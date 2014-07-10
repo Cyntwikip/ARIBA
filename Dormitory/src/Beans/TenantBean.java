@@ -22,6 +22,7 @@ public class TenantBean {
     private String gender;
     private String address;
     private String school;
+    private String degree;
     private int expectedyearofgrad;
     private String status;
 
@@ -64,6 +65,16 @@ public class TenantBean {
     public int getTenantID() {
         return tenantID;
     }
+
+    public String getDegree() {
+        return degree;
+    }
+
+    public void setDegree(String degree) {
+        this.degree = degree;
+    }
+    
+    
 
     public void setAddress(String address) {
         this.address = address;
