@@ -24,18 +24,19 @@ public class Dormitory {
         
         int number = 123;
         TenantBean tenant1 = new TenantBean();
-            tenant1.setAddress("Address1");
+            tenant1.setAddress("Address:(");
             tenant1.setContact(number);
             tenant1.setDegree("CS");
             tenant1.setExpectedyearofgrad(2016);
-            tenant1.setFname("Fname");
+            tenant1.setFname("Fname1");
             tenant1.setGender("female");
             tenant1.setLname("Lname");
-            tenant1.setSchool("School");
+            tenant1.setSchool("SCHOOL!!!");
             tenant1.setStatus("new");
             
             TenantDAOInterface tdao = new TenantDAOImplementation();
-            tdao.addTenant(tenant1);
+       //     tdao.addTenant(tenant1);
+            tdao.editTenant(tenant1, "Fname1", "Lname");
             
             
     }
