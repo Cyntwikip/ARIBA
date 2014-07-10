@@ -9,7 +9,7 @@ USE `dormitory` ;
 -- Table `dormitory`.`Tenant`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dormitory`.`Tenant` (
-  `tenantID` INT(11) NOT NULL,
+  `tenantID` INT(11) NOT NULL AUTO_INCREMENT,
   `fname` VARCHAR(45) NOT NULL,
   `lname` VARCHAR(45) NOT NULL,
   `image` BLOB NULL,
@@ -28,7 +28,7 @@ ENGINE = InnoDB;
 -- Table `dormitory`.`Room`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dormitory`.`Room` (
-  `roomID` INT(11) NOT NULL,
+  `roomID` INT(11) NOT NULL AUTO_INCREMENT,
   `currentKW` FLOAT NOT NULL,
   `currentcubicmeter` FLOAT NOT NULL,
   PRIMARY KEY (`roomID`))
@@ -39,7 +39,7 @@ ENGINE = InnoDB;
 -- Table `dormitory`.`Bill`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dormitory`.`Bill` (
-  `billID` INT(11) NOT NULL,
+  `billID` INT(11) NOT NULL AUTO_INCREMENT,
   `bill_roomID` INT(11) NOT NULL,
   `price` DOUBLE NOT NULL,
   `paidRent` TINYINT(1) NOT NULL,
@@ -113,7 +113,7 @@ ENGINE = InnoDB;
 -- Table `dormitory`.`Guardian`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dormitory`.`Guardian` (
-  `guardianID` INT(11) NOT NULL,
+  `guardianID` INT(11) NOT NULL AUTO_INCREMENT,
   `fname` VARCHAR(45) NOT NULL,
   `lname` VARCHAR(45) NOT NULL,
   `contact` INT(12) NOT NULL,
