@@ -6,10 +6,14 @@
 
 package DAOInterface;
 
+import Beans.WaterReadingBean;
+
 /**
  *
  * @author User
  */
-public class WaterReadingDAOInterface {
+public interface WaterReadingDAOInterface {
+    
+    public boolean addWaterReading (WaterReadingBean water);
     
 }

@@ -10,6 +10,8 @@ package DAOInterface;
  *
  * @author User
  */
-public class RoomDAOInterface {
+public interface RoomDAOInterface {
+    
+    // do something here
     
 }

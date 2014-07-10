@@ -6,10 +6,14 @@
 
 package DAOInterface;
 
+import Beans.GuardianBean;
+
 /**
  *
  * @author User
  */
-public class GuardianDAOInterface {
+public interface GuardianDAOInterface {
+    
+    public boolean addGuardian(GuardianBean guardian);
     
 }

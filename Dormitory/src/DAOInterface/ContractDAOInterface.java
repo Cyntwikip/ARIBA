@@ -6,11 +6,15 @@
 
 package DAOInterface;
 
+import Beans.ContractBean;
+
 /**
  *
  * @author User
  */
-public class ContractDAOInterface {
+public interface ContractDAOInterface {
     
     // do something here
+    
+    public boolean addContract(ContractBean contract);
 }

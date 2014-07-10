@@ -6,10 +6,17 @@
 
 package DAOInterface;
 
+import Beans.AttendanceLogBean;
+import java.util.ArrayList;
+
 /**
  *
  * @author User
  */
-public class AttendanceLogDAOInterface {
+public interface AttendanceLogDAOInterface {
     // do something here
+    public boolean addAttendanceLogDAOInterface (AttendanceLogBean attendance);
+    
+    public ArrayList<AttendanceLogBean> getAllLogs(); //needed ba to haha
+    
 }

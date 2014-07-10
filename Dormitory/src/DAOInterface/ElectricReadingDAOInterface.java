@@ -6,10 +6,12 @@
 
 package DAOInterface;
 
+import Beans.ElectricReadingBean;
+
 /**
  *
  * @author User
  */
-public class ElectricReadingDAOInterface {
-    
+public interface ElectricReadingDAOInterface {
+    public boolean addElectricReading (ElectricReadingBean electric);
 }

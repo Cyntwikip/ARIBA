@@ -12,13 +12,13 @@ import java.sql.Date;
  *
  * @author User
  */
-public class ElectricReading {
+public class ElectricReadingBean {
+    
     private int electric_billID;
     private float currentKW;
     private float priceperKW;
     private float price;
     private Date dateRead;
-
 
     public float getCurrentKW() {
         return currentKW;

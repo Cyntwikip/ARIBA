@@ -6,10 +6,24 @@
 
 package DAOInterface;
 
+import Beans.TenantBean;
+import java.util.ArrayList;
+
 /**
  *
  * @author User
  */
-public class TenantDAOInterface {
+public interface TenantDAOInterface {
+    
+    public boolean addTenant(TenantBean tenant);
+    
+    public TenantBean getTenantById(int tenantid);
+    public ArrayList<TenantBean> getAllTenants();
+    public TenantBean getTenantByName (String fname, String lname);
+    public ArrayList<TenantBean> getTenantByExpectedYearofGrad (int year);
+    
+    // assign tenant to room??
+    
+    public boolean editTenant (TenantBean tenant, String fname, String lname);
     
 }

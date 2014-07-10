@@ -6,12 +6,15 @@
 
 package DAOInterface;
 
+import Beans.BillBean;
+
 /**
  *
  * @author User
  */
-public class BillDAOInterface {
+public interface BillDAOInterface {
     
     // do something here
+    public boolean addBill (BillBean bill);
     
 }
