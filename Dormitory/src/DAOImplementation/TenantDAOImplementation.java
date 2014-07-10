@@ -107,7 +107,55 @@ public class TenantDAOImplementation implements TenantDAOInterface {
 
     @Override
     public ArrayList<TenantBean> getAllTenants() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                try{
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from tenant";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+            
+            ArrayList<TenantBean> list = new ArrayList<TenantBean>();
+            TenantBean bean = new TenantBean();
+            
+            int tenantID, contact, expectedyearofgrad;
+            String fname, lname, gender, address, degree, school, status;
+            Blob image;
+            
+            while(resultSet.next()){
+                tenantID = resultSet.getInt("tenantID");
+                contact = resultSet.getInt("contact");
+                expectedyearofgrad = resultSet.getInt("expectedyearofgrad");
+                fname = resultSet.getString("fname");
+                lname = resultSet.getString("lname");
+                gender = resultSet.getString("gender");
+                address = resultSet.getString("address");
+                degree = resultSet.getString("degree");
+                school = resultSet.getString("school");
+                status = resultSet.getString("status");
+                image = resultSet.getBlob("image");
+               
+                bean = new TenantBean();
+                
+                bean.setTenantID(tenantID);
+                bean.setContact(contact);
+                bean.setExpectedyearofgrad(expectedyearofgrad);
+                bean.setFname(fname);
+                bean.setLname(lname);
+                bean.setGender(gender);
+                bean.setDegree(degree);
+                bean.setAddress(address);
+                bean.setSchool(school);
+                bean.setStatus(status);
+                bean.setImage(image);
+                list.add(bean);
+            }
+            return list;
+    
+        }   catch(SQLException ex){
+        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;    
     }
 
     @Override
