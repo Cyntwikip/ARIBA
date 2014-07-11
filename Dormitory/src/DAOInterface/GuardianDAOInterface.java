@@ -17,7 +17,10 @@ public interface GuardianDAOInterface {
     
     public boolean addGuardian(GuardianBean guardian);
     
-    public GuardianBean getGuardian(int guardianID);
+    public GuardianBean getGuardianByID(int guardianID);
+    public GuardianBean getGuardianByName(String fname, String lname);
     public ArrayList<GuardianBean> getAllGuardians();
+    
+    public boolean editGuardian (GuardianBean guardian, String fname, String lname);
     
 }

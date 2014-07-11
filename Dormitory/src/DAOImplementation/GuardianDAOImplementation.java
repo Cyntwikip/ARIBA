@@ -51,7 +51,7 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
     }
 
     @Override
-    public GuardianBean getGuardian(int guardianID) {
+    public GuardianBean getGuardianByID(int guardianID) {
 
             try{
             Connector c = new Connector();
@@ -121,6 +121,68 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 list.add(bean);
              }
             return list;
+        }   catch(SQLException ex){
+        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null; 
+    
+    }
+
+    @Override
+    public boolean editGuardian(GuardianBean guardian, String fname, String lname) {
+      
+            try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            
+            String query = "update guardian set contact = ? where fname = ? and lname = ? ";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, guardian.getContact());
+            ps.setString(2, fname);
+            ps.setString(3, lname);
+            ps.executeUpdate();
+            
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+            return false;
+    }
+
+    @Override
+    public GuardianBean getGuardianByName(String fname, String lname) {
+ 
+            try{
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from guardian where fname = ? and lname = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, fname);
+            ps.setString(2, lname);
+            ResultSet resultSet = ps.executeQuery();
+            
+            GuardianBean bean = new GuardianBean();
+            
+            int guardianid, contact;
+            String Fname, Lname;
+            
+            while(resultSet.next()){
+                guardianid = resultSet.getInt("guardianID");
+                contact = resultSet.getInt("contact");
+                Fname = resultSet.getString("fname");
+                Lname = resultSet.getString("lname");
+               
+                bean = new GuardianBean();
+                
+                bean.setGuardianID(guardianid);
+                bean.setContact(contact);
+                bean.setFname(fname);
+                bean.setLname(lname);
+                
+             }
+            return bean;
         }   catch(SQLException ex){
         Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
