@@ -7,10 +7,12 @@
 package DAOImplementation;
 
 import Beans.GuardianBean;
+import Beans.TenantBean;
 import Connector.Connector;
 import DAOInterface.GuardianDAOInterface;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -23,7 +25,7 @@ import java.util.logging.Logger;
 public class GuardianDAOImplementation implements GuardianDAOInterface {
 
     @Override
-    public boolean addGuardian(GuardianBean guardian) {
+    public boolean addGuardian(GuardianBean guardian) { // important
                 try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
@@ -50,12 +52,81 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
 
     @Override
     public GuardianBean getGuardian(int guardianID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+            try{
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from guardian where guardianID = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, guardianID);
+            ResultSet resultSet = ps.executeQuery();
+            
+            GuardianBean bean = new GuardianBean();
+            
+            int guardianid, contact;
+            String fname, lname;
+            
+            while(resultSet.next()){
+                guardianid = resultSet.getInt("guardianID");
+                contact = resultSet.getInt("contact");
+                fname = resultSet.getString("fname");
+                lname = resultSet.getString("lname");
+               
+                bean = new GuardianBean();
+                
+                bean.setGuardianID(guardianID);
+                bean.setContact(contact);
+                bean.setFname(fname);
+                bean.setLname(lname);
+                
+             }
+            return bean;
+        }   catch(SQLException ex){
+        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null; 
+    
     }
 
     @Override
     public ArrayList<GuardianBean> getAllGuardians() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+            try{
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from guardian";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+            
+            GuardianBean bean = new GuardianBean();
+            ArrayList<GuardianBean> list = new ArrayList<GuardianBean>();
+            
+            int guardianid, contact;
+            String fname, lname;
+            
+            while(resultSet.next()){
+                guardianid = resultSet.getInt("guardianID");
+                contact = resultSet.getInt("contact");
+                fname = resultSet.getString("fname");
+                lname = resultSet.getString("lname");
+               
+                bean = new GuardianBean();
+                
+                bean.setGuardianID(guardianid);
+                bean.setContact(contact);
+                bean.setFname(fname);
+                bean.setLname(lname);
+                
+                list.add(bean);
+             }
+            return list;
+        }   catch(SQLException ex){
+        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null; 
+    
     }
     
 }

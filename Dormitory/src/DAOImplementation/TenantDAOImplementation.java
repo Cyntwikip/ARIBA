@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 public class TenantDAOImplementation implements TenantDAOInterface {
 
     @Override
-    public boolean addTenant(TenantBean tenant) {
+    public boolean addTenant(TenantBean tenant) { // important
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
@@ -107,7 +107,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
     }
 
     @Override
-    public ArrayList<TenantBean> getAllTenants() {
+    public ArrayList<TenantBean> getAllTenants() { // important
                 try{
             Connector c = new Connector();
             Connection connection = c.getConnection();
@@ -161,7 +161,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
     }
 
     @Override
-    public TenantBean getTenantByName(String firstname, String lastname) {
+    public TenantBean getTenantByName(String firstname, String lastname) { // important
 
             try{
             Connector c = new Connector();
