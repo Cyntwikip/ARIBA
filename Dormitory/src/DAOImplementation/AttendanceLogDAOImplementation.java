@@ -25,5 +25,15 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
     public ArrayList<AttendanceLogBean> getAllLogs() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public ArrayList<AttendanceLogBean> getAllAtendanceLogsByTenantID(int log_tenantID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<AttendanceLogBean> getAllAttendanceLogsByName(String fname, String lname) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

@@ -26,4 +26,6 @@ public interface TenantDAOInterface {
     
     public boolean editTenant (TenantBean tenant, String fname, String lname);
     
+    public ArrayList<TenantBean> getTenantByRoomID(int tenant_roomID);
+    
 }
