@@ -6,8 +6,11 @@
 
 package dormitory;
 
+import Beans.GuardianBean;
 import Beans.TenantBean;
+import DAOImplementation.GuardianDAOImplementation;
 import DAOImplementation.TenantDAOImplementation;
+import DAOInterface.GuardianDAOInterface;
 import DAOInterface.TenantDAOInterface;
 
 /**
@@ -36,8 +39,15 @@ public class Dormitory {
             
             TenantDAOInterface tdao = new TenantDAOImplementation();
        //     tdao.addTenant(tenant1);
-            tdao.editTenant(tenant1, "Fname1", "Lname");
+       //     tdao.editTenant(tenant1, "Fname1", "Lname");
+         
+            GuardianBean guardian1 = new GuardianBean();
+            guardian1.setContact(number);
+            guardian1.setFname("Guardian1");
+            guardian1.setLname("Guardian1l");
             
+            GuardianDAOInterface gdao = new GuardianDAOImplementation();
+            gdao.addGuardian(guardian1);
             
     }
     
