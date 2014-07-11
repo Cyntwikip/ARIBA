@@ -7,6 +7,8 @@
 package DAOInterface;
 
 import Beans.ContractBean;
+import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,4 +19,10 @@ public interface ContractDAOInterface {
     // do something here
     
     public boolean addContract(ContractBean contract);
+    
+
+    public ArrayList <ContractBean> getAllContracts();
+    
+    public ArrayList<ContractBean> getAllContractsByTenantID(int contract_tenantID);
+    public ArrayList<ContractBean> getAllContractsByDate(Date from, Date to);
 }

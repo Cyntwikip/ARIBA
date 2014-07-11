@@ -8,6 +8,7 @@ package DAOImplementation;
 
 import Beans.WaterReadingBean;
 import DAOInterface.WaterReadingDAOInterface;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,8 +17,19 @@ import DAOInterface.WaterReadingDAOInterface;
 public class WaterDAOImplementation implements WaterReadingDAOInterface {
 
     @Override
-    public boolean addWaterReading(WaterReadingBean water) {
+    public boolean addWaterReadingToRoom(WaterReadingBean water, int bill_roomID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    public ArrayList<WaterReadingBean> getAllWaterBills() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<WaterReadingBean> getAllWaterBillsByRoomID(int bill_roomID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+        
 }

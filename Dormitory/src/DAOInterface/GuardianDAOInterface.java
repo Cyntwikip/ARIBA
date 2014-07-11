@@ -7,6 +7,7 @@
 package DAOInterface;
 
 import Beans.GuardianBean;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,5 +16,8 @@ import Beans.GuardianBean;
 public interface GuardianDAOInterface {
     
     public boolean addGuardian(GuardianBean guardian);
+    
+    public GuardianBean getGuardian(int guardianID);
+    public ArrayList<GuardianBean> getAllGuardians();
     
 }

@@ -6,6 +6,9 @@
 
 package DAOInterface;
 
+import Beans.RoomBean;
+import java.util.ArrayList;
+
 /**
  *
  * @author User
@@ -13,5 +16,7 @@ package DAOInterface;
 public interface RoomDAOInterface {
     
     // do something here
+    public boolean addRoom(RoomBean room);
+    public ArrayList<RoomBean> getAllRooms();
     
 }

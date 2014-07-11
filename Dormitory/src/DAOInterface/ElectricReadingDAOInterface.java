@@ -7,11 +7,14 @@
 package DAOInterface;
 
 import Beans.ElectricReadingBean;
+import java.util.ArrayList;
 
 /**
  *
  * @author User
  */
 public interface ElectricReadingDAOInterface {
-    public boolean addElectricReading (ElectricReadingBean electric);
+    public boolean addElectricReadingToRoom (ElectricReadingBean electric, int bill_roomID);
+    public ArrayList<ElectricReadingBean> getAllElectricReading();
+    public ArrayList<ElectricReadingBean> getAllElectricReadingByRoomID(int bill_roomID);
 }

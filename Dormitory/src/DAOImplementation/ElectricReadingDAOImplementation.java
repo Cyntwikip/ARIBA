@@ -8,6 +8,7 @@ package DAOImplementation;
 
 import Beans.ElectricReadingBean;
 import DAOInterface.ElectricReadingDAOInterface;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,8 +16,19 @@ import DAOInterface.ElectricReadingDAOInterface;
  */
 public class ElectricReadingDAOImplementation implements ElectricReadingDAOInterface {
 
+
     @Override
-    public boolean addElectricReading(ElectricReadingBean electric) {
+    public boolean addElectricReadingToRoom(ElectricReadingBean electric, int bill_roomID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<ElectricReadingBean> getAllElectricReading() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<ElectricReadingBean> getAllElectricReadingByRoomID(int bill_roomID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
