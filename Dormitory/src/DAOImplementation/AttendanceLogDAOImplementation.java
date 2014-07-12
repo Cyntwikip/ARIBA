@@ -7,7 +7,9 @@
 package DAOImplementation;
 
 import Beans.AttendanceLogBean;
+import Beans.TenantBean;
 import DAOInterface.AttendanceLogDAOInterface;
+import java.sql.Time;
 import java.util.ArrayList;
 
 /**
@@ -33,6 +35,31 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
 
     @Override
     public ArrayList<AttendanceLogBean> getAllAttendanceLogsByName(String fname, String lname) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void editAttendanceLog(AttendanceLogBean attendance) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<AttendanceLogBean> getAllLogin() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public TenantBean checkLogin() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public TenantBean checkLogout() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<TenantBean> checkAllTenantByTime(Time time) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

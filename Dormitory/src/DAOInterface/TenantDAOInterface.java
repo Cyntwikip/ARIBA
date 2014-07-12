@@ -16,16 +16,15 @@ import java.util.ArrayList;
 public interface TenantDAOInterface {
     
     public boolean addTenant(TenantBean tenant); // important
-    
-    public TenantBean getTenantById(int tenantid);
-    public ArrayList<TenantBean> getAllTenants(); // important
-    public TenantBean getTenantByName (String fname, String lname);
-    public ArrayList<TenantBean> getTenantByExpectedYearofGrad (int year);
-    
-    // assign tenant to room??
-    
     public boolean editTenant (TenantBean tenant, String fname, String lname); // important
-    
+    public ArrayList<TenantBean> getAllTenants(); // important
+    public TenantBean getTenantById(int tenantid);
+    public ArrayList<TenantBean> TenantBySchool();
+    public TenantBean getTenantByName (String fname, String lname);
+    public ArrayList<TenantBean> getMaleTenant();
+    public ArrayList<TenantBean> getFemaleTenant();
+    public ArrayList<TenantBean> getTenantByStatus(boolean status);
+    public ArrayList<TenantBean> getTenantByExpectedYearofGrad (int year);
     public ArrayList<TenantBean> getTenantByRoomID(int tenant_roomID);
     
 }
