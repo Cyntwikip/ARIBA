@@ -15,8 +15,16 @@ import java.util.ArrayList;
  */
 public interface RoomDAOInterface {
     
-    // do something here
-    public boolean addRoom(RoomBean room);
+    public void addRoom(RoomBean room);
+    public void editRoom(RoomBean room);
+    public void editRoomStatus(int roomID, String status);
+    public void assignTenanttoRoom(int tenantID, RoomBean room);
     public ArrayList<RoomBean> getAllRooms();
-    
+    public ArrayList<RoomBean> getAllRoombyStatus(String status);
+    public ArrayList<RoomBean> getAllCurrentKW();
+    public ArrayList<RoomBean> getCurrentKWbyRoom(int roomID);
+    public ArrayList<RoomBean> getAllCubicMeter(int roomID);
+    public RoomBean getCubicMeter(int roomBean);
+    public ArrayList<RoomBean> getAllUnoccupiedRooms();
+    public ArrayList<RoomBean> getAllOccupiedRooms();
 }
