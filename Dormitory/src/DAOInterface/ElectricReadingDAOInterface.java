@@ -7,6 +7,7 @@
 package DAOInterface;
 
 import Beans.ElectricReadingBean;
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -15,6 +16,12 @@ import java.util.ArrayList;
  */
 public interface ElectricReadingDAOInterface {
     public boolean addElectricReadingToRoom (ElectricReadingBean electric, int bill_roomID);
+    public void editElectricReading(ElectricReadingBean electric, int electricID);
+    public void editElectricReadingByPrice(float price, int electricID);
     public ArrayList<ElectricReadingBean> getAllElectricReading();
-    public ArrayList<ElectricReadingBean> getAllElectricReadingByRoomID(int bill_roomID);
+    public ArrayList<ElectricReadingBean> getAllElectricReadingByDate(Date dateread);
+    public void computeElectricReading(ElectricReadingBean electric, int electricID);
+    
+
+
 }

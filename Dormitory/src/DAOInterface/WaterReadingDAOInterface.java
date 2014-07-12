@@ -7,6 +7,7 @@
 package DAOInterface;
 
 import Beans.WaterReadingBean;
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -17,6 +18,8 @@ public interface WaterReadingDAOInterface {
     
     public boolean addWaterReadingToRoom (WaterReadingBean water, int bill_roomID);
     public ArrayList<WaterReadingBean> getAllWaterBills();
-    public ArrayList<WaterReadingBean> getAllWaterBillsByRoomID(int bill_roomID);
-    
+    public ArrayList<WaterReadingBean> getAllWaterReadingsByDate(Date dateread);
+    public void editWaterReading(Date dateread);
+    public void editElectricReadingByPrice(float price, int waterID);
+    public void computeWaterReading(WaterReadingBean water, int billID);
 }

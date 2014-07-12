@@ -8,6 +8,7 @@ package DAOImplementation;
 
 import Beans.WaterReadingBean;
 import DAOInterface.WaterReadingDAOInterface;
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -27,9 +28,25 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
     }
 
     @Override
-    public ArrayList<WaterReadingBean> getAllWaterBillsByRoomID(int bill_roomID) {
+    public ArrayList<WaterReadingBean> getAllWaterReadingsByDate(Date dateread) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void editWaterReading(Date dateread) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void editElectricReadingByPrice(float price, int waterID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void computeWaterReading(WaterReadingBean water, int billID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 
         
 }

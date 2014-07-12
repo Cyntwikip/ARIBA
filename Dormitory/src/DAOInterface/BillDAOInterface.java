@@ -18,10 +18,14 @@ public interface BillDAOInterface {
     
     // do something here
     public boolean addBill (BillBean bill);
-    
+    public void editBill(BillBean bill, int billID);
     public ArrayList<BillBean> getAllBills();
-    public ArrayList<BillBean> getAllBillsByRoomID(int bill_roomID);
-    public ArrayList<BillBean> getAllBillsByDateRead (Date from, Date to);
-    
+    public ArrayList<BillBean> getAllPaidRoom(int roomID);
+    public ArrayList<BillBean> getAllPaidBillByRoom();
+    public ArrayList<BillBean> getAllPaidRoomByWater();
+    public ArrayList<BillBean> getAllPaidRoomByElectric();
+    public ArrayList<BillBean> getAllNotPaidRoomsByWater();
+    public ArrayList<BillBean> getAllNotPaidRoomsByRent();
+    public ArrayList<BillBean> getAllNotPaidRoomsByElectric();
     
 }

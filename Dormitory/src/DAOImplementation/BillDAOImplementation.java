@@ -28,12 +28,42 @@ public class BillDAOImplementation implements BillDAOInterface {
     }
 
     @Override
-    public ArrayList<BillBean> getAllBillsByRoomID(int bill_roomID) {
+    public void editBill(BillBean bill, int billID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ArrayList<BillBean> getAllBillsByDateRead(Date from, Date to) {
+    public ArrayList<BillBean> getAllPaidRoom(int roomID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<BillBean> getAllPaidBillByRoom() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<BillBean> getAllPaidRoomByWater() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<BillBean> getAllPaidRoomByElectric() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<BillBean> getAllNotPaidRoomsByWater() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<BillBean> getAllNotPaidRoomsByRent() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<BillBean> getAllNotPaidRoomsByElectric() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

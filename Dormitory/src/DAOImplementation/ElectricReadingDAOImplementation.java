@@ -8,6 +8,7 @@ package DAOImplementation;
 
 import Beans.ElectricReadingBean;
 import DAOInterface.ElectricReadingDAOInterface;
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -28,7 +29,22 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
     }
 
     @Override
-    public ArrayList<ElectricReadingBean> getAllElectricReadingByRoomID(int bill_roomID) {
+    public void editElectricReading(ElectricReadingBean electric, int electricID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void editElectricReadingByPrice(float price, int electricID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<ElectricReadingBean> getAllElectricReadingByDate(Date dateread) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void computeElectricReading(ElectricReadingBean electric, int electricID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
