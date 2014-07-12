@@ -190,5 +190,10 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
         return null; 
     
     }
+
+    @Override
+    public ArrayList<GuardianBean> getGuardianByTenant(String fname, String lname) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

@@ -16,11 +16,10 @@ import java.util.ArrayList;
 public interface GuardianDAOInterface {
     
     public boolean addGuardian(GuardianBean guardian);
-    
+    public boolean editGuardian (GuardianBean guardian, String fname, String lname);
     public GuardianBean getGuardianByID(int guardianID);
     public GuardianBean getGuardianByName(String fname, String lname);
+    public ArrayList<GuardianBean> getGuardianByTenant(String fname, String lname);
     public ArrayList<GuardianBean> getAllGuardians();
-    
-    public boolean editGuardian (GuardianBean guardian, String fname, String lname);
     
 }
