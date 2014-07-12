@@ -15,10 +15,10 @@ import java.util.ArrayList;
  */
 public interface RoomDAOInterface {
     
-    public void addRoom(RoomBean room);
-    public void editRoom(RoomBean room);
-    public void editRoomStatus(int roomID, String status);
-    public void assignTenanttoRoom(int tenantID, RoomBean room);
+    public boolean addRoom(RoomBean room);
+    public boolean editRoom(RoomBean room, int roomID);
+    public boolean editRoomStatus(int roomID, String status);
+    public boolean assignTenanttoRoom(int tenantID, RoomBean room);
     public ArrayList<RoomBean> getAllRooms();
     public ArrayList<RoomBean> getAllRoombyStatus(String status);
     public ArrayList<RoomBean> getAllCurrentKW();

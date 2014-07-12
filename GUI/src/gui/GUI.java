@@ -4,22 +4,19 @@
  * and open the template in the editor.
  */
 
-package dorm.gui;
+package gui;
 
 /**
  *
- * @author Ellone
+ * @author User
  */
-public class DormGUI {
+public class GUI {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        EditPage ep = new EditPage();
-        MainMenu mn = new MainMenu();
-        
+        // TODO code application logic here
     }
     
 }
