@@ -43,8 +43,8 @@ public class Dormitory {
          
             GuardianBean guardian1 = new GuardianBean();
             guardian1.setContact(number);
-            guardian1.setFname("Guardian1");
-            guardian1.setLname("Guardian1l");
+            guardian1.setFname("Sherlock");
+            guardian1.setLname("Holmes");
             
             GuardianDAOInterface gdao = new GuardianDAOImplementation();
             gdao.addGuardian(guardian1);

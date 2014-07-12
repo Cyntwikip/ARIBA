@@ -29,12 +29,13 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "insert into guardian (fname, lname, contact)"
-                    + " values(?, ?, ?)";
+            String query = "insert into guardian (guardianID, fname, lname, contact)"
+                    + " values(?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, guardian.getFname());
-            ps.setString(2, guardian.getLname());
-            ps.setInt(3, guardian.getContact());
+            ps.setInt(1, guardian.getGuardianID());
+            ps.setString(2, guardian.getFname());
+            ps.setString(3, guardian.getLname());
+            ps.setInt(4, guardian.getContact());
             
             ps.executeUpdate();
             connection.close();

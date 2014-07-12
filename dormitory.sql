@@ -21,7 +21,8 @@ CREATE TABLE IF NOT EXISTS `dormitory`.`Tenant` (
   `expectedyearofgrad` INT(4) NOT NULL,
   `status` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`tenantID`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
 
 
 -- -----------------------------------------------------
@@ -32,7 +33,8 @@ CREATE TABLE IF NOT EXISTS `dormitory`.`Room` (
   `currentKW` FLOAT NOT NULL,
   `currentcubicmeter` FLOAT NOT NULL,
   PRIMARY KEY (`roomID`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
 
 
 -- -----------------------------------------------------
@@ -52,7 +54,8 @@ CREATE TABLE IF NOT EXISTS `dormitory`.`Bill` (
     REFERENCES `dormitory`.`Room` (`roomID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
 
 
 -- -----------------------------------------------------
@@ -106,7 +109,8 @@ CREATE TABLE IF NOT EXISTS `dormitory`.`Contract` (
     REFERENCES `dormitory`.`Tenant` (`tenantID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
 
 
 -- -----------------------------------------------------
@@ -118,7 +122,8 @@ CREATE TABLE IF NOT EXISTS `dormitory`.`Guardian` (
   `lname` VARCHAR(45) NOT NULL,
   `contact` INT(12) NOT NULL,
   PRIMARY KEY (`guardianID`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
 
 
 -- -----------------------------------------------------
@@ -157,7 +162,8 @@ CREATE TABLE IF NOT EXISTS `dormitory`.`AttendanceLog` (
     REFERENCES `dormitory`.`Tenant` (`tenantID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
 
 
 -- -----------------------------------------------------
