@@ -29,19 +29,20 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "insert into tenant (fname, lname, image, contact, gender, address, degree, school, expectedyearofgrad, status)"
-                    + " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "insert into tenant (tenantID, fname, lname, image, contact, gender, address, degree, school, expectedyearofgrad, status)"
+                    + " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, tenant.getFname());
-            ps.setString(2, tenant.getLname());
-            ps.setBlob(3, tenant.getImage());
-            ps.setInt(4, tenant.getContact());
-            ps.setString(5, tenant.getGender());
-            ps.setString(6, tenant.getAddress());
-            ps.setString(7, tenant.getDegree());
-            ps.setString(8, tenant.getSchool());
-            ps.setInt(9, tenant.getExpectedyearofgrad());
-            ps.setBoolean(10, tenant.getStatus());
+            ps.setInt(1, tenant.getTenantID());
+            ps.setString(2, tenant.getFname());
+            ps.setString(3, tenant.getLname());
+            ps.setBlob(4, tenant.getImage());
+            ps.setDouble(5, tenant.getContact());
+            ps.setString(6, tenant.getGender());
+            ps.setString(7, tenant.getAddress());
+            ps.setString(8, tenant.getDegree());
+            ps.setString(9, tenant.getSchool());
+            ps.setInt(10, tenant.getExpectedyearofgrad());
+            ps.setBoolean(11, tenant.getStatus());
             ps.executeUpdate();
             connection.close();
             
@@ -65,14 +66,15 @@ public class TenantDAOImplementation implements TenantDAOInterface {
             
             TenantBean bean = new TenantBean();
             
-            int tenantID, contact, expectedyearofgrad;
+            int tenantID, expectedyearofgrad;
+            Long contact;
             String fname, lname, gender, address, degree, school;
             boolean status;
             Blob image;
             
             while(resultSet.next()){
                 tenantID = resultSet.getInt("tenantID");
-                contact = resultSet.getInt("contact");
+                contact = resultSet.getLong("contact");
                 expectedyearofgrad = resultSet.getInt("expectedyearofgrad");
                 fname = resultSet.getString("fname");
                 lname = resultSet.getString("lname");
@@ -118,14 +120,15 @@ public class TenantDAOImplementation implements TenantDAOInterface {
             ArrayList<TenantBean> list = new ArrayList<TenantBean>();
             TenantBean bean = new TenantBean();
             
-            int tenantID, contact, expectedyearofgrad;
+            int tenantID, expectedyearofgrad;
+            Long contact;
             String fname, lname, gender, address, degree, school;
             Blob image;
             boolean status;
             
             while(resultSet.next()){
                 tenantID = resultSet.getInt("tenantID");
-                contact = resultSet.getInt("contact");
+                contact = resultSet.getLong("contact");
                 expectedyearofgrad = resultSet.getInt("expectedyearofgrad");
                 fname = resultSet.getString("fname");
                 lname = resultSet.getString("lname");
@@ -174,14 +177,15 @@ public class TenantDAOImplementation implements TenantDAOInterface {
             
             TenantBean bean = new TenantBean();
             
-            int tenantID, contact, expectedyearofgrad;
+            int tenantID, expectedyearofgrad;
+            Long contact;
             String fname, lname, gender, address, degree, school;
             boolean status;
             Blob image;
             
             while(resultSet.next()){
                 tenantID = resultSet.getInt("tenantID");
-                contact = resultSet.getInt("contact");
+                contact = resultSet.getLong("contact");
                 expectedyearofgrad = resultSet.getInt("expectedyearofgrad");
                 fname = resultSet.getString("fname");
                 lname = resultSet.getString("lname");
@@ -229,14 +233,15 @@ public class TenantDAOImplementation implements TenantDAOInterface {
             ArrayList<TenantBean> list = new ArrayList<TenantBean>();
             TenantBean bean = new TenantBean();
             
-            int tenantID, contact, expectedyearofgrad;
+            int tenantID, expectedyearofgrad;
+            Long contact;
             String fname, lname, gender, address, degree, school;
             boolean status;
             Blob image;
             
             while(resultSet.next()){
                 tenantID = resultSet.getInt("tenantID");
-                contact = resultSet.getInt("contact");
+                contact = resultSet.getLong("contact");
                 expectedyearofgrad = resultSet.getInt("expectedyearofgrad");
                 fname = resultSet.getString("fname");
                 lname = resultSet.getString("lname");
@@ -283,7 +288,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
             String query = "update tenant set image = ?, contact = ?, gender = ?, address = ?, degree = ?, school = ?, expectedyearofgrad = ?, status=? where fname = ? and lname = ? ";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setBlob(1, tenant.getImage());
-            ps.setInt(2, tenant.getContact());
+            ps.setDouble(2, tenant.getContact());
             ps.setString(3, tenant.getGender());
             ps.setString(4, tenant.getAddress());
             ps.setString(5, tenant.getDegree());

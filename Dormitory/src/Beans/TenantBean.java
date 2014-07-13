@@ -18,7 +18,7 @@ public class TenantBean {
     private String fname;
     private String lname;
     private Blob image;
-    private int contact;
+    private Long contact;
     private String gender;
     private String address;
     private String school;
@@ -30,7 +30,7 @@ public class TenantBean {
         return address;
     }
 
-    public int getContact() {
+    public Long getContact() {
         return contact;
     }
 
@@ -80,7 +80,7 @@ public class TenantBean {
         this.address = address;
     }
 
-    public void setContact(int contact) {
+    public void setContact(Long contact) {
         this.contact = contact;
     }
 

@@ -12,6 +12,8 @@ import DAOImplementation.GuardianDAOImplementation;
 import DAOImplementation.TenantDAOImplementation;
 import DAOInterface.GuardianDAOInterface;
 import DAOInterface.TenantDAOInterface;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 /**
  *
@@ -25,29 +27,32 @@ public class Dormitory {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        int number = 123;
+        //double number = 09166267392;
+        
+        Long number;
+        number = 639166267392L;
         TenantBean tenant1 = new TenantBean();
-            tenant1.setAddress("Address:(");
+            tenant1.setAddress("2 Torre Lorenzo Taft Ave. Manila");
             tenant1.setContact(number);
-            tenant1.setDegree("CS");
+            tenant1.setDegree("Computer Science Major in Computer Systems Engineering");
             tenant1.setExpectedyearofgrad(2016);
-            tenant1.setFname("Fname1");
-            tenant1.setGender("female");
-            tenant1.setLname("Lname");
-            tenant1.setSchool("SCHOOL!!!");
+            tenant1.setFname("Jude Michael");
+            tenant1.setGender("Male");
+            tenant1.setLname("Teves");
+            tenant1.setSchool("De La Salle University");
             tenant1.setStatus(true);
             
             TenantDAOInterface tdao = new TenantDAOImplementation();
-       //     tdao.addTenant(tenant1);
+            tdao.addTenant(tenant1);
        //     tdao.editTenant(tenant1, "Fname1", "Lname");
          
-            GuardianBean guardian1 = new GuardianBean();
-            guardian1.setContact(number);
-            guardian1.setFname("Sherlock");
-            guardian1.setLname("Holmes");
+       //     GuardianBean guardian1 = new GuardianBean();
+       //     guardian1.setContact(number);
+       //     guardian1.setFname("Sherlock");
+       //     guardian1.setLname("Holmes");
             
-            GuardianDAOInterface gdao = new GuardianDAOImplementation();
-            gdao.addGuardian(guardian1);
+       //     GuardianDAOInterface gdao = new GuardianDAOImplementation();
+       //     gdao.addGuardian(guardian1);
             
     }
     
