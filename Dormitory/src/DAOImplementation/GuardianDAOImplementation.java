@@ -64,12 +64,13 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
             
             GuardianBean bean = new GuardianBean();
             
-            int guardianid, contact;
+            int guardianid;
+            Long contact;
             String fname, lname;
             
             while(resultSet.next()){
                 guardianid = resultSet.getInt("guardianID");
-                contact = resultSet.getInt("contact");
+                contact = resultSet.getLong("contact");
                 fname = resultSet.getString("fname");
                 lname = resultSet.getString("lname");
                
@@ -103,12 +104,13 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
             GuardianBean bean = new GuardianBean();
             ArrayList<GuardianBean> list = new ArrayList<GuardianBean>();
             
-            int guardianid, contact;
+            int guardianid;
+            Long contact;
             String fname, lname;
             
             while(resultSet.next()){
                 guardianid = resultSet.getInt("guardianID");
-                contact = resultSet.getInt("contact");
+                contact = resultSet.getLong("contact");
                 fname = resultSet.getString("fname");
                 lname = resultSet.getString("lname");
                
@@ -139,7 +141,7 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
             
             String query = "update guardian set contact = ? where fname = ? and lname = ? ";
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, guardian.getContact());
+            ps.setLong(1, guardian.getContact());
             ps.setString(2, fname);
             ps.setString(3, lname);
             ps.executeUpdate();
@@ -166,12 +168,13 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
             
             GuardianBean bean = new GuardianBean();
             
-            int guardianid, contact;
+            int guardianid;
+            Long contact;
             String Fname, Lname;
             
             while(resultSet.next()){
                 guardianid = resultSet.getInt("guardianID");
-                contact = resultSet.getInt("contact");
+                contact = resultSet.getLong("contact");
                 Fname = resultSet.getString("fname");
                 Lname = resultSet.getString("lname");
                
@@ -179,8 +182,8 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 
                 bean.setGuardianID(guardianid);
                 bean.setContact(contact);
-                bean.setFname(fname);
-                bean.setLname(lname);
+                bean.setFname(Fname);
+                bean.setLname(Lname);
                 
              }
             return bean;
