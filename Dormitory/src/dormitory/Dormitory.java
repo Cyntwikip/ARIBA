@@ -43,7 +43,7 @@ public class Dormitory {
             tenant1.setGender("Male");
             tenant1.setLname("Teves");
             tenant1.setSchool("De La Salle University");
-            tenant1.setStatus(true);
+            tenant1.setStatus("true");
             
             TenantDAOInterface tdao = new TenantDAOImplementation();
             tdao.addTenant(tenant1);

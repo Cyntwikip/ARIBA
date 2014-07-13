@@ -24,7 +24,7 @@ public class TenantBean {
     private String school;
     private String degree;
     private int expectedyearofgrad;
-    private boolean status;
+    private String status;
 
     public String getAddress() {
         return address;
@@ -58,7 +58,7 @@ public class TenantBean {
         return school;
     }
 
-    public boolean getStatus() {
+    public String getStatus() {
         return status;
     }
 
@@ -108,7 +108,7 @@ public class TenantBean {
         this.school = school;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

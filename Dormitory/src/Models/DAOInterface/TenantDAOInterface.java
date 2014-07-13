@@ -23,7 +23,7 @@ public interface TenantDAOInterface {
     public TenantBean getTenantByName (String fname, String lname);
     public ArrayList<TenantBean> getMaleTenant();
     public ArrayList<TenantBean> getFemaleTenant();
-    public ArrayList<TenantBean> getTenantByStatus(boolean status);
+    public ArrayList<TenantBean> getTenantByStatus(String status);
     public ArrayList<TenantBean> getTenantByExpectedYearofGrad (int year);
     public ArrayList<TenantBean> getTenantByRoomID(int tenant_roomID);
     
