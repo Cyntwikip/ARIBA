@@ -8,6 +8,13 @@ package dorm.gui;
 
 import Connector.Connector;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -20,7 +27,8 @@ public class MainMenu extends javax.swing.JFrame {
      */
     
     Connector connector = new Connector();
-
+    private JPanel contentPane;
+    
     /**
      * @param args the command line arguments
      */
@@ -52,9 +60,15 @@ public class MainMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainMenu().setVisible(true);
-                new MainMenu().setTitle("Welcome!");
+                try{
+                    MainMenu frame = new MainMenu();
+                    frame.setTitle("Main Menu");
+                    frame.setVisible(true);
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
             }
+                
         });
     }
 
@@ -63,6 +77,8 @@ public class MainMenu extends javax.swing.JFrame {
         initComponents();
         
         // if may default users dito nalang i-add :)
+        
+ 
     }
 
     /**
