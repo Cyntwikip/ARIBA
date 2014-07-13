@@ -35,7 +35,7 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
             ps.setInt(1, guardian.getGuardianID());
             ps.setString(2, guardian.getFname());
             ps.setString(3, guardian.getLname());
-            ps.setInt(4, guardian.getContact());
+            ps.setLong(4, guardian.getContact());
             
             ps.executeUpdate();
             connection.close();

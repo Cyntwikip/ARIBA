@@ -36,7 +36,8 @@ public class TenantDAOImplementation implements TenantDAOInterface {
             ps.setString(2, tenant.getFname());
             ps.setString(3, tenant.getLname());
             ps.setBlob(4, tenant.getImage());
-            ps.setDouble(5, tenant.getContact());
+            //ps.setLong(5, 639166267392L);
+            ps.setLong(5, tenant.getContact());
             ps.setString(6, tenant.getGender());
             ps.setString(7, tenant.getAddress());
             ps.setString(8, tenant.getDegree());

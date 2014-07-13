@@ -28,10 +28,13 @@ public class Dormitory {
         // TODO code application logic here
         
         //double number = 09166267392;
-        
+           
         Long number;
         number = 639166267392L;
+        
+        //BigInteger number = new BigInteger("639166267392");
         TenantBean tenant1 = new TenantBean();
+        //    tenant1.setTenantID(10);
             tenant1.setAddress("2 Torre Lorenzo Taft Ave. Manila");
             tenant1.setContact(number);
             tenant1.setDegree("Computer Science Major in Computer Systems Engineering");
@@ -46,13 +49,14 @@ public class Dormitory {
             tdao.addTenant(tenant1);
        //     tdao.editTenant(tenant1, "Fname1", "Lname");
          
-       //     GuardianBean guardian1 = new GuardianBean();
-       //     guardian1.setContact(number);
-       //     guardian1.setFname("Sherlock");
-       //     guardian1.setLname("Holmes");
+            GuardianBean guardian1 = new GuardianBean();
+            guardian1.setContact(number);
+            guardian1.setFname("Sherlock");
+            guardian1.setLname("Holmes");
+       //     guardian1.setGuardianID(67);
             
-       //     GuardianDAOInterface gdao = new GuardianDAOImplementation();
-       //     gdao.addGuardian(guardian1);
+            GuardianDAOInterface gdao = new GuardianDAOImplementation();
+            gdao.addGuardian(guardian1);
             
     }
     
