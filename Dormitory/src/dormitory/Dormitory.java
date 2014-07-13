@@ -6,12 +6,12 @@
 
 package dormitory;
 
-import Beans.GuardianBean;
-import Beans.TenantBean;
-import DAOImplementation.GuardianDAOImplementation;
-import DAOImplementation.TenantDAOImplementation;
-import DAOInterface.GuardianDAOInterface;
-import DAOInterface.TenantDAOInterface;
+import Models.Beans.GuardianBean;
+import Models.Beans.TenantBean;
+import Models.DAOImplementation.GuardianDAOImplementation;
+import Models.DAOImplementation.TenantDAOImplementation;
+import Models.DAOInterface.GuardianDAOInterface;
+import Models.DAOInterface.TenantDAOInterface;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
