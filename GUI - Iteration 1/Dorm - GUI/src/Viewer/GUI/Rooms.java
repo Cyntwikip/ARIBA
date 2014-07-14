@@ -349,7 +349,7 @@ public class Rooms extends javax.swing.JFrame {
         room.setCurrentKW(0);
         
         room.setCurrentcubicmeter(0);
-        room.setStatus("unoccupied");
+        //room.setStatus("unoccupied");
         RoomDAOImplementation roomdao = new RoomDAOImplementation();
         roomdao.addRoom(room);
     }//GEN-LAST:event_jButton7ActionPerformed

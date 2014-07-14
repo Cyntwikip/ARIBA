@@ -28,9 +28,9 @@ public class RoomDAOImplementation implements RoomDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "insert into room (status, currentKW, currentcubicmeter) values(?, ?, ?)";
+            String query = "insert into room (currentKW, currentcubicmeter) values(?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, room.getStatus());
+            //ps.setString(1, room.getStatus());
             ps.setFloat(2, room.getCurrentKW());
             ps.setFloat(3, room.getCurrentcubicmeter());
             ps.executeUpdate();
@@ -50,12 +50,12 @@ public class RoomDAOImplementation implements RoomDAOInterface {
             Connector c = new Connector();
             Connection connection = c.getConnection();
             
-            String query = "update room set status = ?, currentKW = ?, currentcubicmeter = ? where roomID = ?";
+            String query = "update room set currentKW = ?, currentcubicmeter = ? where roomID = ?";
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, room.getStatus());
-            ps.setFloat(2, room.getCurrentKW());
-            ps.setFloat(3, room.getCurrentcubicmeter());
-            ps.setInt(4, roomID);
+            //ps.setString(1, room.getStatus());
+            ps.setFloat(1, room.getCurrentKW());
+            ps.setFloat(2, room.getCurrentcubicmeter());
+            ps.setInt(3, roomID);
             ps.executeUpdate();
             
             return true;
@@ -120,7 +120,7 @@ public class RoomDAOImplementation implements RoomDAOInterface {
                 bean.setCurrentKW(currentKW);
                 bean.setCurrentcubicmeter(currentcubicmeter);
                 bean.setRoomID(roomID);
-                bean.setStatus(currStatus);
+                //bean.setStatus(currStatus);
                 
                 list.add(bean);
              }
@@ -147,18 +147,18 @@ public class RoomDAOImplementation implements RoomDAOInterface {
             
             int roomID;
             float currentKW, currentcubicmeter;
-            String currStatus;
+            //String currStatus;
             
             while(resultSet.next()){
                 roomID = resultSet.getInt("roomID");
                 currentKW = resultSet.getFloat("currentKW");
                 currentcubicmeter = resultSet.getFloat("currentcubicmeter");
-                currStatus = resultSet.getString("status");
+                //currStatus = resultSet.getString("status");
                 
                 bean.setCurrentKW(currentKW);
                 bean.setCurrentcubicmeter(currentcubicmeter);
                 bean.setRoomID(roomID);
-                bean.setStatus(currStatus);
+                //bean.setStatus(currStatus);
                 
                 list.add(bean);
              }
@@ -201,12 +201,12 @@ public class RoomDAOImplementation implements RoomDAOInterface {
                 roomID = resultSet.getInt("roomID");
                 currentKW = resultSet.getFloat("currentKW");
                 currentcubicmeter = resultSet.getFloat("currentcubicmeter");
-                currStatus = resultSet.getString("status");
+                //currStatus = resultSet.getString("status");
                 
                 bean.setCurrentKW(currentKW);
                 bean.setCurrentcubicmeter(currentcubicmeter);
                 bean.setRoomID(roomID);
-                bean.setStatus(currStatus);
+                //bean.setStatus(currStatus);
                 
              }
             return bean;
@@ -215,7 +215,7 @@ public class RoomDAOImplementation implements RoomDAOInterface {
         }
         return null;
     }
-
+    /*
     @Override
     public ArrayList<RoomBean> getAllUnoccupiedRooms() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -225,7 +225,7 @@ public class RoomDAOImplementation implements RoomDAOInterface {
     public ArrayList<RoomBean> getAllOccupiedRooms() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    */
     @Override
     public ArrayList<RoomBean> getAllRooms() {
               try{
@@ -240,18 +240,18 @@ public class RoomDAOImplementation implements RoomDAOInterface {
             
             int roomID;
             float currentKW, currentcubicmeter;
-            String status;
+            //String status;
             
             while(resultSet.next()){
                 roomID = resultSet.getInt("roomID");
                 currentKW = resultSet.getFloat("currentKW");
                 currentcubicmeter = resultSet.getFloat("currentcubicmeter");
-                status = resultSet.getString("status");
+                //status = resultSet.getString("status");
                 
                 bean.setCurrentKW(currentKW);
                 bean.setCurrentcubicmeter(currentcubicmeter);
                 bean.setRoomID(roomID);
-                bean.setStatus(status);
+                //bean.setStatus(status);
                 
                 list.add(bean);
              }

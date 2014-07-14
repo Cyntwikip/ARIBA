@@ -15,7 +15,6 @@ public class RoomBean {
     private int roomID;
     private float currentKW;
     private float currentcubicmeter;
-    private String status;
 
     public float getCurrentKW() {
         return currentKW;
@@ -28,10 +27,6 @@ public class RoomBean {
     public int getRoomID() {
         return roomID;
     }
-    
-    public String getStatus() {
-        return status;
-    }
 
     public void setCurrentKW(float currentKW) {
         this.currentKW = currentKW;
@@ -43,9 +38,5 @@ public class RoomBean {
 
     public void setRoomID(int roomID) {
         this.roomID = roomID;
-    }
-    
-    public void setStatus(String status) {
-        this.status = status;
     }
 }
