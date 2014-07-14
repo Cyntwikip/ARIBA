@@ -1,5 +1,8 @@
 package Viewer.GUI;
 
+import Models.Beans.RoomBean;
+import Models.DAOImplementation.RoomDAOImplementation;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -177,6 +180,11 @@ public class Rooms extends javax.swing.JFrame {
         });
 
         jButton7.setText("ADD ROOM");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Current Room Count:");
 
@@ -335,6 +343,16 @@ public class Rooms extends javax.swing.JFrame {
         MainMenu menu = new MainMenu();
         menu.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        RoomBean room = new RoomBean();
+        room.setCurrentKW(0);
+        
+        room.setCurrentcubicmeter(0);
+        room.setStatus("unoccupied");
+        RoomDAOImplementation roomdao = new RoomDAOImplementation();
+        roomdao.addRoom(room);
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments

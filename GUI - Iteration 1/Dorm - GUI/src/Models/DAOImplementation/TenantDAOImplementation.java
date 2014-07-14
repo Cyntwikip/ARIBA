@@ -32,7 +32,6 @@ public class TenantDAOImplementation implements TenantDAOInterface {
             String query = "insert into tenant (fname, lname, image, contact, gender, address, degree, school, expectedyearofgrad, status)"
                     + " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
-            //ps.setInt(1, tenant.getTenantID());
             ps.setString(1, tenant.getFname());
             ps.setString(2, tenant.getLname());
             ps.setBlob(3, tenant.getImage());

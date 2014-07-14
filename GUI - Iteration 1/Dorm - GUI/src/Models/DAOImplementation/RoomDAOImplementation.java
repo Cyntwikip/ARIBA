@@ -28,12 +28,11 @@ public class RoomDAOImplementation implements RoomDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "insert into room (roomID, status, currentKW, currentcubicmeter) values(?, ?, ?, ?)";
+            String query = "insert into room (status, currentKW, currentcubicmeter) values(?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, room.getRoomID());
-            ps.setString(2, room.getStatus());
-            ps.setFloat(3, room.getCurrentKW());
-            ps.setFloat(4, room.getCurrentcubicmeter());
+            ps.setString(1, room.getStatus());
+            ps.setFloat(2, room.getCurrentKW());
+            ps.setFloat(3, room.getCurrentcubicmeter());
             ps.executeUpdate();
             connection.close();
             
