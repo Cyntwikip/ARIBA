@@ -29,21 +29,21 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "insert into tenant ( tenantID, fname, lname, image, contact, gender, address, degree, school, expectedyearofgrad, status)"
-                    + " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "insert into tenant (fname, lname, image, contact, gender, address, degree, school, expectedyearofgrad, status)"
+                    + " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, tenant.getTenantID());
-            ps.setString(2, tenant.getFname());
-            ps.setString(3, tenant.getLname());
-            ps.setBlob(4, tenant.getImage());
+            //ps.setInt(1, tenant.getTenantID());
+            ps.setString(1, tenant.getFname());
+            ps.setString(2, tenant.getLname());
+            ps.setBlob(3, tenant.getImage());
             //ps.setLong(5, 639166267392L);
-            ps.setLong(5, tenant.getContact());
-            ps.setString(6, tenant.getGender());
-            ps.setString(7, tenant.getAddress());
-            ps.setString(8, tenant.getDegree());
-            ps.setString(9, tenant.getSchool());
-            ps.setInt(10, tenant.getExpectedyearofgrad());
-            ps.setString(11, tenant.getStatus());
+            ps.setLong(4, tenant.getContact());
+            ps.setString(5, tenant.getGender());
+            ps.setString(6, tenant.getAddress());
+            ps.setString(7, tenant.getDegree());
+            ps.setString(8, tenant.getSchool());
+            ps.setInt(9, tenant.getExpectedyearofgrad());
+            ps.setString(10, tenant.getStatus());
             ps.executeUpdate();
             connection.close();
             

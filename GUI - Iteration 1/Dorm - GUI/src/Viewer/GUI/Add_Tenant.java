@@ -5,6 +5,12 @@
  */
 
 package Viewer.GUI;
+import Models.Beans.TenantBean;
+import Models.DAOImplementation.TenantDAOImplementation;
+import static java.lang.Integer.parseInt;
+import static java.lang.Integer.parseInt;
+import static java.lang.Long.parseLong;
+import static java.lang.Long.parseLong;
 
 /**
  *
@@ -334,17 +340,28 @@ public class Add_Tenant extends javax.swing.JFrame {
         this.setVisible(false);
         TenantPage tenant = new TenantPage();
         tenant.setVisible(true);
+        
+        TenantBean tenantAcc = new TenantBean();
+        tenantAcc.setFname(FirstNameField.getText());
+        tenantAcc.setLname(LastNameField.getText());
+        tenantAcc.setContact(parseLong(ContactNoField.getText()));
+        tenantAcc.setGender(GenderComboBox.getSelectedItem().toString());
+        tenantAcc.setAddress(AddressField.getText());
+        tenantAcc.setDegree(DegreeField.getText());
+        tenantAcc.setSchool(SchoolField.getText());
+        tenantAcc.setExpectedyearofgrad(parseInt(GradYearField.getText()));
+        tenantAcc.setStatus("Registered");
+        
+        TenantDAOImplementation addTenant = new TenantDAOImplementation();
+        addTenant.addTenant(tenantAcc);
+        
     }//GEN-LAST:event_SaveButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
+    /*
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -361,16 +378,14 @@ public class Add_Tenant extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Add_Tenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Add_Tenant().setVisible(true);
             }
         });
-    }
-
+    }*/
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddTenant;
     private javax.swing.JTextArea AddressField;
