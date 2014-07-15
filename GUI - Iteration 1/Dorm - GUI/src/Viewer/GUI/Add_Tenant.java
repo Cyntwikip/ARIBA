@@ -3,14 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Viewer.GUI;
+
+import Models.Beans.GuardianBean;
 import Models.Beans.TenantBean;
 import Models.DAOImplementation.TenantDAOImplementation;
 import static java.lang.Integer.parseInt;
 import static java.lang.Integer.parseInt;
+import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
 import static java.lang.Long.parseLong;
+import static java.lang.Long.parseLong;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,6 +25,8 @@ public class Add_Tenant extends javax.swing.JFrame {
     /**
      * Creates new form Add_Tenant
      */
+    public boolean proceed = false;
+
     public Add_Tenant() {
         initComponents();
     }
@@ -61,6 +67,7 @@ public class Add_Tenant extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         AddressField = new javax.swing.JTextArea();
         SaveButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         FirstNameField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -269,6 +276,14 @@ public class Add_Tenant extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setActionCommand("BackButton");
+        jButton1.setLabel("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -279,6 +294,8 @@ public class Add_Tenant extends javax.swing.JFrame {
                     .addComponent(AddTenant, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(SaveButton)))
                 .addContainerGap())
         );
@@ -288,7 +305,9 @@ public class Add_Tenant extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(AddTenant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(SaveButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SaveButton)
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -337,55 +356,143 @@ public class Add_Tenant extends javax.swing.JFrame {
 
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
         // DAO IMPLEMENTATIONS
-        this.setVisible(false);
-        TenantPage tenant = new TenantPage();
-        tenant.setVisible(true);
-        
+
         TenantBean tenantAcc = new TenantBean();
-        tenantAcc.setFname(FirstNameField.getText());
-        tenantAcc.setLname(LastNameField.getText());
-        tenantAcc.setContact(parseLong(ContactNoField.getText()));
-        tenantAcc.setGender(GenderComboBox.getSelectedItem().toString());
-        tenantAcc.setAddress(AddressField.getText());
-        tenantAcc.setDegree(DegreeField.getText());
-        tenantAcc.setSchool(SchoolField.getText());
-        tenantAcc.setExpectedyearofgrad(parseInt(GradYearField.getText()));
-        tenantAcc.setStatus("Registered");
-        
-        TenantDAOImplementation addTenant = new TenantDAOImplementation();
-        addTenant.addTenant(tenantAcc);
-        
+        GuardianBean guardianAcc = new GuardianBean();
+
+        if (FirstNameField.getText().isEmpty()
+                || LastNameField.getText().isEmpty()
+                || ContactNoField.getText().isEmpty()
+                || AddressField.getText().isEmpty()
+                || DegreeField.getText().isEmpty()
+                || SchoolField.getText().isEmpty()
+                || GradYearField.getText().isEmpty()
+                || GuardianNameField1.getText().isEmpty()
+                || GuardianNameField2.getText().isEmpty()
+                || GuardianNoFIeld.getText().isEmpty()
+                ) {
+            JOptionPane.showMessageDialog(null, "Please fill up ALL the fields.");
+            proceed = true;
+        } else {
+
+            if (FirstNameField.getText().matches("^[0-9]*$")) {
+                proceed = false;
+            } else {
+                tenantAcc.setFname(FirstNameField.getText());
+            }
+
+            if (LastNameField.getText().matches("^[0-9]*$")) {
+                proceed = false;
+            } else {
+                tenantAcc.setLname(LastNameField.getText());
+            }
+
+            /*if (ContactNoField.getText().matches("[a-zA-Z]")) {
+                proceed = false;
+            } else {
+                Long number = parseLong(ContactNoField.getText());
+                System.out.println(number);
+                tenantAcc.setContact(number);
+            }
+            */
+                tenantAcc.setContact(parseLong(ContactNoField.getText()));
+
+            tenantAcc.setGender(GenderComboBox.getSelectedItem().toString());
+
+            tenantAcc.setAddress(AddressField.getText());
+
+            tenantAcc.setDegree(DegreeField.getText());
+           /* if (DegreeField.getText().matches("^[0-9]*$")) {
+                tenantAcc.setDegree(DegreeField.getText());
+            } else {
+                proceed = false;
+            }
+            */
+
+            if (SchoolField.getText().matches("^[0-9]*$")) {
+                proceed = false;
+            } else {
+                tenantAcc.setSchool(SchoolField.getText());
+            }
+
+            if (GradYearField.getText().matches("[0-9]")) {
+                tenantAcc.setExpectedyearofgrad(parseInt(GradYearField.getText()));
+            } else {
+                proceed = false;
+            }
+            tenantAcc.setStatus("Registered");
+            
+            if(GuardianNameField1.getText().matches("^[0-9]*$")){
+                proceed = false;
+            }else{
+                guardianAcc.setFname(GuardianNameField1.getText());
+            }
+            
+            if(GuardianNameField2.getText().matches("^]0-9]*$")){
+                proceed = false;
+            } else{
+                guardianAcc.setLname(GuardianNameField2.getText());
+            }
+            
+          /*  if(GuardianNoFIeld.getText().matches("[a-zA-Z]")){
+                proceed = false;
+            }
+            else {
+                guardianAcc.setContact(parseLong(GuardianNoFIeld.getText()));
+            }*/
+            guardianAcc.setContact(parseLong(GuardianNoFIeld.getText()));
+            proceed = true;
+        }
+
+        if (proceed) {
+            TenantDAOImplementation addTenant = new TenantDAOImplementation();
+            addTenant.addTenant(tenantAcc);
+            this.setVisible(false);
+            TenantPage tenant = new TenantPage();
+            tenant.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please input ALL necessary information.");
+        }
+
+
     }//GEN-LAST:event_SaveButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        MainMenu menu = new MainMenu();
+        menu.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     /*
-    public static void main(String args[]) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Add_Tenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Add_Tenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Add_Tenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Add_Tenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+     public static void main(String args[]) {
+     try {
+     for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+     if ("Nimbus".equals(info.getName())) {
+     javax.swing.UIManager.setLookAndFeel(info.getClassName());
+     break;
+     }
+     }
+     } catch (ClassNotFoundException ex) {
+     java.util.logging.Logger.getLogger(Add_Tenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+     } catch (InstantiationException ex) {
+     java.util.logging.Logger.getLogger(Add_Tenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+     } catch (IllegalAccessException ex) {
+     java.util.logging.Logger.getLogger(Add_Tenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+     } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+     java.util.logging.Logger.getLogger(Add_Tenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+     }
         
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Add_Tenant().setVisible(true);
-            }
-        });
-    }*/
-    
+     java.awt.EventQueue.invokeLater(new Runnable() {
+     public void run() {
+     new Add_Tenant().setVisible(true);
+     }
+     });
+     }*/
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddTenant;
     private javax.swing.JTextArea AddressField;
@@ -412,6 +519,7 @@ public class Add_Tenant extends javax.swing.JFrame {
     private javax.swing.JButton SaveButton;
     private javax.swing.JTextField SchoolField;
     private javax.swing.JLabel SchoolLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
