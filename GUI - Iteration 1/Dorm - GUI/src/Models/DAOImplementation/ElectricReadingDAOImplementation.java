@@ -29,12 +29,12 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
     }
 
     @Override
-    public void editElectricReading(ElectricReadingBean electric, int electricID) {
+    public boolean editElectricReading(ElectricReadingBean electric, int electricID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void editElectricReadingByPrice(float price, int electricID) {
+    public boolean editElectricReadingByPrice(float price, int electricID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -44,7 +44,7 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
     }
 
     @Override
-    public void computeElectricReading(ElectricReadingBean electric, int electricID) {
+    public boolean computeElectricReading(ElectricReadingBean electric, int electricID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

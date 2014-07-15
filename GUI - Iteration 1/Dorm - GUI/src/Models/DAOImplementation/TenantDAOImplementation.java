@@ -310,7 +310,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
     }
 
     @Override
-    public ArrayList<TenantBean> TenantBySchool() {
+    public ArrayList<TenantBean> getTenantBySchool() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

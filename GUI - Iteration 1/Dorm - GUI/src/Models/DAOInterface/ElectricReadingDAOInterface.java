@@ -16,11 +16,11 @@ import java.util.ArrayList;
  */
 public interface ElectricReadingDAOInterface {
     public boolean addElectricReadingToRoom (ElectricReadingBean electric, int bill_roomID);
-    public void editElectricReading(ElectricReadingBean electric, int electricID);
-    public void editElectricReadingByPrice(float price, int electricID);
+    public boolean editElectricReading(ElectricReadingBean electric, int electricID);
+    public boolean editElectricReadingByPrice(float price, int electricID);
     public ArrayList<ElectricReadingBean> getAllElectricReading();
     public ArrayList<ElectricReadingBean> getAllElectricReadingByDate(Date dateread);
-    public void computeElectricReading(ElectricReadingBean electric, int electricID);
+    public boolean computeElectricReading(ElectricReadingBean electric, int electricID);
     
 
 
