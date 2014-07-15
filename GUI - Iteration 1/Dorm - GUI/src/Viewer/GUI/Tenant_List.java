@@ -35,8 +35,15 @@ public class Tenant_List extends javax.swing.JFrame {
             int tenantid = bean.getTenantID();
             String fname = bean.getFname();
             String lname = bean.getLname();
+            Long contact = bean.getContact();
+            String gender = bean.getGender();
+            String address = bean.getAddress();
+            String degree = bean.getDegree();
+            int yeargrad = bean.getExpectedyearofgrad();
+            String status = bean.getStatus();
+            String school = bean.getSchool();
             
-            Object[] obj = {tenantid, fname, lname};
+            Object[] obj = {tenantid, fname, lname, contact, gender, address, degree, school, yeargrad, status};
             
             model.addRow(obj);   
         }
@@ -62,14 +69,14 @@ public class Tenant_List extends javax.swing.JFrame {
 
             },
             new String [] {
-                "TenantID", "Lastname", "Firstname"
+                "ID", "Lastname", "Firstname", "Contact", "Gender", "Address", "Degree", "School", "Expected Year of Grad", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -88,8 +95,8 @@ public class Tenant_List extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
