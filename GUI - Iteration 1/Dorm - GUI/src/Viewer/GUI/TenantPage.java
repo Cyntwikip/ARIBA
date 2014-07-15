@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Viewer.GUI;
 
 import Models.Beans.TenantBean;
 import Models.DAOImplementation.TenantDAOImplementation;
 import java.util.ArrayList;
-
 
 /**
  *
@@ -42,6 +40,8 @@ public class TenantPage extends javax.swing.JFrame {
         search_button = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         lnameTextField = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -90,6 +90,15 @@ public class TenantPage extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("See list of tenants?");
+
+        jButton1.setText("Yes");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,11 +113,7 @@ public class TenantPage extends javax.swing.JFrame {
                         .addComponent(back_button))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lnameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel2)
@@ -117,13 +122,23 @@ public class TenantPage extends javax.swing.JFrame {
                                         .addGap(14, 14, 14)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addComponent(fnameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(addTennant_button, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(search_button)))
+                                            .addComponent(jButton1)
+                                            .addComponent(addTennant_button, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(8, 8, 8)
-                                        .addComponent(fnameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(search_button))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lnameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel5))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -143,11 +158,17 @@ public class TenantPage extends javax.swing.JFrame {
                 .addComponent(search_button)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addTennant_button)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addComponent(back_button)
-                .addGap(126, 126, 126))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(addTennant_button)
+                        .addGap(133, 133, 133)
+                        .addComponent(back_button))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jButton1))))
+                .addContainerGap())
         );
 
         pack();
@@ -171,7 +192,7 @@ public class TenantPage extends javax.swing.JFrame {
 
     private void search_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_buttonActionPerformed
         // TODO add your handling code here:
-       
+
         TenantDAOImplementation tenant = new TenantDAOImplementation();
         ArrayList<TenantBean> list = new ArrayList<>();
         list = tenant.getTenantListByName(fnameTextField.getText(), lnameTextField.getText());
@@ -183,44 +204,55 @@ public class TenantPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_lnameTextFieldActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        TenantDAOImplementation tenant = new TenantDAOImplementation();
+        ArrayList<TenantBean> list = new ArrayList<TenantBean>();
+        list = tenant.getAllTenants();
+        Tenant_List tenantlist = new Tenant_List(list);
+        tenantlist.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     /*
-    public static void main(String args[]) {
+     public static void main(String args[]) {
        
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TenantPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TenantPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TenantPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TenantPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+     try {
+     for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+     if ("Nimbus".equals(info.getName())) {
+     javax.swing.UIManager.setLookAndFeel(info.getClassName());
+     break;
+     }
+     }
+     } catch (ClassNotFoundException ex) {
+     java.util.logging.Logger.getLogger(TenantPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+     } catch (InstantiationException ex) {
+     java.util.logging.Logger.getLogger(TenantPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+     } catch (IllegalAccessException ex) {
+     java.util.logging.Logger.getLogger(TenantPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+     } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+     java.util.logging.Logger.getLogger(TenantPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+     }
       
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TenantPage().setVisible(true);
-            }
-        });
-    }*/
+     java.awt.EventQueue.invokeLater(new Runnable() {
+     public void run() {
+     new TenantPage().setVisible(true);
+     }
+     });
+     }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addTennant_button;
     private javax.swing.JButton back_button;
     private javax.swing.JTextField fnameTextField;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField lnameTextField;
     private javax.swing.JButton search_button;
     // End of variables declaration//GEN-END:variables
