@@ -2,6 +2,7 @@ package Viewer.GUI;
 
 import Models.Beans.RoomBean;
 import Models.DAOImplementation.RoomDAOImplementation;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -352,6 +353,12 @@ public class Rooms extends javax.swing.JFrame {
         //room.setStatus("unoccupied");
         RoomDAOImplementation roomdao = new RoomDAOImplementation();
         roomdao.addRoom(room);
+        
+        ArrayList<RoomBean> roomlist = new ArrayList<RoomBean>();
+        roomlist = roomdao.getAllRooms();
+        String count = Integer.toString(roomlist.size());
+        jLabel8.setText(count);
+        
     }//GEN-LAST:event_jButton7ActionPerformed
 
     /**

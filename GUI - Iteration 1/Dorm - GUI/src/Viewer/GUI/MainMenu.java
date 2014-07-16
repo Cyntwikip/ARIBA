@@ -6,10 +6,13 @@
 
 package Viewer.GUI;
 
+import Models.Beans.RoomBean;
 import Models.Connector.Connector;
+import Models.DAOImplementation.RoomDAOImplementation;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -180,6 +183,7 @@ public class MainMenu extends javax.swing.JFrame {
         this.setVisible(false);
         Rooms rooms = new Rooms();
         rooms.setVisible(true);
+        
     }//GEN-LAST:event_room_buttonActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
