@@ -37,6 +37,58 @@ CREATE TABLE IF NOT EXISTS `dormitory`.`Room` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 1;
 
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+INSERT into ROOM (currentKW, currentcubicmeter) values (0,0);
+
+
 
 -- -----------------------------------------------------
 -- Table `dormitory`.`Bill`
