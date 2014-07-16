@@ -242,7 +242,7 @@ public class RoomDAOImplementation implements RoomDAOInterface {
 
     @Override
     public RoomBean getRoomByRoomID(int roomID) {
-              try{
+        try{
             Connector c = new Connector();
             Connection connection = c.getConnection();
             String query = "select * from room where roomID = ?";

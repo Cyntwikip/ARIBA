@@ -12,6 +12,7 @@ import Models.DAOInterface.ContractDAOInterface;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -52,7 +53,40 @@ public class ContractDAOImplementation implements ContractDAOInterface {
 
     @Override
     public ArrayList<ContractBean> getAllContractsByTenantID(int contract_tenantID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from contract where contract_tenantID = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, contract_tenantID);
+            ResultSet resultSet = ps.executeQuery();
+            
+            ContractBean bean = new ContractBean();
+            ArrayList<ContractBean> contractlist = new ArrayList<ContractBean>();
+            
+            int contractID;
+            Date effectivedate, expirydate;
+            
+            while(resultSet.next()) {
+                contractID = resultSet.getInt("contractID");
+                effectivedate = resultSet.getDate("effectivedate");
+                expirydate = resultSet.getDate("expirydate");
+                
+                bean.setContractID(contractID);
+                bean.setContract_tenantID(contract_tenantID);
+                bean.setEffectivedate(effectivedate);
+                bean.setExpirydate(expirydate);
+                
+                contractlist.add(bean);
+                bean = new ContractBean();
+            }
+            
+            return contractlist;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ContractDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
