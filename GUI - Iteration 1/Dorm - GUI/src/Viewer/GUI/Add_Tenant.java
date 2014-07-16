@@ -461,17 +461,9 @@ public class Add_Tenant extends javax.swing.JFrame {
 
             tenantAcc.setDegree(DegreeField.getText());
 
-            if (SchoolField.getText().matches("^[0-9]*$")) {
-                proceed = false;
-
-            } else {
-                if (SchoolField.getText().matches("^[a-zA-Z ]+$")) {
                     tenantAcc.setSchool(SchoolField.getText());
-                } else {
-                    proceed = false;
-                }
-
-            }
+            
+            
 
             if (GradYearField.getText().matches("^\\d{4,4}$")) {
                 tenantAcc.setExpectedyearofgrad(parseInt(GradYearField.getText()));

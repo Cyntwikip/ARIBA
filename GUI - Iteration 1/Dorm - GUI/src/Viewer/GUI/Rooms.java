@@ -698,7 +698,7 @@ public class Rooms extends javax.swing.JFrame {
 
         RoomDAOInterface roomdao = new RoomDAOImplementation();
         RoomBean temproom = new RoomBean();
-        int roomnum = Integer.parseInt(choice2.getSelectedItem());
+        int roomnum = choice3.getSelectedIndex() + 1;
         float newcurrentKW = 0;
         float newcurrentcubicmeter = 0;
         boolean proceed = true;
