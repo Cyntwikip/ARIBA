@@ -31,22 +31,22 @@ public class Tenant_List extends javax.swing.JFrame {
         initComponents();
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         
-        for(TenantBean bean: list){
-            int tenantid = bean.getTenantID();
-            String fname = bean.getFname();
-            String lname = bean.getLname();
-            Long contact = bean.getContact();
-            String gender = bean.getGender();
-            String address = bean.getAddress();
-            String degree = bean.getDegree();
-            int yeargrad = bean.getExpectedyearofgrad();
-            String status = bean.getStatus();
-            String school = bean.getSchool();
-            
-            Object[] obj = {tenantid, fname, lname, contact, gender, address, degree, school, yeargrad, status};
-            
-            model.addRow(obj);   
-        }
+            for(TenantBean bean: list){
+                int tenantid = bean.getTenantID();
+                String fname = bean.getFname();
+                String lname = bean.getLname();
+                Long contact = bean.getContact();
+                String gender = bean.getGender();
+                String address = bean.getAddress();
+                String degree = bean.getDegree();
+                int yeargrad = bean.getExpectedyearofgrad();
+                String status = bean.getStatus();
+                String school = bean.getSchool();
+
+                Object[] obj = {tenantid, fname, lname, contact, gender, address, degree, school, yeargrad, status};
+
+                model.addRow(obj);   
+            }
         
     }
 

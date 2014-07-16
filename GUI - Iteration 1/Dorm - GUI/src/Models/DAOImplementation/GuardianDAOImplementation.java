@@ -9,6 +9,7 @@ import Models.Beans.GuardianBean;
 import Models.Beans.TenantBean;
 import Models.Connector.Connector;
 import Models.DAOInterface.GuardianDAOInterface;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -257,6 +258,66 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
             Logger.getLogger(RoomDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    @Override
+    public ArrayList<TenantBean> getTenantsRelatedToGuardian(int guardianID) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+
+            String query = "select * from tenant, tenantguardian, guardian where tenantID = tg_tenantID and guardianID = tg_guardianID and tg_guardianID = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+
+            ps.setInt(1, guardianID);
+            ResultSet resultSet = ps.executeQuery();
+
+            TenantBean bean = new TenantBean();
+            ArrayList<TenantBean> list = new ArrayList<TenantBean>();
+            int tenantID, expectedyearofgraduation;
+            Long contact;
+            String Fname, Lname, gender, address, degree, school, status;
+            Blob image;
+            
+            while (resultSet.next()) {
+                tenantID = resultSet.getInt("guardianID");
+                contact = resultSet.getLong("contact");
+                Fname = resultSet.getString("fname");
+                Lname = resultSet.getString("lname");
+                image = resultSet.getBlob("image");
+                contact = resultSet.getLong("contact");
+                gender = resultSet.getString("gender");
+                address = resultSet.getString("address");
+                degree = resultSet.getString("degree");
+                school = resultSet.getString("school");
+                expectedyearofgraduation = resultSet.getInt("expectedyearofgrad");
+                status = resultSet.getString("status");
+
+                bean = new TenantBean();
+
+                bean.setTenantID(tenantID);
+                bean.setContact(contact);
+                bean.setFname(Fname);
+                bean.setLname(Lname);
+                bean.setImage(image);
+                bean.setContact(contact);
+                bean.setGender(gender);
+                bean.setAddress(address);
+                bean.setDegree(degree);
+                bean.setSchool(school);
+                bean.setExpectedyearofgrad(expectedyearofgraduation);
+                bean.setStatus(status);
+                
+                list.add(bean);
+
+            }
+            return list;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
     }
 
 }
