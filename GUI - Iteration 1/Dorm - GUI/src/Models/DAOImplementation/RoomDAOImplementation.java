@@ -67,69 +67,12 @@ public class RoomDAOImplementation implements RoomDAOInterface {
     
     }
 
-    @Override
-    public boolean editRoomStatus(int roomID, String status) {
-            try {
-            Connector c = new Connector();
-            Connection connection = c.getConnection();
-            
-            String query = "update room set status = ? where roomID = ?";
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, status);
-            ps.setInt(2, roomID);
-            ps.executeUpdate();
-            
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
-            return false;
-    
-    }
 
     @Override
     public boolean assignTenanttoRoom(int tenantID, RoomBean room) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public ArrayList<RoomBean> getAllRoombyStatus(String status) {
-  
-                try{
-            Connector c = new Connector();
-            Connection connection = c.getConnection();
-            String query = "select * from room where status = ?";
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, status);
-            ResultSet resultSet = ps.executeQuery();
-            
-            RoomBean bean = new RoomBean();
-            ArrayList<RoomBean> list = new ArrayList<RoomBean>();
-            
-            int roomID;
-            float currentKW, currentcubicmeter;
-            String currStatus;
-            
-            while(resultSet.next()){
-                roomID = resultSet.getInt("roomID");
-                currentKW = resultSet.getFloat("currentKW");
-                currentcubicmeter = resultSet.getFloat("currentcubicmeter");
-                currStatus = resultSet.getString("status");
-                
-                bean.setCurrentKW(currentKW);
-                bean.setCurrentcubicmeter(currentcubicmeter);
-                bean.setRoomID(roomID);
-                //bean.setStatus(currStatus);
-                
-                list.add(bean);
-             }
-            return list;
-        }   catch(SQLException ex){
-        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
 
     @Override
     public ArrayList<RoomBean> getAllCurrentKW() {
@@ -256,6 +199,45 @@ public class RoomDAOImplementation implements RoomDAOInterface {
                 list.add(bean);
              }
             return list;
+        }   catch(SQLException ex){
+        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null; 
+    
+    }
+
+    @Override
+    public RoomBean getRoomByRoomID(int roomID) {
+              try{
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from room where roomID = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, roomID);
+            ResultSet resultSet = ps.executeQuery();
+            
+            RoomBean bean = new RoomBean();
+            ArrayList<RoomBean> list = new ArrayList<RoomBean>();
+            
+            int currroomID;
+            float currentKW, currentcubicmeter;
+            //String status;
+            
+            while(resultSet.next()){
+                currroomID = resultSet.getInt("roomID");
+                currentKW = resultSet.getFloat("currentKW");
+                currentcubicmeter = resultSet.getFloat("currentcubicmeter");
+                //status = resultSet.getString("status");
+                
+                bean.setCurrentKW(currentKW);
+                bean.setCurrentcubicmeter(currentcubicmeter);
+                bean.setRoomID(roomID);
+                //bean.setStatus(status);
+                
+                
+             }
+            return bean;
         }   catch(SQLException ex){
         Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }

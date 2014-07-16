@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public interface AttendanceLogDAOInterface {
     // do something here
     public boolean addAttendanceLogDAOInterface (AttendanceLogBean attendance);
-    public void editAttendanceLog(AttendanceLogBean attendance);
+    public boolean editAttendanceLog(AttendanceLogBean attendance);
     public ArrayList<AttendanceLogBean> getAllLogs(); //needed ba to haha
     public ArrayList<AttendanceLogBean> getAllAtendanceLogsByTenantID(int log_tenantID);
     public ArrayList<AttendanceLogBean> getAllAttendanceLogsByName (String fname, String lname);

@@ -28,7 +28,7 @@ public class BillDAOImplementation implements BillDAOInterface {
     }
 
     @Override
-    public void editBill(BillBean bill, int billID) {
+    public boolean editBill(BillBean bill, int billID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

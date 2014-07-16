@@ -33,17 +33,17 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
     }
 
     @Override
-    public void editWaterReading(Date dateread) {
+    public boolean editWaterReading(Date dateread) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void editElectricReadingByPrice(float price, int waterID) {
+    public boolean editElectricReadingByPrice(float price, int waterID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void computeWaterReading(WaterReadingBean water, int billID) {
+    public boolean computeWaterReading(WaterReadingBean water, int billID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

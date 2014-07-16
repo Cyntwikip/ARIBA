@@ -19,8 +19,9 @@ public interface TenantDAOInterface {
     public boolean editTenant (TenantBean tenant, String fname, String lname); // important
     public ArrayList<TenantBean> getAllTenants(); // important
     public TenantBean getTenantById(int tenantid);
-    public ArrayList<TenantBean> TenantBySchool();
+    public ArrayList<TenantBean> getTenantBySchool();
     public TenantBean getTenantByName (String fname, String lname);
+    public ArrayList<TenantBean> getTenantListByName (String fname, String lname);
     public ArrayList<TenantBean> getMaleTenant();
     public ArrayList<TenantBean> getFemaleTenant();
     public ArrayList<TenantBean> getTenantByStatus(String status);
