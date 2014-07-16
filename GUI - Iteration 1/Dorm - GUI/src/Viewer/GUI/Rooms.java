@@ -346,8 +346,8 @@ public class Rooms extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         RoomBean room = new RoomBean();
-        room.setCurrentKW(0);
         
+        room.setCurrentKW(0);
         room.setCurrentcubicmeter(0);
         //room.setStatus("unoccupied");
         RoomDAOImplementation roomdao = new RoomDAOImplementation();

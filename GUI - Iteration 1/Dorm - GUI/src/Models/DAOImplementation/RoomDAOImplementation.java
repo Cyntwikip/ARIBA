@@ -31,8 +31,8 @@ public class RoomDAOImplementation implements RoomDAOInterface {
             String query = "insert into room (currentKW, currentcubicmeter) values(?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
             //ps.setString(1, room.getStatus());
-            ps.setFloat(2, room.getCurrentKW());
-            ps.setFloat(3, room.getCurrentcubicmeter());
+            ps.setFloat(1, room.getCurrentKW());
+            ps.setFloat(2, room.getCurrentcubicmeter());
             ps.executeUpdate();
             connection.close();
             
