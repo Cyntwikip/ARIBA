@@ -739,7 +739,7 @@ public class Rooms extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
-     */
+     *//*
     public static void main(String args[]) {
 
         try {
@@ -770,7 +770,7 @@ public class Rooms extends javax.swing.JFrame {
             }
         });
     }
-
+*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Choice choice1;
     private java.awt.Choice choice2;

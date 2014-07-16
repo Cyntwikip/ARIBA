@@ -604,7 +604,7 @@ public class Add_Tenant extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
-     */
+     *//*
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -628,7 +628,7 @@ public class Add_Tenant extends javax.swing.JFrame {
                 new Add_Tenant().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddTenant;
