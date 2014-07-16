@@ -447,7 +447,7 @@ public class Add_Tenant extends javax.swing.JFrame {
                 }
             }
 
-            if (ContactNoField.getText().matches("^\\d{12,12}")) { //numbers only
+            if (ContactNoField.getText().matches("^\\d{11,12}")) { //numbers only
                 tenantAcc.setContact(parseLong(ContactNoField.getText()));
             } else {
                 proceed = false;
@@ -514,7 +514,7 @@ public class Add_Tenant extends javax.swing.JFrame {
                 }
             }
 
-            if (GuardianNoFIeld.getText().matches("^\\d{12,12}") || GuardianNoFIeld.getText().isEmpty()) {
+            if (GuardianNoFIeld.getText().matches("^\\d{11,12}") || GuardianNoFIeld.getText().isEmpty()) {
                 if (GuardianNoFIeld.getText().isEmpty()) {
                     System.out.println("Contact if");
                     Long contact = Long.valueOf(0);
