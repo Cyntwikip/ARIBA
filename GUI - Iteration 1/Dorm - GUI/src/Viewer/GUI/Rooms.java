@@ -40,6 +40,10 @@ public class Rooms extends javax.swing.JFrame {
            choice2.add(String.valueOf(i+1));
        }
        
+       ArrayList<RoomBean> allRooms = new ArrayList<RoomBean>();
+       
+       allRooms = rdao.getAllRooms();
+       jLabel9.setText(String.valueOf(allRooms.size()));
        
        
     }
@@ -75,6 +79,7 @@ public class Rooms extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -220,7 +225,7 @@ public class Rooms extends javax.swing.JFrame {
 
         jLabel7.setText("Current Room Count:");
 
-        jLabel8.setText("jLabel8");
+        jLabel9.setText("jLabel9");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -237,9 +242,11 @@ public class Rooms extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(164, 164, 164)
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8)))
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(257, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,7 +254,8 @@ public class Rooms extends javax.swing.JFrame {
                 .addGap(85, 85, 85)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9))
                 .addGap(18, 18, 18)
                 .addComponent(jButton7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
@@ -396,11 +404,19 @@ public class Rooms extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         RoomBean room = new RoomBean();
         room.setCurrentKW(0);
-        
         room.setCurrentcubicmeter(0);
         //room.setStatus("unoccupied");
         RoomDAOImplementation roomdao = new RoomDAOImplementation();
         roomdao.addRoom(room);
+        
+        
+        ArrayList<RoomBean> allRooms = new ArrayList<RoomBean>();
+                allRooms = roomdao.getAllRooms();
+                
+        JOptionPane.showMessageDialog(null, "Successfully added a room!"
+                + "Total number of rooms: " + allRooms.size());
+        
+        jLabel9.setText(String.valueOf(allRooms.size()));
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
@@ -455,6 +471,7 @@ public class Rooms extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
