@@ -534,13 +534,16 @@ public class Add_Tenant extends javax.swing.JFrame {
         if (proceed) {
             TenantDAOImplementation addTenant = new TenantDAOImplementation();
             addTenant.addTenant(tenantAcc);
+            tenantAcc = addTenant.getTenantByName(tenantAcc.getFname(), tenantAcc.getLname());
             this.setVisible(false);
             TenantPage tenant = new TenantPage();
             tenant.setVisible(true);
+            GuardianDAOInterface addGuardian = new GuardianDAOImplementation();
 
             if (newguardian) { //create new guardian
-                GuardianDAOImplementation addGuardian = new GuardianDAOImplementation();
                 addGuardian.addGuardian(guardianAcc);
+                guardianAcc = addGuardian.getGuardianByName(guardianAcc.getFname(), guardianAcc.getLname());
+
             } else {
                 if (GuardianNameField1.getText().isEmpty()
                         && GuardianNameField2.getText().isEmpty()
@@ -550,6 +553,7 @@ public class Add_Tenant extends javax.swing.JFrame {
                     } else {
                         if (jTextField1.getText().matches("[0-9]+")) {
                             guardianID = Integer.parseInt(jTextField1.getText());
+                            guardianAcc = addGuardian.getGuardianByID(guardianID);
                             newguardian = false;
                         } else {
                             guardianID = Integer.parseInt(jTextField1.getText());
@@ -573,6 +577,9 @@ public class Add_Tenant extends javax.swing.JFrame {
             contractAcc.setExpirydate(expirydate);
 
             contractdao.addContract(contractAcc);
+
+            GuardianDAOInterface guardiandao = new GuardianDAOImplementation();
+            guardiandao.assignTenantToGuardian(guardianAcc, tenantAcc);
 
             JOptionPane.showMessageDialog(null, "Successfully added tenant " + tenantAcc.getFname()
                     + " with tenant ID: " + tenantAcc.getTenantID());
