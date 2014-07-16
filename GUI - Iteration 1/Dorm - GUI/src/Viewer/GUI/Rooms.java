@@ -3,18 +3,14 @@ package Viewer.GUI;
 import Models.Beans.RoomBean;
 import Models.Beans.TenantBean;
 import Models.DAOImplementation.RoomDAOImplementation;
-<<<<<<< HEAD
 import java.util.ArrayList;
-=======
 import Models.DAOImplementation.TenantDAOImplementation;
 import Models.DAOInterface.RoomDAOInterface;
 import Models.DAOInterface.TenantDAOInterface;
-import static java.nio.file.Files.list;
 import java.util.ArrayList;
 import static java.util.Collections.list;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
->>>>>>> 2bb83d7662e5b049809ae1ea7fa8876fec027602
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -407,32 +403,21 @@ public class Rooms extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         RoomBean room = new RoomBean();
-<<<<<<< HEAD
-        
-=======
->>>>>>> 2bb83d7662e5b049809ae1ea7fa8876fec027602
         room.setCurrentKW(0);
         room.setCurrentcubicmeter(0);
         //room.setStatus("unoccupied");
         RoomDAOImplementation roomdao = new RoomDAOImplementation();
         roomdao.addRoom(room);
         
-<<<<<<< HEAD
         ArrayList<RoomBean> roomlist = new ArrayList<RoomBean>();
         roomlist = roomdao.getAllRooms();
+        
+             
+        JOptionPane.showMessageDialog(null, "Successfully added a room!"
+                + "Total number of rooms: " + roomlist.size());
+        
         String count = Integer.toString(roomlist.size());
         jLabel8.setText(count);
-        
-=======
-        
-        ArrayList<RoomBean> allRooms = new ArrayList<RoomBean>();
-                allRooms = roomdao.getAllRooms();
-                
-        JOptionPane.showMessageDialog(null, "Successfully added a room!"
-                + "Total number of rooms: " + allRooms.size());
-        
-        jLabel9.setText(String.valueOf(allRooms.size()));
->>>>>>> 2bb83d7662e5b049809ae1ea7fa8876fec027602
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
