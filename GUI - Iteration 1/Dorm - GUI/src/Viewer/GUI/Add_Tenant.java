@@ -429,7 +429,7 @@ public class Add_Tenant extends javax.swing.JFrame {
             if (FirstNameField.getText().matches("^[0-9]*$")) {
                 proceed = false;
             } else {
-                if (FirstNameField.getText().matches("^[a-zA-Z]+$")) {
+                if (FirstNameField.getText().matches("^[a-zA-Z ]+$")) {
                     tenantAcc.setFname(FirstNameField.getText());
                 } else {
                     proceed = false;
@@ -440,7 +440,7 @@ public class Add_Tenant extends javax.swing.JFrame {
                 proceed = false;
 
             } else {
-                if (LastNameField.getText().matches("^[a-zA-Z]+$")) {
+                if (LastNameField.getText().matches("^[a-zA-Z ]+$")) {
                     tenantAcc.setLname(LastNameField.getText());
                 } else {
                     proceed = false;
@@ -464,7 +464,7 @@ public class Add_Tenant extends javax.swing.JFrame {
                 proceed = false;
 
             } else {
-                if (SchoolField.getText().matches("^[a-zA-Z]+$")) {
+                if (SchoolField.getText().matches("^[a-zA-Z ]+$")) {
                     tenantAcc.setSchool(SchoolField.getText());
                 } else {
                     proceed = false;
@@ -489,7 +489,7 @@ public class Add_Tenant extends javax.swing.JFrame {
                     System.out.println("Fname1 if2");
                 }
             } else {
-                if (GuardianNameField1.getText().matches("^[a-zA-Z]+$")) {
+                if (GuardianNameField1.getText().matches("^[a-zA-Z ]+$")) {
                     guardianAcc.setFname(GuardianNameField1.getText());
                 } else {
                     proceed = false;
@@ -506,7 +506,7 @@ public class Add_Tenant extends javax.swing.JFrame {
                     System.out.println("Fname1 if2");
                 }
             } else {
-                if (GuardianNameField2.getText().matches("^[a-zA-Z]+$")) {
+                if (GuardianNameField2.getText().matches("^[a-zA-Z ]+$")) {
                     guardianAcc.setLname(GuardianNameField2.getText());
                 } else {
                     proceed = false;
