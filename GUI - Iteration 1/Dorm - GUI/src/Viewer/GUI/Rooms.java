@@ -413,11 +413,12 @@ public class Rooms extends javax.swing.JFrame {
         roomlist = roomdao.getAllRooms();
         
              
-        JOptionPane.showMessageDialog(null, "Successfully added a room!"
+        JOptionPane.showMessageDialog(null, "Successfully added a room! "
                 + "Total number of rooms: " + roomlist.size());
         
         String count = Integer.toString(roomlist.size());
-        jLabel8.setText(count);
+        
+        jLabel9.setText(count);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
