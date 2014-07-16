@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Models.DAOImplementation;
 
 import Models.Beans.TenantBean;
@@ -45,33 +44,33 @@ public class TenantDAOImplementation implements TenantDAOInterface {
             ps.setString(10, tenant.getStatus());
             ps.executeUpdate();
             connection.close();
-            
+
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-         return false;
+
+        return false;
     }
 
     @Override
     public TenantBean getTenantById(int tenantid) {
-        try{
+        try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
             String query = "select * from tenant where tenantID = ?";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, tenantid);
             ResultSet resultSet = ps.executeQuery();
-            
+
             TenantBean bean = new TenantBean();
-            
+
             int tenantID, expectedyearofgrad;
             Long contact;
             String fname, lname, gender, address, degree, school, status;
             Blob image;
-            
-            while(resultSet.next()){
+
+            while (resultSet.next()) {
                 tenantID = resultSet.getInt("tenantID");
                 contact = resultSet.getLong("contact");
                 expectedyearofgrad = resultSet.getInt("expectedyearofgrad");
@@ -83,9 +82,9 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 school = resultSet.getString("school");
                 status = resultSet.getString("status");
                 image = resultSet.getBlob("image");
-               
+
                 bean = new TenantBean();
-                
+
                 bean.setTenantID(tenantID);
                 bean.setContact(contact);
                 bean.setExpectedyearofgrad(expectedyearofgrad);
@@ -99,33 +98,32 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 bean.setImage(image);
             }
             return bean;
-    
-        }   catch(SQLException ex){
-        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return null;       
+
+        return null;
     }
 
     @Override
     public ArrayList<TenantBean> getAllTenants() { // important
-                try{
+        try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
             String query = "select * from tenant";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
-            
+
             ArrayList<TenantBean> list = new ArrayList<TenantBean>();
             TenantBean bean = new TenantBean();
-            
+
             int tenantID, expectedyearofgrad;
             Long contact;
             String fname, lname, gender, address, degree, school, status;
             Blob image;
-            
-            
-            while(resultSet.next()){
+
+            while (resultSet.next()) {
                 tenantID = resultSet.getInt("tenantID");
                 contact = resultSet.getLong("contact");
                 expectedyearofgrad = resultSet.getInt("expectedyearofgrad");
@@ -137,9 +135,9 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 school = resultSet.getString("school");
                 status = resultSet.getString("status");
                 image = resultSet.getBlob("image");
-               
+
                 bean = new TenantBean();
-                
+
                 bean.setTenantID(tenantID);
                 bean.setContact(contact);
                 bean.setExpectedyearofgrad(expectedyearofgrad);
@@ -154,18 +152,18 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 list.add(bean);
             }
             return list;
-    
-        }   catch(SQLException ex){
-        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return null;    
+
+        return null;
     }
 
     @Override
     public TenantBean getTenantByName(String firstname, String lastname) { // important
 
-            try{
+        try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
             String query = "select * from tenant where fname = ? and lname = ?";
@@ -173,15 +171,15 @@ public class TenantDAOImplementation implements TenantDAOInterface {
             ps.setString(1, firstname);
             ps.setString(2, lastname);
             ResultSet resultSet = ps.executeQuery();
-            
+
             TenantBean bean = new TenantBean();
-            
+
             int tenantID, expectedyearofgrad;
             Long contact;
             String fname, lname, gender, address, degree, school, status;
             Blob image;
-            
-            while(resultSet.next()){
+
+            while (resultSet.next()) {
                 tenantID = resultSet.getInt("tenantID");
                 contact = resultSet.getLong("contact");
                 expectedyearofgrad = resultSet.getInt("expectedyearofgrad");
@@ -193,9 +191,9 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 school = resultSet.getString("school");
                 status = resultSet.getString("status");
                 image = resultSet.getBlob("image");
-               
+
                 bean = new TenantBean();
-                
+
                 bean.setTenantID(tenantID);
                 bean.setContact(contact);
                 bean.setExpectedyearofgrad(expectedyearofgrad);
@@ -209,34 +207,34 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 bean.setImage(image);
             }
             return bean;
-    
-        }   catch(SQLException ex){
-        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return null;       
+
+        return null;
     }
 
     @Override
     public ArrayList<TenantBean> getTenantByExpectedYearofGrad(int year) {
-  
-            try{
+
+        try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
             String query = "select * from tenant where expectedyearofgrad = ?";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, year);
             ResultSet resultSet = ps.executeQuery();
-            
+
             ArrayList<TenantBean> list = new ArrayList<TenantBean>();
             TenantBean bean = new TenantBean();
-            
+
             int tenantID, expectedyearofgrad;
             Long contact;
             String fname, lname, gender, address, degree, school, status;
             Blob image;
-            
-            while(resultSet.next()){
+
+            while (resultSet.next()) {
                 tenantID = resultSet.getInt("tenantID");
                 contact = resultSet.getLong("contact");
                 expectedyearofgrad = resultSet.getInt("expectedyearofgrad");
@@ -248,9 +246,9 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 school = resultSet.getString("school");
                 status = resultSet.getString("status");
                 image = resultSet.getBlob("image");
-               
+
                 bean = new TenantBean();
-                
+
                 bean.setTenantID(tenantID);
                 bean.setContact(contact);
                 bean.setExpectedyearofgrad(expectedyearofgrad);
@@ -262,26 +260,26 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 bean.setSchool(school);
                 bean.setStatus(status);
                 bean.setImage(image);
-                
+
                 list.add(bean);
             }
             return list;
-    
-        }   catch(SQLException ex){
-        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return null;   
-    
+
+        return null;
+
     }
 
     @Override
     public boolean editTenant(TenantBean tenant, String fname, String lname) {
-     
-            try {
+
+        try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            
+
             String query = "update tenant set image = ?, contact = ?, gender = ?, address = ?, degree = ?, school = ?, expectedyearofgrad = ?, status=? where fname = ? and lname = ? ";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setBlob(1, tenant.getImage());
@@ -295,13 +293,13 @@ public class TenantDAOImplementation implements TenantDAOInterface {
             ps.setString(9, fname);
             ps.setString(10, lname);
             ps.executeUpdate();
-            
+
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-            return false;
+
+        return false;
     }
 
     @Override
@@ -310,34 +308,67 @@ public class TenantDAOImplementation implements TenantDAOInterface {
     }
 
     @Override
-    public ArrayList<TenantBean> getTenantBySchool() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<TenantBean> getTenantBySchool(String currschool) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from tenant where school =?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, currschool);
+            ResultSet resultSet = ps.executeQuery();
+
+            ArrayList<TenantBean> list = new ArrayList<>();
+            TenantBean bean = new TenantBean();
+
+            int tenantID, expectedyearofgrad;
+            Long contact;
+            String fname, lname, gender, address, degree, school, status;
+            Blob image;
+
+            while (resultSet.next()) {
+                tenantID = resultSet.getInt("tenantID");
+                contact = resultSet.getLong("contact");
+                expectedyearofgrad = resultSet.getInt("expectedyearofgrad");
+                fname = resultSet.getString("fname");
+                lname = resultSet.getString("lname");
+                gender = resultSet.getString("gender");
+                address = resultSet.getString("address");
+                degree = resultSet.getString("degree");
+                school = resultSet.getString("school");
+                status = resultSet.getString("status");
+                image = resultSet.getBlob("image");
+
+                bean = new TenantBean();
+
+                bean.setTenantID(tenantID);
+                bean.setContact(contact);
+                bean.setExpectedyearofgrad(expectedyearofgrad);
+                bean.setFname(fname);
+                bean.setLname(lname);
+                bean.setGender(gender);
+                bean.setDegree(degree);
+                bean.setAddress(address);
+                bean.setSchool(school);
+                bean.setStatus(status);
+                bean.setImage(image);
+                list.add(bean);
+            }
+            return list;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
     }
 
     @Override
     public ArrayList<TenantBean> getMaleTenant() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ArrayList<TenantBean> getFemaleTenant() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ArrayList<TenantBean> getTenantByStatus(String status) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ArrayList<TenantBean> getTenantListByName(String firstname, String lastname) {
-        try{
+       try{
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from tenant where fname = ? and lname = ?";
+            String query = "select * from tenant where gender = 'male'";
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, firstname);
-            ps.setString(2, lastname);
             ResultSet resultSet = ps.executeQuery();
             
             ArrayList<TenantBean> list =new ArrayList<>();
@@ -384,5 +415,226 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         
         return null;
     }
-    
+
+    @Override
+    public ArrayList<TenantBean> getFemaleTenant() {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from tenant where gender = 'female'";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+
+            ArrayList<TenantBean> list = new ArrayList<>();
+            TenantBean bean = new TenantBean();
+
+            int tenantID, expectedyearofgrad;
+            Long contact;
+            String fname, lname, gender, address, degree, school, status;
+            Blob image;
+
+            while (resultSet.next()) {
+                tenantID = resultSet.getInt("tenantID");
+                contact = resultSet.getLong("contact");
+                expectedyearofgrad = resultSet.getInt("expectedyearofgrad");
+                fname = resultSet.getString("fname");
+                lname = resultSet.getString("lname");
+                gender = resultSet.getString("gender");
+                address = resultSet.getString("address");
+                degree = resultSet.getString("degree");
+                school = resultSet.getString("school");
+                status = resultSet.getString("status");
+                image = resultSet.getBlob("image");
+
+                bean = new TenantBean();
+
+                bean.setTenantID(tenantID);
+                bean.setContact(contact);
+                bean.setExpectedyearofgrad(expectedyearofgrad);
+                bean.setFname(fname);
+                bean.setLname(lname);
+                bean.setGender(gender);
+                bean.setDegree(degree);
+                bean.setAddress(address);
+                bean.setSchool(school);
+                bean.setStatus(status);
+                bean.setImage(image);
+                list.add(bean);
+            }
+            return list;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
+    @Override
+    public ArrayList<TenantBean> getTenantByStatus(String currstatus) {
+
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from tenant where status =?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, currstatus);
+            ResultSet resultSet = ps.executeQuery();
+
+            ArrayList<TenantBean> list = new ArrayList<>();
+            TenantBean bean = new TenantBean();
+
+            int tenantID, expectedyearofgrad;
+            Long contact;
+            String fname, lname, gender, address, degree, school, status;
+            Blob image;
+
+            while (resultSet.next()) {
+                tenantID = resultSet.getInt("tenantID");
+                contact = resultSet.getLong("contact");
+                expectedyearofgrad = resultSet.getInt("expectedyearofgrad");
+                fname = resultSet.getString("fname");
+                lname = resultSet.getString("lname");
+                gender = resultSet.getString("gender");
+                address = resultSet.getString("address");
+                degree = resultSet.getString("degree");
+                school = resultSet.getString("school");
+                status = resultSet.getString("status");
+                image = resultSet.getBlob("image");
+
+                bean = new TenantBean();
+
+                bean.setTenantID(tenantID);
+                bean.setContact(contact);
+                bean.setExpectedyearofgrad(expectedyearofgrad);
+                bean.setFname(fname);
+                bean.setLname(lname);
+                bean.setGender(gender);
+                bean.setDegree(degree);
+                bean.setAddress(address);
+                bean.setSchool(school);
+                bean.setStatus(status);
+                bean.setImage(image);
+                list.add(bean);
+            }
+            return list;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
+    @Override
+    public ArrayList<TenantBean> getTenantListByName(String firstname, String lastname) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from tenant where fname = ? and lname = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, firstname);
+            ps.setString(2, lastname);
+            ResultSet resultSet = ps.executeQuery();
+
+            ArrayList<TenantBean> list = new ArrayList<>();
+            TenantBean bean = new TenantBean();
+
+            int tenantID, expectedyearofgrad;
+            Long contact;
+            String fname, lname, gender, address, degree, school, status;
+            Blob image;
+
+            while (resultSet.next()) {
+                tenantID = resultSet.getInt("tenantID");
+                contact = resultSet.getLong("contact");
+                expectedyearofgrad = resultSet.getInt("expectedyearofgrad");
+                fname = resultSet.getString("fname");
+                lname = resultSet.getString("lname");
+                gender = resultSet.getString("gender");
+                address = resultSet.getString("address");
+                degree = resultSet.getString("degree");
+                school = resultSet.getString("school");
+                status = resultSet.getString("status");
+                image = resultSet.getBlob("image");
+
+                bean = new TenantBean();
+
+                bean.setTenantID(tenantID);
+                bean.setContact(contact);
+                bean.setExpectedyearofgrad(expectedyearofgrad);
+                bean.setFname(fname);
+                bean.setLname(lname);
+                bean.setGender(gender);
+                bean.setDegree(degree);
+                bean.setAddress(address);
+                bean.setSchool(school);
+                bean.setStatus(status);
+                bean.setImage(image);
+                list.add(bean);
+            }
+            return list;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
+    @Override
+    public ArrayList<TenantBean> getTenantByDegree(String currdegree) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from tenant where degree =?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, currdegree);
+            ResultSet resultSet = ps.executeQuery();
+
+            ArrayList<TenantBean> list = new ArrayList<>();
+            TenantBean bean = new TenantBean();
+
+            int tenantID, expectedyearofgrad;
+            Long contact;
+            String fname, lname, gender, address, degree, school, status;
+            Blob image;
+
+            while (resultSet.next()) {
+                tenantID = resultSet.getInt("tenantID");
+                contact = resultSet.getLong("contact");
+                expectedyearofgrad = resultSet.getInt("expectedyearofgrad");
+                fname = resultSet.getString("fname");
+                lname = resultSet.getString("lname");
+                gender = resultSet.getString("gender");
+                address = resultSet.getString("address");
+                degree = resultSet.getString("degree");
+                school = resultSet.getString("school");
+                status = resultSet.getString("status");
+                image = resultSet.getBlob("image");
+
+                bean = new TenantBean();
+
+                bean.setTenantID(tenantID);
+                bean.setContact(contact);
+                bean.setExpectedyearofgrad(expectedyearofgrad);
+                bean.setFname(fname);
+                bean.setLname(lname);
+                bean.setGender(gender);
+                bean.setDegree(degree);
+                bean.setAddress(address);
+                bean.setSchool(school);
+                bean.setStatus(status);
+                bean.setImage(image);
+                list.add(bean);
+            }
+            return list;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
 }
