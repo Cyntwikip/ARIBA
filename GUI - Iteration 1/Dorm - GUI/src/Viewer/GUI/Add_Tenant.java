@@ -12,6 +12,7 @@ import Models.DAOImplementation.ContractDAOImplementation;
 import Models.DAOImplementation.GuardianDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
 import Models.DAOInterface.ContractDAOInterface;
+import Models.DAOInterface.GuardianDAOInterface;
 import static java.lang.Integer.parseInt;
 import static java.lang.Integer.parseInt;
 import static java.lang.Integer.parseInt;
@@ -19,6 +20,10 @@ import static java.lang.Integer.parseInt;
 import static java.lang.Integer.parseInt;
 import static java.lang.Integer.parseInt;
 import static java.lang.Integer.parseInt;
+import static java.lang.Integer.parseInt;
+import static java.lang.Integer.parseInt;
+import static java.lang.Long.parseLong;
+import static java.lang.Long.parseLong;
 import static java.lang.Long.parseLong;
 import static java.lang.Long.parseLong;
 import static java.lang.Long.parseLong;
@@ -27,7 +32,8 @@ import static java.lang.Long.parseLong;
 import static java.lang.Long.parseLong;
 import static java.lang.Long.parseLong;
 import java.sql.Date;
-import javax.swing.JOptionPane; 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -42,6 +48,14 @@ public class Add_Tenant extends javax.swing.JFrame {
 
     public Add_Tenant() {
         initComponents();
+
+        GuardianDAOInterface guardiandao = new GuardianDAOImplementation();
+        ArrayList<GuardianBean> guardianlist = new ArrayList<GuardianBean>();
+        guardianlist = guardiandao.getAllGuardians();
+
+        for (int i = 0; i < guardianlist.size(); i++) {
+            choice1.add(guardianlist.get(i).getGuardianID() + ": " + guardianlist.get(i).getLname() + ", " + guardianlist.get(i).getFname());
+        }
     }
 
     /**
@@ -79,6 +93,10 @@ public class Add_Tenant extends javax.swing.JFrame {
         GuardianNoFIeld = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         AddressField = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        choice1 = new java.awt.Choice();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
         SaveButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
@@ -178,6 +196,16 @@ public class Add_Tenant extends javax.swing.JFrame {
         AddressField.setLineWrap(true);
         jScrollPane1.setViewportView(AddressField);
 
+        jLabel1.setText("Existing guardian:");
+
+        jLabel2.setText("If existing guardian, enter ID here:");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout AddTenantLayout = new javax.swing.GroupLayout(AddTenant);
         AddTenant.setLayout(AddTenantLayout);
         AddTenantLayout.setHorizontalGroup(
@@ -206,21 +234,9 @@ public class Add_Tenant extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(GradYearField, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(AddTenantLayout.createSequentialGroup()
-                        .addComponent(FirstNameGuardLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(GuardianNameField1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(AddTenantLayout.createSequentialGroup()
-                        .addComponent(GuardianNoLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(GuardianNoFIeld, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(AddTenantLayout.createSequentialGroup()
                         .addComponent(GenderLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(GenderComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(AddTenantLayout.createSequentialGroup()
-                        .addComponent(LastNameGuardLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(GuardianNameField2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(AddTenantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AddTenantLayout.createSequentialGroup()
                             .addComponent(AddressLabel)
@@ -229,8 +245,27 @@ public class Add_Tenant extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AddTenantLayout.createSequentialGroup()
                             .addComponent(LastNameLabel)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(LastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                            .addComponent(LastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(AddTenantLayout.createSequentialGroup()
+                        .addGroup(AddTenantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AddTenantLayout.createSequentialGroup()
+                                .addComponent(GuardianNoLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(GuardianNoFIeld))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AddTenantLayout.createSequentialGroup()
+                                .addComponent(LastNameGuardLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(GuardianNameField2))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AddTenantLayout.createSequentialGroup()
+                                .addComponent(FirstNameGuardLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(GuardianNameField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(AddTenantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         AddTenantLayout.setVerticalGroup(
             AddTenantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,16 +305,21 @@ public class Add_Tenant extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(AddTenantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(FirstNameGuardLabel)
-                    .addComponent(GuardianNameField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(GuardianNameField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(AddTenantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(LastNameGuardLabel)
-                    .addComponent(GuardianNameField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(AddTenantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(GuardianNameField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(AddTenantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(GuardianNoFIeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(GuardianNoLabel))
-                .addContainerGap())
+                    .addComponent(GuardianNoLabel)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
 
         SaveButton.setText("Save");
@@ -315,9 +355,9 @@ public class Add_Tenant extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addComponent(AddTenant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SaveButton)
                     .addComponent(jButton1))
@@ -373,6 +413,8 @@ public class Add_Tenant extends javax.swing.JFrame {
         TenantBean tenantAcc = new TenantBean();
         GuardianBean guardianAcc = new GuardianBean();
         proceed = true;
+        boolean newguardian = true;
+        int guardianID = 0;
 
         if (FirstNameField.getText().isEmpty()
                 || LastNameField.getText().isEmpty()
@@ -380,50 +422,36 @@ public class Add_Tenant extends javax.swing.JFrame {
                 || AddressField.getText().isEmpty()
                 || DegreeField.getText().isEmpty()
                 || SchoolField.getText().isEmpty()
-                || GradYearField.getText().isEmpty()
-                || GuardianNameField1.getText().isEmpty()
-                || GuardianNameField2.getText().isEmpty()
-                || GuardianNoFIeld.getText().isEmpty()
-                ) {
+                || GradYearField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please fill up ALL the fields.");
         } else {
 
             if (FirstNameField.getText().matches("^[0-9]*$")) {
                 proceed = false;
-      //         System.out.println("IF fnae");
             } else {
-                tenantAcc.setFname(FirstNameField.getText());
-                
-         //       System.out.println("ELSE fname");
+                if (FirstNameField.getText().matches("^[a-zA-Z]+$")) {
+                    tenantAcc.setFname(FirstNameField.getText());
+                } else {
+                    proceed = false;
+                }
             }
 
-            if (LastNameField.getText().matches("^[0-9]*$")) {
+            if (LastNameField.getText().matches("^[0-9]*$")) { //special chharacters
                 proceed = false;
-                
-        //       System.out.println("IF lname");
+
             } else {
-                tenantAcc.setLname(LastNameField.getText());
-                
-        //       System.out.println("else lname");
+                if (LastNameField.getText().matches("^[a-zA-Z]+$")) {
+                    tenantAcc.setLname(LastNameField.getText());
+                } else {
+                    proceed = false;
+                }
             }
 
-            /*if (ContactNoField.getText().matches("[a-zA-Z]")) {
-                proceed = false;
+            if (ContactNoField.getText().matches("[0-9]+$")) { //numbers only
+                tenantAcc.setContact(parseLong(ContactNoField.getText()));
             } else {
-                Long number = parseLong(ContactNoField.getText());
-     /           System.out.println(number);
-                tenantAcc.setContact(number);
-            }
-            */
-            if(ContactNoField.getText().matches("[0-9]+")){
-            tenantAcc.setContact(parseLong(ContactNoField.getText()));
-            
-       //        System.out.println("IF contact");
-            }
-            else{
                 proceed = false;
-                
-      //         System.out.println("else contact");
+                System.out.println("Contact false");
             }
 
             tenantAcc.setGender(GenderComboBox.getSelectedItem().toString());
@@ -431,69 +459,73 @@ public class Add_Tenant extends javax.swing.JFrame {
             tenantAcc.setAddress(AddressField.getText());
 
             tenantAcc.setDegree(DegreeField.getText());
-           /* if (DegreeField.getText().matches("^[0-9]*$")) {
-                tenantAcc.setDegree(DegreeField.getText());
-            } else {
-                proceed = false;
-            }
-            */
 
             if (SchoolField.getText().matches("^[0-9]*$")) {
                 proceed = false;
-                
-   //            System.out.println("IF school");
+
             } else {
-                tenantAcc.setSchool(SchoolField.getText());
-                
-   //            System.out.println("else school");
+                if (SchoolField.getText().matches("^[a-zA-Z]+$")) {
+                    tenantAcc.setSchool(SchoolField.getText());
+                } else {
+                    proceed = false;
+                }
+
             }
 
             if (GradYearField.getText().matches("[0-9]+")) {
                 tenantAcc.setExpectedyearofgrad(parseInt(GradYearField.getText()));
-                
-   //            System.out.println("IF grad");
+
             } else {
                 proceed = false;
-                
-    //           System.out.println("else grad");
             }
-            tenantAcc.setStatus("Registered");
-            
-            if(GuardianNameField1.getText().matches("^[0-9]*$")){
+            tenantAcc.setStatus("Current");
+// new guardian
+            if (GuardianNameField1.getText().matches("^[0-9]*$") || GuardianNameField1.getText().isEmpty()) {
+                if (GuardianNameField1.getText().isEmpty()) {
+                    newguardian = false; //existing guardian
+                    System.out.println("Fname1 if");
+                } else {
+                    proceed = false;
+                    System.out.println("Fname1 if2");
+                }
+            } else {
+                if (GuardianNameField1.getText().matches("^[a-zA-Z]+$")) {
+                    guardianAcc.setFname(GuardianNameField1.getText());
+                } else {
+                    proceed = false;
+                }
+
+            }
+
+            if (GuardianNameField2.getText().matches("^[0-9]*$") || GuardianNoFIeld.getText().isEmpty()) {
+                if (GuardianNameField2.getText().isEmpty()) {
+                    newguardian = false;
+                    System.out.println("Fname1 if");
+                } else {
+                    proceed = false;
+                    System.out.println("Fname1 if2");
+                }
+            } else {
+                if (GuardianNameField2.getText().matches("^[a-zA-Z]+$")) {
+                    guardianAcc.setLname(GuardianNameField2.getText());
+                } else {
+                    proceed = false;
+                }
+            }
+
+            if (GuardianNoFIeld.getText().matches("[0-9]+") || GuardianNoFIeld.getText().isEmpty()) {
+                if (GuardianNoFIeld.getText().isEmpty()) {
+                    System.out.println("Contact if");
+                    Long contact = Long.valueOf(0);
+                    guardianAcc.setContact(contact);
+                } else {
+                    System.out.println("Contact else");
+                    guardianAcc.setContact(parseLong(GuardianNoFIeld.getText()));
+                }
+
+            } else {
                 proceed = false;
-                
-    //           System.out.println("IF guardian fname");
-            }else{
-                guardianAcc.setFname(GuardianNameField1.getText());
-                
-    //           System.out.println("else gfname");
-            }
-            
-            if(GuardianNameField2.getText().matches("^]0-9]*$")){
-                proceed = false;
-                
-    //           System.out.println("IF glname");
-            } else{
-                guardianAcc.setLname(GuardianNameField2.getText());
-                
-    //           System.out.println("else glname");
-            }
-            
-          /*  if(GuardianNoFIeld.getText().matches("[a-zA-Z]")){
-                proceed = false;
-            }
-            else {
-                guardianAcc.setContact(parseLong(GuardianNoFIeld.getText()));
-            }*/
-            if(GuardianNoFIeld.getText().matches("[0-9]+")){
-            guardianAcc.setContact(parseLong(GuardianNoFIeld.getText()));
-            
-    //           System.out.println("IF gcontact");
-            }
-            else{
-                proceed = false;
-                
-  //System.out.println("elsegcontact");
+                newguardian = false;
             }
         }
 
@@ -503,29 +535,46 @@ public class Add_Tenant extends javax.swing.JFrame {
             this.setVisible(false);
             TenantPage tenant = new TenantPage();
             tenant.setVisible(true);
-            
-            GuardianDAOImplementation addGuardian = new GuardianDAOImplementation();
-            addGuardian.addGuardian(guardianAcc);
-            
+
+            if (newguardian) { //create new guardian
+                GuardianDAOImplementation addGuardian = new GuardianDAOImplementation();
+                addGuardian.addGuardian(guardianAcc);
+            } else {
+                if (GuardianNameField1.getText().isEmpty()
+                        && GuardianNameField2.getText().isEmpty()
+                        && GuardianNoFIeld.getText().isEmpty()) { // existing guardian
+                    if (jTextField1.getText().isEmpty()) { // no guardian id
+                        JOptionPane.showMessageDialog(null, "No guardian ID indicated");
+                    } else {
+                        if (jTextField1.getText().matches("[0-9]+")) {
+                            guardianID = Integer.parseInt(jTextField1.getText());
+                            newguardian = false;
+                        } else {
+                            guardianID = Integer.parseInt(jTextField1.getText());
+                            System.out.println(guardianID);
+                            JOptionPane.showMessageDialog(null, "Please input ALL necessary information.:)");
+                        }
+                    }
+                }
+            }
             ContractBean contractAcc = new ContractBean();
             ContractDAOInterface contractdao = new ContractDAOImplementation();
-            
+
             tenantAcc = addTenant.getTenantByName(tenantAcc.getFname(), tenantAcc.getLname());
-            
+
             Date effectivedate = new Date(System.currentTimeMillis());
             java.util.Date utilexpirydate = DateUtil.addDays(effectivedate, 365);
             java.sql.Date expirydate = new java.sql.Date(utilexpirydate.getTime());
-            
-            
+
             contractAcc.setContract_tenantID(tenantAcc.getTenantID());
             contractAcc.setEffectivedate(effectivedate);
             contractAcc.setExpirydate(expirydate);
-            
+
             contractdao.addContract(contractAcc);
-            
-            JOptionPane.showMessageDialog(null, "Successfully added tenant " + tenantAcc.getFname() +
-                    " with tenant ID: " + tenantAcc.getTenantID());
-            
+
+            JOptionPane.showMessageDialog(null, "Successfully added tenant " + tenantAcc.getFname()
+                    + " with tenant ID: " + tenantAcc.getTenantID());
+
         } else {
             JOptionPane.showMessageDialog(null, "Please input ALL necessary information.");
         }
@@ -540,34 +589,37 @@ public class Add_Tenant extends javax.swing.JFrame {
         tenant.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    /*
-     public static void main(String args[]) {
-     try {
-     for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-     if ("Nimbus".equals(info.getName())) {
-     javax.swing.UIManager.setLookAndFeel(info.getClassName());
-     break;
-     }
-     }
-     } catch (ClassNotFoundException ex) {
-     java.util.logging.Logger.getLogger(Add_Tenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-     } catch (InstantiationException ex) {
-     java.util.logging.Logger.getLogger(Add_Tenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-     } catch (IllegalAccessException ex) {
-     java.util.logging.Logger.getLogger(Add_Tenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-     } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-     java.util.logging.Logger.getLogger(Add_Tenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-     }
-        
-     java.awt.EventQueue.invokeLater(new Runnable() {
-     public void run() {
-     new Add_Tenant().setVisible(true);
-     }
-     });
-     }*/
+    public static void main(String args[]) {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Add_Tenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Add_Tenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Add_Tenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Add_Tenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Add_Tenant().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddTenant;
@@ -595,8 +647,12 @@ public class Add_Tenant extends javax.swing.JFrame {
     private javax.swing.JButton SaveButton;
     private javax.swing.JTextField SchoolField;
     private javax.swing.JLabel SchoolLabel;
+    private java.awt.Choice choice1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
