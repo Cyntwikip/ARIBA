@@ -5,17 +5,29 @@
  */
 package Viewer.GUI;
 
+import Models.Beans.ContractBean;
 import Models.Beans.GuardianBean;
 import Models.Beans.TenantBean;
+import Models.DAOImplementation.ContractDAOImplementation;
 import Models.DAOImplementation.GuardianDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
+import Models.DAOInterface.ContractDAOInterface;
+import static java.lang.Integer.parseInt;
+import static java.lang.Integer.parseInt;
+import static java.lang.Integer.parseInt;
+import static java.lang.Integer.parseInt;
 import static java.lang.Integer.parseInt;
 import static java.lang.Integer.parseInt;
 import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
 import static java.lang.Long.parseLong;
 import static java.lang.Long.parseLong;
-import javax.swing.JOptionPane;
+import static java.lang.Long.parseLong;
+import static java.lang.Long.parseLong;
+import static java.lang.Long.parseLong;
+import static java.lang.Long.parseLong;
+import java.sql.Date;
+import javax.swing.JOptionPane; 
 
 /**
  *
@@ -454,6 +466,26 @@ public class Add_Tenant extends javax.swing.JFrame {
             
             GuardianDAOImplementation addGuardian = new GuardianDAOImplementation();
             addGuardian.addGuardian(guardianAcc);
+            
+            ContractBean contractAcc = new ContractBean();
+            ContractDAOInterface contractdao = new ContractDAOImplementation();
+            
+            tenantAcc = addTenant.getTenantByName(tenantAcc.getFname(), tenantAcc.getLname());
+            
+            Date effectivedate = new Date(System.currentTimeMillis());
+            java.util.Date utilexpirydate = DateUtil.addDays(effectivedate, 365);
+            java.sql.Date expirydate = new java.sql.Date(utilexpirydate.getTime());
+            
+            
+            contractAcc.setContract_tenantID(tenantAcc.getTenantID());
+            contractAcc.setEffectivedate(effectivedate);
+            contractAcc.setExpirydate(expirydate);
+            
+            contractdao.addContract(contractAcc);
+            
+            JOptionPane.showMessageDialog(null, "Successfully added tenant " + tenantAcc.getFname() +
+                    " with tenant ID: " + tenantAcc.getTenantID());
+            
         } else {
             JOptionPane.showMessageDialog(null, "Please input ALL necessary information.");
         }
