@@ -7,6 +7,7 @@
 package Models.DAOInterface;
 
 import Models.Beans.RoomBean;
+import Models.Beans.TenantBean;
 import java.util.ArrayList;
 
 /**
@@ -17,7 +18,7 @@ public interface RoomDAOInterface {
     
     public boolean addRoom(RoomBean room);
     public boolean editRoom(RoomBean room, int roomID);
-    public boolean assignTenanttoRoom(int tenantID, RoomBean room);
+    public boolean assignTenanttoRoom(TenantBean tenant, RoomBean room);
     public ArrayList<RoomBean> getAllRooms();
     public RoomBean getRoomByRoomID(int roomID);
     public ArrayList<RoomBean> getAllCurrentKW();

@@ -44,7 +44,7 @@ public class Rooms extends javax.swing.JFrame {
        
        allRooms = rdao.getAllRooms();
        jLabel9.setText(String.valueOf(allRooms.size()));
-       
+       jLabel5.setText("4000");
        
     }
 
@@ -354,10 +354,6 @@ public class Rooms extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
@@ -369,7 +365,7 @@ public class Rooms extends javax.swing.JFrame {
             int roomID = Integer.parseInt(choice1.getSelectedItem());
             RoomBean room = new RoomBean();
             room = rdao.getRoomByRoomID(roomID);
-    //        rdao.assignTenanttoRoom(tenant.getTenantID(), room);
+            rdao.assignTenanttoRoom(tenant, room);
             JOptionPane.showMessageDialog(null, "Successfully added tenant " + jTextField1.getText() +" " + jTextField2.getText() +
                    " to room " + room.getRoomID() );
         }
@@ -420,6 +416,10 @@ public class Rooms extends javax.swing.JFrame {
         
         jLabel9.setText(count);
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:

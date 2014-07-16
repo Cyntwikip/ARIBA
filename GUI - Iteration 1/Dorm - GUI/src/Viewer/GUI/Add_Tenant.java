@@ -7,6 +7,7 @@ package Viewer.GUI;
 
 import Models.Beans.GuardianBean;
 import Models.Beans.TenantBean;
+import Models.DAOImplementation.GuardianDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
 import static java.lang.Integer.parseInt;
 import static java.lang.Integer.parseInt;
@@ -395,7 +396,7 @@ public class Add_Tenant extends javax.swing.JFrame {
                 tenantAcc.setContact(number);
             }
             */
-                tenantAcc.setContact(parseLong(ContactNoField.getText()));
+            tenantAcc.setContact(parseLong(ContactNoField.getText()));
 
             tenantAcc.setGender(GenderComboBox.getSelectedItem().toString());
 
@@ -450,6 +451,9 @@ public class Add_Tenant extends javax.swing.JFrame {
             this.setVisible(false);
             TenantPage tenant = new TenantPage();
             tenant.setVisible(true);
+            
+            GuardianDAOImplementation addGuardian = new GuardianDAOImplementation();
+            addGuardian.addGuardian(guardianAcc);
         } else {
             JOptionPane.showMessageDialog(null, "Please input ALL necessary information.");
         }

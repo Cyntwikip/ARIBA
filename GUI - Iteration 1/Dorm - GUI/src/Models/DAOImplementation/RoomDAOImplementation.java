@@ -7,13 +7,18 @@
 package Models.DAOImplementation;
 
 import Models.Beans.RoomBean;
+import Models.Beans.TenantBean;
 import Models.Connector.Connector;
 import Models.DAOInterface.RoomDAOInterface;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -69,8 +74,36 @@ public class RoomDAOImplementation implements RoomDAOInterface {
 
 
     @Override
-    public boolean assignTenanttoRoom(int tenantID, RoomBean room) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean assignTenanttoRoom(TenantBean tenant, RoomBean room) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            
+            String query = "insert into tenantroom (tr_tenantID, tr_roomID, startDate, endDate) values (?, ?, ?, ?)";
+            PreparedStatement ps = connection.prepareStatement(query);
+            /*
+            Calendar now = Calendar.getInstance();
+            int month = now.get(Calendar.MONTH);
+            int day = now.get(Calendar.DAY_OF_MONTH);
+            int year = now.get(Calendar.YEAR);
+            Date date = new 
+            */
+            
+            ps.setInt(1, tenant.getTenantID());
+            ps.setInt(2, room.getRoomID());
+            //ps.setDate(3, );
+            //ps.setDate(4, );
+            ps.executeUpdate();
+            connection.close();
+            
+            return true;
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+        
     }
 
 
