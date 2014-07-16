@@ -366,7 +366,7 @@ public class ViewTenant extends javax.swing.JFrame {
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
-        if (jTextField1.getText().matches("[0-9]+")) {
+        if (jTextField1.getText().matches("^\\d{4,4}$")) {
             list = tenantdao.getTenantByExpectedYearofGrad(Integer.parseInt(jTextField1.getText()));
 
             for (TenantBean bean : list) {
