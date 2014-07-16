@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import static java.util.Collections.list;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author jao
@@ -31,28 +31,23 @@ public class Rooms extends javax.swing.JFrame {
      */
     public Rooms() {
         initComponents();
-        
-       ArrayList<RoomBean> list = new ArrayList<RoomBean>();
-       
-       RoomDAOInterface rdao = new RoomDAOImplementation();
-       list = rdao.getAllRooms();
-       
-       for (int i=0; i<list.size();i++){
-           choice1.add(String.valueOf(i+1));
-           choice2.add(String.valueOf(i+1));
-       }
-       
-       ArrayList<RoomBean> allRooms = new ArrayList<RoomBean>();
-       
-       allRooms = rdao.getAllRooms();
-       jLabel9.setText(String.valueOf(allRooms.size()));
-       jLabel5.setText("4000");
-       
-       
-       
-       
-       
-       
+
+        ArrayList<RoomBean> list = new ArrayList<RoomBean>();
+
+        RoomDAOInterface rdao = new RoomDAOImplementation();
+        list = rdao.getAllRooms();
+
+        for (int i = 0; i < list.size(); i++) {
+            choice1.add(String.valueOf(i + 1));
+            choice2.add(String.valueOf(i + 1));
+        }
+
+        ArrayList<RoomBean> allRooms = new ArrayList<RoomBean>();
+
+        allRooms = rdao.getAllRooms();
+        jLabel9.setText(String.valueOf(allRooms.size()));
+        jLabel5.setText("4000");
+
     }
 
     /**
@@ -74,11 +69,13 @@ public class Rooms extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jTextField3 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
         jLabel3 = new javax.swing.JLabel();
         choice2 = new java.awt.Choice();
         jButton2 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton8 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
@@ -163,7 +160,7 @@ public class Rooms extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 274, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
@@ -171,8 +168,6 @@ public class Rooms extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Assign Room", jPanel1);
-
-        jScrollPane1.setViewportView(jList1);
 
         jLabel3.setText("Please Choose Room:");
 
@@ -183,23 +178,65 @@ public class Rooms extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Room", "Tenant ID", "First name", "Last name"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        jButton8.setText("Clear table");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jButton10.setText("View");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(choice2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(choice2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton8)))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,10 +244,13 @@ public class Rooms extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(choice2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                    .addComponent(choice2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton8)
+                        .addComponent(jButton10)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(267, 267, 267)
                 .addComponent(jButton2))
         );
 
@@ -363,34 +403,36 @@ public class Rooms extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         TenantDAOInterface tdao = new TenantDAOImplementation();
         TenantBean tenant = tdao.getTenantByName(jTextField1.getText(), jTextField3.getText());
-        System.out.println(tenant.getTenantID());
-        if(tenant.getTenantID() != 0 ){
+        if (tenant.getTenantID() != 0) {
             RoomDAOInterface rdao = new RoomDAOImplementation();
             int roomID = Integer.parseInt(choice1.getSelectedItem());
             RoomBean room = new RoomBean();
             room = rdao.getRoomByRoomID(roomID);
-            
+
             ContractDAOImplementation cdao = new ContractDAOImplementation();
             ArrayList<ContractBean> contractlist = new ArrayList<ContractBean>();
-            
+
             contractlist = cdao.getAllContractsByTenantID(tenant.getTenantID());
-            
-            int index = contractlist.size()-1;
+
+            int index = contractlist.size() - 1;
             ContractBean currentContract = new ContractBean();
-            currentContract = contractlist.get(index);
-            
-            rdao.assignTenanttoRoom(tenant, room, currentContract);
-            
-            JOptionPane.showMessageDialog(null, "Successfully added tenant " + jTextField1.getText() +" " + jTextField2.getText() +
-                   " to room " + room.getRoomID() );
-        }
-        else{
+
+            if (index >= 0) {
+                currentContract = contractlist.get(index);
+                rdao.assignTenanttoRoom(tenant, room, currentContract);
+
+                JOptionPane.showMessageDialog(null, "Successfully added tenant " + jTextField1.getText() + " " + jTextField2.getText()
+                        + " to room " + room.getRoomID());
+            } else {
+                JOptionPane.showMessageDialog(null, "Tenant doesn't have contract.");
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "No such tenant exists.");
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -422,16 +464,15 @@ public class Rooms extends javax.swing.JFrame {
         //room.setStatus("unoccupied");
         RoomDAOImplementation roomdao = new RoomDAOImplementation();
         roomdao.addRoom(room);
-        
+
         ArrayList<RoomBean> roomlist = new ArrayList<RoomBean>();
         roomlist = roomdao.getAllRooms();
-        
-             
+
         JOptionPane.showMessageDialog(null, "Successfully added a room! "
                 + "Total number of rooms: " + roomlist.size());
-        
+
         String count = Integer.toString(roomlist.size());
-        
+
         jLabel9.setText(count);
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -443,46 +484,95 @@ public class Rooms extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    /*
-    public static void main(String args[]) {
-      
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+        ArrayList<TenantBean> list = new ArrayList<TenantBean>();
+        int roomnum = Integer.parseInt(choice2.getSelectedItem());
+         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        
+        list = tdao.getTenantByRoomID(roomnum);
+        if(list.size()!= 0){
+        for (TenantBean bean : list) {
+            int tenantid = bean.getTenantID();
+            String fname = bean.getFname();
+            String lname = bean.getLname();
+
+            Object[] obj = {roomnum, tenantid, fname, lname, };
+
+            model.addRow(obj);
+        }
+        }else{
+            JOptionPane.showMessageDialog(null, "There are no tenants occupying room " + roomnum);
+        }
+        
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+
+/**
+ * @param args the command line arguments
+ */
+public static void main(String args[]) {
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+
+                
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Rooms.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Rooms.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Rooms.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Rooms.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Rooms.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } 
+
+catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Rooms.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } 
+
+catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Rooms.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } 
+
+catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Rooms.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
- 
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Rooms().setVisible(true);
             }
         });
-    }*/
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Choice choice1;
     private java.awt.Choice choice2;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -492,15 +582,15 @@ public class Rooms extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
