@@ -1,7 +1,9 @@
 package Viewer.GUI;
 
+import Models.Beans.ContractBean;
 import Models.Beans.RoomBean;
 import Models.Beans.TenantBean;
+import Models.DAOImplementation.ContractDAOImplementation;
 import Models.DAOImplementation.RoomDAOImplementation;
 import java.util.ArrayList;
 import Models.DAOImplementation.TenantDAOImplementation;
@@ -370,7 +372,18 @@ public class Rooms extends javax.swing.JFrame {
             int roomID = Integer.parseInt(choice1.getSelectedItem());
             RoomBean room = new RoomBean();
             room = rdao.getRoomByRoomID(roomID);
-            rdao.assignTenanttoRoom(tenant, room);
+            
+            ContractDAOImplementation cdao = new ContractDAOImplementation();
+            ArrayList<ContractBean> contractlist = new ArrayList<ContractBean>();
+            
+            contractlist = cdao.getAllContractsByTenantID(tenant.getTenantID());
+            
+            int index = contractlist.size()-1;
+            ContractBean currentContract = new ContractBean();
+            currentContract = contractlist.get(index);
+            
+            rdao.assignTenanttoRoom(tenant, room, currentContract);
+            
             JOptionPane.showMessageDialog(null, "Successfully added tenant " + jTextField1.getText() +" " + jTextField2.getText() +
                    " to room " + room.getRoomID() );
         }

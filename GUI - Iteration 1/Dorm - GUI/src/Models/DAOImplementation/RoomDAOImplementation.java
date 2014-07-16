@@ -6,6 +6,7 @@
 
 package Models.DAOImplementation;
 
+import Models.Beans.ContractBean;
 import Models.Beans.RoomBean;
 import Models.Beans.TenantBean;
 import Models.Connector.Connector;
@@ -74,25 +75,18 @@ public class RoomDAOImplementation implements RoomDAOInterface {
 
 
     @Override
-    public boolean assignTenanttoRoom(TenantBean tenant, RoomBean room) {
+    public boolean assignTenanttoRoom(TenantBean tenant, RoomBean room, ContractBean contract) {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
             
             String query = "insert into tenantroom (tr_tenantID, tr_roomID, startDate, endDate) values (?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
-            /*
-            Calendar now = Calendar.getInstance();
-            int month = now.get(Calendar.MONTH);
-            int day = now.get(Calendar.DAY_OF_MONTH);
-            int year = now.get(Calendar.YEAR);
-            Date date = new 
-            */
-            
+                        
             ps.setInt(1, tenant.getTenantID());
             ps.setInt(2, room.getRoomID());
-            //ps.setDate(3, );
-            //ps.setDate(4, );
+            ps.setDate(3, contract.getEffectivedate());
+            ps.setDate(4, contract.getExpirydate());
             ps.executeUpdate();
             connection.close();
             
