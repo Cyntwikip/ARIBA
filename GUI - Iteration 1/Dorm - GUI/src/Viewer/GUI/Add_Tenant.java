@@ -372,6 +372,7 @@ public class Add_Tenant extends javax.swing.JFrame {
 
         TenantBean tenantAcc = new TenantBean();
         GuardianBean guardianAcc = new GuardianBean();
+        proceed = true;
 
         if (FirstNameField.getText().isEmpty()
                 || LastNameField.getText().isEmpty()
@@ -385,30 +386,45 @@ public class Add_Tenant extends javax.swing.JFrame {
                 || GuardianNoFIeld.getText().isEmpty()
                 ) {
             JOptionPane.showMessageDialog(null, "Please fill up ALL the fields.");
-            proceed = true;
         } else {
 
             if (FirstNameField.getText().matches("^[0-9]*$")) {
                 proceed = false;
+      //         System.out.println("IF fnae");
             } else {
                 tenantAcc.setFname(FirstNameField.getText());
+                
+         //       System.out.println("ELSE fname");
             }
 
             if (LastNameField.getText().matches("^[0-9]*$")) {
                 proceed = false;
+                
+        //       System.out.println("IF lname");
             } else {
                 tenantAcc.setLname(LastNameField.getText());
+                
+        //       System.out.println("else lname");
             }
 
             /*if (ContactNoField.getText().matches("[a-zA-Z]")) {
                 proceed = false;
             } else {
                 Long number = parseLong(ContactNoField.getText());
-                System.out.println(number);
+     /           System.out.println(number);
                 tenantAcc.setContact(number);
             }
             */
+            if(ContactNoField.getText().matches("[0-9]+")){
             tenantAcc.setContact(parseLong(ContactNoField.getText()));
+            
+       //        System.out.println("IF contact");
+            }
+            else{
+                proceed = false;
+                
+      //         System.out.println("else contact");
+            }
 
             tenantAcc.setGender(GenderComboBox.getSelectedItem().toString());
 
@@ -424,27 +440,43 @@ public class Add_Tenant extends javax.swing.JFrame {
 
             if (SchoolField.getText().matches("^[0-9]*$")) {
                 proceed = false;
+                
+   //            System.out.println("IF school");
             } else {
                 tenantAcc.setSchool(SchoolField.getText());
+                
+   //            System.out.println("else school");
             }
 
-            if (GradYearField.getText().matches("[0-9]")) {
+            if (GradYearField.getText().matches("[0-9]+")) {
                 tenantAcc.setExpectedyearofgrad(parseInt(GradYearField.getText()));
+                
+   //            System.out.println("IF grad");
             } else {
                 proceed = false;
+                
+    //           System.out.println("else grad");
             }
             tenantAcc.setStatus("Registered");
             
             if(GuardianNameField1.getText().matches("^[0-9]*$")){
                 proceed = false;
+                
+    //           System.out.println("IF guardian fname");
             }else{
                 guardianAcc.setFname(GuardianNameField1.getText());
+                
+    //           System.out.println("else gfname");
             }
             
             if(GuardianNameField2.getText().matches("^]0-9]*$")){
                 proceed = false;
+                
+    //           System.out.println("IF glname");
             } else{
                 guardianAcc.setLname(GuardianNameField2.getText());
+                
+    //           System.out.println("else glname");
             }
             
           /*  if(GuardianNoFIeld.getText().matches("[a-zA-Z]")){
@@ -453,8 +485,16 @@ public class Add_Tenant extends javax.swing.JFrame {
             else {
                 guardianAcc.setContact(parseLong(GuardianNoFIeld.getText()));
             }*/
+            if(GuardianNoFIeld.getText().matches("[0-9]+")){
             guardianAcc.setContact(parseLong(GuardianNoFIeld.getText()));
-            proceed = true;
+            
+    //           System.out.println("IF gcontact");
+            }
+            else{
+                proceed = false;
+                
+  //System.out.println("elsegcontact");
+            }
         }
 
         if (proceed) {
