@@ -131,17 +131,18 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
     }
 
     @Override
-    public boolean editGuardian(GuardianBean guardian, String fname, String lname) {
+    public boolean editGuardian(GuardianBean guardian, int guardianID) {
 
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
 
-            String query = "update guardian set contact = ? where fname = ? and lname = ? ";
+            String query = "update guardian set contact=?, fname=?, lname=? where guardianID = ? ";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setLong(1, guardian.getContact());
-            ps.setString(2, fname);
-            ps.setString(3, lname);
+            ps.setString(2, guardian.getFname());
+            ps.setString(3, guardian.getLname());
+            ps.setInt(4, guardianID);
             ps.executeUpdate();
 
             return true;

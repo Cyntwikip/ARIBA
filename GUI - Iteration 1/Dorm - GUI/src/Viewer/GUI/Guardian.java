@@ -10,6 +10,7 @@ import Models.Beans.TenantBean;
 import Models.DAOImplementation.GuardianDAOImplementation;
 import Models.DAOInterface.GuardianDAOInterface;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -71,6 +72,7 @@ public class Guardian extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
+        jButton10 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         choice3 = new java.awt.Choice();
@@ -209,6 +211,11 @@ public class Guardian extends javax.swing.JFrame {
         }
 
         jButton4.setText("Clear");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Back");
 
@@ -218,6 +225,13 @@ public class Guardian extends javax.swing.JFrame {
 
         jLabel5.setText("Contact:");
 
+        jButton10.setText("Edit");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -225,11 +239,6 @@ public class Guardian extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(choice2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,7 +255,15 @@ public class Guardian extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(choice2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton10))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -276,7 +293,9 @@ public class Guardian extends javax.swing.JFrame {
                         .addComponent(jLabel5)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(198, 198, 198))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton10)
+                .addGap(164, 164, 164))
         );
 
         jTabbedPane1.addTab("Edit Guardian", jPanel3);
@@ -284,8 +303,18 @@ public class Guardian extends javax.swing.JFrame {
         jLabel6.setText("Guardian list:");
 
         jButton6.setText("View By ID");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("View All");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -312,8 +341,18 @@ public class Guardian extends javax.swing.JFrame {
         }
 
         jButton8.setText("Clear Table");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jButton9.setText("Back");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -389,7 +428,7 @@ public class Guardian extends javax.swing.JFrame {
         GuardianDAOInterface guardiandao = new GuardianDAOImplementation();
         GuardianBean bean = new GuardianBean();
         ArrayList<TenantBean> tenant_list = new ArrayList<TenantBean>();
-        
+
         tenant_list = guardiandao.getTenantsRelatedToGuardian(guardianID);
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -397,17 +436,17 @@ public class Guardian extends javax.swing.JFrame {
         Long contact;
         int tenantID;
         System.out.println(choice1.getSelectedIndex());
-        for(int i =0 ; i<tenant_list.size(); i++){
+        for (int i = 0; i < tenant_list.size(); i++) {
             tenantID = tenant_list.get(i).getTenantID();
             fname = tenant_list.get(i).getFname();
             lname = tenant_list.get(i).getLname();
             contact = tenant_list.get(i).getContact();
-            
+
             Object[] obj = {tenantID, fname, lname, contact};
-            
+
             model.addRow(obj);
         }
-        
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -417,6 +456,137 @@ public class Guardian extends javax.swing.JFrame {
         MainMenu menu = new MainMenu();
         menu.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+
+        GuardianDAOInterface guardiandao = new GuardianDAOImplementation();
+        GuardianBean bean = new GuardianBean();
+
+        boolean proceed = true;
+        String fname;
+        String lname;
+        Long contact;
+        int guardianID = choice2.getSelectedIndex() + 1;
+
+        if (jTextField1.getText().matches("[a-zA-Z ]+$")) {
+            fname = jTextField1.getText();
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid first name");
+            proceed = false;
+        }
+
+        if (jTextField2.getText().matches("[a-zA-Z ]+$")) {
+            lname = jTextField2.getText();
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid last name");
+            proceed = false;
+        }
+
+        if (jTextField3.getText().matches("^\\d{11,12}")) {
+            contact = Long.parseLong(jTextField3.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid contact number.");
+            proceed = false;
+        }
+
+        if (proceed) {
+            bean.setContact(Long.parseLong(jTextField3.getText()));
+            bean.setFname(jTextField1.getText());
+            bean.setLname(jTextField2.getText());
+            bean.setGuardianID(choice2.getSelectedIndex() + 1);
+            guardiandao.editGuardian(bean, guardianID);
+
+            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+
+            Object[] obj = {guardianID, jTextField1.getText(), jTextField2.getText(), jTextField3.getText()};
+
+            model.addRow(obj);
+
+            // update list
+            ArrayList<GuardianBean> list = new ArrayList<GuardianBean>();
+            list = guardiandao.getAllGuardians();
+            choice1.removeAll();
+            choice2.removeAll();
+            choice3.removeAll();
+            for (int i = 0; i < list.size(); i++) {
+                choice1.add(list.get(i).getGuardianID() + ": " + list.get(i).getLname() + ", " + list.get(i).getFname());
+                choice2.add(list.get(i).getGuardianID() + ": " + list.get(i).getLname() + ", " + list.get(i).getFname());
+                choice3.add(list.get(i).getGuardianID() + ": " + list.get(i).getLname() + ", " + list.get(i).getFname());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please input valid information.");
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model.setRowCount(0);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+
+        GuardianDAOInterface guardiandao = new GuardianDAOImplementation();
+        GuardianBean bean = new GuardianBean();
+
+        int guardianID = choice2.getSelectedIndex() + 1;
+
+        DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
+
+        bean = guardiandao.getGuardianByID(guardianID);
+
+        String fname, lname;
+        Long contact;
+
+        fname = bean.getFname();
+        lname = bean.getLname();
+        contact = bean.getContact();
+
+        Object[] obj = {guardianID, fname, lname, contact};
+        model.addRow(obj);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+
+        GuardianDAOInterface guardiandao = new GuardianDAOImplementation();
+        ArrayList<GuardianBean> list = new ArrayList<GuardianBean>();
+
+        list = guardiandao.getAllGuardians();
+        String fname, lname;
+        Long contact;
+        int guardianID;
+
+        DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
+        for (int i = 0; i < list.size(); i++) {
+            fname = list.get(i).getFname();
+            lname = list.get(i).getLname();
+            contact = list.get(i).getContact();
+            guardianID = list.get(i).getGuardianID();
+
+            Object[] obj = {guardianID, fname, lname, contact};
+
+            model.addRow(obj);
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+
+        DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
+        model.setRowCount(0);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+
+        this.setVisible(false);
+        MainMenu menu = new MainMenu();
+        menu.setVisible(true);
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -458,6 +628,7 @@ public class Guardian extends javax.swing.JFrame {
     private java.awt.Choice choice2;
     private java.awt.Choice choice3;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

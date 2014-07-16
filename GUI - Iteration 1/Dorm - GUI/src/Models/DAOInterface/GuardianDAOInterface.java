@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public interface GuardianDAOInterface {
     
     public boolean addGuardian(GuardianBean guardian);
-    public boolean editGuardian (GuardianBean guardian, String fname, String lname);
+    public boolean editGuardian (GuardianBean guardian, int guardianID);
     public boolean assignTenantToGuardian (GuardianBean guardian, TenantBean tenant);
     public GuardianBean getGuardianByID(int guardianID);
     public GuardianBean getGuardianByName(String fname, String lname);
