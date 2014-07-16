@@ -99,7 +99,7 @@ public class Add_Tenant extends javax.swing.JFrame {
 
         FirstNameGuardLabel.setText("First Name of Guardian:");
 
-        LastNameGuardLabel.setText("First Name of Guardian:");
+        LastNameGuardLabel.setText("Last Name of Guardian:");
 
         GuardianNoLabel.setText("Contact Number of Guardian:");
 
