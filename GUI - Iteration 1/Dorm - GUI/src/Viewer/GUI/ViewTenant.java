@@ -9,6 +9,7 @@ import Models.Beans.TenantBean;
 import Models.DAOImplementation.TenantDAOImplementation;
 import Models.DAOInterface.TenantDAOInterface;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,7 +23,7 @@ public class ViewTenant extends javax.swing.JFrame {
      */
     public ViewTenant() {
         initComponents();
- 
+
     }
 
     /**
@@ -178,7 +179,7 @@ public class ViewTenant extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Clear table");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -293,6 +294,7 @@ public class ViewTenant extends javax.swing.JFrame {
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
+        // ALL SCHOOL
         TenantDAOInterface tenantdao = new TenantDAOImplementation();
         ArrayList<TenantBean> list = new ArrayList<TenantBean>();
 
@@ -355,28 +357,33 @@ public class ViewTenant extends javax.swing.JFrame {
         TenantDAOInterface tenantdao = new TenantDAOImplementation();
         ArrayList<TenantBean> list = new ArrayList<TenantBean>();
 
-        list = tenantdao.getTenantByExpectedYearofGrad(Integer.parseInt(jTextField1.getText()));
-
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
-        for (TenantBean bean : list) {
-            int tenantid = bean.getTenantID();
-            String fname = bean.getFname();
-            String lname = bean.getLname();
-            int expectedyearofgraduation = bean.getExpectedyearofgrad();
+        if (jTextField1.getText().matches("[0-9]+")) {
+            list = tenantdao.getTenantByExpectedYearofGrad(Integer.parseInt(jTextField1.getText()));
 
-            Object[] obj = {tenantid, fname, lname, expectedyearofgraduation};
+            for (TenantBean bean : list) {
+                int tenantid = bean.getTenantID();
+                String fname = bean.getFname();
+                String lname = bean.getLname();
+                int expectedyearofgraduation = bean.getExpectedyearofgrad();
 
-            model.addRow(obj);
+                Object[] obj = {tenantid, fname, lname, expectedyearofgraduation};
+
+                model.addRow(obj);
+            }
+
+            jLabel9.setText("Displaying list for: expected year of graduation " + jTextField1.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "Please input valid year of expected graduation.");
         }
 
-        jLabel9.setText("Displaying list for: expected year of graduation " + jTextField1.getText());
 
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
-        // view tenants by expected year of graduation(int)
+        // view tenants by school
 
         TenantDAOInterface tenantdao = new TenantDAOImplementation();
         ArrayList<TenantBean> list = new ArrayList<TenantBean>();
@@ -519,7 +526,6 @@ public class ViewTenant extends javax.swing.JFrame {
         // TODO add your handling code here:
         TenantDAOInterface tenantdao = new TenantDAOImplementation();
         ArrayList<TenantBean> list = new ArrayList<TenantBean>();
-
 
         list = tenantdao.getFemaleTenant();
 
