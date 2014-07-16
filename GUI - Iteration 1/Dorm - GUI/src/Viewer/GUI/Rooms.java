@@ -1,7 +1,16 @@
 package Viewer.GUI;
 
 import Models.Beans.RoomBean;
+import Models.Beans.TenantBean;
 import Models.DAOImplementation.RoomDAOImplementation;
+import Models.DAOImplementation.TenantDAOImplementation;
+import Models.DAOInterface.RoomDAOInterface;
+import Models.DAOInterface.TenantDAOInterface;
+import static java.nio.file.Files.list;
+import java.util.ArrayList;
+import static java.util.Collections.list;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,6 +29,19 @@ public class Rooms extends javax.swing.JFrame {
      */
     public Rooms() {
         initComponents();
+        
+       ArrayList<RoomBean> list = new ArrayList<RoomBean>();
+       
+       RoomDAOInterface rdao = new RoomDAOImplementation();
+       list = rdao.getAllRooms();
+       
+       for (int i=0; i<list.size();i++){
+           choice1.add(String.valueOf(i+1));
+           choice2.add(String.valueOf(i+1));
+       }
+       
+       
+       
     }
 
     /**
@@ -39,6 +61,7 @@ public class Rooms extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jTextField3 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
@@ -86,6 +109,12 @@ public class Rooms extends javax.swing.JFrame {
             }
         });
 
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -96,15 +125,17 @@ public class Rooms extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
                 .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(choice1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addComponent(jButton1)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                        .addComponent(jButton1))
+                    .addComponent(jTextField1))
+                .addGap(18, 18, 18)
+                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(263, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(195, 195, 195))
         );
@@ -115,11 +146,12 @@ public class Rooms extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(34, 34, 34)
+                .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
@@ -164,9 +196,9 @@ public class Rooms extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(choice2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
+                .addGap(55, 55, 55)
                 .addComponent(jButton2))
         );
 
@@ -320,6 +352,23 @@ public class Rooms extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+        TenantBean tenant = tdao.getTenantByName(jTextField1.getText(), jTextField3.getText());
+        System.out.println(tenant.getTenantID());
+        if(tenant.getTenantID() != 0 ){
+            RoomDAOInterface rdao = new RoomDAOImplementation();
+            int roomID = Integer.parseInt(choice1.getSelectedItem());
+            RoomBean room = new RoomBean();
+            room = rdao.getRoomByRoomID(roomID);
+    //        rdao.assignTenanttoRoom(tenant.getTenantID(), room);
+            JOptionPane.showMessageDialog(null, "Successfully added tenant " + jTextField1.getText() +" " + jTextField2.getText() +
+                   " to room " + room.getRoomID() );
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "No such tenant exists.");
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -353,6 +402,10 @@ public class Rooms extends javax.swing.JFrame {
         RoomDAOImplementation roomdao = new RoomDAOImplementation();
         roomdao.addRoom(room);
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -413,5 +466,6 @@ public class Rooms extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

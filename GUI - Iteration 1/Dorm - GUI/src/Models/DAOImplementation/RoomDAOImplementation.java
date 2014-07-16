@@ -207,5 +207,44 @@ public class RoomDAOImplementation implements RoomDAOInterface {
     
     }
 
+    @Override
+    public RoomBean getRoomByRoomID(int roomID) {
+              try{
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from room where roomID = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, roomID);
+            ResultSet resultSet = ps.executeQuery();
+            
+            RoomBean bean = new RoomBean();
+            ArrayList<RoomBean> list = new ArrayList<RoomBean>();
+            
+            int currroomID;
+            float currentKW, currentcubicmeter;
+            //String status;
+            
+            while(resultSet.next()){
+                currroomID = resultSet.getInt("roomID");
+                currentKW = resultSet.getFloat("currentKW");
+                currentcubicmeter = resultSet.getFloat("currentcubicmeter");
+                //status = resultSet.getString("status");
+                
+                bean.setCurrentKW(currentKW);
+                bean.setCurrentcubicmeter(currentcubicmeter);
+                bean.setRoomID(roomID);
+                //bean.setStatus(status);
+                
+                
+             }
+            return bean;
+        }   catch(SQLException ex){
+        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null; 
+    
+    }
+
     
 }

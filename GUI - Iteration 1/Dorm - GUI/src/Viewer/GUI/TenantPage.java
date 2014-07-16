@@ -8,6 +8,7 @@ package Viewer.GUI;
 import Models.Beans.TenantBean;
 import Models.DAOImplementation.TenantDAOImplementation;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -194,10 +195,15 @@ public class TenantPage extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         TenantDAOImplementation tenant = new TenantDAOImplementation();
-        ArrayList<TenantBean> list = new ArrayList<>();
+        ArrayList<TenantBean> list = new ArrayList<TenantBean>();
         list = tenant.getTenantListByName(fnameTextField.getText(), lnameTextField.getText());
         Tenant_List tenantlist = new Tenant_List(list);
-        tenantlist.setVisible(true);
+
+        if (list == null) {
+            JOptionPane.showMessageDialog(null, "No such tenant exists.");
+        } else {
+            tenantlist.setVisible(true);
+        }
     }//GEN-LAST:event_search_buttonActionPerformed
 
     private void lnameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lnameTextFieldActionPerformed
@@ -207,7 +213,7 @@ public class TenantPage extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         TenantDAOImplementation tenant = new TenantDAOImplementation();
-        ArrayList<TenantBean> list = new ArrayList<TenantBean>();
+        ArrayList<TenantBean> list = new ArrayList<>();
         list = tenant.getAllTenants();
         Tenant_List tenantlist = new Tenant_List(list);
         tenantlist.setVisible(true);

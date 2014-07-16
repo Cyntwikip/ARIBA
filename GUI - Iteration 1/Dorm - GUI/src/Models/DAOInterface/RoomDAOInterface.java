@@ -19,6 +19,7 @@ public interface RoomDAOInterface {
     public boolean editRoom(RoomBean room, int roomID);
     public boolean assignTenanttoRoom(int tenantID, RoomBean room);
     public ArrayList<RoomBean> getAllRooms();
+    public RoomBean getRoomByRoomID(int roomID);
     public ArrayList<RoomBean> getAllCurrentKW();
     public ArrayList<RoomBean> getCurrentKWbyRoom(int roomID);
     public ArrayList<RoomBean> getAllCubicMeter(int roomID);
