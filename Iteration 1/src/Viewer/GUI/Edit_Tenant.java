@@ -8,6 +8,7 @@ import Models.Beans.GuardianBean;
 import Models.Beans.TenantBean;
 import Models.DAOImplementation.GuardianDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
+import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
 import java.util.ArrayList;
 
@@ -20,47 +21,36 @@ public class Edit_Tenant extends javax.swing.JFrame {
     /**
      * Creates new form Edit_Tenant
      */
+    /*
     public Edit_Tenant() {
         initComponents();
     }
-    
+    */
     public Edit_Tenant(int tenantID) {
+        initComponents();
         
         TenantDAOImplementation tdao = new TenantDAOImplementation();
-        TenantBean bean = new TenantBean();
+        TenantBean tenant = new TenantBean();
         
         GuardianDAOImplementation gdao = new GuardianDAOImplementation();
-        ArrayList<GuardianBean> guardian = new ArrayList<GuardianBean>();
+        GuardianBean guardian = new GuardianBean();
         
-        bean = tdao.getTenantById(tenantID);
-        guardian = gdao.getGuardianByTenant(bean.getFname(), bean.getLname());
+        tenant = tdao.getTenantById(tenantID);
+        guardian = gdao.getGuardianByTenant(tenant.getFname(), tenant.getLname());
         
-        FirstNameField.setText(bean.getFname());
-        LastNameField.setText(bean.getLname());
-        ContactNoField.setText(bean.getContact().toString());
-        GenderComboBox.setSelectedItem(bean.getContact());
-        AddressField.setText(bean.getAddress());
-        DegreeField.setText(bean.getDegree());
-        SchoolField.setText(bean.getSchool());
-        //GradYearField.setText(bean.getExpectedyearofgrad().toString());
-        GuardianNameField1.setText(guardian.get(0).getFname());
-        GuardianNameField2.setText(guardian.get(0).getLname());
-        GuardianNoFIeld.setText(guardian.get(0).getContact().toString());
+        FirstNameField.setText(tenant.getFname());
+        LastNameField.setText(tenant.getLname());
+        ContactNoField.setText(tenant.getContact().toString());
+        GenderComboBox.setSelectedItem(tenant.getContact());
+        AddressField.setText(tenant.getAddress());
+        DegreeField.setText(tenant.getDegree());
+        SchoolField.setText(tenant.getSchool());
+        GradYearField.setText(Integer.toString(tenant.getExpectedyearofgrad()));
+        GuardianNameField1.setText(guardian.getFname());
+        GuardianNameField2.setText(guardian.getLname());
+        GuardianNoFIeld.setText(guardian.getContact().toString());
+             
         
-        
-        /*
-        String fname = FirstNameField.getText();
-        String lname = LastNameField.getText();
-        Long contact = parseLong(ContactNoField.getText());
-        String gender = GenderComboBox.getSelectedItem().toString();
-        String address = AddressField.getText();
-        String degree = DegreeField.getText();
-        String school = SchoolField.getText();
-        String grad = GradYearField.getText();
-        String guarfname = GuardianNameField1.getText();
-        String guarlname = GuardianNameField2.getText();
-        Long gcontact = parseLong(GuardianNoFIeld.getText());
-        */
     }
 
     /**
@@ -310,6 +300,11 @@ public class Edit_Tenant extends javax.swing.JFrame {
         });
 
         SaveButton.setText("Save");
+        SaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -383,9 +378,51 @@ public class Edit_Tenant extends javax.swing.JFrame {
         tenant.setVisible(true);
     }//GEN-LAST:event_Back_AddTenantActionPerformed
 
+    private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
+
+        String fname = FirstNameField.getText();
+        String lname = LastNameField.getText();
+        Long contact = parseLong(ContactNoField.getText());
+        String gender = GenderComboBox.getSelectedItem().toString();
+        String address = AddressField.getText();
+        String degree = DegreeField.getText();
+        String school = SchoolField.getText();
+        int grad = parseInt(GradYearField.getText());
+        String guarfname = GuardianNameField1.getText();
+        String guarlname = GuardianNameField2.getText();
+        Long gcontact = parseLong(GuardianNoFIeld.getText());
+        
+        
+        TenantDAOImplementation tenantdao = new TenantDAOImplementation();
+        TenantBean tenantbean = new TenantBean();
+        
+        tenantbean.setFname(fname);
+        tenantbean.setLname(lname);
+        tenantbean.setContact(contact);
+        tenantbean.setGender(gender);
+        tenantbean.setAddress(address);
+        tenantbean.setDegree(degree);
+        tenantbean.setSchool(school);
+        tenantbean.setExpectedyearofgrad(grad);
+                
+        tenantdao.editTenant(tenantbean, fname, lname);
+        
+        GuardianDAOImplementation guardiandao = new GuardianDAOImplementation();
+        GuardianBean guardianbean = new GuardianBean();
+        guardianbean = guardiandao.getGuardianByTenant(fname, lname);
+        
+        GuardianBean editedguardian = new GuardianBean();
+        editedguardian.setFname(guarfname);
+        editedguardian.setLname(guarlname);
+        editedguardian.setContact(contact);
+        
+        guardiandao.editGuardian(editedguardian, guardianbean.getGuardianID());
+    }//GEN-LAST:event_SaveButtonActionPerformed
+    
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -413,10 +450,12 @@ public class Edit_Tenant extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Edit_Tenant().setVisible(true);
+                
+                //new Edit_Tenant().setVisible(true);
             }
         });
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea AddressField;
     private javax.swing.JLabel AddressLabel;
@@ -445,4 +484,8 @@ public class Edit_Tenant extends javax.swing.JFrame {
     private javax.swing.JLabel SchoolLabel;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    private String ParseInt(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

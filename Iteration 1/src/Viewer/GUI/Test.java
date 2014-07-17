@@ -7,8 +7,12 @@
 package Viewer.GUI;
 
 import Models.Beans.ContractBean;
+import Models.Beans.GuardianBean;
+import Models.Beans.TenantBean;
 import Models.DAOImplementation.ContractDAOImplementation;
+import Models.DAOImplementation.GuardianDAOImplementation;
 import Models.DAOImplementation.RoomDAOImplementation;
+import Models.DAOImplementation.TenantDAOImplementation;
 import java.util.ArrayList;
 
 /**
@@ -21,7 +25,7 @@ public class Test {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        /*
         ContractDAOImplementation cdao = new ContractDAOImplementation();
         ArrayList<ContractBean> contractlist = new ArrayList<ContractBean>();
             
@@ -30,7 +34,12 @@ public class Test {
         System.out.println(contractlist.size());
         
         //RoomDAOImplementation rdao = new RoomDAOImplementation();
+        */
+        GuardianDAOImplementation gdao = new GuardianDAOImplementation();
+        GuardianBean bean = new GuardianBean();
         
+        bean = gdao.getGuardianByTenant("Danica", "Corpuz");
+        System.out.println(bean.getFname());
         
     }
     

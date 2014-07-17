@@ -24,24 +24,17 @@ public class EditTenantPage extends javax.swing.JFrame {
     public EditTenantPage() {
         initComponents();
         
-        jTextField1.setText("");
-        jTextField2.setText("");
+        fnameField.setText("");
+        lnameField.setText("");
         
         TenantDAOImplementation tdao = new TenantDAOImplementation();
         ArrayList<TenantBean> tlist = new ArrayList<TenantBean>();
     
         tlist = tdao.getAllTenants();
-        
-        System.out.println(tlist.size());
-        
     
         for (int i = 0; i < tlist.size(); i++) {
             choice1.insert(tlist.get(i).getFname() + " " + tlist.get(i).getLname(), i);
-            System.out.println(tlist.get(i).getFname());
-            
         }
-        
-        
     }
 
     /**
@@ -58,8 +51,8 @@ public class EditTenantPage extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        fnameField = new javax.swing.JTextField();
+        lnameField = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         choice1 = new java.awt.Choice();
@@ -118,8 +111,8 @@ public class EditTenantPage extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(173, 173, 173)
                         .addComponent(jButton2))
@@ -146,11 +139,11 @@ public class EditTenantPage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
@@ -164,14 +157,16 @@ public class EditTenantPage extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.setVisible(false);
         
-        Edit_Tenant tenant = new Edit_Tenant();
+        TenantPage tenant = new TenantPage();
         tenant.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             
+        this.setVisible(true);
+        int tenantID = choice1.getSelectedIndex()+1;
         
-        int tenantID = choice1.getSelectedIndex() + 1;
+        //System.out.println(tenantID);
         
         TenantDAOImplementation tdao = new TenantDAOImplementation();
         TenantBean bean = new TenantBean();
@@ -181,13 +176,17 @@ public class EditTenantPage extends javax.swing.JFrame {
         this.setVisible(false);
         Edit_Tenant edittenant = new Edit_Tenant(tenantID);
         edittenant.setVisible(true);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
         
-        String fname = jTextField1.getText();
-        String lname = jTextField2.getText();
+        String fname = fnameField.getText();
+        String lname = lnameField.getText();
+        
+        System.out.println(fname);
+        System.out.println(lname);
         
         TenantDAOImplementation tdao = new TenantDAOImplementation();
         TenantBean bean = new TenantBean();
@@ -195,7 +194,7 @@ public class EditTenantPage extends javax.swing.JFrame {
         bean = tdao.getTenantByName(fname, lname);
         
         this.setVisible(false);
-        Edit_Tenant edittenant = new Edit_Tenant();
+        Edit_Tenant edittenant = new Edit_Tenant(bean.getTenantID());
         edittenant.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -236,6 +235,7 @@ public class EditTenantPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Choice choice1;
+    private javax.swing.JTextField fnameField;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -243,7 +243,6 @@ public class EditTenantPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField lnameField;
     // End of variables declaration//GEN-END:variables
 }
