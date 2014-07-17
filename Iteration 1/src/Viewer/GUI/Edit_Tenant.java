@@ -331,7 +331,10 @@ public class Edit_Tenant extends javax.swing.JFrame {
     }//GEN-LAST:event_GuardianNoFIeldActionPerformed
 
     private void Back_AddTenantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_AddTenantActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        
+        TenantPage tenant = new TenantPage();
+        tenant.setVisible(true);
     }//GEN-LAST:event_Back_AddTenantActionPerformed
 
     /**
