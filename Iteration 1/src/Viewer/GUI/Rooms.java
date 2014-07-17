@@ -667,11 +667,15 @@ public class Rooms extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
+        
+        
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model.setRowCount(0);
+        
         RoomDAOInterface rdao = new RoomDAOImplementation();
         RoomBean list = new RoomBean();
         int roomnum = Integer.parseInt(choice3.getSelectedItem());
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model = (DefaultTableModel) jTable2.getModel();
 
         list = rdao.getRoomByRoomID(roomnum);
         if (list != null) {
@@ -744,6 +748,14 @@ public class Rooms extends javax.swing.JFrame {
             temproom.setRoomID(roomnum);
             roomdao.editRoom(temproom, roomnum);
             JOptionPane.showMessageDialog(null, "Successfully updated room " + roomnum);
+            
+            
+            //display updated data to table
+            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+            Object[] obj = {roomnum, newcurrentKW, newcurrentcubicmeter};
+            model.setRowCount(0);
+            model.addRow(obj);
+            
         } else {
             JOptionPane.showMessageDialog(null, "Unable to update room " + roomnum);
         }
