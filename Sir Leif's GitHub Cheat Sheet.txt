@@ -1,0 +1,12 @@
+Git Commands Cheat Sheet
+=============
+cloning:
+git clone <Repository URL>
+committing:
+git add
+git commit -m "<message>"
+git push
+updating:
+git pull
+new branch:
+git push --set-upstream origin <branch name>
