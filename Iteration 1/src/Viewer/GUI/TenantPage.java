@@ -267,8 +267,8 @@ public class TenantPage extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.setVisible(false);
         
-        Edit_Tenant edit = new Edit_Tenant();
-        edit.setVisible(true);
+        EditTenantPage editpage = new EditTenantPage();
+        editpage.setVisible(true);
         
     }//GEN-LAST:event_jButton3ActionPerformed
 

@@ -333,7 +333,7 @@ public class Edit_Tenant extends javax.swing.JFrame {
     private void Back_AddTenantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_AddTenantActionPerformed
         this.setVisible(false);
         
-        TenantPage tenant = new TenantPage();
+        EditTenantPage tenant = new EditTenantPage();
         tenant.setVisible(true);
     }//GEN-LAST:event_Back_AddTenantActionPerformed
 
