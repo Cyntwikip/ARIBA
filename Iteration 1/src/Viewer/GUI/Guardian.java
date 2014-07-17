@@ -437,10 +437,13 @@ public class Guardian extends javax.swing.JFrame {
         tenant_list = guardiandao.getTenantsRelatedToGuardian(guardianID);
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        
+        model.setNumRows(0);
+        
         String fname, lname;
         Long contact;
         int tenantID;
-        System.out.println(choice1.getSelectedIndex());
+        //System.out.println(choice1.getSelectedIndex());
         for (int i = 0; i < tenant_list.size(); i++) {
             tenantID = tenant_list.get(i).getTenantID();
             fname = tenant_list.get(i).getFname();
