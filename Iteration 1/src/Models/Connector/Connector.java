@@ -17,8 +17,8 @@ import java.util.logging.Logger;
  */
 public class Connector {
 
-    private String username = "root";
-    private String password = "danica";
+    private String username = "ariba";
+    private String password = "p@ssword";
     private String url = "jdbc:mysql://localhost:3306/dormitory";
     private String driver = "com.mysql.jdbc.Driver";
 
