@@ -649,6 +649,8 @@ public class Rooms extends javax.swing.JFrame {
         int roomnum = Integer.parseInt(choice2.getSelectedItem());
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
+        model.setRowCount(0);
+        
         list = tdao.getTenantByRoomID(roomnum);
         if (list.size() != 0) {
             for (TenantBean bean : list) {
