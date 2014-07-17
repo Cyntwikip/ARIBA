@@ -269,7 +269,6 @@ public class TenantPage extends javax.swing.JFrame {
         
         EditTenantPage editpage = new EditTenantPage();
         editpage.setVisible(true);
-        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

@@ -4,6 +4,13 @@
  */
 package Viewer.GUI;
 
+import Models.Beans.GuardianBean;
+import Models.Beans.TenantBean;
+import Models.DAOImplementation.GuardianDAOImplementation;
+import Models.DAOImplementation.TenantDAOImplementation;
+import static java.lang.Long.parseLong;
+import java.util.ArrayList;
+
 /**
  *
  * @author pbu_015
@@ -15,6 +22,45 @@ public class Edit_Tenant extends javax.swing.JFrame {
      */
     public Edit_Tenant() {
         initComponents();
+    }
+    
+    public Edit_Tenant(int tenantID) {
+        
+        TenantDAOImplementation tdao = new TenantDAOImplementation();
+        TenantBean bean = new TenantBean();
+        
+        GuardianDAOImplementation gdao = new GuardianDAOImplementation();
+        ArrayList<GuardianBean> guardian = new ArrayList<GuardianBean>();
+        
+        bean = tdao.getTenantById(tenantID);
+        guardian = gdao.getGuardianByTenant(bean.getFname(), bean.getLname());
+        
+        FirstNameField.setText(bean.getFname());
+        LastNameField.setText(bean.getLname());
+        ContactNoField.setText(bean.getContact().toString());
+        GenderComboBox.setSelectedItem(bean.getContact());
+        AddressField.setText(bean.getAddress());
+        DegreeField.setText(bean.getDegree());
+        SchoolField.setText(bean.getSchool());
+        //GradYearField.setText(bean.getExpectedyearofgrad().toString());
+        GuardianNameField1.setText(guardian.get(0).getFname());
+        GuardianNameField2.setText(guardian.get(0).getLname());
+        GuardianNoFIeld.setText(guardian.get(0).getContact().toString());
+        
+        
+        /*
+        String fname = FirstNameField.getText();
+        String lname = LastNameField.getText();
+        Long contact = parseLong(ContactNoField.getText());
+        String gender = GenderComboBox.getSelectedItem().toString();
+        String address = AddressField.getText();
+        String degree = DegreeField.getText();
+        String school = SchoolField.getText();
+        String grad = GradYearField.getText();
+        String guarfname = GuardianNameField1.getText();
+        String guarlname = GuardianNameField2.getText();
+        Long gcontact = parseLong(GuardianNoFIeld.getText());
+        */
     }
 
     /**
@@ -134,7 +180,7 @@ public class Edit_Tenant extends javax.swing.JFrame {
             }
         });
 
-        LastNameGuardLabel.setText("First Name of Guardian:");
+        LastNameGuardLabel.setText("Last Name of Guardian:");
 
         GuardianNameField2.setText("<insert previous info>");
         GuardianNameField2.addActionListener(new java.awt.event.ActionListener() {

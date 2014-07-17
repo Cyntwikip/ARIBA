@@ -331,7 +331,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="LastNameGuardLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="First Name of Guardian:"/>
+            <Property name="text" type="java.lang.String" value="Last Name of Guardian:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="GuardianNameField2">
