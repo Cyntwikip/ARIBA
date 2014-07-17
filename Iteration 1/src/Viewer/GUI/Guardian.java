@@ -218,6 +218,11 @@ public class Guardian extends javax.swing.JFrame {
         });
 
         jButton5.setText("Back");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("First name:");
 
@@ -587,6 +592,13 @@ public class Guardian extends javax.swing.JFrame {
         MainMenu menu = new MainMenu();
         menu.setVisible(true);
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        this.setVisible(false);
+        
+        MainMenu menu = new MainMenu();
+        menu.setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
