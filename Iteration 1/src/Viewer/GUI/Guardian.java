@@ -263,11 +263,11 @@ public class Guardian extends javax.swing.JFrame {
                                 .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton10)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(choice2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton10))
+                                .addComponent(choice2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -543,6 +543,8 @@ public class Guardian extends javax.swing.JFrame {
         int guardianID = choice2.getSelectedIndex() + 1;
 
         DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
+        
+        model.setNumRows(0);
 
         bean = guardiandao.getGuardianByID(guardianID);
 
@@ -569,6 +571,9 @@ public class Guardian extends javax.swing.JFrame {
         int guardianID;
 
         DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
+        
+        model.setNumRows(0);
+        
         for (int i = 0; i < list.size(); i++) {
             fname = list.get(i).getFname();
             lname = list.get(i).getLname();
