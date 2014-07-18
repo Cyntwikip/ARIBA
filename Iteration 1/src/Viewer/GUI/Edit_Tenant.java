@@ -44,7 +44,7 @@ public class Edit_Tenant extends javax.swing.JFrame {
         
         FirstNameField.setText(tenant.getFname());
         LastNameField.setText(tenant.getLname());
-        ContactNoField.setText(tenant.getContact().toString());
+        ContactNoField.setText("0"+tenant.getContact().toString());
         GenderComboBox.setSelectedItem(tenant.getGender());
         AddressField.setText(tenant.getAddress());
         DegreeField.setText(tenant.getDegree());
@@ -52,7 +52,7 @@ public class Edit_Tenant extends javax.swing.JFrame {
         GradYearField.setText(Integer.toString(tenant.getExpectedyearofgrad()));
         GuardianNameField1.setText(guardian.getFname());
         GuardianNameField2.setText(guardian.getLname());
-        GuardianNoFIeld.setText(guardian.getContact().toString());
+        GuardianNoFIeld.setText("0"+guardian.getContact().toString());
              
         
     }

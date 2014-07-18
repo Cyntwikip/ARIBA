@@ -491,7 +491,7 @@ public class Add_Tenant extends javax.swing.JFrame {
 
             }
 
-            if (GuardianNameField2.getText().matches("^[0-9]*$") || GuardianNoFIeld.getText().isEmpty()) {
+            if (GuardianNameField2.getText().matches("^[0-9]*$") || GuardianNameField2.getText().isEmpty()) {
                 if (GuardianNameField2.getText().isEmpty()) {
                     newguardian = false;
                     System.out.println("Fname1 if");
