@@ -11,6 +11,7 @@ import Models.DAOImplementation.TenantDAOImplementation;
 import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,6 +27,9 @@ public class Edit_Tenant extends javax.swing.JFrame {
         initComponents();
     }
     */
+    
+    public boolean proceed = false;
+    
     public Edit_Tenant(int tenantID) {
         initComponents();
         
@@ -380,6 +384,10 @@ public class Edit_Tenant extends javax.swing.JFrame {
 
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
 
+        
+        TenantBean tenantbean = new TenantBean();
+        GuardianBean editedguardian = new GuardianBean();
+        
         String fname = FirstNameField.getText();
         String lname = LastNameField.getText();
         Long contact = parseLong(ContactNoField.getText());
@@ -392,36 +400,155 @@ public class Edit_Tenant extends javax.swing.JFrame {
         String guarlname = GuardianNameField2.getText();
         Long gcontact = parseLong(GuardianNoFIeld.getText());
         
+        proceed = true;
+        boolean newguardian = true;
         
-        TenantDAOImplementation tenantdao = new TenantDAOImplementation();
-        TenantBean tenantbean = new TenantBean();
-        
-        tenantbean.setFname(fname);
-        tenantbean.setLname(lname);
-        tenantbean.setContact(contact);
+        if(FirstNameField.getText().isEmpty() 
+                || LastNameField.getText().isEmpty()
+                || ContactNoField.getText().isEmpty()
+                || AddressField.getText().isEmpty()
+                || DegreeField.getText().isEmpty()
+                || SchoolField.getText().isEmpty()
+                || GradYearField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please fill up ALL the fields.");
+        }
+        else {
+            
+            
+            //First Name
+            if(FirstNameField.getText().matches("^[0-9]*$")) {
+                proceed = false;
+            }
+            else {
+                if(fname.matches("^[a-zA-Z ]+$")) {
+                    tenantbean.setFname(fname);
+                }
+                else {
+                    proceed = false;
+                }
+            }
+            
+            //Last Name
+            if(LastNameField.getText().matches("^[0-9]*$")) {
+                proceed = false;
+            }
+            else {
+                if(fname.matches("^[a-zA-Z ]+$")) {
+                    tenantbean.setLname(lname);
+                }
+                else {
+                    proceed = false;
+                }
+            }
+            
+            //Contact
+            if(ContactNoField.getText().matches("^\\d{11,12}")) {
+                tenantbean.setContact(contact);
+            }
+            else {
+                proceed = false;
+                System.out.println("Contact false");
+            }
+            
+        }
+             
+        //Gender
         tenantbean.setGender(gender);
+        //Address
         tenantbean.setAddress(address);
+        //Degree
         tenantbean.setDegree(degree);
+        //School
         tenantbean.setSchool(school);
-        tenantbean.setExpectedyearofgrad(grad);
+        //Expected Year
+        if(GradYearField.getText().matches("^\\d{4,4}$")) {
+            tenantbean.setExpectedyearofgrad(grad);
+            System.out.println("Success");
+        }
+        else {
+            System.out.println("fail");
+            proceed = false;
+        }
+        
+        //Status
         tenantbean.setStatus("Current");
                 
-        tenantdao.editTenant(tenantbean, fname, lname);
+                
+        //Set Guardian First Name
+        if(GuardianNameField1.getText().matches("^[0-9]*$") 
+                || GuardianNameField1.getText().isEmpty()) {
+            if (GuardianNameField1.getText().isEmpty()) {
+                    newguardian = false; //existing guardian
+                    System.out.println("Fname1 if");
+            }
+            else {
+                    proceed = false;
+                    System.out.println("Fname1 if2");
+            }
+        }
+        else {
+                if (GuardianNameField1.getText().matches("^[a-zA-Z ]+$")) {
+                    editedguardian.setFname(guarfname);
+                } else {
+                    proceed = false;
+                }
+        }
         
-        GuardianDAOImplementation guardiandao = new GuardianDAOImplementation();
-        GuardianBean guardianbean = new GuardianBean();
-        guardianbean = guardiandao.getGuardianByTenant(fname, lname);
+        if(GuardianNameField2.getText().matches("^[0-9]*$")
+                || GuardianNameField2.getText().isEmpty()) {
+            if(GuardianNameField2.getText().isEmpty()) {
+                newguardian = false;
+                System.out.println("Lname if");
+            }
+            else {
+                proceed = false;
+                System.out.println("Lname if2");
+            }
+        }
+        else {
+            if(GuardianNameField2.getText().matches("^[a-zA-Z ]+$")) {
+                editedguardian.setLname(guarlname);
+            }
+            else {
+                proceed = false;
+            }
+        }
         
-        GuardianBean editedguardian = new GuardianBean();
-        editedguardian.setFname(guarfname);
-        editedguardian.setLname(guarlname);
-        editedguardian.setContact(gcontact);
+        if(GuardianNoFIeld.getText().matches("^\\d{11,12}")
+                || GuardianNoFIeld.getText().isEmpty()) {
+            if(GuardianNoFIeld.getText().isEmpty()) {
+                System.out.println("Contact if");
+                Long temp = Long.valueOf(0);
+                editedguardian.setContact(temp);
+            }
+            else {
+                System.out.println("Contact else");
+                editedguardian.setContact(gcontact);
+            }
+        }
+        else {
+            proceed = false;
+            newguardian = false;
+        }
         
-        guardiandao.editGuardian(editedguardian, guardianbean.getGuardianID());
+        if(proceed) {
+            TenantDAOImplementation tenantdao = new TenantDAOImplementation();
+            tenantdao.editTenant(tenantbean, fname, lname);
+            
+            this.setVisible(false);
+            TenantPage tenant = new TenantPage();
+            tenant.setVisible(true);
+            
+            GuardianDAOImplementation guardiandao = new GuardianDAOImplementation();
+            GuardianBean guardianbean = new GuardianBean();
+            guardianbean = guardiandao.getGuardianByTenant(fname, lname);
+            guardiandao.editGuardian(editedguardian, guardianbean.getGuardianID());
         
-        this.setVisible(false);
-        TenantPage tenant = new TenantPage();
-        tenant.setVisible(true);
+            JOptionPane.showMessageDialog(null, "Successfully edited tenant");
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Please input ALL neccessary information.");
+        }
     }//GEN-LAST:event_SaveButtonActionPerformed
     
     /**
