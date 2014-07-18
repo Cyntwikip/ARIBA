@@ -116,7 +116,7 @@ public class Add_Tenant extends javax.swing.JFrame {
 
         LastNameLabel.setText("Last Name:");
 
-        ContactNoLabel.setText("Contact Number:");
+        ContactNoLabel.setText("Contact Number: (11-12 digits only)");
 
         GenderLabel.setText("Gender:");
 
@@ -132,7 +132,7 @@ public class Add_Tenant extends javax.swing.JFrame {
 
         LastNameGuardLabel.setText("Last Name of Guardian:");
 
-        GuardianNoLabel.setText("Contact Number of Guardian:");
+        GuardianNoLabel.setText("Contact Number of Guardian: (11-12 digits only)");
 
         FirstNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,20 +247,18 @@ public class Add_Tenant extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(LastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(AddTenantLayout.createSequentialGroup()
-                        .addGroup(AddTenantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AddTenantLayout.createSequentialGroup()
-                                .addComponent(GuardianNoLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(GuardianNoFIeld))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AddTenantLayout.createSequentialGroup()
+                        .addGroup(AddTenantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(AddTenantLayout.createSequentialGroup()
                                 .addComponent(LastNameGuardLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(GuardianNameField2))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AddTenantLayout.createSequentialGroup()
+                                .addComponent(GuardianNameField2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(AddTenantLayout.createSequentialGroup()
                                 .addComponent(FirstNameGuardLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(GuardianNameField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(GuardianNameField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(GuardianNoLabel)
+                            .addComponent(GuardianNoFIeld, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
                         .addGroup(AddTenantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -315,12 +313,12 @@ public class Add_Tenant extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AddTenantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addGroup(AddTenantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(GuardianNoFIeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(GuardianNoLabel)))
+                    .addComponent(GuardianNoLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addGroup(AddTenantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(GuardianNoFIeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
         );
 
         SaveButton.setText("Save");

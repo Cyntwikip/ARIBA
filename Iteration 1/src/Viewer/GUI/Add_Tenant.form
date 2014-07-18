@@ -124,24 +124,21 @@
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="GuardianNoLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="GuardianNoFIeld" max="32767" attributes="0"/>
-                              </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="LastNameGuardLabel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="GuardianNameField2" max="32767" attributes="0"/>
+                                  <Component id="GuardianNameField2" min="-2" pref="124" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="FirstNameGuardLabel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="GuardianNameField1" min="-2" pref="100" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="GuardianNoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="GuardianNoFIeld" alignment="1" min="-2" pref="113" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <Component id="choice1" min="-2" pref="125" max="-2" attributes="0"/>
@@ -211,14 +208,14 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="GuardianNoFIeld" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="GuardianNoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="GuardianNoLabel" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="GuardianNoFIeld" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -236,7 +233,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="ContactNoLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Contact Number:"/>
+            <Property name="text" type="java.lang.String" value="Contact Number: (11-12 digits only)"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="GenderLabel">
@@ -276,7 +273,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="GuardianNoLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Contact Number of Guardian:"/>
+            <Property name="text" type="java.lang.String" value="Contact Number of Guardian: (11-12 digits only)"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="FirstNameField">
