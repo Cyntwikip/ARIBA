@@ -23,28 +23,27 @@ public class Edit_Tenant extends javax.swing.JFrame {
      * Creates new form Edit_Tenant
      */
     /*
-    public Edit_Tenant() {
-        initComponents();
-    }
-    */
-    
+     public Edit_Tenant() {
+     initComponents();
+     }
+     */
     public boolean proceed = false;
-    
+
     public Edit_Tenant(int tenantID) {
         initComponents();
-        
+
         TenantDAOImplementation tdao = new TenantDAOImplementation();
         TenantBean tenant = new TenantBean();
-        
+
         GuardianDAOImplementation gdao = new GuardianDAOImplementation();
         GuardianBean guardian = new GuardianBean();
-        
+
         tenant = tdao.getTenantById(tenantID);
         guardian = gdao.getGuardianByTenant(tenant.getFname(), tenant.getLname());
-        
+
         FirstNameField.setText(tenant.getFname());
         LastNameField.setText(tenant.getLname());
-        ContactNoField.setText("0"+tenant.getContact().toString());
+        ContactNoField.setText("0" + tenant.getContact().toString());
         GenderComboBox.setSelectedItem(tenant.getGender());
         AddressField.setText(tenant.getAddress());
         DegreeField.setText(tenant.getDegree());
@@ -52,9 +51,8 @@ public class Edit_Tenant extends javax.swing.JFrame {
         GradYearField.setText(Integer.toString(tenant.getExpectedyearofgrad()));
         GuardianNameField1.setText(guardian.getFname());
         GuardianNameField2.setText(guardian.getLname());
-        GuardianNoFIeld.setText("0"+guardian.getContact().toString());
-             
-        
+        GuardianNoFIeld.setText("0" + guardian.getContact().toString());
+
     }
 
     /**
@@ -377,33 +375,29 @@ public class Edit_Tenant extends javax.swing.JFrame {
 
     private void Back_AddTenantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_AddTenantActionPerformed
         this.setVisible(false);
-        
+
         EditTenantPage tenant = new EditTenantPage();
         tenant.setVisible(true);
     }//GEN-LAST:event_Back_AddTenantActionPerformed
 
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
 
-        
         TenantBean tenantbean = new TenantBean();
         GuardianBean editedguardian = new GuardianBean();
-        
+
         String fname = FirstNameField.getText();
         String lname = LastNameField.getText();
-        Long contact = parseLong(ContactNoField.getText());
         String gender = GenderComboBox.getSelectedItem().toString();
         String address = AddressField.getText();
         String degree = DegreeField.getText();
         String school = SchoolField.getText();
-        int grad = parseInt(GradYearField.getText());
         String guarfname = GuardianNameField1.getText();
         String guarlname = GuardianNameField2.getText();
-        Long gcontact = parseLong(GuardianNoFIeld.getText());
-        
+
         proceed = true;
         boolean newguardian = true;
-        
-        if(FirstNameField.getText().isEmpty() 
+
+        if (FirstNameField.getText().isEmpty()
                 || LastNameField.getText().isEmpty()
                 || ContactNoField.getText().isEmpty()
                 || AddressField.getText().isEmpty()
@@ -411,47 +405,42 @@ public class Edit_Tenant extends javax.swing.JFrame {
                 || SchoolField.getText().isEmpty()
                 || GradYearField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please fill up ALL the fields.");
-        }
-        else {
-            
-            
+        } else {
+
             //First Name
-            if(FirstNameField.getText().matches("^[0-9]*$")) {
+            if (FirstNameField.getText().matches("^[0-9]*$")) {
                 proceed = false;
-            }
-            else {
-                if(fname.matches("^[a-zA-Z ]+$")) {
+            } else {
+                if (fname.matches("^[a-zA-Z ]+$")) {
                     tenantbean.setFname(fname);
-                }
-                else {
+                } else {
                     proceed = false;
                 }
             }
-            
+
             //Last Name
-            if(LastNameField.getText().matches("^[0-9]*$")) {
+            if (LastNameField.getText().matches("^[0-9]*$")) {
                 proceed = false;
-            }
-            else {
-                if(fname.matches("^[a-zA-Z ]+$")) {
+            } else {
+                if (lname.matches("^[a-zA-Z ]+$")) {
                     tenantbean.setLname(lname);
-                }
-                else {
+                } else {
                     proceed = false;
                 }
             }
-            
+
             //Contact
-            if(ContactNoField.getText().matches("^\\d{11,12}")) {
+            if (ContactNoField.getText().matches("^\\d{11,12}")) {
+                Long contact = parseLong(ContactNoField.getText());
+
                 tenantbean.setContact(contact);
-            }
-            else {
+            } else {
                 proceed = false;
                 System.out.println("Contact false");
             }
-            
+
         }
-             
+
         //Gender
         tenantbean.setGender(gender);
         //Address
@@ -461,100 +450,92 @@ public class Edit_Tenant extends javax.swing.JFrame {
         //School
         tenantbean.setSchool(school);
         //Expected Year
-        if(GradYearField.getText().matches("^\\d{4,4}$")) {
+        if (GradYearField.getText().matches("^\\d{4,4}$")) {
+            int grad = parseInt(GradYearField.getText());
             tenantbean.setExpectedyearofgrad(grad);
             System.out.println("Success");
-        }
-        else {
+        } else {
             System.out.println("fail");
             proceed = false;
         }
-        
+
         //Status
         tenantbean.setStatus("Current");
-                
-                
+
         //Set Guardian First Name
-        if(GuardianNameField1.getText().matches("^[0-9]*$") 
+        if (GuardianNameField1.getText().matches("^[0-9]*$")
                 || GuardianNameField1.getText().isEmpty()) {
             if (GuardianNameField1.getText().isEmpty()) {
-                    newguardian = false; //existing guardian
-                    System.out.println("Fname1 if");
+                newguardian = false; //existing guardian
+                System.out.println("Fname1 if");
+            } else {
+                proceed = false;
+                System.out.println("Fname1 if2");
             }
-            else {
-                    proceed = false;
-                    System.out.println("Fname1 if2");
+        } else {
+            if (GuardianNameField1.getText().matches("^[a-zA-Z ]+$")) {
+                editedguardian.setFname(guarfname);
+            } else {
+                proceed = false;
             }
         }
-        else {
-                if (GuardianNameField1.getText().matches("^[a-zA-Z ]+$")) {
-                    editedguardian.setFname(guarfname);
-                } else {
-                    proceed = false;
-                }
-        }
-        
-        if(GuardianNameField2.getText().matches("^[0-9]*$")
+
+        if (GuardianNameField2.getText().matches("^[0-9]*$")
                 || GuardianNameField2.getText().isEmpty()) {
-            if(GuardianNameField2.getText().isEmpty()) {
+            if (GuardianNameField2.getText().isEmpty()) {
                 newguardian = false;
                 System.out.println("Lname if");
-            }
-            else {
+            } else {
                 proceed = false;
                 System.out.println("Lname if2");
             }
-        }
-        else {
-            if(GuardianNameField2.getText().matches("^[a-zA-Z ]+$")) {
+        } else {
+            if (GuardianNameField2.getText().matches("^[a-zA-Z ]+$")) {
                 editedguardian.setLname(guarlname);
-            }
-            else {
+            } else {
                 proceed = false;
             }
         }
-        
-        if(GuardianNoFIeld.getText().matches("^\\d{11,12}")
+
+        if (GuardianNoFIeld.getText().matches("^\\d{11,12}")
                 || GuardianNoFIeld.getText().isEmpty()) {
-            if(GuardianNoFIeld.getText().isEmpty()) {
+            if (GuardianNoFIeld.getText().isEmpty()) {
                 System.out.println("Contact if");
                 Long temp = Long.valueOf(0);
                 editedguardian.setContact(temp);
-            }
-            else {
+            } else {
+                Long gcontact = parseLong(GuardianNoFIeld.getText());
+
                 System.out.println("Contact else");
                 editedguardian.setContact(gcontact);
             }
-        }
-        else {
+        } else {
             proceed = false;
             newguardian = false;
         }
-        
-        if(proceed) {
+
+        if (proceed && newguardian) {
             TenantDAOImplementation tenantdao = new TenantDAOImplementation();
             tenantdao.editTenant(tenantbean, fname, lname);
-            
+
             this.setVisible(false);
             TenantPage tenant = new TenantPage();
             tenant.setVisible(true);
-            
+
             GuardianDAOImplementation guardiandao = new GuardianDAOImplementation();
             GuardianBean guardianbean = new GuardianBean();
             guardianbean = guardiandao.getGuardianByTenant(fname, lname);
             guardiandao.editGuardian(editedguardian, guardianbean.getGuardianID());
-        
+
             JOptionPane.showMessageDialog(null, "Successfully edited tenant");
-        }
-        else {
+        } else {
             JOptionPane.showMessageDialog(null, "Please input ALL neccessary information.");
         }
     }//GEN-LAST:event_SaveButtonActionPerformed
-    
+
     /**
      * @param args the command line arguments
      */
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -582,12 +563,12 @@ public class Edit_Tenant extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
                 //new Edit_Tenant().setVisible(true);
             }
         });
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea AddressField;
     private javax.swing.JLabel AddressLabel;
