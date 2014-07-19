@@ -283,7 +283,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
             String query = "update tenant set image = ?, contact = ?, gender = ?, address = ?, degree = ?, school = ?, expectedyearofgrad = ?, status=? where fname = ? and lname = ? ";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setBlob(1, tenant.getImage());
-            ps.setDouble(2, tenant.getContact());
+            ps.setLong(2, tenant.getContact());
             ps.setString(3, tenant.getGender());
             ps.setString(4, tenant.getAddress());
             ps.setString(5, tenant.getDegree());
@@ -689,5 +689,36 @@ public class TenantDAOImplementation implements TenantDAOInterface {
 
         return null;
     }
+
+    @Override
+    public boolean editTenantByID(TenantBean tenant) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+
+            String query = "update tenant set image = ?, contact = ?, gender = ?, address = ?, degree = ?, school = ?, expectedyearofgrad = ?, status=?, fname = ?, lname = ? where tenantID = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setBlob(1, tenant.getImage());
+            ps.setLong(2, tenant.getContact());
+            ps.setString(3, tenant.getGender());
+            ps.setString(4, tenant.getAddress());
+            ps.setString(5, tenant.getDegree());
+            ps.setString(6, tenant.getSchool());
+            ps.setInt(7, tenant.getExpectedyearofgrad());
+            ps.setString(8, tenant.getStatus());
+            ps.setString(9, tenant.getFname());
+            ps.setString(10, tenant.getLname());
+            ps.setInt(11, tenant.getTenantID());
+            ps.executeUpdate();
+
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+
+    
 
 }

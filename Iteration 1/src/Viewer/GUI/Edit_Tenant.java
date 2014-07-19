@@ -28,12 +28,12 @@ public class Edit_Tenant extends javax.swing.JFrame {
      }
      */
     public boolean proceed = false;
-
+    private TenantBean tenant;
     public Edit_Tenant(int tenantID) {
         initComponents();
 
         TenantDAOImplementation tdao = new TenantDAOImplementation();
-        TenantBean tenant = new TenantBean();
+        tenant = new TenantBean();
 
         GuardianDAOImplementation gdao = new GuardianDAOImplementation();
         GuardianBean guardian = new GuardianBean();
@@ -43,7 +43,7 @@ public class Edit_Tenant extends javax.swing.JFrame {
 
         FirstNameField.setText(tenant.getFname());
         LastNameField.setText(tenant.getLname());
-        ContactNoField.setText("0" + tenant.getContact().toString());
+        ContactNoField.setText(tenant.getContact().toString());
         GenderComboBox.setSelectedItem(tenant.getGender());
         AddressField.setText(tenant.getAddress());
         DegreeField.setText(tenant.getDegree());
@@ -51,7 +51,7 @@ public class Edit_Tenant extends javax.swing.JFrame {
         GradYearField.setText(Integer.toString(tenant.getExpectedyearofgrad()));
         GuardianNameField1.setText(guardian.getFname());
         GuardianNameField2.setText(guardian.getLname());
-        GuardianNoFIeld.setText("0" + guardian.getContact().toString());
+        GuardianNoFIeld.setText(guardian.getContact().toString());
 
     }
 
@@ -400,6 +400,7 @@ public class Edit_Tenant extends javax.swing.JFrame {
         String school = SchoolField.getText();
         String guarfname = GuardianNameField1.getText();
         String guarlname = GuardianNameField2.getText();
+        tenantbean.setTenantID(tenant.getTenantID());
 
         proceed = true;
         boolean newguardian = true;
@@ -523,7 +524,7 @@ public class Edit_Tenant extends javax.swing.JFrame {
 
         if (proceed && newguardian) {
             TenantDAOImplementation tenantdao = new TenantDAOImplementation();
-            tenantdao.editTenant(tenantbean, fname, lname);
+            tenantdao.editTenantByID(tenantbean);
 
             this.setVisible(false);
             TenantPage tenant = new TenantPage();
