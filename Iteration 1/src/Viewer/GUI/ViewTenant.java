@@ -15,6 +15,7 @@ import Models.DAOInterface.RoomDAOInterface;
 import Models.DAOInterface.TenantDAOInterface;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -160,7 +161,7 @@ public class ViewTenant extends javax.swing.JFrame {
             }
         });
 
-        jRadioButton4.setText("Pending");
+        jRadioButton4.setText("Old");
         jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton4ActionPerformed(evt);
@@ -297,13 +298,20 @@ public class ViewTenant extends javax.swing.JFrame {
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
         // ALL SCHOOL
+        jRadioButton1.setSelected(false);
+        jRadioButton3.setSelected(false);
+        jRadioButton4.setSelected(false);
+        jRadioButton5.setSelected(false);
+        jRadioButton6.setSelected(false);
+        jRadioButton7.setSelected(false);
         TenantDAOInterface tenantdao = new TenantDAOImplementation();
         ArrayList<TenantBean> list = new ArrayList<TenantBean>();
 
         list = tenantdao.getAllTenants();
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-
+        model.getDataVector().removeAllElements();
+        SwingUtilities.updateComponentTreeUI(jTable1);
         for (TenantBean bean : list) {
             int tenantid = bean.getTenantID();
             String fname = bean.getFname();
@@ -329,26 +337,33 @@ public class ViewTenant extends javax.swing.JFrame {
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
         // view all by year of graduation (all)
+        jRadioButton2.setSelected(false);
+        jRadioButton3.setSelected(false);
+        jRadioButton4.setSelected(false);
+        jRadioButton5.setSelected(false);
+        jRadioButton6.setSelected(false);
+        jRadioButton7.setSelected(false);
 
         TenantDAOInterface tenantdao = new TenantDAOImplementation();
         ArrayList<TenantBean> list = new ArrayList<TenantBean>();
 
+        list = tenantdao.getAllTenants();
+
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
-        
-            list = tenantdao.getTenantByExpectedYearofGrad(Integer.parseInt(jTextField1.getText()));
+        model.getDataVector().removeAllElements();
 
-            for (TenantBean bean : list) {
-                int tenantid = bean.getTenantID();
-                String fname = bean.getFname();
-                String lname = bean.getLname();
-                int expectedyearofgraduation = bean.getExpectedyearofgrad();
+        for (TenantBean bean : list) {
+            int tenantid = bean.getTenantID();
+            String fname = bean.getFname();
+            String lname = bean.getLname();
+            String school = bean.getSchool();
 
-                Object[] obj = {tenantid, fname, lname, expectedyearofgraduation};
+            Object[] obj = {tenantid, fname, lname, school};
 
-                model.addRow(obj);
-            }
-            
+            model.addRow(obj);
+        }
+
         jLabel9.setText("Displaying list for: expected year of graduation(ALL)");
 
 
@@ -357,13 +372,21 @@ public class ViewTenant extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
         // view tenants by expected year of graduation(int)
-
+        jRadioButton1.setSelected(false);
+        jRadioButton2.setSelected(false);
+        jRadioButton3.setSelected(false);
+        jRadioButton4.setSelected(false);
+        jRadioButton5.setSelected(false);
+        jRadioButton6.setSelected(false);
+        jRadioButton7.setSelected(false);
         TenantDAOInterface tenantdao = new TenantDAOImplementation();
         ArrayList<TenantBean> list = new ArrayList<TenantBean>();
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
         if (jTextField1.getText().matches("^\\d{4,4}$")) {
+            model.getDataVector().removeAllElements();
+            SwingUtilities.updateComponentTreeUI(jTable1);
             list = tenantdao.getTenantByExpectedYearofGrad(Integer.parseInt(jTextField1.getText()));
 
             for (TenantBean bean : list) {
@@ -379,6 +402,8 @@ public class ViewTenant extends javax.swing.JFrame {
 
             jLabel9.setText("Displaying list for: expected year of graduation " + jTextField1.getText());
         } else {
+            model.getDataVector().removeAllElements();
+            SwingUtilities.updateComponentTreeUI(jTable1);
             JOptionPane.showMessageDialog(null, "Please input valid year of expected graduation.");
         }
 
@@ -388,23 +413,35 @@ public class ViewTenant extends javax.swing.JFrame {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
         // view tenants by school
-
+        jRadioButton1.setSelected(false);
+        jRadioButton2.setSelected(false);
+        jRadioButton3.setSelected(false);
+        jRadioButton4.setSelected(false);
+        jRadioButton5.setSelected(false);
+        jRadioButton6.setSelected(false);
+        jRadioButton7.setSelected(false);
         TenantDAOInterface tenantdao = new TenantDAOImplementation();
         ArrayList<TenantBean> list = new ArrayList<TenantBean>();
 
-        list = tenantdao.getTenantBySchool(jTextField2.getText());
-
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        list = tenantdao.getTenantBySchool(jTextField2.getText());
+        if (list != null) {
 
-        for (TenantBean bean : list) {
-            int tenantid = bean.getTenantID();
-            String fname = bean.getFname();
-            String lname = bean.getLname();
-            String school = bean.getSchool();
+            model.getDataVector().removeAllElements();
+            SwingUtilities.updateComponentTreeUI(jTable1);
+            for (TenantBean bean : list) {
+                int tenantid = bean.getTenantID();
+                String fname = bean.getFname();
+                String lname = bean.getLname();
+                String school = bean.getSchool();
 
-            Object[] obj = {tenantid, fname, lname, school};
+                Object[] obj = {tenantid, fname, lname, school};
 
-            model.addRow(obj);
+                model.addRow(obj);
+            }
+        } else {
+            model.getDataVector().removeAllElements();
+            SwingUtilities.updateComponentTreeUI(jTable1);
         }
 
         jLabel9.setText("Displaying list for: school " + jTextField1.getText());
@@ -412,14 +449,23 @@ public class ViewTenant extends javax.swing.JFrame {
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
-
+        jRadioButton1.setSelected(false);
+        jRadioButton2.setSelected(false);
+        jRadioButton3.setSelected(false);
+        jRadioButton4.setSelected(false);
+        jRadioButton5.setSelected(false);
+        jRadioButton6.setSelected(false);
+        jRadioButton7.setSelected(false);
         TenantDAOInterface tenantdao = new TenantDAOImplementation();
         ArrayList<TenantBean> list = new ArrayList<TenantBean>();
 
         list = tenantdao.getTenantByDegree(jTextField3.getText());
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-
+        
+        if(list != null){
+        model.getDataVector().removeAllElements();
+        SwingUtilities.updateComponentTreeUI(jTable1);
         for (TenantBean bean : list) {
             int tenantid = bean.getTenantID();
             String fname = bean.getFname();
@@ -430,20 +476,29 @@ public class ViewTenant extends javax.swing.JFrame {
 
             model.addRow(obj);
         }
-
+        }else{
+           model.getDataVector().removeAllElements();
+           SwingUtilities.updateComponentTreeUI(jTable1);
+        }
         jLabel9.setText("Displaying list for: degree " + jTextField3.getText());
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6ActionPerformed
         // TODO add your handling code here:
-
+        jRadioButton1.setSelected(false);
+        jRadioButton2.setSelected(false);
+        jRadioButton3.setSelected(false);
+        jRadioButton4.setSelected(false);
+        jRadioButton5.setSelected(false);
+        jRadioButton7.setSelected(false);
         TenantDAOInterface tenantdao = new TenantDAOImplementation();
         ArrayList<TenantBean> list = new ArrayList<TenantBean>();
 
         list = tenantdao.getAllTenants();
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-
+        model.getDataVector().removeAllElements();
+        SwingUtilities.updateComponentTreeUI(jTable1);
         for (TenantBean bean : list) {
             int tenantid = bean.getTenantID();
             String fname = bean.getFname();
@@ -460,14 +515,20 @@ public class ViewTenant extends javax.swing.JFrame {
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
         // TODO add your handling code here:
-
+        jRadioButton1.setSelected(false);
+        jRadioButton2.setSelected(false);
+        jRadioButton4.setSelected(false);
+        jRadioButton5.setSelected(false);
+        jRadioButton6.setSelected(false);
+        jRadioButton7.setSelected(false);
         TenantDAOInterface tenantdao = new TenantDAOImplementation();
         ArrayList<TenantBean> list = new ArrayList<TenantBean>();
 
         list = tenantdao.getTenantByStatus("Current");
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-
+        model.getDataVector().removeAllElements();
+        SwingUtilities.updateComponentTreeUI(jTable1);
         for (TenantBean bean : list) {
             int tenantid = bean.getTenantID();
             String fname = bean.getFname();
@@ -478,18 +539,24 @@ public class ViewTenant extends javax.swing.JFrame {
             model.addRow(obj);
         }
 
-        jLabel9.setText("Displaying list for: Registered tenants");
+        jLabel9.setText("Displaying list for: Current tenants");
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
-
+        jRadioButton1.setSelected(false);
+        jRadioButton2.setSelected(false);
+        jRadioButton3.setSelected(false);
+        jRadioButton5.setSelected(false);
+        jRadioButton6.setSelected(false);
+        jRadioButton7.setSelected(false);
         TenantDAOInterface tenantdao = new TenantDAOImplementation();
         ArrayList<TenantBean> list = new ArrayList<TenantBean>();
 
-        list = tenantdao.getTenantByStatus("Pending");
+        list = tenantdao.getTenantByStatus("Old");
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-
+        model.getDataVector().removeAllElements();
+        SwingUtilities.updateComponentTreeUI(jTable1);
         for (TenantBean bean : list) {
             int tenantid = bean.getTenantID();
             String fname = bean.getFname();
@@ -500,19 +567,26 @@ public class ViewTenant extends javax.swing.JFrame {
             model.addRow(obj);
         }
 
-        jLabel9.setText("Displaying list for: Unregistered tenants");
+        jLabel9.setText("Displaying list for: Old tenants");
 
     }//GEN-LAST:event_jRadioButton4ActionPerformed
 
     private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
         // TODO add your handling code here:
+        jRadioButton1.setSelected(false);
+        jRadioButton2.setSelected(false);
+        jRadioButton3.setSelected(false);
+        jRadioButton4.setSelected(false);
+        jRadioButton6.setSelected(false);
+        jRadioButton7.setSelected(false);
         TenantDAOInterface tenantdao = new TenantDAOImplementation();
         ArrayList<TenantBean> list = new ArrayList<TenantBean>();
 
         list = tenantdao.getMaleTenant();
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-
+        model.getDataVector().removeAllElements();
+        SwingUtilities.updateComponentTreeUI(jTable1);
         for (TenantBean bean : list) {
             int tenantid = bean.getTenantID();
             String fname = bean.getFname();
@@ -528,13 +602,20 @@ public class ViewTenant extends javax.swing.JFrame {
 
     private void jRadioButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton7ActionPerformed
         // TODO add your handling code here:
+        jRadioButton1.setSelected(false);
+        jRadioButton2.setSelected(false);
+        jRadioButton3.setSelected(false);
+        jRadioButton4.setSelected(false);
+        jRadioButton5.setSelected(false);
+        jRadioButton6.setSelected(false);
         TenantDAOInterface tenantdao = new TenantDAOImplementation();
         ArrayList<TenantBean> list = new ArrayList<TenantBean>();
 
         list = tenantdao.getFemaleTenant();
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-
+        model.getDataVector().removeAllElements();
+        SwingUtilities.updateComponentTreeUI(jTable1);
         for (TenantBean bean : list) {
             int tenantid = bean.getTenantID();
             String fname = bean.getFname();
@@ -558,38 +639,38 @@ public class ViewTenant extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      *//*
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+     public static void main(String args[]) {
+     /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-/*        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewTenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewTenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewTenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewTenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+     * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+     */
+    /*        try {
+     for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+     if ("Nimbus".equals(info.getName())) {
+     javax.swing.UIManager.setLookAndFeel(info.getClassName());
+     break;
+     }
+     }
+     } catch (ClassNotFoundException ex) {
+     java.util.logging.Logger.getLogger(ViewTenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+     } catch (InstantiationException ex) {
+     java.util.logging.Logger.getLogger(ViewTenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+     } catch (IllegalAccessException ex) {
+     java.util.logging.Logger.getLogger(ViewTenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+     } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+     java.util.logging.Logger.getLogger(ViewTenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+     }
+     //</editor-fold>
 
-        /* Create and display the form *//*
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewTenant().setVisible(true);
-            }
-        });
-    }
-*/
+     /* Create and display the form *//*
+     java.awt.EventQueue.invokeLater(new Runnable() {
+     public void run() {
+     new ViewTenant().setVisible(true);
+     }
+     });
+     }
+     */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
