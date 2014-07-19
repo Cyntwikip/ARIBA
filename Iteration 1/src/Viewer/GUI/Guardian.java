@@ -540,7 +540,7 @@ public class Guardian extends javax.swing.JFrame {
         GuardianDAOInterface guardiandao = new GuardianDAOImplementation();
         GuardianBean bean = new GuardianBean();
 
-        int guardianID = choice2.getSelectedIndex() + 1;
+        int guardianID = choice3.getSelectedIndex() + 1;
 
         DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
         
