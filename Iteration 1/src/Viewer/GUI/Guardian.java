@@ -519,7 +519,7 @@ public class Guardian extends javax.swing.JFrame {
             proceed = false;
         }
 
-        if (jTextField3.getText().matches("^\\d{11,12}")) {
+        if (jTextField3.getText().matches("^\\d{10,12}")) {
             contact = Long.parseLong(jTextField3.getText());
         } else {
             JOptionPane.showMessageDialog(null, "Invalid contact number.");

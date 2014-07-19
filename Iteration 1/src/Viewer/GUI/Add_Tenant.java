@@ -116,7 +116,7 @@ public class Add_Tenant extends javax.swing.JFrame {
 
         LastNameLabel.setText("Last Name:");
 
-        ContactNoLabel.setText("Contact Number: (11-12 digits only)");
+        ContactNoLabel.setText("Contact Number: (10-12 digits only)");
 
         GenderLabel.setText("Gender:");
 
@@ -132,7 +132,7 @@ public class Add_Tenant extends javax.swing.JFrame {
 
         LastNameGuardLabel.setText("Last Name of Guardian:");
 
-        GuardianNoLabel.setText("Contact Number of Guardian: (11-12 digits only)");
+        GuardianNoLabel.setText("Contact Number of Guardian: (10-12 digits only)");
 
         FirstNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -315,9 +315,9 @@ public class Add_Tenant extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(GuardianNoLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AddTenantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(GuardianNoFIeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(AddTenantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(GuardianNoFIeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
         );
 
@@ -446,7 +446,7 @@ public class Add_Tenant extends javax.swing.JFrame {
                 }
             }
 
-            if (ContactNoField.getText().matches("^\\d{11,12}")) { //numbers only
+            if (ContactNoField.getText().matches("^\\d{10,12}")) { //numbers only
                 tenantAcc.setContact(parseLong(ContactNoField.getText()));
             } else {
                 proceed = false;
@@ -505,7 +505,7 @@ public class Add_Tenant extends javax.swing.JFrame {
                 }
             }
 
-            if (GuardianNoFIeld.getText().matches("^\\d{11,12}") || GuardianNoFIeld.getText().isEmpty()) {
+            if (GuardianNoFIeld.getText().matches("^\\d{10,12}") || GuardianNoFIeld.getText().isEmpty()) {
                 if (GuardianNoFIeld.getText().isEmpty()) {
                     System.out.println("Contact if");
                     Long contact = Long.valueOf(0);

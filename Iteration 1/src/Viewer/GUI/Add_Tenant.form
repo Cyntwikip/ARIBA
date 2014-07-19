@@ -211,9 +211,9 @@
                       <Component id="GuardianNoLabel" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="GuardianNoFIeld" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               </Group>
@@ -233,7 +233,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="ContactNoLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Contact Number: (11-12 digits only)"/>
+            <Property name="text" type="java.lang.String" value="Contact Number: (10-12 digits only)"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="GenderLabel">
@@ -273,7 +273,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="GuardianNoLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Contact Number of Guardian: (11-12 digits only)"/>
+            <Property name="text" type="java.lang.String" value="Contact Number of Guardian: (10-12 digits only)"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="FirstNameField">

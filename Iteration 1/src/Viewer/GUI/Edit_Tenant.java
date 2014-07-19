@@ -114,7 +114,7 @@ public class Edit_Tenant extends javax.swing.JFrame {
             }
         });
 
-        ContactNoLabel.setText("Contact Number: (11 - 12 digits only)");
+        ContactNoLabel.setText("Contact Number: (10 - 12 digits only)");
 
         ContactNoField.setText("<insert previous info>");
         ContactNoField.addActionListener(new java.awt.event.ActionListener() {
@@ -298,7 +298,7 @@ public class Edit_Tenant extends javax.swing.JFrame {
                 .addGroup(EditTenantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(GuardianNoLabel)
                     .addComponent(GuardianNoFIeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         Back_AddTenant.setText("Back");
@@ -322,7 +322,7 @@ public class Edit_Tenant extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(EditTenant, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                    .addComponent(EditTenant, javax.swing.GroupLayout.PREFERRED_SIZE, 381, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Back_AddTenant)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -438,7 +438,7 @@ public class Edit_Tenant extends javax.swing.JFrame {
             }
 
             //Contact
-            if (ContactNoField.getText().matches("^\\d{11,12}")) {
+            if (ContactNoField.getText().matches("^\\d{10,12}")) {
                 Long contact = parseLong(ContactNoField.getText());
 
                 tenantbean.setContact(contact);
@@ -505,7 +505,7 @@ public class Edit_Tenant extends javax.swing.JFrame {
             }
         }
 
-        if (GuardianNoFIeld.getText().matches("^\\d{11,12}")
+        if (GuardianNoFIeld.getText().matches("^\\d{10,12}")
                 || GuardianNoFIeld.getText().isEmpty()) {
             if (GuardianNoFIeld.getText().isEmpty()) {
                 System.out.println("Contact if");

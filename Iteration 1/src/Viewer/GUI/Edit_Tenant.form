@@ -235,7 +235,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="ContactNoLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Contact Number: (11 - 12 digits only)"/>
+            <Property name="text" type="java.lang.String" value="Contact Number: (10 - 12 digits only)"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="ContactNoField">
