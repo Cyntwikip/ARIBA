@@ -16,8 +16,7 @@ import java.util.ArrayList;
 public interface TenantDAOInterface {
     
     public boolean addTenant(TenantBean tenant); // important
-    public boolean editTenant (TenantBean tenant, String fname, String lname); // important
-    public boolean editTenantByID (TenantBean tenant);
+    public boolean editTenant (TenantBean tenant);
     public ArrayList<TenantBean> getAllTenants(); // important
     public TenantBean getTenantById(int tenantid);
     public ArrayList<TenantBean> getTenantBySchool(String school);

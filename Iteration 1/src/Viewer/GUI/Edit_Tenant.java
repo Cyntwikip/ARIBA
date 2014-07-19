@@ -524,7 +524,7 @@ public class Edit_Tenant extends javax.swing.JFrame {
 
         if (proceed && newguardian) {
             TenantDAOImplementation tenantdao = new TenantDAOImplementation();
-            tenantdao.editTenantByID(tenantbean);
+            tenantdao.editTenant(tenantbean);
 
             this.setVisible(false);
             TenantPage tenant = new TenantPage();
