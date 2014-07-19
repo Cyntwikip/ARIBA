@@ -153,14 +153,14 @@ public class ViewTenant extends javax.swing.JFrame {
 
         jLabel9.setText("Displaying list for: ");
 
-        jRadioButton3.setText("Registered");
+        jRadioButton3.setText("Current");
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton3ActionPerformed(evt);
             }
         });
 
-        jRadioButton4.setText("Unregistered");
+        jRadioButton4.setText("Pending");
         jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton4ActionPerformed(evt);
@@ -464,7 +464,7 @@ public class ViewTenant extends javax.swing.JFrame {
         TenantDAOInterface tenantdao = new TenantDAOImplementation();
         ArrayList<TenantBean> list = new ArrayList<TenantBean>();
 
-        list = tenantdao.getTenantByStatus("Registered");
+        list = tenantdao.getTenantByStatus("Current");
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
@@ -486,7 +486,7 @@ public class ViewTenant extends javax.swing.JFrame {
         TenantDAOInterface tenantdao = new TenantDAOImplementation();
         ArrayList<TenantBean> list = new ArrayList<TenantBean>();
 
-        list = tenantdao.getTenantByStatus("unregistered");
+        list = tenantdao.getTenantByStatus("Pending");
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 

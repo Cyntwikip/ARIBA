@@ -41,6 +41,24 @@ public class Guardian extends javax.swing.JFrame {
             choice3.add(list.get(i).getGuardianID() + ": " + list.get(i).getLname() + ", " + list.get(i).getFname());
 
         }
+        
+        bean = guardiandao.getGuardianByID(choice2.getSelectedIndex() + 1);
+        jTextField1.setText(bean.getFname());
+        jTextField2.setText(bean.getLname());
+        jTextField3.setText(bean.getContact().toString());
+
+    }
+
+    public void reload() {
+        jTextField1.invalidate();
+        jTextField1.validate();
+        jTextField1.repaint();
+        jTextField2.invalidate();
+        jTextField2.validate();
+        jTextField2.repaint();
+        jTextField3.invalidate();
+        jTextField3.validate();
+        jTextField3.repaint();
 
     }
 
@@ -77,7 +95,6 @@ public class Guardian extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jButton10 = new javax.swing.JButton();
-        selectButton = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         choice3 = new java.awt.Choice();
@@ -191,6 +208,12 @@ public class Guardian extends javax.swing.JFrame {
 
         jLabel2.setText("Guardian List:");
 
+        choice2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                selection(evt);
+            }
+        });
+
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -242,13 +265,6 @@ public class Guardian extends javax.swing.JFrame {
             }
         });
 
-        selectButton.setText("Select");
-        selectButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -279,9 +295,7 @@ public class Guardian extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(choice2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(selectButton)))
+                                .addComponent(choice2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -289,12 +303,10 @@ public class Guardian extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel2)
-                        .addComponent(choice2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(selectButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(choice2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -624,7 +636,7 @@ public class Guardian extends javax.swing.JFrame {
         menu.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void selectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectButtonActionPerformed
+    private void selection(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selection
         // TODO add your handling code here:
         GuardianDAOInterface guardiandao = new GuardianDAOImplementation();
         GuardianBean bean = new GuardianBean();
@@ -632,7 +644,7 @@ public class Guardian extends javax.swing.JFrame {
         jTextField1.setText(bean.getFname());
         jTextField2.setText(bean.getLname());
         jTextField3.setText(bean.getContact().toString());
-    }//GEN-LAST:event_selectButtonActionPerformed
+    }//GEN-LAST:event_selection
 
     /**
      * @param args the command line arguments
@@ -705,6 +717,5 @@ public class Guardian extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JButton selectButton;
     // End of variables declaration//GEN-END:variables
 }
