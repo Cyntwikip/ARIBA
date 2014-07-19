@@ -36,6 +36,14 @@ public class Rooms extends javax.swing.JFrame {
 
         RoomDAOInterface rdao = new RoomDAOImplementation();
         list = rdao.getAllRooms();
+        TenantDAOImplementation tdao = new TenantDAOImplementation();
+        ArrayList<TenantBean> tlist = new ArrayList<TenantBean>();
+    
+        tlist = tdao.getAllTenants();
+    
+        for (int i = 0; i < tlist.size(); i++) {
+            nameChoice.insert(tlist.get(i).getFname() + " " + tlist.get(i).getLname(), i);
+        }
 
         for (int i = 0; i < list.size(); i++) {
             choice1.add(String.valueOf(i + 1));
@@ -65,10 +73,9 @@ public class Rooms extends javax.swing.JFrame {
         choice1 = new java.awt.Choice();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
+        nameChoice = new java.awt.Choice();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         choice2 = new java.awt.Choice();
@@ -111,13 +118,7 @@ public class Rooms extends javax.swing.JFrame {
 
         jLabel1.setText("Please choose room:");
 
-        jLabel2.setText("Please enter name of tenant:");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
+        jLabel2.setText("Please choose name of tenant:");
 
         jButton1.setText("Add");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -130,12 +131,6 @@ public class Rooms extends javax.swing.JFrame {
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
-            }
-        });
-
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
             }
         });
 
@@ -153,15 +148,13 @@ public class Rooms extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(choice1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                            .addComponent(jTextField1))
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(nameChoice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(213, 213, 213)
                         .addComponent(jButton1)
                         .addGap(51, 51, 51)
                         .addComponent(jButton3)))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(200, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,16 +163,15 @@ public class Rooms extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(53, 53, 53)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(59, 59, 59)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(69, 69, 69)
+                    .addComponent(nameChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(71, 71, 71)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton3))
-                .addContainerGap(435, Short.MAX_VALUE))
+                .addContainerGap(403, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Assign Room", jPanel1);
@@ -350,6 +342,11 @@ public class Rooms extends javax.swing.JFrame {
         jLabel6.setText("Input New Price:");
 
         jButton6.setText("Save");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -553,11 +550,9 @@ public class Rooms extends javax.swing.JFrame {
 
         TenantDAOInterface tdao = new TenantDAOImplementation();
         TenantBean tenant = new TenantBean();
-        if (jTextField1.getText().matches("^[a-zA-Z ]+$") && jTextField3.getText().matches("^[a-zA-Z ]+$")) {
-            tenant = tdao.getTenantByName(jTextField1.getText(), jTextField3.getText());
-        } else {
-            JOptionPane.showMessageDialog(null, "Invalid name");
-        }
+        
+        tenant = tdao.getTenantById(nameChoice.getSelectedIndex()+1);
+        
         if (tenant.getTenantID() != 0) {
             RoomDAOInterface rdao = new RoomDAOImplementation();
             int roomID = Integer.parseInt(choice1.getSelectedItem());
@@ -576,7 +571,7 @@ public class Rooms extends javax.swing.JFrame {
                 currentContract = contractlist.get(index);
                 rdao.assignTenanttoRoom(tenant, room, currentContract);
 
-                JOptionPane.showMessageDialog(null, "Successfully added tenant " + jTextField1.getText() + " " + jTextField2.getText()
+                JOptionPane.showMessageDialog(null, "Successfully added tenant " + tenant.getFname() + " " + tenant.getLname()
                         + " to room " + room.getRoomID());
             } else {
                 JOptionPane.showMessageDialog(null, "Tenant doesn't have contract.");
@@ -627,14 +622,6 @@ public class Rooms extends javax.swing.JFrame {
 
         jLabel9.setText(count);
     }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
@@ -771,6 +758,11 @@ public class Rooms extends javax.swing.JFrame {
         menu.setVisible(true);
     }//GEN-LAST:event_jButton14ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     /**
      * @param args the command line arguments
      *//*
@@ -847,10 +839,9 @@ public class Rooms extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private java.awt.Choice nameChoice;
     // End of variables declaration//GEN-END:variables
 }
