@@ -36,15 +36,16 @@ public class Tenant_List extends javax.swing.JFrame {
                 int tenantid = bean.getTenantID();
                 String fname = bean.getFname();
                 String lname = bean.getLname();
-                Long contact = bean.getContact();
+                String contact = bean.getContact();
                 String gender = bean.getGender();
                 String address = bean.getAddress();
                 String degree = bean.getDegree();
+                String email = bean.getEmail();
                 int yeargrad = bean.getExpectedyearofgrad();
                 String status = bean.getStatus();
                 String school = bean.getSchool();
 
-                Object[] obj = {tenantid, fname, lname, contact, gender, address, degree, school, yeargrad, status};
+                Object[] obj = {tenantid, fname, lname, contact, email, gender, address, degree, school, yeargrad, status};
 
                 model.addRow(obj);   
             }

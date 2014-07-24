@@ -15,7 +15,18 @@ public class GuardianBean {
     private int guardianID;
     private String fname;
     private String lname;
-    private Long contact;
+    private String contact;
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    
 
     public int getGuardianID() {
         return guardianID;
@@ -41,11 +52,11 @@ public class GuardianBean {
         this.lname = lname;
     }
 
-    public Long getContact() {
+    public String getContact() {
         return contact;
     }
 
-    public void setContact(Long contact) {
+    public void setContact(String contact) {
         this.contact = contact;
     }
 

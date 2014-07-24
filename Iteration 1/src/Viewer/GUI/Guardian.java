@@ -469,7 +469,7 @@ public class Guardian extends javax.swing.JFrame {
         model.setNumRows(0);
 
         String fname, lname;
-        Long contact;
+        String contact;
         int tenantID;
         //System.out.println(choice1.getSelectedIndex());
         for (int i = 0; i < tenant_list.size(); i++) {
@@ -527,7 +527,7 @@ public class Guardian extends javax.swing.JFrame {
         }
 
         if (proceed) {
-            bean.setContact(Long.parseLong(jTextField3.getText()));
+            bean.setContact(jTextField3.getText());
             bean.setFname(jTextField1.getText());
             bean.setLname(jTextField2.getText());
             bean.setGuardianID(choice2.getSelectedIndex() + 1);
@@ -576,8 +576,7 @@ public class Guardian extends javax.swing.JFrame {
 
         bean = guardiandao.getGuardianByID(guardianID);
 
-        String fname, lname;
-        Long contact;
+        String fname, lname, contact;
 
         fname = bean.getFname();
         lname = bean.getLname();
@@ -594,8 +593,7 @@ public class Guardian extends javax.swing.JFrame {
         ArrayList<GuardianBean> list = new ArrayList<GuardianBean>();
 
         list = guardiandao.getAllGuardians();
-        String fname, lname;
-        Long contact;
+        String fname, lname, contact;
         int guardianID;
 
         DefaultTableModel model = (DefaultTableModel) jTable3.getModel();

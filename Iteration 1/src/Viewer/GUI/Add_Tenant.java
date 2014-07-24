@@ -22,15 +22,6 @@ import static java.lang.Integer.parseInt;
 import static java.lang.Integer.parseInt;
 import static java.lang.Integer.parseInt;
 import static java.lang.Integer.parseInt;
-import static java.lang.Long.parseLong;
-import static java.lang.Long.parseLong;
-import static java.lang.Long.parseLong;
-import static java.lang.Long.parseLong;
-import static java.lang.Long.parseLong;
-import static java.lang.Long.parseLong;
-import static java.lang.Long.parseLong;
-import static java.lang.Long.parseLong;
-import static java.lang.Long.parseLong;
 import java.sql.Date;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -447,7 +438,7 @@ public class Add_Tenant extends javax.swing.JFrame {
             }
 
             if (ContactNoField.getText().matches("^\\d{10,12}")) { //numbers only
-                tenantAcc.setContact(parseLong(ContactNoField.getText()));
+                tenantAcc.setContact(ContactNoField.getText());
             } else {
                 proceed = false;
                 System.out.println("Contact false");
@@ -508,11 +499,11 @@ public class Add_Tenant extends javax.swing.JFrame {
             if (GuardianNoFIeld.getText().matches("^\\d{10,12}") || GuardianNoFIeld.getText().isEmpty()) {
                 if (GuardianNoFIeld.getText().isEmpty()) {
                     System.out.println("Contact if");
-                    Long contact = Long.valueOf(0);
+                    String contact = "0";
                     guardianAcc.setContact(contact);
                 } else {
                     System.out.println("Contact else");
-                    guardianAcc.setContact(parseLong(GuardianNoFIeld.getText()));
+                    guardianAcc.setContact(GuardianNoFIeld.getText());
                 }
 
             } else {

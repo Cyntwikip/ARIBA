@@ -438,7 +438,7 @@ public class Edit_Tenant extends javax.swing.JFrame {
 
             //Contact
             if (ContactNoField.getText().matches("^\\d{10,12}")) {
-                Long contact = parseLong(ContactNoField.getText());
+                String contact = ContactNoField.getText();
 
                 tenantbean.setContact(contact);
             } else {
@@ -508,10 +508,10 @@ public class Edit_Tenant extends javax.swing.JFrame {
                 || GuardianNoFIeld.getText().isEmpty()) {
             if (GuardianNoFIeld.getText().isEmpty()) {
                 System.out.println("Contact if");
-                Long temp = Long.valueOf(0);
+                String temp = "0";
                 editedguardian.setContact(temp);
             } else {
-                Long gcontact = parseLong(GuardianNoFIeld.getText());
+                String gcontact = GuardianNoFIeld.getText();
 
                 System.out.println("Contact else");
                 editedguardian.setContact(gcontact);

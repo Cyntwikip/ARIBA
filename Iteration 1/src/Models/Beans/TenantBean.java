@@ -18,7 +18,8 @@ public class TenantBean {
     private String fname;
     private String lname;
     private Blob image;
-    private Long contact;
+    private String contact;
+    private String email;
     private String gender;
     private String address;
     private String school;
@@ -26,11 +27,16 @@ public class TenantBean {
     private int expectedyearofgrad;
     private String status;
 
+    public String getEmail() {
+        return email;
+    }
+
+    
     public String getAddress() {
         return address;
     }
 
-    public Long getContact() {
+    public String getContact() {
         return contact;
     }
 
@@ -80,8 +86,12 @@ public class TenantBean {
         this.address = address;
     }
 
-    public void setContact(Long contact) {
+    public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setExpectedyearofgrad(int expectedyearofgrad) {
