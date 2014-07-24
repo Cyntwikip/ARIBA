@@ -7,6 +7,7 @@
 package Models.Beans;
 
 import java.sql.Blob;
+import java.sql.Date;
 
 /**
  *
@@ -26,6 +27,17 @@ public class TenantBean {
     private String degree;
     private int expectedyearofgrad;
     private String status;
+    private Date birthday;
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+    
+    
 
     public String getEmail() {
         return email;

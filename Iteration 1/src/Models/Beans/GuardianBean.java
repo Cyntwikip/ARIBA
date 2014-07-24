@@ -6,6 +6,8 @@
 
 package Models.Beans;
 
+import java.sql.Date;
+
 /**
  *
  * @author User
@@ -17,6 +19,15 @@ public class GuardianBean {
     private String lname;
     private String contact;
     private String email;
+    private Date birthday;
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 
     public String getEmail() {
         return email;

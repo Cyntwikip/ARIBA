@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS `dormitory`.`Tenant` (
   `tenantID` INT(11) NOT NULL AUTO_INCREMENT,
   `fname` VARCHAR(45) NOT NULL,
   `lname` VARCHAR(45) NOT NULL,
+  `birthday` DATE NOT NULL,
   `image` BLOB NULL,
   `contact` VARCHAR(12) NOT NULL,
   `gender` VARCHAR(45) NOT NULL,
@@ -22,6 +23,7 @@ CREATE TABLE IF NOT EXISTS `dormitory`.`Tenant` (
   `school` VARCHAR(255) NOT NULL,
   `expectedyearofgrad` INT(4) NOT NULL,
   `status` VARCHAR(45) NOT NULL,
+
   PRIMARY KEY (`tenantID`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1;
@@ -175,6 +177,7 @@ CREATE TABLE IF NOT EXISTS `dormitory`.`Guardian` (
   `fname` VARCHAR(45) NOT NULL,
   `lname` VARCHAR(45) NOT NULL,
   `contact` VARCHAR(12) NOT NULL,
+  `birthday` DATE NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`guardianID`))
 ENGINE = InnoDB
