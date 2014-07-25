@@ -100,14 +100,14 @@ public class RoomDAOImplementation implements RoomDAOInterface {
         
     }
 
-
+    /*
     @Override
     public ArrayList<RoomBean> getAllCurrentKW() {
  
                 try{
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select roomID, currentKW from room";
+            String query = "select * from room";
             PreparedStatement ps = connection.prepareStatement(query);
             
             ResultSet resultSet = ps.executeQuery();
@@ -139,12 +139,21 @@ public class RoomDAOImplementation implements RoomDAOInterface {
         return null;
     
     }
-
+    
     @Override
     public ArrayList<RoomBean> getCurrentKWbyRoom(int roomID) {  
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from room";
+            PreparedStatement ps = connection.prepareStatement(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+        
     }
-
+    
     @Override
     public ArrayList<RoomBean> getAllCubicMeter(int roomID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -185,7 +194,7 @@ public class RoomDAOImplementation implements RoomDAOInterface {
         }
         return null;
     }
-    /*
+
     @Override
     public ArrayList<RoomBean> getAllUnoccupiedRooms() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

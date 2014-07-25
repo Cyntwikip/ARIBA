@@ -22,10 +22,10 @@ public interface RoomDAOInterface {
     public boolean assignTenanttoRoom(TenantBean tenant, RoomBean room, ContractBean contract);
     public ArrayList<RoomBean> getAllRooms();
     public RoomBean getRoomByRoomID(int roomID);
-    public ArrayList<RoomBean> getAllCurrentKW();
-    public ArrayList<RoomBean> getCurrentKWbyRoom(int roomID);
-    public ArrayList<RoomBean> getAllCubicMeter(int roomID);
-    public RoomBean getCubicMeter(int roomID);
+    //public ArrayList<RoomBean> getAllCurrentKW();
+    //public ArrayList<RoomBean> getAllCubicMeter(int roomID);
+    //public ArrayList<RoomBean> getCurrentKWbyRoom(int roomID);
+    //public RoomBean getCubicMeter(int roomID);
     //public ArrayList<RoomBean> getAllUnoccupiedRooms();
     //public ArrayList<RoomBean> getAllOccupiedRooms();
 }

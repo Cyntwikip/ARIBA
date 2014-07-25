@@ -36,14 +36,11 @@ public class TenantBean {
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
-    
-    
 
     public String getEmail() {
         return email;
     }
 
-    
     public String getAddress() {
         return address;
     }
@@ -91,9 +88,7 @@ public class TenantBean {
     public void setDegree(String degree) {
         this.degree = degree;
     }
-    
-    
-
+   
     public void setAddress(String address) {
         this.address = address;
     }
@@ -137,7 +132,5 @@ public class TenantBean {
     public void setTenantID(int tenantID) {
         this.tenantID = tenantID;
     }
-    
-    
     
 }
