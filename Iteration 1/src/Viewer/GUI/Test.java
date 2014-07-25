@@ -6,13 +6,17 @@
 
 package Viewer.GUI;
 
+import Models.Beans.AttendanceLogBean;
 import Models.Beans.ContractBean;
 import Models.Beans.GuardianBean;
 import Models.Beans.TenantBean;
+import Models.DAOImplementation.AttendanceLogDAOImplementation;
 import Models.DAOImplementation.ContractDAOImplementation;
 import Models.DAOImplementation.GuardianDAOImplementation;
 import Models.DAOImplementation.RoomDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -35,11 +39,6 @@ public class Test {
         
         //RoomDAOImplementation rdao = new RoomDAOImplementation();
         */
-        GuardianDAOImplementation gdao = new GuardianDAOImplementation();
-        GuardianBean bean = new GuardianBean();
-        
-        bean = gdao.getGuardianByTenant("Danica", "Corpuz");
-        System.out.println(bean.getFname());
         
     }
     

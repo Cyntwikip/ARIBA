@@ -21,9 +21,7 @@ public interface AttendanceLogDAOInterface {
     public boolean editAttendanceLog(AttendanceLogBean attendance);
     public ArrayList<AttendanceLogBean> getAllLogs(); //needed ba to haha
     public ArrayList<AttendanceLogBean> getAllAtendanceLogsByTenantID(int log_tenantID);
-    public ArrayList<AttendanceLogBean> getAllAttendanceLogsByName (String fname, String lname);
-    public ArrayList<AttendanceLogBean> getAllLogin();
-    public TenantBean checkLogin();
-    public TenantBean checkLogout();
+    public ArrayList<AttendanceLogBean> checkLogin();
+    public ArrayList<AttendanceLogBean> checkLogout();
     public ArrayList<TenantBean> checkAllTenantByTime(Time time);
 }

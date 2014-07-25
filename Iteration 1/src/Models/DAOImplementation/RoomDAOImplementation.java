@@ -223,6 +223,8 @@ public class RoomDAOImplementation implements RoomDAOInterface {
                 currentcubicmeter = resultSet.getFloat("currentcubicmeter");
                 //status = resultSet.getString("status");
                 
+                bean = new RoomBean();
+                
                 bean.setCurrentKW(currentKW);
                 bean.setCurrentcubicmeter(currentcubicmeter);
                 bean.setRoomID(roomID);
