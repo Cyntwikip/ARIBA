@@ -48,8 +48,43 @@ public class ContractDAOImplementation implements ContractDAOInterface {
 
     @Override
     public ArrayList<ContractBean> getAllContracts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+            try{
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from contract";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+            
+            ContractBean bean = new ContractBean();
+            ArrayList<ContractBean> list = new ArrayList<ContractBean>();
+            
+            int contractID, contract_tenantID;
+            Date effectivedate, expirydate;
+            //String status;
+            
+            while(resultSet.next()){
+                contractID = resultSet.getInt("contractID");
+                contract_tenantID = resultSet.getInt("contract_tenantID");
+                effectivedate = resultSet.getDate("effectivedate");
+                expirydate = resultSet.getDate("expirydate");
+                
+                
+                bean = new ContractBean();
+                
+                bean.setContractID(contractID);
+                bean.setContract_tenantID(contract_tenantID);
+                bean.setEffectivedate(effectivedate);
+                bean.setExpirydate(expirydate);
+                
+                list.add(bean);
+             }
+            return list;
+        }   catch(SQLException ex){
+        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null; 
+      }
 
     @Override
     public ArrayList<ContractBean> getAllContractsByTenantID(int contract_tenantID) {
@@ -91,7 +126,43 @@ public class ContractDAOImplementation implements ContractDAOInterface {
 
     @Override
     public ArrayList<ContractBean> getAllContractsByDate(Date from, Date to) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            try{
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from contract where effectivadate and expirydate "
+                    + "BETWEEN '" + from + "' and '" + to + "'" ;
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+            
+            ContractBean bean = new ContractBean();
+            ArrayList<ContractBean> list = new ArrayList<ContractBean>();
+            
+            int contractID, contract_tenantID;
+            Date effectivedate, expirydate;
+            //String status;
+            
+            while(resultSet.next()){
+                contractID = resultSet.getInt("contractID");
+                contract_tenantID = resultSet.getInt("contract_tenantID");
+                effectivedate = resultSet.getDate("effectivedate");
+                expirydate = resultSet.getDate("expirydate");
+                
+                
+                bean = new ContractBean();
+                
+                bean.setContractID(contractID);
+                bean.setContract_tenantID(contract_tenantID);
+                bean.setEffectivedate(effectivedate);
+                bean.setExpirydate(expirydate);
+                
+                list.add(bean);
+             }
+            return list;
+        }   catch(SQLException ex){
+        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null; 
     }
     
 }
