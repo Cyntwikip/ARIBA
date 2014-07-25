@@ -40,6 +40,14 @@ public class Test {
         //RoomDAOImplementation rdao = new RoomDAOImplementation();
         */
         
+        AttendanceLogBean bean = new AttendanceLogBean();
+        AttendanceLogDAOImplementation dao = new AttendanceLogDAOImplementation();
+        
+        bean.setIsIn(false);
+        bean.setLog_tenantID(1);
+        
+        dao.addAttendanceLogDAOInterface(bean);
+        
     }
     
 }

@@ -31,11 +31,10 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "insert into attendancelog (log_tenantID, isIN, timeLogged) values (?, ?, ?)";
+            String query = "insert into attendancelog (log_tenantID, isIN) values (?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, attendance.getLog_tenantID());
             ps.setBoolean(2, attendance.getIsIn());
-            ps.setTimestamp(3, attendance.getTimeLogged());
             ps.executeUpdate();
             connection.close();
             
