@@ -29,12 +29,13 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "insert into waterreading (currentcubicpermeter, pricepercubicmeter, price, dateRead) values (?, ?, ?, ?)";
+            String query = "insert into waterreading (water_billID, currentcubicpermeter, pricepercubicmeter, price, dateRead) values (?, ?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setFloat(1, water.getCurrentcubicmeter());
-            ps.setFloat(2, water.getPricepercubicmeter());
-            ps.setFloat(3, water.getPrice());
-            ps.setDate(4, water.getDateRead());
+            ps.setInt(1, bill_roomID);
+            ps.setFloat(2, water.getCurrentcubicmeter());
+            ps.setFloat(3, water.getPricepercubicmeter());
+            ps.setFloat(4, water.getPrice());
+            ps.setDate(5, water.getDateRead());
             ps.executeUpdate();
             connection.close();
             

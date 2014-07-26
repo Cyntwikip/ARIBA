@@ -118,7 +118,7 @@ AUTO_INCREMENT = 1;
 -- Table `dormitory`.`ElectricReading`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dormitory`.`ElectricReading` (
-  `electric_billID` INT(11) NOT NULL,
+  `electric_billID` INT(11) NOT NULL AUTO_INCREMENT,
   `currentKW` FLOAT NOT NULL,
   `priceperKW` FLOAT NOT NULL,
   `price` FLOAT NOT NULL,

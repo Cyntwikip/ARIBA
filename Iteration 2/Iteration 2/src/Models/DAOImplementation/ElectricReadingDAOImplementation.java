@@ -31,13 +31,14 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "insert into electricreading (currentKW, priceperKW, price, dateRead) values (?, ?, ?, ?)";
+            String query = "insert into electricreading (electric_billID, currentKW, priceperKW, price, dateRead) values (?, ?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setFloat(1, electric.getCurrentKW());
-            ps.setFloat(2, electric.getPriceperKW());
-            ps.setFloat(3, electric.getPrice());
-            ps.setDate(4, electric.getDateRead());
-            ps.executeQuery();
+            ps.setInt(1, bill_roomID);
+            ps.setFloat(2, electric.getCurrentKW());
+            ps.setFloat(3, electric.getPriceperKW());
+            ps.setFloat(4, electric.getPrice());
+            ps.setDate(5, electric.getDateRead());
+            ps.executeUpdate();
             connection.close();
             
             return true;

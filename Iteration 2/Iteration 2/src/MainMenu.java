@@ -1,19 +1,8 @@
 
-import Models.Beans.TenantBean;
-import Models.DAOImplementation.TenantDAOImplementation;
-import java.io.File;
+import Models.Beans.ElectricReadingBean;
+import Models.DAOImplementation.ElectricReadingDAOImplementation;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.sql.Blob;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemHeaders;
+import java.sql.Date;
 
 
 
@@ -78,6 +67,18 @@ public class MainMenu {
         }
         */
         
+        ElectricReadingBean bean = new ElectricReadingBean();
+        ElectricReadingDAOImplementation dao = new ElectricReadingDAOImplementation();
+        
+        bean.setElectric_billID(0);
+        bean.setCurrentKW(10);
+        bean.setElectric_billID(10);
+        bean.setPrice(10);
+        bean.setPriceperKW(10);
+        Date date = new Date(2014-07-26);
+        bean.setDateRead(date);
+        
+        dao.addElectricReadingToRoom(bean, 1);
     }
     
 }
