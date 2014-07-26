@@ -42,5 +42,30 @@ public class BillBean {
     public boolean getpaidElectric(){
         return paidElectric;
     }
+
+    public void setBillID(int billID) {
+        this.billID = billID;
+    }
+
+    public void setBill_roomID(int bill_roomID) {
+        this.bill_roomID = bill_roomID;
+    }
+
+    public void setPaidElectric(boolean paidElectric) {
+        this.paidElectric = paidElectric;
+    }
+
+    public void setPaidRent(boolean paidRent) {
+        this.paidRent = paidRent;
+    }
+
+    public void setPaidWater(boolean paidWater) {
+        this.paidWater = paidWater;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    
     
 }

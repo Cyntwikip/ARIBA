@@ -1,5 +1,7 @@
 
+import Models.Beans.BillBean;
 import Models.Beans.ElectricReadingBean;
+import Models.DAOImplementation.BillDAOImplementation;
 import Models.DAOImplementation.ElectricReadingDAOImplementation;
 import java.io.FileInputStream;
 import java.sql.Date;
@@ -67,18 +69,29 @@ public class MainMenu {
         }
         */
         
+        BillBean bill = new BillBean();
+        BillDAOImplementation bdao = new BillDAOImplementation();
+        
+        bill.setBill_roomID(1);
+        bill.setPaidElectric(true);
+        bill.setPaidRent(true);
+        bill.setPaidWater(true);
+        bill.setPrice(0);
+        
+        bdao.addBill(bill);
+        
         ElectricReadingBean bean = new ElectricReadingBean();
         ElectricReadingDAOImplementation dao = new ElectricReadingDAOImplementation();
         
-        bean.setElectric_billID(0);
         bean.setCurrentKW(10);
-        bean.setElectric_billID(10);
+        bean.setElectric_billID(1);
         bean.setPrice(10);
         bean.setPriceperKW(10);
         Date date = new Date(2014-07-26);
         bean.setDateRead(date);
         
         dao.addElectricReadingToRoom(bean, 1);
+        
     }
     
 }

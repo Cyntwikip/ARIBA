@@ -7,9 +7,15 @@
 package Models.DAOImplementation;
 
 import Models.Beans.BillBean;
+import Models.Connector.Connector;
 import Models.DAOInterface.BillDAOInterface;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,7 +25,27 @@ public class BillDAOImplementation implements BillDAOInterface {
 
     @Override
     public boolean addBill(BillBean bill) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "insert into bill (bill_roomID, price, paidRent, paidWater, paidElectric) value (?, ?, ?, ?, ?)";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, bill.getBill_roomID());
+            ps.setDouble(2, bill.getPrice());
+            ps.setBoolean(3, bill.getpaidRent());
+            ps.setBoolean(4, bill.getPaidWater());
+            ps.setBoolean(5, bill.getpaidElectric());
+            
+            ps.executeUpdate();
+            connection.close();
+            
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(BillDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
     }
 
     @Override
