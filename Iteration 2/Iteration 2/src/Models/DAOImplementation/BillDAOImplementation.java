@@ -7,6 +7,7 @@
 package Models.DAOImplementation;
 
 import Models.Beans.BillBean;
+import Models.Beans.RoomBean;
 import Models.Connector.Connector;
 import Models.DAOInterface.BillDAOInterface;
 import java.sql.Connection;
@@ -102,38 +103,314 @@ public class BillDAOImplementation implements BillDAOInterface {
     }
 
     @Override
-    public ArrayList<BillBean> getAllPaidRoom(int roomID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<BillBean> getAllPaidRoom() { 
+            try{
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select roomID, currentKW, currentcubicmeter "
+                    + "from bill, room where paidRent = 1 AND paidWater = 1 AND paidElectric = 1";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+            
+            BillBean bean = new BillBean();
+            ArrayList<BillBean> list = new ArrayList<BillBean>();
+            
+            int billID, bill_roomID;
+            double price;
+            boolean paidRent, paidWater, paidElectric;
+            
+            while(resultSet.next()){
+                billID = resultSet.getInt("billID");
+                bill_roomID = resultSet.getInt("bill_roomID");
+                price = resultSet.getDouble("price");
+                paidRent = resultSet.getBoolean("paidRent");
+                paidWater = resultSet.getBoolean("paidWater");
+                paidElectric = resultSet.getBoolean("paidElectric");
+                
+                bean = new BillBean();
+                
+                bean.setBillID(billID);
+                bean.setBill_roomID(bill_roomID);
+                bean.setPaidElectric(paidElectric);
+                bean.setPaidRent(paidRent);
+                bean.setPaidWater(paidWater);
+                bean.setPrice(price);
+                
+                list.add(bean);
+             }
+            return list;
+        }   catch(SQLException ex){
+        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null; 
     }
 
     @Override
     public ArrayList<BillBean> getAllPaidBillByRoom() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            try{
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select roomID, currentKW, currentcubicmeter "
+                    + "from bill, room where paidRent = 1";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+            
+            BillBean bean = new BillBean();
+            ArrayList<BillBean> list = new ArrayList<BillBean>();
+            
+            int billID, bill_roomID;
+            double price;
+            boolean paidRent, paidWater, paidElectric;
+            
+            while(resultSet.next()){
+                billID = resultSet.getInt("billID");
+                bill_roomID = resultSet.getInt("bill_roomID");
+                price = resultSet.getDouble("price");
+                paidRent = resultSet.getBoolean("paidRent");
+                paidWater = resultSet.getBoolean("paidWater");
+                paidElectric = resultSet.getBoolean("paidElectric");
+                
+                bean = new BillBean();
+                
+                bean.setBillID(billID);
+                bean.setBill_roomID(bill_roomID);
+                bean.setPaidElectric(paidElectric);
+                bean.setPaidRent(paidRent);
+                bean.setPaidWater(paidWater);
+                bean.setPrice(price);
+                
+                list.add(bean);
+             }
+            return list;
+        }   catch(SQLException ex){
+        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null; 
     }
 
     @Override
     public ArrayList<BillBean> getAllPaidRoomByWater() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            try{
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select roomID, currentKW, currentcubicmeter "
+                    + "from bill, room where paidWater = 1";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+            
+            BillBean bean = new BillBean();
+            ArrayList<BillBean> list = new ArrayList<BillBean>();
+            
+            int billID, bill_roomID;
+            double price;
+            boolean paidRent, paidWater, paidElectric;
+            
+            while(resultSet.next()){
+                billID = resultSet.getInt("billID");
+                bill_roomID = resultSet.getInt("bill_roomID");
+                price = resultSet.getDouble("price");
+                paidRent = resultSet.getBoolean("paidRent");
+                paidWater = resultSet.getBoolean("paidWater");
+                paidElectric = resultSet.getBoolean("paidElectric");
+                
+                bean = new BillBean();
+                
+                bean.setBillID(billID);
+                bean.setBill_roomID(bill_roomID);
+                bean.setPaidElectric(paidElectric);
+                bean.setPaidRent(paidRent);
+                bean.setPaidWater(paidWater);
+                bean.setPrice(price);
+                
+                list.add(bean);
+             }
+            return list;
+        }   catch(SQLException ex){
+        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null; 
     }
 
     @Override
     public ArrayList<BillBean> getAllPaidRoomByElectric() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            try{
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select roomID, currentKW, currentcubicmeter "
+                    + "from bill, room where paidElectric = 1";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+            
+            BillBean bean = new BillBean();
+            ArrayList<BillBean> list = new ArrayList<BillBean>();
+            
+            int billID, bill_roomID;
+            double price;
+            boolean paidRent, paidWater, paidElectric;
+            
+            while(resultSet.next()){
+                billID = resultSet.getInt("billID");
+                bill_roomID = resultSet.getInt("bill_roomID");
+                price = resultSet.getDouble("price");
+                paidRent = resultSet.getBoolean("paidRent");
+                paidWater = resultSet.getBoolean("paidWater");
+                paidElectric = resultSet.getBoolean("paidElectric");
+                
+                bean = new BillBean();
+                
+                bean.setBillID(billID);
+                bean.setBill_roomID(bill_roomID);
+                bean.setPaidElectric(paidElectric);
+                bean.setPaidRent(paidRent);
+                bean.setPaidWater(paidWater);
+                bean.setPrice(price);
+                
+                list.add(bean);
+             }
+            return list;
+        }   catch(SQLException ex){
+        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null; 
     }
 
     @Override
     public ArrayList<BillBean> getAllNotPaidRoomsByWater() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            try{
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select roomID, currentKW, currentcubicmeter "
+                    + "from bill, room where paidWater = 0";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+            
+            BillBean bean = new BillBean();
+            ArrayList<BillBean> list = new ArrayList<BillBean>();
+            
+            int billID, bill_roomID;
+            double price;
+            boolean paidRent, paidWater, paidElectric;
+            
+            while(resultSet.next()){
+                billID = resultSet.getInt("billID");
+                bill_roomID = resultSet.getInt("bill_roomID");
+                price = resultSet.getDouble("price");
+                paidRent = resultSet.getBoolean("paidRent");
+                paidWater = resultSet.getBoolean("paidWater");
+                paidElectric = resultSet.getBoolean("paidElectric");
+                
+                bean = new BillBean();
+                
+                bean.setBillID(billID);
+                bean.setBill_roomID(bill_roomID);
+                bean.setPaidElectric(paidElectric);
+                bean.setPaidRent(paidRent);
+                bean.setPaidWater(paidWater);
+                bean.setPrice(price);
+                
+                list.add(bean);
+             }
+            return list;
+        }   catch(SQLException ex){
+        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null; 
+
     }
 
     @Override
     public ArrayList<BillBean> getAllNotPaidRoomsByRent() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            try{
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select roomID, currentKW, currentcubicmeter "
+                    + "from bill, room where paidRent = 0";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+            
+            BillBean bean = new BillBean();
+            ArrayList<BillBean> list = new ArrayList<BillBean>();
+            
+            int billID, bill_roomID;
+            double price;
+            boolean paidRent, paidWater, paidElectric;
+            
+            while(resultSet.next()){
+                billID = resultSet.getInt("billID");
+                bill_roomID = resultSet.getInt("bill_roomID");
+                price = resultSet.getDouble("price");
+                paidRent = resultSet.getBoolean("paidRent");
+                paidWater = resultSet.getBoolean("paidWater");
+                paidElectric = resultSet.getBoolean("paidElectric");
+                
+                bean = new BillBean();
+                
+                bean.setBillID(billID);
+                bean.setBill_roomID(bill_roomID);
+                bean.setPaidElectric(paidElectric);
+                bean.setPaidRent(paidRent);
+                bean.setPaidWater(paidWater);
+                bean.setPrice(price);
+                
+                list.add(bean);
+             }
+            return list;
+        }   catch(SQLException ex){
+        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null; 
+
     }
 
     @Override
     public ArrayList<BillBean> getAllNotPaidRoomsByElectric() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            try{
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select roomID, currentKW, currentcubicmeter "
+                    + "from bill, room where paidElectric = 0";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+            
+            BillBean bean = new BillBean();
+            ArrayList<BillBean> list = new ArrayList<BillBean>();
+            
+            int billID, bill_roomID;
+            double price;
+            boolean paidRent, paidWater, paidElectric;
+            
+            while(resultSet.next()){
+                billID = resultSet.getInt("billID");
+                bill_roomID = resultSet.getInt("bill_roomID");
+                price = resultSet.getDouble("price");
+                paidRent = resultSet.getBoolean("paidRent");
+                paidWater = resultSet.getBoolean("paidWater");
+                paidElectric = resultSet.getBoolean("paidElectric");
+                
+                bean = new BillBean();
+                
+                bean.setBillID(billID);
+                bean.setBill_roomID(bill_roomID);
+                bean.setPaidElectric(paidElectric);
+                bean.setPaidRent(paidRent);
+                bean.setPaidWater(paidWater);
+                bean.setPrice(price);
+                
+                list.add(bean);
+             }
+            return list;
+        }   catch(SQLException ex){
+        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null; 
+
     }
     
 }

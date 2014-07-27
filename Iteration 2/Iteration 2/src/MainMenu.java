@@ -3,6 +3,7 @@ import Models.Beans.BillBean;
 import Models.Beans.ElectricReadingBean;
 import Models.DAOImplementation.BillDAOImplementation;
 import Models.DAOImplementation.ElectricReadingDAOImplementation;
+import Models.DAOInterface.BillDAOInterface;
 import java.io.FileInputStream;
 import java.sql.Date;
 
@@ -75,10 +76,10 @@ public class MainMenu {
         bill.setBill_roomID(1);
         bill.setPaidElectric(true);
         bill.setPaidRent(true);
-        bill.setPaidWater(true);
+        bill.setPaidWater(false);
         bill.setPrice(0);
         
-        bdao.addBill(bill);
+//        bdao.addBill(bill);
         
         ElectricReadingBean bean = new ElectricReadingBean();
         ElectricReadingDAOImplementation dao = new ElectricReadingDAOImplementation();
@@ -91,6 +92,8 @@ public class MainMenu {
         bean.setDateRead(date);
         
         dao.addElectricReadingToRoom(bean, 1);
+
+        
         
     }
     

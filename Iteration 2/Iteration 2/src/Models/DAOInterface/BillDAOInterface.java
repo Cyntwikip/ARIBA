@@ -7,6 +7,7 @@
 package Models.DAOInterface;
 
 import Models.Beans.BillBean;
+import Models.Beans.RoomBean;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public interface BillDAOInterface {
     public boolean addBill (BillBean bill);
     public boolean editBill(BillBean bill, int billID);
     public ArrayList<BillBean> getAllBills();
-    public ArrayList<BillBean> getAllPaidRoom(int roomID);
+    public ArrayList<BillBean> getAllPaidRoom();
     public ArrayList<BillBean> getAllPaidBillByRoom();
     public ArrayList<BillBean> getAllPaidRoomByWater();
     public ArrayList<BillBean> getAllPaidRoomByElectric();
