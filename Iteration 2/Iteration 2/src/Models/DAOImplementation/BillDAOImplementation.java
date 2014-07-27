@@ -99,7 +99,30 @@ public class BillDAOImplementation implements BillDAOInterface {
 
     @Override
     public boolean editBill(BillBean bill, int billID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+
+            String query = "update bill set bill_roomID = ?, "
+                    + "price = ?, paidRent = ?, paidWater= ?, paidElectric = ?"
+                    + "where billID = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, bill.getBill_roomID());
+            ps.setDouble(2, bill.getPrice());
+            ps.setBoolean(3, bill.getpaidRent());
+            ps.setBoolean(4, bill.getPaidWater());
+            ps.setBoolean(5, bill.getpaidElectric());
+            ps.setInt(6, billID);
+            ps.executeUpdate();
+
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+
+
     }
 
     @Override
