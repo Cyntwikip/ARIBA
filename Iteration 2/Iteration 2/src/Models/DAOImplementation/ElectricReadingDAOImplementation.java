@@ -94,17 +94,92 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
 
     @Override
     public boolean editElectricReading(ElectricReadingBean electric, int electricID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+
+            String query = "update electricreading set currentKW =?, "
+                    + "priceperKW = ?, price = ?, dateRead = ?"
+                    + "where electricID = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setFloat(1, electric.getCurrentKW());
+            ps.setFloat(2, electric.getPrice());
+            ps.setDate(3, electric.getDateRead());
+            ps.setInt(4, electricID);
+            ps.executeUpdate();
+
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+
     }
 
     @Override
     public boolean editElectricReadingByPrice(float price, int electricID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+
+            String query = "update electricreading set price = ? "
+                    + "where electricID = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setFloat(1, price);
+            ps.setFloat(2, electricID);
+            ps.executeUpdate();
+
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+
     }
 
     @Override
-    public ArrayList<ElectricReadingBean> getAllElectricReadingByDate(Date dateread) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<ElectricReadingBean> getAllElectricReadingByDate(Date from, Date to) {
+            try{
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from electricreading where dateRead"
+                    + "BETWEEN '" + from + "' and '" + to + "'" ;
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+            
+            ElectricReadingBean bean = new ElectricReadingBean();
+            ArrayList<ElectricReadingBean> list = new ArrayList<ElectricReadingBean>();
+            
+            int electric_billID;
+            float currentKW, priceperKW, price;
+            Date dateRead;
+            
+            while(resultSet.next()){
+                electric_billID = resultSet.getInt("electric_billID");
+                currentKW = resultSet.getFloat("currentKW");
+                priceperKW = resultSet.getFloat("priceperKW");
+                price = resultSet.getFloat("price");
+                dateRead = resultSet.getDate("dateRead");
+                
+                
+                bean = new ElectricReadingBean();
+                
+                bean.setCurrentKW(currentKW);
+                bean.setDateRead(dateRead);
+                bean.setElectric_billID(electric_billID);
+                bean.setPrice(price);
+                bean.setPriceperKW(priceperKW);
+                
+                list.add(bean);
+             }
+            return list;
+        }   catch(SQLException ex){
+        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null; 
     }
 
     @Override

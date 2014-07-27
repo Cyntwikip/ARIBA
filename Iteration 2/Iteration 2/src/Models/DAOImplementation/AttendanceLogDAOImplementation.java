@@ -129,7 +129,27 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
 
     @Override
     public boolean editAttendanceLog(AttendanceLogBean attendance) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+
+            String query = "update attendancelog set log_tenantID = ?, isIn = ?, timeLogged = ? "
+                    + "where logID = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, attendance.getLog_tenantID());
+            ps.setBoolean (2, attendance.getIsIn());
+            ps.setTimestamp(3, attendance.getTimeLogged());
+            ps.setInt(4, attendance.getLogID());
+            
+            ps.executeUpdate();
+
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+
     }
 
     @Override
@@ -205,7 +225,7 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
     }
 
     @Override
-    public ArrayList<TenantBean> checkAllTenantByTime(Time time) {
+    public ArrayList<TenantBean> checkAllTenantByTime(Timestamp from, Timestamp to) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

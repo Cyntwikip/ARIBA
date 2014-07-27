@@ -9,6 +9,7 @@ package Models.DAOInterface;
 import Models.Beans.AttendanceLogBean;
 import Models.Beans.TenantBean;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -23,5 +24,5 @@ public interface AttendanceLogDAOInterface {
     public ArrayList<AttendanceLogBean> getAllAtendanceLogsByTenantID(int log_tenantID);
     public ArrayList<AttendanceLogBean> checkLogin();
     public ArrayList<AttendanceLogBean> checkLogout();
-    public ArrayList<TenantBean> checkAllTenantByTime(Time time);
+    public ArrayList<TenantBean> checkAllTenantByTime(Timestamp from, Timestamp to);
 }

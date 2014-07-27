@@ -19,7 +19,7 @@ public interface ElectricReadingDAOInterface {
     public boolean editElectricReading(ElectricReadingBean electric, int electricID);
     public boolean editElectricReadingByPrice(float price, int electricID);
     public ArrayList<ElectricReadingBean> getAllElectricReading();
-    public ArrayList<ElectricReadingBean> getAllElectricReadingByDate(Date dateread);
+    public ArrayList<ElectricReadingBean> getAllElectricReadingByDate(Date from, Date to);
     public boolean computeElectricReading(ElectricReadingBean electric, int electricID);
     
 
