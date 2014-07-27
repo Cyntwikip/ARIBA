@@ -12,6 +12,7 @@ import Models.DAOInterface.BillDAOInterface;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -50,7 +51,49 @@ public class BillDAOImplementation implements BillDAOInterface {
 
     @Override
     public ArrayList<BillBean> getAllBills() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            try{
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from bill";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+            
+            BillBean bean = new BillBean();
+            ArrayList<BillBean> list = new ArrayList<BillBean>();
+            
+            int billID, bill_roomID;
+            double price;
+            boolean paidRent, paidWater, paidElectric;
+            
+            while(resultSet.next()){
+                billID = resultSet.getInt("billID");
+                bill_roomID = resultSet.getInt("bill_roomID");
+                price = resultSet.getDouble("price");
+                paidRent = resultSet.getBoolean("paidRent");
+                paidWater = resultSet.getBoolean("paidWater");
+                paidElectric = resultSet.getBoolean("paidElectric");
+                
+                
+                bean = new BillBean();
+                
+                bean.setBillID(billID);
+                bean.setBill_roomID(bill_roomID);
+                bean.setPrice(price);
+                bean.setPaidElectric(paidElectric);
+                bean.setPaidRent(paidRent);
+                bean.setPaidWater(paidWater);
+                
+                list.add(bean);
+             }
+            return list;
+        }   catch(SQLException ex){
+        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null; 
+
+    
+    
     }
 
     @Override
