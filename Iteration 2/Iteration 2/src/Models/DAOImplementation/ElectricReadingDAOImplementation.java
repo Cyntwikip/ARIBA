@@ -38,7 +38,7 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
             ps.setFloat(3, electric.getPriceperKW());
             ps.setFloat(4, electric.getPrice());
             ps.setDate(5, electric.getDateRead());
-            ps.executeUpdate();
+//            ps.executeUpdate();
             connection.close();
             
             return true;
