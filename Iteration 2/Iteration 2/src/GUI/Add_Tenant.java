@@ -8,6 +8,8 @@ package GUI;
 
 import ErrorHandling.CheckAccount;
 import ErrorHandling.AccountException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -434,9 +436,10 @@ public class Add_Tenant extends javax.swing.JFrame {
                 c.checkName(DegreeField.getText(), "Degree");
                 c.checkName(SchoolField.getText(), "School");
                 c.checkEmail(EmailField.getText(), "Email");
+                c.checkContact(ContactNoField.getText(), "Contact");
             }catch(AccountException e){
                 e.promptFieldError();
-            }
+            }  
         }
         
     }//GEN-LAST:event_saveButtonActionPerformed

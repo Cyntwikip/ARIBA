@@ -27,4 +27,11 @@ public class CheckAccount {
             throw new AccountException(field);
         } 
     }
+    
+    public void checkContact(String contact, String field) throws AccountException{
+        if(!contact.matches("^(09+(22|22|25|06|07|15|17|26|27|"+
+                             "10|18|19|20|21|28|12))+\\d{7}$")){
+            throw new AccountException(field);
+        }
+    }
 }
