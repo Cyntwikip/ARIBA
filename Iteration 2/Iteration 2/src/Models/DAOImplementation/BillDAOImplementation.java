@@ -170,7 +170,7 @@ public class BillDAOImplementation implements BillDAOInterface {
     }
 
     @Override
-    public ArrayList<BillBean> getAllPaidBillByRoom() {
+    public ArrayList<BillBean> getAllPaidBillByRent() {
             try{
             Connector c = new Connector();
             Connection connection = c.getConnection();

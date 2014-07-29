@@ -28,7 +28,7 @@ public class GuardianBean {
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
-
+    
     public String getEmail() {
         return email;
     }

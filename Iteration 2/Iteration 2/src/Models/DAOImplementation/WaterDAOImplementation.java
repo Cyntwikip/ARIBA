@@ -102,7 +102,7 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
     }
 
     @Override
-    public boolean editElectricReadingByPrice(float price, int waterID) {
+    public boolean editWaterReadingByPrice(float price, int waterID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
