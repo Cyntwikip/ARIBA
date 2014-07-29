@@ -1,11 +1,20 @@
 
 import Models.Beans.BillBean;
 import Models.Beans.ElectricReadingBean;
+import Models.Beans.TenantBean;
 import Models.DAOImplementation.BillDAOImplementation;
 import Models.DAOImplementation.ElectricReadingDAOImplementation;
+import Models.DAOImplementation.TenantDAOImplementation;
 import Models.DAOInterface.BillDAOInterface;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.commons.fileupload.FileItem;
 
 
 
