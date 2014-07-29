@@ -1,11 +1,20 @@
 
 import Models.Beans.BillBean;
 import Models.Beans.ElectricReadingBean;
+import Models.Beans.TenantBean;
 import Models.DAOImplementation.BillDAOImplementation;
 import Models.DAOImplementation.ElectricReadingDAOImplementation;
+import Models.DAOImplementation.TenantDAOImplementation;
 import Models.DAOInterface.BillDAOInterface;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.commons.fileupload.FileItem;
 
 
 
@@ -31,12 +40,12 @@ public class MainMenu {
             // TODO code application logic here
             
             //testing blob
-            /*
-            FileItem photo;
-            File imgfile = new File("C:\\Users\\Danica\\Documents\\heart.png");
-            fin = new FileInputStream(imgfile);
             
-            Blob image = (Blob) fin;
+            //FileItem photo;
+            //File imgfile = new File("C:\\Users\\Danica\\Documents\\heart.png");
+            //fin = new FileInputStream(imgfile);
+            
+            //Blob image = (Blob) fin;
             
             TenantDAOImplementation dao = new TenantDAOImplementation();
             TenantBean bean = new TenantBean();
@@ -55,10 +64,10 @@ public class MainMenu {
             bean.setLname("Corpuz");
             bean.setSchool("DLSU");
             bean.setStatus("Current");
-            bean.setImage(image);
+            //bean.setImage(image);
             
             dao.addTenant(bean);
-            
+         /*   
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -68,8 +77,10 @@ public class MainMenu {
                 Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        */
         
+       
+        
+        /*
         BillBean bill = new BillBean();
         BillDAOImplementation bdao = new BillDAOImplementation();
         
@@ -93,7 +104,7 @@ public class MainMenu {
         
         dao.addElectricReadingToRoom(bean, 1);
 
-        
+        */
         
     }
     
