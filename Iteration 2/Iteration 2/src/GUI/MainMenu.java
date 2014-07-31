@@ -1,5 +1,10 @@
 
+import Models.Beans.TenantBean;
+import Models.DAOImplementation.TenantDAOImplementation;
+import Models.DAOInterface.TenantDAOInterface;
+import java.util.ArrayList;
 import java.util.Calendar;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -31,6 +36,7 @@ public class MainMenu extends javax.swing.JFrame {
         for (int i = 2000; i <= year + 10; i++) {
             YearOfGraduationField.addItem(i);
         }
+
     }
 
     /**
@@ -190,13 +196,10 @@ public class MainMenu extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3"
+                "Tenant ID", "First Name", "Last Name"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -240,6 +243,27 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void NameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameFieldActionPerformed
         // TODO add your handling code here:
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+        if (NameField.getText().matches("^[a-zA-Z ]+$")) { // letters lang
+            String name = NameField.getText();
+
+            ArrayList<TenantBean> list = new ArrayList<TenantBean>();
+            list = tdao.searchTenantName(name);
+            for (TenantBean bean : list) {
+                int tenantid = bean.getTenantID();
+                String fname = bean.getFname();
+                String lname = bean.getLname();
+          
+                Object[] obj = {tenantid, fname, lname};
+
+                model.addRow(obj);
+            }
+
+        }
+
     }//GEN-LAST:event_NameFieldActionPerformed
 
     private void MaleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaleFieldActionPerformed
