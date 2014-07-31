@@ -1,9 +1,11 @@
+
+import java.util.Calendar;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author jao
@@ -15,11 +17,20 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu() {
         initComponents();
-        buttonGroup1.add(jRadioButton1);
-        buttonGroup1.add(jRadioButton2);
-        
-        buttonGroup2.add(jRadioButton3);
-        buttonGroup2.add(jRadioButton4);
+        buttonGroup1.add(MaleField);
+        buttonGroup1.add(FemaleField);
+
+        buttonGroup2.add(CurrentField);
+        buttonGroup2.add(OldField);
+
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+
+        for (int i = 2000; i <= year + 10; i++) {
+            YearOfGraduationField.removeItem(i);
+        }
+        for (int i = 2000; i <= year + 10; i++) {
+            YearOfGraduationField.addItem(i);
+        }
     }
 
     /**
@@ -52,16 +63,16 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        NameField = new javax.swing.JTextField();
+        SchoolField = new javax.swing.JTextField();
+        DegreeField = new javax.swing.JTextField();
+        MaleField = new javax.swing.JRadioButton();
+        FemaleField = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        CurrentField = new javax.swing.JRadioButton();
+        OldField = new javax.swing.JRadioButton();
+        YearOfGraduationField = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -145,45 +156,37 @@ public class MainMenu extends javax.swing.JFrame {
         getContentPane().add(jButton2);
         jButton2.setBounds(70, 360, 260, 70);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        NameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                NameFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(150, 100, 160, 20);
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(150, 130, 160, 20);
-        getContentPane().add(jTextField3);
-        jTextField3.setBounds(150, 160, 160, 30);
+        getContentPane().add(NameField);
+        NameField.setBounds(150, 100, 160, 20);
+        getContentPane().add(SchoolField);
+        SchoolField.setBounds(150, 130, 160, 20);
+        getContentPane().add(DegreeField);
+        DegreeField.setBounds(150, 160, 160, 30);
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        MaleField.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        MaleField.setText("Male");
+        MaleField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                MaleFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField4);
-        jTextField4.setBounds(224, 188, 90, 30);
+        getContentPane().add(MaleField);
+        MaleField.setBounds(150, 210, 60, 30);
 
-        jRadioButton1.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
-        jRadioButton1.setText("Male");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        FemaleField.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        FemaleField.setText("Female");
+        FemaleField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                FemaleFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButton1);
-        jRadioButton1.setBounds(150, 210, 60, 30);
-
-        jRadioButton2.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
-        jRadioButton2.setText("Female");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jRadioButton2);
-        jRadioButton2.setBounds(210, 210, 80, 30);
+        getContentPane().add(FemaleField);
+        FemaleField.setBounds(210, 210, 80, 30);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -201,18 +204,21 @@ public class MainMenu extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(340, 70, 350, 450);
 
-        jRadioButton3.setText("Current");
-        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+        CurrentField.setText("Current");
+        CurrentField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
+                CurrentFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButton3);
-        jRadioButton3.setBounds(150, 240, 63, 23);
+        getContentPane().add(CurrentField);
+        CurrentField.setBounds(150, 240, 63, 23);
 
-        jRadioButton4.setText("Old");
-        getContentPane().add(jRadioButton4);
-        jRadioButton4.setBounds(150, 260, 41, 23);
+        OldField.setText("Old");
+        getContentPane().add(OldField);
+        OldField.setBounds(150, 260, 41, 23);
+
+        getContentPane().add(YearOfGraduationField);
+        YearOfGraduationField.setBounds(230, 190, 70, 20);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tenant.png"))); // NOI18N
         getContentPane().add(jLabel1);
@@ -232,25 +238,21 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void NameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_NameFieldActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void MaleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaleFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_MaleFieldActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void FemaleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FemaleFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_FemaleFieldActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void CurrentFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurrentFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
-
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
+    }//GEN-LAST:event_CurrentFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,6 +291,14 @@ public class MainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton CurrentField;
+    private javax.swing.JTextField DegreeField;
+    private javax.swing.JRadioButton FemaleField;
+    private javax.swing.JRadioButton MaleField;
+    private javax.swing.JTextField NameField;
+    private javax.swing.JRadioButton OldField;
+    private javax.swing.JTextField SchoolField;
+    private javax.swing.JComboBox YearOfGraduationField;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
@@ -311,15 +321,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }
