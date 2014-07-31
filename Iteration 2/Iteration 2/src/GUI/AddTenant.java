@@ -1,3 +1,8 @@
+
+import java.util.Calendar;
+import javax.swing.ButtonGroup;
+import javax.swing.JRadioButton;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,6 +20,25 @@ public class AddTenant extends javax.swing.JFrame {
      */
     public AddTenant() {
         initComponents();
+        jPanel1.setLayout(null);
+
+  
+       jRadioButton1.setText("Male");
+        jRadioButton2.setText("Female");
+        
+        buttonGroup1.add(jRadioButton1);
+        buttonGroup1.add(jRadioButton2);
+        
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        
+        for(int i=0; i<=year-1900; i++){ // remove all years
+            jComboBox5.removeItem(1900+i);
+        }
+        for(int i=0; i<=year-1900; i++){ 
+            jComboBox5.addItem(1900+i);
+        }
+        
+        
     }
 
     /**
@@ -26,115 +50,47 @@ public class AddTenant extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
+        buttonGroup4 = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jTextField4 = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox();
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
+        jComboBox3 = new javax.swing.JComboBox();
+        jComboBox4 = new javax.swing.JComboBox();
+        jComboBox5 = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jTextField7 = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
-        choice1 = new java.awt.Choice();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(801, 457));
         setResizable(false);
         getContentPane().setLayout(null);
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(360, 130, 160, 20);
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(360, 100, 160, 20);
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField3);
-        jTextField3.setBounds(580, 100, 160, 20);
+        jPanel1.setLayout(null);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jLabel2.setText("    jLabel - put picture here");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(100, 210, 127, 14);
 
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(370, 190, 150, 70);
-
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField4);
-        jTextField4.setBounds(400, 300, 120, 20);
-        getContentPane().add(jTextField5);
-        jTextField5.setBounds(400, 330, 120, 20);
-
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField6);
-        jTextField6.setBounds(460, 160, 60, 20);
-        getContentPane().add(jTextField7);
-        jTextField7.setBounds(640, 230, 100, 20);
-        getContentPane().add(jTextField8);
-        jTextField8.setBounds(650, 160, 90, 20);
-        getContentPane().add(choice1);
-        choice1.setBounds(400, 270, 120, 20);
-
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField9);
-        jTextField9.setBounds(580, 130, 160, 20);
-
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField10);
-        jTextField10.setBounds(600, 200, 140, 20);
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(630, 370, 90, 40);
-
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField11ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField11);
-        jTextField11.setBounds(410, 160, 50, 20);
-
-        jTextField12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField12ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField12);
-        jTextField12.setBounds(370, 160, 40, 20);
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/choosephoto.png"))); // NOI18N
+        jPanel1.add(jButton2);
+        jButton2.setBounds(90, 290, 140, 40);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/backbutton.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -142,51 +98,107 @@ public class AddTenant extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(530, 370, 90, 40);
+        jPanel1.add(jButton3);
+        jButton3.setBounds(560, 380, 90, 40);
 
-        jLabel2.setText("    jLabel - put picture here");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(80, 110, 180, 170);
+        jRadioButton1.setText("Male");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jRadioButton1);
+        jRadioButton1.setBounds(370, 270, 60, 23);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/choosephoto.png"))); // NOI18N
-        getContentPane().add(jButton2);
-        jButton2.setBounds(100, 290, 140, 40);
+        jRadioButton2.setText("Female");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jRadioButton2);
+        jRadioButton2.setBounds(460, 270, 70, 23);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(660, 380, 90, 40);
+        jPanel1.add(jTextField1);
+        jTextField1.setBounds(370, 100, 170, 30);
+        jPanel1.add(jTextField2);
+        jTextField2.setBounds(370, 130, 170, 30);
+        jPanel1.add(jTextField3);
+        jTextField3.setBounds(590, 100, 150, 30);
+        jPanel1.add(jTextField4);
+        jTextField4.setBounds(590, 130, 150, 30);
+
+        jPanel1.add(jComboBox1);
+        jComboBox1.setBounds(650, 160, 90, 20);
+        jPanel1.add(jTextField5);
+        jTextField5.setBounds(390, 300, 140, 30);
+        jPanel1.add(jTextField6);
+        jTextField6.setBounds(380, 330, 150, 30);
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec" }));
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox3);
+        jComboBox3.setBounds(370, 160, 60, 20);
+
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox4);
+        jComboBox4.setBounds(430, 160, 40, 20);
+
+        jComboBox5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox5);
+        jComboBox5.setBounds(470, 160, 70, 20);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(370, 190, 160, 70);
+        jPanel1.add(jTextField7);
+        jTextField7.setBounds(610, 190, 130, 30);
+
+        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField8ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextField8);
+        jTextField8.setBounds(630, 220, 110, 30);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/addnewtenant-peg-edited.png"))); // NOI18N
-        getContentPane().add(jLabel1);
+        jPanel1.add(jLabel1);
         jLabel1.setBounds(0, 0, 800, 450);
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 800, 450);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
-
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
-
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
-
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField11ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -195,9 +207,67 @@ public class AddTenant extends javax.swing.JFrame {
         menu.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField12ActionPerformed
+    }//GEN-LAST:event_jComboBox4ActionPerformed
+
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField8ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        // TODO add your handling code here:
+
+        if(jComboBox3.getSelectedItem().equals("Jan") || 
+           jComboBox3.getSelectedItem().equals("Mar") ||    
+           jComboBox3.getSelectedItem().equals("May") ||
+           jComboBox3.getSelectedItem().equals("Jul") ||
+           jComboBox3.getSelectedItem().equals("Aug") ||
+           jComboBox3.getSelectedItem().equals("Oct") ||
+           jComboBox3.getSelectedItem().equals("Dec")
+                
+                ){ 
+            jComboBox4.removeItem("29");
+            jComboBox4.removeItem("30");
+            jComboBox4.removeItem("31");
+            jComboBox4.addItem("29");
+            jComboBox4.addItem("30");
+            jComboBox4.addItem("31");
+            
+        }else if(jComboBox3.getSelectedItem().equals("Feb")){ // feb
+            jComboBox4.removeItem("29");
+            jComboBox4.removeItem("30");
+            jComboBox4.removeItem("31");
+        }else{
+            jComboBox4.removeItem("29");
+            jComboBox4.removeItem("30");
+            jComboBox4.removeItem("31");
+            jComboBox4.addItem("29");
+            jComboBox4.addItem("30");
+            
+        }
+    }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
+        // TODO add your handling code here:
+        int year = (Integer) jComboBox5.getSelectedItem();
+        if((year % 4) == 0){
+            if(jComboBox3.getSelectedItem().equals("Feb")){
+                jComboBox4.removeItem("29");
+                jComboBox4.addItem("29");
+            }
+        }else{
+                jComboBox4.removeItem("29");
+            }
+    }//GEN-LAST:event_jComboBox5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,18 +305,25 @@ public class AddTenant extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Choice choice1;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox3;
+    private javax.swing.JComboBox jComboBox4;
+    private javax.swing.JComboBox jComboBox5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
@@ -254,6 +331,5 @@ public class AddTenant extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 }
