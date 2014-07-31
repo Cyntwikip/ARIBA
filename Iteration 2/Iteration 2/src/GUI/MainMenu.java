@@ -162,9 +162,9 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(NameField);
-        NameField.setBounds(150, 100, 160, 20);
+        NameField.setBounds(150, 100, 160, 30);
         getContentPane().add(SchoolField);
-        SchoolField.setBounds(150, 130, 160, 20);
+        SchoolField.setBounds(150, 130, 160, 30);
         getContentPane().add(DegreeField);
         DegreeField.setBounds(150, 160, 160, 30);
 
