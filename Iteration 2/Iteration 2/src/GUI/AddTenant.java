@@ -8,7 +8,6 @@ import javax.swing.JRadioButton;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author jao
@@ -22,23 +21,29 @@ public class AddTenant extends javax.swing.JFrame {
         initComponents();
         jPanel1.setLayout(null);
 
-  
-       jRadioButton1.setText("Male");
+        jRadioButton1.setText("Male");
         jRadioButton2.setText("Female");
-        
+
         buttonGroup1.add(jRadioButton1);
         buttonGroup1.add(jRadioButton2);
-        
+
         int year = Calendar.getInstance().get(Calendar.YEAR);
-        
-        for(int i=0; i<=year-1900; i++){ // remove all years
-            jComboBox5.removeItem(1900+i);
+
+        for (int i = 0; i <= year - 1900; i++) { // remove all years
+            jComboBox5.removeItem(1900 + i);
         }
-        for(int i=0; i<=year-1900; i++){ 
-            jComboBox5.addItem(1900+i);
+        for (int i = 0; i <= year - 1900; i++) {
+            jComboBox5.addItem(1900 + i);
         }
-        
-        
+
+        //jComboBox1
+        for (int i = 2000; i <= year + 10; i++) {
+            jComboBox1.removeItem(i);
+        }
+        for (int i = 2000; i <= year + 10; i++) {
+            jComboBox1.addItem(i);
+        }
+
     }
 
     /**
@@ -226,47 +231,45 @@ public class AddTenant extends javax.swing.JFrame {
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         // TODO add your handling code here:
 
-        if(jComboBox3.getSelectedItem().equals("Jan") || 
-           jComboBox3.getSelectedItem().equals("Mar") ||    
-           jComboBox3.getSelectedItem().equals("May") ||
-           jComboBox3.getSelectedItem().equals("Jul") ||
-           jComboBox3.getSelectedItem().equals("Aug") ||
-           jComboBox3.getSelectedItem().equals("Oct") ||
-           jComboBox3.getSelectedItem().equals("Dec")
-                
-                ){ 
+        if (jComboBox3.getSelectedItem().equals("Jan")
+                || jComboBox3.getSelectedItem().equals("Mar")
+                || jComboBox3.getSelectedItem().equals("May")
+                || jComboBox3.getSelectedItem().equals("Jul")
+                || jComboBox3.getSelectedItem().equals("Aug")
+                || jComboBox3.getSelectedItem().equals("Oct")
+                || jComboBox3.getSelectedItem().equals("Dec")) {
             jComboBox4.removeItem("29");
             jComboBox4.removeItem("30");
             jComboBox4.removeItem("31");
             jComboBox4.addItem("29");
             jComboBox4.addItem("30");
             jComboBox4.addItem("31");
-            
-        }else if(jComboBox3.getSelectedItem().equals("Feb")){ // feb
+
+        } else if (jComboBox3.getSelectedItem().equals("Feb")) { // feb
             jComboBox4.removeItem("29");
             jComboBox4.removeItem("30");
             jComboBox4.removeItem("31");
-        }else{
+        } else {
             jComboBox4.removeItem("29");
             jComboBox4.removeItem("30");
             jComboBox4.removeItem("31");
             jComboBox4.addItem("29");
             jComboBox4.addItem("30");
-            
+
         }
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
     private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
         // TODO add your handling code here:
         int year = (Integer) jComboBox5.getSelectedItem();
-        if((year % 4) == 0){
-            if(jComboBox3.getSelectedItem().equals("Feb")){
+        if ((year % 4) == 0) {
+            if (jComboBox3.getSelectedItem().equals("Feb")) {
                 jComboBox4.removeItem("29");
                 jComboBox4.addItem("29");
             }
-        }else{
-                jComboBox4.removeItem("29");
-            }
+        } else {
+            jComboBox4.removeItem("29");
+        }
     }//GEN-LAST:event_jComboBox5ActionPerformed
 
     /**

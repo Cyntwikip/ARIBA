@@ -15,6 +15,11 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu() {
         initComponents();
+        buttonGroup1.add(jRadioButton1);
+        buttonGroup1.add(jRadioButton2);
+        
+        buttonGroup2.add(jRadioButton3);
+        buttonGroup2.add(jRadioButton4);
     }
 
     /**
@@ -28,6 +33,8 @@ public class MainMenu extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
+        buttonGroup4 = new javax.swing.ButtonGroup();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -58,68 +65,67 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setSize(new java.awt.Dimension(1023, 559));
         getContentPane().setLayout(null);
 
         jLabel2.setText("jLabel2");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(810, 100, 45, 16);
+        jLabel2.setBounds(810, 100, 34, 14);
 
         jLabel3.setText("jLabel3");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(800, 130, 45, 16);
+        jLabel3.setBounds(800, 130, 34, 14);
 
         jLabel4.setText("jLabel4");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(810, 150, 45, 16);
+        jLabel4.setBounds(810, 150, 34, 14);
 
         jLabel5.setText("jLabel5");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(800, 180, 45, 16);
+        jLabel5.setBounds(800, 180, 34, 14);
 
         jLabel6.setText("jLabel6");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(800, 210, 45, 16);
+        jLabel6.setBounds(800, 210, 34, 14);
 
         jLabel7.setText("jLabel7");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(790, 230, 45, 16);
+        jLabel7.setBounds(790, 230, 34, 14);
 
         jLabel8.setText("jLabel8");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(820, 260, 45, 16);
+        jLabel8.setBounds(820, 260, 34, 14);
 
         jLabel9.setText("jLabel9");
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(790, 280, 45, 16);
+        jLabel9.setBounds(790, 280, 34, 14);
 
         jLabel10.setText("jLabel10");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(800, 310, 53, 16);
+        jLabel10.setBounds(800, 310, 40, 14);
 
         jLabel11.setText("jLabel11");
         getContentPane().add(jLabel11);
-        jLabel11.setBounds(800, 340, 53, 16);
+        jLabel11.setBounds(800, 340, 40, 14);
 
         jLabel12.setText("jLabel12");
         getContentPane().add(jLabel12);
-        jLabel12.setBounds(870, 360, 53, 16);
+        jLabel12.setBounds(870, 360, 40, 14);
 
         jLabel13.setText("jLabel13");
         getContentPane().add(jLabel13);
-        jLabel13.setBounds(810, 400, 53, 16);
+        jLabel13.setBounds(810, 400, 40, 14);
 
         jLabel14.setText("jLabel14");
         getContentPane().add(jLabel14);
-        jLabel14.setBounds(820, 420, 53, 16);
+        jLabel14.setBounds(820, 420, 40, 14);
 
         jLabel15.setText("jLabel15");
         getContentPane().add(jLabel15);
-        jLabel15.setBounds(870, 460, 53, 16);
+        jLabel15.setBounds(870, 460, 40, 14);
 
         jLabel16.setText("jLabel16");
         getContentPane().add(jLabel16);
-        jLabel16.setBounds(790, 480, 53, 16);
+        jLabel16.setBounds(790, 480, 40, 14);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddTenant.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -145,9 +151,9 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTextField1);
-        jTextField1.setBounds(150, 100, 160, 28);
+        jTextField1.setBounds(150, 100, 160, 20);
         getContentPane().add(jTextField2);
-        jTextField2.setBounds(150, 130, 160, 28);
+        jTextField2.setBounds(150, 130, 160, 20);
         getContentPane().add(jTextField3);
         jTextField3.setBounds(150, 160, 160, 30);
 
@@ -202,11 +208,11 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jRadioButton3);
-        jRadioButton3.setBounds(150, 240, 79, 23);
+        jRadioButton3.setBounds(150, 240, 63, 23);
 
         jRadioButton4.setText("Old");
         getContentPane().add(jRadioButton4);
-        jRadioButton4.setBounds(150, 260, 54, 23);
+        jRadioButton4.setBounds(150, 260, 41, 23);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tenant.png"))); // NOI18N
         getContentPane().add(jLabel1);
@@ -277,6 +283,7 @@ public class MainMenu extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainMenu().setVisible(true);
+
             }
         });
     }
@@ -284,6 +291,8 @@ public class MainMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
