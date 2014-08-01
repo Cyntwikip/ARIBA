@@ -23,6 +23,8 @@ public class AddTenant extends javax.swing.JFrame {
     /**
      * Creates new form AddTenant
      */
+    private int tenantID = 0;
+
     public AddTenant() {
 
         initComponents();
@@ -52,7 +54,8 @@ public class AddTenant extends javax.swing.JFrame {
         }
     }
 
-    public AddTenant(int tenantID) {
+    public AddTenant(int id) {
+        tenantID = id;
         TenantDAOInterface tdao = new TenantDAOImplementation();
         TenantBean tb = new TenantBean();
         tb = tdao.getTenantById(tenantID);
@@ -286,8 +289,32 @@ public class AddTenant extends javax.swing.JFrame {
                 c.checkEmail(EmailAddressField.getText(), "Email");
                 c.checkContact(ContactNumberField.getText(), "Contact");
 
-                
-                
+                System.out.println(tenantID);
+                if (tenantID == 0) { // add tenant
+
+                } else { // edit
+                    TenantDAOInterface tdao = new TenantDAOImplementation();
+                    TenantBean bean = new TenantBean();
+                    bean.setFname(FirstnameField.getText().toUpperCase());
+                    bean.setLname(SurnameField.getText().toUpperCase());
+                    bean.setAddress(AddressField.getText().toUpperCase());
+                    //         bean.setBirthday(null);
+                    bean.setContact(ContactNumberField.getText());
+                    bean.setDegree(DegreeField.getText().toUpperCase());
+                    bean.setEmail(EmailAddressField.getText());
+                    bean.setExpectedyearofgrad((Integer) YearOfGraduationField.getSelectedItem());
+                    if (MaleField.isSelected()) {
+                        bean.setGender("MALE");
+                    } else {
+                        bean.setGender("FEMALE");
+                    }
+                    //         bean.setImage(null);
+                    bean.setStatus("CURRENT");
+
+                    //    tdao.editTenant(bean);
+                    // guardian  
+                }
+
             } catch (AccountException e) {
                 e.promptFieldError();
             }
