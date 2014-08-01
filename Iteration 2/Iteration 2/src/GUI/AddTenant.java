@@ -141,6 +141,11 @@ public class AddTenant extends javax.swing.JFrame {
         jPanel1.add(DegreeField);
         DegreeField.setBounds(590, 130, 150, 30);
 
+        YearOfGraduationField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                YearOfGraduationFieldActionPerformed(evt);
+            }
+        });
         jPanel1.add(YearOfGraduationField);
         YearOfGraduationField.setBounds(650, 160, 90, 20);
         jPanel1.add(ContactNumberField);
@@ -271,6 +276,10 @@ public class AddTenant extends javax.swing.JFrame {
             DayField.removeItem("29");
         }
     }//GEN-LAST:event_YearFieldActionPerformed
+
+    private void YearOfGraduationFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YearOfGraduationFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_YearOfGraduationFieldActionPerformed
 
     /**
      * @param args the command line arguments
