@@ -41,6 +41,88 @@ public class MainMenu extends javax.swing.JFrame {
 
     }
 
+    public void checkresults() {
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setNumRows(0);
+
+        ArrayList<TenantBean> list = new ArrayList<TenantBean>(); // final list
+        ArrayList<TenantBean> searchnamelist = new ArrayList<TenantBean>();
+        ArrayList<TenantBean> searchschoollist = new ArrayList<TenantBean>();
+        ArrayList<TenantBean> searchdegreelist = new ArrayList<TenantBean>();
+        ArrayList<TenantBean> searchyearlist = new ArrayList<TenantBean>();
+        ArrayList<TenantBean> searchgenderlist = new ArrayList<TenantBean>();
+        ArrayList<TenantBean> searchstatuslist = new ArrayList<TenantBean>();
+
+        if (NameField.getText().matches("^[a-zA-Z ]+$")) { // letters lang
+            String name = NameField.getText();
+            searchnamelist = tdao.searchTenantName(name); // list from searchname
+        }
+        if (!(SchoolField.getText().isEmpty())) {
+            String school = SchoolField.getText();
+            searchschoollist = tdao.getTenantBySchool(school);
+
+        }
+        if (!(DegreeField.getText().isEmpty())) {
+            String degree = DegreeField.getText();
+            searchdegreelist = tdao.getTenantByDegree(degree);
+        }
+        int expectedyear = (Integer) YearOfGraduationField.getSelectedItem();
+        searchyearlist = tdao.getTenantByExpectedYearofGrad(expectedyear);
+
+        if (MaleField.isSelected()) {
+            searchgenderlist = tdao.getMaleTenant();
+        } else if (FemaleField.isSelected()) {
+            searchgenderlist = tdao.getFemaleTenant();
+        }
+
+        if (CurrentField.isSelected()) {
+            searchstatuslist = tdao.getTenantByStatus("Current");
+        } else if (OldField.isSelected()) {
+            searchstatuslist = tdao.getTenantByStatus("Old");
+        }
+        // filter out results
+
+        // filter searchnamelist searchschoollist
+        for (int i = 0; i < searchnamelist.size(); i++) {
+            list.add(searchnamelist.get(i));
+        }
+        for (int i = 0; i < searchschoollist.size(); i++) {
+            list.add(searchschoollist.get(i));
+        }
+        for (int i = 0; i < searchdegreelist.size(); i++) {
+            list.add(searchdegreelist.get(i));
+        }
+        for (int i = 0; i < searchyearlist.size(); i++) {
+            list.add(searchyearlist.get(i));
+        }
+        for (int i = 0; i < searchgenderlist.size(); i++) {
+            list.add(searchgenderlist.get(i));
+        }
+        for (int i = 0; i < searchstatuslist.size(); i++) {
+            list.add(searchstatuslist.get(i));
+        }
+
+        Object[] filtertenant = list.toArray();
+        for (Object ft : filtertenant) {
+            if (list.indexOf(ft) != list.lastIndexOf(ft)) {
+                list.remove(list.lastIndexOf(ft));
+            }
+        }
+
+        for (TenantBean bean : list) {
+            int tenantid = bean.getTenantID();
+            String fname = bean.getFname();
+            String lname = bean.getLname();
+
+            Object[] obj = {tenantid, fname, lname};
+
+            model.addRow(obj);
+        }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -267,91 +349,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void NameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameFieldActionPerformed
         // TODO add your handling code here:
-        TenantDAOInterface tdao = new TenantDAOImplementation();
-
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setNumRows(0);
-        
-        ArrayList<TenantBean> list = new ArrayList<TenantBean>(); // final list
-        ArrayList<TenantBean> searchnamelist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchschoollist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchdegreelist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchyearlist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchgenderlist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchstatuslist = new ArrayList<TenantBean>();
-
-        if (NameField.getText().matches("^[a-zA-Z ]+$")) { // letters lang
-            String name = NameField.getText();
-            searchnamelist = tdao.searchTenantName(name); // list from searchname
-        }
-        if (!(SchoolField.getText().isEmpty())) {
-            String school = SchoolField.getText();
-            searchschoollist = tdao.getTenantBySchool(school);
-
-        }
-        if (!(DegreeField.getText().isEmpty())) {
-            String degree = DegreeField.getText();
-            searchdegreelist = tdao.getTenantByDegree(degree);
-        }
-        int expectedyear = (Integer) YearOfGraduationField.getSelectedItem();
-        searchyearlist = tdao.getTenantByExpectedYearofGrad(expectedyear);
-
-        if (MaleField.isSelected()) {
-            searchgenderlist = tdao.getMaleTenant();
-        } else if (FemaleField.isSelected()) {
-            searchgenderlist = tdao.getFemaleTenant();
-        }
-
-        if (CurrentField.isSelected()) {
-            searchstatuslist = tdao.getTenantByStatus("Current");
-        } else if (OldField.isSelected()) {
-            searchstatuslist = tdao.getTenantByStatus("Old");
-        }
-        // filter out results
-
-        int max1 = Math.max(searchnamelist.size(), searchschoollist.size());
-        int max2 = Math.max(searchdegreelist.size(), searchyearlist.size());
-        int max3 = Math.max(searchgenderlist.size(), searchstatuslist.size());
-        int max4 = Math.max(max1, max2);
-        int finalmax = Math.max(max4, max3);
-
-        // filter searchnamelist searchschoollist
-        for (int i = 0; i < searchnamelist.size(); i++) {
-            list.add(searchnamelist.get(i));
-        }
-        for (int i = 0; i < searchschoollist.size(); i++) {
-            list.add(searchschoollist.get(i));
-        }
-        for (int i = 0; i < searchdegreelist.size(); i++) {
-            list.add(searchdegreelist.get(i));
-        }
-        for (int i = 0; i < searchyearlist.size(); i++) {
-            list.add(searchyearlist.get(i));
-        }
-        for (int i = 0; i < searchgenderlist.size(); i++) {
-            list.add(searchgenderlist.get(i));
-        }
-        for (int i = 0; i < searchstatuslist.size(); i++) {
-            list.add(searchstatuslist.get(i));
-        }
-
-        Object[] filtertenant = list.toArray();
-        for (Object ft : filtertenant) {
-            if (list.indexOf(ft) != list.lastIndexOf(ft)) {
-                list.remove(list.lastIndexOf(ft));
-            }
-        }
-
-        for (TenantBean bean : list) {
-            int tenantid = bean.getTenantID();
-            String fname = bean.getFname();
-            String lname = bean.getLname();
-
-            Object[] obj = {tenantid, fname, lname};
-
-            model.addRow(obj);
-        }
-
+        checkresults();
 
     }//GEN-LAST:event_NameFieldActionPerformed
 
@@ -622,356 +620,22 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void SchoolFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SchoolFieldActionPerformed
         // TODO add your handling code here:
-        TenantDAOInterface tdao = new TenantDAOImplementation();
-
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setNumRows(0);
-
-        ArrayList<TenantBean> list = new ArrayList<TenantBean>(); // final list
-        ArrayList<TenantBean> searchnamelist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchschoollist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchdegreelist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchyearlist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchgenderlist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchstatuslist = new ArrayList<TenantBean>();
-
-        if (NameField.getText().matches("^[a-zA-Z ]+$")) { // letters lang
-            String name = NameField.getText();
-            searchnamelist = tdao.searchTenantName(name); // list from searchname
-        }
-        if (!(SchoolField.getText().isEmpty())) {
-            String school = SchoolField.getText();
-            searchschoollist = tdao.getTenantBySchool(school);
-
-        }
-        if (!(DegreeField.getText().isEmpty())) {
-            String degree = DegreeField.getText();
-            searchdegreelist = tdao.getTenantByDegree(degree);
-        }
-        int expectedyear = (Integer) YearOfGraduationField.getSelectedItem();
-        searchyearlist = tdao.getTenantByExpectedYearofGrad(expectedyear);
-
-        if (MaleField.isSelected()) {
-            searchgenderlist = tdao.getMaleTenant();
-        } else if (FemaleField.isSelected()) {
-            searchgenderlist = tdao.getFemaleTenant();
-        }
-
-        if (CurrentField.isSelected()) {
-            searchstatuslist = tdao.getTenantByStatus("Current");
-        } else if (OldField.isSelected()) {
-            searchstatuslist = tdao.getTenantByStatus("Old");
-        }
-        // filter out results
-
-        int max1 = Math.max(searchnamelist.size(), searchschoollist.size());
-        int max2 = Math.max(searchdegreelist.size(), searchyearlist.size());
-        int max3 = Math.max(searchgenderlist.size(), searchstatuslist.size());
-        int max4 = Math.max(max1, max2);
-        int finalmax = Math.max(max4, max3);
-
-        // filter searchnamelist searchschoollist
-        for (int i = 0; i < searchnamelist.size(); i++) {
-            list.add(searchnamelist.get(i));
-        }
-        for (int i = 0; i < searchschoollist.size(); i++) {
-            list.add(searchschoollist.get(i));
-        }
-        for (int i = 0; i < searchdegreelist.size(); i++) {
-            list.add(searchdegreelist.get(i));
-        }
-        for (int i = 0; i < searchyearlist.size(); i++) {
-            list.add(searchyearlist.get(i));
-        }
-        for (int i = 0; i < searchgenderlist.size(); i++) {
-            list.add(searchgenderlist.get(i));
-        }
-        for (int i = 0; i < searchstatuslist.size(); i++) {
-            list.add(searchstatuslist.get(i));
-        }
-
-        Object[] filtertenant = list.toArray();
-        for (Object ft : filtertenant) {
-            if (list.indexOf(ft) != list.lastIndexOf(ft)) {
-                list.remove(list.lastIndexOf(ft));
-            }
-        }
-
-        for (TenantBean bean : list) {
-            int tenantid = bean.getTenantID();
-            String fname = bean.getFname();
-            String lname = bean.getLname();
-
-            Object[] obj = {tenantid, fname, lname};
-
-            model.addRow(obj);
-        }
-
-
+        checkresults();
     }//GEN-LAST:event_SchoolFieldActionPerformed
 
     private void YearOfGraduationFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YearOfGraduationFieldActionPerformed
         // TODO add your handling code here:
-        TenantDAOInterface tdao = new TenantDAOImplementation();
-
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setNumRows(0);
-
-        ArrayList<TenantBean> list = new ArrayList<TenantBean>(); // final list
-        ArrayList<TenantBean> searchnamelist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchschoollist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchdegreelist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchyearlist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchgenderlist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchstatuslist = new ArrayList<TenantBean>();
-
-        if (NameField.getText().matches("^[a-zA-Z ]+$")) { // letters lang
-            String name = NameField.getText();
-            searchnamelist = tdao.searchTenantName(name); // list from searchname
-        }
-        if (!(SchoolField.getText().isEmpty())) {
-            String school = SchoolField.getText();
-            searchschoollist = tdao.getTenantBySchool(school);
-
-        }
-        if (!(DegreeField.getText().isEmpty())) {
-            String degree = DegreeField.getText();
-            searchdegreelist = tdao.getTenantByDegree(degree);
-        }
-        int expectedyear = (Integer) YearOfGraduationField.getSelectedItem();
-        searchyearlist = tdao.getTenantByExpectedYearofGrad(expectedyear);
-
-        if (MaleField.isSelected()) {
-            searchgenderlist = tdao.getMaleTenant();
-        } else if (FemaleField.isSelected()) {
-            searchgenderlist = tdao.getFemaleTenant();
-        }
-
-        if (CurrentField.isSelected()) {
-            searchstatuslist = tdao.getTenantByStatus("Current");
-        } else if (OldField.isSelected()) {
-            searchstatuslist = tdao.getTenantByStatus("Old");
-        }
-        // filter out results
-
-        int max1 = Math.max(searchnamelist.size(), searchschoollist.size());
-        int max2 = Math.max(searchdegreelist.size(), searchyearlist.size());
-        int max3 = Math.max(searchgenderlist.size(), searchstatuslist.size());
-        int max4 = Math.max(max1, max2);
-        int finalmax = Math.max(max4, max3);
-
-        // filter searchnamelist searchschoollist
-        for (int i = 0; i < searchnamelist.size(); i++) {
-            list.add(searchnamelist.get(i));
-        }
-        for (int i = 0; i < searchschoollist.size(); i++) {
-            list.add(searchschoollist.get(i));
-        }
-        for (int i = 0; i < searchdegreelist.size(); i++) {
-            list.add(searchdegreelist.get(i));
-        }
-        for (int i = 0; i < searchyearlist.size(); i++) {
-            list.add(searchyearlist.get(i));
-        }
-        for (int i = 0; i < searchgenderlist.size(); i++) {
-            list.add(searchgenderlist.get(i));
-        }
-        for (int i = 0; i < searchstatuslist.size(); i++) {
-            list.add(searchstatuslist.get(i));
-        }
-
-        Object[] filtertenant = list.toArray();
-        for (Object ft : filtertenant) {
-            if (list.indexOf(ft) != list.lastIndexOf(ft)) {
-                list.remove(list.lastIndexOf(ft));
-            }
-        }
-
-        for (TenantBean bean : list) {
-            int tenantid = bean.getTenantID();
-            String fname = bean.getFname();
-            String lname = bean.getLname();
-
-            Object[] obj = {tenantid, fname, lname};
-
-            model.addRow(obj);
-        }
+        checkresults();
     }//GEN-LAST:event_YearOfGraduationFieldActionPerformed
 
     private void DegreeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DegreeFieldActionPerformed
         // TODO add your handling code here:
-        TenantDAOInterface tdao = new TenantDAOImplementation();
-
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setNumRows(0);
-
-        ArrayList<TenantBean> list = new ArrayList<TenantBean>(); // final list
-        ArrayList<TenantBean> searchnamelist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchschoollist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchdegreelist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchyearlist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchgenderlist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchstatuslist = new ArrayList<TenantBean>();
-
-        if (NameField.getText().matches("^[a-zA-Z ]+$")) { // letters lang
-            String name = NameField.getText();
-            searchnamelist = tdao.searchTenantName(name); // list from searchname
-        }
-        if (!(SchoolField.getText().isEmpty())) {
-            String school = SchoolField.getText();
-            searchschoollist = tdao.getTenantBySchool(school);
-
-        }
-        if (!(DegreeField.getText().isEmpty())) {
-            String degree = DegreeField.getText();
-            searchdegreelist = tdao.getTenantByDegree(degree);
-        }
-        int expectedyear = (Integer) YearOfGraduationField.getSelectedItem();
-        searchyearlist = tdao.getTenantByExpectedYearofGrad(expectedyear);
-
-        if (MaleField.isSelected()) {
-            searchgenderlist = tdao.getMaleTenant();
-        } else if (FemaleField.isSelected()) {
-            searchgenderlist = tdao.getFemaleTenant();
-        }
-
-        if (CurrentField.isSelected()) {
-            searchstatuslist = tdao.getTenantByStatus("Current");
-        } else if (OldField.isSelected()) {
-            searchstatuslist = tdao.getTenantByStatus("Old");
-        }
-        // filter out results
-
-        int max1 = Math.max(searchnamelist.size(), searchschoollist.size());
-        int max2 = Math.max(searchdegreelist.size(), searchyearlist.size());
-        int max3 = Math.max(searchgenderlist.size(), searchstatuslist.size());
-        int max4 = Math.max(max1, max2);
-        int finalmax = Math.max(max4, max3);
-
-        // filter searchnamelist searchschoollist
-        for (int i = 0; i < searchnamelist.size(); i++) {
-            list.add(searchnamelist.get(i));
-        }
-        for (int i = 0; i < searchschoollist.size(); i++) {
-            list.add(searchschoollist.get(i));
-        }
-        for (int i = 0; i < searchdegreelist.size(); i++) {
-            list.add(searchdegreelist.get(i));
-        }
-        for (int i = 0; i < searchyearlist.size(); i++) {
-            list.add(searchyearlist.get(i));
-        }
-        for (int i = 0; i < searchgenderlist.size(); i++) {
-            list.add(searchgenderlist.get(i));
-        }
-        for (int i = 0; i < searchstatuslist.size(); i++) {
-            list.add(searchstatuslist.get(i));
-        }
-
-        Object[] filtertenant = list.toArray();
-        for (Object ft : filtertenant) {
-            if (list.indexOf(ft) != list.lastIndexOf(ft)) {
-                list.remove(list.lastIndexOf(ft));
-            }
-        }
-
-        for (TenantBean bean : list) {
-            int tenantid = bean.getTenantID();
-            String fname = bean.getFname();
-            String lname = bean.getLname();
-
-            Object[] obj = {tenantid, fname, lname};
-
-            model.addRow(obj);
-        }
+        checkresults();
     }//GEN-LAST:event_DegreeFieldActionPerformed
 
     private void OldFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OldFieldActionPerformed
         // TODO add your handling code here:
-        TenantDAOInterface tdao = new TenantDAOImplementation();
-
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setNumRows(0);
-
-        ArrayList<TenantBean> list = new ArrayList<TenantBean>(); // final list
-        ArrayList<TenantBean> searchnamelist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchschoollist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchdegreelist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchyearlist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchgenderlist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchstatuslist = new ArrayList<TenantBean>();
-
-        if (NameField.getText().matches("^[a-zA-Z ]+$")) { // letters lang
-            String name = NameField.getText();
-            searchnamelist = tdao.searchTenantName(name); // list from searchname
-        }
-        if (!(SchoolField.getText().isEmpty())) {
-            String school = SchoolField.getText();
-            searchschoollist = tdao.getTenantBySchool(school);
-
-        }
-        if (!(DegreeField.getText().isEmpty())) {
-            String degree = DegreeField.getText();
-            searchdegreelist = tdao.getTenantByDegree(degree);
-        }
-        int expectedyear = (Integer) YearOfGraduationField.getSelectedItem();
-        searchyearlist = tdao.getTenantByExpectedYearofGrad(expectedyear);
-
-        if (MaleField.isSelected()) {
-            searchgenderlist = tdao.getMaleTenant();
-        } else if (FemaleField.isSelected()) {
-            searchgenderlist = tdao.getFemaleTenant();
-        }
-
-        if (CurrentField.isSelected()) {
-            searchstatuslist = tdao.getTenantByStatus("Current");
-        } else if (OldField.isSelected()) {
-            searchstatuslist = tdao.getTenantByStatus("Old");
-        }
-        // filter out results
-
-        int max1 = Math.max(searchnamelist.size(), searchschoollist.size());
-        int max2 = Math.max(searchdegreelist.size(), searchyearlist.size());
-        int max3 = Math.max(searchgenderlist.size(), searchstatuslist.size());
-        int max4 = Math.max(max1, max2);
-        int finalmax = Math.max(max4, max3);
-
-        // filter searchnamelist searchschoollist
-        for (int i = 0; i < searchnamelist.size(); i++) {
-            list.add(searchnamelist.get(i));
-        }
-        for (int i = 0; i < searchschoollist.size(); i++) {
-            list.add(searchschoollist.get(i));
-        }
-        for (int i = 0; i < searchdegreelist.size(); i++) {
-            list.add(searchdegreelist.get(i));
-        }
-        for (int i = 0; i < searchyearlist.size(); i++) {
-            list.add(searchyearlist.get(i));
-        }
-        for (int i = 0; i < searchgenderlist.size(); i++) {
-            list.add(searchgenderlist.get(i));
-        }
-        for (int i = 0; i < searchstatuslist.size(); i++) {
-            list.add(searchstatuslist.get(i));
-        }
-
-        Object[] filtertenant = list.toArray();
-        for (Object ft : filtertenant) {
-            if (list.indexOf(ft) != list.lastIndexOf(ft)) {
-                list.remove(list.lastIndexOf(ft));
-            }
-        }
-
-        for (TenantBean bean : list) {
-            int tenantid = bean.getTenantID();
-            String fname = bean.getFname();
-            String lname = bean.getLname();
-
-            Object[] obj = {tenantid, fname, lname};
-
-            model.addRow(obj);
-        }
+        checkresults();
     }//GEN-LAST:event_OldFieldActionPerformed
 
     /**
