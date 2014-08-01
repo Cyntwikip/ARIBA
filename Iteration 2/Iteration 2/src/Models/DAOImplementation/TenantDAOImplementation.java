@@ -117,7 +117,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from tenant";
+            String query = "select * from tenant order by fname, lname ASC";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
 
@@ -236,7 +236,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from tenant where expectedyearofgrad = ?";
+            String query = "select * from tenant where expectedyearofgrad = ? order by fname, lname ASC";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, year);
             ResultSet resultSet = ps.executeQuery();
@@ -298,7 +298,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from tenant, tenantroom where tenantID = tr_tenantID"
+            String query = "select * from tenant, tenantroom where tenantID = tr_tenantID order by fname, lname ASC"
                     + " and tr_roomID = ?";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, tenant_roomID);
@@ -361,9 +361,8 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from tenant where school =?";
+            String query = "select * from tenant where school like '%"+currschool+"%' order by fname, lname ASC";
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, currschool);
             ResultSet resultSet = ps.executeQuery();
 
             ArrayList<TenantBean> list = new ArrayList<>();
@@ -419,7 +418,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
        try{
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from tenant where gender = 'male'";
+            String query = "select * from tenant where gender = 'male' order by fname, lname ASC";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
             
@@ -478,7 +477,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from tenant where gender = 'female'";
+            String query = "select * from tenant where gender = 'female' order by fname, lname ASC";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
 
@@ -538,7 +537,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from tenant where status =?";
+            String query = "select * from tenant where status =? order by fname, lname ASC";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, currstatus);
             ResultSet resultSet = ps.executeQuery();
@@ -598,7 +597,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from tenant where fname = ? and lname = ?";
+            String query = "select * from tenant where fname = ? and lname = ? order by fname, lname ASC";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, firstname);
             ps.setString(2, lastname);
@@ -659,9 +658,8 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from tenant where degree =?";
+            String query = "select * from tenant where degree like '%"+currdegree+"%' order by fname, lname ASC";
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, currdegree);
             ResultSet resultSet = ps.executeQuery();
 
             ArrayList<TenantBean> list = new ArrayList<>();
@@ -744,6 +742,69 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         }
 
         return false;
+    }
+
+    @Override
+    public ArrayList<TenantBean> searchTenantName(String name) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from tenant where fname like '%"+name+"%'"
+                    + "or lname like '%"+name+"%' order by fname, lname ASC";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+
+            ArrayList<TenantBean> list = new ArrayList<>();
+            TenantBean bean = new TenantBean();
+
+            int tenantID, expectedyearofgrad;
+            String fname, lname, gender, address, degree, school, status, contact, email;
+            Blob image;
+            Date birthday;
+
+            while (resultSet.next()) {
+                tenantID = resultSet.getInt("tenantID");
+                contact = resultSet.getString("contact");
+                expectedyearofgrad = resultSet.getInt("expectedyearofgrad");
+                fname = resultSet.getString("fname");
+                lname = resultSet.getString("lname");
+                gender = resultSet.getString("gender");
+                address = resultSet.getString("address");
+                degree = resultSet.getString("degree");
+                school = resultSet.getString("school");
+                status = resultSet.getString("status");
+                image = resultSet.getBlob("image");
+                email = resultSet.getString("email");
+                birthday = resultSet.getDate("birthday");
+
+                bean = new TenantBean();
+
+                bean.setTenantID(tenantID);
+                bean.setContact(contact);
+                bean.setExpectedyearofgrad(expectedyearofgrad);
+                bean.setFname(fname);
+                bean.setLname(lname);
+                bean.setGender(gender);
+                bean.setDegree(degree);
+                bean.setAddress(address);
+                bean.setSchool(school);
+                bean.setStatus(status);
+                bean.setImage(image);
+                bean.setEmail(email);
+                bean.setBirthday(birthday);
+                
+                list.add(bean);
+            }
+            return list;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+   
+    
+    
     }
 
     
