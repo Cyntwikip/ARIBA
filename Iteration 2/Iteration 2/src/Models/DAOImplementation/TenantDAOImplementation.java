@@ -750,7 +750,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
             Connector c = new Connector();
             Connection connection = c.getConnection();
             String query = "select * from tenant where fname like '%"+name+"%'"
-                    + "or lname like '%"+name+"%' order by fname, lname ASC";
+                    + "or lname like '%"+name+"%' or concat (fname,' ',lname) like '%"+name+"%' order by fname, lname ASC";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
 
