@@ -3,6 +3,7 @@ import ErrorHandling.CheckAccount;
 import Models.Beans.TenantBean;
 import Models.DAOImplementation.TenantDAOImplementation;
 import Models.DAOInterface.TenantDAOInterface;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
@@ -458,9 +459,26 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        ;
+        int row = jTable1.getSelectedRow();
+        int col = 0;
+        
+        int tenantid = (Integer) jTable1.getValueAt(row, col);
+        System.out.println(tenantID);
+        
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+        TenantBean bean = new TenantBean();
+        bean = tdao.getTenantById(tenantid);
+        
+        tenantID.setText(String.valueOf(bean.getTenantID()));
+        lname.setText(bean.getLname());
+        fname.setText(bean.getFname());
+        birthday.setText(java.sql.Date.toString(bean.getBirthday()));
+        address.setText()
+        
+        
     }//GEN-LAST:event_jTable1MouseClicked
 
+    
     private void NameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NameFieldKeyPressed
         // TODO add your handling code here:
         checkresults();
