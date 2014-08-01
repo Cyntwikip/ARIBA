@@ -1,9 +1,12 @@
 
+import ErrorHandling.AccountException;
+import ErrorHandling.CheckAccount;
 import Models.Beans.TenantBean;
 import Models.DAOImplementation.TenantDAOImplementation;
 import Models.DAOInterface.TenantDAOInterface;
 import java.util.Calendar;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
 /*
@@ -21,6 +24,7 @@ public class AddTenant extends javax.swing.JFrame {
      * Creates new form AddTenant
      */
     public AddTenant() {
+
         initComponents();
         jPanel1.setLayout(null);
 
@@ -82,9 +86,9 @@ public class AddTenant extends javax.swing.JFrame {
         FirstnameField.setText(tb.getFname());
         // birthday;
         AddressField.setText(tb.getAddress());
-        if(tb.getGender().equals("Male")){
+        if (tb.getGender().equals("Male")) {
             MaleField.doClick();
-        }else{
+        } else {
             FemaleField.doClick();
         }
         ContactNumberField.setText(tb.getContact());
@@ -92,11 +96,8 @@ public class AddTenant extends javax.swing.JFrame {
         SchoolField.setText(tb.getSchool());
         DegreeField.setText(tb.getDegree());
         YearOfGraduationField.setSelectedItem(tb.getExpectedyearofgrad());
-        
+
         // guardian part
-        
-        
-        
     }
 
     /**
@@ -267,6 +268,31 @@ public class AddTenant extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        CheckAccount c = new CheckAccount();
+        if (FirstnameField.getText().isEmpty()
+                || SurnameField.getText().isEmpty()
+                || ContactNumberField.getText().isEmpty()
+                || AddressField.getText().isEmpty()
+                || DegreeField.getText().isEmpty()
+                || EmailAddressField.getText().isEmpty()
+                || SchoolField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please fill up ALL the fields.");
+        } else {
+            try {
+                c.checkName(FirstnameField.getText(), "Firstname");
+                c.checkName(SurnameField.getText(), "Lastname");
+                c.checkName(DegreeField.getText(), "Degree");
+                c.checkName(SchoolField.getText(), "School");
+                c.checkEmail(EmailAddressField.getText(), "Email");
+                c.checkContact(ContactNumberField.getText(), "Contact");
+
+                
+                
+            } catch (AccountException e) {
+                e.promptFieldError();
+            }
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
