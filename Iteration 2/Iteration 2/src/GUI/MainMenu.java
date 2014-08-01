@@ -192,47 +192,47 @@ public class MainMenu extends javax.swing.JFrame {
 
         tenantID.setText("jLabel2");
         getContentPane().add(tenantID);
-        tenantID.setBounds(810, 100, 34, 14);
+        tenantID.setBounds(810, 100, 90, 20);
 
         lname.setText("jLabel3");
         getContentPane().add(lname);
-        lname.setBounds(800, 130, 34, 14);
+        lname.setBounds(800, 130, 100, 20);
 
         fname.setText("jLabel4");
         getContentPane().add(fname);
-        fname.setBounds(810, 150, 34, 14);
+        fname.setBounds(810, 150, 90, 20);
 
         birthday.setText("jLabel5");
         getContentPane().add(birthday);
-        birthday.setBounds(800, 180, 34, 14);
+        birthday.setBounds(800, 180, 180, 20);
 
         address.setText("jLabel6");
         getContentPane().add(address);
-        address.setBounds(800, 210, 34, 14);
+        address.setBounds(800, 210, 180, 14);
 
         gender.setText("jLabel7");
         getContentPane().add(gender);
-        gender.setBounds(790, 230, 34, 14);
+        gender.setBounds(790, 240, 190, 14);
 
         contactno.setText("jLabel8");
         getContentPane().add(contactno);
-        contactno.setBounds(820, 260, 34, 14);
+        contactno.setBounds(820, 260, 170, 20);
 
         email.setText("jLabel9");
         getContentPane().add(email);
-        email.setBounds(790, 280, 34, 14);
+        email.setBounds(790, 280, 190, 30);
 
         school.setText("jLabel10");
         getContentPane().add(school);
-        school.setBounds(800, 310, 40, 14);
+        school.setBounds(800, 310, 180, 20);
 
         degree.setText("jLabel11");
         getContentPane().add(degree);
-        degree.setBounds(800, 340, 40, 14);
+        degree.setBounds(800, 340, 180, 20);
 
         yearofgraduation.setText("jLabel12");
         getContentPane().add(yearofgraduation);
-        yearofgraduation.setBounds(870, 360, 40, 14);
+        yearofgraduation.setBounds(870, 360, 110, 20);
 
         guardian.setText("jLabel13");
         getContentPane().add(guardian);
@@ -472,8 +472,14 @@ public class MainMenu extends javax.swing.JFrame {
         tenantID.setText(String.valueOf(bean.getTenantID()));
         lname.setText(bean.getLname());
         fname.setText(bean.getFname());
-        birthday.setText(java.sql.Date.toString(bean.getBirthday()));
-        address.setText()
+   //     birthday.setText(java.sql.Date.toString(bean.getBirthday()));
+        address.setText(bean.getAddress());
+        gender.setText(bean.getGender());
+        contactno.setText(bean.getContact());
+        email.setText(bean.getEmail());
+        school.setText(bean.getSchool());
+        degree.setText(bean.getDegree());
+        yearofgraduation.setText(String.valueOf(bean.getExpectedyearofgrad()));
         
         
     }//GEN-LAST:event_jTable1MouseClicked
