@@ -92,18 +92,93 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
     }
 
     @Override
-    public ArrayList<WaterReadingBean> getAllWaterReadingsByDate(Date dateread) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<WaterReadingBean> getAllWaterReadingsByDate(Date from, Date to) {
+        try{
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from waterreading where dateRead"
+                    + "BETWEEN '" + from + "' and '" + to + "'" ;
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+            
+            WaterReadingBean bean = new WaterReadingBean();
+            ArrayList<WaterReadingBean> list = new ArrayList<WaterReadingBean>();
+            
+            int water_billID;
+            float currentcubicmeter, pricepercubicmeter, price;
+            Date dateRead;
+            
+            while(resultSet.next()){
+                water_billID = resultSet.getInt("electric_billID");
+                currentcubicmeter = resultSet.getFloat("currentcubicmeter");
+                pricepercubicmeter = resultSet.getFloat("pricepercubicmeter");
+                price = resultSet.getFloat("price");
+                dateRead = resultSet.getDate("dateRead");
+                
+                
+                bean = new WaterReadingBean();
+                
+                bean.setCurrentcubicmeter(currentcubicmeter);
+                bean.setDateRead(dateRead);
+                bean.setWater_billID(water_billID);
+                bean.setPrice(price);
+                bean.setPricepercubicmeter(pricepercubicmeter);
+                
+                list.add(bean);
+             }
+            return list;
+        }   catch(SQLException ex){
+        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null; 
     }
 
     @Override
-    public boolean editWaterReading(Date dateread) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean editWaterReading(WaterReadingBean water, int waterID) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+
+            String query = "update waterreading set currentcubicmeter =?, "
+                    + "pricepercubicmeter = ?, price = ?, dateRead = ?"
+                    + "where water_billID = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setFloat(1, water.getCurrentcubicmeter());
+            ps.setFloat(2, water.getPricepercubicmeter());
+            ps.setFloat(3, water.getPrice());
+            ps.setDate(4, water.getDateRead());
+            ps.setInt(5, waterID);
+            ps.executeUpdate();
+
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
     }
 
     @Override
     public boolean editWaterReadingByPrice(float price, int waterID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+
+            String query = "update waterreading set price = ? "
+                    + "where water_billID = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setFloat(1, price);
+            ps.setFloat(2, waterID);
+            ps.executeUpdate();
+
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    
     }
 
     @Override

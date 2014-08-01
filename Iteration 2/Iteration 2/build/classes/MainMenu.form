@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<<<<<<< HEAD
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[1023, 559]"/>
+    </Property>
+=======
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
     </Component>
@@ -9,6 +16,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+>>>>>>> 9e48966e245b1edbff4c1d6c3432d2eec7f5d188
     <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1023, 559]"/>
     </Property>
@@ -327,6 +335,8 @@
         </Component>
       </SubComponents>
     </Container>
+<<<<<<< HEAD
+=======
     <Component class="javax.swing.JRadioButton" name="jRadioButton3">
       <Properties>
         <Property name="text" type="java.lang.String" value="Current"/>
@@ -350,6 +360,7 @@
         </Constraint>
       </Constraints>
     </Component>
+>>>>>>> 9e48966e245b1edbff4c1d6c3432d2eec7f5d188
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
