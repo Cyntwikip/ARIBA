@@ -1,4 +1,7 @@
 
+import Models.Beans.TenantBean;
+import Models.DAOImplementation.TenantDAOImplementation;
+import Models.DAOInterface.TenantDAOInterface;
 import java.util.Calendar;
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
@@ -43,7 +46,57 @@ public class AddTenant extends javax.swing.JFrame {
         for (int i = 2000; i <= year + 10; i++) {
             YearOfGraduationField.addItem(i);
         }
+    }
 
+    public AddTenant(int tenantID) {
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+        TenantBean tb = new TenantBean();
+        tb = tdao.getTenantById(tenantID);
+        initComponents();
+        jPanel1.setLayout(null);
+
+        MaleField.setText("Male");
+        FemaleField.setText("Female");
+
+        buttonGroup1.add(MaleField);
+        buttonGroup1.add(FemaleField);
+
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+
+        for (int i = 0; i <= year - 1900; i++) { // remove all years
+            YearField.removeItem(1900 + i);
+        }
+        for (int i = 0; i <= year - 1900; i++) {
+            YearField.addItem(1900 + i);
+        }
+
+        //jComboBox1
+        for (int i = 2000; i <= year + 10; i++) {
+            YearOfGraduationField.removeItem(i);
+        }
+        for (int i = 2000; i <= year + 10; i++) {
+            YearOfGraduationField.addItem(i);
+        }
+
+        SurnameField.setText(tb.getLname());
+        FirstnameField.setText(tb.getFname());
+        // birthday;
+        AddressField.setText(tb.getAddress());
+        if(tb.getGender().equals("Male")){
+            MaleField.doClick();
+        }else{
+            FemaleField.doClick();
+        }
+        ContactNumberField.setText(tb.getContact());
+        EmailAddressField.setText(tb.getEmail());
+        SchoolField.setText(tb.getSchool());
+        DegreeField.setText(tb.getDegree());
+        YearOfGraduationField.setSelectedItem(tb.getExpectedyearofgrad());
+        
+        // guardian part
+        
+        
+        
     }
 
     /**
@@ -132,6 +185,12 @@ public class AddTenant extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1);
         jButton1.setBounds(660, 380, 90, 40);
+
+        SurnameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SurnameFieldActionPerformed(evt);
+            }
+        });
         jPanel1.add(SurnameField);
         SurnameField.setBounds(370, 100, 170, 30);
         jPanel1.add(FirstnameField);
@@ -280,6 +339,10 @@ public class AddTenant extends javax.swing.JFrame {
     private void YearOfGraduationFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YearOfGraduationFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_YearOfGraduationFieldActionPerformed
+
+    private void SurnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SurnameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SurnameFieldActionPerformed
 
     /**
      * @param args the command line arguments

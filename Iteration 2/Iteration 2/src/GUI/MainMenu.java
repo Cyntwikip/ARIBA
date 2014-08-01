@@ -145,6 +145,20 @@ public class MainMenu extends javax.swing.JFrame {
         list = null;
     }
 
+    public TenantBean initializetenant() {
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+        TenantBean bean = new TenantBean();
+        
+        int row = jTable1.getSelectedRow();
+        int col = 0;
+        int id = (Integer) jTable1.getValueAt(row, col);
+        
+        bean = tdao.getTenantById(id);
+        
+        return bean;
+        
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -412,6 +426,18 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
+        int row = jTable1.getSelectedRow();
+        int tenantID = (Integer) jTable1.getValueAt(row, 0);
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+        TenantBean tb = new TenantBean();
+        tb = tdao.getTenantById(tenantID);
+        
+        this.setVisible(false);
+        AddTenant at = new AddTenant(tenantID);
+        at.setVisible(true);
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void NameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameFieldActionPerformed
@@ -461,10 +487,10 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         int row = jTable1.getSelectedRow();
         int col = 0;
-        
-        int tenantid = (Integer) jTable1.getValueAt(row, col);
+
+        int tenantid = (Integer) jTable1.getModel().getValueAt(row, col);
         System.out.println(tenantID);
-        
+
         TenantDAOInterface tdao = new TenantDAOImplementation();
         TenantBean bean = new TenantBean();
         bean = tdao.getTenantById(tenantid);
@@ -472,7 +498,7 @@ public class MainMenu extends javax.swing.JFrame {
         tenantID.setText(String.valueOf(bean.getTenantID()));
         lname.setText(bean.getLname());
         fname.setText(bean.getFname());
-   //     birthday.setText(java.sql.Date.toString(bean.getBirthday()));
+        //     birthday.setText(java.sql.Date.toString(bean.getBirthday()));
         address.setText(bean.getAddress());
         gender.setText(bean.getGender());
         contactno.setText(bean.getContact());
@@ -480,11 +506,12 @@ public class MainMenu extends javax.swing.JFrame {
         school.setText(bean.getSchool());
         degree.setText(bean.getDegree());
         yearofgraduation.setText(String.valueOf(bean.getExpectedyearofgrad()));
-        
-        
+           
+    
+
     }//GEN-LAST:event_jTable1MouseClicked
 
-    
+
     private void NameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NameFieldKeyPressed
         // TODO add your handling code here:
         checkresults();
