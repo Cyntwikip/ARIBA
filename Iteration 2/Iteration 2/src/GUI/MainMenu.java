@@ -228,11 +228,11 @@ public class MainMenu extends javax.swing.JFrame {
 
         address.setText("jLabel6");
         getContentPane().add(address);
-        address.setBounds(800, 210, 180, 16);
+        address.setBounds(800, 210, 180, 14);
 
         gender.setText("jLabel7");
         getContentPane().add(gender);
-        gender.setBounds(790, 240, 190, 16);
+        gender.setBounds(790, 240, 190, 14);
 
         contactno.setText("jLabel8");
         getContentPane().add(contactno);
@@ -256,19 +256,19 @@ public class MainMenu extends javax.swing.JFrame {
 
         guardian.setText("jLabel13");
         getContentPane().add(guardian);
-        guardian.setBounds(810, 400, 53, 16);
+        guardian.setBounds(810, 400, 120, 14);
 
         guardiancontactno.setText("jLabel14");
         getContentPane().add(guardiancontactno);
-        guardiancontactno.setBounds(820, 420, 53, 16);
+        guardiancontactno.setBounds(820, 420, 120, 14);
 
         roomassignment.setText("jLabel15");
         getContentPane().add(roomassignment);
-        roomassignment.setBounds(870, 460, 53, 16);
+        roomassignment.setBounds(870, 460, 40, 14);
 
         status.setText("jLabel16");
         getContentPane().add(status);
-        status.setBounds(790, 480, 53, 16);
+        status.setBounds(790, 480, 40, 14);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/AddTenant.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -387,7 +387,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(CurrentField);
-        CurrentField.setBounds(150, 240, 79, 23);
+        CurrentField.setBounds(150, 240, 63, 23);
 
         OldField.setText("Old");
         OldField.addActionListener(new java.awt.event.ActionListener() {
@@ -401,7 +401,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(OldField);
-        OldField.setBounds(150, 260, 54, 23);
+        OldField.setBounds(150, 260, 41, 23);
 
         YearOfGraduationField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -414,7 +414,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(YearOfGraduationField);
-        YearOfGraduationField.setBounds(230, 190, 70, 27);
+        YearOfGraduationField.setBounds(230, 190, 70, 20);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Tenant.png"))); // NOI18N
         getContentPane().add(jLabel1);
