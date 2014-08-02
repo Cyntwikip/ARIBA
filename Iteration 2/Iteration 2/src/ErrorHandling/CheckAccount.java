@@ -16,7 +16,7 @@ public class CheckAccount {
     }
     
     public void checkName(String name, String field) throws AccountException{
-        if(!name.matches("[\\w&&[\\D]]*")){
+        if(!name.matches("[- \\w&&[\\D]]*")){
             throw new AccountException(field);
         }
     }

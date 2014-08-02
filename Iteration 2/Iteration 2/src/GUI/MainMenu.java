@@ -1,3 +1,5 @@
+package GUI;
+
 
 import ErrorHandling.CheckAccount;
 import Models.Beans.TenantBean;
@@ -222,11 +224,11 @@ public class MainMenu extends javax.swing.JFrame {
 
         address.setText("jLabel6");
         getContentPane().add(address);
-        address.setBounds(800, 210, 180, 14);
+        address.setBounds(800, 210, 180, 16);
 
         gender.setText("jLabel7");
         getContentPane().add(gender);
-        gender.setBounds(790, 240, 190, 14);
+        gender.setBounds(790, 240, 190, 16);
 
         contactno.setText("jLabel8");
         getContentPane().add(contactno);
@@ -250,21 +252,21 @@ public class MainMenu extends javax.swing.JFrame {
 
         guardian.setText("jLabel13");
         getContentPane().add(guardian);
-        guardian.setBounds(810, 400, 40, 14);
+        guardian.setBounds(810, 400, 53, 16);
 
         guardiancontactno.setText("jLabel14");
         getContentPane().add(guardiancontactno);
-        guardiancontactno.setBounds(820, 420, 40, 14);
+        guardiancontactno.setBounds(820, 420, 53, 16);
 
         roomassignment.setText("jLabel15");
         getContentPane().add(roomassignment);
-        roomassignment.setBounds(870, 460, 40, 14);
+        roomassignment.setBounds(870, 460, 53, 16);
 
         status.setText("jLabel16");
         getContentPane().add(status);
-        status.setBounds(790, 480, 40, 14);
+        status.setBounds(790, 480, 53, 16);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddTenant.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/AddTenant.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -273,7 +275,7 @@ public class MainMenu extends javax.swing.JFrame {
         getContentPane().add(jButton1);
         jButton1.setBounds(70, 300, 260, 60);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Edit Tenant.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Edit Tenant.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -381,7 +383,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(CurrentField);
-        CurrentField.setBounds(150, 240, 63, 23);
+        CurrentField.setBounds(150, 240, 79, 23);
 
         OldField.setText("Old");
         OldField.addActionListener(new java.awt.event.ActionListener() {
@@ -395,7 +397,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(OldField);
-        OldField.setBounds(150, 260, 41, 23);
+        OldField.setBounds(150, 260, 54, 23);
 
         YearOfGraduationField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -408,9 +410,9 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(YearOfGraduationField);
-        YearOfGraduationField.setBounds(230, 190, 70, 20);
+        YearOfGraduationField.setBounds(230, 190, 70, 27);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Tenant.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Tenant.png"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 1020, 560);
 

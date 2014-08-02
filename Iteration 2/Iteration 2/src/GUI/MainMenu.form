@@ -188,7 +188,7 @@
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/AddTenant.png"/>
+          <Image iconType="3" name="/GUI/AddTenant.png"/>
         </Property>
       </Properties>
       <Events>
@@ -203,7 +203,7 @@
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Edit Tenant.png"/>
+          <Image iconType="3" name="/GUI/Edit Tenant.png"/>
         </Property>
       </Properties>
       <Events>
@@ -379,7 +379,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Tenant.png"/>
+          <Image iconType="3" name="/GUI/Tenant.png"/>
         </Property>
       </Properties>
       <Constraints>
