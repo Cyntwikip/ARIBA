@@ -2,7 +2,9 @@ package GUI;
 
 
 import ErrorHandling.CheckAccount;
+import Models.Beans.GuardianBean;
 import Models.Beans.TenantBean;
+import Models.DAOImplementation.GuardianDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
 import Models.DAOInterface.TenantDAOInterface;
 import java.sql.Date;
@@ -511,7 +513,14 @@ public class MainMenu extends javax.swing.JFrame {
         degree.setText(bean.getDegree());
         yearofgraduation.setText(String.valueOf(bean.getExpectedyearofgrad()));
            
-    
+        GuardianBean guardianbean = new GuardianBean();
+        GuardianDAOImplementation gdao = new GuardianDAOImplementation();
+        
+        
+        guardianbean = gdao.getGuardianByTenant(bean.getFname(), bean.getLname());
+        guardian.setText(guardianbean.getFname() + " " + guardianbean.getLname());
+        guardiancontactno.setText(guardianbean.getContact());
+        
 
     }//GEN-LAST:event_jTable1MouseClicked
 

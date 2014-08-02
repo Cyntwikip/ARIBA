@@ -241,7 +241,6 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                     Fname = resultSet2.getString("fname");
                     Lname = resultSet2.getString("lname");
                     email = resultSet2.getString("email");
-                    birthday = resultSet2.getDate("birthday");
                     
                     bean = new GuardianBean();
 
@@ -250,7 +249,6 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                     bean.setFname(Fname);
                     bean.setLname(Lname);
                     bean.setEmail(email);
-                    bean.setBirthday(birthday);
                 }
             }
             
