@@ -1,13 +1,12 @@
 package GUI;
 
-
-
 import ErrorHandling.AccountException;
 import ErrorHandling.CheckAccount;
 import Models.Beans.GuardianBean;
 import Models.Beans.TenantBean;
 import Models.DAOImplementation.GuardianDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
+import Models.DAOInterface.GuardianDAOInterface;
 import Models.DAOInterface.TenantDAOInterface;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -32,6 +31,7 @@ public class AddTenant extends javax.swing.JFrame {
      * Creates new form AddTenant
      */
     private int tenantID = 0;
+    private int guardianID = 0;
     private boolean flag = false;
 
     public AddTenant() {
@@ -104,6 +104,21 @@ public class AddTenant extends javax.swing.JFrame {
         YearOfGraduationField.setSelectedItem(tb.getExpectedyearofgrad());
 
         // guardian part
+        GuardianDAOInterface gdao = new GuardianDAOImplementation();
+        GuardianBean gbean = new GuardianBean();
+
+        gbean = gdao.getGuardianByTenantID(tenantID);
+
+        if (gbean.getGuardianID() > 0) { // existing guardian
+            guardianID = gbean.getGuardianID();
+            GuardianFirstnameField.setText(gbean.getFname());
+            GuardianSurnameField.setText(gbean.getLname());
+            GuardianContactField.setText(gbean.getContact());
+            GuardianEmailField.setText(gbean.getEmail());
+        } else {
+            JOptionPane.showMessageDialog(null, "No existing guardian for tenant " + FirstnameField.getText() + " " + SurnameField.getText());
+        }
+
     }
 
     /**
@@ -157,7 +172,7 @@ public class AddTenant extends javax.swing.JFrame {
 
         jLabel2.setText("    jLabel - put picture here");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(100, 210, 169, 16);
+        jLabel2.setBounds(100, 210, 127, 14);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/choosephoto.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -241,7 +256,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         jPanel1.add(MonthField);
-        MonthField.setBounds(370, 160, 60, 27);
+        MonthField.setBounds(370, 160, 60, 20);
 
         DayField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         DayField.addActionListener(new java.awt.event.ActionListener() {
@@ -250,7 +265,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         jPanel1.add(DayField);
-        DayField.setBounds(430, 160, 50, 27);
+        DayField.setBounds(430, 160, 50, 20);
 
         YearField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,7 +273,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         jPanel1.add(YearField);
-        YearField.setBounds(480, 160, 70, 27);
+        YearField.setBounds(480, 160, 70, 20);
 
         AddressField.setColumns(20);
         AddressField.setLineWrap(true);
@@ -282,15 +297,15 @@ public class AddTenant extends javax.swing.JFrame {
 
         jLabel3.setText("Guardian Email");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(540, 330, 130, 16);
+        jLabel3.setBounds(540, 330, 130, 14);
 
         jLabel4.setText("Guardian Firstname");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(540, 270, 130, 16);
+        jLabel4.setBounds(540, 270, 130, 14);
 
         jLabel5.setText("Guardian Surname");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(540, 300, 130, 16);
+        jLabel5.setBounds(540, 300, 130, 14);
 
         GuardianFirstnameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -298,11 +313,11 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         jPanel1.add(GuardianFirstnameField);
-        GuardianFirstnameField.setBounds(660, 260, 80, 28);
+        GuardianFirstnameField.setBounds(650, 260, 90, 30);
         jPanel1.add(GuardianSurnameField);
-        GuardianSurnameField.setBounds(650, 290, 90, 28);
+        GuardianSurnameField.setBounds(650, 290, 90, 30);
         jPanel1.add(GuardianEmailField);
-        GuardianEmailField.setBounds(630, 320, 110, 28);
+        GuardianEmailField.setBounds(630, 320, 110, 30);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addnewtenant-peg-edited.png"))); // NOI18N
         jPanel1.add(jLabel1);
@@ -325,7 +340,11 @@ public class AddTenant extends javax.swing.JFrame {
                     || AddressField.getText().isEmpty()
                     || DegreeField.getText().isEmpty()
                     || EmailAddressField.getText().isEmpty()
-                    || SchoolField.getText().isEmpty()) {
+                    || SchoolField.getText().isEmpty()
+                    || GuardianContactField.getText().isEmpty()
+                    || GuardianFirstnameField.getText().isEmpty()
+                    || GuardianSurnameField.getText().isEmpty()
+                    || GuardianEmailField.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please fill up ALL the fields.");
             } else {
                 try {
@@ -335,8 +354,12 @@ public class AddTenant extends javax.swing.JFrame {
                     c.checkName(SchoolField.getText(), "School");
                     c.checkEmail(EmailAddressField.getText(), "Email");
                     c.checkContact(ContactNumberField.getText(), "Contact");
+                    c.checkName(GuardianFirstnameField.getText(), "Firstname");
+                    c.checkName(GuardianSurnameField.getText(), "Lastname");
+                    c.checkEmail(GuardianEmailField.getText(), "Email");
+                    c.checkContact(GuardianContactField.getText(), "Contact");
 
-                    System.out.println(tenantID);
+                    System.out.println("Tenant ID: " + tenantID);
                     if (tenantID == 0) { // add tenant
 
                     } else { // edit
@@ -345,7 +368,26 @@ public class AddTenant extends javax.swing.JFrame {
                         bean.setFname(FirstnameField.getText().toUpperCase());
                         bean.setLname(SurnameField.getText().toUpperCase());
                         bean.setAddress(AddressField.getText().toUpperCase());
-                        //         bean.setBirthday(null);
+
+                        //converting string to Calendar
+                        String sDate = MonthField.getSelectedItem().toString() + " " + DayField.getSelectedItem().toString() + ", " + YearField.getSelectedItem().toString();
+                        Calendar birthdate = Calendar.getInstance();
+                        DateFormat df = new SimpleDateFormat("MMMM d, yyyy");
+                        try {
+                            birthdate.setTime(df.parse(sDate));
+                        } catch (ParseException ex) {
+                            Logger.getLogger(AddTenant.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        //converting Calendar to sql Date
+                        java.sql.Date sqlBirthdate = new java.sql.Date(birthdate.getTime().getTime());
+
+                        String gender;
+                        try {
+                            gender = buttonGroup1.getSelection().getActionCommand();
+                        } catch (NullPointerException n) {
+                            gender = "";
+                        }
+
                         bean.setContact(ContactNumberField.getText());
                         bean.setDegree(DegreeField.getText().toUpperCase());
                         bean.setEmail(EmailAddressField.getText());
@@ -358,114 +400,132 @@ public class AddTenant extends javax.swing.JFrame {
                         //         bean.setImage(null);
                         bean.setStatus("CURRENT");
 
-                    //    tdao.editTenant(bean);
                         // guardian  
+                        boolean edittenant = tdao.editTenant(bean);
+
+                        GuardianDAOInterface gdao = new GuardianDAOImplementation();
+                        GuardianBean gbean = new GuardianBean();
+
+                        gbean.setFname(GuardianFirstnameField.getText().toUpperCase());
+                        gbean.setLname(GuardianSurnameField.getText().toUpperCase());
+                        gbean.setContact(GuardianContactField.getText());
+                        gbean.setGuardianID(guardianID);
+                        gbean.setEmail(GuardianEmailField.getText());
+
+                        boolean editguardian = gdao.editGuardian(gbean, guardianID);
+
+                        if (edittenant && editguardian) {
+                            JOptionPane.showMessageDialog(null, "Tenant " + bean.getFname() + " " + bean.getLname() + "'s information has been successfully edited.");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Not successful");
+                        }
                     }
 
                 } catch (AccountException e) {
                     e.promptFieldError();
                 }
             }
-        }else{
-            CheckAccount c = new CheckAccount();
-        boolean flag = false;
-        TenantDAOImplementation tenantImpl = new TenantDAOImplementation();
-        TenantBean tenant = new TenantBean();
-        String fname = FirstnameField.getText();
-        String lname = SurnameField.getText();
-        String degree = DegreeField.getText();
-        String school = SchoolField.getText();
-        String email = EmailAddressField.getText();
-        String contact = ContactNumberField.getText();
-        String address = AddressField.getText();
-        //converting string to Calendar
-        String sDate = MonthField.getSelectedItem().toString() + " " + DayField.getSelectedItem().toString() + ", " + YearField.getSelectedItem().toString();
-        Calendar birthdate = Calendar.getInstance();
-        DateFormat df = new SimpleDateFormat("MMMM d, yyyy");
-        try {
-            birthdate.setTime(df.parse(sDate));
-        } catch (ParseException ex) {
-            Logger.getLogger(AddTenant.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //converting Calendar to sql Date
-        java.sql.Date sqlBirthdate = new java.sql.Date(birthdate.getTime().getTime());
-        
-        String gender;
-        try{
-            gender = buttonGroup1.getSelection().getActionCommand();
-        }catch(NullPointerException n){
-            gender = "";
-        }
-        int gradyear = (int) YearOfGraduationField.getSelectedItem();
-        String guardFname = GuardianFirstnameField.getText();
-        String guardLname = GuardianSurnameField.getText();
-        String guardContact = GuardianContactField.getText();
-        String guardEmail = GuardianEmailField.getText();
-
-        if (FirstnameField.getText().isEmpty()
-                || SurnameField.getText().isEmpty()
-                || ContactNumberField.getText().isEmpty()
-                || AddressField.getText().isEmpty()
-                || DegreeField.getText().isEmpty()
-                || EmailAddressField.getText().isEmpty()
-                || SchoolField.getText().isEmpty()
-                || gender.isEmpty()
-                || guardFname.isEmpty()
-                || guardLname.isEmpty()
-                || guardContact.isEmpty()
-                || guardEmail.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please input ALL necessary information");
         } else {
+            CheckAccount c = new CheckAccount();
+            boolean flag = false;
+            TenantDAOImplementation tenantImpl = new TenantDAOImplementation();
+            TenantBean tenant = new TenantBean();
+            String fname = FirstnameField.getText();
+            String lname = SurnameField.getText();
+            String degree = DegreeField.getText();
+            String school = SchoolField.getText();
+            String email = EmailAddressField.getText();
+            String contact = ContactNumberField.getText();
+            String address = AddressField.getText();
+            //converting string to Calendar
+            String sDate = MonthField.getSelectedItem().toString() + " " + DayField.getSelectedItem().toString() + ", " + YearField.getSelectedItem().toString();
+            Calendar birthdate = Calendar.getInstance();
+            DateFormat df = new SimpleDateFormat("MMMM d, yyyy");
             try {
-                //error checking
-                c.checkName(fname, "Firstname");
-                c.checkName(lname, "Lastname");
-                c.checkName(degree, "Degree");
-                c.checkName(school, "School");
-                c.checkEmail(email, "Email");
-                c.checkContact(contact, "Contact");
-                tenant.setFname(fname.toUpperCase());
-                tenant.setLname(lname.toUpperCase());
-                tenant.setContact(contact);
-                tenant.setGender(gender);
-                tenant.setAddress(address.toUpperCase());
-                tenant.setDegree(degree.toUpperCase());
-                tenant.setEmail(email);
-                tenant.setBirthday((java.sql.Date) sqlBirthdate);
-                tenant.setSchool(school.toUpperCase());
-                tenant.setExpectedyearofgrad(gradyear);
-                tenant.setStatus("Current");
-                c.checkName(guardFname, "Guardian Firstname");
-                c.checkName(guardLname, "Guardian Lastname");
-                c.checkContact(guardContact, "Guardian Contact");
-                c.checkEmail(guardEmail, "Guardian Email");
-                
-                GuardianBean guard = new GuardianBean();
-                GuardianDAOImplementation guardImpl = new GuardianDAOImplementation();
-                guard.setFname(guardFname.toUpperCase());
-                guard.setLname(guardLname.toUpperCase());
-                guard.setContact(guardContact);
-                guard.setEmail(guardEmail);
-                
-                boolean g = guardImpl.addGuardian(guard);
-                boolean t = tenantImpl.addTenant(tenant);
-                tenant = tenantImpl.getTenantByName(fname, lname);
-                guard = guardImpl.getGuardianByName(guardFname, guardLname);
-                boolean tg = guardImpl.assignTenantToGuardian(guard, tenant);
-                if(t && g && tg){
-                    guardImpl.assignTenantToGuardian(guard, tenant);
-                    flag = true;
-                }
-                
-            } catch (AccountException e) {
-                e.promptFieldError();
+                birthdate.setTime(df.parse(sDate));
+            } catch (ParseException ex) {
+                Logger.getLogger(AddTenant.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        if(flag){
-            JOptionPane.showMessageDialog(null, "Tenant "+tenant.getFname()+" "+tenant.getLname()+" has successfully added.");
-        }else{
-            JOptionPane.showMessageDialog(null,"Error: Make sure to input all necessary information correcly.");
-        }
+            //converting Calendar to sql Date
+            java.sql.Date sqlBirthdate = new java.sql.Date(birthdate.getTime().getTime());
+
+            String gender;
+            try {
+                gender = buttonGroup1.getSelection().getActionCommand();
+            } catch (NullPointerException n) {
+                gender = "";
+            }
+            int gradyear = (int) YearOfGraduationField.getSelectedItem();
+            String guardFname = GuardianFirstnameField.getText();
+            String guardLname = GuardianSurnameField.getText();
+            String guardContact = GuardianContactField.getText();
+            String guardEmail = GuardianEmailField.getText();
+
+            if (FirstnameField.getText().isEmpty()
+                    || SurnameField.getText().isEmpty()
+                    || ContactNumberField.getText().isEmpty()
+                    || AddressField.getText().isEmpty()
+                    || DegreeField.getText().isEmpty()
+                    || EmailAddressField.getText().isEmpty()
+                    || SchoolField.getText().isEmpty()
+                    || gender.isEmpty()
+                    || guardFname.isEmpty()
+                    || guardLname.isEmpty()
+                    || guardContact.isEmpty()
+                    || guardEmail.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please input ALL necessary information");
+            } else {
+                try {
+                    //error checking
+                    c.checkName(fname, "Firstname");
+                    c.checkName(lname, "Lastname");
+                    c.checkName(degree, "Degree");
+                    c.checkName(school, "School");
+                    c.checkEmail(email, "Email");
+                    c.checkContact(contact, "Contact");
+                    tenant.setFname(fname.toUpperCase());
+                    tenant.setLname(lname.toUpperCase());
+                    tenant.setContact(contact);
+                    tenant.setGender(gender);
+                    tenant.setAddress(address.toUpperCase());
+                    tenant.setDegree(degree.toUpperCase());
+                    tenant.setEmail(email);
+                    tenant.setBirthday((java.sql.Date) sqlBirthdate);
+                    tenant.setSchool(school.toUpperCase());
+                    tenant.setExpectedyearofgrad(gradyear);
+                    tenant.setStatus("Current");
+                    c.checkName(guardFname, "Guardian Firstname");
+                    c.checkName(guardLname, "Guardian Lastname");
+                    c.checkContact(guardContact, "Guardian Contact");
+                    c.checkEmail(guardEmail, "Guardian Email");
+
+                    GuardianBean guard = new GuardianBean();
+                    GuardianDAOImplementation guardImpl = new GuardianDAOImplementation();
+                    guard.setFname(guardFname.toUpperCase());
+                    guard.setLname(guardLname.toUpperCase());
+                    guard.setContact(guardContact);
+                    guard.setEmail(guardEmail);
+
+                    boolean g = guardImpl.addGuardian(guard);
+                    boolean t = tenantImpl.addTenant(tenant);
+                    tenant = tenantImpl.getTenantByName(fname, lname);
+                    guard = guardImpl.getGuardianByName(guardFname, guardLname);
+                    boolean tg = guardImpl.assignTenantToGuardian(guard, tenant);
+                    if (t && g && tg) {
+                        guardImpl.assignTenantToGuardian(guard, tenant);
+
+                        flag = true;
+                    }
+
+                } catch (AccountException e) {
+                    e.promptFieldError();
+                }
+            }
+            if (flag) {
+                JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + " has successfully added.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correcly.");
+            }
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed

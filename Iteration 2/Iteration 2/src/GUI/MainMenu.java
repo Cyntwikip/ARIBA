@@ -2,8 +2,11 @@ package GUI;
 
 
 import ErrorHandling.CheckAccount;
+import Models.Beans.GuardianBean;
 import Models.Beans.TenantBean;
 import Models.DAOImplementation.TenantDAOImplementation;
+import Models.DAOImplementation.GuardianDAOImplementation;
+import Models.DAOInterface.GuardianDAOInterface;
 import Models.DAOInterface.TenantDAOInterface;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -126,8 +129,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         // filter list
         for (int i = 0; i < list.size(); i++) {
-            System.out.println("I: " + i);
-            for (int j = list.size() - 1; j > i; j--) {
+           for (int j = list.size() - 1; j > i; j--) {
                 if (list.get(i).getTenantID() == list.get(j).getTenantID()) {
                     list.remove(j);
                 }
@@ -201,70 +203,46 @@ public class MainMenu extends javax.swing.JFrame {
         CurrentField = new javax.swing.JRadioButton();
         OldField = new javax.swing.JRadioButton();
         YearOfGraduationField = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
-
-        tenantID.setText("jLabel2");
         getContentPane().add(tenantID);
         tenantID.setBounds(810, 100, 90, 20);
-
-        lname.setText("jLabel3");
         getContentPane().add(lname);
         lname.setBounds(800, 130, 100, 20);
-
-        fname.setText("jLabel4");
         getContentPane().add(fname);
         fname.setBounds(810, 150, 90, 20);
-
-        birthday.setText("jLabel5");
         getContentPane().add(birthday);
         birthday.setBounds(800, 180, 180, 20);
-
-        address.setText("jLabel6");
         getContentPane().add(address);
-        address.setBounds(800, 210, 180, 16);
-
-        gender.setText("jLabel7");
+        address.setBounds(800, 210, 180, 0);
         getContentPane().add(gender);
-        gender.setBounds(790, 240, 190, 16);
-
-        contactno.setText("jLabel8");
+        gender.setBounds(790, 240, 190, 0);
         getContentPane().add(contactno);
         contactno.setBounds(820, 260, 170, 20);
-
-        email.setText("jLabel9");
         getContentPane().add(email);
         email.setBounds(790, 280, 190, 30);
-
-        school.setText("jLabel10");
         getContentPane().add(school);
         school.setBounds(800, 310, 180, 20);
-
-        degree.setText("jLabel11");
         getContentPane().add(degree);
         degree.setBounds(800, 340, 180, 20);
-
-        yearofgraduation.setText("jLabel12");
         getContentPane().add(yearofgraduation);
         yearofgraduation.setBounds(870, 360, 110, 20);
-
-        guardian.setText("jLabel13");
         getContentPane().add(guardian);
-        guardian.setBounds(810, 400, 53, 16);
-
-        guardiancontactno.setText("jLabel14");
+        guardian.setBounds(810, 400, 170, 20);
         getContentPane().add(guardiancontactno);
-        guardiancontactno.setBounds(820, 420, 53, 16);
+        guardiancontactno.setBounds(820, 424, 160, 20);
 
         roomassignment.setText("jLabel15");
         getContentPane().add(roomassignment);
-        roomassignment.setBounds(870, 460, 53, 16);
+        roomassignment.setBounds(870, 460, 40, 14);
 
         status.setText("jLabel16");
         getContentPane().add(status);
-        status.setBounds(790, 480, 53, 16);
+        status.setBounds(790, 480, 40, 14);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/AddTenant.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -383,7 +361,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(CurrentField);
-        CurrentField.setBounds(150, 240, 79, 23);
+        CurrentField.setBounds(150, 240, 63, 23);
 
         OldField.setText("Old");
         OldField.addActionListener(new java.awt.event.ActionListener() {
@@ -397,7 +375,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(OldField);
-        OldField.setBounds(150, 260, 54, 23);
+        OldField.setBounds(150, 260, 41, 23);
 
         YearOfGraduationField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -410,7 +388,14 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(YearOfGraduationField);
-        YearOfGraduationField.setBounds(230, 190, 70, 27);
+        YearOfGraduationField.setBounds(230, 190, 70, 20);
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(800, 204, 170, 30);
+        jLabel2.getAccessibleContext().setAccessibleName("address");
+
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(800, 230, 180, 20);
+        jLabel3.getAccessibleContext().setAccessibleName("gender");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Tenant.png"))); // NOI18N
         getContentPane().add(jLabel1);
@@ -491,8 +476,7 @@ public class MainMenu extends javax.swing.JFrame {
         int col = 0;
 
         int tenantid = (Integer) jTable1.getModel().getValueAt(row, col);
-        System.out.println(tenantID);
-
+   
         TenantDAOInterface tdao = new TenantDAOImplementation();
         TenantBean bean = new TenantBean();
         bean = tdao.getTenantById(tenantid);
@@ -500,14 +484,23 @@ public class MainMenu extends javax.swing.JFrame {
         tenantID.setText(String.valueOf(bean.getTenantID()));
         lname.setText(bean.getLname());
         fname.setText(bean.getFname());
-        //     birthday.setText(java.sql.Date.toString(bean.getBirthday()));
-        address.setText(bean.getAddress());
-        gender.setText(bean.getGender());
+//             birthday.setText(java.sql.Date.toString(bean.getBirthday()));
+        jLabel2.setText(bean.getAddress());
+        jLabel3.setText(bean.getGender());
         contactno.setText(bean.getContact());
         email.setText(bean.getEmail());
         school.setText(bean.getSchool());
         degree.setText(bean.getDegree());
         yearofgraduation.setText(String.valueOf(bean.getExpectedyearofgrad()));
+        
+        GuardianDAOInterface gdao = new GuardianDAOImplementation();
+        GuardianBean gbean = new GuardianBean();
+        
+        gbean = gdao.getGuardianByTenantID(tenantid);
+        
+        guardian.setText(gbean.getFname()+" "+gbean.getLname());
+        guardiancontactno.setText(gbean.getContact());
+        
            
     
 
@@ -615,6 +608,8 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lname;

@@ -114,7 +114,7 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 lname = resultSet.getString("lname");
                 email = resultSet.getString("email");
                 birthday = resultSet.getDate("birthday");
-                
+
                 bean = new GuardianBean();
 
                 bean.setGuardianID(guardianid);
@@ -123,7 +123,7 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 bean.setLname(lname);
                 bean.setEmail(email);
                 bean.setBirthday(birthday);
-                
+
                 list.add(bean);
             }
             return list;
@@ -142,14 +142,13 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
             Connector c = new Connector();
             Connection connection = c.getConnection();
 
-            String query = "update guardian set contact=?, fname=?, lname=?, email=?, birthday=? where guardianID = ? ";
+            String query = "update guardian set contact=?, fname=?, lname=?, email=? where guardianID = ? ";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, guardian.getContact());
             ps.setString(2, guardian.getFname());
             ps.setString(3, guardian.getLname());
             ps.setString(4, guardian.getEmail());
-            ps.setDate(5, guardian.getBirthday());
-            ps.setInt(6, guardianID);
+            ps.setInt(5, guardianID);
             ps.executeUpdate();
 
             return true;
@@ -207,44 +206,40 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            
+
             TenantDAOImplementation tenantdao = new TenantDAOImplementation();
             TenantBean tenantbean = new TenantBean();
-            
+
             tenantbean = tenantdao.getTenantByName(fname, lname);
 
             String query = "select * from tenantguardian where tg_tenantID = ?";
             PreparedStatement ps = connection.prepareStatement(query);
 
             ps.setInt(1, tenantbean.getTenantID());
-            
+
             ResultSet resultSet = ps.executeQuery();
-            
+
             GuardianBean bean = new GuardianBean();
             int guardianid;
             String Fname, Lname, contact, email;
-            Date birthday;
-            
+
             PreparedStatement ps2;
             ResultSet resultSet2;
-            
+
             while (resultSet.next()) {
                 guardianid = resultSet.getInt("tg_guardianID");
                 query = "select * from guardian where guardianID = ?";
                 ps2 = connection.prepareStatement(query);
-                
-                //System.out.println(guardianid);
-                
+
                 ps2.setInt(1, guardianid);
                 resultSet2 = ps2.executeQuery();
-                
-                while(resultSet2.next()) {
+
+                while (resultSet2.next()) {
                     contact = resultSet2.getString("contact");
                     Fname = resultSet2.getString("fname");
                     Lname = resultSet2.getString("lname");
                     email = resultSet2.getString("email");
-                    birthday = resultSet2.getDate("birthday");
-                    
+
                     bean = new GuardianBean();
 
                     bean.setGuardianID(guardianid);
@@ -252,10 +247,9 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                     bean.setFname(Fname);
                     bean.setLname(Lname);
                     bean.setEmail(email);
-                    bean.setBirthday(birthday);
                 }
             }
-            
+
             return bean;
 
         } catch (SQLException ex) {
@@ -278,8 +272,6 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
             ps.setInt(2, guardian.getGuardianID());
             ps.executeUpdate();
             connection.close();
-            System.out.println(tenant.getTenantID());
-            System.out.println(guardian.getGuardianID());
             return true;
 
         } catch (SQLException ex) {
@@ -306,7 +298,7 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
             String Fname, Lname, gender, address, degree, school, status, contact, email;
             Blob image;
             Date birthday;
-            
+
             while (resultSet.next()) {
                 tenantID = resultSet.getInt("guardianID");
                 Fname = resultSet.getString("fname");
@@ -337,11 +329,67 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 bean.setStatus(status);
                 bean.setEmail(email);
                 bean.setBirthday(birthday);
-                
+
                 list.add(bean);
 
             }
             return list;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
+
+    @Override
+    public GuardianBean getGuardianByTenantID(int tenantID) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+
+            String query = "select * from tenantguardian where tg_tenantID = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+
+            ps.setInt(1, tenantID);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            GuardianBean bean = new GuardianBean();
+            int guardianid;
+            String Fname, Lname, contact, email;
+  
+            PreparedStatement ps2;
+            ResultSet resultSet2;
+
+            while (resultSet.next()) {
+                guardianid = resultSet.getInt("tg_guardianID");
+                query = "select * from guardian where guardianID = ?";
+                ps2 = connection.prepareStatement(query);
+
+                ps2.setInt(1, guardianid);
+                resultSet2 = ps2.executeQuery();
+
+                while (resultSet2.next()) {
+                    
+                    contact = resultSet2.getString("contact");
+                    Fname = resultSet2.getString("fname");
+                    Lname = resultSet2.getString("lname");
+                    email = resultSet2.getString("email");
+          
+                    bean = new GuardianBean();
+
+                    bean.setGuardianID(guardianid);
+                    bean.setContact(contact);
+                    bean.setFname(Fname);
+                    bean.setLname(Lname);
+                    bean.setEmail(email);
+                    
+                    System.out.println("Guardian ID: " + bean.getGuardianID());
+                }
+            }
+
+            return bean;
 
         } catch (SQLException ex) {
             Logger.getLogger(RoomDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
