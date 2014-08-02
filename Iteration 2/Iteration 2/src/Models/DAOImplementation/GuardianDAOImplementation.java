@@ -30,16 +30,14 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "insert into guardian (guardianID, fname, lname, contact, email, birthday)"
-                    + " values(?, ?, ?, ?, ?, ?)";
+            String query = "insert into guardian (guardianID, fname, lname, contact, email)"
+                    + " values(?, ?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, guardian.getGuardianID());
             ps.setString(2, guardian.getFname());
             ps.setString(3, guardian.getLname());
             ps.setString(4, guardian.getContact());
             ps.setString(5, guardian.getEmail());
-            ps.setDate(6, guardian.getBirthday());
-
             ps.executeUpdate();
             connection.close();
 
@@ -67,7 +65,6 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
 
             int guardianid;
             String fname, lname, contact, email;
-            Date birthday;
 
             while (resultSet.next()) {
                 guardianid = resultSet.getInt("guardianID");
@@ -75,7 +72,6 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 fname = resultSet.getString("fname");
                 lname = resultSet.getString("lname");
                 email = resultSet.getString("email");
-                birthday = resultSet.getDate("birthday");
 
                 bean = new GuardianBean();
 
@@ -84,7 +80,6 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 bean.setFname(fname);
                 bean.setLname(lname);
                 bean.setEmail(email);
-                bean.setBirthday(birthday);
             }
             return bean;
         } catch (SQLException ex) {
@@ -189,7 +184,6 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 Fname = resultSet.getString("fname");
                 Lname = resultSet.getString("lname");
                 email = resultSet.getString("email");
-                birthday = resultSet.getDate("birthday");
 
                 bean = new GuardianBean();
 
@@ -198,7 +192,6 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 bean.setFname(Fname);
                 bean.setLname(Lname);
                 bean.setEmail(email);
-                bean.setBirthday(birthday);
             }
             return bean;
         } catch (SQLException ex) {
