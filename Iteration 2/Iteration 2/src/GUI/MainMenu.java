@@ -3,8 +3,10 @@ package GUI;
 
 import ErrorHandling.CheckAccount;
 import Models.Beans.GuardianBean;
+import Models.Beans.RoomBean;
 import Models.Beans.TenantBean;
 import Models.DAOImplementation.GuardianDAOImplementation;
+import Models.DAOImplementation.RoomDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
 import Models.DAOInterface.TenantDAOInterface;
 import java.sql.Date;
@@ -516,12 +518,19 @@ public class MainMenu extends javax.swing.JFrame {
         GuardianBean guardianbean = new GuardianBean();
         GuardianDAOImplementation gdao = new GuardianDAOImplementation();
         
-        
         guardianbean = gdao.getGuardianByTenant(bean.getFname(), bean.getLname());
         guardian.setText(guardianbean.getFname() + " " + guardianbean.getLname());
         guardiancontactno.setText(guardianbean.getContact());
         
-
+        /*
+        RoomBean roombean = new RoomBean();
+        RoomDAOImplementation roomdao = new RoomDAOImplementation();
+        
+        roombean = roomdao.getTenantRoom(tenantid);
+        roomassignment.setText(String.valueOf(roombean.getRoomID()));
+        */
+        
+        status.setText(bean.getStatus());
     }//GEN-LAST:event_jTable1MouseClicked
 
 
