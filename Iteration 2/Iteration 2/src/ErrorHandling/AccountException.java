@@ -24,7 +24,7 @@ public class AccountException extends Exception {
     }
     
     public void promptFieldError(){
-        JOptionPane.showMessageDialog(null, "Invalid input in "+fieldname+" field.");
+        JOptionPane.showMessageDialog(null, "Invalid input in "+fieldname+" field.", "Error Input", JOptionPane.ERROR_MESSAGE);
     }
     
 }

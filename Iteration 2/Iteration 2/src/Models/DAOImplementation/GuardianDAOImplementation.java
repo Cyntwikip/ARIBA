@@ -113,7 +113,6 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 fname = resultSet.getString("fname");
                 lname = resultSet.getString("lname");
                 email = resultSet.getString("email");
-                birthday = resultSet.getDate("birthday");
                 
                 bean = new GuardianBean();
 
@@ -122,7 +121,6 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 bean.setFname(fname);
                 bean.setLname(lname);
                 bean.setEmail(email);
-                bean.setBirthday(birthday);
                 
                 list.add(bean);
             }
@@ -278,8 +276,6 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
             ps.setInt(2, guardian.getGuardianID());
             ps.executeUpdate();
             connection.close();
-            System.out.println(tenant.getTenantID());
-            System.out.println(guardian.getGuardianID());
             return true;
 
         } catch (SQLException ex) {

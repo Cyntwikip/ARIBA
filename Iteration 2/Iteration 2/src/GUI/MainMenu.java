@@ -204,6 +204,8 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximizedBounds(new java.awt.Rectangle(0, 0, 1020, 560));
+        setMinimumSize(new java.awt.Dimension(1020, 560));
         getContentPane().setLayout(null);
 
         tenantID.setText("jLabel2");
