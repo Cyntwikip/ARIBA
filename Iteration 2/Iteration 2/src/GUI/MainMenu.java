@@ -3,10 +3,8 @@ package GUI;
 
 import ErrorHandling.CheckAccount;
 import Models.Beans.GuardianBean;
-<<<<<<< HEAD
-=======
+
 import Models.Beans.RoomBean;
->>>>>>> e0e03ce7d225e10053c3b773762b76c0fe527a07
 import Models.Beans.TenantBean;
 import Models.DAOImplementation.GuardianDAOImplementation;
 import Models.DAOImplementation.RoomDAOImplementation;
@@ -193,7 +191,6 @@ public class MainMenu extends javax.swing.JFrame {
         school = new javax.swing.JLabel();
         degree = new javax.swing.JLabel();
         yearofgraduation = new javax.swing.JLabel();
-        guardian = new javax.swing.JLabel();
         guardiancontactno = new javax.swing.JLabel();
         roomassignment = new javax.swing.JLabel();
         status = new javax.swing.JLabel();
@@ -226,19 +223,9 @@ public class MainMenu extends javax.swing.JFrame {
         getContentPane().add(birthday);
         birthday.setBounds(800, 180, 180, 20);
         getContentPane().add(address);
-<<<<<<< HEAD
         address.setBounds(800, 210, 180, 0);
         getContentPane().add(gender);
         gender.setBounds(790, 240, 190, 0);
-=======
-        address.setBounds(800, 210, 180, 14);
-
-        gender.setText("jLabel7");
-        getContentPane().add(gender);
-        gender.setBounds(790, 240, 190, 14);
-
-        contactno.setText("jLabel8");
->>>>>>> e0e03ce7d225e10053c3b773762b76c0fe527a07
         getContentPane().add(contactno);
         contactno.setBounds(820, 260, 170, 20);
         getContentPane().add(email);
@@ -249,18 +236,8 @@ public class MainMenu extends javax.swing.JFrame {
         degree.setBounds(800, 340, 180, 20);
         getContentPane().add(yearofgraduation);
         yearofgraduation.setBounds(870, 360, 110, 20);
-        getContentPane().add(guardian);
-<<<<<<< HEAD
-        guardian.setBounds(810, 400, 170, 20);
         getContentPane().add(guardiancontactno);
         guardiancontactno.setBounds(820, 424, 160, 20);
-=======
-        guardian.setBounds(810, 400, 120, 14);
-
-        guardiancontactno.setText("jLabel14");
-        getContentPane().add(guardiancontactno);
-        guardiancontactno.setBounds(820, 420, 120, 14);
->>>>>>> e0e03ce7d225e10053c3b773762b76c0fe527a07
 
         roomassignment.setText("jLabel15");
         getContentPane().add(roomassignment);
@@ -415,7 +392,6 @@ public class MainMenu extends javax.swing.JFrame {
         });
         getContentPane().add(YearOfGraduationField);
         YearOfGraduationField.setBounds(230, 190, 70, 20);
-<<<<<<< HEAD
         getContentPane().add(jLabel2);
         jLabel2.setBounds(800, 204, 170, 30);
         jLabel2.getAccessibleContext().setAccessibleName("address");
@@ -423,8 +399,6 @@ public class MainMenu extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(800, 230, 180, 20);
         jLabel3.getAccessibleContext().setAccessibleName("gender");
-=======
->>>>>>> e0e03ce7d225e10053c3b773762b76c0fe527a07
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Tenant.png"))); // NOI18N
         getContentPane().add(jLabel1);
@@ -527,14 +501,14 @@ public class MainMenu extends javax.swing.JFrame {
         
         gbean = gdao.getGuardianByTenantID(tenantid);
         
-        guardian.setText(gbean.getFname()+" "+gbean.getLname());
+        jLabel1.setText(gbean.getFname()+" "+gbean.getLname());
         guardiancontactno.setText(gbean.getContact());
         
            
         GuardianBean guardianbean = new GuardianBean();
         
         guardianbean = gdao.getGuardianByTenant(bean.getFname(), bean.getLname());
-        guardian.setText(guardianbean.getFname() + " " + guardianbean.getLname());
+        jLabel1.setText(guardianbean.getFname() + " " + guardianbean.getLname());
         guardiancontactno.setText(guardianbean.getContact());
         
         /*
@@ -645,7 +619,6 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel email;
     private javax.swing.JLabel fname;
     private javax.swing.JLabel gender;
-    private javax.swing.JLabel guardian;
     private javax.swing.JLabel guardiancontactno;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

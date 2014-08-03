@@ -118,25 +118,10 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="guardian">
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-<<<<<<< HEAD
-          <AbsoluteConstraints x="810" y="400" width="170" height="20"/>
-=======
-          <AbsoluteConstraints x="810" y="400" width="120" height="-1"/>
->>>>>>> e0e03ce7d225e10053c3b773762b76c0fe527a07
-        </Constraint>
-      </Constraints>
-    </Component>
     <Component class="javax.swing.JLabel" name="guardiancontactno">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-<<<<<<< HEAD
           <AbsoluteConstraints x="820" y="424" width="160" height="20"/>
-=======
-          <AbsoluteConstraints x="820" y="420" width="120" height="-1"/>
->>>>>>> e0e03ce7d225e10053c3b773762b76c0fe527a07
         </Constraint>
       </Constraints>
     </Component>
