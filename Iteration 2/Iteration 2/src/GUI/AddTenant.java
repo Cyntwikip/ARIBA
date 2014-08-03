@@ -161,11 +161,7 @@ public class AddTenant extends javax.swing.JFrame {
         YearField = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         AddressField = new javax.swing.JTextArea();
-        GuardianNameField = new javax.swing.JTextField();
         GuardianContactField = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         GuardianFirstnameField = new javax.swing.JTextField();
         GuardianSurnameField = new javax.swing.JTextField();
         GuardianEmailField = new javax.swing.JTextField();
@@ -200,7 +196,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(560, 380, 90, 40);
+        jButton3.setBounds(530, 370, 90, 40);
 
         buttonGroup1.add(MaleField);
         MaleField.setText("Male");
@@ -231,7 +227,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(660, 380, 90, 40);
+        jButton1.setBounds(620, 370, 130, 40);
 
         SurnameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -293,29 +289,13 @@ public class AddTenant extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(370, 190, 160, 70);
 
-        GuardianNameField.setText("<not used>");
-        jPanel1.add(GuardianNameField);
-        GuardianNameField.setBounds(610, 190, 130, 30);
-
         GuardianContactField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GuardianContactFieldActionPerformed(evt);
             }
         });
         jPanel1.add(GuardianContactField);
-        GuardianContactField.setBounds(630, 220, 110, 30);
-
-        jLabel3.setText("Guardian Email");
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(540, 330, 130, 14);
-
-        jLabel4.setText("Guardian Firstname");
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(540, 270, 130, 14);
-
-        jLabel5.setText("Guardian Surname");
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(540, 300, 130, 14);
+        GuardianContactField.setBounds(630, 270, 110, 30);
 
         GuardianFirstnameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -323,11 +303,11 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         jPanel1.add(GuardianFirstnameField);
-        GuardianFirstnameField.setBounds(650, 260, 90, 30);
+        GuardianFirstnameField.setBounds(600, 240, 140, 30);
         jPanel1.add(GuardianSurnameField);
-        GuardianSurnameField.setBounds(650, 290, 90, 30);
+        GuardianSurnameField.setBounds(600, 210, 140, 30);
         jPanel1.add(GuardianEmailField);
-        GuardianEmailField.setBounds(630, 320, 110, 30);
+        GuardianEmailField.setBounds(630, 300, 110, 30);
 
         ExistingGuardianRadioButton.setText("Existing Guardian");
         ExistingGuardianRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -336,10 +316,10 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         jPanel1.add(ExistingGuardianRadioButton);
-        ExistingGuardianRadioButton.setBounds(510, 360, 109, 23);
+        ExistingGuardianRadioButton.setBounds(530, 340, 120, 23);
 
         jPanel1.add(ExistingGuardianComboBox);
-        ExistingGuardianComboBox.setBounds(650, 360, 130, 20);
+        ExistingGuardianComboBox.setBounds(650, 340, 120, 20);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addnewtenant-peg-edited.png"))); // NOI18N
         jPanel1.add(jLabel1);
@@ -733,7 +713,6 @@ public class AddTenant extends javax.swing.JFrame {
     private javax.swing.JTextField GuardianContactField;
     private javax.swing.JTextField GuardianEmailField;
     private javax.swing.JTextField GuardianFirstnameField;
-    private javax.swing.JTextField GuardianNameField;
     private javax.swing.JTextField GuardianSurnameField;
     private javax.swing.JRadioButton MaleField;
     private javax.swing.JComboBox MonthField;
@@ -750,9 +729,6 @@ public class AddTenant extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
