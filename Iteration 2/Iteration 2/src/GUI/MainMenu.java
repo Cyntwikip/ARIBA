@@ -1,6 +1,6 @@
 package GUI;
 
-
+import ErrorHandling.AccountException;
 import ErrorHandling.CheckAccount;
 import Models.Beans.GuardianBean;
 
@@ -9,7 +9,6 @@ import Models.Beans.TenantBean;
 import Models.DAOImplementation.GuardianDAOImplementation;
 import Models.DAOImplementation.RoomDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
-import Models.DAOImplementation.GuardianDAOImplementation;
 import Models.DAOInterface.GuardianDAOInterface;
 import Models.DAOInterface.TenantDAOInterface;
 import java.sql.Date;
@@ -35,14 +34,14 @@ public class MainMenu extends javax.swing.JFrame {
     /**
      * Creates new form MainMenu
      */
+    private DefaultTableModel model;
+    private CheckAccount c = new CheckAccount();
+    private ArrayList<TenantBean> searchnamelist = new ArrayList<>();
+    private TenantDAOImplementation tenantImpl = new TenantDAOImplementation();
+
     public MainMenu() {
         initComponents();
-        CheckAccount c = new CheckAccount();
-        buttonGroup1.add(MaleField);
-        buttonGroup1.add(FemaleField);
-
-        buttonGroup2.add(CurrentField);
-        buttonGroup2.add(OldField);
+        initTable();
 
         int year = Calendar.getInstance().get(Calendar.YEAR);
 
@@ -52,119 +51,159 @@ public class MainMenu extends javax.swing.JFrame {
         for (int i = 2000; i <= year + 10; i++) {
             YearOfGraduationField.addItem(i);
         }
+        jTable1.addRowSelectionInterval(0, 0);
+        getSelection();
 
     }
 
-    public void checkresults() {
-        TenantDAOInterface tdao = new TenantDAOImplementation();
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    public void initTable() {
+        ArrayList<TenantBean> tenantlist = new ArrayList<>();
+        tenantlist = tenantImpl.getAllTenants();
+        model = (DefaultTableModel) jTable1.getModel();
+        initSearch(tenantlist);
+    }
 
-        for (int i = 0; i < model.getRowCount(); i++) {
-            model.removeRow(i);
-        }
-        model.setRowCount(0);
-        model.setNumRows(0);
+    public void searchName() {
+        String name = NameField.getText();
 
-        ArrayList<TenantBean> list = new ArrayList<TenantBean>(); // final list
-        ArrayList<TenantBean> searchnamelist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchschoollist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchdegreelist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchyearlist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchgenderlist = new ArrayList<TenantBean>();
-        ArrayList<TenantBean> searchstatuslist = new ArrayList<TenantBean>();
+        try {
+            c.checkName(name, "Name");
+            searchnamelist = tenantImpl.searchTenantName(name);
+            initSearch(searchnamelist);
 
-        if (NameField.getText().matches("^[a-zA-Z ]+$")) { // letters lang
-            String name = NameField.getText();
-            searchnamelist = tdao.searchTenantName(name); // list from searchname
-            for (int i = 0; i < searchnamelist.size(); i++) {
-                list.add(searchnamelist.get(i));
-            }
-        }
-        if (!(SchoolField.getText().isEmpty())) {
-            String school = SchoolField.getText();
-            searchschoollist = tdao.getTenantBySchool(school);
-            for (int i = 0; i < searchschoollist.size(); i++) {
-                list.add(searchschoollist.get(i));
-            }
-        }
-        if (!(DegreeField.getText().isEmpty())) {
-            String degree = DegreeField.getText();
-            searchdegreelist = tdao.getTenantByDegree(degree);
-            for (int i = 0; i < searchdegreelist.size(); i++) {
-                list.add(searchdegreelist.get(i));
-            }
-        }
-        int expectedyear = (Integer) YearOfGraduationField.getSelectedItem();
-        searchyearlist = tdao.getTenantByExpectedYearofGrad(expectedyear);
-        for (int i = 0; i < searchyearlist.size(); i++) {
-            list.add(searchyearlist.get(i));
-        }
-        if (MaleField.isSelected()) {
-            searchgenderlist = tdao.getMaleTenant();
-            for (int i = 0; i < searchgenderlist.size(); i++) {
-                list.add(searchgenderlist.get(i));
-            }
-
-        } else if (FemaleField.isSelected()) {
-            searchgenderlist = tdao.getFemaleTenant();
-            for (int i = 0; i < searchgenderlist.size(); i++) {
-                list.add(searchgenderlist.get(i));
-            }
-
+        } catch (AccountException ex) {
+            model.getDataVector().removeAllElements();
+            model.fireTableDataChanged();
         }
 
-        if (CurrentField.isSelected()) {
-            searchstatuslist = tdao.getTenantByStatus("Current");
-            for (int i = 0; i < searchstatuslist.size(); i++) {
-                list.add(searchstatuslist.get(i));
-            }
+    }
 
-        } else if (OldField.isSelected()) {
-            searchstatuslist = tdao.getTenantByStatus("Old");
-            for (int i = 0; i < searchstatuslist.size(); i++) {
-                list.add(searchstatuslist.get(i));
-            }
+    public void searchSchool() {
+        String school = SchoolField.getText();
 
+        try {
+            c.checkName(school, "School");
+            searchnamelist = tenantImpl.getTenantBySchool(school);
+            initSearch(searchnamelist);
+
+        } catch (AccountException ex) {
+            model.getDataVector().removeAllElements();
+            model.fireTableDataChanged();
         }
+    }
 
-        // filter searchnamelist searchschoollist
-        ArrayList<TenantBean> result = new ArrayList<TenantBean>();
-        Set<Integer> ids = new HashSet<Integer>();
+    public void searchDegree() {
+        String degree = DegreeField.getText();
 
-        // filter list
-        for (int i = 0; i < list.size(); i++) {
-           for (int j = list.size() - 1; j > i; j--) {
-                if (list.get(i).getTenantID() == list.get(j).getTenantID()) {
-                    list.remove(j);
-                }
-            }
+        try {
+            c.checkName(degree, "Degree");
+            searchnamelist = tenantImpl.getTenantByDegree(degree);
+            initSearch(searchnamelist);
+
+        } catch (AccountException ex) {
+            model.getDataVector().removeAllElements();
+            model.fireTableDataChanged();
         }
+    }
 
-        for (TenantBean bean : list) {
-            int tenantid = bean.getTenantID();
-            String fname = bean.getFname();
-            String lname = bean.getLname();
+    public void searchYear() {
+        int year = Integer.parseInt(YearOfGraduationField.getSelectedItem().toString());
 
-            Object[] obj = {tenantid, fname, lname};
+        searchnamelist = tenantImpl.getTenantByExpectedYearofGrad(year);
+        initSearch(searchnamelist);
 
-            model.addRow(obj);
-        }
+    }
 
-        list = null;
+    public void searchMale() {
+        searchnamelist = tenantImpl.getMaleTenant();
+        initSearch(searchnamelist);
+
+    }
+
+    public void searchFemale() {
+            searchnamelist = tenantImpl.getFemaleTenant();
+            initSearch(searchnamelist);
+    }
+
+    public void searchCurrent() {
+            searchnamelist = tenantImpl.getTenantByStatus(CurrentField.getText());
+            initSearch(searchnamelist);
+    }
+
+    public void searchOld() {
+            searchnamelist = tenantImpl.getTenantByStatus(OldField.getText());
+            initSearch(searchnamelist);
     }
 
     public TenantBean initializetenant() {
         TenantDAOInterface tdao = new TenantDAOImplementation();
         TenantBean bean = new TenantBean();
-        
+
         int row = jTable1.getSelectedRow();
         int col = 0;
         int id = (Integer) jTable1.getValueAt(row, col);
-        
+
         bean = tdao.getTenantById(id);
-        
+
         return bean;
+
+    }
+
+    public void initSearch(ArrayList<TenantBean> list) {
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+        for (TenantBean tenant : list) {
+            Object[] obj = {tenant.getTenantID(), tenant.getLname(), tenant.getFname()};
+            model.addRow(obj);
+        }
+        jTable1.addRowSelectionInterval(0, 0);
+        getSelection();
+    }
+
+    public void getSelection() {
+        int row = jTable1.getSelectedRow();
+        int col = 0;
+
+        int tenantid = (Integer) jTable1.getModel().getValueAt(row, col);
+
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+        TenantBean bean = new TenantBean();
+        bean = tdao.getTenantById(tenantid);
+
+        tenantID.setText(String.valueOf(bean.getTenantID()));
+        lname.setText(bean.getLname());
+        fname.setText(bean.getFname());
+//             birthday.setText(java.sql.Date.toString(bean.getBirthday()));
+        jLabel2.setText(bean.getAddress());
+        jLabel3.setText(bean.getGender());
+        contactno.setText(bean.getContact());
+        email.setText(bean.getEmail());
+        school.setText(bean.getSchool());
+        degree.setText(bean.getDegree());
+        yearofgraduation.setText(String.valueOf(bean.getExpectedyearofgrad()));
+
+        GuardianDAOInterface gdao = new GuardianDAOImplementation();
+        GuardianBean gbean = new GuardianBean();
+
+        gbean = gdao.getGuardianByTenantID(tenantid);
+
+        jLabel1.setText(gbean.getFname() + " " + gbean.getLname());
+        guardiancontactno.setText(gbean.getContact());
+
+        GuardianBean guardianbean = new GuardianBean();
+
+        guardianbean = gdao.getGuardianByTenant(bean.getFname(), bean.getLname());
+        jLabel1.setText(guardianbean.getFname() + " " + guardianbean.getLname());
+        guardiancontactno.setText(guardianbean.getContact());
+
+        /*
+         RoomBean roombean = new RoomBean();
+         RoomDAOImplementation roomdao = new RoomDAOImplementation();
         
+         roombean = roomdao.getTenantRoom(tenantid);
+         roomassignment.setText(String.valueOf(roombean.getRoomID()));
+         */
+        status.setText(bean.getStatus());
     }
 
     /**
@@ -242,11 +281,11 @@ public class MainMenu extends javax.swing.JFrame {
 
         roomassignment.setText("jLabel15");
         getContentPane().add(roomassignment);
-        roomassignment.setBounds(870, 460, 40, 14);
+        roomassignment.setBounds(870, 460, 53, 16);
 
         status.setText("jLabel16");
         getContentPane().add(status);
-        status.setBounds(790, 480, 40, 14);
+        status.setBounds(790, 480, 53, 16);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/AddTenant.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -272,8 +311,8 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         NameField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                NameFieldKeyPressed(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                NameFieldKeyReleased(evt);
             }
         });
         getContentPane().add(NameField);
@@ -285,8 +324,8 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         SchoolField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                SchoolFieldKeyPressed(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                SchoolFieldKeyReleased(evt);
             }
         });
         getContentPane().add(SchoolField);
@@ -298,13 +337,14 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         DegreeField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                DegreeFieldKeyPressed(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                DegreeFieldKeyReleased(evt);
             }
         });
         getContentPane().add(DegreeField);
         DegreeField.setBounds(150, 160, 160, 30);
 
+        buttonGroup1.add(MaleField);
         MaleField.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         MaleField.setText("Male");
         MaleField.addActionListener(new java.awt.event.ActionListener() {
@@ -312,24 +352,15 @@ public class MainMenu extends javax.swing.JFrame {
                 MaleFieldActionPerformed(evt);
             }
         });
-        MaleField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                MaleFieldKeyPressed(evt);
-            }
-        });
         getContentPane().add(MaleField);
         MaleField.setBounds(150, 210, 60, 30);
 
+        buttonGroup1.add(FemaleField);
         FemaleField.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         FemaleField.setText("Female");
         FemaleField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FemaleFieldActionPerformed(evt);
-            }
-        });
-        FemaleField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                FemaleFieldKeyPressed(evt);
             }
         });
         getContentPane().add(FemaleField);
@@ -342,10 +373,24 @@ public class MainMenu extends javax.swing.JFrame {
             new String [] {
                 "Tenant ID", "First Name", "Last Name"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setToolTipText("");
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -353,46 +398,33 @@ public class MainMenu extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(340, 70, 350, 450);
 
+        buttonGroup2.add(CurrentField);
         CurrentField.setText("Current");
         CurrentField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CurrentFieldActionPerformed(evt);
             }
         });
-        CurrentField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                CurrentFieldKeyPressed(evt);
-            }
-        });
         getContentPane().add(CurrentField);
-        CurrentField.setBounds(150, 240, 63, 23);
+        CurrentField.setBounds(150, 240, 79, 23);
 
+        buttonGroup2.add(OldField);
         OldField.setText("Old");
         OldField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OldFieldActionPerformed(evt);
             }
         });
-        OldField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                OldFieldKeyPressed(evt);
-            }
-        });
         getContentPane().add(OldField);
-        OldField.setBounds(150, 260, 41, 23);
+        OldField.setBounds(150, 260, 54, 23);
 
         YearOfGraduationField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 YearOfGraduationFieldActionPerformed(evt);
             }
         });
-        YearOfGraduationField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                YearOfGraduationFieldKeyPressed(evt);
-            }
-        });
         getContentPane().add(YearOfGraduationField);
-        YearOfGraduationField.setBounds(230, 190, 70, 20);
+        YearOfGraduationField.setBounds(230, 190, 70, 27);
         getContentPane().add(jLabel2);
         jLabel2.setBounds(800, 204, 170, 30);
         jLabel2.getAccessibleContext().setAccessibleName("address");
@@ -417,13 +449,13 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
+
         int row = jTable1.getSelectedRow();
         int tenantID = (Integer) jTable1.getValueAt(row, 0);
         TenantDAOInterface tdao = new TenantDAOImplementation();
         TenantBean tb = new TenantBean();
         tb = tdao.getTenantById(tenantID);
-        
+
         this.setVisible(false);
         AddTenant at = new AddTenant(tenantID);
         at.setVisible(true);
@@ -433,136 +465,69 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void NameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameFieldActionPerformed
         // TODO add your handling code here:
-        checkresults();
 
     }//GEN-LAST:event_NameFieldActionPerformed
 
     private void MaleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaleFieldActionPerformed
         // TODO add your handling code here:
-        checkresults();
+        searchMale();
     }//GEN-LAST:event_MaleFieldActionPerformed
 
 
     private void FemaleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FemaleFieldActionPerformed
         // TODO add your handling code here:
-        checkresults();
+        searchFemale();
     }//GEN-LAST:event_FemaleFieldActionPerformed
 
     private void CurrentFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurrentFieldActionPerformed
         // TODO add your handling code here:
-        checkresults();
+        searchCurrent();
 
     }//GEN-LAST:event_CurrentFieldActionPerformed
 
     private void SchoolFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SchoolFieldActionPerformed
         // TODO add your handling code here:
-        checkresults();
     }//GEN-LAST:event_SchoolFieldActionPerformed
 
     private void YearOfGraduationFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YearOfGraduationFieldActionPerformed
         // TODO add your handling code here:
-        checkresults();
+        searchYear();
     }//GEN-LAST:event_YearOfGraduationFieldActionPerformed
 
     private void DegreeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DegreeFieldActionPerformed
         // TODO add your handling code here:
-        checkresults();
     }//GEN-LAST:event_DegreeFieldActionPerformed
 
     private void OldFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OldFieldActionPerformed
         // TODO add your handling code here:
-        checkresults();
+        searchOld();
     }//GEN-LAST:event_OldFieldActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        int row = jTable1.getSelectedRow();
-        int col = 0;
-
-        int tenantid = (Integer) jTable1.getModel().getValueAt(row, col);
-   
-        TenantDAOInterface tdao = new TenantDAOImplementation();
-        TenantBean bean = new TenantBean();
-        bean = tdao.getTenantById(tenantid);
-        
-        tenantID.setText(String.valueOf(bean.getTenantID()));
-        lname.setText(bean.getLname());
-        fname.setText(bean.getFname());
-//             birthday.setText(java.sql.Date.toString(bean.getBirthday()));
-        jLabel2.setText(bean.getAddress());
-        jLabel3.setText(bean.getGender());
-        contactno.setText(bean.getContact());
-        email.setText(bean.getEmail());
-        school.setText(bean.getSchool());
-        degree.setText(bean.getDegree());
-        yearofgraduation.setText(String.valueOf(bean.getExpectedyearofgrad()));
-        
-        GuardianDAOInterface gdao = new GuardianDAOImplementation();
-        GuardianBean gbean = new GuardianBean();
-        
-        gbean = gdao.getGuardianByTenantID(tenantid);
-        
-        jLabel1.setText(gbean.getFname()+" "+gbean.getLname());
-        guardiancontactno.setText(gbean.getContact());
-        
-           
-        GuardianBean guardianbean = new GuardianBean();
-        
-        guardianbean = gdao.getGuardianByTenant(bean.getFname(), bean.getLname());
-        jLabel1.setText(guardianbean.getFname() + " " + guardianbean.getLname());
-        guardiancontactno.setText(guardianbean.getContact());
-        
-        /*
-        RoomBean roombean = new RoomBean();
-        RoomDAOImplementation roomdao = new RoomDAOImplementation();
-        
-        roombean = roomdao.getTenantRoom(tenantid);
-        roomassignment.setText(String.valueOf(roombean.getRoomID()));
-        */
-        
-        status.setText(bean.getStatus());
+        getSelection();
     }//GEN-LAST:event_jTable1MouseClicked
 
 
-    private void NameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NameFieldKeyPressed
+    private void NameFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NameFieldKeyReleased
         // TODO add your handling code here:
-        checkresults();
-    }//GEN-LAST:event_NameFieldKeyPressed
+        searchName();
+    }//GEN-LAST:event_NameFieldKeyReleased
 
-    private void SchoolFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SchoolFieldKeyPressed
+    private void SchoolFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SchoolFieldKeyReleased
         // TODO add your handling code here:
-        checkresults();
-    }//GEN-LAST:event_SchoolFieldKeyPressed
+        searchSchool();
+    }//GEN-LAST:event_SchoolFieldKeyReleased
 
-    private void DegreeFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DegreeFieldKeyPressed
+    private void DegreeFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DegreeFieldKeyReleased
         // TODO add your handling code here:
-        checkresults();
-    }//GEN-LAST:event_DegreeFieldKeyPressed
+        searchDegree();
+    }//GEN-LAST:event_DegreeFieldKeyReleased
 
-    private void YearOfGraduationFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_YearOfGraduationFieldKeyPressed
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
         // TODO add your handling code here:
-        checkresults();
-    }//GEN-LAST:event_YearOfGraduationFieldKeyPressed
-
-    private void MaleFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MaleFieldKeyPressed
-        // TODO add your handling code here:
-        checkresults();
-    }//GEN-LAST:event_MaleFieldKeyPressed
-
-    private void FemaleFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FemaleFieldKeyPressed
-        // TODO add your handling code here:
-        checkresults();
-    }//GEN-LAST:event_FemaleFieldKeyPressed
-
-    private void CurrentFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CurrentFieldKeyPressed
-        // TODO add your handling code here:
-        checkresults();
-    }//GEN-LAST:event_CurrentFieldKeyPressed
-
-    private void OldFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_OldFieldKeyPressed
-        // TODO add your handling code here:
-        checkresults();
-    }//GEN-LAST:event_OldFieldKeyPressed
+        getSelection();
+    }//GEN-LAST:event_jTable1KeyReleased
 
     /**
      * @param args the command line arguments
