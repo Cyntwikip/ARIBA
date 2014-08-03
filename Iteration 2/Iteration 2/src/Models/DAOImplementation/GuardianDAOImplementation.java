@@ -113,12 +113,6 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 fname = resultSet.getString("fname");
                 lname = resultSet.getString("lname");
                 email = resultSet.getString("email");
-<<<<<<< HEAD
-                birthday = resultSet.getDate("birthday");
-
-=======
-                
->>>>>>> e0e03ce7d225e10053c3b773762b76c0fe527a07
                 bean = new GuardianBean();
 
                 bean.setGuardianID(guardianid);
@@ -126,12 +120,6 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 bean.setFname(fname);
                 bean.setLname(lname);
                 bean.setEmail(email);
-<<<<<<< HEAD
-                bean.setBirthday(birthday);
-
-=======
-                
->>>>>>> e0e03ce7d225e10053c3b773762b76c0fe527a07
                 list.add(bean);
             }
             return list;
@@ -247,11 +235,6 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                     Fname = resultSet2.getString("fname");
                     Lname = resultSet2.getString("lname");
                     email = resultSet2.getString("email");
-<<<<<<< HEAD
-
-=======
-                    
->>>>>>> e0e03ce7d225e10053c3b773762b76c0fe527a07
                     bean = new GuardianBean();
 
                     bean.setGuardianID(guardianid);
