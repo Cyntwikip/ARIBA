@@ -213,6 +213,7 @@ public class MainMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximizedBounds(new java.awt.Rectangle(0, 0, 1020, 560));
         setMinimumSize(new java.awt.Dimension(1020, 560));
+        setResizable(false);
         getContentPane().setLayout(null);
         getContentPane().add(tenantID);
         tenantID.setBounds(810, 100, 90, 20);

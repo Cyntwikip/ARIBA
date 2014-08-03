@@ -167,6 +167,7 @@ public class AddTenant extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(800, 480));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -224,7 +225,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(GuardianContactField);
-        GuardianContactField.setBounds(630, 270, 110, 20);
+        GuardianContactField.setBounds(630, 270, 110, 30);
 
         AddressField.setColumns(20);
         AddressField.setLineWrap(true);
@@ -279,7 +280,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(GuardianFirstnameField);
-        GuardianFirstnameField.setBounds(600, 240, 140, 20);
+        GuardianFirstnameField.setBounds(600, 240, 140, 30);
 
         GuardianSurnameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -287,12 +288,12 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(GuardianSurnameField);
-        GuardianSurnameField.setBounds(600, 210, 140, 20);
+        GuardianSurnameField.setBounds(600, 210, 140, 30);
         getContentPane().add(GuardianEmailField);
-        GuardianEmailField.setBounds(630, 300, 110, 20);
+        GuardianEmailField.setBounds(630, 300, 110, 30);
 
         getContentPane().add(ExistingGuardianComboBox);
-        ExistingGuardianComboBox.setBounds(670, 330, 100, 20);
+        ExistingGuardianComboBox.setBounds(660, 330, 110, 20);
 
         ExistingGuardianRadioButton.setText("Existing Guardian");
         ExistingGuardianRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -301,7 +302,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ExistingGuardianRadioButton);
-        ExistingGuardianRadioButton.setBounds(530, 330, 109, 23);
+        ExistingGuardianRadioButton.setBounds(530, 330, 130, 23);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/backbutton.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -323,7 +324,7 @@ public class AddTenant extends javax.swing.JFrame {
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addnewtenant-peg-edited.png"))); // NOI18N
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(0, 0, 800, 450);
+        jLabel6.setBounds(0, 10, 790, 440);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
