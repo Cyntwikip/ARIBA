@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -54,6 +55,13 @@ public class AddTenant extends javax.swing.JFrame {
         }
         for (int i = 2000; i <= year + 10; i++) {
             YearOfGraduationField.addItem(i);
+        }
+
+        ArrayList<GuardianBean> guardianList = new ArrayList<>();
+        GuardianDAOImplementation guardImpl = new GuardianDAOImplementation();
+        guardianList = guardImpl.getAllGuardians();
+        for (GuardianBean guardian : guardianList) {
+            ExistingGuardianComboBox.addItem(guardian.getGuardianID()+":"+guardian.getLname()+", "+guardian.getFname());
         }
     }
 
@@ -161,6 +169,8 @@ public class AddTenant extends javax.swing.JFrame {
         GuardianFirstnameField = new javax.swing.JTextField();
         GuardianSurnameField = new javax.swing.JTextField();
         GuardianEmailField = new javax.swing.JTextField();
+        ExistingGuardianRadioButton = new javax.swing.JRadioButton();
+        ExistingGuardianComboBox = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -319,6 +329,18 @@ public class AddTenant extends javax.swing.JFrame {
         jPanel1.add(GuardianEmailField);
         GuardianEmailField.setBounds(630, 320, 110, 30);
 
+        ExistingGuardianRadioButton.setText("Existing Guardian");
+        ExistingGuardianRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExistingGuardianRadioButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ExistingGuardianRadioButton);
+        ExistingGuardianRadioButton.setBounds(510, 360, 143, 23);
+
+        jPanel1.add(ExistingGuardianComboBox);
+        ExistingGuardianComboBox.setBounds(650, 360, 130, 27);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addnewtenant-peg-edited.png"))); // NOI18N
         jPanel1.add(jLabel1);
         jLabel1.setBounds(0, 0, 800, 450);
@@ -332,6 +354,7 @@ public class AddTenant extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
+        //Edit Tenant
         if (!flag) {
             CheckAccount c = new CheckAccount();
             if (FirstnameField.getText().isEmpty()
@@ -400,6 +423,10 @@ public class AddTenant extends javax.swing.JFrame {
                         //         bean.setImage(null);
                         bean.setStatus("CURRENT");
 
+<<<<<<< HEAD
+=======
+                        //    tdao.editTenant(bean);
+>>>>>>> e0e03ce7d225e10053c3b773762b76c0fe527a07
                         // guardian  
                         boolean edittenant = tdao.editTenant(bean);
 
@@ -425,7 +452,14 @@ public class AddTenant extends javax.swing.JFrame {
                     e.promptFieldError();
                 }
             }
+<<<<<<< HEAD
         } else {
+=======
+
+            //Add New Tenant
+        } else {
+
+>>>>>>> e0e03ce7d225e10053c3b773762b76c0fe527a07
             CheckAccount c = new CheckAccount();
             boolean flag = false;
             TenantDAOImplementation tenantImpl = new TenantDAOImplementation();
@@ -468,11 +502,15 @@ public class AddTenant extends javax.swing.JFrame {
                     || DegreeField.getText().isEmpty()
                     || EmailAddressField.getText().isEmpty()
                     || SchoolField.getText().isEmpty()
+<<<<<<< HEAD
                     || gender.isEmpty()
                     || guardFname.isEmpty()
                     || guardLname.isEmpty()
                     || guardContact.isEmpty()
                     || guardEmail.isEmpty()) {
+=======
+                    || gender.isEmpty()){
+>>>>>>> e0e03ce7d225e10053c3b773762b76c0fe527a07
                 JOptionPane.showMessageDialog(null, "Please input ALL necessary information");
             } else {
                 try {
@@ -486,7 +524,11 @@ public class AddTenant extends javax.swing.JFrame {
                     tenant.setFname(fname.toUpperCase());
                     tenant.setLname(lname.toUpperCase());
                     tenant.setContact(contact);
+<<<<<<< HEAD
                     tenant.setGender(gender);
+=======
+                    tenant.setGender(gender.toUpperCase());
+>>>>>>> e0e03ce7d225e10053c3b773762b76c0fe527a07
                     tenant.setAddress(address.toUpperCase());
                     tenant.setDegree(degree.toUpperCase());
                     tenant.setEmail(email);
@@ -494,6 +536,7 @@ public class AddTenant extends javax.swing.JFrame {
                     tenant.setSchool(school.toUpperCase());
                     tenant.setExpectedyearofgrad(gradyear);
                     tenant.setStatus("Current");
+<<<<<<< HEAD
                     c.checkName(guardFname, "Guardian Firstname");
                     c.checkName(guardLname, "Guardian Lastname");
                     c.checkContact(guardContact, "Guardian Contact");
@@ -517,15 +560,66 @@ public class AddTenant extends javax.swing.JFrame {
                         flag = true;
                     }
 
+=======
+
+                    GuardianBean guard = new GuardianBean();
+                    GuardianDAOImplementation guardImpl = new GuardianDAOImplementation();
+                    boolean t, g, tg;
+                    t=false;
+                    g=false;
+                    tg=false;
+
+                    if (ExistingGuardianRadioButton.isSelected()) {
+                        String[] guardianSelected = ExistingGuardianComboBox.getSelectedItem().toString().split(":");
+                        guard = guardImpl.getGuardianByID(Integer.parseInt(guardianSelected[0]));
+                        t = tenantImpl.addTenant(tenant);
+                        g = true;
+                        
+                    }else{
+                        c.checkName(guardFname, "Guardian Firstname");
+                        c.checkName(guardLname, "Guardian Lastname");
+                        c.checkContact(guardContact, "Guardian Contact");
+                        c.checkEmail(guardEmail, "Guardian Email");
+                        guard.setFname(guardFname.toUpperCase());
+                        guard.setLname(guardLname.toUpperCase());
+                        guard.setContact(guardContact);
+                        guard.setEmail(guardEmail);
+                        
+                        g = guardImpl.addGuardian(guard);
+                        t = tenantImpl.addTenant(tenant);
+                        guard = guardImpl.getGuardianByName(guardFname, guardLname);
+                        
+                    }
+                    
+                    tenant = tenantImpl.getTenantByName(fname, lname);
+                    tg = guardImpl.assignTenantToGuardian(guard, tenant);
+                    if (t && g && tg) {
+                        flag = true;
+                    }
+
+                    if (flag) {
+                        JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + " has successfully added.");
+                        this.dispose();
+                        MainMenu main = new MainMenu();
+                        main.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correcly.");
+                    }
+
+>>>>>>> e0e03ce7d225e10053c3b773762b76c0fe527a07
                 } catch (AccountException e) {
                     e.promptFieldError();
                 }
             }
+<<<<<<< HEAD
             if (flag) {
                 JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + " has successfully added.");
             } else {
                 JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correcly.");
             }
+=======
+
+>>>>>>> e0e03ce7d225e10053c3b773762b76c0fe527a07
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -613,6 +707,10 @@ public class AddTenant extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void ExistingGuardianRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExistingGuardianRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ExistingGuardianRadioButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -654,6 +752,8 @@ public class AddTenant extends javax.swing.JFrame {
     private javax.swing.JComboBox DayField;
     private javax.swing.JTextField DegreeField;
     private javax.swing.JTextField EmailAddressField;
+    private javax.swing.JComboBox ExistingGuardianComboBox;
+    private javax.swing.JRadioButton ExistingGuardianRadioButton;
     private javax.swing.JRadioButton FemaleField;
     private javax.swing.JTextField FirstnameField;
     private javax.swing.JTextField GuardianContactField;

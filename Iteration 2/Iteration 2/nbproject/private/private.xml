@@ -4,6 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
 <<<<<<< HEAD
+            <file>file:/Users/adrian/Documents/Term_7/INTROSE/MP/Iteration%202/Iteration%202/src/Models/DAOInterface/GuardianDAOInterface.java</file>
+            <file>file:/Users/adrian/Documents/Term_7/INTROSE/MP/Iteration%202/Iteration%202/src/GUI/MainMenu.java</file>
+            <file>file:/Users/adrian/Documents/Term_7/INTROSE/MP/Iteration%202/Iteration%202/src/GUI/AddTenant.java</file>
+=======
+<<<<<<< HEAD
             <file>file:/D:/College/TERM%207/INTROSE/MP/ARIBA/Iteration%202/Iteration%202/src/GUI/MainMenu.java</file>
             <file>file:/D:/College/TERM%207/INTROSE/MP/ARIBA/Iteration%202/Iteration%202/src/GUI/AddTenant.java</file>
 =======
@@ -11,6 +16,7 @@
             <file>file:/Users/adrian/Documents/Term_7/INTROSE/MP/Iteration%202/Iteration%202/src/GUI/MainMenu.java</file>
             <file>file:/Users/adrian/Documents/Term_7/INTROSE/MP/Iteration%202/Iteration%202/src/Models/DAOInterface/GuardianDAOInterface.java</file>
 >>>>>>> d652b787ddfaf4c073678ab92d6b145fdb476011
+>>>>>>> 7d90c50c5a3b888bded6fc5b7aed7732616f673f
         </group>
     </open-files>
 </project-private>
