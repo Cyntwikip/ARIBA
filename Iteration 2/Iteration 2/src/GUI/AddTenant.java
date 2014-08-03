@@ -191,7 +191,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(90, 290, 140, 40);
+        jButton2.setBounds(100, 290, 140, 40);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/backbutton.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -336,10 +336,10 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         jPanel1.add(ExistingGuardianRadioButton);
-        ExistingGuardianRadioButton.setBounds(510, 360, 143, 23);
+        ExistingGuardianRadioButton.setBounds(510, 360, 109, 23);
 
         jPanel1.add(ExistingGuardianComboBox);
-        ExistingGuardianComboBox.setBounds(650, 360, 130, 27);
+        ExistingGuardianComboBox.setBounds(650, 360, 130, 20);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addnewtenant-peg-edited.png"))); // NOI18N
         jPanel1.add(jLabel1);
