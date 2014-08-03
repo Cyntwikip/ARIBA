@@ -61,7 +61,7 @@ public class AddTenant extends javax.swing.JFrame {
         GuardianDAOImplementation guardImpl = new GuardianDAOImplementation();
         guardianList = guardImpl.getAllGuardians();
         for (GuardianBean guardian : guardianList) {
-            ExistingGuardianComboBox.addItem(guardian.getGuardianID()+":"+guardian.getLname()+", "+guardian.getFname());
+            ExistingGuardianComboBox.addItem(guardian.getGuardianID() + ":" + guardian.getLname() + ", " + guardian.getFname());
         }
     }
 
@@ -423,10 +423,6 @@ public class AddTenant extends javax.swing.JFrame {
                         //         bean.setImage(null);
                         bean.setStatus("CURRENT");
 
-<<<<<<< HEAD
-=======
-                        //    tdao.editTenant(bean);
->>>>>>> e0e03ce7d225e10053c3b773762b76c0fe527a07
                         // guardian  
                         boolean edittenant = tdao.editTenant(bean);
 
@@ -452,14 +448,8 @@ public class AddTenant extends javax.swing.JFrame {
                     e.promptFieldError();
                 }
             }
-<<<<<<< HEAD
-        } else {
-=======
 
-            //Add New Tenant
         } else {
-
->>>>>>> e0e03ce7d225e10053c3b773762b76c0fe527a07
             CheckAccount c = new CheckAccount();
             boolean flag = false;
             TenantDAOImplementation tenantImpl = new TenantDAOImplementation();
@@ -502,15 +492,11 @@ public class AddTenant extends javax.swing.JFrame {
                     || DegreeField.getText().isEmpty()
                     || EmailAddressField.getText().isEmpty()
                     || SchoolField.getText().isEmpty()
-<<<<<<< HEAD
                     || gender.isEmpty()
                     || guardFname.isEmpty()
                     || guardLname.isEmpty()
                     || guardContact.isEmpty()
                     || guardEmail.isEmpty()) {
-=======
-                    || gender.isEmpty()){
->>>>>>> e0e03ce7d225e10053c3b773762b76c0fe527a07
                 JOptionPane.showMessageDialog(null, "Please input ALL necessary information");
             } else {
                 try {
@@ -524,19 +510,14 @@ public class AddTenant extends javax.swing.JFrame {
                     tenant.setFname(fname.toUpperCase());
                     tenant.setLname(lname.toUpperCase());
                     tenant.setContact(contact);
-<<<<<<< HEAD
-                    tenant.setGender(gender);
-=======
                     tenant.setGender(gender.toUpperCase());
->>>>>>> e0e03ce7d225e10053c3b773762b76c0fe527a07
                     tenant.setAddress(address.toUpperCase());
                     tenant.setDegree(degree.toUpperCase());
                     tenant.setEmail(email);
                     tenant.setBirthday((java.sql.Date) sqlBirthdate);
                     tenant.setSchool(school.toUpperCase());
                     tenant.setExpectedyearofgrad(gradyear);
-                    tenant.setStatus("Current");
-<<<<<<< HEAD
+                    tenant.setStatus("CURRENT");
                     c.checkName(guardFname, "Guardian Firstname");
                     c.checkName(guardLname, "Guardian Lastname");
                     c.checkContact(guardContact, "Guardian Contact");
@@ -560,40 +541,38 @@ public class AddTenant extends javax.swing.JFrame {
                         flag = true;
                     }
 
-=======
-
-                    GuardianBean guard = new GuardianBean();
-                    GuardianDAOImplementation guardImpl = new GuardianDAOImplementation();
-                    boolean t, g, tg;
-                    t=false;
-                    g=false;
-                    tg=false;
+                    GuardianBean guard1 = new GuardianBean();
+                    GuardianDAOImplementation guardImpl1 = new GuardianDAOImplementation();
+                    boolean t1, g1, tg1;
+                    t1 = false;
+                    g1 = false;
+                    tg1 = false;
 
                     if (ExistingGuardianRadioButton.isSelected()) {
                         String[] guardianSelected = ExistingGuardianComboBox.getSelectedItem().toString().split(":");
-                        guard = guardImpl.getGuardianByID(Integer.parseInt(guardianSelected[0]));
-                        t = tenantImpl.addTenant(tenant);
-                        g = true;
-                        
-                    }else{
+                        guard1 = guardImpl1.getGuardianByID(Integer.parseInt(guardianSelected[0]));
+                        t1 = tenantImpl.addTenant(tenant);
+                        g1 = true;
+
+                    } else {
                         c.checkName(guardFname, "Guardian Firstname");
                         c.checkName(guardLname, "Guardian Lastname");
                         c.checkContact(guardContact, "Guardian Contact");
                         c.checkEmail(guardEmail, "Guardian Email");
-                        guard.setFname(guardFname.toUpperCase());
-                        guard.setLname(guardLname.toUpperCase());
-                        guard.setContact(guardContact);
-                        guard.setEmail(guardEmail);
-                        
-                        g = guardImpl.addGuardian(guard);
-                        t = tenantImpl.addTenant(tenant);
-                        guard = guardImpl.getGuardianByName(guardFname, guardLname);
-                        
+                        guard1.setFname(guardFname.toUpperCase());
+                        guard1.setLname(guardLname.toUpperCase());
+                        guard1.setContact(guardContact);
+                        guard1.setEmail(guardEmail);
+
+                        g1 = guardImpl1.addGuardian(guard1);
+                        t1 = tenantImpl.addTenant(tenant);
+                        guard1 = guardImpl1.getGuardianByName(guardFname, guardLname);
+
                     }
-                    
+
                     tenant = tenantImpl.getTenantByName(fname, lname);
-                    tg = guardImpl.assignTenantToGuardian(guard, tenant);
-                    if (t && g && tg) {
+                    tg1 = guardImpl1.assignTenantToGuardian(guard, tenant);
+                    if (t1 && g1 && tg1) {
                         flag = true;
                     }
 
@@ -605,21 +584,16 @@ public class AddTenant extends javax.swing.JFrame {
                     } else {
                         JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correcly.");
                     }
-
->>>>>>> e0e03ce7d225e10053c3b773762b76c0fe527a07
                 } catch (AccountException e) {
                     e.promptFieldError();
                 }
             }
-<<<<<<< HEAD
+
             if (flag) {
                 JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + " has successfully added.");
             } else {
                 JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correcly.");
             }
-=======
-
->>>>>>> e0e03ce7d225e10053c3b773762b76c0fe527a07
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -532,7 +532,6 @@ public class MainMenu extends javax.swing.JFrame {
         
            
         GuardianBean guardianbean = new GuardianBean();
-        GuardianDAOImplementation gdao = new GuardianDAOImplementation();
         
         guardianbean = gdao.getGuardianByTenant(bean.getFname(), bean.getLname());
         guardian.setText(guardianbean.getFname() + " " + guardianbean.getLname());
