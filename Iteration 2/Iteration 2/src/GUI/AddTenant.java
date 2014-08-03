@@ -38,7 +38,6 @@ public class AddTenant extends javax.swing.JFrame {
     public AddTenant() {
 
         initComponents();
-        jPanel1.setLayout(null);
         flag = true;
         int year = Calendar.getInstance().get(Calendar.YEAR);
 
@@ -71,7 +70,6 @@ public class AddTenant extends javax.swing.JFrame {
         TenantBean tb = new TenantBean();
         tb = tdao.getTenantById(tenantID);
         initComponents();
-        jPanel1.setLayout(null);
 
         MaleField.setText("Male");
         FemaleField.setText("Female");
@@ -142,43 +140,103 @@ public class AddTenant extends javax.swing.JFrame {
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
         buttonGroup4 = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        MaleField = new javax.swing.JRadioButton();
-        FemaleField = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
         SurnameField = new javax.swing.JTextField();
         FirstnameField = new javax.swing.JTextField();
-        SchoolField = new javax.swing.JTextField();
-        DegreeField = new javax.swing.JTextField();
-        YearOfGraduationField = new javax.swing.JComboBox();
-        ContactNumberField = new javax.swing.JTextField();
-        EmailAddressField = new javax.swing.JTextField();
         MonthField = new javax.swing.JComboBox();
         DayField = new javax.swing.JComboBox();
         YearField = new javax.swing.JComboBox();
+        SchoolField = new javax.swing.JTextField();
+        DegreeField = new javax.swing.JTextField();
+        YearOfGraduationField = new javax.swing.JComboBox();
+        GuardianContactField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         AddressField = new javax.swing.JTextArea();
-        GuardianContactField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        MaleField = new javax.swing.JRadioButton();
+        FemaleField = new javax.swing.JRadioButton();
+        ContactNumberField = new javax.swing.JTextField();
+        EmailAddressField = new javax.swing.JTextField();
         GuardianFirstnameField = new javax.swing.JTextField();
         GuardianSurnameField = new javax.swing.JTextField();
         GuardianEmailField = new javax.swing.JTextField();
-        ExistingGuardianRadioButton = new javax.swing.JRadioButton();
         ExistingGuardianComboBox = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
+        ExistingGuardianRadioButton = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(801, 457));
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jPanel1.setLayout(null);
+        SurnameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SurnameFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(SurnameField);
+        SurnameField.setBounds(360, 90, 170, 30);
+        getContentPane().add(FirstnameField);
+        FirstnameField.setBounds(360, 120, 170, 30);
+
+        MonthField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec" }));
+        MonthField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MonthFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(MonthField);
+        MonthField.setBounds(350, 160, 60, 20);
+
+        DayField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        DayField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DayFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(DayField);
+        DayField.setBounds(410, 160, 50, 20);
+
+        YearField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                YearFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(YearField);
+        YearField.setBounds(460, 160, 70, 20);
+        getContentPane().add(SchoolField);
+        SchoolField.setBounds(580, 90, 160, 30);
+        getContentPane().add(DegreeField);
+        DegreeField.setBounds(580, 120, 160, 30);
+
+        YearOfGraduationField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                YearOfGraduationFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(YearOfGraduationField);
+        YearOfGraduationField.setBounds(650, 160, 90, 20);
+
+        GuardianContactField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardianContactFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(GuardianContactField);
+        GuardianContactField.setBounds(630, 270, 110, 20);
+
+        AddressField.setColumns(20);
+        AddressField.setLineWrap(true);
+        AddressField.setRows(5);
+        jScrollPane1.setViewportView(AddressField);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(350, 190, 180, 70);
 
         jLabel2.setText("    jLabel - put picture here");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(100, 210, 127, 14);
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(80, 100, 180, 180);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/choosephoto.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -186,17 +244,8 @@ public class AddTenant extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2);
+        getContentPane().add(jButton2);
         jButton2.setBounds(100, 290, 140, 40);
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/backbutton.png"))); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton3);
-        jButton3.setBounds(530, 370, 90, 40);
 
         buttonGroup1.add(MaleField);
         MaleField.setText("Male");
@@ -206,8 +255,8 @@ public class AddTenant extends javax.swing.JFrame {
                 MaleFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(MaleField);
-        MaleField.setBounds(370, 270, 70, 23);
+        getContentPane().add(MaleField);
+        MaleField.setBounds(380, 270, 70, 23);
 
         buttonGroup1.add(FemaleField);
         FemaleField.setText("Female\n");
@@ -217,97 +266,33 @@ public class AddTenant extends javax.swing.JFrame {
                 FemaleFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(FemaleField);
-        FemaleField.setBounds(460, 270, 80, 23);
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/save.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1);
-        jButton1.setBounds(620, 370, 130, 40);
-
-        SurnameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SurnameFieldActionPerformed(evt);
-            }
-        });
-        jPanel1.add(SurnameField);
-        SurnameField.setBounds(370, 100, 170, 30);
-        jPanel1.add(FirstnameField);
-        FirstnameField.setBounds(370, 130, 170, 30);
-        jPanel1.add(SchoolField);
-        SchoolField.setBounds(590, 100, 150, 30);
-        jPanel1.add(DegreeField);
-        DegreeField.setBounds(590, 130, 150, 30);
-
-        YearOfGraduationField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                YearOfGraduationFieldActionPerformed(evt);
-            }
-        });
-        jPanel1.add(YearOfGraduationField);
-        YearOfGraduationField.setBounds(650, 160, 90, 20);
-        jPanel1.add(ContactNumberField);
-        ContactNumberField.setBounds(390, 300, 140, 30);
-        jPanel1.add(EmailAddressField);
-        EmailAddressField.setBounds(380, 330, 150, 30);
-
-        MonthField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec" }));
-        MonthField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MonthFieldActionPerformed(evt);
-            }
-        });
-        jPanel1.add(MonthField);
-        MonthField.setBounds(370, 160, 60, 20);
-
-        DayField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        DayField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DayFieldActionPerformed(evt);
-            }
-        });
-        jPanel1.add(DayField);
-        DayField.setBounds(430, 160, 50, 20);
-
-        YearField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                YearFieldActionPerformed(evt);
-            }
-        });
-        jPanel1.add(YearField);
-        YearField.setBounds(480, 160, 70, 20);
-
-        AddressField.setColumns(20);
-        AddressField.setLineWrap(true);
-        AddressField.setRows(5);
-        jScrollPane1.setViewportView(AddressField);
-
-        jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(370, 190, 160, 70);
-
-        GuardianContactField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardianContactFieldActionPerformed(evt);
-            }
-        });
-        jPanel1.add(GuardianContactField);
-        GuardianContactField.setBounds(630, 270, 110, 30);
+        getContentPane().add(FemaleField);
+        FemaleField.setBounds(450, 270, 59, 23);
+        getContentPane().add(ContactNumberField);
+        ContactNumberField.setBounds(390, 290, 140, 30);
+        getContentPane().add(EmailAddressField);
+        EmailAddressField.setBounds(390, 320, 140, 30);
 
         GuardianFirstnameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GuardianFirstnameFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(GuardianFirstnameField);
-        GuardianFirstnameField.setBounds(600, 240, 140, 30);
-        jPanel1.add(GuardianSurnameField);
-        GuardianSurnameField.setBounds(600, 210, 140, 30);
-        jPanel1.add(GuardianEmailField);
-        GuardianEmailField.setBounds(630, 300, 110, 30);
+        getContentPane().add(GuardianFirstnameField);
+        GuardianFirstnameField.setBounds(600, 240, 140, 20);
+
+        GuardianSurnameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardianSurnameFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(GuardianSurnameField);
+        GuardianSurnameField.setBounds(600, 210, 140, 20);
+        getContentPane().add(GuardianEmailField);
+        GuardianEmailField.setBounds(630, 300, 110, 20);
+
+        getContentPane().add(ExistingGuardianComboBox);
+        ExistingGuardianComboBox.setBounds(670, 330, 100, 20);
 
         ExistingGuardianRadioButton.setText("Existing Guardian");
         ExistingGuardianRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -315,23 +300,119 @@ public class AddTenant extends javax.swing.JFrame {
                 ExistingGuardianRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(ExistingGuardianRadioButton);
-        ExistingGuardianRadioButton.setBounds(530, 340, 120, 23);
+        getContentPane().add(ExistingGuardianRadioButton);
+        ExistingGuardianRadioButton.setBounds(530, 330, 109, 23);
 
-        jPanel1.add(ExistingGuardianComboBox);
-        ExistingGuardianComboBox.setBounds(650, 340, 120, 20);
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/backbutton.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(530, 370, 80, 40);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addnewtenant-peg-edited.png"))); // NOI18N
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 800, 450);
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/save.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(630, 370, 80, 40);
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 800, 450);
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addnewtenant-peg-edited.png"))); // NOI18N
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(0, 0, 800, 450);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ExistingGuardianRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExistingGuardianRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ExistingGuardianRadioButtonActionPerformed
+
+    private void GuardianFirstnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardianFirstnameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GuardianFirstnameFieldActionPerformed
+
+    private void GuardianContactFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardianContactFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GuardianContactFieldActionPerformed
+
+    private void YearFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YearFieldActionPerformed
+        // TODO add your handling code here:
+        int year = (Integer) YearField.getSelectedItem();
+        if ((year % 4) == 0) {
+            if (MonthField.getSelectedItem().equals("Feb")) {
+                DayField.removeItem("29");
+                DayField.addItem("29");
+            }
+        } else {
+            DayField.removeItem("29");
+        }
+    }//GEN-LAST:event_YearFieldActionPerformed
+
+    private void DayFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DayFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DayFieldActionPerformed
+
+    private void MonthFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MonthFieldActionPerformed
+        // TODO add your handling code here:
+
+        if (MonthField.getSelectedItem().equals("Jan")
+                || MonthField.getSelectedItem().equals("Mar")
+                || MonthField.getSelectedItem().equals("May")
+                || MonthField.getSelectedItem().equals("Jul")
+                || MonthField.getSelectedItem().equals("Aug")
+                || MonthField.getSelectedItem().equals("Oct")
+                || MonthField.getSelectedItem().equals("Dec")) {
+            DayField.removeItem("29");
+            DayField.removeItem("30");
+            DayField.removeItem("31");
+            DayField.addItem("29");
+            DayField.addItem("30");
+            DayField.addItem("31");
+
+        } else if (MonthField.getSelectedItem().equals("Feb")) { // feb
+            DayField.removeItem("29");
+            DayField.removeItem("30");
+            DayField.removeItem("31");
+        } else {
+            DayField.removeItem("29");
+            DayField.removeItem("30");
+            DayField.removeItem("31");
+            DayField.addItem("29");
+            DayField.addItem("30");
+
+        }
+    }//GEN-LAST:event_MonthFieldActionPerformed
+
+    private void YearOfGraduationFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YearOfGraduationFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_YearOfGraduationFieldActionPerformed
+
+    private void SurnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SurnameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SurnameFieldActionPerformed
+
+    private void FemaleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FemaleFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FemaleFieldActionPerformed
+
+    private void MaleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaleFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MaleFieldActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void GuardianSurnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardianSurnameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GuardianSurnameFieldActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
 
         //Edit Tenant
@@ -576,94 +657,15 @@ public class AddTenant extends javax.swing.JFrame {
             }
         }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.setVisible(false);
         MainMenu menu = new MainMenu();
         menu.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void DayFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DayFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DayFieldActionPerformed
-
-    private void GuardianContactFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardianContactFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_GuardianContactFieldActionPerformed
-
-    private void FemaleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FemaleFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_FemaleFieldActionPerformed
-
-    private void MaleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaleFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MaleFieldActionPerformed
-
-    private void MonthFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MonthFieldActionPerformed
-        // TODO add your handling code here:
-
-        if (MonthField.getSelectedItem().equals("Jan")
-                || MonthField.getSelectedItem().equals("Mar")
-                || MonthField.getSelectedItem().equals("May")
-                || MonthField.getSelectedItem().equals("Jul")
-                || MonthField.getSelectedItem().equals("Aug")
-                || MonthField.getSelectedItem().equals("Oct")
-                || MonthField.getSelectedItem().equals("Dec")) {
-            DayField.removeItem("29");
-            DayField.removeItem("30");
-            DayField.removeItem("31");
-            DayField.addItem("29");
-            DayField.addItem("30");
-            DayField.addItem("31");
-
-        } else if (MonthField.getSelectedItem().equals("Feb")) { // feb
-            DayField.removeItem("29");
-            DayField.removeItem("30");
-            DayField.removeItem("31");
-        } else {
-            DayField.removeItem("29");
-            DayField.removeItem("30");
-            DayField.removeItem("31");
-            DayField.addItem("29");
-            DayField.addItem("30");
-
-        }
-    }//GEN-LAST:event_MonthFieldActionPerformed
-
-    private void YearFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YearFieldActionPerformed
-        // TODO add your handling code here:
-        int year = (Integer) YearField.getSelectedItem();
-        if ((year % 4) == 0) {
-            if (MonthField.getSelectedItem().equals("Feb")) {
-                DayField.removeItem("29");
-                DayField.addItem("29");
-            }
-        } else {
-            DayField.removeItem("29");
-        }
-    }//GEN-LAST:event_YearFieldActionPerformed
-
-    private void YearOfGraduationFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YearOfGraduationFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_YearOfGraduationFieldActionPerformed
-
-    private void SurnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SurnameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SurnameFieldActionPerformed
-
-    private void GuardianFirstnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardianFirstnameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_GuardianFirstnameFieldActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void ExistingGuardianRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExistingGuardianRadioButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ExistingGuardianRadioButtonActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -727,9 +729,8 @@ public class AddTenant extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
