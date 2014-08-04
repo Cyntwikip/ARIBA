@@ -19,6 +19,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import javax.swing.table.DefaultTableModel;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -181,6 +183,8 @@ public class MainMenu extends javax.swing.JFrame {
         school.setText(bean.getSchool());
         degree.setText(bean.getDegree());
         yearofgraduation.setText(String.valueOf(bean.getExpectedyearofgrad()));
+        DateFormat date = new SimpleDateFormat("MMMM d, yyyy");
+        birthday.setText(date.format(bean.getBirthday()));
 
         GuardianDAOInterface gdao = new GuardianDAOImplementation();
         GuardianBean gbean = new GuardianBean();
@@ -193,8 +197,9 @@ public class MainMenu extends javax.swing.JFrame {
         GuardianBean guardianbean = new GuardianBean();
 
         guardianbean = gdao.getGuardianByTenant(bean.getFname(), bean.getLname());
-        jLabel1.setText(guardianbean.getFname() + " " + guardianbean.getLname());
+        guardianName.setText(guardianbean.getFname() + " " + guardianbean.getLname());
         guardiancontactno.setText(guardianbean.getContact());
+        guardianEmail.setText(guardianbean.getEmail());
 
         /*
          RoomBean roombean = new RoomBean();
@@ -247,6 +252,9 @@ public class MainMenu extends javax.swing.JFrame {
         YearOfGraduationField = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        guardianName = new javax.swing.JLabel();
+        guardianEmail = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -283,9 +291,9 @@ public class MainMenu extends javax.swing.JFrame {
         getContentPane().add(roomassignment);
         roomassignment.setBounds(870, 460, 53, 16);
 
-        status.setText("jLabel16");
+        status.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         getContentPane().add(status);
-        status.setBounds(790, 480, 53, 16);
+        status.setBounds(790, 480, 70, 20);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/AddTenant.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -432,6 +440,15 @@ public class MainMenu extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(800, 230, 180, 20);
         jLabel3.getAccessibleContext().setAccessibleName("gender");
+
+        getContentPane().add(guardianName);
+        guardianName.setBounds(820, 400, 160, 20);
+        getContentPane().add(guardianEmail);
+        guardianEmail.setBounds(800, 440, 180, 20);
+
+        jLabel5.setText("Email");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(750, 440, 60, 20);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Tenant.png"))); // NOI18N
         getContentPane().add(jLabel1);
@@ -585,12 +602,15 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel email;
     private javax.swing.JLabel fname;
     private javax.swing.JLabel gender;
+    private javax.swing.JLabel guardianEmail;
+    private javax.swing.JLabel guardianName;
     private javax.swing.JLabel guardiancontactno;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lname;
