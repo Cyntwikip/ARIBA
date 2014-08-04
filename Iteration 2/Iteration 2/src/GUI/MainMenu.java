@@ -289,7 +289,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         roomassignment.setText("jLabel15");
         getContentPane().add(roomassignment);
-        roomassignment.setBounds(870, 460, 53, 16);
+        roomassignment.setBounds(870, 460, 40, 14);
 
         status.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         getContentPane().add(status);
@@ -414,7 +414,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(CurrentField);
-        CurrentField.setBounds(150, 240, 79, 23);
+        CurrentField.setBounds(150, 240, 63, 23);
 
         buttonGroup2.add(OldField);
         OldField.setText("Old");
@@ -424,7 +424,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(OldField);
-        OldField.setBounds(150, 260, 54, 23);
+        OldField.setBounds(150, 260, 41, 23);
 
         YearOfGraduationField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -432,7 +432,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(YearOfGraduationField);
-        YearOfGraduationField.setBounds(230, 190, 70, 27);
+        YearOfGraduationField.setBounds(230, 190, 70, 20);
         getContentPane().add(jLabel2);
         jLabel2.setBounds(800, 204, 170, 30);
         jLabel2.getAccessibleContext().setAccessibleName("address");

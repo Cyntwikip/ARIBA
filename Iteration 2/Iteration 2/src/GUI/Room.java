@@ -34,8 +34,12 @@ public class Room extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(820, 480));
+        setMinimumSize(new java.awt.Dimension(820, 480));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -81,7 +85,7 @@ public class Room extends javax.swing.JFrame {
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(410, 160, 300, 160);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assignroom.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/assignroom.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -89,10 +93,15 @@ public class Room extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1);
         jButton1.setBounds(590, 330, 120, 40);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rooms-peg-edited.png"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 800, 450);
+        jLabel1.setBounds(0, 0, 0, 450);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/rooms-peg-edited.png"))); // NOI18N
+        jLabel2.setMaximumSize(new java.awt.Dimension(820, 480));
+        jLabel2.setMinimumSize(new java.awt.Dimension(820, 480));
+        jLabel2.setPreferredSize(new java.awt.Dimension(1020, 560));
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 800, 450);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -141,6 +150,7 @@ public class Room extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
