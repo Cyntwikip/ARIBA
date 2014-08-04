@@ -17,6 +17,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import quicktime.sound.SoundConstants;
 
 /**
  *
@@ -34,7 +38,21 @@ public class TenantDAOImplementation implements TenantDAOInterface {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, tenant.getFname());
             ps.setString(2, tenant.getLname());
-            ps.setBlob(3, tenant.getImage());
+            FileInputStream fin = null;
+            if (tenant.getImage() != null) {
+                try {
+                    fin = new FileInputStream(tenant.getImage());
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    ps.setBinaryStream(3, fin, fin.available());
+                } catch (IOException ex) {
+                    Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                ps.setBlob(3, tenant.getBlobimage());
+            }
             ps.setString(4, tenant.getContact());
             ps.setString(5, tenant.getGender());
             ps.setString(6, tenant.getAddress());
@@ -99,7 +117,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 bean.setAddress(address);
                 bean.setSchool(school);
                 bean.setStatus(status);
-                bean.setImage(image);
+                bean.setBlobimage(image);
                 bean.setEmail(email);
                 bean.setBirthday(birthday);
             }
@@ -117,7 +135,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from tenant order by fname, lname ASC";
+            String query = "select * from tenant order by lname, fname ASC";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
 
@@ -125,9 +143,9 @@ public class TenantDAOImplementation implements TenantDAOInterface {
             TenantBean bean = new TenantBean();
 
             int tenantID, expectedyearofgrad;
-             String fname, lname, gender, address, degree, school, status, contact, email;
+            String fname, lname, gender, address, degree, school, status, contact, email;
             Date birthday;
-            
+
             Blob image;
 
             while (resultSet.next()) {
@@ -144,7 +162,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 image = resultSet.getBlob("image");
                 email = resultSet.getString("email");
                 birthday = resultSet.getDate("birthday");
-                
+
                 bean = new TenantBean();
 
                 bean.setTenantID(tenantID);
@@ -157,7 +175,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 bean.setAddress(address);
                 bean.setSchool(school);
                 bean.setStatus(status);
-                bean.setImage(image);
+//                bean.setImage(image);
                 bean.setEmail(email);
                 bean.setBirthday(birthday);
                 list.add(bean);
@@ -217,7 +235,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 bean.setAddress(address);
                 bean.setSchool(school);
                 bean.setStatus(status);
-                bean.setImage(image);
+//                bean.setImage(image);
                 bean.setEmail(email);
                 bean.setBirthday(birthday);
             }
@@ -236,7 +254,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from tenant where expectedyearofgrad = ? order by fname, lname ASC";
+            String query = "select * from tenant where expectedyearofgrad = ? order by lname, fname ASC";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, year);
             ResultSet resultSet = ps.executeQuery();
@@ -263,7 +281,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 image = resultSet.getBlob("image");
                 email = resultSet.getString("email");
                 birthday = resultSet.getDate("birthday");
-                
+
                 bean = new TenantBean();
 
                 bean.setTenantID(tenantID);
@@ -276,7 +294,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 bean.setAddress(address);
                 bean.setSchool(school);
                 bean.setStatus(status);
-                bean.setImage(image);
+//                bean.setImage(image);
                 bean.setEmail(email);
                 bean.setBirthday(birthday);
 
@@ -292,7 +310,6 @@ public class TenantDAOImplementation implements TenantDAOInterface {
 
     }
 
-    
     @Override
     public ArrayList<TenantBean> getTenantByRoomID(int tenant_roomID) {
         try {
@@ -339,10 +356,10 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 bean.setAddress(address);
                 bean.setSchool(school);
                 bean.setStatus(status);
-                bean.setImage(image);
+//                bean.setImage(image);
                 bean.setEmail(email);
                 bean.setBirthday(birthday);
-                
+
                 list.add(bean);
             }
             return list;
@@ -352,8 +369,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         }
 
         return null;
-    
-    
+
     }
 
     @Override
@@ -361,7 +377,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from tenant where school like '%"+currschool+"%' order by fname, lname ASC";
+            String query = "select * from tenant where school like '%" + currschool + "%' order by lname, fname ASC";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
 
@@ -400,7 +416,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 bean.setAddress(address);
                 bean.setSchool(school);
                 bean.setStatus(status);
-                bean.setImage(image);
+//                bean.setImage(image);
                 bean.setBirthday(birthday);
                 list.add(bean);
             }
@@ -415,22 +431,22 @@ public class TenantDAOImplementation implements TenantDAOInterface {
 
     @Override
     public ArrayList<TenantBean> getMaleTenant() {
-       try{
+        try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from tenant where gender = 'male' order by fname, lname ASC";
+            String query = "select * from tenant where gender = 'male' order by lname, fname ASC";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
-            
-            ArrayList<TenantBean> list =new ArrayList<>();
+
+            ArrayList<TenantBean> list = new ArrayList<>();
             TenantBean bean = new TenantBean();
-            
+
             int tenantID, expectedyearofgrad;
             String fname, lname, gender, address, degree, school, status, contact, email;
             Blob image;
             Date birthday;
-            
-            while(resultSet.next()){
+
+            while (resultSet.next()) {
                 tenantID = resultSet.getInt("tenantID");
                 contact = resultSet.getString("contact");
                 expectedyearofgrad = resultSet.getInt("expectedyearofgrad");
@@ -444,9 +460,9 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 image = resultSet.getBlob("image");
                 email = resultSet.getString("email");
                 birthday = resultSet.getDate("birthday");
-                
+
                 bean = new TenantBean();
-                
+
                 bean.setTenantID(tenantID);
                 bean.setContact(contact);
                 bean.setExpectedyearofgrad(expectedyearofgrad);
@@ -457,18 +473,18 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 bean.setAddress(address);
                 bean.setSchool(school);
                 bean.setStatus(status);
-                bean.setImage(image);
+//                bean.setImage(image);
                 bean.setEmail(email);
                 bean.setBirthday(birthday);
-                
+
                 list.add(bean);
             }
             return list;
-    
-        }   catch(SQLException ex){
-        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return null;
     }
 
@@ -477,7 +493,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from tenant where gender = 'female' order by fname, lname ASC";
+            String query = "select * from tenant where gender = 'female' order by lname, fname ASC";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
 
@@ -516,10 +532,10 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 bean.setAddress(address);
                 bean.setSchool(school);
                 bean.setStatus(status);
-                bean.setImage(image);
+//                bean.setImage(image);
                 bean.setEmail(email);
                 bean.setBirthday(birthday);
-                
+
                 list.add(bean);
             }
             return list;
@@ -537,7 +553,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from tenant where status =? order by fname, lname ASC";
+            String query = "select * from tenant where status =? order by lname, fname ASC";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, currstatus);
             ResultSet resultSet = ps.executeQuery();
@@ -564,7 +580,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 image = resultSet.getBlob("image");
                 email = resultSet.getString("email");
                 birthday = resultSet.getDate("birthday");
-                
+
                 bean = new TenantBean();
 
                 bean.setTenantID(tenantID);
@@ -577,10 +593,10 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 bean.setAddress(address);
                 bean.setSchool(school);
                 bean.setStatus(status);
-                bean.setImage(image);
+//                bean.setImage(image);
                 bean.setEmail(email);
                 bean.setBirthday(birthday);
-                
+
                 list.add(bean);
             }
             return list;
@@ -638,10 +654,10 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 bean.setAddress(address);
                 bean.setSchool(school);
                 bean.setStatus(status);
-                bean.setImage(image);
+//                bean.setImage(image);
                 bean.setEmail(email);
                 bean.setBirthday(birthday);
-                
+
                 list.add(bean);
             }
             return list;
@@ -658,7 +674,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from tenant where degree like '%"+currdegree+"%' order by fname, lname ASC";
+            String query = "select * from tenant where degree like '%" + currdegree + "%' order by lname, fname ASC";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
 
@@ -697,10 +713,10 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 bean.setAddress(address);
                 bean.setSchool(school);
                 bean.setStatus(status);
-                bean.setImage(image);
+//                bean.setImage(image);
                 bean.setEmail(email);
                 bean.setBirthday(birthday);
-                
+
                 list.add(bean);
             }
             return list;
@@ -720,7 +736,17 @@ public class TenantDAOImplementation implements TenantDAOInterface {
 
             String query = "update tenant set image = ?, contact = ?, gender = ?, address = ?, degree = ?, school = ?, expectedyearofgrad = ?, status=?, fname = ?, lname = ?, email = ?, birthday = ? where tenantID = ?";
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setBlob(1, tenant.getImage());
+            FileInputStream fin = null;
+            try {
+                fin = new FileInputStream(tenant.getImage());
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                ps.setBinaryStream(1, fin, fin.available());
+            } catch (IOException ex) {
+                Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+            }
             ps.setString(2, tenant.getContact());
             ps.setString(3, tenant.getGender());
             ps.setString(4, tenant.getAddress());
@@ -733,7 +759,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
             ps.setString(11, tenant.getEmail());
             ps.setDate(12, tenant.getBirthday());
             ps.setInt(13, tenant.getTenantID());
-            
+
             ps.executeUpdate();
 
             return true;
@@ -749,8 +775,8 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from tenant where fname like '%"+name+"%'"
-                    + "or lname like '%"+name+"%' or concat (fname,' ',lname) like '%"+name+"%' order by fname, lname ASC";
+            String query = "select * from tenant where fname like '%" + name + "%'"
+                    + "or lname like '%" + name + "%' or concat (fname,' ',lname) like '%" + name + "%' order by fname, lname ASC";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
 
@@ -789,10 +815,10 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 bean.setAddress(address);
                 bean.setSchool(school);
                 bean.setStatus(status);
-                bean.setImage(image);
+//                bean.setImage(image);
                 bean.setEmail(email);
                 bean.setBirthday(birthday);
-                
+
                 list.add(bean);
             }
             return list;
@@ -802,11 +828,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         }
 
         return null;
-   
-    
-    
-    }
 
-    
+    }
 
 }

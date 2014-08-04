@@ -8,20 +8,27 @@ import Models.DAOImplementation.GuardianDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
 import Models.DAOInterface.GuardianDAOInterface;
 import Models.DAOInterface.TenantDAOInterface;
+import com.mysql.jdbc.Blob;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import java.util.ArrayList;
-
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.ImageIcon;
+import java.awt.Image;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 /**
  *
  * @author jao
@@ -34,6 +41,10 @@ public class AddTenant extends javax.swing.JFrame {
     private int tenantID = 0;
     private int guardianID = 0;
     private boolean flag = false;
+    private TenantDAOInterface tdao = new TenantDAOImplementation();
+    private TenantBean bean = new TenantBean();
+    private TenantDAOImplementation tenantImpl = new TenantDAOImplementation();
+    private TenantBean tenant = new TenantBean();
 
     public AddTenant() {
 
@@ -151,7 +162,7 @@ public class AddTenant extends javax.swing.JFrame {
         GuardianContactField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         AddressField = new javax.swing.JTextArea();
-        jLabel2 = new javax.swing.JLabel();
+        imgaddLabel = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         MaleField = new javax.swing.JRadioButton();
         FemaleField = new javax.swing.JRadioButton();
@@ -188,7 +199,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(MonthField);
-        MonthField.setBounds(350, 160, 60, 20);
+        MonthField.setBounds(350, 160, 60, 27);
 
         DayField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         DayField.addActionListener(new java.awt.event.ActionListener() {
@@ -197,7 +208,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(DayField);
-        DayField.setBounds(410, 160, 50, 20);
+        DayField.setBounds(410, 160, 50, 27);
 
         YearField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,7 +216,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(YearField);
-        YearField.setBounds(460, 160, 70, 20);
+        YearField.setBounds(460, 160, 70, 27);
         getContentPane().add(SchoolField);
         SchoolField.setBounds(580, 90, 160, 30);
         getContentPane().add(DegreeField);
@@ -235,9 +246,9 @@ public class AddTenant extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(350, 190, 180, 70);
 
-        jLabel2.setText("    jLabel - put picture here");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(80, 100, 180, 180);
+        imgaddLabel.setText("    jLabel - put picture here");
+        getContentPane().add(imgaddLabel);
+        imgaddLabel.setBounds(80, 100, 180, 180);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/choosephoto.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -268,7 +279,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(FemaleField);
-        FemaleField.setBounds(450, 270, 59, 23);
+        FemaleField.setBounds(450, 270, 80, 23);
         getContentPane().add(ContactNumberField);
         ContactNumberField.setBounds(390, 290, 140, 30);
         getContentPane().add(EmailAddressField);
@@ -293,7 +304,7 @@ public class AddTenant extends javax.swing.JFrame {
         GuardianEmailField.setBounds(630, 300, 110, 30);
 
         getContentPane().add(ExistingGuardianComboBox);
-        ExistingGuardianComboBox.setBounds(660, 330, 110, 20);
+        ExistingGuardianComboBox.setBounds(660, 330, 110, 27);
 
         ExistingGuardianRadioButton.setText("Existing Guardian");
         ExistingGuardianRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -407,6 +418,23 @@ public class AddTenant extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "JPG, GIF & PNG Images", "jpg", "gif", "png");
+        chooser.setFileFilter(filter);
+        int returnVal = chooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            System.out.println("You chose to open this file: "
+                    + chooser.getSelectedFile().getAbsolutePath());
+            tenant.setImage(chooser.getSelectedFile().getAbsolutePath());
+            
+            ImageIcon icon = new ImageIcon(chooser.getSelectedFile().getAbsolutePath());
+            Image img = icon.getImage();
+            Image newimg = img.getScaledInstance(imgaddLabel.getWidth(), imgaddLabel.getHeight(), java.awt.Image.SCALE_SMOOTH);
+            icon = new ImageIcon(newimg);
+            imgaddLabel.setIcon(icon);
+        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void GuardianSurnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardianSurnameFieldActionPerformed
@@ -448,8 +476,7 @@ public class AddTenant extends javax.swing.JFrame {
                     if (tenantID == 0) { // add tenant
 
                     } else { // edit
-                        TenantDAOInterface tdao = new TenantDAOImplementation();
-                        TenantBean bean = new TenantBean();
+
                         bean.setFname(FirstnameField.getText().toUpperCase());
                         bean.setLname(SurnameField.getText().toUpperCase());
                         bean.setAddress(AddressField.getText().toUpperCase());
@@ -513,9 +540,7 @@ public class AddTenant extends javax.swing.JFrame {
 
         } else {
             CheckAccount c = new CheckAccount();
-            boolean flag = false;
-            TenantDAOImplementation tenantImpl = new TenantDAOImplementation();
-            TenantBean tenant = new TenantBean();
+            boolean tflag = false;
             String fname = FirstnameField.getText();
             String lname = SurnameField.getText();
             String degree = DegreeField.getText();
@@ -554,11 +579,7 @@ public class AddTenant extends javax.swing.JFrame {
                     || DegreeField.getText().isEmpty()
                     || EmailAddressField.getText().isEmpty()
                     || SchoolField.getText().isEmpty()
-                    || gender.isEmpty()
-                    || guardFname.isEmpty()
-                    || guardLname.isEmpty()
-                    || guardContact.isEmpty()
-                    || guardEmail.isEmpty()) {
+                    || gender.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please input ALL necessary information");
             } else {
                 try {
@@ -580,65 +601,43 @@ public class AddTenant extends javax.swing.JFrame {
                     tenant.setSchool(school.toUpperCase());
                     tenant.setExpectedyearofgrad(gradyear);
                     tenant.setStatus("CURRENT");
-                    c.checkName(guardFname, "Guardian Firstname");
-                    c.checkName(guardLname, "Guardian Lastname");
-                    c.checkContact(guardContact, "Guardian Contact");
-                    c.checkEmail(guardEmail, "Guardian Email");
 
                     GuardianBean guard = new GuardianBean();
-                    GuardianDAOImplementation guardImpl = new GuardianDAOImplementation();
-                    guard.setFname(guardFname.toUpperCase());
-                    guard.setLname(guardLname.toUpperCase());
-                    guard.setContact(guardContact);
-                    guard.setEmail(guardEmail);
-
-                    boolean g = guardImpl.addGuardian(guard);
-                    boolean t = tenantImpl.addTenant(tenant);
-                    tenant = tenantImpl.getTenantByName(fname, lname);
-                    guard = guardImpl.getGuardianByName(guardFname, guardLname);
-                    boolean tg = guardImpl.assignTenantToGuardian(guard, tenant);
-                    if (t && g && tg) {
-                        guardImpl.assignTenantToGuardian(guard, tenant);
-
-                        flag = true;
-                    }
-
-                    GuardianBean guard1 = new GuardianBean();
                     GuardianDAOImplementation guardImpl1 = new GuardianDAOImplementation();
-                    boolean t1, g1, tg1;
-                    t1 = false;
-                    g1 = false;
-                    tg1 = false;
+                    boolean t1 = false, g1 = false, tg1;
 
                     if (ExistingGuardianRadioButton.isSelected()) {
                         String[] guardianSelected = ExistingGuardianComboBox.getSelectedItem().toString().split(":");
-                        guard1 = guardImpl1.getGuardianByID(Integer.parseInt(guardianSelected[0]));
+                        guard = guardImpl1.getGuardianByID(Integer.parseInt(guardianSelected[0]));
                         t1 = tenantImpl.addTenant(tenant);
                         g1 = true;
 
                     } else {
-                        c.checkName(guardFname, "Guardian Firstname");
-                        c.checkName(guardLname, "Guardian Lastname");
-                        c.checkContact(guardContact, "Guardian Contact");
-                        c.checkEmail(guardEmail, "Guardian Email");
-                        guard1.setFname(guardFname.toUpperCase());
-                        guard1.setLname(guardLname.toUpperCase());
-                        guard1.setContact(guardContact);
-                        guard1.setEmail(guardEmail);
+                        if (guardFname.isEmpty() || guardLname.isEmpty() || guardContact.isEmpty() || guardEmail.isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "Please input ALL necessary information");
+                        } else {
+                            c.checkName(guardFname, "Guardian Firstname");
+                            c.checkName(guardLname, "Guardian Lastname");
+                            c.checkContact(guardContact, "Guardian Contact");
+                            c.checkEmail(guardEmail, "Guardian Email");
+                            guard.setFname(guardFname.toUpperCase());
+                            guard.setLname(guardLname.toUpperCase());
+                            guard.setContact(guardContact);
+                            guard.setEmail(guardEmail);
 
-                        g1 = guardImpl1.addGuardian(guard1);
-                        t1 = tenantImpl.addTenant(tenant);
-                        guard1 = guardImpl1.getGuardianByName(guardFname, guardLname);
-
+                            g1 = guardImpl1.addGuardian(guard);
+                            t1 = tenantImpl.addTenant(tenant);
+                            guard = guardImpl1.getGuardianByName(guardFname, guardLname);
+                        }
                     }
 
                     tenant = tenantImpl.getTenantByName(fname, lname);
                     tg1 = guardImpl1.assignTenantToGuardian(guard, tenant);
                     if (t1 && g1 && tg1) {
-                        flag = true;
+                        tflag = true;
                     }
 
-                    if (flag) {
+                    if (tflag) {
                         JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + " has successfully added.");
                         this.dispose();
                         MainMenu main = new MainMenu();
@@ -651,18 +650,13 @@ public class AddTenant extends javax.swing.JFrame {
                 }
             }
 
-            if (flag) {
-                JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + " has successfully added.");
-            } else {
-                JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correcly.");
-            }
         }
 
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.setVisible(false);
+        this.dispose();
         MainMenu menu = new MainMenu();
         menu.setVisible(true);
 
@@ -727,10 +721,10 @@ public class AddTenant extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.JLabel imgaddLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

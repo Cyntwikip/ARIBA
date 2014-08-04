@@ -315,7 +315,7 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 bean.setContact(contact);
                 bean.setFname(Fname);
                 bean.setLname(Lname);
-                bean.setImage(image);
+//                bean.setImage(image);
                 bean.setGender(gender);
                 bean.setAddress(address);
                 bean.setDegree(degree);

@@ -18,7 +18,7 @@ public class TenantBean {
     private int tenantID;
     private String fname;
     private String lname;
-    private Blob image;
+    private String image;
     private String contact;
     private String email;
     private String gender;
@@ -28,6 +28,7 @@ public class TenantBean {
     private int expectedyearofgrad;
     private String status;
     private Date birthday;
+    private Blob blobimage;
 
     public Date getBirthday() {
         return birthday;
@@ -61,7 +62,7 @@ public class TenantBean {
         return gender;
     }
 
-    public Blob getImage() {
+    public String getImage() {
         return image;
     }
 
@@ -113,10 +114,6 @@ public class TenantBean {
         this.gender = gender;
     }
 
-    public void setImage(Blob image) {
-        this.image = image;
-    }
-
     public void setLname(String lname) {
         this.lname = lname;
     }
@@ -131,6 +128,27 @@ public class TenantBean {
 
     public void setTenantID(int tenantID) {
         this.tenantID = tenantID;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    /**
+     * @return the blobimage
+     */
+    public Blob getBlobimage() {
+        return blobimage;
+    }
+
+    /**
+     * @param blobimage the blobimage to set
+     */
+    public void setBlobimage(Blob blobimage) {
+        this.blobimage = blobimage;
     }
     
 }

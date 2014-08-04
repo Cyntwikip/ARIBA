@@ -11,16 +11,25 @@ import Models.DAOImplementation.RoomDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
 import Models.DAOInterface.GuardianDAOInterface;
 import Models.DAOInterface.TenantDAOInterface;
+import com.google.common.io.ByteStreams;
+import com.mysql.jdbc.Blob;
+import com.sun.medialib.mlib.Image;
+import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -43,8 +52,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     public MainMenu() {
         initComponents();
-        initTable();
-
+        model = (DefaultTableModel) jTable1.getModel();
         int year = Calendar.getInstance().get(Calendar.YEAR);
 
         for (int i = 2000; i <= year + 10; i++) {
@@ -53,15 +61,12 @@ public class MainMenu extends javax.swing.JFrame {
         for (int i = 2000; i <= year + 10; i++) {
             YearOfGraduationField.addItem(i);
         }
-        jTable1.addRowSelectionInterval(0, 0);
-        getSelection();
-
+        initTable();
     }
 
     public void initTable() {
         ArrayList<TenantBean> tenantlist = new ArrayList<>();
         tenantlist = tenantImpl.getAllTenants();
-        model = (DefaultTableModel) jTable1.getModel();
         initSearch(tenantlist);
     }
 
@@ -123,18 +128,18 @@ public class MainMenu extends javax.swing.JFrame {
     }
 
     public void searchFemale() {
-            searchnamelist = tenantImpl.getFemaleTenant();
-            initSearch(searchnamelist);
+        searchnamelist = tenantImpl.getFemaleTenant();
+        initSearch(searchnamelist);
     }
 
     public void searchCurrent() {
-            searchnamelist = tenantImpl.getTenantByStatus(CurrentField.getText());
-            initSearch(searchnamelist);
+        searchnamelist = tenantImpl.getTenantByStatus(CurrentField.getText());
+        initSearch(searchnamelist);
     }
 
     public void searchOld() {
-            searchnamelist = tenantImpl.getTenantByStatus(OldField.getText());
-            initSearch(searchnamelist);
+        searchnamelist = tenantImpl.getTenantByStatus(OldField.getText());
+        initSearch(searchnamelist);
     }
 
     public TenantBean initializetenant() {
@@ -158,8 +163,10 @@ public class MainMenu extends javax.swing.JFrame {
             Object[] obj = {tenant.getTenantID(), tenant.getLname(), tenant.getFname()};
             model.addRow(obj);
         }
-        jTable1.addRowSelectionInterval(0, 0);
-        getSelection();
+        if (!list.isEmpty()) {
+            jTable1.addRowSelectionInterval(0, 0);
+            getSelection();
+        }
     }
 
     public void getSelection() {
@@ -172,6 +179,20 @@ public class MainMenu extends javax.swing.JFrame {
         TenantBean bean = new TenantBean();
         bean = tdao.getTenantById(tenantid);
 
+        java.sql.Blob imgBlob = bean.getBlobimage();
+        byte[] content = null;
+        if (imgBlob != null) {
+            try {
+                content = imgBlob.getBytes(1L, (int) imgBlob.length());
+            } catch (SQLException ex) {
+                Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            ImageIcon ik = new ImageIcon(content);
+            java.awt.Image img = ik.getImage();
+            java.awt.Image newimg = img.getScaledInstance(imgLabel.getWidth(), imgLabel.getHeight(), java.awt.Image.SCALE_SMOOTH);
+            ik = new ImageIcon(newimg);
+            imgLabel.setIcon(ik);
+        }
         tenantID.setText(String.valueOf(bean.getTenantID()));
         lname.setText(bean.getLname());
         fname.setText(bean.getFname());
@@ -209,6 +230,7 @@ public class MainMenu extends javax.swing.JFrame {
          roomassignment.setText(String.valueOf(roombean.getRoomID()));
          */
         status.setText(bean.getStatus());
+
     }
 
     /**
@@ -255,6 +277,7 @@ public class MainMenu extends javax.swing.JFrame {
         guardianName = new javax.swing.JLabel();
         guardianEmail = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        imgLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -379,7 +402,7 @@ public class MainMenu extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tenant ID", "First Name", "Last Name"
+                "Tenant ID", "Surname", "Firstname"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -449,6 +472,8 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel5.setText("Email");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(750, 440, 60, 20);
+        getContentPane().add(imgLabel);
+        imgLabel.setBounds(910, 100, 70, 70);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Tenant.png"))); // NOI18N
         getContentPane().add(jLabel1);
@@ -459,7 +484,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        this.dispose();
         AddTenant at = new AddTenant();
         at.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -605,6 +630,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel guardianEmail;
     private javax.swing.JLabel guardianName;
     private javax.swing.JLabel guardiancontactno;
+    private javax.swing.JLabel imgLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
