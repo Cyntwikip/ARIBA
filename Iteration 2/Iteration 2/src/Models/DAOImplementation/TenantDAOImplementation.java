@@ -20,7 +20,6 @@ import java.util.logging.Logger;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import quicktime.sound.SoundConstants;
 
 /**
  *

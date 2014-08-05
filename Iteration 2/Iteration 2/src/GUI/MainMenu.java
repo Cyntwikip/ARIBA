@@ -13,7 +13,6 @@ import Models.DAOInterface.GuardianDAOInterface;
 import Models.DAOInterface.TenantDAOInterface;
 import com.google.common.io.ByteStreams;
 import com.mysql.jdbc.Blob;
-import com.sun.medialib.mlib.Image;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
