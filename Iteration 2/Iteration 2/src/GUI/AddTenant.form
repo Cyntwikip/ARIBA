@@ -206,7 +206,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="imgaddLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="    jLabel - put picture here"/>
       </Properties>

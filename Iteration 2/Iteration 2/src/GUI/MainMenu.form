@@ -266,8 +266,8 @@
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="3" rowCount="0">
                 <Column editable="false" title="Tenant ID" type="java.lang.Object"/>
-                <Column editable="false" title="First Name" type="java.lang.Object"/>
-                <Column editable="false" title="Last Name" type="java.lang.Object"/>
+                <Column editable="false" title="Surname" type="java.lang.Object"/>
+                <Column editable="false" title="Firstname" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -389,6 +389,13 @@
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="750" y="440" width="60" height="20"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JLabel" name="imgLabel">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="910" y="100" width="70" height="70"/>
         </Constraint>
       </Constraints>
     </Component>

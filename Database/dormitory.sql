@@ -190,7 +190,7 @@ CREATE TABLE `Tenant` (
   `fname` varchar(45) NOT NULL,
   `lname` varchar(45) NOT NULL,
   `birthday` date NOT NULL,
-  `image` blob,
+  `image` longblob,
   `contact` varchar(12) NOT NULL,
   `gender` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
@@ -302,4 +302,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-07-28  1:37:27
+-- Dump completed on 2014-08-05  1:40:40
