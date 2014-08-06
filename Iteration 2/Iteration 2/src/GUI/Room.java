@@ -2,6 +2,7 @@
 import Models.Beans.RoomBean;
 import Models.Beans.TenantBean;
 import Models.DAOImplementation.RoomDAOImplementation;
+import Models.DAOImplementation.TenantDAOImplementation;
 import Models.DAOInterface.RoomDAOInterface;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -34,7 +35,14 @@ public class Room extends javax.swing.JFrame {
             jComboBox1.addItem(room.getRoomID());
         }
         
+        TenantDAOImplementation tdao = new TenantDAOImplementation();
+        ArrayList<TenantBean> tlist = tdao.getAllTenants();
         
+        tenantlist.removeAllItems();
+        
+        for(int i=0; i<tlist.size(); i++) {
+            tenantlist.addItem(tlist.get(i).getFname() + " " + tlist.get(i).getLname());
+        }
     }
 
     /**
@@ -49,7 +57,7 @@ public class Room extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jComboBox2 = new javax.swing.JComboBox();
+        tenantlist = new javax.swing.JComboBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -94,9 +102,9 @@ public class Room extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(90, 150, 250, 210);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox2);
-        jComboBox2.setBounds(490, 107, 220, 40);
+        tenantlist.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(tenantlist);
+        tenantlist.setBounds(490, 107, 220, 40);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -190,12 +198,12 @@ public class Room extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JComboBox tenantlist;
     // End of variables declaration//GEN-END:variables
 }
