@@ -314,8 +314,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from tenant, tenantroom where tenantID = tr_tenantID order by fname, lname ASC"
-                    + " and tr_roomID = ?";
+            String query = "select * from tenant, tenantroom where tenantID = tr_tenantID and tr_roomID = ?";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, tenant_roomID);
             ResultSet resultSet = ps.executeQuery();
