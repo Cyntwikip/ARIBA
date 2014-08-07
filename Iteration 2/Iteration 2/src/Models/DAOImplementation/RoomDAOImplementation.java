@@ -315,5 +315,43 @@ public class RoomDAOImplementation implements RoomDAOInterface {
         return null;
     }
 
+    @Override
+    public ArrayList<TenantBean> getTenantsInRoom(int roomID) {
+         try{
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select tenant.fname, tenant.lname, tenant.tenantID from tenantroom, tenant where tr_roomID = ? order by tenant.lname ASC";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, roomID);
+            ResultSet resultSet = ps.executeQuery();
+            
+            TenantBean bean = new TenantBean();
+            ArrayList<TenantBean> list = new ArrayList<TenantBean>();
+            
+            int tenantID;
+            String fname, lname;
+            
+            while(resultSet.next()){
+                tenantID = resultSet.getInt("tenantID");
+                fname = resultSet.getString("fname");
+                lname = resultSet.getString("lname");
+                
+                bean.setTenantID(tenantID);
+                bean.setFname(fname);
+                bean.setLname(lname);
+                
+                list.add(bean);
+                
+             }
+
+            return list;
+        }   catch(SQLException ex){
+        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null; 
+    
+    }
+
     
 }

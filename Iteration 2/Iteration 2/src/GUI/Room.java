@@ -5,6 +5,7 @@ import Models.DAOImplementation.RoomDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
 import Models.DAOInterface.RoomDAOInterface;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -171,6 +172,24 @@ public class Room extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
+        
+        int roomID = (Integer) jComboBox1.getSelectedItem();
+        
+        ArrayList<TenantBean> tenantlist = new ArrayList<TenantBean>();
+        RoomDAOInterface rdao = new RoomDAOImplementation();
+        
+        tenantlist = rdao.getTenantsInRoom(roomID);
+        String name;
+                
+        if(tenantlist.isEmpty()){
+            JOptionPane.showMessageDialog(null, "There are no tenants occupying room " + roomID);
+        }
+        for(int i=0; i<tenantlist.size(); i++) {
+            name = tenantlist.get(i).getFname() + " " + tenantlist.get(i).getLname();
+            Object[] obj = {name};
+            model1.addRow(obj);
+        }
+        
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
