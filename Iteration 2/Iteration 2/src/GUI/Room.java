@@ -21,15 +21,18 @@ public class Room extends javax.swing.JFrame {
     /**
      * Creates new form Room
      */
-    private DefaultTableModel model;
+    private DefaultTableModel model1;
+    private DefaultTableModel model2;
+    private RoomDAOInterface rdao = new RoomDAOImplementation();
+    private TenantDAOImplementation tdao = new TenantDAOImplementation();
 
     public Room() {
         initComponents();
 
-        RoomDAOInterface rdao = new RoomDAOImplementation();
         ArrayList<RoomBean> list = rdao.getAllRooms();
 
-        model = (DefaultTableModel) jTable2.getModel();
+        model1 = (DefaultTableModel) jTable1.getModel();
+        model2 = (DefaultTableModel) jTable2.getModel();
 
         for(RoomBean room : list){
             jComboBox1.addItem(room.getRoomID());
@@ -43,6 +46,16 @@ public class Room extends javax.swing.JFrame {
         for(int i=0; i<tlist.size(); i++) {
             tenantlist.addItem(tlist.get(i).getFname() + " " + tlist.get(i).getLname());
         }
+        
+        ArrayList<TenantBean> tenantlist = tdao.getTenantByRoomID(jComboBox1.getSelectedIndex()+1);
+        String name;
+        
+        for(int i=0; i<tenantlist.size(); i++) {
+            name = tenantlist.get(i).getFname() + " " + tenantlist.get(i).getLname();
+            Object[] obj = {name};
+            model1.addRow(obj);
+        }
+        
     }
 
     /**
@@ -76,7 +89,7 @@ public class Room extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(180, 107, 130, 40);
+        jComboBox1.setBounds(180, 110, 130, 30);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -104,7 +117,7 @@ public class Room extends javax.swing.JFrame {
 
         tenantlist.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(tenantlist);
-        tenantlist.setBounds(490, 107, 220, 40);
+        tenantlist.setBounds(500, 110, 220, 30);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
