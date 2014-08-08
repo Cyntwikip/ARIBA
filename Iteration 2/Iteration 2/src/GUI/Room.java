@@ -235,7 +235,7 @@ public class Room extends javax.swing.JFrame {
         }
         else if (roomID == 0) {
             JOptionPane.showMessageDialog(null, "Please select a room.");
-        } else if (temp.equals(null)) {
+        } else if (temp == null) {
             JOptionPane.showMessageDialog(null, "Please select a tenant.");
 
         } else {
