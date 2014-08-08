@@ -128,7 +128,7 @@ public class AddTenant extends javax.swing.JFrame {
         } else {
             FemaleField.doClick();
         }
-        GuardianContactField.setText(tb.getContact());
+        ContactNumberField1.setText(tb.getContact());
         EmailAddressField.setText(tb.getEmail());
         SchoolField.setText(tb.getSchool());
         DegreeField.setText(tb.getDegree());
@@ -524,6 +524,7 @@ public class AddTenant extends javax.swing.JFrame {
                         bean.setFname(FirstnameField.getText().toUpperCase());
                         bean.setLname(SurnameField.getText().toUpperCase());
                         bean.setAddress(AddressField.getText().toUpperCase());
+                        bean.setContact(ContactNumberField1.getText());
 
                         //converting string to Calendar
                         String sDate = MonthField.getSelectedItem().toString() + " " + DayField.getSelectedItem().toString() + ", " + YearField.getSelectedItem().toString();
