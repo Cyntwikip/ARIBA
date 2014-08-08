@@ -3,8 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package GUI;
+
+import Models.Beans.ContractBean;
+import Models.Beans.TenantBean;
+import Models.DAOImplementation.ContractDAOImplementation;
+import Models.DAOImplementation.TenantDAOImplementation;
+import Models.DAOInterface.ContractDAOInterface;
+import Models.DAOInterface.TenantDAOInterface;
+import java.sql.Date;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -15,6 +27,8 @@ public class Reports extends javax.swing.JFrame {
     /**
      * Creates new form Reports
      */
+    private DefaultTableModel model1;
+    
     public Reports() {
         initComponents();
     }
@@ -36,6 +50,8 @@ public class Reports extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(800, 450));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -70,6 +86,11 @@ public class Reports extends javax.swing.JFrame {
         jButton2.setBounds(80, 220, 170, 40);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/leavingtenants.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3);
         jButton3.setBounds(80, 270, 160, 40);
 
@@ -82,11 +103,57 @@ public class Reports extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        ContractDAOInterface cdao = new ContractDAOImplementation();
+        ArrayList<ContractBean> clist = cdao.getAllContracts();
+        model1 = (DefaultTableModel) jTable1.getModel();
+        model1.setRowCount(0);
+        JTableHeader th = jTable1.getTableHeader();
+        TableColumnModel tcm = th.getColumnModel();
+        TableColumn tc = tcm.getColumn(0);
+        tc.setHeaderValue("Surname");
+        tc = tcm.getColumn(1);
+        tc.setHeaderValue("Firstname");
+        tc = tcm.getColumn(2);
+        tc.setHeaderValue("Effective date");
+        tc = tcm.getColumn(3);
+        tc.setHeaderValue("Expiry date");
+        th.repaint();
+        
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+        TenantBean tbean = new TenantBean();
+        ContractBean cbean = new ContractBean();
+        String fname, lname;
+        Date effectivedate, expirydate;
+        for (int i = 0; i < clist.size(); i++) {
+            int id = clist.get(i).getContract_tenantID();
+            
+            if (id == 0) {
+                
+            } else {
+                tbean = tdao.getTenantById(id);
+                cbean = clist.get(i);
+                lname = tbean.getLname();
+                fname = tbean.getFname();
+                effectivedate = cbean.getEffectivedate();
+                expirydate = cbean.getExpirydate();
+                Object[] obj = {lname, fname, effectivedate, expirydate};
+                model1.addRow(obj);
+            }
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
+             model1 = (DefaultTableModel) jTable1.getModel();
+        model1.setRowCount(0);
+   
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
