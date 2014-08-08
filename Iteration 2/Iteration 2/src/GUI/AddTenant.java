@@ -21,8 +21,8 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -149,7 +149,6 @@ public class AddTenant extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "No existing guardian for tenant " + FirstnameField.getText() + " " + SurnameField.getText());
         }
-
     }
 
     public void preventDigit(java.awt.event.KeyEvent evt) {
@@ -700,7 +699,7 @@ public class AddTenant extends javax.swing.JFrame {
                         MainMenu main = new MainMenu();
                         main.setVisible(true);
                     } else {
-                        JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correcly.");
+                        JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correctly.");
                     }
                 } catch (AccountException e) {
                     e.promptFieldError();

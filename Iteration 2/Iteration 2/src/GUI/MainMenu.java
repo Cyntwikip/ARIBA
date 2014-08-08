@@ -3,7 +3,6 @@ package GUI;
 import ErrorHandling.AccountException;
 import ErrorHandling.CheckAccount;
 import Models.Beans.GuardianBean;
-
 import Models.Beans.RoomBean;
 import Models.Beans.TenantBean;
 import Models.DAOImplementation.GuardianDAOImplementation;
@@ -11,19 +10,11 @@ import Models.DAOImplementation.RoomDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
 import Models.DAOInterface.GuardianDAOInterface;
 import Models.DAOInterface.TenantDAOInterface;
-import com.google.common.io.ByteStreams;
-import com.mysql.jdbc.Blob;
-import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -81,7 +72,6 @@ public class MainMenu extends javax.swing.JFrame {
             model.getDataVector().removeAllElements();
             model.fireTableDataChanged();
         }
-
     }
 
     public void searchSchool() {
@@ -221,13 +211,12 @@ public class MainMenu extends javax.swing.JFrame {
         guardiancontactno.setText(guardianbean.getContact());
         guardianEmail.setText(guardianbean.getEmail());
 
-        /*
          RoomBean roombean = new RoomBean();
          RoomDAOImplementation roomdao = new RoomDAOImplementation();
         
          roombean = roomdao.getTenantRoom(tenantid);
          roomassignment.setText(String.valueOf(roombean.getRoomID()));
-         */
+         
         status.setText(bean.getStatus());
 
     }

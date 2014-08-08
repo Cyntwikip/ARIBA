@@ -282,7 +282,7 @@ public class RoomDAOImplementation implements RoomDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from tenantroom where tenantID = ? order by endDate desc";
+            String query = "select * from tenantroom where tr_tenantID = ? order by endDate desc";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, tenantID);
             ResultSet resultSet = ps.executeQuery();
@@ -290,17 +290,10 @@ public class RoomDAOImplementation implements RoomDAOInterface {
             RoomBean bean = new RoomBean();
 
             int roomID;
-            float currentKW, currentcubicmeter;
 
             while (resultSet.next()) {
-                roomID = resultSet.getInt("roomID");
-                currentKW = resultSet.getFloat("currentKW");
-                currentcubicmeter = resultSet.getFloat("currentcubicmeter");
-
+                roomID = resultSet.getInt("tr_roomID");
                 bean.setRoomID(roomID);
-                bean.setCurrentKW(currentKW);
-                bean.setCurrentcubicmeter(currentcubicmeter);
-
             }
 
             return bean;

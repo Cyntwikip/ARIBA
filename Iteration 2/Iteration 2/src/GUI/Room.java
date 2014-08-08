@@ -1,3 +1,5 @@
+package GUI;
+
 
 import Models.Beans.ContractBean;
 import Models.Beans.RoomBean;
@@ -68,6 +70,7 @@ public class Room extends javax.swing.JFrame {
     
     public void updateAvailableRooms() {
         model2.getDataVector().removeAllElements();
+        model2.fireTableDataChanged();
         
         ArrayList<RoomBean> availablerooms = rdao.getAllRooms();
         int roomID, count;
@@ -102,7 +105,6 @@ public class Room extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(820, 480));
         setMinimumSize(new java.awt.Dimension(820, 480));
         setResizable(false);
         getContentPane().setLayout(null);
@@ -239,6 +241,7 @@ public class Room extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         model1.getDataVector().removeAllElements();
+        model1.fireTableDataChanged();
         //model1.setRowCount(0);
         
         int roomID = (Integer) jComboBox1.getSelectedItem();
@@ -251,10 +254,9 @@ public class Room extends javax.swing.JFrame {
         String name;
 
         if (tenantlist.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "There are no tenants occupying room " + roomID);
+            //JOptionPane.showMessageDialog(null, "There are no tenants occupying room " + roomID);
             model1.getDataVector().removeAllElements();
-            model1.setRowCount(0);
-            jTable1.removeAll();
+            model1.fireTableDataChanged();
         }
         for (int i = 0; i < tenantlist.size(); i++) {
             name = tenantlist.get(i).getFname() + " " + tenantlist.get(i).getLname();
