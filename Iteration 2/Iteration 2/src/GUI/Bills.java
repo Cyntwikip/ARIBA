@@ -75,7 +75,6 @@ public class Bills extends javax.swing.JFrame {
         getContentPane().add(jTextField1);
         jTextField1.setBounds(210, 210, 100, 30);
 
-        jTextField2.setText("jTextField2");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
