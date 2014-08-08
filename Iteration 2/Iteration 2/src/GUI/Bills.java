@@ -20,21 +20,25 @@ public class Bills extends javax.swing.JFrame {
     /**
      * Creates new form Bills
      */
+    
+    public RoomDAOImplementation rdao= new RoomDAOImplementation();
+    
     public Bills() {
         initComponents();
         
-        ArrayList<RoomBean> list = new ArrayList<RoomBean>();
-        RoomBean bean = new RoomBean();
-        
-        RoomDAOInterface rdao = new RoomDAOImplementation();
-        
-        list = rdao.getAllRooms();
-        
-        for (int i=0; i<list.size(); i++){
-            jComboBox1.addItem(list.get(i).getRoomID());
-        }
+        roomlist();
     }
 
+    public void roomlist() {
+        jComboBox1.removeAllItems();
+        
+        ArrayList<RoomBean> rbean = new ArrayList<RoomBean>();
+        rbean = rdao.getAllRooms();
+        
+        for(int i=0; i<rbean.size(); i++) {
+            jComboBox1.addItem(rbean.get(i).getRoomID());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,7 +67,6 @@ public class Bills extends javax.swing.JFrame {
         getContentPane().add(jComboBox1);
         jComboBox1.setBounds(210, 180, 100, 30);
 
-        jTextField1.setText("jTextField1");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
