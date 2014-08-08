@@ -1,10 +1,13 @@
 
+import Models.Beans.ContractBean;
 import Models.Beans.RoomBean;
 import Models.Beans.TenantBean;
+import Models.DAOImplementation.ContractDAOImplementation;
 import Models.DAOImplementation.RoomDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
 import Models.DAOInterface.RoomDAOInterface;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -25,7 +28,7 @@ public class Room extends javax.swing.JFrame {
     private DefaultTableModel model2;
     private RoomDAOInterface rdao = new RoomDAOImplementation();
     private TenantDAOImplementation tdao = new TenantDAOImplementation();
-   
+
     public Room() {
         initComponents();
 
@@ -34,38 +37,48 @@ public class Room extends javax.swing.JFrame {
         model1 = (DefaultTableModel) jTable1.getModel();
         model2 = (DefaultTableModel) jTable2.getModel();
 
-        for(RoomBean room : list){
+        for (RoomBean room : list) {
             jComboBox1.addItem(room.getRoomID());
         }
-        
+
         TenantDAOImplementation tdao = new TenantDAOImplementation();
         ArrayList<TenantBean> tlist = tdao.getAllTenants();
-        
+
         tenantlist.removeAllItems();
-        
-        for(int i=0; i<tlist.size(); i++) {
+
+        for (int i = 0; i < tlist.size(); i++) {
             tenantlist.addItem(tlist.get(i).getLname() + ", " + tlist.get(i).getFname());
         }
-        
-        //view room assignment
-        ArrayList<TenantBean> tenantlist = tdao.getTenantByRoomID(jComboBox1.getSelectedIndex()+1);
+
+        /*view room assignment
+        ArrayList<TenantBean> tenantlist = tdao.getTenantByRoomID(jComboBox1.getSelectedIndex() + 1);
         String name;
+
+        jTable1.removeAll();
         
-        for(int i=0; i<tenantlist.size(); i++) {
+        for (int i = 0; i < tenantlist.size(); i++) {
             name = tenantlist.get(i).getLname() + ", " + tenantlist.get(i).getFname();
             Object[] obj = {name};
             model1.addRow(obj);
         }
+        */
         
-        //assign tenant to room
+        updateAvailableRooms();
+    }
+    
+    public void updateAvailableRooms() {
+        model2.getDataVector().removeAllElements();
+        
         ArrayList<RoomBean> availablerooms = rdao.getAllRooms();
         int roomID, count;
-        
-        for(int i=0; i<availablerooms.size(); i++) {
+
+        for (int i = 0; i < availablerooms.size(); i++) {
             roomID = availablerooms.get(i).getRoomID();
-            count = 4;
+            count = rdao.checkRoomCount(roomID);
+            if(count<4 ) {
             Object[] obj = {roomID, count};
             model2.addRow(obj);
+            }
         }
     }
 
@@ -183,19 +196,67 @@ public class Room extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         Object temp = tenantlist.getSelectedItem();
-        System.out.println(temp.toString());
+        String tempString = temp.toString();
+        int index = tempString.indexOf(",");
+        String lname = tempString.substring(0, index);
+        String fname = tempString.substring(index + 2);
+
+        //System.out.println(fname);
+        //System.out.println(lname);
+        
+        int roomID = jTable2.getSelectedRow() + 1;
+        RoomBean rbean = rdao.getRoomByRoomID(roomID);
+
+        //System.out.println(roomID);
+        
+        TenantBean tbean = tdao.getTenantByName(fname, lname);
+
+        ContractDAOImplementation cdao = new ContractDAOImplementation();
+        ArrayList<ContractBean> contractlist = new ArrayList<ContractBean>();
+
+        contractlist = cdao.getAllContractsByTenantID(tbean.getTenantID());
+
+        int contractindex = contractlist.size() - 1;
+        ContractBean currentContract = new ContractBean();
+
+        if (contractindex >= 0) {
+            currentContract = contractlist.get(contractindex);
+            rdao.assignTenanttoRoom(tbean, rbean, currentContract);
+
+            JOptionPane.showMessageDialog(null, "Successfully added tenant " + tbean.getFname() + " " + tbean.getLname()
+                    + " to room " + rbean.getRoomID());
+        } else {
+            JOptionPane.showMessageDialog(null, "Tenant doesn't have contract.");
+        }
+        
+        updateAvailableRooms();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        model1 = (DefaultTableModel) jTable1.getModel();
+
+        // TODO add your handling code here:
         
-        //view room assignment
-        ArrayList<TenantBean> tenantlist = tdao.getTenantByRoomID(jComboBox1.getSelectedIndex()+1);
+        model1.getDataVector().removeAllElements();
+        //model1.setRowCount(0);
+        
+        int roomID = (Integer) jComboBox1.getSelectedItem();
+
+        System.out.println(roomID);
+        ArrayList<TenantBean> tenantlist = new ArrayList<TenantBean>();
+        RoomDAOInterface rdao = new RoomDAOImplementation();
+
+        tenantlist = tdao.getTenantByRoomID(roomID);
         String name;
-        
-        for(int i=0; i<tenantlist.size(); i++) {
+
+        if (tenantlist.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "There are no tenants occupying room " + roomID);
+            model1.getDataVector().removeAllElements();
+            model1.setRowCount(0);
+            jTable1.removeAll();
+        }
+        for (int i = 0; i < tenantlist.size(); i++) {
             name = tenantlist.get(i).getFname() + " " + tenantlist.get(i).getLname();
             Object[] obj = {name};
             model1.addRow(obj);
@@ -203,7 +264,7 @@ public class Room extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void tenantlistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tenantlistActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_tenantlistActionPerformed
 
     /**

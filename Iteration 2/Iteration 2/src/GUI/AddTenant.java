@@ -199,7 +199,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(MonthField);
-        MonthField.setBounds(350, 160, 60, 27);
+        MonthField.setBounds(350, 160, 60, 20);
 
         DayField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         DayField.addActionListener(new java.awt.event.ActionListener() {
@@ -208,7 +208,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(DayField);
-        DayField.setBounds(410, 160, 50, 27);
+        DayField.setBounds(410, 160, 50, 20);
 
         YearField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,7 +216,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(YearField);
-        YearField.setBounds(460, 160, 70, 27);
+        YearField.setBounds(460, 160, 70, 20);
         getContentPane().add(SchoolField);
         SchoolField.setBounds(580, 90, 160, 30);
         getContentPane().add(DegreeField);
@@ -279,7 +279,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(FemaleField);
-        FemaleField.setBounds(450, 270, 80, 23);
+        FemaleField.setBounds(450, 270, 59, 23);
         getContentPane().add(ContactNumberField);
         ContactNumberField.setBounds(390, 290, 140, 30);
         getContentPane().add(EmailAddressField);
@@ -304,7 +304,7 @@ public class AddTenant extends javax.swing.JFrame {
         GuardianEmailField.setBounds(630, 300, 110, 30);
 
         getContentPane().add(ExistingGuardianComboBox);
-        ExistingGuardianComboBox.setBounds(660, 330, 110, 27);
+        ExistingGuardianComboBox.setBounds(660, 330, 110, 20);
 
         ExistingGuardianRadioButton.setText("Existing Guardian");
         ExistingGuardianRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -342,6 +342,14 @@ public class AddTenant extends javax.swing.JFrame {
 
     private void ExistingGuardianRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExistingGuardianRadioButtonActionPerformed
         // TODO add your handling code here:
+        
+        GuardianDAOInterface gdao = new GuardianDAOImplementation();
+        
+        ArrayList<GuardianBean> list = gdao.getAllGuardians();
+        
+        if(list.isEmpty()){
+            JOptionPane.showMessageDialog(null, "There are no existing guardians.");
+        }
     }//GEN-LAST:event_ExistingGuardianRadioButtonActionPerformed
 
     private void GuardianFirstnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardianFirstnameFieldActionPerformed

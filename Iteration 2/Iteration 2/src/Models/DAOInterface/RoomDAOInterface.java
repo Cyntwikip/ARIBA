@@ -23,6 +23,7 @@ public interface RoomDAOInterface {
     public ArrayList<RoomBean> getAllRooms();
     public RoomBean getRoomByRoomID(int roomID);
     public RoomBean getTenantRoom(int tenantID);
+    public int checkRoomCount(int roomID);
     //public ArrayList<RoomBean> getAllCurrentKW();
     //public ArrayList<RoomBean> getAllCubicMeter(int roomID);
     //public ArrayList<RoomBean> getCurrentKWbyRoom(int roomID);
