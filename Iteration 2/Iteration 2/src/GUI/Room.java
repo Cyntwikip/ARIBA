@@ -1,3 +1,5 @@
+package GUI;
+
 
 import Models.Beans.ContractBean;
 import Models.Beans.RoomBean;
@@ -103,7 +105,6 @@ public class Room extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(820, 480));
         setMinimumSize(new java.awt.Dimension(820, 480));
         setResizable(false);
         getContentPane().setLayout(null);
