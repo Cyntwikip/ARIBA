@@ -72,7 +72,7 @@ public class AddTenant extends javax.swing.JFrame {
 
         File ff = new File("Woman.jpg");
         ff = ff.getAbsoluteFile();
-        File fm = new File("Man.png");
+        File fm = new File("Man.jpg");
         fm = fm.getAbsoluteFile();
 
         if (MaleField.isSelected()) {
