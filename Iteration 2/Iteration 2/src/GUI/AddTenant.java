@@ -354,7 +354,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(530, 370, 80, 40);
+        jButton1.setBounds(530, 360, 80, 40);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/save.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -363,7 +363,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(630, 370, 80, 40);
+        jButton3.setBounds(630, 360, 80, 40);
 
         try {
             GuardianContactField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
@@ -378,12 +378,22 @@ public class AddTenant extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        ContactNumberField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ContactNumberField1ActionPerformed(evt);
+            }
+        });
+        ContactNumberField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                ContactNumberField1KeyReleased(evt);
+            }
+        });
         getContentPane().add(ContactNumberField1);
         ContactNumberField1.setBounds(390, 288, 140, 30);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addnewtenant-peg-edited.png"))); // NOI18N
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(0, 10, 800, 440);
+        jLabel6.setBounds(0, 0, 800, 440);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -509,12 +519,12 @@ public class AddTenant extends javax.swing.JFrame {
                     c.checkName(SchoolField.getText(), "School");
                     c.checkEmail(EmailAddressField.getText(), "Email");
                     c.checkContact(ContactNumberField1.getText(), "Contact");
-                        c.checkName(GuardianFirstnameField.getText(), "Firstname");
-                        c.checkName(GuardianSurnameField.getText(), "Lastname");
-                        c.checkEmail(GuardianEmailField.getText(), "Email");
-                        c.checkContact(GuardianContactField.getText(), "Contact");
-                
-                        System.out.println("Tenant ID: " + tenantID);
+                    c.checkName(GuardianFirstnameField.getText(), "Firstname");
+                    c.checkName(GuardianSurnameField.getText(), "Lastname");
+                    c.checkEmail(GuardianEmailField.getText(), "Email");
+                    c.checkContact(GuardianContactField.getText(), "Contact");
+
+                    System.out.println("Tenant ID: " + tenantID);
                     if (tenantID == 0) { // add tenant
 
                     } else { // edit
@@ -695,9 +705,10 @@ public class AddTenant extends javax.swing.JFrame {
 
                     if (tflag) {
                         JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + " has successfully added.");
-                        this.dispose();
                         MainMenu main = new MainMenu();
                         main.setVisible(true);
+                        this.dispose();
+
                     } else {
                         JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correctly.");
                     }
@@ -717,9 +728,9 @@ public class AddTenant extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();
         MainMenu menu = new MainMenu();
         menu.setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -752,6 +763,17 @@ public class AddTenant extends javax.swing.JFrame {
         // TODO add your handling code here:
         preventDigit(evt);
     }//GEN-LAST:event_GuardianFirstnameFieldKeyTyped
+
+    private void ContactNumberField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactNumberField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ContactNumberField1ActionPerformed
+
+    private void ContactNumberField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ContactNumberField1KeyReleased
+        // TODO add your handling code here:
+
+        char c = evt.getKeyChar();
+        System.out.println(c);
+    }//GEN-LAST:event_ContactNumberField1KeyReleased
 
     /**
      * @param args the command line arguments
