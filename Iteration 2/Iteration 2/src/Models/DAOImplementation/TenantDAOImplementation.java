@@ -829,4 +829,64 @@ public class TenantDAOImplementation implements TenantDAOInterface {
 
     }
 
+    @Override
+    public ArrayList<TenantBean> getAllTenantsWithoutRoom() {
+        
+               try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select tenant.lname, tenant.fname, tenant.tenantID from tenant, tenantroom where tr_tenantID = tenantID order asc";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+
+            ArrayList<TenantBean> list = new ArrayList<>();
+            TenantBean bean = new TenantBean();
+
+            int tenantID, expectedyearofgrad;
+            String fname, lname, gender, address, degree, school, status, contact, email;
+            Blob image;
+            Date birthday;
+
+            while (resultSet.next()) {
+                tenantID = resultSet.getInt("tenantID");
+                contact = resultSet.getString("contact");
+                expectedyearofgrad = resultSet.getInt("expectedyearofgrad");
+                fname = resultSet.getString("fname");
+                lname = resultSet.getString("lname");
+                gender = resultSet.getString("gender");
+                address = resultSet.getString("address");
+                degree = resultSet.getString("degree");
+                school = resultSet.getString("school");
+                status = resultSet.getString("status");
+                image = resultSet.getBlob("image");
+                email = resultSet.getString("email");
+                birthday = resultSet.getDate("birthday");
+
+                bean = new TenantBean();
+
+                bean.setTenantID(tenantID);
+                bean.setContact(contact);
+                bean.setExpectedyearofgrad(expectedyearofgrad);
+                bean.setFname(fname);
+                bean.setLname(lname);
+                bean.setGender(gender);
+                bean.setDegree(degree);
+                bean.setAddress(address);
+                bean.setSchool(school);
+                bean.setStatus(status);
+//                bean.setImage(image);
+                bean.setEmail(email);
+                bean.setBirthday(birthday);
+
+                list.add(bean);
+            }
+            return list;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
 }

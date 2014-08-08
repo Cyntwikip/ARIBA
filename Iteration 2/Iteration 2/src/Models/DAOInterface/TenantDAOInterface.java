@@ -29,5 +29,6 @@ public interface TenantDAOInterface {
     public ArrayList<TenantBean> getTenantByExpectedYearofGrad (int year);
     public ArrayList<TenantBean> getTenantByRoomID(int tenant_roomID);
     public ArrayList<TenantBean> searchTenantName(String name);
+    public ArrayList<TenantBean> getAllTenantsWithoutRoom();
     
 }

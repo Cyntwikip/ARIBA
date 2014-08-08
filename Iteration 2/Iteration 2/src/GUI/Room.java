@@ -1,6 +1,5 @@
 package GUI;
 
-
 import Models.Beans.ContractBean;
 import Models.Beans.RoomBean;
 import Models.Beans.TenantBean;
@@ -46,41 +45,68 @@ public class Room extends javax.swing.JFrame {
         TenantDAOImplementation tdao = new TenantDAOImplementation();
         ArrayList<TenantBean> tlist = tdao.getAllTenants();
 
+        RoomDAOInterface rdao = new RoomDAOImplementation();
+        RoomBean rbean = new RoomBean();
         tenantlist.removeAllItems();
 
         for (int i = 0; i < tlist.size(); i++) {
-            tenantlist.addItem(tlist.get(i).getLname() + ", " + tlist.get(i).getFname());
+            rbean = rdao.getTenantRoom(tlist.get(i).getTenantID());
+            System.out.println(rbean.getRoomID());
+            if (rbean.getRoomID() == 0) {
+                tenantlist.addItem(tlist.get(i).getLname() + ", " + tlist.get(i).getFname());
+
+            } else {
+            }
         }
 
         /*view room assignment
-        ArrayList<TenantBean> tenantlist = tdao.getTenantByRoomID(jComboBox1.getSelectedIndex() + 1);
-        String name;
+         ArrayList<TenantBean> tenantlist = tdao.getTenantByRoomID(jComboBox1.getSelectedIndex() + 1);
+         String name;
 
-        jTable1.removeAll();
+         jTable1.removeAll();
         
-        for (int i = 0; i < tenantlist.size(); i++) {
-            name = tenantlist.get(i).getLname() + ", " + tenantlist.get(i).getFname();
-            Object[] obj = {name};
-            model1.addRow(obj);
-        }
-        */
-        
+         for (int i = 0; i < tenantlist.size(); i++) {
+         name = tenantlist.get(i).getLname() + ", " + tenantlist.get(i).getFname();
+         Object[] obj = {name};
+         model1.addRow(obj);
+         }
+         */
         updateAvailableRooms();
     }
-    
+
     public void updateAvailableRooms() {
         model2.getDataVector().removeAllElements();
         model2.fireTableDataChanged();
-        
+
         ArrayList<RoomBean> availablerooms = rdao.getAllRooms();
         int roomID, count;
 
         for (int i = 0; i < availablerooms.size(); i++) {
             roomID = availablerooms.get(i).getRoomID();
             count = rdao.checkRoomCount(roomID);
-            if(count<4 ) {
-            Object[] obj = {roomID, count};
-            model2.addRow(obj);
+            if (count < 4) {
+                Object[] obj = {roomID, count};
+                model2.addRow(obj);
+            }
+        }
+    }
+
+    public void updateTenants() {
+        tenantlist.removeAllItems();
+
+        RoomDAOInterface rdao = new RoomDAOImplementation();
+        RoomBean rbean = new RoomBean();
+
+        ArrayList<TenantBean> tlist = new ArrayList<TenantBean>();
+        tlist = tdao.getAllTenants();
+
+        for (int i = 0; i < tlist.size(); i++) {
+            rbean = rdao.getTenantRoom(tlist.get(i).getTenantID());
+            System.out.println(rbean.getRoomID());
+            if (rbean.getRoomID() == 0) {
+                tenantlist.addItem(tlist.get(i).getLname() + ", " + tlist.get(i).getFname());
+
+            } else {
             }
         }
     }
@@ -141,7 +167,6 @@ public class Room extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(90, 150, 250, 210);
 
-        tenantlist.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         tenantlist.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tenantlistActionPerformed(evt);
@@ -200,50 +225,60 @@ public class Room extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         Object temp = tenantlist.getSelectedItem();
-        String tempString = temp.toString();
-        int index = tempString.indexOf(",");
-        String lname = tempString.substring(0, index);
-        String fname = tempString.substring(index + 2);
 
         //System.out.println(fname);
         //System.out.println(lname);
-        
         int roomID = jTable2.getSelectedRow() + 1;
-        RoomBean rbean = rdao.getRoomByRoomID(roomID);
 
-        //System.out.println(roomID);
-        
-        TenantBean tbean = tdao.getTenantByName(fname, lname);
-
-        ContractDAOImplementation cdao = new ContractDAOImplementation();
-        ArrayList<ContractBean> contractlist = new ArrayList<ContractBean>();
-
-        contractlist = cdao.getAllContractsByTenantID(tbean.getTenantID());
-
-        int contractindex = contractlist.size() - 1;
-        ContractBean currentContract = new ContractBean();
-
-        if (contractindex >= 0) {
-            currentContract = contractlist.get(contractindex);
-            rdao.assignTenanttoRoom(tbean, rbean, currentContract);
-
-            JOptionPane.showMessageDialog(null, "Successfully added tenant " + tbean.getFname() + " " + tbean.getLname()
-                    + " to room " + rbean.getRoomID());
-        } else {
-            JOptionPane.showMessageDialog(null, "Tenant doesn't have contract.");
+        if(roomID == 0 && temp == null){
+            JOptionPane.showMessageDialog(null, "No tenant and room selected. Please choose from the list.");
         }
-        
-        updateAvailableRooms();
+        else if (roomID == 0) {
+            JOptionPane.showMessageDialog(null, "Please select a room.");
+        } else if (temp.equals(null)) {
+            JOptionPane.showMessageDialog(null, "Please select a tenant.");
+
+        } else {
+            String tempString = temp.toString();
+            int index = tempString.indexOf(",");
+            String lname = tempString.substring(0, index);
+            String fname = tempString.substring(index + 2);
+
+            RoomBean rbean = rdao.getRoomByRoomID(roomID);
+
+            //System.out.println(roomID);
+            TenantBean tbean = tdao.getTenantByName(fname, lname);
+
+            ContractDAOImplementation cdao = new ContractDAOImplementation();
+            ArrayList<ContractBean> contractlist = new ArrayList<ContractBean>();
+
+            contractlist = cdao.getAllContractsByTenantID(tbean.getTenantID());
+
+            int contractindex = contractlist.size() - 1;
+            ContractBean currentContract = new ContractBean();
+
+            if (contractindex >= 0) {
+                currentContract = contractlist.get(contractindex);
+                rdao.assignTenanttoRoom(tbean, rbean, currentContract);
+
+                JOptionPane.showMessageDialog(null, "Successfully added tenant " + tbean.getFname() + " " + tbean.getLname()
+                        + " to room " + rbean.getRoomID());
+            } else {
+                JOptionPane.showMessageDialog(null, "Tenant doesn't have contract.");
+            }
+
+            updateAvailableRooms();
+            updateTenants();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
 
         // TODO add your handling code here:
-        
         model1.getDataVector().removeAllElements();
         model1.fireTableDataChanged();
         //model1.setRowCount(0);
-        
+
         int roomID = (Integer) jComboBox1.getSelectedItem();
 
         System.out.println(roomID);
@@ -283,16 +318,21 @@ public class Room extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Room.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Room.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Room.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Room.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Room.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Room.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Room.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Room.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
