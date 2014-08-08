@@ -290,14 +290,10 @@ public class RoomDAOImplementation implements RoomDAOInterface {
             RoomBean bean = new RoomBean();
 
             int roomID;
-            float currentKW, currentcubicmeter;
 
             while (resultSet.next()) {
                 roomID = resultSet.getInt("tr_roomID");
                 bean.setRoomID(roomID);
-                //bean.setCurrentKW(currentKW);
-                //bean.setCurrentcubicmeter(currentcubicmeter);
-
             }
 
             return bean;
