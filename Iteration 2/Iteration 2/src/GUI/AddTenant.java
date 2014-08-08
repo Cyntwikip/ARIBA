@@ -59,10 +59,10 @@ public class AddTenant extends javax.swing.JFrame {
         flag = true;
         int year = Calendar.getInstance().get(Calendar.YEAR);
 
-        for (int i = 0; i <= year - 1990; i++) { // remove all years
+        for (int i = 0; i <= year - 1995; i++) { // remove all years
             YearField.removeItem(1995 + i);
         }
-        for (int i = 0; i <= year - 1990; i++) {
+        for (int i = 0; i <= year - 1995; i++) {
             YearField.addItem(1995 + i);
         }
 
@@ -202,8 +202,6 @@ public class AddTenant extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         GuardianContactField = new javax.swing.JFormattedTextField();
         ContactNumberField1 = new javax.swing.JFormattedTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jComboBox1 = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -389,23 +387,6 @@ public class AddTenant extends javax.swing.JFrame {
         getContentPane().add(ContactNumberField1);
         ContactNumberField1.setBounds(390, 288, 140, 30);
 
-        jRadioButton1.setText("Existing Guardian:");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jRadioButton1);
-        jRadioButton1.setBounds(530, 340, 120, 23);
-
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(660, 340, 110, 20);
-
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addnewtenant-peg-edited.png"))); // NOI18N
         getContentPane().add(jLabel6);
         jLabel6.setBounds(0, 10, 800, 440);
@@ -534,13 +515,12 @@ public class AddTenant extends javax.swing.JFrame {
                     c.checkName(SchoolField.getText(), "School");
                     c.checkEmail(EmailAddressField.getText(), "Email");
                     c.checkContact(ContactNumberField1.getText(), "Contact");
-                    if (!jRadioButton1.isEnabled()) {
                         c.checkName(GuardianFirstnameField.getText(), "Firstname");
                         c.checkName(GuardianSurnameField.getText(), "Lastname");
                         c.checkEmail(GuardianEmailField.getText(), "Email");
                         c.checkContact(GuardianContactField.getText(), "Contact");
-                    }
-                    System.out.println("Tenant ID: " + tenantID);
+                
+                        System.out.println("Tenant ID: " + tenantID);
                     if (tenantID == 0) { // add tenant
 
                     } else { // edit
@@ -569,7 +549,7 @@ public class AddTenant extends javax.swing.JFrame {
                             gender = "";
                         }
 
-                        bean.setContact(GuardianContactField.getText());
+                        bean.setContact(ContactNumberField1.getText());
                         bean.setDegree(DegreeField.getText().toUpperCase());
                         bean.setEmail(EmailAddressField.getText());
                         bean.setExpectedyearofgrad((Integer) YearOfGraduationField.getSelectedItem());
@@ -650,16 +630,12 @@ public class AddTenant extends javax.swing.JFrame {
                     || DegreeField.getText().isEmpty()
                     || EmailAddressField.getText().isEmpty()
                     || SchoolField.getText().isEmpty()
-                    || gender.isEmpty()) {
+                    || gender.isEmpty()
+                    || guardFname.isEmpty()
+                    || guardLname.isEmpty()
+                    || guardEmail.isEmpty()
+                    || guardContact.isEmpty()) {
                 empty = true;
-            } else if (!jRadioButton1.isEnabled()) {
-                if (guardFname.isEmpty()
-                        || guardLname.isEmpty()
-                        || guardEmail.isEmpty()
-                        || guardContact.isEmpty()) {
-                    empty = true;
-
-                }
             } else {
                 empty = false;
                 try {
@@ -689,16 +665,10 @@ public class AddTenant extends javax.swing.JFrame {
                     GuardianBean guard = new GuardianBean();
                     GuardianDAOImplementation guardImpl1 = new GuardianDAOImplementation();
                     boolean t1 = false, g1 = false, tg1;
-                    if (jRadioButton1.isEnabled()) {
-
-                        String name = (String) jComboBox1.getSelectedItem();
-                        guard = guardImpl1.searchGuardianByName(name);
-                    } else {
-                        guard.setFname(guardFname.toUpperCase());
-                        guard.setLname(guardLname.toUpperCase());
-                        guard.setContact(guardContact);
-                        guard.setEmail(guardEmail);
-                    }
+                    guard.setFname(guardFname.toUpperCase());
+                    guard.setLname(guardLname.toUpperCase());
+                    guard.setContact(guardContact);
+                    guard.setEmail(guardEmail);
                     g1 = guardImpl1.addGuardian(guard);
                     t1 = tenantImpl.addTenant(tenant);
                     guard = guardImpl1.getGuardianByName(guardFname, guardLname);
@@ -789,16 +759,6 @@ public class AddTenant extends javax.swing.JFrame {
         preventDigit(evt);
     }//GEN-LAST:event_GuardianFirstnameFieldKeyTyped
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-
-
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -865,9 +825,7 @@ public class AddTenant extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
