@@ -211,12 +211,18 @@ public class MainMenu extends javax.swing.JFrame {
         guardiancontactno.setText(guardianbean.getContact());
         guardianEmail.setText(guardianbean.getEmail());
 
-         RoomBean roombean = new RoomBean();
-         RoomDAOImplementation roomdao = new RoomDAOImplementation();
+        RoomBean roombean = new RoomBean();
+        RoomDAOImplementation roomdao = new RoomDAOImplementation();
+
+        roombean = roomdao.getTenantRoom(tenantid);
+        if(roombean.getRoomID()==0) {
+            roomassignment.setText("none");
+        }
+        else {
+            roomassignment.setText(String.valueOf(roombean.getRoomID()));
+        }
         
-         roombean = roomdao.getTenantRoom(tenantid);
-         roomassignment.setText(String.valueOf(roombean.getRoomID()));
-         
+
         status.setText(bean.getStatus());
 
     }
@@ -298,7 +304,7 @@ public class MainMenu extends javax.swing.JFrame {
         getContentPane().add(guardiancontactno);
         guardiancontactno.setBounds(820, 424, 160, 20);
         getContentPane().add(roomassignment);
-        roomassignment.setBounds(870, 460, 0, 0);
+        roomassignment.setBounds(870, 460, 40, 20);
 
         status.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         getContentPane().add(status);
