@@ -2,15 +2,22 @@ package GUI;
 
 import ErrorHandling.AccountException;
 import ErrorHandling.CheckAccount;
+import Models.Beans.ContractBean;
 import Models.Beans.GuardianBean;
 import Models.Beans.TenantBean;
+import Models.DAOImplementation.ContractDAOImplementation;
 import Models.DAOImplementation.GuardianDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
+import Models.DAOInterface.ContractDAOInterface;
 import Models.DAOInterface.GuardianDAOInterface;
 import Models.DAOInterface.TenantDAOInterface;
 import com.mysql.jdbc.Blob;
+import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,13 +25,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.ImageIcon;
-import java.awt.Image;
-import java.awt.event.KeyEvent;
-import java.io.File;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -669,6 +673,26 @@ public class AddTenant extends javax.swing.JFrame {
                     if (t1 && g1 && tg1) {
                         tflag = true;
                     }
+
+                    ContractBean contractAcc = new ContractBean();
+                    ContractDAOInterface contractdao = new ContractDAOImplementation();
+
+                    tenant = tdao.getTenantByName(tenant.getFname(), tenant.getLname());
+
+                    Calendar effectivedate = Calendar.getInstance();
+                    Calendar expirydate = Calendar.getInstance();
+                            expirydate.add(Calendar.DAY_OF_YEAR, 365); // add 1 year
+                    DateFormat df_contract = new SimpleDateFormat("MMMM d, yyyy");
+
+                    //converting Calendar to sql Date
+                    java.sql.Date sqlEffectivedate = new java.sql.Date(effectivedate.getTime().getTime());
+                    java.sql.Date sqlExpirydate = new java.sql.Date(expirydate.getTime().getTime());
+
+                    contractAcc.setContract_tenantID(tenant.getTenantID());
+                    contractAcc.setEffectivedate(sqlEffectivedate);
+                    contractAcc.setExpirydate(sqlExpirydate);
+
+                    contractdao.addContract(contractAcc);
 
                     if (tflag) {
                         JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + " has successfully added.");
