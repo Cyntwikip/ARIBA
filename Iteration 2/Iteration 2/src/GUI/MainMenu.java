@@ -297,10 +297,8 @@ public class MainMenu extends javax.swing.JFrame {
         yearofgraduation.setBounds(870, 360, 110, 20);
         getContentPane().add(guardiancontactno);
         guardiancontactno.setBounds(820, 424, 160, 20);
-
-        roomassignment.setText("jLabel15");
         getContentPane().add(roomassignment);
-        roomassignment.setBounds(870, 460, 40, 14);
+        roomassignment.setBounds(870, 460, 0, 0);
 
         status.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         getContentPane().add(status);
