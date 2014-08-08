@@ -87,12 +87,6 @@ public class AddTenant extends javax.swing.JFrame {
             tenant.setImage(ff.getAbsolutePath());
         }
 
-        GuardianDAOInterface gdao = new GuardianDAOImplementation();
-        ArrayList<GuardianBean> gbean = gdao.getAllGuardians();
-
-        for (GuardianBean bean : gbean) {
-            jComboBox1.addItem(bean.getFname() + " " + bean.getLname());
-        }
     }
 
     public AddTenant(int id) {
