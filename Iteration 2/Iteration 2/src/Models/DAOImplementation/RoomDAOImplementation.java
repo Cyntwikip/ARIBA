@@ -315,5 +315,41 @@ public class RoomDAOImplementation implements RoomDAOInterface {
         return null;
     }
 
+    @Override
+    public ArrayList<RoomBean> viewAvailbleRooms() {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select ";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+            
+            ArrayList<RoomBean> list = new ArrayList<>();
+            RoomBean bean = new RoomBean();
+            
+            int roomID;
+            float currentKW, currentcubicmeter;
+            
+            while(resultSet.next()) {
+                roomID = resultSet.getInt("roomID");
+                currentKW = resultSet.getFloat("currentKW");
+                currentcubicmeter = resultSet.getFloat("currentcubicmeter");
+                
+                bean = new RoomBean();
+                
+                bean.setRoomID(roomID);
+                bean.setCurrentKW(currentKW);
+                bean.setCurrentcubicmeter(currentcubicmeter);
+                
+                list.add(bean);
+            }
+        
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     
 }

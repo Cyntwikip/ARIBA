@@ -25,7 +25,7 @@ public class Room extends javax.swing.JFrame {
     private DefaultTableModel model2;
     private RoomDAOInterface rdao = new RoomDAOImplementation();
     private TenantDAOImplementation tdao = new TenantDAOImplementation();
-
+   
     public Room() {
         initComponents();
 
@@ -44,18 +44,29 @@ public class Room extends javax.swing.JFrame {
         tenantlist.removeAllItems();
         
         for(int i=0; i<tlist.size(); i++) {
-            tenantlist.addItem(tlist.get(i).getFname() + " " + tlist.get(i).getLname());
+            tenantlist.addItem(tlist.get(i).getLname() + ", " + tlist.get(i).getFname());
         }
         
+        //view room assignment
         ArrayList<TenantBean> tenantlist = tdao.getTenantByRoomID(jComboBox1.getSelectedIndex()+1);
         String name;
         
         for(int i=0; i<tenantlist.size(); i++) {
-            name = tenantlist.get(i).getFname() + " " + tenantlist.get(i).getLname();
+            name = tenantlist.get(i).getLname() + ", " + tenantlist.get(i).getFname();
             Object[] obj = {name};
             model1.addRow(obj);
         }
         
+        //assign tenant to room
+        ArrayList<RoomBean> availablerooms = rdao.getAllRooms();
+        int roomID, count;
+        
+        for(int i=0; i<availablerooms.size(); i++) {
+            roomID = availablerooms.get(i).getRoomID();
+            count = 4;
+            Object[] obj = {roomID, count};
+            model2.addRow(obj);
+        }
     }
 
     /**
@@ -116,6 +127,11 @@ public class Room extends javax.swing.JFrame {
         jScrollPane1.setBounds(90, 150, 250, 210);
 
         tenantlist.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        tenantlist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tenantlistActionPerformed(evt);
+            }
+        });
         getContentPane().add(tenantlist);
         tenantlist.setBounds(500, 110, 220, 30);
 
@@ -167,11 +183,28 @@ public class Room extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        Object temp = tenantlist.getSelectedItem();
+        System.out.println(temp.toString());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
+        model1 = (DefaultTableModel) jTable1.getModel();
+        
+        //view room assignment
+        ArrayList<TenantBean> tenantlist = tdao.getTenantByRoomID(jComboBox1.getSelectedIndex()+1);
+        String name;
+        
+        for(int i=0; i<tenantlist.size(); i++) {
+            name = tenantlist.get(i).getFname() + " " + tenantlist.get(i).getLname();
+            Object[] obj = {name};
+            model1.addRow(obj);
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void tenantlistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tenantlistActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tenantlistActionPerformed
 
     /**
      * @param args the command line arguments

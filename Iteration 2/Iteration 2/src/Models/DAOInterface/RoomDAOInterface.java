@@ -29,4 +29,5 @@ public interface RoomDAOInterface {
     //public RoomBean getCubicMeter(int roomID);
     //public ArrayList<RoomBean> getAllUnoccupiedRooms();
     //public ArrayList<RoomBean> getAllOccupiedRooms();
+    public ArrayList<RoomBean> viewAvailbleRooms();
 }
