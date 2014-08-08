@@ -6,6 +6,11 @@
 
 package GUI;
 
+import Models.Beans.RoomBean;
+import Models.DAOImplementation.RoomDAOImplementation;
+import Models.DAOInterface.RoomDAOInterface;
+import java.util.ArrayList;
+
 /**
  *
  * @author jao
@@ -17,6 +22,17 @@ public class Bills extends javax.swing.JFrame {
      */
     public Bills() {
         initComponents();
+        
+        ArrayList<RoomBean> list = new ArrayList<RoomBean>();
+        RoomBean bean = new RoomBean();
+        
+        RoomDAOInterface rdao = new RoomDAOImplementation();
+        
+        list = rdao.getAllRooms();
+        
+        for (int i=0; i<list.size(); i++){
+            jComboBox1.addItem(list.get(i).getRoomID());
+        }
     }
 
     /**
@@ -39,9 +55,11 @@ public class Bills extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(800, 470));
+        setMinimumSize(new java.awt.Dimension(800, 470));
+        setResizable(false);
         getContentPane().setLayout(null);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jComboBox1);
         jComboBox1.setBounds(210, 180, 100, 30);
 
