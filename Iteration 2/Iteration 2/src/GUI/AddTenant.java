@@ -70,7 +70,7 @@ public class AddTenant extends javax.swing.JFrame {
             YearOfGraduationField.addItem(i);
         }
 
-        File ff = new File("Woman.png");
+        File ff = new File("Woman.jpg");
         ff = ff.getAbsoluteFile();
         File fm = new File("Man.png");
         fm = fm.getAbsoluteFile();
