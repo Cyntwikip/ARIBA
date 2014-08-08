@@ -59,11 +59,11 @@ public class AddTenant extends javax.swing.JFrame {
         flag = true;
         int year = Calendar.getInstance().get(Calendar.YEAR);
 
-        for (int i = 0; i <= year - 1900; i++) { // remove all years
-            YearField.removeItem(1900 + i);
+        for (int i = 0; i <= year - 1990; i++) { // remove all years
+            YearField.removeItem(1995 + i);
         }
-        for (int i = 0; i <= year - 1900; i++) {
-            YearField.addItem(1900 + i);
+        for (int i = 0; i <= year - 1990; i++) {
+            YearField.addItem(1995 + i);
         }
 
         //jComboBox1
@@ -87,6 +87,12 @@ public class AddTenant extends javax.swing.JFrame {
             tenant.setImage(ff.getAbsolutePath());
         }
 
+        GuardianDAOInterface gdao = new GuardianDAOImplementation();
+        ArrayList<GuardianBean> gbean = gdao.getAllGuardians();
+
+        for (GuardianBean bean : gbean) {
+            jComboBox1.addItem(bean.getFname() + " " + bean.getLname());
+        }
     }
 
     public AddTenant(int id) {
@@ -134,6 +140,7 @@ public class AddTenant extends javax.swing.JFrame {
         DegreeField.setText(tb.getDegree());
         YearOfGraduationField.setSelectedItem(tb.getExpectedyearofgrad());
 
+        //   imgaddLabel.setIcon(tb.getImage());
         // guardian part
         GuardianDAOInterface gdao = new GuardianDAOImplementation();
         GuardianBean gbean = new GuardianBean();
@@ -195,6 +202,8 @@ public class AddTenant extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         GuardianContactField = new javax.swing.JFormattedTextField();
         ContactNumberField1 = new javax.swing.JFormattedTextField();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jComboBox1 = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -255,7 +264,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(SchoolField);
-        SchoolField.setBounds(580, 90, 160, 30);
+        SchoolField.setBounds(580, 90, 190, 30);
 
         DegreeField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -263,7 +272,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(DegreeField);
-        DegreeField.setBounds(580, 120, 160, 30);
+        DegreeField.setBounds(580, 120, 190, 30);
 
         YearOfGraduationField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -271,7 +280,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(YearOfGraduationField);
-        YearOfGraduationField.setBounds(650, 160, 90, 20);
+        YearOfGraduationField.setBounds(650, 160, 120, 20);
 
         AddressField.setColumns(20);
         AddressField.setLineWrap(true);
@@ -329,7 +338,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(GuardianFirstnameField);
-        GuardianFirstnameField.setBounds(600, 240, 140, 30);
+        GuardianFirstnameField.setBounds(600, 240, 170, 30);
 
         GuardianSurnameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -342,9 +351,9 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(GuardianSurnameField);
-        GuardianSurnameField.setBounds(600, 210, 140, 30);
+        GuardianSurnameField.setBounds(600, 210, 170, 30);
         getContentPane().add(GuardianEmailField);
-        GuardianEmailField.setBounds(630, 300, 110, 30);
+        GuardianEmailField.setBounds(630, 300, 140, 30);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/backbutton.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -370,7 +379,7 @@ public class AddTenant extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         getContentPane().add(GuardianContactField);
-        GuardianContactField.setBounds(630, 270, 110, 30);
+        GuardianContactField.setBounds(630, 270, 140, 30);
 
         try {
             ContactNumberField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
@@ -380,9 +389,26 @@ public class AddTenant extends javax.swing.JFrame {
         getContentPane().add(ContactNumberField1);
         ContactNumberField1.setBounds(390, 288, 140, 30);
 
+        jRadioButton1.setText("Existing Guardian:");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jRadioButton1);
+        jRadioButton1.setBounds(530, 340, 120, 23);
+
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBox1);
+        jComboBox1.setBounds(660, 340, 110, 20);
+
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addnewtenant-peg-edited.png"))); // NOI18N
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(0, 10, 790, 440);
+        jLabel6.setBounds(0, 10, 800, 440);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -493,15 +519,12 @@ public class AddTenant extends javax.swing.JFrame {
             CheckAccount c = new CheckAccount();
             if (FirstnameField.getText().isEmpty()
                     || SurnameField.getText().isEmpty()
-                    || GuardianContactField.getText().isEmpty()
+                    || ContactNumberField1.getText().isEmpty()
                     || AddressField.getText().isEmpty()
                     || DegreeField.getText().isEmpty()
                     || EmailAddressField.getText().isEmpty()
-                    || SchoolField.getText().isEmpty()
-                    || GuardianContactField.getText().isEmpty()
-                    || GuardianFirstnameField.getText().isEmpty()
-                    || GuardianSurnameField.getText().isEmpty()
-                    || GuardianEmailField.getText().isEmpty()) {
+                    || SchoolField.getText().isEmpty()) {
+
                 JOptionPane.showMessageDialog(null, "Please fill up ALL the fields.");
             } else {
                 try {
@@ -510,12 +533,13 @@ public class AddTenant extends javax.swing.JFrame {
                     c.checkName(DegreeField.getText(), "Degree");
                     c.checkName(SchoolField.getText(), "School");
                     c.checkEmail(EmailAddressField.getText(), "Email");
-                    c.checkContact(GuardianContactField.getText(), "Contact");
-                    c.checkName(GuardianFirstnameField.getText(), "Firstname");
-                    c.checkName(GuardianSurnameField.getText(), "Lastname");
-                    c.checkEmail(GuardianEmailField.getText(), "Email");
-                    c.checkContact(GuardianContactField.getText(), "Contact");
-
+                    c.checkContact(ContactNumberField1.getText(), "Contact");
+                    if (!jRadioButton1.isEnabled()) {
+                        c.checkName(GuardianFirstnameField.getText(), "Firstname");
+                        c.checkName(GuardianSurnameField.getText(), "Lastname");
+                        c.checkEmail(GuardianEmailField.getText(), "Email");
+                        c.checkContact(GuardianContactField.getText(), "Contact");
+                    }
                     System.out.println("Tenant ID: " + tenantID);
                     if (tenantID == 0) { // add tenant
 
@@ -592,7 +616,7 @@ public class AddTenant extends javax.swing.JFrame {
             String degree = DegreeField.getText();
             String school = SchoolField.getText();
             String email = EmailAddressField.getText();
-            String contact = GuardianContactField.getText();
+            String contact = ContactNumberField1.getText();
             String address = AddressField.getText();
             //converting string to Calendar
             String sDate = MonthField.getSelectedItem().toString() + " " + DayField.getSelectedItem().toString() + ", " + YearField.getSelectedItem().toString();
@@ -613,25 +637,31 @@ public class AddTenant extends javax.swing.JFrame {
                 gender = "";
             }
             int gradyear = (int) YearOfGraduationField.getSelectedItem();
+
             String guardFname = GuardianFirstnameField.getText();
             String guardLname = GuardianSurnameField.getText();
             String guardContact = GuardianContactField.getText();
             String guardEmail = GuardianEmailField.getText();
-
+            boolean empty = false;
             if (FirstnameField.getText().isEmpty()
                     || SurnameField.getText().isEmpty()
-                    || GuardianContactField.getText().isEmpty()
+                    || ContactNumberField1.getText().isEmpty()
                     || AddressField.getText().isEmpty()
                     || DegreeField.getText().isEmpty()
                     || EmailAddressField.getText().isEmpty()
                     || SchoolField.getText().isEmpty()
-                    || gender.isEmpty()
-                    || guardFname.isEmpty()
-                    || guardLname.isEmpty()
-                    || guardEmail.isEmpty()
-                    || guardContact.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Please input ALL necessary information");
+                    || gender.isEmpty()) {
+                empty = true;
+            } else if (!jRadioButton1.isEnabled()) {
+                if (guardFname.isEmpty()
+                        || guardLname.isEmpty()
+                        || guardEmail.isEmpty()
+                        || guardContact.isEmpty()) {
+                    empty = true;
+
+                }
             } else {
+                empty = false;
                 try {
                     //error checking
                     c.checkName(fname, "Firstname");
@@ -659,11 +689,16 @@ public class AddTenant extends javax.swing.JFrame {
                     GuardianBean guard = new GuardianBean();
                     GuardianDAOImplementation guardImpl1 = new GuardianDAOImplementation();
                     boolean t1 = false, g1 = false, tg1;
-                    guard.setFname(guardFname.toUpperCase());
-                    guard.setLname(guardLname.toUpperCase());
-                    guard.setContact(guardContact);
-                    guard.setEmail(guardEmail);
+                    if (jRadioButton1.isEnabled()) {
 
+                        String name = (String) jComboBox1.getSelectedItem();
+                        guard = guardImpl1.searchGuardianByName(name);
+                    } else {
+                        guard.setFname(guardFname.toUpperCase());
+                        guard.setLname(guardLname.toUpperCase());
+                        guard.setContact(guardContact);
+                        guard.setEmail(guardEmail);
+                    }
                     g1 = guardImpl1.addGuardian(guard);
                     t1 = tenantImpl.addTenant(tenant);
                     guard = guardImpl1.getGuardianByName(guardFname, guardLname);
@@ -681,7 +716,7 @@ public class AddTenant extends javax.swing.JFrame {
 
                     Calendar effectivedate = Calendar.getInstance();
                     Calendar expirydate = Calendar.getInstance();
-                            expirydate.add(Calendar.DAY_OF_YEAR, 365); // add 1 year
+                    expirydate.add(Calendar.DAY_OF_YEAR, 365); // add 1 year
                     DateFormat df_contract = new SimpleDateFormat("MMMM d, yyyy");
 
                     //converting Calendar to sql Date
@@ -705,6 +740,11 @@ public class AddTenant extends javax.swing.JFrame {
                 } catch (AccountException e) {
                     e.promptFieldError();
                 }
+            }
+
+            if (empty == false) {
+                JOptionPane.showMessageDialog(null, "Please input ALL necessary information");
+
             }
 
         }
@@ -748,6 +788,16 @@ public class AddTenant extends javax.swing.JFrame {
         // TODO add your handling code here:
         preventDigit(evt);
     }//GEN-LAST:event_GuardianFirstnameFieldKeyTyped
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -815,7 +865,9 @@ public class AddTenant extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

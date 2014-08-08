@@ -31,4 +31,5 @@ public interface TenantDAOInterface {
     public ArrayList<TenantBean> searchTenantName(String name);
     public ArrayList<TenantBean> getAllTenantsWithoutRoom();
     
+    
 }

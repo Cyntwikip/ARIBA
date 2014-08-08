@@ -25,5 +25,6 @@ public interface GuardianDAOInterface {
     public GuardianBean getGuardianByTenantID(int tenantID);
     public ArrayList<GuardianBean> getAllGuardians();
     public ArrayList<TenantBean> getTenantsRelatedToGuardian(int guardianID);
+    public GuardianBean searchGuardianByName(String name);
     
 }

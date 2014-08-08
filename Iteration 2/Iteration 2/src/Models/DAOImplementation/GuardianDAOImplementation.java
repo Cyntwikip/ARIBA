@@ -353,7 +353,7 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
             GuardianBean bean = new GuardianBean();
             int guardianid;
             String Fname, Lname, contact, email;
-  
+
             PreparedStatement ps2;
             ResultSet resultSet2;
 
@@ -366,12 +366,12 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 resultSet2 = ps2.executeQuery();
 
                 while (resultSet2.next()) {
-                    
+
                     contact = resultSet2.getString("contact");
                     Fname = resultSet2.getString("fname");
                     Lname = resultSet2.getString("lname");
                     email = resultSet2.getString("email");
-          
+
                     bean = new GuardianBean();
 
                     bean.setGuardianID(guardianid);
@@ -379,7 +379,7 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                     bean.setFname(Fname);
                     bean.setLname(Lname);
                     bean.setEmail(email);
-                    
+
                     System.out.println("Guardian ID: " + bean.getGuardianID());
                 }
             }
@@ -391,6 +391,46 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
         }
         return null;
 
+    }
+
+    @Override
+    public GuardianBean searchGuardianByName(String name) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from guardian where fname like '%" + name + "%'"
+                    + "or lname like '%" + name + "%' or concat (fname,' ',lname) like '%" + name + "%' order by fname, lname ASC";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+
+            GuardianBean bean = new GuardianBean();
+
+            int guardianID;
+            String fname, lname, contact, email;
+
+            while (resultSet.next()) {
+                guardianID = resultSet.getInt("guardianID");
+                contact = resultSet.getString("contact");
+                fname = resultSet.getString("fname");
+                lname = resultSet.getString("lname");
+                email = resultSet.getString("email");
+             
+                bean = new GuardianBean();
+
+                bean.setGuardianID(guardianID);
+                bean.setContact(contact);
+                bean.setFname(fname);
+                bean.setLname(lname);
+                bean.setEmail(email);
+           
+           }
+            return bean;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
     }
 
 }
