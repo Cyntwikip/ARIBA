@@ -120,6 +120,18 @@ public class Reports extends javax.swing.JFrame {
 
         model.getDataVector().removeAllElements();
         model.fireTableDataChanged();
+        
+        JTableHeader th = jTable1.getTableHeader();
+        TableColumnModel tcm = th.getColumnModel();
+        TableColumn tc = tcm.getColumn(0);
+        tc.setHeaderValue("Tenant ID");
+        tc = tcm.getColumn(1);
+        tc.setHeaderValue("Lastname");
+        tc = tcm.getColumn(2);
+        tc.setHeaderValue("Firstname");
+        tc = tcm.getColumn(3);
+        tc.setHeaderValue("Degree");
+        th.repaint();
 
         int year = Calendar.getInstance().get(Calendar.YEAR);
 
