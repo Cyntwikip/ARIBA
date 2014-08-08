@@ -6,6 +6,12 @@
 
 package GUI;
 
+import Models.Beans.TenantBean;
+import Models.DAOImplementation.TenantDAOImplementation;
+import java.util.ArrayList;
+import java.util.Calendar;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author jao
@@ -15,8 +21,14 @@ public class Reports extends javax.swing.JFrame {
     /**
      * Creates new form Reports
      */
+    
+    private DefaultTableModel model;
+    private TenantDAOImplementation tdao = new TenantDAOImplementation();
+    
     public Reports() {
         initComponents();
+        
+        model = (DefaultTableModel) jTable1.getModel();
     }
 
     /**
@@ -36,6 +48,9 @@ public class Reports extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(800, 480));
+        setMinimumSize(new java.awt.Dimension(800, 480));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -70,6 +85,11 @@ public class Reports extends javax.swing.JFrame {
         jButton2.setBounds(80, 220, 170, 40);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/leavingtenants.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3);
         jButton3.setBounds(80, 270, 160, 40);
 
@@ -87,6 +107,22 @@ public class Reports extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+        
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        
+        ArrayList<TenantBean> tlist = tdao.getTenantByExpectedYearofGrad(year);
+        
+        for(int i=0; i<tlist.size(); i++) {
+            //System.out.println(tlist.get(i).getLname());
+            Object[] obj = {tlist.get(i).getTenantID(), tlist.get(i).getLname(), tlist.get(i).getFname(), tlist.get(i).getDegree()};
+            model.addRow(obj);
+        }
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
