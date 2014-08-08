@@ -8,13 +8,9 @@ import Models.DAOImplementation.GuardianDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
 import Models.DAOInterface.GuardianDAOInterface;
 import Models.DAOInterface.TenantDAOInterface;
-import com.mysql.jdbc.Blob;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,9 +33,6 @@ import java.io.File;
  */
 public class AddTenant extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AddTenant
-     */
     private int tenantID = 0;
     private int guardianID = 0;
     private boolean flag = false;
@@ -145,7 +138,6 @@ public class AddTenant extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "No existing guardian for tenant " + FirstnameField.getText() + " " + SurnameField.getText());
         }
-
     }
 
     public void preventDigit(java.awt.event.KeyEvent evt) {
@@ -573,7 +565,6 @@ public class AddTenant extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "Not successful");
                         }
                     }
-
                 } catch (AccountException e) {
                     e.promptFieldError();
                 }
@@ -676,7 +667,7 @@ public class AddTenant extends javax.swing.JFrame {
                         MainMenu main = new MainMenu();
                         main.setVisible(true);
                     } else {
-                        JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correcly.");
+                        JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correctly.");
                     }
                 } catch (AccountException e) {
                     e.promptFieldError();
