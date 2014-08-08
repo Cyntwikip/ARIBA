@@ -230,7 +230,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(MonthField);
-        MonthField.setBounds(350, 160, 60, 27);
+        MonthField.setBounds(350, 160, 60, 20);
 
         DayField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         DayField.addActionListener(new java.awt.event.ActionListener() {
@@ -239,7 +239,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(DayField);
-        DayField.setBounds(410, 160, 50, 27);
+        DayField.setBounds(410, 160, 50, 20);
 
         YearField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,7 +247,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(YearField);
-        YearField.setBounds(460, 160, 70, 27);
+        YearField.setBounds(460, 160, 70, 20);
 
         SchoolField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -281,7 +281,7 @@ public class AddTenant extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(350, 190, 180, 70);
 
-        imgaddLabel.setText("    jLabel - put picture here");
+        imgaddLabel.setText("                   Choose photo");
         getContentPane().add(imgaddLabel);
         imgaddLabel.setBounds(80, 100, 180, 180);
 
@@ -314,7 +314,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(FemaleField);
-        FemaleField.setBounds(450, 270, 80, 23);
+        FemaleField.setBounds(450, 270, 59, 23);
         getContentPane().add(EmailAddressField);
         EmailAddressField.setBounds(390, 320, 140, 30);
 

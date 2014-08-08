@@ -208,7 +208,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="imgaddLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="    jLabel - put picture here"/>
+        <Property name="text" type="java.lang.String" value="                   Choose photo"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
