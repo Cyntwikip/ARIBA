@@ -12,6 +12,7 @@ import Models.DAOInterface.ContractDAOInterface;
 import Models.DAOInterface.GuardianDAOInterface;
 import Models.DAOInterface.TenantDAOInterface;
 import com.mysql.jdbc.Blob;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -233,12 +234,20 @@ public class AddTenant extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
+        SurnameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                SurnameFieldFocusLost(evt);
+            }
+        });
         SurnameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SurnameFieldActionPerformed(evt);
             }
         });
         SurnameField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                SurnameFieldKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 SurnameFieldKeyTyped(evt);
             }
@@ -246,7 +255,15 @@ public class AddTenant extends javax.swing.JFrame {
         getContentPane().add(SurnameField);
         SurnameField.setBounds(360, 90, 170, 30);
 
+        FirstnameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                FirstnameFieldFocusLost(evt);
+            }
+        });
         FirstnameField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                FirstnameFieldKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 FirstnameFieldKeyTyped(evt);
             }
@@ -280,7 +297,15 @@ public class AddTenant extends javax.swing.JFrame {
         getContentPane().add(YearField);
         YearField.setBounds(460, 160, 70, 20);
 
+        SchoolField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                SchoolFieldFocusLost(evt);
+            }
+        });
         SchoolField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                SchoolFieldKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 SchoolFieldKeyTyped(evt);
             }
@@ -288,7 +313,15 @@ public class AddTenant extends javax.swing.JFrame {
         getContentPane().add(SchoolField);
         SchoolField.setBounds(580, 90, 190, 30);
 
+        DegreeField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                DegreeFieldFocusLost(evt);
+            }
+        });
         DegreeField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                DegreeFieldKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 DegreeFieldKeyTyped(evt);
             }
@@ -307,6 +340,14 @@ public class AddTenant extends javax.swing.JFrame {
         AddressField.setColumns(20);
         AddressField.setLineWrap(true);
         AddressField.setRows(5);
+        AddressField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                AddressFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                AddressFieldFocusLost(evt);
+            }
+        });
         jScrollPane1.setViewportView(AddressField);
 
         getContentPane().add(jScrollPane1);
@@ -346,15 +387,32 @@ public class AddTenant extends javax.swing.JFrame {
         });
         getContentPane().add(FemaleField);
         FemaleField.setBounds(450, 270, 90, 23);
+
+        EmailAddressField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                EmailAddressFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                EmailAddressFieldFocusLost(evt);
+            }
+        });
         getContentPane().add(EmailAddressField);
         EmailAddressField.setBounds(390, 320, 140, 30);
 
+        GuardianFirstnameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                GuardianFirstnameFieldFocusLost(evt);
+            }
+        });
         GuardianFirstnameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GuardianFirstnameFieldActionPerformed(evt);
             }
         });
         GuardianFirstnameField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                GuardianFirstnameFieldKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 GuardianFirstnameFieldKeyTyped(evt);
             }
@@ -362,18 +420,35 @@ public class AddTenant extends javax.swing.JFrame {
         getContentPane().add(GuardianFirstnameField);
         GuardianFirstnameField.setBounds(600, 240, 170, 30);
 
+        GuardianSurnameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                GuardianSurnameFieldFocusLost(evt);
+            }
+        });
         GuardianSurnameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GuardianSurnameFieldActionPerformed(evt);
             }
         });
         GuardianSurnameField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                GuardianSurnameFieldKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 GuardianSurnameFieldKeyTyped(evt);
             }
         });
         getContentPane().add(GuardianSurnameField);
         GuardianSurnameField.setBounds(600, 210, 170, 30);
+
+        GuardianEmailField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                GuardianEmailFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                GuardianEmailFieldFocusLost(evt);
+            }
+        });
         getContentPane().add(GuardianEmailField);
         GuardianEmailField.setBounds(630, 300, 140, 30);
 
@@ -395,6 +470,14 @@ public class AddTenant extends javax.swing.JFrame {
         getContentPane().add(jButton3);
         jButton3.setBounds(630, 360, 80, 40);
 
+        ContactNumberField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                ContactNumberField1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                ContactNumberField1FocusLost(evt);
+            }
+        });
         ContactNumberField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ContactNumberField1ActionPerformed(evt);
@@ -408,6 +491,14 @@ public class AddTenant extends javax.swing.JFrame {
         getContentPane().add(ContactNumberField1);
         ContactNumberField1.setBounds(390, 290, 140, 30);
 
+        GuardianContactField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                GuardianContactFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                GuardianContactFieldFocusLost(evt);
+            }
+        });
         GuardianContactField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 GuardianContactFieldKeyReleased(evt);
@@ -480,7 +571,7 @@ public class AddTenant extends javax.swing.JFrame {
     }//GEN-LAST:event_YearOfGraduationFieldActionPerformed
 
     private void SurnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SurnameFieldActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_SurnameFieldActionPerformed
 
     private void FemaleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FemaleFieldActionPerformed
@@ -813,6 +904,7 @@ public class AddTenant extends javax.swing.JFrame {
         }
 
         ContactNumberField1.setText(input);
+        
     }//GEN-LAST:event_ContactNumberField1KeyReleased
 
     private void ContactNumberField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactNumberField1ActionPerformed
@@ -845,6 +937,241 @@ public class AddTenant extends javax.swing.JFrame {
 
         GuardianContactField.setText(input);
     }//GEN-LAST:event_GuardianContactFieldKeyReleased
+
+    private void SurnameFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SurnameFieldKeyReleased
+        // TODO add your handling code here:
+        CheckAccount check = new CheckAccount();
+        
+        String input = SurnameField.getText();
+        
+        try {
+            check.checkName(input, "Lastname");
+            SurnameField.setBackground(Color.WHITE);
+        }
+        catch(AccountException e) {
+            SurnameField.setBackground(Color.PINK);
+        }
+    }//GEN-LAST:event_SurnameFieldKeyReleased
+
+    private void FirstnameFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FirstnameFieldKeyReleased
+        // TODO add your handling code here:
+        CheckAccount check = new CheckAccount();
+        
+        String input = FirstnameField.getText();
+        
+        try {
+            check.checkName(input, "Lastname");
+            FirstnameField.setBackground(Color.WHITE);
+        }
+        catch(AccountException e) {
+            FirstnameField.setBackground(Color.PINK);
+        }
+    }//GEN-LAST:event_FirstnameFieldKeyReleased
+
+    private void EmailAddressFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_EmailAddressFieldFocusLost
+        // TODO add your handling code here:
+        CheckAccount check = new CheckAccount();
+        
+        String input = EmailAddressField.getText();
+        
+        try {
+            check.checkEmail(input, "Email");
+            EmailAddressField.setBackground(Color.WHITE);
+        }
+        catch(AccountException e) {
+            EmailAddressField.setBackground(Color.PINK);
+        }
+    }//GEN-LAST:event_EmailAddressFieldFocusLost
+
+    private void SurnameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SurnameFieldFocusLost
+        String input = SurnameField.getText();
+        
+        if(input.isEmpty()) {
+            SurnameField.setBackground(Color.PINK);
+        }
+    }//GEN-LAST:event_SurnameFieldFocusLost
+
+    private void FirstnameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_FirstnameFieldFocusLost
+        // TODO add your handling code here:
+        String input = FirstnameField.getText();
+        
+        if(input.isEmpty()) {
+            FirstnameField.setBackground(Color.PINK);
+        }
+    }//GEN-LAST:event_FirstnameFieldFocusLost
+
+    private void AddressFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_AddressFieldFocusLost
+        // TODO add your handling code here:
+        String input = AddressField.getText();
+        
+        if(input.isEmpty()) {
+            AddressField.setBackground(Color.PINK);
+        }
+    }//GEN-LAST:event_AddressFieldFocusLost
+
+    private void AddressFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_AddressFieldFocusGained
+        // TODO add your handling code here:
+        AddressField.setBackground(Color.WHITE);
+    }//GEN-LAST:event_AddressFieldFocusGained
+
+    private void EmailAddressFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_EmailAddressFieldFocusGained
+        EmailAddressField.setBackground(Color.WHITE);
+    }//GEN-LAST:event_EmailAddressFieldFocusGained
+
+    private void SchoolFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SchoolFieldFocusLost
+        String input = SchoolField.getText();
+        
+        if(input.isEmpty()) {
+            SchoolField.setBackground(Color.PINK);
+        }
+    }//GEN-LAST:event_SchoolFieldFocusLost
+
+    private void DegreeFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DegreeFieldFocusLost
+        // TODO add your handling code here:
+        String input = DegreeField.getText();
+        
+        if(input.isEmpty()) {
+            DegreeField.setBackground(Color.PINK);
+        }
+    }//GEN-LAST:event_DegreeFieldFocusLost
+
+    private void GuardianSurnameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_GuardianSurnameFieldFocusLost
+        // TODO add your handling code here:
+        String input = GuardianSurnameField.getText();
+        
+        if(input.isEmpty()) {
+            GuardianSurnameField.setBackground(Color.PINK);
+        }
+    }//GEN-LAST:event_GuardianSurnameFieldFocusLost
+
+    private void ContactNumberField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContactNumberField1FocusLost
+        // TODO add your handling code here:
+        String input = ContactNumberField1.getText();
+        
+        if(input.isEmpty()) {
+            ContactNumberField1.setBackground(Color.PINK);
+        }
+        else if (input.length()!=11) {
+            ContactNumberField1.setBackground(Color.PINK);
+        }
+        else {
+            ContactNumberField1.setBackground(Color.WHITE);
+        }
+    }//GEN-LAST:event_ContactNumberField1FocusLost
+
+    private void GuardianFirstnameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_GuardianFirstnameFieldFocusLost
+        // TODO add your handling code here:
+        String input = GuardianFirstnameField.getText();
+        
+        if(input.isEmpty()) {
+            GuardianFirstnameField.setBackground(Color.PINK);
+        }
+    }//GEN-LAST:event_GuardianFirstnameFieldFocusLost
+
+    private void GuardianContactFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_GuardianContactFieldFocusLost
+        // TODO add your handling code here:
+        String input = GuardianContactField.getText();
+        
+        if(input.isEmpty()) {
+            GuardianContactField.setBackground(Color.PINK);
+        }
+        else if (input.length()!=11) {
+            GuardianContactField.setBackground(Color.PINK);
+        }
+        else {
+            GuardianContactField.setBackground(Color.WHITE);
+        }
+    }//GEN-LAST:event_GuardianContactFieldFocusLost
+
+    private void GuardianEmailFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_GuardianEmailFieldFocusLost
+        // TODO add your handling code here:
+        CheckAccount check = new CheckAccount();
+        
+        String input = EmailAddressField.getText();
+        
+        try {
+            check.checkEmail(input, "Email");
+            EmailAddressField.setBackground(Color.WHITE);
+        }
+        catch(AccountException e) {
+            EmailAddressField.setBackground(Color.PINK);
+        }
+    }//GEN-LAST:event_GuardianEmailFieldFocusLost
+
+    private void ContactNumberField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContactNumberField1FocusGained
+        // TODO add your handling code here:
+        ContactNumberField1.setBackground(Color.WHITE);
+    }//GEN-LAST:event_ContactNumberField1FocusGained
+
+    private void GuardianContactFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_GuardianContactFieldFocusGained
+        // TODO add your handling code here:
+        GuardianContactField.setBackground(Color.WHITE);
+    }//GEN-LAST:event_GuardianContactFieldFocusGained
+
+    private void GuardianEmailFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_GuardianEmailFieldFocusGained
+        // TODO add your handling code here:
+        GuardianEmailField.setBackground(Color.WHITE);
+    }//GEN-LAST:event_GuardianEmailFieldFocusGained
+
+    private void SchoolFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SchoolFieldKeyReleased
+        // TODO add your handling code here:
+        CheckAccount check = new CheckAccount();
+        
+        String input = SchoolField.getText();
+        
+        try {
+            check.checkName(input, "Lastname");
+            SchoolField.setBackground(Color.WHITE);
+        }
+        catch(AccountException e) {
+            SchoolField.setBackground(Color.PINK);
+        }
+    }//GEN-LAST:event_SchoolFieldKeyReleased
+
+    private void DegreeFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DegreeFieldKeyReleased
+        // TODO add your handling code here:
+        CheckAccount check = new CheckAccount();
+        
+        String input = DegreeField.getText();
+        
+        try {
+            check.checkName(input, "Lastname");
+            DegreeField.setBackground(Color.WHITE);
+        }
+        catch(AccountException e) {
+            DegreeField.setBackground(Color.PINK);
+        }
+    }//GEN-LAST:event_DegreeFieldKeyReleased
+
+    private void GuardianSurnameFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_GuardianSurnameFieldKeyReleased
+        // TODO add your handling code here:
+        CheckAccount check = new CheckAccount();
+        
+        String input = GuardianSurnameField.getText();
+        
+        try {
+            check.checkName(input, "Lastname");
+            GuardianSurnameField.setBackground(Color.WHITE);
+        }
+        catch(AccountException e) {
+            GuardianSurnameField.setBackground(Color.PINK);
+        }
+    }//GEN-LAST:event_GuardianSurnameFieldKeyReleased
+
+    private void GuardianFirstnameFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_GuardianFirstnameFieldKeyReleased
+        // TODO add your handling code here:
+        CheckAccount check = new CheckAccount();
+        
+        String input = GuardianFirstnameField.getText();
+        
+        try {
+            check.checkName(input, "Lastname");
+            GuardianFirstnameField.setBackground(Color.WHITE);
+        }
+        catch(AccountException e) {
+            GuardianFirstnameField.setBackground(Color.PINK);
+        }
+    }//GEN-LAST:event_GuardianFirstnameFieldKeyReleased
 
     /**
      * @param args the command line arguments
