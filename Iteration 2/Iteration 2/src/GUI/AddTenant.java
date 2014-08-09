@@ -174,12 +174,11 @@ public class AddTenant extends javax.swing.JFrame {
         SimpleDateFormat yr = new SimpleDateFormat("yyyy");
         String c = yr.format(tb.getBirthday());
         for (int i = 0; i < YearField.getItemCount(); i++) {
-            if ((int)YearField.getItemAt(i) == Integer.parseInt(c)) {
+            if ((int) YearField.getItemAt(i) == Integer.parseInt(c)) {
                 YearField.setSelectedIndex(i);
                 break;
             }
         }
-
 
     }
 
@@ -225,8 +224,8 @@ public class AddTenant extends javax.swing.JFrame {
         GuardianEmailField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        GuardianContactField = new javax.swing.JFormattedTextField();
         ContactNumberField1 = new javax.swing.JTextField();
+        GuardianContactField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -262,7 +261,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(MonthField);
-        MonthField.setBounds(350, 160, 60, 27);
+        MonthField.setBounds(350, 160, 60, 20);
 
         DayField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         DayField.addActionListener(new java.awt.event.ActionListener() {
@@ -271,7 +270,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(DayField);
-        DayField.setBounds(410, 160, 50, 27);
+        DayField.setBounds(410, 160, 50, 20);
 
         YearField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -279,7 +278,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(YearField);
-        YearField.setBounds(460, 160, 70, 27);
+        YearField.setBounds(460, 160, 70, 20);
 
         SchoolField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -396,14 +395,11 @@ public class AddTenant extends javax.swing.JFrame {
         getContentPane().add(jButton3);
         jButton3.setBounds(630, 360, 80, 40);
 
-        try {
-            GuardianContactField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        getContentPane().add(GuardianContactField);
-        GuardianContactField.setBounds(630, 270, 140, 30);
-
+        ContactNumberField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ContactNumberField1ActionPerformed(evt);
+            }
+        });
         ContactNumberField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 ContactNumberField1KeyReleased(evt);
@@ -411,6 +407,14 @@ public class AddTenant extends javax.swing.JFrame {
         });
         getContentPane().add(ContactNumberField1);
         ContactNumberField1.setBounds(390, 290, 140, 30);
+
+        GuardianContactField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                GuardianContactFieldKeyReleased(evt);
+            }
+        });
+        getContentPane().add(GuardianContactField);
+        GuardianContactField.setBounds(630, 270, 140, 30);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addnewtenant-peg-edited.png"))); // NOI18N
         getContentPane().add(jLabel6);
@@ -790,23 +794,60 @@ public class AddTenant extends javax.swing.JFrame {
 
         char c = evt.getKeyChar();
         String input = "";
-        String trim;
-        String re1 = "";
+        String trim1;
+        String trim2;
+        String re1 = "^[0-9]*$";
         int last;
         if (!ContactNumberField1.getText().isEmpty()) {
             input = ContactNumberField1.getText();
         }
 
-        if (input.matches(re1)) {
+        if (input.matches(re1)) { // number
+            if (input.length() > 11) {
+                trim1 = input.substring(0, input.length() - 1);
+                input = trim1;
+            }// more than 11 numbers
 
         } else {
-            trim = input.substring(0, input.length() - 1);
-            input = trim;
-            System.out.println(trim);
+
+            trim1 = input.substring(0, input.indexOf(c));//first to index of character;
+            trim2 = input.substring(input.indexOf(c) + 1);
+            input = trim1 + trim2;
         }
 
         ContactNumberField1.setText(input);
     }//GEN-LAST:event_ContactNumberField1KeyReleased
+
+    private void ContactNumberField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactNumberField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ContactNumberField1ActionPerformed
+
+    private void GuardianContactFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_GuardianContactFieldKeyReleased
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        String input = "";
+        String trim1, trim2;
+        String re1 = "^[0-9]*$";
+        int last;
+        if (!GuardianContactField.getText().isEmpty()) {
+            input = GuardianContactField.getText();
+        }
+
+        if (input.matches(re1)) { // number
+            if (input.length() > 11) {
+                trim = input.substring(0, input.length() - 1);
+                input = trim;
+            }// more than 11 numbers
+
+        } else {
+
+            trim1 = input.substring(0, input.indexOf(c));//first to index of character;
+            trim2 = input.substring(input.indexOf(c) + 1);
+            input = trim1 + trim2;
+        }
+
+        GuardianContactField.setText(input);
+    }//GEN-LAST:event_GuardianContactFieldKeyReleased
 
     /**
      * @param args the command line arguments
@@ -856,7 +897,7 @@ public class AddTenant extends javax.swing.JFrame {
     private javax.swing.JTextField EmailAddressField;
     private javax.swing.JRadioButton FemaleField;
     private javax.swing.JTextField FirstnameField;
-    private javax.swing.JFormattedTextField GuardianContactField;
+    private javax.swing.JTextField GuardianContactField;
     private javax.swing.JTextField GuardianEmailField;
     private javax.swing.JTextField GuardianFirstnameField;
     private javax.swing.JTextField GuardianSurnameField;
