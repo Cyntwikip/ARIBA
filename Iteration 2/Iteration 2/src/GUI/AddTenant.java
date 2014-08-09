@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -135,21 +136,36 @@ public class AddTenant extends javax.swing.JFrame {
         YearOfGraduationField.setSelectedItem(tb.getExpectedyearofgrad());
 
         //   imgaddLabel.setIcon(tb.getImage());
-        // guardian part
-        GuardianDAOInterface gdao = new GuardianDAOImplementation();
-        GuardianBean gbean = new GuardianBean();
+        java.sql.Blob imgBlob = tb.getBlobimage();
+        byte[] content = null;
+        if (imgBlob != null) {
+            try {
+                content = imgBlob.getBytes(1L, (int) imgBlob.length());
+            } catch (SQLException ex) {
+                Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            ImageIcon ik = new ImageIcon(content);
+            java.awt.Image img = ik.getImage();
+            java.awt.Image newimg = img.getScaledInstance(imgaddLabel.getWidth(), imgaddLabel.getHeight(), java.awt.Image.SCALE_SMOOTH);
+            ik = new ImageIcon(newimg);
+            imgaddLabel.setIcon(ik);
+            // guardian part
+            GuardianDAOInterface gdao = new GuardianDAOImplementation();
+            GuardianBean gbean = new GuardianBean();
 
-        gbean = gdao.getGuardianByTenantID(tenantID);
+            gbean = gdao.getGuardianByTenantID(tenantID);
 
-        if (gbean.getGuardianID() > 0) { // existing guardian
-            guardianID = gbean.getGuardianID();
-            GuardianFirstnameField.setText(gbean.getFname());
-            GuardianSurnameField.setText(gbean.getLname());
-            GuardianContactField.setText(gbean.getContact());
-            GuardianEmailField.setText(gbean.getEmail());
-        } else {
-            JOptionPane.showMessageDialog(null, "No existing guardian for tenant " + FirstnameField.getText() + " " + SurnameField.getText());
+            if (gbean.getGuardianID() > 0) { // existing guardian
+                guardianID = gbean.getGuardianID();
+                GuardianFirstnameField.setText(gbean.getFname());
+                GuardianSurnameField.setText(gbean.getLname());
+                GuardianContactField.setText(gbean.getContact());
+                GuardianEmailField.setText(gbean.getEmail());
+            } else {
+                JOptionPane.showMessageDialog(null, "No existing guardian for tenant " + FirstnameField.getText() + " " + SurnameField.getText());
+            }
         }
+
     }
 
     public void preventDigit(java.awt.event.KeyEvent evt) {
