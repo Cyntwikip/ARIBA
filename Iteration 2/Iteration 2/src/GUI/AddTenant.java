@@ -30,6 +30,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.text.SimpleDateFormat;
+import java.awt.Component;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -97,12 +99,6 @@ public class AddTenant extends javax.swing.JFrame {
         tb = tdao.getTenantById(tenantID);
         initComponents();
 
-        MaleField.setText("Male");
-        FemaleField.setText("Female");
-
-        buttonGroup1.add(MaleField);
-        buttonGroup1.add(FemaleField);
-
         int year = Calendar.getInstance().get(Calendar.YEAR);
 
         for (int i = 0; i <= year - 1900; i++) { // remove all years
@@ -124,7 +120,7 @@ public class AddTenant extends javax.swing.JFrame {
         FirstnameField.setText(tb.getFname());
         // birthday;
         AddressField.setText(tb.getAddress());
-        if (tb.getGender().equals("Male")) {
+        if (tb.getGender().equalsIgnoreCase("Male")) {
             MaleField.doClick();
         } else {
             FemaleField.doClick();
@@ -136,35 +132,54 @@ public class AddTenant extends javax.swing.JFrame {
         YearOfGraduationField.setSelectedItem(tb.getExpectedyearofgrad());
 
         //   imgaddLabel.setIcon(tb.getImage());
-        java.sql.Blob imgBlob = tb.getBlobimage();
+        // guardian part
+        GuardianDAOInterface gdao = new GuardianDAOImplementation();
+        GuardianBean gbean = new GuardianBean();
+
+        gbean = gdao.getGuardianByTenantID(tenantID);
+
+        guardianID = gbean.getGuardianID();
+        GuardianFirstnameField.setText(gbean.getFname());
+        GuardianSurnameField.setText(gbean.getLname());
+        GuardianContactField.setText(gbean.getContact());
+        GuardianEmailField.setText(gbean.getEmail());
+
         byte[] content = null;
-        if (imgBlob != null) {
+        if (tb.getBlobimage() != null) {
             try {
-                content = imgBlob.getBytes(1L, (int) imgBlob.length());
+                content = tb.getBlobimage().getBytes(1L, (int) tb.getBlobimage().length());
             } catch (SQLException ex) {
                 Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
             }
-            ImageIcon ik = new ImageIcon(content);
-            java.awt.Image img = ik.getImage();
-            java.awt.Image newimg = img.getScaledInstance(imgaddLabel.getWidth(), imgaddLabel.getHeight(), java.awt.Image.SCALE_SMOOTH);
-            ik = new ImageIcon(newimg);
-            imgaddLabel.setIcon(ik);
-            // guardian part
-            GuardianDAOInterface gdao = new GuardianDAOImplementation();
-            GuardianBean gbean = new GuardianBean();
+            ImageIcon icon = new ImageIcon(content);
+            Image img = icon.getImage();
+            img = img.getScaledInstance(imgaddLabel.getWidth(), imgaddLabel.getHeight(), Image.SCALE_SMOOTH);
+            icon = new ImageIcon(img);
+            imgaddLabel.setIcon(icon);
+        }
 
-            gbean = gdao.getGuardianByTenantID(tenantID);
-
-            if (gbean.getGuardianID() > 0) { // existing guardian
-                guardianID = gbean.getGuardianID();
-                GuardianFirstnameField.setText(gbean.getFname());
-                GuardianSurnameField.setText(gbean.getLname());
-                GuardianContactField.setText(gbean.getContact());
-                GuardianEmailField.setText(gbean.getEmail());
-            } else {
-                JOptionPane.showMessageDialog(null, "No existing guardian for tenant " + FirstnameField.getText() + " " + SurnameField.getText());
+        for (int i = 0; i < MonthField.getItemCount(); i++) {
+            if (MonthField.getItemAt(i).equals(new SimpleDateFormat("MMM").format(tb.getBirthday()))) {
+                MonthField.setSelectedIndex(id);
+                break;
             }
         }
+
+        for (int i = 0; i < DayField.getItemCount(); i++) {
+            if (DayField.getItemAt(i).equals(new SimpleDateFormat("d").format(tb.getBirthday()))) {
+                DayField.setSelectedIndex(i);
+                break;
+            }
+        }
+        SimpleDateFormat yr = new SimpleDateFormat("yyyy");
+        String c = yr.format(tb.getBirthday());
+        for (int i = 0; i < YearField.getItemCount(); i++) {
+            if ((int)YearField.getItemAt(i) == Integer.parseInt(c)) {
+                YearField.setSelectedIndex(i);
+                break;
+            }
+        }
+
 
     }
 
@@ -240,14 +255,14 @@ public class AddTenant extends javax.swing.JFrame {
         getContentPane().add(FirstnameField);
         FirstnameField.setBounds(360, 120, 170, 30);
 
-        MonthField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec" }));
+        MonthField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }));
         MonthField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MonthFieldActionPerformed(evt);
             }
         });
         getContentPane().add(MonthField);
-        MonthField.setBounds(350, 160, 60, 20);
+        MonthField.setBounds(350, 160, 60, 27);
 
         DayField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         DayField.addActionListener(new java.awt.event.ActionListener() {
@@ -256,7 +271,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(DayField);
-        DayField.setBounds(410, 160, 50, 20);
+        DayField.setBounds(410, 160, 50, 27);
 
         YearField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -264,7 +279,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(YearField);
-        YearField.setBounds(460, 160, 70, 20);
+        YearField.setBounds(460, 160, 70, 27);
 
         SchoolField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -331,7 +346,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(FemaleField);
-        FemaleField.setBounds(450, 270, 59, 23);
+        FemaleField.setBounds(450, 270, 90, 23);
         getContentPane().add(EmailAddressField);
         EmailAddressField.setBounds(390, 320, 140, 30);
 
