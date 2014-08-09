@@ -5,7 +5,8 @@
  */
 package GUI;
 
-import Home_Module.JDoubleField;
+import Models.DAOImplementation.BillDAOImplementation;
+import Models.DAOInterface.BillDAOInterface;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
@@ -134,6 +135,11 @@ public class EditBills extends javax.swing.JFrame {
         jTextField5.setBounds(120, 220, 100, 30);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/confirm.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1);
         jButton1.setBounds(80, 250, 90, 50);
 
@@ -288,6 +294,32 @@ public class EditBills extends javax.swing.JFrame {
 
         jTextField5.setText(input);
     }//GEN-LAST:event_jTextField5KeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        if (jTextField1.getText().isEmpty()
+                || jTextField2.getText().isEmpty()
+                || jTextField3.getText().isEmpty()
+                || jTextField4.getText().isEmpty()
+                || jTextField5.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please input ALL necessary fields.");
+        } else {
+            String electricityconsumption = jTextField1.getText();
+            String electricitycost = jTextField2.getText();
+
+            String waterconsumption = jTextField3.getText();
+            String watercost = jTextField4.getText();
+
+            String roomrent = jTextField5.getText();
+            
+            BillDAOInterface bdao = new BillDAOImplementation();
+            float priceperkw;
+            float pricepercubicmeter;
+            
+            
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
