@@ -742,10 +742,7 @@ public class AddTenant extends javax.swing.JFrame {
                 }
             }
 
-            if (empty == false) {
-                JOptionPane.showMessageDialog(null, "Please input ALL necessary information");
 
-            }
 
         }
 
