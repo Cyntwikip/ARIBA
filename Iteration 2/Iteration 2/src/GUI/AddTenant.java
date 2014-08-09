@@ -59,18 +59,18 @@ public class AddTenant extends javax.swing.JFrame {
         flag = true;
         int year = Calendar.getInstance().get(Calendar.YEAR);
 
-        for (int i = 0; i <= year - 1995; i++) { // remove all years
-            YearField.removeItem(1995 + i);
+        for (int i = 0; i <= year - 1980; i++) { // remove all years
+            YearField.removeItem(1980 + i);
         }
-        for (int i = 0; i <= year - 1995; i++) {
-            YearField.addItem(1995 + i);
+        for (int i = 0; i <= year - 1980; i++) {
+            YearField.addItem(1980 + i);
         }
 
         //jComboBox1
-        for (int i = 2000; i <= year + 10; i++) {
+        for (int i = 2014; i <= year + 10; i++) {
             YearOfGraduationField.removeItem(i);
         }
-        for (int i = 2000; i <= year + 10; i++) {
+        for (int i = 2014; i <= year + 10; i++) {
             YearOfGraduationField.addItem(i);
         }
 
