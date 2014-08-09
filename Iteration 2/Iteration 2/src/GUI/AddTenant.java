@@ -835,8 +835,8 @@ public class AddTenant extends javax.swing.JFrame {
 
         if (input.matches(re1)) { // number
             if (input.length() > 11) {
-                trim = input.substring(0, input.length() - 1);
-                input = trim;
+                trim1 = input.substring(0, input.length() - 1);
+                input = trim1;
             }// more than 11 numbers
 
         } else {
