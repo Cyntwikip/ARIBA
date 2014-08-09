@@ -319,6 +319,7 @@ public class EditBills extends javax.swing.JFrame {
             
             
         }
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

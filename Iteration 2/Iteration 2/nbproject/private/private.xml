@@ -3,22 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/Reports.java</file>
-            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/Woman.jpg</file>
-            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/Man.jpg</file>
+            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/ErrorHandling/CheckAccount.java</file>
+            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/AddTenant.java</file>
+            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/MainMenu.java</file>
             <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/Room.java</file>
-            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/Models/DAOImplementation/TenantDAOImplementation.java</file>
-        </group>
-        <group>
-<<<<<<< HEAD
-            <file>file:/Users/adrian/Documents/Term_7/INTROSE/MP/Iteration%202/Iteration%202/src/GUI/MainMenu.java</file>
-            <file>file:/Users/adrian/Documents/Term_7/INTROSE/MP/Iteration%202/Iteration%202/src/GUI/AddTenant.java</file>
-=======
-            <file>file:/D:/College/TERM%207/INTROSE/MP/ARIBA/Iteration%202/Iteration%202/src/ErrorHandling/AccountException.java</file>
-            <file>file:/D:/College/TERM%207/INTROSE/MP/ARIBA/Iteration%202/Iteration%202/src/ErrorHandling/CheckAccount.java</file>
-            <file>file:/D:/College/TERM%207/INTROSE/MP/ARIBA/Iteration%202/Iteration%202/src/GUI/Reports.java</file>
-            <file>file:/D:/College/TERM%207/INTROSE/MP/ARIBA/Iteration%202/Iteration%202/src/Models/DAOImplementation/TenantDAOImplementation.java</file>
->>>>>>> fda5a2169788dc04322a67036697fd014ff50933
         </group>
     </open-files>
 </project-private>
