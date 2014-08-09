@@ -211,7 +211,7 @@ public class AddTenant extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         GuardianContactField = new javax.swing.JFormattedTextField();
-        ContactNumberField1 = new javax.swing.JFormattedTextField();
+        ContactNumberField1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -389,23 +389,13 @@ public class AddTenant extends javax.swing.JFrame {
         getContentPane().add(GuardianContactField);
         GuardianContactField.setBounds(630, 270, 140, 30);
 
-        try {
-            ContactNumberField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        ContactNumberField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ContactNumberField1ActionPerformed(evt);
-            }
-        });
         ContactNumberField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 ContactNumberField1KeyReleased(evt);
             }
         });
         getContentPane().add(ContactNumberField1);
-        ContactNumberField1.setBounds(390, 288, 140, 30);
+        ContactNumberField1.setBounds(390, 290, 140, 30);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addnewtenant-peg-edited.png"))); // NOI18N
         getContentPane().add(jLabel6);
@@ -780,15 +770,27 @@ public class AddTenant extends javax.swing.JFrame {
         preventDigit(evt);
     }//GEN-LAST:event_GuardianFirstnameFieldKeyTyped
 
-    private void ContactNumberField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactNumberField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ContactNumberField1ActionPerformed
-
     private void ContactNumberField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ContactNumberField1KeyReleased
         // TODO add your handling code here:
 
         char c = evt.getKeyChar();
-        System.out.println(c);
+        String input = "";
+        String trim;
+        String re1 = "";
+        int last;
+        if (!ContactNumberField1.getText().isEmpty()) {
+            input = ContactNumberField1.getText();
+        }
+
+        if (input.matches(re1)) {
+
+        } else {
+            trim = input.substring(0, input.length() - 1);
+            input = trim;
+            System.out.println(trim);
+        }
+
+        ContactNumberField1.setText(input);
     }//GEN-LAST:event_ContactNumberField1KeyReleased
 
     /**
@@ -833,7 +835,7 @@ public class AddTenant extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea AddressField;
-    private javax.swing.JFormattedTextField ContactNumberField1;
+    private javax.swing.JTextField ContactNumberField1;
     private javax.swing.JComboBox DayField;
     private javax.swing.JTextField DegreeField;
     private javax.swing.JTextField EmailAddressField;

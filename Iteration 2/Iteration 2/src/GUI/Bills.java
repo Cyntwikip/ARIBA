@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package GUI;
 
 import Models.Beans.RoomBean;
 import Models.DAOImplementation.RoomDAOImplementation;
 import Models.DAOInterface.RoomDAOInterface;
 import java.util.ArrayList;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 /**
  *
@@ -20,25 +22,25 @@ public class Bills extends javax.swing.JFrame {
     /**
      * Creates new form Bills
      */
-    
-    public RoomDAOImplementation rdao= new RoomDAOImplementation();
-    
+    public RoomDAOImplementation rdao = new RoomDAOImplementation();
+
     public Bills() {
         initComponents();
-        
+
         roomlist();
     }
 
     public void roomlist() {
         jComboBox1.removeAllItems();
-        
+
         ArrayList<RoomBean> rbean = new ArrayList<RoomBean>();
         rbean = rdao.getAllRooms();
-        
-        for(int i=0; i<rbean.size(); i++) {
+
+        for (int i = 0; i < rbean.size(); i++) {
             jComboBox1.addItem(rbean.get(i).getRoomID());
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,6 +66,11 @@ public class Bills extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jComboBox1);
         jComboBox1.setBounds(210, 180, 100, 30);
 
@@ -88,6 +95,11 @@ public class Bills extends javax.swing.JFrame {
         jButton1.setBounds(120, 290, 190, 40);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/editoverallbills.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2);
         jButton2.setBounds(120, 340, 190, 40);
 
@@ -126,6 +138,18 @@ public class Bills extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+
+        EditBills nj = new EditBills();
+        nj.setVisible(true);
+      
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
