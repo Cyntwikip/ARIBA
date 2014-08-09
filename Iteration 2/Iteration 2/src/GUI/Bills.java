@@ -53,60 +53,35 @@ public class Bills extends javax.swing.JFrame {
 
     public void initdate() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
-        String year = formatter.format(new java.util.Date());
+        year = formatter.format(new java.util.Date());
         SimpleDateFormat formatter1 = new SimpleDateFormat("MM");
-        String month = formatter1.format(new java.util.Date());
+        month = formatter1.format(new java.util.Date());
 
         if (month.equals("01")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("February " + year);
+            jLabel3.setText("Jauary " + year);
         } else if (month.equals("02")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("March " + year);
+            jLabel3.setText("February " + year);
         } else if (month.equals("03")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("April " + year);
+            jLabel3.setText("March " + year);
         } else if (month.equals("04")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("May " + year);
+            jLabel3.setText("April " + year);
         } else if (month.equals("05")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("June " + year);
+            jLabel3.setText("May " + year);
         } else if (month.equals("06")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("July " + year);
+            jLabel3.setText("June " + year);
         } else if (month.equals("07")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("August " + year);
+            jLabel3.setText("July " + year);
         } else if (month.equals("08")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("September " + year);
+            jLabel3.setText("August " + year);
         } else if (month.equals("09")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("October " + year);
+            jLabel3.setText("September " + year);
         } else if (month.equals("10")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("November " + year);
+            jLabel3.setText("October " + year);
         } else if (month.equals("11")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("December " + year);
+            jLabel3.setText("November " + year);
         } else {
-            int yeartemp = Integer.parseInt(year) + 1;
-            jLabel3.setText("January " + yeartemp);
-            year = String.valueOf(yeartemp);
+            jLabel3.setText("December " + year);
         }
-
     }
 
     public void roomlist() {
@@ -265,7 +240,7 @@ public class Bills extends javax.swing.JFrame {
 
         System.out.println(roomID);
         bbean = bdao.getBillsByRoomID(roomID);
-          System.out.println(bbean.getBillID());
+        System.out.println(bbean.getBillID());
         float electricprice;
         float waterprice;
 
@@ -283,21 +258,20 @@ public class Bills extends javax.swing.JFrame {
             ebean = edao.getElectricReadingByBillID(bbean.getBillID());
             wbean = wdao.getWaterReadingsByBillID(bbean.getBillID());
 
-            System.out.println("Bill ID" +ebean.getElectric_billID());
-            
+            System.out.println("Bill ID" + ebean.getElectric_billID());
+
             ebean.setCurrentKW(currentkw);
             ebean.setElectric_billID(bbean.getBillID());
             electricprice = currentkw * ebean.getPriceperKW();
             ebean.setPrice(electricprice);
-            
+
             wbean.setCurrentcubicmeter(currentcubicmeter);
             wbean.setWater_billID(bbean.getBillID());
-            waterprice=currentcubicmeter*wbean.getPricepercubicmeter();
+            waterprice = currentcubicmeter * wbean.getPricepercubicmeter();
             wbean.setPrice(waterprice);
 
-          //  edao.editElectricReading(ebean, bbean.getBillID());
+            //  edao.editElectricReading(ebean, bbean.getBillID());
             //wdao.editWaterReading(wbean, bbean.getBillID());
-
             if (edao.editElectricReading(ebean, bbean.getBillID()) && wdao.editWaterReading(wbean, bbean.getBillID())) {
                 JOptionPane.showMessageDialog(null, "Successfully added water and electric bill for room " + roomID);
             } else {
@@ -308,60 +282,8 @@ public class Bills extends javax.swing.JFrame {
 
     public java.sql.Date initializedate() {
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
-        String year = formatter.format(new java.util.Date());
-        SimpleDateFormat formatter1 = new SimpleDateFormat("MM");
-        String month = formatter1.format(new java.util.Date());
-
-        if (month.equals("01")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("February " + year);
-        } else if (month.equals("02")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("March " + year);
-        } else if (month.equals("03")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("April " + year);
-        } else if (month.equals("04")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("May " + year);
-        } else if (month.equals("05")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("June " + year);
-        } else if (month.equals("06")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("July " + year);
-        } else if (month.equals("07")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("August " + year);
-        } else if (month.equals("08")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("September " + year);
-        } else if (month.equals("09")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("October " + year);
-        } else if (month.equals("10")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("November " + year);
-        } else if (month.equals("11")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel3.setText("December " + year);
-        } else {
-            int yeartemp = Integer.parseInt(year) + 1;
-            jLabel3.setText("January " + yeartemp);
-            year = String.valueOf(yeartemp);
-        }
+        initdate();
+        
         String testDate = year + "-" + month;
         DateFormat df = new SimpleDateFormat("yyyy-MM");
         java.util.Date date;

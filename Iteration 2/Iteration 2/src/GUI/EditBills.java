@@ -51,53 +51,29 @@ public class EditBills extends javax.swing.JFrame {
         month = formatter1.format(new java.util.Date());
 
         if (month.equals("01")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel2.setText("February " + year);
+            jLabel2.setText("January " + year);
         } else if (month.equals("02")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel2.setText("March " + year);
+            jLabel2.setText("February " + year);
         } else if (month.equals("03")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel2.setText("April " + year);
+            jLabel2.setText("March " + year);
         } else if (month.equals("04")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel2.setText("May " + year);
+            jLabel2.setText("April " + year);
         } else if (month.equals("05")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel2.setText("June " + year);
+            jLabel2.setText("May " + year);
         } else if (month.equals("06")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel2.setText("July " + year);
+            jLabel2.setText("June " + year);
         } else if (month.equals("07")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel2.setText("August " + year);
+            jLabel2.setText("July " + year);
         } else if (month.equals("08")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel2.setText("September " + year);
+            jLabel2.setText("August " + year);
         } else if (month.equals("09")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel2.setText("October " + year);
+            jLabel2.setText("September " + year);
         } else if (month.equals("10")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel2.setText("November " + year);
+            jLabel2.setText("October " + year);
         } else if (month.equals("11")) {
-            int monthtemp = Integer.parseInt(month) + 1;
-            month = String.valueOf(monthtemp);
-            jLabel2.setText("December " + year);
+            jLabel2.setText("November " + year);
         } else {
-            int yeartemp = Integer.parseInt(year) + 1;
-            jLabel2.setText("January " + yeartemp);
-            year = String.valueOf(yeartemp);
+            jLabel2.setText("December " + year);
         }
     }
 
@@ -425,7 +401,7 @@ public class EditBills extends javax.swing.JFrame {
             wbean.setPrice(0);
             ebean.setPrice(0);
             for (int i = 0; i < rbeanlist.size(); i++) {
-                
+
                 bbean.setBill_roomID(rbeanlist.get(i).getRoomID());
                 bbean.setPrice(price);
                 bbean.setPaidElectric(paidElectric);
@@ -437,8 +413,8 @@ public class EditBills extends javax.swing.JFrame {
                 } else {
                     addbill = false;
                 }
-                wdao.addWaterReadingToRoom(wbean, bbeanlist.size()+i );
-                edao.addElectricReadingToRoom(ebean, bbeanlist.size()+i);
+                wdao.addWaterReadingToRoom(wbean, bbeanlist.size() + i);
+                edao.addElectricReadingToRoom(ebean, bbeanlist.size() + i);
             }
 
             if (addbill) {
@@ -468,8 +444,8 @@ public class EditBills extends javax.swing.JFrame {
     public String getMonth() {
         return this.month;
     }
-      
-    public java.sql.Date getDateRead(){
+
+    public java.sql.Date getDateRead() {
         String testDate = year + "-" + month;
         DateFormat df = new SimpleDateFormat("yyyy-MM");
         java.util.Date date;
@@ -484,6 +460,7 @@ public class EditBills extends javax.swing.JFrame {
         return null;
 
     }
+
     /**
      * @param args the command line arguments
      */
