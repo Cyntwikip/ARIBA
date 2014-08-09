@@ -5,10 +5,26 @@
  */
 package GUI;
 
+import Models.Beans.BillBean;
+import Models.Beans.ElectricReadingBean;
 import Models.Beans.RoomBean;
+import Models.Beans.WaterReadingBean;
+import Models.DAOImplementation.BillDAOImplementation;
+import Models.DAOImplementation.ElectricReadingDAOImplementation;
 import Models.DAOImplementation.RoomDAOImplementation;
+import Models.DAOImplementation.WaterDAOImplementation;
+import Models.DAOInterface.BillDAOInterface;
+import Models.DAOInterface.ElectricReadingDAOInterface;
 import Models.DAOInterface.RoomDAOInterface;
+import Models.DAOInterface.WaterReadingDAOInterface;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -23,11 +39,74 @@ public class Bills extends javax.swing.JFrame {
      * Creates new form Bills
      */
     public RoomDAOImplementation rdao = new RoomDAOImplementation();
+    private float priceperkw;
+    private float pricepercubicmeter;
+    private String year;
+    private String month;
 
     public Bills() {
         initComponents();
+        initdate();
 
         roomlist();
+    }
+
+    public void initdate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+        String year = formatter.format(new java.util.Date());
+        SimpleDateFormat formatter1 = new SimpleDateFormat("MM");
+        String month = formatter1.format(new java.util.Date());
+
+        if (month.equals("01")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("February " + year);
+        } else if (month.equals("02")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("March " + year);
+        } else if (month.equals("03")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("April " + year);
+        } else if (month.equals("04")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("May " + year);
+        } else if (month.equals("05")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("June " + year);
+        } else if (month.equals("06")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("July " + year);
+        } else if (month.equals("07")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("August " + year);
+        } else if (month.equals("08")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("September " + year);
+        } else if (month.equals("09")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("October " + year);
+        } else if (month.equals("10")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("November " + year);
+        } else if (month.equals("11")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("December " + year);
+        } else {
+            int yeartemp = Integer.parseInt(year) + 1;
+            jLabel3.setText("January " + yeartemp);
+            year = String.valueOf(yeartemp);
+        }
+
     }
 
     public void roomlist() {
@@ -58,6 +137,9 @@ public class Bills extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -91,6 +173,11 @@ public class Bills extends javax.swing.JFrame {
         jTextField2.setBounds(210, 240, 100, 30);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/computeforbills.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1);
         jButton1.setBounds(120, 290, 190, 40);
 
@@ -124,6 +211,20 @@ public class Bills extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(350, 80, 240, 320);
 
+        jPanel1.setLayout(null);
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(70, 5, 0, 0);
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("jLabel3");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(0, 0, 140, 20);
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(110, 110, 140, 20);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/bills-peg-edited.png"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 800, 450);
@@ -144,12 +245,137 @@ public class Bills extends javax.swing.JFrame {
 
         EditBills nj = new EditBills();
         nj.setVisible(true);
-      
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        BillDAOInterface bdao = new BillDAOImplementation();
+        BillBean bbean = new BillBean();
+        ElectricReadingDAOInterface edao = new ElectricReadingDAOImplementation();
+        ElectricReadingBean ebean = new ElectricReadingBean();
+        WaterReadingBean wbean = new WaterReadingBean();
+        WaterReadingDAOInterface wdao = new WaterDAOImplementation();
+        int roomID = (Integer) jComboBox1.getSelectedItem();
+
+        System.out.println(roomID);
+        bbean = bdao.getBillsByRoomID(roomID);
+          System.out.println(bbean.getBillID());
+        float electricprice;
+        float waterprice;
+
+        EditBills eb = new EditBills();
+        if (jTextField1.getText().isEmpty() && jTextField2.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please input values for Electric Meter and Water Meter.");
+        } else if (jTextField1.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please input value for Electric meter.");
+        } else if (jTextField2.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please input value for Water meter.");
+        } else {
+            float currentkw = Float.parseFloat(jTextField1.getText());
+            float currentcubicmeter = Float.parseFloat(jTextField2.getText());
+
+            ebean = edao.getElectricReadingByBillID(bbean.getBillID());
+            wbean = wdao.getWaterReadingsByBillID(bbean.getBillID());
+
+            System.out.println("Bill ID" +ebean.getElectric_billID());
+            
+            ebean.setCurrentKW(currentkw);
+            ebean.setElectric_billID(bbean.getBillID());
+            electricprice = currentkw * ebean.getPriceperKW();
+            ebean.setPrice(electricprice);
+            
+            wbean.setCurrentcubicmeter(currentcubicmeter);
+            wbean.setWater_billID(bbean.getBillID());
+            waterprice=currentcubicmeter*wbean.getPricepercubicmeter();
+            wbean.setPrice(waterprice);
+
+          //  edao.editElectricReading(ebean, bbean.getBillID());
+            //wdao.editWaterReading(wbean, bbean.getBillID());
+
+            if (edao.editElectricReading(ebean, bbean.getBillID()) && wdao.editWaterReading(wbean, bbean.getBillID())) {
+                JOptionPane.showMessageDialog(null, "Successfully added water and electric bill for room " + roomID);
+            } else {
+                JOptionPane.showMessageDialog(null, "Not successful in adding water and electric bill for room " + roomID);
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public java.sql.Date initializedate() {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+        String year = formatter.format(new java.util.Date());
+        SimpleDateFormat formatter1 = new SimpleDateFormat("MM");
+        String month = formatter1.format(new java.util.Date());
+
+        if (month.equals("01")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("February " + year);
+        } else if (month.equals("02")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("March " + year);
+        } else if (month.equals("03")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("April " + year);
+        } else if (month.equals("04")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("May " + year);
+        } else if (month.equals("05")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("June " + year);
+        } else if (month.equals("06")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("July " + year);
+        } else if (month.equals("07")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("August " + year);
+        } else if (month.equals("08")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("September " + year);
+        } else if (month.equals("09")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("October " + year);
+        } else if (month.equals("10")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("November " + year);
+        } else if (month.equals("11")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel3.setText("December " + year);
+        } else {
+            int yeartemp = Integer.parseInt(year) + 1;
+            jLabel3.setText("January " + yeartemp);
+            year = String.valueOf(yeartemp);
+        }
+        String testDate = year + "-" + month;
+        DateFormat df = new SimpleDateFormat("yyyy-MM");
+        java.util.Date date;
+        try {
+            date = df.parse(testDate);
+
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            return sqlDate;
+        } catch (ParseException ex) {
+            Logger.getLogger(Bills.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
 
     /**
      * @param args the command line arguments
@@ -192,6 +418,9 @@ public class Bills extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;

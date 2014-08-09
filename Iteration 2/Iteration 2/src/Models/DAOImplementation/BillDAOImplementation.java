@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Models.DAOImplementation;
 
 import Models.Beans.BillBean;
@@ -27,7 +26,7 @@ public class BillDAOImplementation implements BillDAOInterface {
 
     @Override
     public boolean addBill(BillBean bill) {
-        
+
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
@@ -38,63 +37,59 @@ public class BillDAOImplementation implements BillDAOInterface {
             ps.setBoolean(3, bill.getpaidRent());
             ps.setBoolean(4, bill.getPaidWater());
             ps.setBoolean(5, bill.getpaidElectric());
-            
+
             ps.executeUpdate();
             connection.close();
-            
+
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(BillDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return false;
     }
 
     @Override
     public ArrayList<BillBean> getAllBills() {
-            try{
+        try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
             String query = "select * from bill";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
-            
+
             BillBean bean = new BillBean();
             ArrayList<BillBean> list = new ArrayList<BillBean>();
-            
+
             int billID, bill_roomID;
             double price;
             boolean paidRent, paidWater, paidElectric;
-            
-            while(resultSet.next()){
+
+            while (resultSet.next()) {
                 billID = resultSet.getInt("billID");
                 bill_roomID = resultSet.getInt("bill_roomID");
                 price = resultSet.getDouble("price");
                 paidRent = resultSet.getBoolean("paidRent");
                 paidWater = resultSet.getBoolean("paidWater");
                 paidElectric = resultSet.getBoolean("paidElectric");
-                
-                
+
                 bean = new BillBean();
-                
+
                 bean.setBillID(billID);
                 bean.setBill_roomID(bill_roomID);
                 bean.setPrice(price);
                 bean.setPaidElectric(paidElectric);
                 bean.setPaidRent(paidRent);
                 bean.setPaidWater(paidWater);
-                
-                list.add(bean);
-             }
-            return list;
-        }   catch(SQLException ex){
-        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return null; 
 
-    
-    
+                list.add(bean);
+            }
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
     }
 
     @Override
@@ -121,319 +116,358 @@ public class BillDAOImplementation implements BillDAOInterface {
         }
 
         return false;
-
-
     }
 
     @Override
-    public ArrayList<BillBean> getAllPaidRoom() { 
-            try{
+    public ArrayList<BillBean> getAllPaidRoom() {
+        try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
             String query = "select roomID, currentKW, currentcubicmeter "
                     + "from bill, room where paidRent = 1 AND paidWater = 1 AND paidElectric = 1";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
-            
+
             BillBean bean = new BillBean();
             ArrayList<BillBean> list = new ArrayList<BillBean>();
-            
+
             int billID, bill_roomID;
             double price;
             boolean paidRent, paidWater, paidElectric;
-            
-            while(resultSet.next()){
+
+            while (resultSet.next()) {
                 billID = resultSet.getInt("billID");
                 bill_roomID = resultSet.getInt("bill_roomID");
                 price = resultSet.getDouble("price");
                 paidRent = resultSet.getBoolean("paidRent");
                 paidWater = resultSet.getBoolean("paidWater");
                 paidElectric = resultSet.getBoolean("paidElectric");
-                
+
                 bean = new BillBean();
-                
+
                 bean.setBillID(billID);
                 bean.setBill_roomID(bill_roomID);
                 bean.setPaidElectric(paidElectric);
                 bean.setPaidRent(paidRent);
                 bean.setPaidWater(paidWater);
                 bean.setPrice(price);
-                
+
                 list.add(bean);
-             }
+            }
             return list;
-        }   catch(SQLException ex){
-        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return null; 
+
+        return null;
     }
 
     @Override
     public ArrayList<BillBean> getAllPaidBillByRent() {
-            try{
+        try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
             String query = "select roomID, currentKW, currentcubicmeter "
                     + "from bill, room where paidRent = 1";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
-            
+
             BillBean bean = new BillBean();
             ArrayList<BillBean> list = new ArrayList<BillBean>();
-            
+
             int billID, bill_roomID;
             double price;
             boolean paidRent, paidWater, paidElectric;
-            
-            while(resultSet.next()){
+
+            while (resultSet.next()) {
                 billID = resultSet.getInt("billID");
                 bill_roomID = resultSet.getInt("bill_roomID");
                 price = resultSet.getDouble("price");
                 paidRent = resultSet.getBoolean("paidRent");
                 paidWater = resultSet.getBoolean("paidWater");
                 paidElectric = resultSet.getBoolean("paidElectric");
-                
+
                 bean = new BillBean();
-                
+
                 bean.setBillID(billID);
                 bean.setBill_roomID(bill_roomID);
                 bean.setPaidElectric(paidElectric);
                 bean.setPaidRent(paidRent);
                 bean.setPaidWater(paidWater);
                 bean.setPrice(price);
-                
+
                 list.add(bean);
-             }
+            }
             return list;
-        }   catch(SQLException ex){
-        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return null; 
+
+        return null;
     }
 
     @Override
     public ArrayList<BillBean> getAllPaidRoomByWater() {
-            try{
+        try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
             String query = "select roomID, currentKW, currentcubicmeter "
                     + "from bill, room where paidWater = 1";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
-            
+
             BillBean bean = new BillBean();
             ArrayList<BillBean> list = new ArrayList<BillBean>();
-            
+
             int billID, bill_roomID;
             double price;
             boolean paidRent, paidWater, paidElectric;
-            
-            while(resultSet.next()){
+
+            while (resultSet.next()) {
                 billID = resultSet.getInt("billID");
                 bill_roomID = resultSet.getInt("bill_roomID");
                 price = resultSet.getDouble("price");
                 paidRent = resultSet.getBoolean("paidRent");
                 paidWater = resultSet.getBoolean("paidWater");
                 paidElectric = resultSet.getBoolean("paidElectric");
-                
+
                 bean = new BillBean();
-                
+
                 bean.setBillID(billID);
                 bean.setBill_roomID(bill_roomID);
                 bean.setPaidElectric(paidElectric);
                 bean.setPaidRent(paidRent);
                 bean.setPaidWater(paidWater);
                 bean.setPrice(price);
-                
+
                 list.add(bean);
-             }
+            }
             return list;
-        }   catch(SQLException ex){
-        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return null; 
+
+        return null;
     }
 
     @Override
     public ArrayList<BillBean> getAllPaidRoomByElectric() {
-            try{
+        try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
             String query = "select roomID, currentKW, currentcubicmeter "
                     + "from bill, room where paidElectric = 1";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
-            
+
             BillBean bean = new BillBean();
             ArrayList<BillBean> list = new ArrayList<BillBean>();
-            
+
             int billID, bill_roomID;
             double price;
             boolean paidRent, paidWater, paidElectric;
-            
-            while(resultSet.next()){
+
+            while (resultSet.next()) {
                 billID = resultSet.getInt("billID");
                 bill_roomID = resultSet.getInt("bill_roomID");
                 price = resultSet.getDouble("price");
                 paidRent = resultSet.getBoolean("paidRent");
                 paidWater = resultSet.getBoolean("paidWater");
                 paidElectric = resultSet.getBoolean("paidElectric");
-                
+
                 bean = new BillBean();
-                
+
                 bean.setBillID(billID);
                 bean.setBill_roomID(bill_roomID);
                 bean.setPaidElectric(paidElectric);
                 bean.setPaidRent(paidRent);
                 bean.setPaidWater(paidWater);
                 bean.setPrice(price);
-                
+
                 list.add(bean);
-             }
+            }
             return list;
-        }   catch(SQLException ex){
-        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return null; 
+
+        return null;
     }
 
     @Override
     public ArrayList<BillBean> getAllNotPaidRoomsByWater() {
-            try{
+        try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
             String query = "select roomID, currentKW, currentcubicmeter "
                     + "from bill, room where paidWater = 0";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
-            
+
             BillBean bean = new BillBean();
             ArrayList<BillBean> list = new ArrayList<BillBean>();
-            
+
             int billID, bill_roomID;
             double price;
             boolean paidRent, paidWater, paidElectric;
-            
-            while(resultSet.next()){
+
+            while (resultSet.next()) {
                 billID = resultSet.getInt("billID");
                 bill_roomID = resultSet.getInt("bill_roomID");
                 price = resultSet.getDouble("price");
                 paidRent = resultSet.getBoolean("paidRent");
                 paidWater = resultSet.getBoolean("paidWater");
                 paidElectric = resultSet.getBoolean("paidElectric");
-                
+
                 bean = new BillBean();
-                
+
                 bean.setBillID(billID);
                 bean.setBill_roomID(bill_roomID);
                 bean.setPaidElectric(paidElectric);
                 bean.setPaidRent(paidRent);
                 bean.setPaidWater(paidWater);
                 bean.setPrice(price);
-                
+
                 list.add(bean);
-             }
+            }
             return list;
-        }   catch(SQLException ex){
-        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return null; 
+
+        return null;
 
     }
 
     @Override
     public ArrayList<BillBean> getAllNotPaidRoomsByRent() {
-            try{
+        try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
             String query = "select roomID, currentKW, currentcubicmeter "
                     + "from bill, room where paidRent = 0";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
-            
+
             BillBean bean = new BillBean();
             ArrayList<BillBean> list = new ArrayList<BillBean>();
-            
+
             int billID, bill_roomID;
             double price;
             boolean paidRent, paidWater, paidElectric;
-            
-            while(resultSet.next()){
+
+            while (resultSet.next()) {
                 billID = resultSet.getInt("billID");
                 bill_roomID = resultSet.getInt("bill_roomID");
                 price = resultSet.getDouble("price");
                 paidRent = resultSet.getBoolean("paidRent");
                 paidWater = resultSet.getBoolean("paidWater");
                 paidElectric = resultSet.getBoolean("paidElectric");
-                
+
                 bean = new BillBean();
-                
+
                 bean.setBillID(billID);
                 bean.setBill_roomID(bill_roomID);
                 bean.setPaidElectric(paidElectric);
                 bean.setPaidRent(paidRent);
                 bean.setPaidWater(paidWater);
                 bean.setPrice(price);
-                
+
                 list.add(bean);
-             }
+            }
             return list;
-        }   catch(SQLException ex){
-        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return null; 
+
+        return null;
 
     }
 
     @Override
     public ArrayList<BillBean> getAllNotPaidRoomsByElectric() {
-            try{
+        try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
             String query = "select roomID, currentKW, currentcubicmeter "
                     + "from bill, room where paidElectric = 0";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
-            
+
             BillBean bean = new BillBean();
             ArrayList<BillBean> list = new ArrayList<BillBean>();
-            
+
             int billID, bill_roomID;
             double price;
             boolean paidRent, paidWater, paidElectric;
-            
-            while(resultSet.next()){
+
+            while (resultSet.next()) {
                 billID = resultSet.getInt("billID");
                 bill_roomID = resultSet.getInt("bill_roomID");
                 price = resultSet.getDouble("price");
                 paidRent = resultSet.getBoolean("paidRent");
                 paidWater = resultSet.getBoolean("paidWater");
                 paidElectric = resultSet.getBoolean("paidElectric");
-                
+
                 bean = new BillBean();
-                
+
                 bean.setBillID(billID);
                 bean.setBill_roomID(bill_roomID);
                 bean.setPaidElectric(paidElectric);
                 bean.setPaidRent(paidRent);
                 bean.setPaidWater(paidWater);
                 bean.setPrice(price);
-                
+
                 list.add(bean);
-             }
+            }
             return list;
-        }   catch(SQLException ex){
-        Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return null; 
+
+        return null;
 
     }
-    
+
+    @Override
+    public BillBean getBillsByRoomID(int roomID) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from bill where bill_roomID = ? order by billID DESC";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, roomID);
+            ResultSet resultSet = ps.executeQuery();
+
+            BillBean bean = new BillBean();
+
+            int billID, bill_roomID;
+            double price;
+            boolean paidRent, paidWater, paidElectric;
+            
+            while (resultSet.next()) {
+                billID = resultSet.getInt("billID");
+                bill_roomID = resultSet.getInt("bill_roomID");
+                price = resultSet.getDouble("price");
+                paidRent = resultSet.getBoolean("paidRent");
+                paidWater = resultSet.getBoolean("paidWater");
+                paidElectric = resultSet.getBoolean("paidElectric");
+
+                bean.setBillID(billID);
+                bean.setBill_roomID(bill_roomID);
+                bean.setPrice(price);
+                bean.setPaidElectric(paidElectric);
+                bean.setPaidRent(paidRent);
+                bean.setPaidWater(paidWater);
+
+                return bean;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+
+    }
+
 }

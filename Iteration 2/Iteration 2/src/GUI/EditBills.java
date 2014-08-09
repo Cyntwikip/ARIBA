@@ -6,13 +6,25 @@
 package GUI;
 
 import Models.Beans.BillBean;
+import Models.Beans.ElectricReadingBean;
 import Models.Beans.RoomBean;
+import Models.Beans.WaterReadingBean;
 import Models.DAOImplementation.BillDAOImplementation;
+import Models.DAOImplementation.ElectricReadingDAOImplementation;
 import Models.DAOImplementation.RoomDAOImplementation;
+import Models.DAOImplementation.WaterDAOImplementation;
 import Models.DAOInterface.BillDAOInterface;
+import Models.DAOInterface.ElectricReadingDAOInterface;
 import Models.DAOInterface.RoomDAOInterface;
+import Models.DAOInterface.WaterReadingDAOInterface;
 import java.awt.event.KeyEvent;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,10 +37,68 @@ public class EditBills extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     private boolean dot = false;
+    private float priceperkw;
+    private float pricepercubicmeter;
+    private String year;
+    private String month;
 
     public EditBills() {
         initComponents();
 
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+        year = formatter.format(new java.util.Date());
+        SimpleDateFormat formatter1 = new SimpleDateFormat("MM");
+        month = formatter1.format(new java.util.Date());
+
+        if (month.equals("01")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel2.setText("February " + year);
+        } else if (month.equals("02")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel2.setText("March " + year);
+        } else if (month.equals("03")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel2.setText("April " + year);
+        } else if (month.equals("04")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel2.setText("May " + year);
+        } else if (month.equals("05")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel2.setText("June " + year);
+        } else if (month.equals("06")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel2.setText("July " + year);
+        } else if (month.equals("07")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel2.setText("August " + year);
+        } else if (month.equals("08")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel2.setText("September " + year);
+        } else if (month.equals("09")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel2.setText("October " + year);
+        } else if (month.equals("10")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel2.setText("November " + year);
+        } else if (month.equals("11")) {
+            int monthtemp = Integer.parseInt(month) + 1;
+            month = String.valueOf(monthtemp);
+            jLabel2.setText("December " + year);
+        } else {
+            int yeartemp = Integer.parseInt(year) + 1;
+            jLabel2.setText("January " + yeartemp);
+            year = String.valueOf(yeartemp);
+        }
     }
 
     /**
@@ -51,7 +121,7 @@ public class EditBills extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
         setMaximumSize(new java.awt.Dimension(250, 340));
         setMinimumSize(new java.awt.Dimension(250, 340));
@@ -321,10 +391,11 @@ public class EditBills extends javax.swing.JFrame {
             //price ng room
             double price = Double.parseDouble(roomrent);
 
-            float priceperkw = Float.parseFloat(totalelectricitycost) / Float.parseFloat(totalelectricityconsumption);
+            priceperkw = Float.parseFloat(totalelectricitycost) / Float.parseFloat(totalelectricityconsumption);
 
-            float pricepercubicmeter = Float.parseFloat(totalwatercost) / Float.parseFloat(totalwaterconsumption);
-
+            System.out.println(priceperkw);
+            pricepercubicmeter = Float.parseFloat(totalwatercost) / Float.parseFloat(totalwaterconsumption);
+            System.out.println(pricepercubicmeter);
             boolean paidRent = false;
             boolean paidWater = false;
             boolean paidElectric = false;
@@ -337,8 +408,24 @@ public class EditBills extends javax.swing.JFrame {
             ArrayList<RoomBean> rbeanlist = new ArrayList<RoomBean>();
             rbeanlist = rdao.getAllRooms();
             RoomBean rbean = new RoomBean();
+            ElectricReadingBean ebean = new ElectricReadingBean();
+            WaterReadingBean wbean = new WaterReadingBean();
+            ElectricReadingDAOInterface edao = new ElectricReadingDAOImplementation();
+            WaterReadingDAOInterface wdao = new WaterDAOImplementation();
 
+            ArrayList<BillBean> bbeanlist = new ArrayList<BillBean>();
+            bbeanlist = bdao.getAllBills();
+            wbean.setPricepercubicmeter(pricepercubicmeter);
+            ebean.setCurrentKW(priceperkw);
+            java.sql.Date dateread = getDateRead();
+            wbean.setDateRead(dateread);
+            ebean.setDateRead(dateread);
+            wbean.setCurrentcubicmeter(0);
+            ebean.setCurrentKW(0);
+            wbean.setPrice(0);
+            ebean.setPrice(0);
             for (int i = 0; i < rbeanlist.size(); i++) {
+                
                 bbean.setBill_roomID(rbeanlist.get(i).getRoomID());
                 bbean.setPrice(price);
                 bbean.setPaidElectric(paidElectric);
@@ -350,9 +437,10 @@ public class EditBills extends javax.swing.JFrame {
                 } else {
                     addbill = false;
                 }
-
+                wdao.addWaterReadingToRoom(wbean, bbeanlist.size()+i );
+                edao.addElectricReadingToRoom(ebean, bbeanlist.size()+i);
             }
-            
+
             if (addbill) {
                 JOptionPane.showMessageDialog(null, "Succesfully added bills for all rooms!");
             } else {
@@ -362,8 +450,40 @@ public class EditBills extends javax.swing.JFrame {
         }
 
         this.setVisible(false);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public float getPricePerKwAll() {
+        return this.priceperkw;
+    }
+
+    public float getPricePerCubicmeterAll() {
+        return this.pricepercubicmeter;
+    }
+
+    public String getYear() {
+        return this.year;
+    }
+
+    public String getMonth() {
+        return this.month;
+    }
+      
+    public java.sql.Date getDateRead(){
+        String testDate = year + "-" + month;
+        DateFormat df = new SimpleDateFormat("yyyy-MM");
+        java.util.Date date;
+        try {
+            date = df.parse(testDate);
+
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            return sqlDate;
+        } catch (ParseException ex) {
+            Logger.getLogger(Bills.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
     /**
      * @param args the command line arguments
      */

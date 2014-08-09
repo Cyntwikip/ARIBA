@@ -21,7 +21,7 @@ public interface ElectricReadingDAOInterface {
     public ArrayList<ElectricReadingBean> getAllElectricReading();
     public ArrayList<ElectricReadingBean> getAllElectricReadingByDate(Date from, Date to);
     public boolean computeElectricReading(ElectricReadingBean electric, int electricID);
-    
+    public ElectricReadingBean getElectricReadingByBillID(int billID);
 
 
 }

@@ -20,6 +20,7 @@ public interface BillDAOInterface {
     // do something here
     public boolean addBill (BillBean bill);
     public boolean editBill(BillBean bill, int billID);
+    public BillBean getBillsByRoomID(int roomID);
     public ArrayList<BillBean> getAllBills();
     public ArrayList<BillBean> getAllPaidRoom();
     public ArrayList<BillBean> getAllPaidBillByRent();
