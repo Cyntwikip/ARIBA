@@ -168,19 +168,18 @@ public class MainMenu extends javax.swing.JFrame {
         TenantBean bean = new TenantBean();
         bean = tdao.getTenantById(tenantid);
 
-        java.sql.Blob imgBlob = bean.getBlobimage();
         byte[] content = null;
-        if (imgBlob != null) {
+        if (bean.getBlobimage() != null) {
             try {
-                content = imgBlob.getBytes(1L, (int) imgBlob.length());
+                content = bean.getBlobimage().getBytes(1L, (int) bean.getBlobimage().length());
             } catch (SQLException ex) {
                 Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
             }
-            ImageIcon ik = new ImageIcon(content);
-            java.awt.Image img = ik.getImage();
+            ImageIcon icon = new ImageIcon(content);
+            java.awt.Image img = icon.getImage();
             java.awt.Image newimg = img.getScaledInstance(imgLabel.getWidth(), imgLabel.getHeight(), java.awt.Image.SCALE_SMOOTH);
-            ik = new ImageIcon(newimg);
-            imgLabel.setIcon(ik);
+            icon = new ImageIcon(newimg);
+            imgLabel.setIcon(icon);
         }
         tenantID.setText(String.valueOf(bean.getTenantID()));
         lname.setText(bean.getLname());
@@ -215,13 +214,11 @@ public class MainMenu extends javax.swing.JFrame {
         RoomDAOImplementation roomdao = new RoomDAOImplementation();
 
         roombean = roomdao.getTenantRoom(tenantid);
-        if(roombean.getRoomID()==0) {
+        if (roombean.getRoomID() == 0) {
             roomassignment.setText("none");
-        }
-        else {
+        } else {
             roomassignment.setText(String.valueOf(roombean.getRoomID()));
         }
-        
 
         status.setText(bean.getStatus());
 
@@ -478,8 +475,8 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         AddTenant at = new AddTenant();
         at.setVisible(true);
-         this.dispose();
-       
+        this.dispose();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -493,8 +490,8 @@ public class MainMenu extends javax.swing.JFrame {
 
         AddTenant at = new AddTenant(tenantID);
         at.setVisible(true);
- this.setVisible(false);
-       
+        this.dispose();
+
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
