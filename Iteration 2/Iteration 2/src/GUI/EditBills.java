@@ -5,9 +5,14 @@
  */
 package GUI;
 
+import Models.Beans.BillBean;
+import Models.Beans.RoomBean;
 import Models.DAOImplementation.BillDAOImplementation;
+import Models.DAOImplementation.RoomDAOImplementation;
 import Models.DAOInterface.BillDAOInterface;
+import Models.DAOInterface.RoomDAOInterface;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -305,20 +310,57 @@ public class EditBills extends javax.swing.JFrame {
                 || jTextField5.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please input ALL necessary fields.");
         } else {
-            String electricityconsumption = jTextField1.getText();
-            String electricitycost = jTextField2.getText();
+            String totalelectricityconsumption = jTextField1.getText();
+            String totalelectricitycost = jTextField2.getText();
 
-            String waterconsumption = jTextField3.getText();
-            String watercost = jTextField4.getText();
+            String totalwaterconsumption = jTextField3.getText();
+            String totalwatercost = jTextField4.getText();
 
             String roomrent = jTextField5.getText();
-            
+
+            //price ng room
+            double price = Double.parseDouble(roomrent);
+
+            float priceperkw = Float.parseFloat(totalelectricitycost) / Float.parseFloat(totalelectricityconsumption);
+
+            float pricepercubicmeter = Float.parseFloat(totalwatercost) / Float.parseFloat(totalwaterconsumption);
+
+            boolean paidRent = false;
+            boolean paidWater = false;
+            boolean paidElectric = false;
+            boolean addbill = false;
+            BillBean bbean = new BillBean();
             BillDAOInterface bdao = new BillDAOImplementation();
-            float priceperkw;
-            float pricepercubicmeter;
+            // initialize billbean for each room
+
+            RoomDAOInterface rdao = new RoomDAOImplementation();
+            ArrayList<RoomBean> rbeanlist = new ArrayList<RoomBean>();
+            rbeanlist = rdao.getAllRooms();
+            RoomBean rbean = new RoomBean();
+
+            for (int i = 0; i < rbeanlist.size(); i++) {
+                bbean.setBill_roomID(rbeanlist.get(i).getRoomID());
+                bbean.setPrice(price);
+                bbean.setPaidElectric(paidElectric);
+                bbean.setPaidWater(paidWater);
+                bbean.setPaidRent(paidRent);
+
+                if (bdao.addBill(bbean) == true) {
+                    addbill = true;
+                } else {
+                    addbill = false;
+                }
+
+            }
             
-            
+            if (addbill) {
+                JOptionPane.showMessageDialog(null, "Succesfully added bills for all rooms!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Unsuccessful in adding bills.");
+            }
+
         }
+
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
