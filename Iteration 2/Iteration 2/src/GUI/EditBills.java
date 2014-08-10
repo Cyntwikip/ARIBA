@@ -229,7 +229,7 @@ public class EditBills extends javax.swing.JFrame {
         char c = evt.getKeyChar();
         String input = "";
         String trim;
-        String re1 = "^([+-]?\\d*\\.?\\d*)$";
+        String re1 = "^(\\d*\\.?\\d*)$";
         int last;
         if (!jTextField1.getText().isEmpty()) {
             input = jTextField1.getText();
@@ -257,7 +257,7 @@ public class EditBills extends javax.swing.JFrame {
         char c = evt.getKeyChar();
         String input = "";
         String trim;
-        String re1 = "^([+-]?\\d*\\.?\\d*)$";
+        String re1 = "^(\\d*\\.?\\d*)$";
         int last;
         if (!jTextField2.getText().isEmpty()) {
             input = jTextField2.getText();
@@ -307,7 +307,7 @@ public class EditBills extends javax.swing.JFrame {
         char c = evt.getKeyChar();
         String input = "";
         String trim;
-        String re1 = "^([+-]?\\d*\\.?\\d*)$";
+        String re1 = "^(\\d*\\.?\\d*)$";
         int last;
         if (!jTextField4.getText().isEmpty()) {
             input = jTextField4.getText();
@@ -329,7 +329,7 @@ public class EditBills extends javax.swing.JFrame {
         char c = evt.getKeyChar();
         String input = "";
         String trim;
-        String re1 = "^([+-]?\\d*\\.?\\d*)$";
+        String re1 = "^(\\d*\\.?\\d*)$";
         int last;
         if (!jTextField5.getText().isEmpty()) {
             input = jTextField5.getText();
