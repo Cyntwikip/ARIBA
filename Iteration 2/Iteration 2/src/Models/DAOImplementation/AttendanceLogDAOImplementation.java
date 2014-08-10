@@ -266,7 +266,7 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
     }
 
     @Override
-    public ArrayList<AttendanceLogBean> getLatestLoginByTenant(int tenantID) {
+    public AttendanceLogBean getLatestLoginByTenant(int tenantID) {
           try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
@@ -291,10 +291,10 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
                 bean.setIsIn(isIn);
                 bean.setTimeLogged(timeLogged);
 
-                list.add(bean);
+                return bean;
 
             }
-            return list;
+            
         } catch (SQLException ex) {
             Logger.getLogger(AttendanceLogDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -303,7 +303,7 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
     }
 
     @Override
-    public ArrayList<AttendanceLogBean> getLatestLogoutByTenant(int tenantID) {
+    public AttendanceLogBean getLatestLogoutByTenant(int tenantID) {
          try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
@@ -328,10 +328,10 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
                 bean.setIsIn(isIn);
                 bean.setTimeLogged(timeLogged);
 
-                list.add(bean);
+                return bean;
 
             }
-            return list;
+            
         } catch (SQLException ex) {
             Logger.getLogger(AttendanceLogDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
