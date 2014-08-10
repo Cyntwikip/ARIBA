@@ -59,18 +59,19 @@ public class Logging extends javax.swing.JFrame {
             out = logdao.getAllAtendanceLogsByTenantID(tbean.getTenantID());
             String lname = tbean.getLname();
             String fname = tbean.getFname();
+            String tenantid = Integer.toString(tbean.getTenantID());
             if (in.isEmpty() && out.isEmpty()) {
-        
-                Object[] obj = {lname + ", " + fname, "", ""};
+
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, "", ""};
                 model.addRow(obj);
             } else if (out.isEmpty()) {
-                Object[] obj = {lname + ", " + fname, in.get(0).getTimeLogged(), " "};
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, in.get(0).getTimeLogged(), " "};
                 model.addRow(obj);
             } else if (in.isEmpty()) {
-                Object[] obj = {lname + ", " + fname, " ", out.get(0).getTimeLogged()};
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, " ", out.get(0).getTimeLogged()};
                 model.addRow(obj);
             } else {
-                Object[] obj = {lname + ", " + fname, in.get(0).getTimeLogged(), out.get(0).getTimeLogged()};
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, in.get(0).getTimeLogged(), out.get(0).getTimeLogged()};
                 model.addRow(obj);
             }
         }
@@ -99,18 +100,19 @@ public class Logging extends javax.swing.JFrame {
             out = logdao.getAllAtendanceLogsByTenantID(tbean.getTenantID());
             String lname = tbean.getLname();
             String fname = tbean.getFname();
+            String tenantid = Integer.toString(tbean.getTenantID());
             if (in.isEmpty() && out.isEmpty()) {
-       
-                Object[] obj = {lname + ", " + fname, "", ""};
+
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, "", ""};
                 model.addRow(obj);
             } else if (out.isEmpty()) {
-                Object[] obj = {lname + ", " + fname, in.get(0).getTimeLogged(), " "};
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, in.get(0).getTimeLogged(), " "};
                 model.addRow(obj);
             } else if (in.isEmpty()) {
-                Object[] obj = {lname + ", " + fname, " ", out.get(0).getTimeLogged()};
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, " ", out.get(0).getTimeLogged()};
                 model.addRow(obj);
             } else {
-                Object[] obj = {lname + ", " + fname, in.get(0).getTimeLogged(), out.get(0).getTimeLogged()};
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, in.get(0).getTimeLogged(), out.get(0).getTimeLogged()};
                 model.addRow(obj);
             }
 
