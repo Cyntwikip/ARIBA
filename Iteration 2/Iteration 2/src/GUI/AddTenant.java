@@ -832,9 +832,6 @@ public class AddTenant extends javax.swing.JFrame {
                     e.promptFieldError();
                 }
             }
-
-
-
         }
 
 
@@ -844,7 +841,6 @@ public class AddTenant extends javax.swing.JFrame {
         MainMenu menu = new MainMenu();
         menu.setVisible(true);
         this.dispose();
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void SurnameFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SurnameFieldKeyTyped

@@ -28,6 +28,7 @@ import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -39,16 +40,19 @@ public class Bills extends javax.swing.JFrame {
      * Creates new form Bills
      */
     public RoomDAOImplementation rdao = new RoomDAOImplementation();
+    public BillDAOImplementation bdao = new BillDAOImplementation();
     private float priceperkw;
     private float pricepercubicmeter;
     private String year;
     private String month;
+    private DefaultTableModel model;
 
     public Bills() {
         initComponents();
         initdate();
 
         roomlist();
+        roomtable();
     }
 
     public void initdate() {
@@ -86,7 +90,7 @@ public class Bills extends javax.swing.JFrame {
 
     public void roomlist() {
         jComboBox1.removeAllItems();
-
+        
         ArrayList<RoomBean> rbean = new ArrayList<RoomBean>();
         rbean = rdao.getAllRooms();
 
@@ -94,7 +98,11 @@ public class Bills extends javax.swing.JFrame {
             jComboBox1.addItem(rbean.get(i).getRoomID());
         }
     }
-
+    
+    public void roomtable() {
+        model = (DefaultTableModel) jTable1.getModel();
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
