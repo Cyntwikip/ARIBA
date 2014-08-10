@@ -27,6 +27,7 @@ public class Logging extends javax.swing.JFrame {
      */
     private AttendanceLogDAOImplementation logdao = new AttendanceLogDAOImplementation();
     private DefaultTableModel model;
+    private Object[] obj = {"", "", ""};
 
     public Logging() {
         initComponents();
@@ -97,29 +98,35 @@ public class Logging extends javax.swing.JFrame {
         } else {
             size = (alist.size() / 2) + 1;
         }
-        for (int i = 0; i < size; i++) {
+        
+        boolean flag = false;
+        for (int i = 0; i < alist.size(); i++) {
             tbean = tdao.getTenantById(alist.get(i).getLog_tenantID());
             System.out.println(tbean.getTenantID());
 
             in = logdao.getLatestLoginByTenant(tbean.getTenantID());
             out = logdao.getLatestLogoutByTenant(tbean.getTenantID());
 
+            
             String lname = tbean.getLname();
             String fname = tbean.getFname();
 
-            if (!in.isEmpty()&& !out.isEmpty()) { // may log-in and logout
-                Timestamp intemp = in.get(0).getTimeLogged();
-                Timestamp outtemp = out.get(0).getTimeLogged();
-                Object[] obj = {lname + ", " + fname, intemp, outtemp};
+            if (!in.isEmpty() && !out.isEmpty()) { // may log-in and logout
 
-                model.addRow(obj);
+
+                    Object[] obj = {lname + ", " + fname, in.get(0).getTimeLogged(), out.get(0).getTimeLogged() };
+                    model.addRow(obj);
+                
+
             } else {
                 if (in.isEmpty()) { // wala in
                     Timestamp outtemp = out.get(0).getTimeLogged();
 
+                    System.out.println("Not empty");
                     Object[] obj = {lname + ", " + fname, " ", outtemp};
                     model.addRow(obj);
                 } else {
+                    System.out.println(" may empty");
                     Timestamp intemp = in.get(0).getTimeLogged();
                     Object[] obj = {lname + ", " + fname, intemp, " "};
                     model.addRow(obj);

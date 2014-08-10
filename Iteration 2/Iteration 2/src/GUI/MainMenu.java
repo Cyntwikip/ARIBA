@@ -206,7 +206,8 @@ public class MainMenu extends javax.swing.JFrame {
         GuardianBean guardianbean = new GuardianBean();
 
         guardianbean = gdao.getGuardianByTenant(bean.getFname(), bean.getLname());
-        guardianName.setText(guardianbean.getFname() + " " + guardianbean.getLname());
+        guardianlname.setText(guardianbean.getLname());
+        guardianfname.setText(guardianbean.getFname());
         guardiancontactno.setText(guardianbean.getContact());
         guardianEmail.setText(guardianbean.getEmail());
 
@@ -244,9 +245,9 @@ public class MainMenu extends javax.swing.JFrame {
         address = new javax.swing.JLabel();
         gender = new javax.swing.JLabel();
         contactno = new javax.swing.JLabel();
+        degree = new javax.swing.JLabel();
         email = new javax.swing.JLabel();
         school = new javax.swing.JLabel();
-        degree = new javax.swing.JLabel();
         yearofgraduation = new javax.swing.JLabel();
         guardiancontactno = new javax.swing.JLabel();
         roomassignment = new javax.swing.JLabel();
@@ -265,47 +266,70 @@ public class MainMenu extends javax.swing.JFrame {
         YearOfGraduationField = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        guardianName = new javax.swing.JLabel();
+        guardianlname = new javax.swing.JLabel();
         guardianEmail = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         imgLabel = new javax.swing.JLabel();
+        guardianfname = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximizedBounds(new java.awt.Rectangle(0, 0, 1020, 560));
-        setMinimumSize(new java.awt.Dimension(1020, 560));
+        setMinimumSize(new java.awt.Dimension(800, 450));
         setResizable(false);
         getContentPane().setLayout(null);
+
+        tenantID.setText("id");
         getContentPane().add(tenantID);
-        tenantID.setBounds(810, 100, 90, 20);
+        tenantID.setBounds(610, 70, 70, 20);
+
+        lname.setText("surname");
         getContentPane().add(lname);
-        lname.setBounds(800, 130, 100, 20);
+        lname.setBounds(610, 90, 100, 20);
+
+        fname.setText("fname");
         getContentPane().add(fname);
-        fname.setBounds(810, 150, 90, 20);
+        fname.setBounds(610, 110, 90, 20);
+
+        birthday.setText("bday");
         getContentPane().add(birthday);
-        birthday.setBounds(800, 180, 180, 20);
+        birthday.setBounds(610, 130, 180, 20);
         getContentPane().add(address);
         address.setBounds(800, 210, 180, 0);
         getContentPane().add(gender);
         gender.setBounds(790, 240, 190, 0);
+
+        contactno.setText("contact");
         getContentPane().add(contactno);
-        contactno.setBounds(820, 260, 170, 20);
-        getContentPane().add(email);
-        email.setBounds(790, 280, 190, 30);
-        getContentPane().add(school);
-        school.setBounds(800, 310, 180, 20);
+        contactno.setBounds(620, 170, 170, 20);
+
+        degree.setText("degre");
         getContentPane().add(degree);
-        degree.setBounds(800, 340, 180, 20);
+        degree.setBounds(600, 230, 180, 20);
+
+        email.setText("email");
+        getContentPane().add(email);
+        email.setBounds(590, 190, 190, 30);
+
+        school.setText("school");
+        getContentPane().add(school);
+        school.setBounds(590, 210, 180, 20);
+
+        yearofgraduation.setText("year");
         getContentPane().add(yearofgraduation);
-        yearofgraduation.setBounds(870, 360, 110, 20);
+        yearofgraduation.setBounds(650, 240, 110, 20);
+
+        guardiancontactno.setText("contact");
         getContentPane().add(guardiancontactno);
-        guardiancontactno.setBounds(820, 424, 160, 20);
+        guardiancontactno.setBounds(610, 310, 160, 20);
+
+        roomassignment.setText("room");
         getContentPane().add(roomassignment);
-        roomassignment.setBounds(870, 460, 40, 20);
+        roomassignment.setBounds(640, 350, 40, 20);
 
         status.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        status.setText("stat");
         getContentPane().add(status);
-        status.setBounds(790, 480, 70, 20);
+        status.setBounds(590, 370, 70, 20);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/AddTenant.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -314,17 +338,18 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(70, 300, 260, 60);
+        jButton1.setBounds(60, 290, 180, 40);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Edit Tenant.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/edittenantinformation.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(70, 360, 260, 70);
+        jButton2.setBounds(720, 360, 30, 30);
 
+        NameField.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
         NameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NameFieldActionPerformed(evt);
@@ -336,8 +361,9 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(NameField);
-        NameField.setBounds(150, 100, 160, 30);
+        NameField.setBounds(110, 120, 130, 30);
 
+        SchoolField.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         SchoolField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SchoolFieldActionPerformed(evt);
@@ -349,8 +375,9 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(SchoolField);
-        SchoolField.setBounds(150, 130, 160, 30);
+        SchoolField.setBounds(110, 150, 130, 30);
 
+        DegreeField.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         DegreeField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DegreeFieldActionPerformed(evt);
@@ -362,7 +389,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(DegreeField);
-        DegreeField.setBounds(150, 160, 160, 30);
+        DegreeField.setBounds(110, 180, 130, 20);
 
         buttonGroup1.add(MaleField);
         MaleField.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
@@ -373,7 +400,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(MaleField);
-        MaleField.setBounds(150, 210, 60, 30);
+        MaleField.setBounds(110, 210, 60, 30);
 
         buttonGroup1.add(FemaleField);
         FemaleField.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
@@ -384,7 +411,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(FemaleField);
-        FemaleField.setBounds(210, 210, 80, 30);
+        FemaleField.setBounds(170, 210, 80, 30);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -416,7 +443,7 @@ public class MainMenu extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(340, 70, 350, 450);
+        jScrollPane1.setBounds(260, 60, 270, 340);
 
         buttonGroup2.add(CurrentField);
         CurrentField.setText("Current");
@@ -426,7 +453,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(CurrentField);
-        CurrentField.setBounds(150, 240, 63, 23);
+        CurrentField.setBounds(110, 240, 63, 23);
 
         buttonGroup2.add(OldField);
         OldField.setText("Old");
@@ -436,7 +463,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(OldField);
-        OldField.setBounds(150, 260, 41, 23);
+        OldField.setBounds(180, 240, 41, 23);
 
         YearOfGraduationField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -444,29 +471,35 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(YearOfGraduationField);
-        YearOfGraduationField.setBounds(230, 190, 70, 20);
+        YearOfGraduationField.setBounds(180, 200, 70, 20);
+
+        jLabel2.setText("adress");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(800, 204, 170, 30);
+        jLabel2.setBounds(600, 140, 170, 30);
         jLabel2.getAccessibleContext().setAccessibleName("address");
 
+        jLabel3.setText("gender");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(800, 230, 180, 20);
+        jLabel3.setBounds(600, 160, 180, 20);
         jLabel3.getAccessibleContext().setAccessibleName("gender");
 
-        getContentPane().add(guardianName);
-        guardianName.setBounds(820, 400, 160, 20);
+        guardianlname.setText("name");
+        getContentPane().add(guardianlname);
+        guardianlname.setBounds(610, 280, 160, 20);
+
+        guardianEmail.setText("email");
         getContentPane().add(guardianEmail);
-        guardianEmail.setBounds(800, 440, 180, 20);
-
-        jLabel5.setText("Email");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(750, 440, 60, 20);
+        guardianEmail.setBounds(590, 330, 180, 20);
         getContentPane().add(imgLabel);
-        imgLabel.setBounds(910, 100, 70, 70);
+        imgLabel.setBounds(690, 80, 50, 50);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Tenant.png"))); // NOI18N
+        guardianfname.setText("fname");
+        getContentPane().add(guardianfname);
+        guardianfname.setBounds(610, 300, 130, 14);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tenanttab-peg-edited.png"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 1020, 560);
+        jLabel1.setBounds(0, -10, 800, 450);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -618,15 +651,15 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel fname;
     private javax.swing.JLabel gender;
     private javax.swing.JLabel guardianEmail;
-    private javax.swing.JLabel guardianName;
     private javax.swing.JLabel guardiancontactno;
+    private javax.swing.JLabel guardianfname;
+    private javax.swing.JLabel guardianlname;
     private javax.swing.JLabel imgLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lname;
