@@ -58,19 +58,6 @@ public class Room extends javax.swing.JFrame {
             } else {
             }
         }
-
-        /*view room assignment
-         ArrayList<TenantBean> tenantlist = tdao.getTenantByRoomID(jComboBox1.getSelectedIndex() + 1);
-         String name;
-
-         jTable1.removeAll();
-        
-         for (int i = 0; i < tenantlist.size(); i++) {
-         name = tenantlist.get(i).getLname() + ", " + tenantlist.get(i).getFname();
-         Object[] obj = {name};
-         model1.addRow(obj);
-         }
-         */
         updateAvailableRooms();
     }
 
@@ -108,6 +95,30 @@ public class Room extends javax.swing.JFrame {
 
             } else {
             }
+        }
+    }
+    
+    public void updateRoomAssignments() {
+        model1.getDataVector().removeAllElements();
+        model1.fireTableDataChanged();
+
+        int roomID = (Integer) jComboBox1.getSelectedItem();
+
+        System.out.println(roomID);
+        ArrayList<TenantBean> tenantlist = new ArrayList<TenantBean>();
+        RoomDAOInterface rdao = new RoomDAOImplementation();
+
+        tenantlist = tdao.getTenantByRoomID(roomID);
+        String name;
+
+        if (tenantlist.isEmpty()) {
+            model1.getDataVector().removeAllElements();
+            model1.fireTableDataChanged();
+        }
+        for (int i = 0; i < tenantlist.size(); i++) {
+            name = tenantlist.get(i).getFname() + " " + tenantlist.get(i).getLname();
+            Object[] obj = {name};
+            model1.addRow(obj);
         }
     }
 
@@ -269,35 +280,13 @@ public class Room extends javax.swing.JFrame {
 
             updateAvailableRooms();
             updateTenants();
+            updateRoomAssignments();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
 
-        // TODO add your handling code here:
-        model1.getDataVector().removeAllElements();
-        model1.fireTableDataChanged();
-        //model1.setRowCount(0);
-
-        int roomID = (Integer) jComboBox1.getSelectedItem();
-
-        System.out.println(roomID);
-        ArrayList<TenantBean> tenantlist = new ArrayList<TenantBean>();
-        RoomDAOInterface rdao = new RoomDAOImplementation();
-
-        tenantlist = tdao.getTenantByRoomID(roomID);
-        String name;
-
-        if (tenantlist.isEmpty()) {
-            //JOptionPane.showMessageDialog(null, "There are no tenants occupying room " + roomID);
-            model1.getDataVector().removeAllElements();
-            model1.fireTableDataChanged();
-        }
-        for (int i = 0; i < tenantlist.size(); i++) {
-            name = tenantlist.get(i).getFname() + " " + tenantlist.get(i).getLname();
-            Object[] obj = {name};
-            model1.addRow(obj);
-        }
+        updateRoomAssignments();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void tenantlistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tenantlistActionPerformed
