@@ -137,6 +137,8 @@ public class Logging extends javax.swing.JFrame {
         
         logdao.addAttendanceLogDAOInterface(logbean);
         
+        jTextField1.setText("");
+        
         updateTable();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -157,6 +159,8 @@ public class Logging extends javax.swing.JFrame {
         logbean.setIsIn(false);
         
         logdao.addAttendanceLogDAOInterface(logbean);
+        
+        jTextField1.setText("");
         
         updateTable();
     }//GEN-LAST:event_jButton1ActionPerformed
