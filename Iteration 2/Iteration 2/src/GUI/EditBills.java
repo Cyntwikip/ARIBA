@@ -368,7 +368,7 @@ public class EditBills extends javax.swing.JFrame {
             double price = Double.parseDouble(roomrent);
 
             priceperkw = Float.parseFloat(totalelectricitycost) / Float.parseFloat(totalelectricityconsumption);
-            System.out.println(priceperkw);
+            System.out.println("Price per kw: " + priceperkw);
             
             pricepercubicmeter = Float.parseFloat(totalwatercost) / Float.parseFloat(totalwaterconsumption);
             System.out.println(pricepercubicmeter);
@@ -393,7 +393,7 @@ public class EditBills extends javax.swing.JFrame {
 
             ArrayList<BillBean> bbeanlist = bdao.getAllBills();
             wbean.setPricepercubicmeter(pricepercubicmeter);
-            ebean.setCurrentKW(priceperkw);
+            ebean.setPriceperKW(priceperkw);
             java.sql.Date dateread = getDateRead();
             wbean.setDateRead(dateread);
             ebean.setDateRead(dateread);
