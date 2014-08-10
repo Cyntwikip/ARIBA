@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package GUI;
 
 import Models.Beans.AttendanceLogBean;
 import Models.Beans.TenantBean;
 import Models.DAOImplementation.AttendanceLogDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
+import Models.DAOInterface.TenantDAOInterface;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,20 +25,129 @@ public class Logging extends javax.swing.JFrame {
     /**
      * Creates new form Logging
      */
-    
     private AttendanceLogDAOImplementation logdao = new AttendanceLogDAOImplementation();
     private DefaultTableModel model;
-    
+
     public Logging() {
         initComponents();
-        
+
+        updateTable();
         Calendar c = Calendar.getInstance();
-        
+
         System.out.println(c.getTime());
     }
-    
+
     public void updateTable() {
-        
+
+        AttendanceLogBean abean = new AttendanceLogBean();
+        AttendanceLogBean in = new AttendanceLogBean();
+        AttendanceLogBean out = new AttendanceLogBean();
+        ArrayList<AttendanceLogBean> alist = new ArrayList<AttendanceLogBean>();
+
+        TenantBean tbean = new TenantBean();
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+
+        alist = logdao.getLogsToday();
+
+        model = (DefaultTableModel) jTable1.getModel();
+
+        int size = 0;
+        if ((alist.size() % 2) == 0) {//EVEN
+            size = alist.size() / 2;
+        } else {
+            size = (alist.size() / 2) + 1;
+        }
+        for (int i = 0; i < size; i++) {
+            tbean = tdao.getTenantById(alist.get(i).getLog_tenantID());
+            System.out.println(tbean.getTenantID());
+
+            in = logdao.getLatestLoginByTenant(tbean.getTenantID());
+            out = logdao.getLatestLogoutByTenant(tbean.getTenantID());
+
+            String lname = tbean.getLname();
+            String fname = tbean.getFname();
+
+            if (in != null && out != null) { // may log-in and logout
+                Timestamp intemp = in.getTimeLogged();
+                Timestamp outtemp = out.getTimeLogged();
+                Object[] obj = {lname + ", " + fname, intemp, outtemp};
+
+                model.addRow(obj);
+            } else {
+                if (in == null) { // wala in
+                    Timestamp outtemp = out.getTimeLogged();
+
+                    Object[] obj = {lname + ", " + fname, " ", outtemp};
+                    model.addRow(obj);
+                } else {
+                    Timestamp intemp = in.getTimeLogged();
+                    Object[] obj = {lname + ", " + fname, intemp, " "};
+                    model.addRow(obj);
+
+                }
+
+            }
+            System.out.println(alist.size());
+
+            // get tenant
+        }
+
+    }
+
+    public void updateTable1() {
+
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+        AttendanceLogBean abean = new AttendanceLogBean();
+        AttendanceLogBean in = new AttendanceLogBean();
+        AttendanceLogBean out = new AttendanceLogBean();
+        ArrayList<AttendanceLogBean> alist = new ArrayList<AttendanceLogBean>();
+
+        TenantBean tbean = new TenantBean();
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+
+        alist = logdao.getLogsToday();
+
+        int size = 0;
+        if ((alist.size() % 2) == 0) {//EVEN
+            size = alist.size() / 2;
+        } else {
+            size = (alist.size() / 2) + 1;
+        }
+        for (int i = 0; i < size; i++) {
+            tbean = tdao.getTenantById(alist.get(i).getLog_tenantID());
+            System.out.println(tbean.getTenantID());
+
+            in = logdao.getLatestLoginByTenant(tbean.getTenantID());
+            out = logdao.getLatestLogoutByTenant(tbean.getTenantID());
+
+            String lname = tbean.getLname();
+            String fname = tbean.getFname();
+
+            if (in != null && out != null) { // may log-in and logout
+                Timestamp intemp = in.getTimeLogged();
+                Timestamp outtemp = out.getTimeLogged();
+                Object[] obj = {lname + ", " + fname, intemp, outtemp};
+
+                model.addRow(obj);
+            } else {
+                if (in == null) { // wala in
+                    Timestamp outtemp = out.getTimeLogged();
+
+                    Object[] obj = {lname + ", " + fname, " ", outtemp};
+                    model.addRow(obj);
+                } else {
+                    Timestamp intemp = in.getTimeLogged();
+                    Object[] obj = {lname + ", " + fname, intemp, " "};
+                    model.addRow(obj);
+
+                }
+
+            }
+            System.out.println(alist.size());
+
+            // get tenant
+        }
     }
 
     /**
@@ -90,10 +201,7 @@ public class Logging extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Name", "Time - IN", "Time - OUT"
@@ -122,47 +230,57 @@ public class Logging extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         int tenantid = Integer.parseInt(jTextField1.getText());
-        
+
         TenantDAOImplementation tdao = new TenantDAOImplementation();
         TenantBean bean = new TenantBean();
         bean = tdao.getTenantById(tenantid);
-        
-        Calendar c = Calendar.getInstance();
-        Timestamp time = new Timestamp(c.getTimeInMillis());
-        
-        AttendanceLogBean logbean = new AttendanceLogBean();
-        logbean.setLog_tenantID(tenantid);
-        logbean.setTimeLogged(time);
-        logbean.setIsIn(true);
-        
-        logdao.addAttendanceLogDAOInterface(logbean);
-        
-        jTextField1.setText("");
-        
-        updateTable();
+        if (bean.getFname() == null) {
+            JOptionPane.showMessageDialog(null, "No tenant ID " + tenantid);
+            jTextField1.setText("");
+        } else {
+            Calendar c = Calendar.getInstance();
+            Timestamp time = new Timestamp(c.getTimeInMillis());
+
+            AttendanceLogBean logbean = new AttendanceLogBean();
+            logbean.setLog_tenantID(tenantid);
+            logbean.setTimeLogged(time);
+            logbean.setIsIn(true);
+
+            logdao.addAttendanceLogDAOInterface(logbean);
+
+            jTextField1.setText("");
+
+            updateTable1();
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         int tenantid = Integer.parseInt(jTextField1.getText());
-        
+
         TenantDAOImplementation tdao = new TenantDAOImplementation();
         TenantBean bean = new TenantBean();
         bean = tdao.getTenantById(tenantid);
-        
-        Calendar c = Calendar.getInstance();
-        Timestamp time = new Timestamp(c.getTimeInMillis());
-        
-        AttendanceLogBean logbean = new AttendanceLogBean();
-        logbean.setLog_tenantID(tenantid);
-        logbean.setTimeLogged(time);
-        logbean.setIsIn(false);
-        
-        logdao.addAttendanceLogDAOInterface(logbean);
-        
-        jTextField1.setText("");
-        
-        updateTable();
+
+        if (bean.getFname() == null) {
+            JOptionPane.showMessageDialog(null, "No tenant ID " + tenantid);
+            jTextField1.setText("");
+        } else {
+
+            Calendar c = Calendar.getInstance();
+            Timestamp time = new Timestamp(c.getTimeInMillis());
+
+            AttendanceLogBean logbean = new AttendanceLogBean();
+            logbean.setLog_tenantID(tenantid);
+            logbean.setTimeLogged(time);
+            logbean.setIsIn(false);
+
+            logdao.addAttendanceLogDAOInterface(logbean);
+
+            jTextField1.setText("");
+
+            updateTable1();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
