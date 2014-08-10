@@ -6,6 +6,14 @@
 
 package GUI;
 
+import Models.Beans.AttendanceLogBean;
+import Models.Beans.TenantBean;
+import Models.DAOImplementation.AttendanceLogDAOImplementation;
+import Models.DAOImplementation.TenantDAOImplementation;
+import java.sql.Timestamp;
+import java.util.Calendar;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author jao
@@ -15,8 +23,20 @@ public class Logging extends javax.swing.JFrame {
     /**
      * Creates new form Logging
      */
+    
+    private AttendanceLogDAOImplementation logdao = new AttendanceLogDAOImplementation();
+    private DefaultTableModel model;
+    
     public Logging() {
         initComponents();
+        
+        Calendar c = Calendar.getInstance();
+        
+        System.out.println(c.getTime());
+    }
+    
+    public void updateTable() {
+        
     }
 
     /**
@@ -37,6 +57,9 @@ public class Logging extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(800, 450));
+        setMinimumSize(new java.awt.Dimension(800, 450));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -48,6 +71,11 @@ public class Logging extends javax.swing.JFrame {
         jTextField1.setBounds(80, 250, 180, 40);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/imgoingout.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1);
         jButton1.setBounds(70, 300, 190, 40);
 
@@ -74,7 +102,7 @@ public class Logging extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(300, 80, 454, 320);
+        jScrollPane1.setBounds(300, 80, 452, 320);
 
         jLabel2.setText("Current Date and Time HERE! ");
         getContentPane().add(jLabel2);
@@ -93,7 +121,45 @@ public class Logging extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        int tenantid = Integer.parseInt(jTextField1.getText());
+        
+        TenantDAOImplementation tdao = new TenantDAOImplementation();
+        TenantBean bean = new TenantBean();
+        bean = tdao.getTenantById(tenantid);
+        
+        Calendar c = Calendar.getInstance();
+        Timestamp time = new Timestamp(c.getTimeInMillis());
+        
+        AttendanceLogBean logbean = new AttendanceLogBean();
+        logbean.setLog_tenantID(tenantid);
+        logbean.setTimeLogged(time);
+        logbean.setIsIn(true);
+        
+        logdao.addAttendanceLogDAOInterface(logbean);
+        
+        updateTable();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int tenantid = Integer.parseInt(jTextField1.getText());
+        
+        TenantDAOImplementation tdao = new TenantDAOImplementation();
+        TenantBean bean = new TenantBean();
+        bean = tdao.getTenantById(tenantid);
+        
+        Calendar c = Calendar.getInstance();
+        Timestamp time = new Timestamp(c.getTimeInMillis());
+        
+        AttendanceLogBean logbean = new AttendanceLogBean();
+        logbean.setLog_tenantID(tenantid);
+        logbean.setTimeLogged(time);
+        logbean.setIsIn(false);
+        
+        logdao.addAttendanceLogDAOInterface(logbean);
+        
+        updateTable();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
