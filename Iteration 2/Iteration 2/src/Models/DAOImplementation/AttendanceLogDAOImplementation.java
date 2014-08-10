@@ -270,7 +270,7 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
           try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from attendancelog where isIn = true and log_tenantID = " + tenantID + " order by logID desc";
+            String query = "select * from attendancelog where isIn = true and log_tenantID = " + tenantID + "  and timeLogged >= CURDATE() order by logID desc";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
             AttendanceLogBean bean = new AttendanceLogBean();
@@ -307,7 +307,7 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
          try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from attendancelog where isIn = false and log_tenantID = "+ tenantID + " order by logID desc";
+            String query = "select * from attendancelog where isIn = false and log_tenantID = "+ tenantID + " and timeLogged >= CURDATE() order by logID desc";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
             AttendanceLogBean bean = new AttendanceLogBean();

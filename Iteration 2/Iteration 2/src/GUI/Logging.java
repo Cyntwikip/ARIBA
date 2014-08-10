@@ -32,50 +32,48 @@ public class Logging extends javax.swing.JFrame {
     public Logging() {
         initComponents();
 
+        model = (DefaultTableModel) jTable1.getModel();
         updateTable();
+
         Calendar c = Calendar.getInstance();
 
         System.out.println(c.getTime());
     }
 
     public void updateTable() {
-
         AttendanceLogBean abean = new AttendanceLogBean();
         ArrayList<AttendanceLogBean> in = new ArrayList<AttendanceLogBean>();
         ArrayList<AttendanceLogBean> out = new ArrayList<AttendanceLogBean>();
         ArrayList<AttendanceLogBean> alist = new ArrayList<AttendanceLogBean>();
+        ArrayList<TenantBean> tlist = new ArrayList<TenantBean>();
 
         TenantBean tbean = new TenantBean();
         TenantDAOInterface tdao = new TenantDAOImplementation();
 
-        alist = logdao.getLogsToday();
-
-        model = (DefaultTableModel) jTable1.getModel();
-
-        int size = alist.size() / 2;
-        for (int i = 0; i < size; i++) {
-            tbean = tdao.getTenantById(alist.get(i).getLog_tenantID());
-            System.out.println(tbean.getTenantID());
-
-            in = logdao.getLatestLoginByTenant(tbean.getTenantID()); // gets all log in of tenant
-            out = logdao.getLatestLogoutByTenant(tbean.getTenantID()); // gets all log out of tenant
-
+        tlist = tdao.getAllTenants();
+        System.out.println(tlist.size());
+        for (int i = 0; i < tlist.size(); i++) {
+            tbean = tlist.get(i);
+            System.out.println(tbean.getFname());
+            in = logdao.getLatestLoginByTenant(tbean.getTenantID());
+            out = logdao.getAllAtendanceLogsByTenantID(tbean.getTenantID());
             String lname = tbean.getLname();
             String fname = tbean.getFname();
-
-            if (in.size() == out.size()) // sakto lang
-            {
-
+            if (in.isEmpty() && out.isEmpty()) {
+        
+                Object[] obj = {lname + ", " + fname, "", ""};
+                model.addRow(obj);
+            } else if (out.isEmpty()) {
+                Object[] obj = {lname + ", " + fname, in.get(0).getTimeLogged(), " "};
+                model.addRow(obj);
+            } else if (in.isEmpty()) {
+                Object[] obj = {lname + ", " + fname, " ", out.get(0).getTimeLogged()};
+                model.addRow(obj);
+            } else {
+                Object[] obj = {lname + ", " + fname, in.get(0).getTimeLogged(), out.get(0).getTimeLogged()};
+                model.addRow(obj);
             }
-            Timestamp intemp = in.get(0).getTimeLogged();
-            Timestamp outtemp = out.get(0).getTimeLogged();
-            Object[] obj = {lname + ", " + fname, intemp, outtemp};
-
-            System.out.println(alist.size());
-
-            // get tenant
         }
-
     }
 
     public void updateTable1() {
@@ -86,57 +84,36 @@ public class Logging extends javax.swing.JFrame {
         ArrayList<AttendanceLogBean> in = new ArrayList<AttendanceLogBean>();
         ArrayList<AttendanceLogBean> out = new ArrayList<AttendanceLogBean>();
         ArrayList<AttendanceLogBean> alist = new ArrayList<AttendanceLogBean>();
+        ArrayList<TenantBean> tlist = new ArrayList<TenantBean>();
 
         TenantBean tbean = new TenantBean();
         TenantDAOInterface tdao = new TenantDAOImplementation();
 
         alist = logdao.getLogsToday();
+        tlist = tdao.getAllTenants();
 
-        int size = 0;
-        if ((alist.size() % 2) == 0) {//EVEN
-            size = alist.size() / 2;
-        } else {
-            size = (alist.size() / 2) + 1;
-        }
-        
-        boolean flag = false;
-        for (int i = 0; i < alist.size(); i++) {
-            tbean = tdao.getTenantById(alist.get(i).getLog_tenantID());
-            System.out.println(tbean.getTenantID());
+        for (int i = 0; i < tlist.size(); i++) {
+            tbean = tlist.get(i);
 
             in = logdao.getLatestLoginByTenant(tbean.getTenantID());
-            out = logdao.getLatestLogoutByTenant(tbean.getTenantID());
-
-            
+            out = logdao.getAllAtendanceLogsByTenantID(tbean.getTenantID());
             String lname = tbean.getLname();
             String fname = tbean.getFname();
-
-            if (!in.isEmpty() && !out.isEmpty()) { // may log-in and logout
-
-
-                    Object[] obj = {lname + ", " + fname, in.get(0).getTimeLogged(), out.get(0).getTimeLogged() };
-                    model.addRow(obj);
-                
-
+            if (in.isEmpty() && out.isEmpty()) {
+       
+                Object[] obj = {lname + ", " + fname, "", ""};
+                model.addRow(obj);
+            } else if (out.isEmpty()) {
+                Object[] obj = {lname + ", " + fname, in.get(0).getTimeLogged(), " "};
+                model.addRow(obj);
+            } else if (in.isEmpty()) {
+                Object[] obj = {lname + ", " + fname, " ", out.get(0).getTimeLogged()};
+                model.addRow(obj);
             } else {
-                if (in.isEmpty()) { // wala in
-                    Timestamp outtemp = out.get(0).getTimeLogged();
-
-                    System.out.println("Not empty");
-                    Object[] obj = {lname + ", " + fname, " ", outtemp};
-                    model.addRow(obj);
-                } else {
-                    System.out.println(" may empty");
-                    Timestamp intemp = in.get(0).getTimeLogged();
-                    Object[] obj = {lname + ", " + fname, intemp, " "};
-                    model.addRow(obj);
-
-                }
-
+                Object[] obj = {lname + ", " + fname, in.get(0).getTimeLogged(), out.get(0).getTimeLogged()};
+                model.addRow(obj);
             }
-            System.out.println(alist.size());
 
-            // get tenant
         }
     }
 
