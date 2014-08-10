@@ -266,7 +266,7 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
     }
 
     @Override
-    public AttendanceLogBean getLatestLoginByTenant(int tenantID) {
+    public ArrayList<AttendanceLogBean> getLatestLoginByTenant(int tenantID) {
           try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
@@ -274,6 +274,7 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
             AttendanceLogBean bean = new AttendanceLogBean();
+            ArrayList<AttendanceLogBean> list = new ArrayList<AttendanceLogBean>();
     
             int logID, log_tenantID;
             boolean isIn;
@@ -290,9 +291,10 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
                 bean.setIsIn(isIn);
                 bean.setTimeLogged(timeLogged);
 
-                return bean;
+                list.add(bean);
 
             }
+            return list;
         } catch (SQLException ex) {
             Logger.getLogger(AttendanceLogDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -301,7 +303,7 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
     }
 
     @Override
-    public AttendanceLogBean getLatestLogoutByTenant(int tenantID) {
+    public ArrayList<AttendanceLogBean> getLatestLogoutByTenant(int tenantID) {
          try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
@@ -326,9 +328,10 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
                 bean.setIsIn(isIn);
                 bean.setTimeLogged(timeLogged);
 
-                return bean;
+                list.add(bean);
 
             }
+            return list;
         } catch (SQLException ex) {
             Logger.getLogger(AttendanceLogDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }

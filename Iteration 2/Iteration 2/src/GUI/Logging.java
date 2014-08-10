@@ -40,8 +40,8 @@ public class Logging extends javax.swing.JFrame {
     public void updateTable() {
 
         AttendanceLogBean abean = new AttendanceLogBean();
-        AttendanceLogBean in = new AttendanceLogBean();
-        AttendanceLogBean out = new AttendanceLogBean();
+        ArrayList<AttendanceLogBean> in = new ArrayList<AttendanceLogBean>();
+        ArrayList<AttendanceLogBean> out = new ArrayList<AttendanceLogBean>();
         ArrayList<AttendanceLogBean> alist = new ArrayList<AttendanceLogBean>();
 
         TenantBean tbean = new TenantBean();
@@ -51,42 +51,25 @@ public class Logging extends javax.swing.JFrame {
 
         model = (DefaultTableModel) jTable1.getModel();
 
-        int size = 0;
-        if ((alist.size() % 2) == 0) {//EVEN
-            size = alist.size() / 2;
-        } else {
-            size = (alist.size() / 2) + 1;
-        }
+        int size = alist.size() / 2;
         for (int i = 0; i < size; i++) {
             tbean = tdao.getTenantById(alist.get(i).getLog_tenantID());
             System.out.println(tbean.getTenantID());
 
-            in = logdao.getLatestLoginByTenant(tbean.getTenantID());
-            out = logdao.getLatestLogoutByTenant(tbean.getTenantID());
+            in = logdao.getLatestLoginByTenant(tbean.getTenantID()); // gets all log in of tenant
+            out = logdao.getLatestLogoutByTenant(tbean.getTenantID()); // gets all log out of tenant
 
             String lname = tbean.getLname();
             String fname = tbean.getFname();
 
-            if (in != null && out != null) { // may log-in and logout
-                Timestamp intemp = in.getTimeLogged();
-                Timestamp outtemp = out.getTimeLogged();
-                Object[] obj = {lname + ", " + fname, intemp, outtemp};
-
-                model.addRow(obj);
-            } else {
-                if (in == null) { // wala in
-                    Timestamp outtemp = out.getTimeLogged();
-
-                    Object[] obj = {lname + ", " + fname, " ", outtemp};
-                    model.addRow(obj);
-                } else {
-                    Timestamp intemp = in.getTimeLogged();
-                    Object[] obj = {lname + ", " + fname, intemp, " "};
-                    model.addRow(obj);
-
-                }
+            if (in.size() == out.size()) // sakto lang
+            {
 
             }
+            Timestamp intemp = in.get(0).getTimeLogged();
+            Timestamp outtemp = out.get(0).getTimeLogged();
+            Object[] obj = {lname + ", " + fname, intemp, outtemp};
+
             System.out.println(alist.size());
 
             // get tenant
@@ -99,8 +82,8 @@ public class Logging extends javax.swing.JFrame {
         model.getDataVector().removeAllElements();
         model.fireTableDataChanged();
         AttendanceLogBean abean = new AttendanceLogBean();
-        AttendanceLogBean in = new AttendanceLogBean();
-        AttendanceLogBean out = new AttendanceLogBean();
+        ArrayList<AttendanceLogBean> in = new ArrayList<AttendanceLogBean>();
+        ArrayList<AttendanceLogBean> out = new ArrayList<AttendanceLogBean>();
         ArrayList<AttendanceLogBean> alist = new ArrayList<AttendanceLogBean>();
 
         TenantBean tbean = new TenantBean();
@@ -124,20 +107,20 @@ public class Logging extends javax.swing.JFrame {
             String lname = tbean.getLname();
             String fname = tbean.getFname();
 
-            if (in != null && out != null) { // may log-in and logout
-                Timestamp intemp = in.getTimeLogged();
-                Timestamp outtemp = out.getTimeLogged();
+            if (!in.isEmpty()&& !out.isEmpty()) { // may log-in and logout
+                Timestamp intemp = in.get(0).getTimeLogged();
+                Timestamp outtemp = out.get(0).getTimeLogged();
                 Object[] obj = {lname + ", " + fname, intemp, outtemp};
 
                 model.addRow(obj);
             } else {
-                if (in == null) { // wala in
-                    Timestamp outtemp = out.getTimeLogged();
+                if (in.isEmpty()) { // wala in
+                    Timestamp outtemp = out.get(0).getTimeLogged();
 
                     Object[] obj = {lname + ", " + fname, " ", outtemp};
                     model.addRow(obj);
                 } else {
-                    Timestamp intemp = in.getTimeLogged();
+                    Timestamp intemp = in.get(0).getTimeLogged();
                     Object[] obj = {lname + ", " + fname, intemp, " "};
                     model.addRow(obj);
 
@@ -229,38 +212,64 @@ public class Logging extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        // out
         int tenantid = Integer.parseInt(jTextField1.getText());
 
         TenantDAOImplementation tdao = new TenantDAOImplementation();
         TenantBean bean = new TenantBean();
         bean = tdao.getTenantById(tenantid);
+
+        ArrayList<AttendanceLogBean> alist = new ArrayList<AttendanceLogBean>();
+        ArrayList<AttendanceLogBean> alistout = new ArrayList<AttendanceLogBean>();
+        ArrayList<AttendanceLogBean> alistin = new ArrayList<AttendanceLogBean>();
+        alist = logdao.getAllAtendanceLogsByTenantID(tenantid);
+        alistout = logdao.getLatestLogoutByTenant(tenantid);
+        alistin = logdao.getLatestLoginByTenant(tenantid);
+
         if (bean.getFname() == null) {
             JOptionPane.showMessageDialog(null, "No tenant ID " + tenantid);
             jTextField1.setText("");
         } else {
+
             Calendar c = Calendar.getInstance();
             Timestamp time = new Timestamp(c.getTimeInMillis());
 
-            AttendanceLogBean logbean = new AttendanceLogBean();
-            logbean.setLog_tenantID(tenantid);
-            logbean.setTimeLogged(time);
-            logbean.setIsIn(true);
+            if ((alistout.size() - alistin.size() == 0)
+                    || (alistout.size() - alistin.size()) == 1) {
+                AttendanceLogBean logbean = new AttendanceLogBean();
+                logbean.setLog_tenantID(tenantid);
+                logbean.setTimeLogged(time);
+                logbean.setIsIn(true);
 
-            logdao.addAttendanceLogDAOInterface(logbean);
+                logdao.addAttendanceLogDAOInterface(logbean);
 
-            jTextField1.setText("");
+                jTextField1.setText("");
 
-            updateTable1();
+                updateTable1();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "You are not allowed to log in."); // di balance yung log in
+            }
+
         }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        // out
         int tenantid = Integer.parseInt(jTextField1.getText());
 
         TenantDAOImplementation tdao = new TenantDAOImplementation();
         TenantBean bean = new TenantBean();
         bean = tdao.getTenantById(tenantid);
+
+        ArrayList<AttendanceLogBean> alist = new ArrayList<AttendanceLogBean>();
+        ArrayList<AttendanceLogBean> alistout = new ArrayList<AttendanceLogBean>();
+        ArrayList<AttendanceLogBean> alistin = new ArrayList<AttendanceLogBean>();
+        alist = logdao.getAllAtendanceLogsByTenantID(tenantid);
+        alistout = logdao.getLatestLogoutByTenant(tenantid);
+        alistin = logdao.getLatestLoginByTenant(tenantid);
 
         if (bean.getFname() == null) {
             JOptionPane.showMessageDialog(null, "No tenant ID " + tenantid);
@@ -270,16 +279,23 @@ public class Logging extends javax.swing.JFrame {
             Calendar c = Calendar.getInstance();
             Timestamp time = new Timestamp(c.getTimeInMillis());
 
-            AttendanceLogBean logbean = new AttendanceLogBean();
-            logbean.setLog_tenantID(tenantid);
-            logbean.setTimeLogged(time);
-            logbean.setIsIn(false);
+            if ((alistout.size() - alistin.size() == 0)
+                    || (alistin.size() - alistout.size()) == 1) {
+                AttendanceLogBean logbean = new AttendanceLogBean();
+                logbean.setLog_tenantID(tenantid);
+                logbean.setTimeLogged(time);
+                logbean.setIsIn(false);
 
-            logdao.addAttendanceLogDAOInterface(logbean);
+                logdao.addAttendanceLogDAOInterface(logbean);
 
-            jTextField1.setText("");
+                jTextField1.setText("");
 
-            updateTable1();
+                updateTable1();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "You are not allowed to log out."); // di balance yung log in
+            }
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -297,16 +313,21 @@ public class Logging extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Logging.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Logging.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Logging.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Logging.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Logging.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Logging.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Logging.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Logging.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
