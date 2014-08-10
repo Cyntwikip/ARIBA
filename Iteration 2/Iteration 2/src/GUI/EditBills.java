@@ -368,10 +368,11 @@ public class EditBills extends javax.swing.JFrame {
             double price = Double.parseDouble(roomrent);
 
             priceperkw = Float.parseFloat(totalelectricitycost) / Float.parseFloat(totalelectricityconsumption);
-
             System.out.println(priceperkw);
+            
             pricepercubicmeter = Float.parseFloat(totalwatercost) / Float.parseFloat(totalwaterconsumption);
             System.out.println(pricepercubicmeter);
+            
             boolean paidRent = false;
             boolean paidWater = false;
             boolean paidElectric = false;
@@ -384,13 +385,13 @@ public class EditBills extends javax.swing.JFrame {
             ArrayList<RoomBean> rbeanlist = new ArrayList<RoomBean>();
             rbeanlist = rdao.getAllRooms();
             RoomBean rbean = new RoomBean();
+            
             ElectricReadingBean ebean = new ElectricReadingBean();
             WaterReadingBean wbean = new WaterReadingBean();
             ElectricReadingDAOInterface edao = new ElectricReadingDAOImplementation();
             WaterReadingDAOInterface wdao = new WaterDAOImplementation();
 
-            ArrayList<BillBean> bbeanlist = new ArrayList<BillBean>();
-            bbeanlist = bdao.getAllBills();
+            ArrayList<BillBean> bbeanlist = bdao.getAllBills();
             wbean.setPricepercubicmeter(pricepercubicmeter);
             ebean.setCurrentKW(priceperkw);
             java.sql.Date dateread = getDateRead();
@@ -402,6 +403,8 @@ public class EditBills extends javax.swing.JFrame {
             ebean.setPrice(0);
             for (int i = 0; i < rbeanlist.size(); i++) {
 
+                bbean = new BillBean();
+                
                 bbean.setBill_roomID(rbeanlist.get(i).getRoomID());
                 bbean.setPrice(price);
                 bbean.setPaidElectric(paidElectric);
@@ -413,8 +416,8 @@ public class EditBills extends javax.swing.JFrame {
                 } else {
                     addbill = false;
                 }
-                wdao.addWaterReadingToRoom(wbean, bbeanlist.size() + i);
-                edao.addElectricReadingToRoom(ebean, bbeanlist.size() + i);
+                wdao.addWaterReadingToRoom(wbean, i+1);
+                edao.addElectricReadingToRoom(ebean, i+1);
             }
 
             if (addbill) {
