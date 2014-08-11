@@ -75,6 +75,17 @@ public class EditBills extends javax.swing.JFrame {
         } else {
             jLabel2.setText("December " + year);
         }
+
+        ElectricReadingDAOInterface edao = new ElectricReadingDAOImplementation();
+        ArrayList<ElectricReadingBean> ebeanlist = edao.getAllElectricReading();
+        ElectricReadingBean ebean = new ElectricReadingBean();
+        if(ebeanlist.isEmpty()){
+            System.out.println("wala pa laman.");
+        }else{
+            ebean = ebeanlist.get(ebeanlist.size()-1);
+            
+   //         if(ebean.getDateRead().before(new java.sql.Date()) && new java.sql.Date().)
+        }
     }
 
     /**
@@ -369,10 +380,10 @@ public class EditBills extends javax.swing.JFrame {
 
             priceperkw = Float.parseFloat(totalelectricitycost) / Float.parseFloat(totalelectricityconsumption);
             System.out.println("Price per kw: " + priceperkw);
-            
+
             pricepercubicmeter = Float.parseFloat(totalwatercost) / Float.parseFloat(totalwaterconsumption);
             System.out.println(pricepercubicmeter);
-            
+
             boolean paidRent = false;
             boolean paidWater = false;
             boolean paidElectric = false;
@@ -385,7 +396,7 @@ public class EditBills extends javax.swing.JFrame {
             ArrayList<RoomBean> rbeanlist = new ArrayList<RoomBean>();
             rbeanlist = rdao.getAllRooms();
             RoomBean rbean = new RoomBean();
-            
+
             ElectricReadingBean ebean = new ElectricReadingBean();
             WaterReadingBean wbean = new WaterReadingBean();
             ElectricReadingDAOInterface edao = new ElectricReadingDAOImplementation();
@@ -404,7 +415,7 @@ public class EditBills extends javax.swing.JFrame {
             for (int i = 0; i < rbeanlist.size(); i++) {
 
                 bbean = new BillBean();
-                
+
                 bbean.setBill_roomID(rbeanlist.get(i).getRoomID());
                 bbean.setPrice(price);
                 bbean.setPaidElectric(paidElectric);
@@ -416,7 +427,7 @@ public class EditBills extends javax.swing.JFrame {
                 } else {
                     addbill = false;
                 }
-                int billID = bdao.getAllBills().size()-(rbeanlist.size());
+                int billID = bdao.getAllBills().size() - (rbeanlist.size());
                 System.out.println(billID);
                 wdao.addWaterReadingToRoom(wbean, billID);
                 edao.addElectricReadingToRoom(ebean, billID);
