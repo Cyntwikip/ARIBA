@@ -338,7 +338,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(60, 290, 180, 40);
+        jButton1.setBounds(60, 290, 170, 40);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/edittenantinformation.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -361,7 +361,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(NameField);
-        NameField.setBounds(110, 120, 130, 30);
+        NameField.setBounds(110, 130, 120, 20);
 
         SchoolField.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         SchoolField.addActionListener(new java.awt.event.ActionListener() {
@@ -375,7 +375,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(SchoolField);
-        SchoolField.setBounds(110, 150, 130, 30);
+        SchoolField.setBounds(110, 150, 120, 20);
 
         DegreeField.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         DegreeField.addActionListener(new java.awt.event.ActionListener() {
@@ -389,7 +389,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(DegreeField);
-        DegreeField.setBounds(110, 180, 130, 20);
+        DegreeField.setBounds(110, 170, 120, 20);
 
         buttonGroup1.add(MaleField);
         MaleField.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
@@ -411,7 +411,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(FemaleField);
-        FemaleField.setBounds(170, 210, 80, 30);
+        FemaleField.setBounds(160, 210, 80, 30);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -453,7 +453,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(CurrentField);
-        CurrentField.setBounds(110, 240, 63, 23);
+        CurrentField.setBounds(70, 360, 79, 23);
 
         buttonGroup2.add(OldField);
         OldField.setText("Old");
@@ -463,7 +463,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(OldField);
-        OldField.setBounds(180, 240, 41, 23);
+        OldField.setBounds(150, 360, 54, 23);
 
         YearOfGraduationField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -471,7 +471,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(YearOfGraduationField);
-        YearOfGraduationField.setBounds(180, 200, 70, 20);
+        YearOfGraduationField.setBounds(170, 190, 70, 27);
 
         jLabel2.setText("adress");
         getContentPane().add(jLabel2);
@@ -481,7 +481,6 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel3.setText("gender");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(600, 160, 180, 20);
-        jLabel3.getAccessibleContext().setAccessibleName("gender");
 
         guardianlname.setText("name");
         getContentPane().add(guardianlname);
@@ -495,7 +494,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         guardianfname.setText("fname");
         getContentPane().add(guardianfname);
-        guardianfname.setBounds(610, 300, 130, 14);
+        guardianfname.setBounds(610, 300, 130, 16);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tenanttab-peg-edited.png"))); // NOI18N
         getContentPane().add(jLabel1);
