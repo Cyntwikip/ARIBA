@@ -77,15 +77,23 @@ public class EditBills extends javax.swing.JFrame {
         }
 
         ElectricReadingDAOInterface edao = new ElectricReadingDAOImplementation();
-        ArrayList<ElectricReadingBean> ebeanlist = edao.getAllElectricReading();
         ElectricReadingBean ebean = new ElectricReadingBean();
+        ArrayList<RoomBean> rlist = new ArrayList<RoomBean>();
+        RoomDAOInterface rdao = new RoomDAOImplementation();
+        rlist = rdao.getAllRooms();
+        ArrayList<ElectricReadingBean> ebeanlist = edao.getAllElectricReadingforThisMonth(rlist.size());
+        ArrayList<BillBean> bbeanlist = new ArrayList<BillBean>();
+        BillDAOInterface bdao = new BillDAOImplementation();
+        bbeanlist = bdao.getAllBills();
         if (ebeanlist.isEmpty()) {
             System.out.println("wala pa laman.");
         } else {
-            ebean = ebeanlist.get(ebeanlist.size() - 1);
 
-            //         if(ebean.getDateRead().before(new java.sql.Date()) && new java.sql.Date().)
+            JOptionPane.showMessageDialog(null, "You are not allowed for you have already placed information"
+                    + " for the bills for the month of " + jLabel2.getText());
+                    
         }
+
     }
 
     /**
@@ -428,14 +436,14 @@ public class EditBills extends javax.swing.JFrame {
                     addbill = false;
                 }
                 int billID = 0;
-                if (rbeanlist.size() <= bdao.getAllBills().size()){ // mas malaki yung billsize{
-                
+                if (rbeanlist.size() <= bdao.getAllBills().size()) { // mas malaki yung billsize{
+
                     billID = bdao.getAllBills().size() - (rbeanlist.size());
-                    if(billID==0){
-                        billID=50;
+                    if (billID == 0) {
+                        billID = 50;
                     }
                 } else { // start pa lang
-                    billID = i+1;
+                    billID = i + 1;
                 }
 
                 System.out.println(billID);
