@@ -347,9 +347,9 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(720, 360, 30, 30);
+        jButton2.setBounds(710, 360, 30, 30);
 
-        NameField.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        NameField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         NameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NameFieldActionPerformed(evt);
@@ -361,7 +361,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(NameField);
-        NameField.setBounds(110, 130, 120, 20);
+        NameField.setBounds(110, 100, 120, 30);
 
         SchoolField.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         SchoolField.addActionListener(new java.awt.event.ActionListener() {
@@ -375,7 +375,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(SchoolField);
-        SchoolField.setBounds(110, 150, 120, 20);
+        SchoolField.setBounds(110, 130, 120, 30);
 
         DegreeField.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         DegreeField.addActionListener(new java.awt.event.ActionListener() {
@@ -389,7 +389,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(DegreeField);
-        DegreeField.setBounds(110, 170, 120, 20);
+        DegreeField.setBounds(110, 160, 120, 30);
 
         buttonGroup1.add(MaleField);
         MaleField.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
