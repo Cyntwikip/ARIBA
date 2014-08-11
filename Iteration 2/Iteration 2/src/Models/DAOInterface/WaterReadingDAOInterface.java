@@ -23,5 +23,6 @@ public interface WaterReadingDAOInterface {
     public boolean editWaterReadingByPrice(float price, int waterID);
     public boolean computeWaterReading(WaterReadingBean water, int billID);
     public WaterReadingBean getWaterReadingsByBillID(int billID);
+    public ArrayList<WaterReadingBean> getWaterReadingforThisMonth(int roomCount);
     
 }

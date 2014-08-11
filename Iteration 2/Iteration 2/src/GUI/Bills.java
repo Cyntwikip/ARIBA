@@ -121,10 +121,10 @@ public class Bills extends javax.swing.JFrame {
         ArrayList<RoomBean> rlist = rdao.getAllRooms();
         
         WaterDAOImplementation wdao = new WaterDAOImplementation();
-        //ArrayList<WaterReadingBean> wlist = wdao.getAllWaterReadingsByDate(sqldatefrom, sqldateto); //this month
+        ArrayList<WaterReadingBean> wlist = wdao.getWaterReadingforThisMonth(rlist.size()); //this month
         
         ElectricReadingDAOImplementation edao = new ElectricReadingDAOImplementation();
-        //ArrayList<ElectricReadingBean> elist = edao.getAllElectricReadingByDate(sqldatefrom, sqldateto); //this month
+        ArrayList<ElectricReadingBean> elist = edao.getAllElectricReadingforThisMonth(rlist.size()); //this month
         
         BillDAOImplementation bdao = new BillDAOImplementation();
         ArrayList<BillBean> blist = bdao.getAllBills();
@@ -133,16 +133,16 @@ public class Bills extends javax.swing.JFrame {
         double rentprice, total=0;
         
         for(int i=0; i<rlist.size(); i++) {
-            //waterprice = wlist.get(i).getPrice();
-            //electricprice = elist.get(i).getPrice();
+            waterprice = wlist.get(i).getPrice();
+            electricprice = elist.get(i).getPrice();
             rentprice = blist.get(i).getPrice();
-            //total = waterprice + electricprice + rentprice;
+            total = waterprice + electricprice + rentprice;
             if(blist.get(i).getPaidWater() == false || blist.get(i).getpaidElectric() == false || blist.get(i).getpaidRent() == false) {
-                Object[] obj = {rlist.get(i).getRoomID(), rentprice, "UNPAID"};
+                Object[] obj = {rlist.get(i).getRoomID(), total, "UNPAID"};
                 model.addRow(obj);
             }
             else {
-                Object[] obj = {rlist.get(i).getRoomID(), rentprice, "PAID"};
+                Object[] obj = {rlist.get(i).getRoomID(), total, "PAID"};
                 model.addRow(obj);
             }
             

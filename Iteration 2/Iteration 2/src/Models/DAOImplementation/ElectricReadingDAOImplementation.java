@@ -221,4 +221,45 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
         }
         return null;
     }
+
+    @Override
+    public ArrayList<ElectricReadingBean> getAllElectricReadingforThisMonth(int roomCount) {
+         try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from electricreading where dateRead >= (NOW() - INTERVAL 1 MONTH) order by electric_billID DESC limit " + roomCount;
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+
+            ElectricReadingBean bean = new ElectricReadingBean();
+            ArrayList<ElectricReadingBean> list = new ArrayList<ElectricReadingBean>();
+
+            int electric_billID;
+            float currentKW, priceperKW, price;
+            Date dateRead;
+
+            while (resultSet.next()) {
+                electric_billID = resultSet.getInt("electric_billID");
+                currentKW = resultSet.getFloat("currentKW");
+                priceperKW = resultSet.getFloat("priceperKW");
+                price = resultSet.getFloat("price");
+                dateRead = resultSet.getDate("dateRead");
+
+                bean = new ElectricReadingBean();
+
+                bean.setCurrentKW(currentKW);
+                bean.setDateRead(dateRead);
+                bean.setElectric_billID(electric_billID);
+                bean.setPrice(price);
+                bean.setPriceperKW(priceperKW);
+
+                list.add(bean);
+            }
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
 }
