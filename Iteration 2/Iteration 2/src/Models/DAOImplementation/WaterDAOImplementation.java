@@ -25,13 +25,13 @@ import java.util.logging.Logger;
 public class WaterDAOImplementation implements WaterReadingDAOInterface {
 
     @Override
-    public boolean addWaterReadingToRoom(WaterReadingBean water, int bill_roomID) {
+    public boolean addWaterReadingToRoom(WaterReadingBean water, int billID) {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
             String query = "insert into waterreading (water_billID, currentcubicpermeter, pricepercubicmeter, price, dateRead) values (?, ?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, bill_roomID);
+            ps.setInt(1, billID);
             ps.setFloat(2, water.getCurrentcubicmeter());
             ps.setFloat(3, water.getPricepercubicmeter());
             ps.setFloat(4, water.getPrice());

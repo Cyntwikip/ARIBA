@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public interface WaterReadingDAOInterface {
     
-    public boolean addWaterReadingToRoom (WaterReadingBean water, int bill_roomID);
+    public boolean addWaterReadingToRoom (WaterReadingBean water, int roomID);
     public ArrayList<WaterReadingBean> getAllWaterBills();
     public ArrayList<WaterReadingBean> getAllWaterReadingsByDate(Date from, Date to);
     public boolean editWaterReading(WaterReadingBean water, int waterID);

@@ -24,14 +24,14 @@ import java.util.logging.Logger;
 public class ElectricReadingDAOImplementation implements ElectricReadingDAOInterface {
 
     @Override
-    public boolean addElectricReadingToRoom(ElectricReadingBean electric, int bill_roomID) {
+    public boolean addElectricReadingToRoom(ElectricReadingBean electric, int billID) {
 
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "insert into electricreading (electric_billID, currentKW, priceperKW, price, dateRead) values (?, ?, ?, ?, ?)";
+            String query = "insert into electricreading (electric_billID, currentKW, priceperKW, price, dateRead) values ( ?, ?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, bill_roomID);
+            ps.setInt(1, billID);
             ps.setFloat(2, electric.getCurrentKW());
             ps.setFloat(3, electric.getPriceperKW());
             ps.setFloat(4, electric.getPrice());

@@ -416,8 +416,10 @@ public class EditBills extends javax.swing.JFrame {
                 } else {
                     addbill = false;
                 }
-                wdao.addWaterReadingToRoom(wbean, i+1);
-                edao.addElectricReadingToRoom(ebean, i+1);
+                int billID = bdao.getAllBills().size()-(rbeanlist.size());
+                System.out.println(billID);
+                wdao.addWaterReadingToRoom(wbean, billID);
+                edao.addElectricReadingToRoom(ebean, billID);
             }
 
             if (addbill) {
