@@ -29,5 +29,6 @@ public interface BillDAOInterface {
     public ArrayList<BillBean> getAllNotPaidRoomsByWater();
     public ArrayList<BillBean> getAllNotPaidRoomsByRent();
     public ArrayList<BillBean> getAllNotPaidRoomsByElectric();
+    public ArrayList<BillBean> getAllNotPaidAll(int roomCount);
     
 }

@@ -444,7 +444,7 @@ public class BillDAOImplementation implements BillDAOInterface {
             int billID, bill_roomID;
             double price;
             boolean paidRent, paidWater, paidElectric;
-            
+
             while (resultSet.next()) {
                 billID = resultSet.getInt("billID");
                 bill_roomID = resultSet.getInt("bill_roomID");
@@ -467,6 +467,51 @@ public class BillDAOImplementation implements BillDAOInterface {
         }
 
         return null;
+
+    }
+
+    @Override
+    public ArrayList<BillBean> getAllNotPaidAll(int roomCount) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from bill where paidElectric = 0 and paidWater=0 and paidRent=0 order by billID desc limit " + roomCount;
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+
+            BillBean bean = new BillBean();
+            ArrayList<BillBean> list = new ArrayList<BillBean>();
+
+            int billID, bill_roomID;
+            double price;
+            boolean paidRent, paidWater, paidElectric;
+
+            while (resultSet.next()) {
+                billID = resultSet.getInt("billID");
+                bill_roomID = resultSet.getInt("bill_roomID");
+                price = resultSet.getDouble("price");
+                paidRent = resultSet.getBoolean("paidRent");
+                paidWater = resultSet.getBoolean("paidWater");
+                paidElectric = resultSet.getBoolean("paidElectric");
+
+                bean = new BillBean();
+
+                bean.setBillID(billID);
+                bean.setBill_roomID(bill_roomID);
+                bean.setPaidElectric(paidElectric);
+                bean.setPaidRent(paidRent);
+                bean.setPaidWater(paidWater);
+                bean.setPrice(price);
+
+                list.add(bean);
+            }
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+
 
     }
 

@@ -189,7 +189,7 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from waterreading where water_billID =" + billID +  " order by water_billID desc";
+            String query = "select * from waterreading where water_billID =" + billID + " order by water_billID desc";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
 
@@ -219,6 +219,48 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
             Logger.getLogger(ElectricReadingDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    @Override
+    public ArrayList<WaterReadingBean> getWaterReadingforThisMonth(int roomCount) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from waterreading where dateRead >= (NOW() - INTERVAL 1 MONTH) order by water_billID DESC limit " + roomCount;
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+
+            WaterReadingBean bean = new WaterReadingBean();
+            ArrayList<WaterReadingBean> list = new ArrayList<WaterReadingBean>();
+
+            int water_billID;
+            float currentcubicpermeter, pricepercubicmeter, price;
+            Date dateRead;
+
+            while (resultSet.next()) {
+                water_billID = resultSet.getInt("water_billID");
+                currentcubicpermeter = resultSet.getFloat("currentcubicpermeter");
+                pricepercubicmeter = resultSet.getFloat("pricepercubicmeter");
+                price = resultSet.getFloat("price");
+                dateRead = resultSet.getDate("dateRead");
+
+                bean = new WaterReadingBean();
+
+                bean.setCurrentcubicmeter(currentcubicpermeter);
+                bean.setDateRead(dateRead);
+                bean.setWater_billID(water_billID);
+                bean.setPrice(price);
+                bean.setPricepercubicmeter(pricepercubicmeter);
+
+                list.add(bean);
+            }
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+
     }
 
 }
