@@ -101,7 +101,10 @@ public class Bills extends javax.swing.JFrame {
     
     public void roomtable() {
         model = (DefaultTableModel) jTable1.getModel();
-         
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+        
+        /*
         Calendar datefrom = Calendar.getInstance();
         datefrom.set(Calendar.DAY_OF_MONTH, 1);
         
@@ -109,21 +112,19 @@ public class Bills extends javax.swing.JFrame {
         int lastday = dateto.getActualMaximum(Calendar.DAY_OF_MONTH);
         dateto.set(Calendar.DAY_OF_MONTH, lastday);
         
-        java.sql.Date sqldatefrom = new java.sql.Date(datefrom.getTimeInMillis());
-        java.sql.Date sqldateto = new java.sql.Date(dateto.getTimeInMillis());
+        //java.sql.Date sqldatefrom = new java.sql.Date(datefrom.getTimeInMillis());
+        //java.sql.Date sqldateto = new java.sql.Date(dateto.getTimeInMillis());
         
-        System.out.println(sqldatefrom.getTime());
-        System.out.println(sqldateto.getTime());
+        */
         
-        /*
         RoomDAOImplementation rdao = new RoomDAOImplementation();
         ArrayList<RoomBean> rlist = rdao.getAllRooms();
         
         WaterDAOImplementation wdao = new WaterDAOImplementation();
-        ArrayList<WaterReadingBean> wlist = wdao.getAllWaterReadingsByDate(sqldatefrom, sqldateto); //this month
+        //ArrayList<WaterReadingBean> wlist = wdao.getAllWaterReadingsByDate(sqldatefrom, sqldateto); //this month
         
         ElectricReadingDAOImplementation edao = new ElectricReadingDAOImplementation();
-        ArrayList<ElectricReadingBean> elist = edao.getAllElectricReadingByDate(sqldatefrom, sqldateto); //this month
+        //ArrayList<ElectricReadingBean> elist = edao.getAllElectricReadingByDate(sqldatefrom, sqldateto); //this month
         
         BillDAOImplementation bdao = new BillDAOImplementation();
         ArrayList<BillBean> blist = bdao.getAllBills();
@@ -132,21 +133,20 @@ public class Bills extends javax.swing.JFrame {
         double rentprice, total=0;
         
         for(int i=0; i<rlist.size(); i++) {
-            waterprice = wlist.get(i).getPrice();
-            electricprice = elist.get(i).getPrice();
+            //waterprice = wlist.get(i).getPrice();
+            //electricprice = elist.get(i).getPrice();
             rentprice = blist.get(i).getPrice();
-            total = waterprice + electricprice + rentprice;
+            //total = waterprice + electricprice + rentprice;
             if(blist.get(i).getPaidWater() == false || blist.get(i).getpaidElectric() == false || blist.get(i).getpaidRent() == false) {
-                Object[] obj = {rlist.get(i).getRoomID(), total, "PAID"};
+                Object[] obj = {rlist.get(i).getRoomID(), rentprice, "UNPAID"};
                 model.addRow(obj);
             }
             else {
-                Object[] obj = {rlist.get(i).getRoomID(), total, "PAID"};
+                Object[] obj = {rlist.get(i).getRoomID(), rentprice, "PAID"};
                 model.addRow(obj);
             }
             
         }
-        */
     }
     /**
      * This method is called from within the constructor to initialize the form.
