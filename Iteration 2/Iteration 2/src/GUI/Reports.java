@@ -5,11 +5,17 @@
  */
 package GUI;
 
+import Models.Beans.BillBean;
 import Models.Beans.ContractBean;
+import Models.Beans.RoomBean;
 import Models.Beans.TenantBean;
+import Models.DAOImplementation.BillDAOImplementation;
 import Models.DAOImplementation.ContractDAOImplementation;
+import Models.DAOImplementation.RoomDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
+import Models.DAOInterface.BillDAOInterface;
 import Models.DAOInterface.ContractDAOInterface;
+import Models.DAOInterface.RoomDAOInterface;
 import Models.DAOInterface.TenantDAOInterface;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -70,6 +76,11 @@ public class Reports extends javax.swing.JFrame {
         jButton1.setBounds(70, 170, 190, 40);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/unpaidtenants.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2);
         jButton2.setBounds(70, 220, 190, 40);
 
@@ -121,7 +132,7 @@ public class Reports extends javax.swing.JFrame {
 
         model.getDataVector().removeAllElements();
         model.fireTableDataChanged();
-        
+
         JTableHeader th = jTable1.getTableHeader();
         TableColumnModel tcm = th.getColumnModel();
         TableColumn tc = tcm.getColumn(0);
@@ -191,6 +202,57 @@ public class Reports extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+
+        JTableHeader th = jTable1.getTableHeader();
+        TableColumnModel tcm = th.getColumnModel();
+        TableColumn tc = tcm.getColumn(0);
+        tc.setHeaderValue("Tenant ID");
+        tc = tcm.getColumn(1);
+        tc.setHeaderValue("Lastname");
+        tc = tcm.getColumn(2);
+        tc.setHeaderValue("Firstname");
+        tc = tcm.getColumn(3);
+        tc.setHeaderValue("Amount");
+        th.repaint();
+        ArrayList<BillBean> bbeanlist = new ArrayList<BillBean>();
+        BillBean bbean = new BillBean();
+        BillDAOInterface bdao = new BillDAOImplementation();
+
+        ArrayList<RoomBean> rbeanlist = new ArrayList<RoomBean>();
+        RoomBean rbean = new RoomBean();
+        RoomDAOInterface rdao = new RoomDAOImplementation();
+        rbeanlist = rdao.getAllRooms();
+
+        ArrayList<TenantBean> tbeanlist = new ArrayList<TenantBean>();
+        TenantBean tbean = new TenantBean();
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+
+        bbeanlist = bdao.getAllNotPaidAll(rbeanlist.size());
+        System.out.println(bbeanlist.size());
+
+        int roomID;
+        for (int i = 0; i < bbeanlist.size(); i++) {
+            roomID = bbeanlist.get(i).getBill_roomID(); // current room ID
+
+            tbeanlist = tdao.getTenantByRoomID(roomID);
+
+            for (int j = 0; j < tbeanlist.size(); j++) {
+                tbean = tbeanlist.get(j);
+                double amount = bbeanlist.get(i).getPrice();
+                String fname = tbean.getFname();
+                String lname = tbean.getLname();
+
+                Object[] obj = {roomID, lname, fname, amount};
+                model.addRow(obj);
+            }
+
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
