@@ -79,12 +79,12 @@ public class EditBills extends javax.swing.JFrame {
         ElectricReadingDAOInterface edao = new ElectricReadingDAOImplementation();
         ArrayList<ElectricReadingBean> ebeanlist = edao.getAllElectricReading();
         ElectricReadingBean ebean = new ElectricReadingBean();
-        if(ebeanlist.isEmpty()){
+        if (ebeanlist.isEmpty()) {
             System.out.println("wala pa laman.");
-        }else{
-            ebean = ebeanlist.get(ebeanlist.size()-1);
-            
-   //         if(ebean.getDateRead().before(new java.sql.Date()) && new java.sql.Date().)
+        } else {
+            ebean = ebeanlist.get(ebeanlist.size() - 1);
+
+            //         if(ebean.getDateRead().before(new java.sql.Date()) && new java.sql.Date().)
         }
     }
 
@@ -427,8 +427,20 @@ public class EditBills extends javax.swing.JFrame {
                 } else {
                     addbill = false;
                 }
-                int billID = bdao.getAllBills().size() - (rbeanlist.size());
+                int billID = 0;
+                if (rbeanlist.size() <= bdao.getAllBills().size()){ // mas malaki yung billsize{
+                
+                    billID = bdao.getAllBills().size() - (rbeanlist.size());
+                    if(billID==0){
+                        billID=50;
+                    }
+                } else { // start pa lang
+                    billID = i+1;
+                }
+
                 System.out.println(billID);
+                wbean.setWater_billID(billID);
+                ebean.setElectric_billID(billID);
                 wdao.addWaterReadingToRoom(wbean, billID);
                 edao.addElectricReadingToRoom(ebean, billID);
             }
@@ -441,7 +453,8 @@ public class EditBills extends javax.swing.JFrame {
 
         }
 
-        this.setVisible(false);
+        this.setVisible(
+                false);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -470,8 +483,10 @@ public class EditBills extends javax.swing.JFrame {
 
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
             return sqlDate;
+
         } catch (ParseException ex) {
-            Logger.getLogger(Bills.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Bills.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return null;
 
@@ -491,16 +506,21 @@ public class EditBills extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditBills.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditBills.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditBills.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditBills.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditBills.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditBills.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditBills.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditBills.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
