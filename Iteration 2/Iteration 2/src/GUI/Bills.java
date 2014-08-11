@@ -90,7 +90,7 @@ public class Bills extends javax.swing.JFrame {
 
     public void roomlist() {
         jComboBox1.removeAllItems();
-        
+
         ArrayList<RoomBean> rbean = new ArrayList<RoomBean>();
         rbean = rdao.getAllRooms();
 
@@ -98,56 +98,60 @@ public class Bills extends javax.swing.JFrame {
             jComboBox1.addItem(rbean.get(i).getRoomID());
         }
     }
-    
+
     public void roomtable() {
         model = (DefaultTableModel) jTable1.getModel();
         model.getDataVector().removeAllElements();
         model.fireTableDataChanged();
-        
+
         /*
-        Calendar datefrom = Calendar.getInstance();
-        datefrom.set(Calendar.DAY_OF_MONTH, 1);
+         Calendar datefrom = Calendar.getInstance();
+         datefrom.set(Calendar.DAY_OF_MONTH, 1);
         
-        Calendar dateto = Calendar.getInstance();
-        int lastday = dateto.getActualMaximum(Calendar.DAY_OF_MONTH);
-        dateto.set(Calendar.DAY_OF_MONTH, lastday);
+         Calendar dateto = Calendar.getInstance();
+         int lastday = dateto.getActualMaximum(Calendar.DAY_OF_MONTH);
+         dateto.set(Calendar.DAY_OF_MONTH, lastday);
         
-        //java.sql.Date sqldatefrom = new java.sql.Date(datefrom.getTimeInMillis());
-        //java.sql.Date sqldateto = new java.sql.Date(dateto.getTimeInMillis());
+         //java.sql.Date sqldatefrom = new java.sql.Date(datefrom.getTimeInMillis());
+         //java.sql.Date sqldateto = new java.sql.Date(dateto.getTimeInMillis());
         
-        */
-        
+         */
         RoomDAOImplementation rdao = new RoomDAOImplementation();
         ArrayList<RoomBean> rlist = rdao.getAllRooms();
-        
+
         WaterDAOImplementation wdao = new WaterDAOImplementation();
         ArrayList<WaterReadingBean> wlist = wdao.getWaterReadingforThisMonth(rlist.size()); //this month
-        
+
         ElectricReadingDAOImplementation edao = new ElectricReadingDAOImplementation();
         ArrayList<ElectricReadingBean> elist = edao.getAllElectricReadingforThisMonth(rlist.size()); //this month
-        
+
         BillDAOImplementation bdao = new BillDAOImplementation();
         ArrayList<BillBean> blist = bdao.getAllBills();
-        
+
         float waterprice, electricprice;
-        double rentprice, total=0;
-        
-        for(int i=0; i<rlist.size(); i++) {
-            waterprice = wlist.get(i).getPrice();
-            electricprice = elist.get(i).getPrice();
-            rentprice = blist.get(i).getPrice();
-            total = waterprice + electricprice + rentprice;
-            if(blist.get(i).getPaidWater() == false || blist.get(i).getpaidElectric() == false || blist.get(i).getpaidRent() == false) {
+        double rentprice, total = 0;
+
+        for (int i = 0; i < rlist.size(); i++) {
+
+            if (blist.get(i).getPaidWater() == false || blist.get(i).getpaidElectric() == false || blist.get(i).getpaidRent() == false) {
                 Object[] obj = {rlist.get(i).getRoomID(), total, "UNPAID"};
                 model.addRow(obj);
-            }
-            else {
+            } else if (wlist.isEmpty() && elist.isEmpty() && blist.isEmpty()) {
+                Object[] obj = {rlist.get(i).getRoomID(), 0, "UNPAID"};
+                model.addRow(obj);
+
+            } else {
+                waterprice = wlist.get(i).getPrice();
+                electricprice = elist.get(i).getPrice();
+                rentprice = blist.get(i).getPrice();
+                total = waterprice + electricprice + rentprice;
                 Object[] obj = {rlist.get(i).getRoomID(), total, "PAID"};
                 model.addRow(obj);
             }
-            
+
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -336,7 +340,7 @@ public class Bills extends javax.swing.JFrame {
     public java.sql.Date initializedate() {
 
         initdate();
-        
+
         String testDate = year + "-" + month;
         DateFormat df = new SimpleDateFormat("yyyy-MM");
         java.util.Date date;
