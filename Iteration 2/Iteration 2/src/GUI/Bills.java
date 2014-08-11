@@ -109,6 +109,7 @@ public class Bills extends javax.swing.JFrame {
 
         BillDAOImplementation bdao = new BillDAOImplementation();
         ArrayList<BillBean> blist = bdao.getAllBills();
+        BillBean bbean = new BillBean();
 
         if (blist.isEmpty()) {
             System.out.println("EMPTY");
@@ -116,20 +117,30 @@ public class Bills extends javax.swing.JFrame {
 
             WaterDAOImplementation wdao = new WaterDAOImplementation();
             ArrayList<WaterReadingBean> wlist = wdao.getWaterReadingforThisMonth(rlist.size()); //this month
+            WaterReadingBean wbean = new WaterReadingBean();
 
             ElectricReadingDAOImplementation edao = new ElectricReadingDAOImplementation();
             ArrayList<ElectricReadingBean> elist = edao.getAllElectricReadingforThisMonth(rlist.size()); //this month
+            ElectricReadingBean ebean = new ElectricReadingBean();
 
             float waterprice, electricprice;
             double rentprice, total = 0;
+            int billID = 0;
 
             for (int i = 0; i < rlist.size(); i++) {
+                // bbean = bdao.getBillsByRoomID(i);
+                billID = blist.get(i).getBillID();
+                System.out.println(billID);
                 if (wlist.isEmpty() && elist.isEmpty() && blist.isEmpty()) {
                     Object[] obj = {rlist.get(i).getRoomID(), 0, "UNPAID"};
                     model.addRow(obj);
 
                 } else if (blist.get(i).getPaidWater() == false || blist.get(i).getpaidElectric() == false || blist.get(i).getpaidRent() == false) {
-                    Object[] obj = {rlist.get(i).getRoomID(), total, "UNPAID"};
+                    ebean = edao.getElectricReadingByBillID(billID);
+                    wbean = wdao.getWaterReadingsByBillID(billID);
+
+                    total = blist.get(i).getPrice()+ ebean.getPrice() + wbean.getPrice();
+                            Object[] obj = {rlist.get(i).getRoomID(), total, "UNPAID"};
                     model.addRow(obj);
                 } else {
                     waterprice = wlist.get(i).getPrice();
@@ -319,10 +330,11 @@ public class Bills extends javax.swing.JFrame {
             waterprice = currentcubicmeter * wbean.getPricepercubicmeter();
             wbean.setPrice(waterprice);
 
-            //  edao.editElectricReading(ebean, bbean.getBillID());
-            //wdao.editWaterReading(wbean, bbean.getBillID());
+            edao.editElectricReading(ebean, bbean.getBillID());
+            wdao.editWaterReading(wbean, bbean.getBillID());
             if (edao.editElectricReading(ebean, bbean.getBillID()) && wdao.editWaterReading(wbean, bbean.getBillID())) {
                 JOptionPane.showMessageDialog(null, "Successfully added water and electric bill for room " + roomID);
+                roomtable();
             } else {
                 JOptionPane.showMessageDialog(null, "Not successful in adding water and electric bill for room " + roomID);
             }

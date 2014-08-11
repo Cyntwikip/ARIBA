@@ -89,8 +89,6 @@ public class EditBills extends javax.swing.JFrame {
             System.out.println("wala pa laman.");
         } else {
 
-            JOptionPane.showMessageDialog(null, "You are not allowed for you have already placed information"
-                    + " for the bills for the month of " + jLabel2.getText());
                     
         }
 

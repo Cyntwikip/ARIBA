@@ -54,7 +54,7 @@ public class BillDAOImplementation implements BillDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from bill";
+            String query = "select * from bill order by billID desc";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
 
