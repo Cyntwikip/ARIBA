@@ -48,13 +48,13 @@ public class AddTenant extends javax.swing.JFrame {
     /**
      * Creates new form AddTenant
      */
-    private int tenantID = 0;
-    private int guardianID = 0;
+    private int tenantID;
+    private int guardID;
     private boolean flag = false;
-    private TenantDAOInterface tdao = new TenantDAOImplementation();
-    private TenantBean bean = new TenantBean();
     private TenantDAOImplementation tenantImpl = new TenantDAOImplementation();
     private TenantBean tenant = new TenantBean();
+    private GuardianBean guard = new GuardianBean();
+    private GuardianDAOImplementation guardImpl = new GuardianDAOImplementation();
     private ImageIcon icon;
 
     public AddTenant() {
@@ -78,26 +78,11 @@ public class AddTenant extends javax.swing.JFrame {
             YearOfGraduationField.addItem(i);
         }
 
-        File ff = new File("Woman.jpg");
-        ff = ff.getAbsoluteFile();
-        File fm = new File("Man.jpg");
-        fm = fm.getAbsoluteFile();
-
-        if (MaleField.isSelected()) {
-            icon = new ImageIcon(fm.getAbsolutePath());
-            tenant.setImage(fm.getAbsolutePath());
-        } else {
-            icon = new ImageIcon(ff.getAbsolutePath());
-            tenant.setImage(ff.getAbsolutePath());
-        }
-
     }
 
     public AddTenant(int id) {
-        tenantID = id;
-        TenantDAOInterface tdao = new TenantDAOImplementation();
-        TenantBean tb = new TenantBean();
-        tb = tdao.getTenantById(tenantID);
+        tenant = tenantImpl.getTenantById(id);
+        tenantID = tenant.getTenantID();
         initComponents();
 
         int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -117,38 +102,33 @@ public class AddTenant extends javax.swing.JFrame {
             YearOfGraduationField.addItem(i);
         }
 
-        SurnameField.setText(tb.getLname());
-        FirstnameField.setText(tb.getFname());
-        // birthday;
-        AddressField.setText(tb.getAddress());
-        if (tb.getGender().equalsIgnoreCase("Male")) {
+        SurnameField.setText(tenant.getLname());
+        FirstnameField.setText(tenant.getFname());
+        AddressField.setText(tenant.getAddress());
+        if (tenant.getGender().equalsIgnoreCase("Male")) {
             MaleField.doClick();
         } else {
             FemaleField.doClick();
         }
-        ContactNumberField1.setText(tb.getContact());
-        EmailAddressField.setText(tb.getEmail());
-        SchoolField.setText(tb.getSchool());
-        DegreeField.setText(tb.getDegree());
-        YearOfGraduationField.setSelectedItem(tb.getExpectedyearofgrad());
+        ContactNumberField1.setText(tenant.getContact());
+        EmailAddressField.setText(tenant.getEmail());
+        SchoolField.setText(tenant.getSchool());
+        DegreeField.setText(tenant.getDegree());
+        YearOfGraduationField.setSelectedItem(tenant.getExpectedyearofgrad());
 
-        //   imgaddLabel.setIcon(tb.getImage());
         // guardian part
-        GuardianDAOInterface gdao = new GuardianDAOImplementation();
-        GuardianBean gbean = new GuardianBean();
+        guard = guardImpl.getGuardianByTenantID(id);
+        guardID = guard.getGuardianID();
 
-        gbean = gdao.getGuardianByTenantID(tenantID);
-
-        guardianID = gbean.getGuardianID();
-        GuardianFirstnameField.setText(gbean.getFname());
-        GuardianSurnameField.setText(gbean.getLname());
-        GuardianContactField.setText(gbean.getContact());
-        GuardianEmailField.setText(gbean.getEmail());
+        GuardianFirstnameField.setText(guard.getFname());
+        GuardianSurnameField.setText(guard.getLname());
+        GuardianContactField.setText(guard.getContact());
+        GuardianEmailField.setText(guard.getEmail());
 
         byte[] content = null;
-        if (tb.getBlobimage() != null) {
+        if (tenant.getBlobimage() != null) {
             try {
-                content = tb.getBlobimage().getBytes(1L, (int) tb.getBlobimage().length());
+                content = tenant.getBlobimage().getBytes(1L, (int) tenant.getBlobimage().length());
             } catch (SQLException ex) {
                 Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -159,21 +139,25 @@ public class AddTenant extends javax.swing.JFrame {
             imgaddLabel.setIcon(icon);
         }
 
+        //get birthday month
         for (int i = 0; i < MonthField.getItemCount(); i++) {
-            if (MonthField.getItemAt(i).equals(new SimpleDateFormat("MMM").format(tb.getBirthday()))) {
+            if (MonthField.getItemAt(i).equals(new SimpleDateFormat("MMM").format(tenant.getBirthday()))) {
                 MonthField.setSelectedIndex(id);
                 break;
             }
         }
 
+        //get birthday day
         for (int i = 0; i < DayField.getItemCount(); i++) {
-            if (DayField.getItemAt(i).equals(new SimpleDateFormat("d").format(tb.getBirthday()))) {
+            if (DayField.getItemAt(i).equals(new SimpleDateFormat("d").format(tenant.getBirthday()))) {
                 DayField.setSelectedIndex(i);
                 break;
             }
         }
+
+        //get birthday year
         SimpleDateFormat yr = new SimpleDateFormat("yyyy");
-        String c = yr.format(tb.getBirthday());
+        String c = yr.format(tenant.getBirthday());
         for (int i = 0; i < YearField.getItemCount(); i++) {
             if ((int) YearField.getItemAt(i) == Integer.parseInt(c)) {
                 YearField.setSelectedIndex(i);
@@ -234,22 +218,22 @@ public class AddTenant extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        SurnameField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                SurnameFieldFocusLost(evt);
-            }
-        });
         SurnameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SurnameFieldActionPerformed(evt);
             }
         });
-        SurnameField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                SurnameFieldKeyReleased(evt);
+        SurnameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                SurnameFieldFocusLost(evt);
             }
+        });
+        SurnameField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 SurnameFieldKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                SurnameFieldKeyReleased(evt);
             }
         });
         getContentPane().add(SurnameField);
@@ -261,11 +245,11 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         FirstnameField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                FirstnameFieldKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 FirstnameFieldKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                FirstnameFieldKeyReleased(evt);
             }
         });
         getContentPane().add(FirstnameField);
@@ -278,7 +262,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(MonthField);
-        MonthField.setBounds(350, 160, 60, 20);
+        MonthField.setBounds(350, 160, 60, 27);
 
         DayField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         DayField.addActionListener(new java.awt.event.ActionListener() {
@@ -287,7 +271,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(DayField);
-        DayField.setBounds(410, 160, 50, 20);
+        DayField.setBounds(410, 160, 50, 27);
 
         YearField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -295,7 +279,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(YearField);
-        YearField.setBounds(460, 160, 70, 20);
+        YearField.setBounds(460, 160, 70, 27);
 
         SchoolField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -303,11 +287,11 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         SchoolField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                SchoolFieldKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 SchoolFieldKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                SchoolFieldKeyReleased(evt);
             }
         });
         getContentPane().add(SchoolField);
@@ -470,17 +454,17 @@ public class AddTenant extends javax.swing.JFrame {
         getContentPane().add(jButton3);
         jButton3.setBounds(630, 360, 80, 40);
 
+        ContactNumberField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ContactNumberField1ActionPerformed(evt);
+            }
+        });
         ContactNumberField1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 ContactNumberField1FocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 ContactNumberField1FocusLost(evt);
-            }
-        });
-        ContactNumberField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ContactNumberField1ActionPerformed(evt);
             }
         });
         ContactNumberField1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -571,7 +555,7 @@ public class AddTenant extends javax.swing.JFrame {
     }//GEN-LAST:event_YearOfGraduationFieldActionPerformed
 
     private void SurnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SurnameFieldActionPerformed
-        
+
     }//GEN-LAST:event_SurnameFieldActionPerformed
 
     private void FemaleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FemaleFieldActionPerformed
@@ -613,213 +597,136 @@ public class AddTenant extends javax.swing.JFrame {
     }//GEN-LAST:event_GuardianSurnameFieldActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
 
-        //Edit Tenant
-        if (!flag) {
-            CheckAccount c = new CheckAccount();
-            if (FirstnameField.getText().isEmpty()
-                    || SurnameField.getText().isEmpty()
-                    || ContactNumberField1.getText().isEmpty()
-                    || AddressField.getText().isEmpty()
-                    || DegreeField.getText().isEmpty()
-                    || EmailAddressField.getText().isEmpty()
-                    || SchoolField.getText().isEmpty()) {
+        /*    */
+        CheckAccount c = new CheckAccount();
+        boolean tflag = false;
+        String fname = FirstnameField.getText();
+        String lname = SurnameField.getText();
+        String degree = DegreeField.getText();
+        String school = SchoolField.getText();
+        String email = EmailAddressField.getText();
+        String contact = ContactNumberField1.getText();
+        String address = AddressField.getText();
+        //converting string to Calendar
+        String sDate = MonthField.getSelectedItem().toString() + " " + DayField.getSelectedItem().toString() + ", " + YearField.getSelectedItem().toString();
+        Calendar birthdate = Calendar.getInstance();
+        DateFormat df = new SimpleDateFormat("MMMM d, yyyy");
+        try {
+            birthdate.setTime(df.parse(sDate));
+        } catch (ParseException ex) {
+            Logger.getLogger(AddTenant.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //converting Calendar to sql Date
+        java.sql.Date sqlBirthdate = new java.sql.Date(birthdate.getTime().getTime());
 
-                JOptionPane.showMessageDialog(null, "Please fill up ALL the fields.");
-            } else {
-                try {
-                    c.checkName(FirstnameField.getText(), "Firstname");
-                    c.checkName(SurnameField.getText(), "Lastname");
-                    c.checkName(DegreeField.getText(), "Degree");
-                    c.checkName(SchoolField.getText(), "School");
-                    c.checkEmail(EmailAddressField.getText(), "Email");
-                    c.checkContact(ContactNumberField1.getText(), "Contact");
-                    c.checkName(GuardianFirstnameField.getText(), "Firstname");
-                    c.checkName(GuardianSurnameField.getText(), "Lastname");
-                    c.checkEmail(GuardianEmailField.getText(), "Email");
-                    c.checkContact(GuardianContactField.getText(), "Contact");
+        String gender;
+        try {
+            gender = buttonGroup1.getSelection().getActionCommand();
+        } catch (NullPointerException n) {
+            gender = "";
+        }
+        int gradyear = (int) YearOfGraduationField.getSelectedItem();
 
-                    System.out.println("Tenant ID: " + tenantID);
-                    if (tenantID == 0) { // add tenant
-
-                    } else { // edit
-
-                        bean.setFname(FirstnameField.getText().toUpperCase());
-                        bean.setLname(SurnameField.getText().toUpperCase());
-                        bean.setAddress(AddressField.getText().toUpperCase());
-                        bean.setContact(ContactNumberField1.getText());
-
-                        //converting string to Calendar
-                        String sDate = MonthField.getSelectedItem().toString() + " " + DayField.getSelectedItem().toString() + ", " + YearField.getSelectedItem().toString();
-                        Calendar birthdate = Calendar.getInstance();
-                        DateFormat df = new SimpleDateFormat("MMMM d, yyyy");
-                        try {
-                            birthdate.setTime(df.parse(sDate));
-                        } catch (ParseException ex) {
-                            Logger.getLogger(AddTenant.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        //converting Calendar to sql Date
-                        java.sql.Date sqlBirthdate = new java.sql.Date(birthdate.getTime().getTime());
-
-                        String gender;
-                        try {
-                            gender = buttonGroup1.getSelection().getActionCommand();
-                        } catch (NullPointerException n) {
-                            gender = "";
-                        }
-
-                        bean.setContact(ContactNumberField1.getText());
-                        bean.setDegree(DegreeField.getText().toUpperCase());
-                        bean.setEmail(EmailAddressField.getText());
-                        bean.setExpectedyearofgrad((Integer) YearOfGraduationField.getSelectedItem());
-                        if (MaleField.isSelected()) {
-                            bean.setGender("MALE");
-                        } else {
-                            bean.setGender("FEMALE");
-                        }
-                        //         bean.setImage(null);
-                        bean.setStatus("CURRENT");
-
-                        // guardian  
-                        boolean edittenant = tdao.editTenant(bean);
-
-                        GuardianDAOInterface gdao = new GuardianDAOImplementation();
-                        GuardianBean gbean = new GuardianBean();
-
-                        gbean.setFname(GuardianFirstnameField.getText().toUpperCase());
-                        gbean.setLname(GuardianSurnameField.getText().toUpperCase());
-                        gbean.setContact(GuardianContactField.getText());
-                        gbean.setGuardianID(guardianID);
-                        gbean.setEmail(GuardianEmailField.getText());
-
-                        boolean editguardian = gdao.editGuardian(gbean, guardianID);
-
-                        if (edittenant && editguardian) {
-                            JOptionPane.showMessageDialog(null, "Tenant " + bean.getFname() + " " + bean.getLname() + "'s information has been successfully edited.");
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Not successful");
-                        }
-                    }
-
-                } catch (AccountException e) {
-                    e.promptFieldError();
-                }
-            }
-
-            // Add Account
+        String guardFname = GuardianFirstnameField.getText();
+        String guardLname = GuardianSurnameField.getText();
+        String guardContact = GuardianContactField.getText();
+        String guardEmail = GuardianEmailField.getText();
+        boolean empty = false;
+        if (FirstnameField.getText().isEmpty()
+                || SurnameField.getText().isEmpty()
+                || ContactNumberField1.getText().isEmpty()
+                || AddressField.getText().isEmpty()
+                || DegreeField.getText().isEmpty()
+                || EmailAddressField.getText().isEmpty()
+                || SchoolField.getText().isEmpty()
+                || gender.isEmpty()
+                || guardFname.isEmpty()
+                || guardLname.isEmpty()
+                || guardEmail.isEmpty()
+                || guardContact.isEmpty()) {
+            empty = true;
+            JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correctly.");
         } else {
-            CheckAccount c = new CheckAccount();
-            boolean tflag = false;
-            String fname = FirstnameField.getText();
-            String lname = SurnameField.getText();
-            String degree = DegreeField.getText();
-            String school = SchoolField.getText();
-            String email = EmailAddressField.getText();
-            String contact = ContactNumberField1.getText();
-            String address = AddressField.getText();
-            //converting string to Calendar
-            String sDate = MonthField.getSelectedItem().toString() + " " + DayField.getSelectedItem().toString() + ", " + YearField.getSelectedItem().toString();
-            Calendar birthdate = Calendar.getInstance();
-            DateFormat df = new SimpleDateFormat("MMMM d, yyyy");
+            empty = false;
             try {
-                birthdate.setTime(df.parse(sDate));
-            } catch (ParseException ex) {
-                Logger.getLogger(AddTenant.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            //converting Calendar to sql Date
-            java.sql.Date sqlBirthdate = new java.sql.Date(birthdate.getTime().getTime());
+                //error checking tenant
+                c.checkName(fname, "Firstname");
+                c.checkName(lname, "Lastname");
+                c.checkName(degree, "Degree");
+                c.checkName(school, "School");
+                c.checkEmail(email, "Email");
+                c.checkContact(contact, "Contact");
+                tenant.setFname(fname.toUpperCase());
+                tenant.setLname(lname.toUpperCase());
+                tenant.setContact(contact);
+                tenant.setGender(gender.toUpperCase());
+                tenant.setAddress(address.toUpperCase());
+                tenant.setDegree(degree.toUpperCase());
+                tenant.setEmail(email);
+                tenant.setBirthday((java.sql.Date) sqlBirthdate);
+                tenant.setSchool(school.toUpperCase());
+                tenant.setExpectedyearofgrad(gradyear);
+                tenant.setStatus("CURRENT");
 
-            String gender;
-            try {
-                gender = buttonGroup1.getSelection().getActionCommand();
-            } catch (NullPointerException n) {
-                gender = "";
-            }
-            int gradyear = (int) YearOfGraduationField.getSelectedItem();
+                if (tenant.getImage().isEmpty()) {
+                    File ff = new File("Woman.jpg");
+                    ff = ff.getAbsoluteFile();
+                    File fm = new File("Man.jpg");
+                    fm = fm.getAbsoluteFile();
 
-            String guardFname = GuardianFirstnameField.getText();
-            String guardLname = GuardianSurnameField.getText();
-            String guardContact = GuardianContactField.getText();
-            String guardEmail = GuardianEmailField.getText();
-            boolean empty = false;
-            if (FirstnameField.getText().isEmpty()
-                    || SurnameField.getText().isEmpty()
-                    || ContactNumberField1.getText().isEmpty()
-                    || AddressField.getText().isEmpty()
-                    || DegreeField.getText().isEmpty()
-                    || EmailAddressField.getText().isEmpty()
-                    || SchoolField.getText().isEmpty()
-                    || gender.isEmpty()
-                    || guardFname.isEmpty()
-                    || guardLname.isEmpty()
-                    || guardEmail.isEmpty()
-                    || guardContact.isEmpty()) {
-                empty = true;
-            } else {
-                empty = false;
-                try {
-                    //error checking
-                    c.checkName(fname, "Firstname");
-                    c.checkName(lname, "Lastname");
-                    c.checkName(degree, "Degree");
-                    c.checkName(school, "School");
-                    c.checkEmail(email, "Email");
-                    c.checkContact(contact, "Contact");
-                    tenant.setFname(fname.toUpperCase());
-                    tenant.setLname(lname.toUpperCase());
-                    tenant.setContact(contact);
-                    tenant.setGender(gender.toUpperCase());
-                    tenant.setAddress(address.toUpperCase());
-                    tenant.setDegree(degree.toUpperCase());
-                    tenant.setEmail(email);
-                    tenant.setBirthday((java.sql.Date) sqlBirthdate);
-                    tenant.setSchool(school.toUpperCase());
-                    tenant.setExpectedyearofgrad(gradyear);
-                    tenant.setStatus("CURRENT");
-                    c.checkName(guardFname, "Guardian Firstname");
-                    c.checkName(guardLname, "Guardian Lastname");
-                    c.checkContact(guardContact, "Guardian Contact");
-                    c.checkEmail(guardEmail, "Guardian Email");
+                    if (MaleField.isSelected()) {
+                        icon = new ImageIcon(fm.getAbsolutePath());
+                        tenant.setImage(fm.getAbsolutePath());
+                    } else {
+                        icon = new ImageIcon(ff.getAbsolutePath());
+                        tenant.setImage(ff.getAbsolutePath());
+                    }
+                }
 
-                    GuardianBean guard = new GuardianBean();
-                    GuardianDAOImplementation guardImpl1 = new GuardianDAOImplementation();
+                //error checking guardian
+                c.checkName(guardFname, "Guardian Firstname");
+                c.checkName(guardLname, "Guardian Lastname");
+                c.checkContact(guardContact, "Guardian Contact");
+                c.checkEmail(guardEmail, "Guardian Email");
+
+                //set guardian values
+                guard.setFname(guardFname.toUpperCase());
+                guard.setLname(guardLname.toUpperCase());
+                guard.setContact(guardContact);
+                guard.setEmail(guardEmail);
+
+                // add tenant
+                if (flag) {
                     boolean t1 = false, g1 = false, tg1;
-                    guard.setFname(guardFname.toUpperCase());
-                    guard.setLname(guardLname.toUpperCase());
-                    guard.setContact(guardContact);
-                    guard.setEmail(guardEmail);
-                    g1 = guardImpl1.addGuardian(guard);
+                    g1 = guardImpl.addGuardian(guard);
                     t1 = tenantImpl.addTenant(tenant);
-                    guard = guardImpl1.getGuardianByName(guardFname, guardLname);
+                    tenant = tenantImpl.getTenantByName(fname, lname);
+                    guard = guardImpl.getGuardianByName(guardFname, guardLname);
+                    tg1 = guardImpl.assignTenantToGuardian(guard, tenant);
 
                     tenant = tenantImpl.getTenantByName(fname, lname);
-                    tg1 = guardImpl1.assignTenantToGuardian(guard, tenant);
+                    guard = guardImpl.getGuardianByName(guardFname, guardLname);
+
                     if (t1 && g1 && tg1) {
-                        tflag = true;
-                    }
+                        ContractBean contractAcc = new ContractBean();
+                        ContractDAOInterface contractdao = new ContractDAOImplementation();
 
-                    ContractBean contractAcc = new ContractBean();
-                    ContractDAOInterface contractdao = new ContractDAOImplementation();
+                        Calendar effectivedate = Calendar.getInstance();
+                        Calendar expirydate = Calendar.getInstance();
+                        expirydate.add(Calendar.DAY_OF_YEAR, 365); // add 1 year
+                        DateFormat df_contract = new SimpleDateFormat("MMMM d, yyyy");
 
-                    tenant = tdao.getTenantByName(tenant.getFname(), tenant.getLname());
+                        //converting Calendar to sql Date
+                        java.sql.Date sqlEffectivedate = new java.sql.Date(effectivedate.getTime().getTime());
+                        java.sql.Date sqlExpirydate = new java.sql.Date(expirydate.getTime().getTime());
 
-                    Calendar effectivedate = Calendar.getInstance();
-                    Calendar expirydate = Calendar.getInstance();
-                    expirydate.add(Calendar.DAY_OF_YEAR, 365); // add 1 year
-                    DateFormat df_contract = new SimpleDateFormat("MMMM d, yyyy");
+                        contractAcc.setContract_tenantID(tenant.getTenantID());
+                        contractAcc.setEffectivedate(sqlEffectivedate);
+                        contractAcc.setExpirydate(sqlExpirydate);
 
-                    //converting Calendar to sql Date
-                    java.sql.Date sqlEffectivedate = new java.sql.Date(effectivedate.getTime().getTime());
-                    java.sql.Date sqlExpirydate = new java.sql.Date(expirydate.getTime().getTime());
+                        contractdao.addContract(contractAcc);
 
-                    contractAcc.setContract_tenantID(tenant.getTenantID());
-                    contractAcc.setEffectivedate(sqlEffectivedate);
-                    contractAcc.setExpirydate(sqlExpirydate);
-
-                    contractdao.addContract(contractAcc);
-
-                    if (tflag) {
                         JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + " has successfully added.");
                         MainMenu main = new MainMenu();
                         main.setVisible(true);
@@ -828,10 +735,28 @@ public class AddTenant extends javax.swing.JFrame {
                     } else {
                         JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correctly.");
                     }
-                } catch (AccountException e) {
-                    e.promptFieldError();
+
+                    // edit tenant    
+                } else {
+                    boolean edittenant = tenantImpl.editTenant(tenant);
+
+                    guard.setFname(GuardianFirstnameField.getText().toUpperCase());
+                    guard.setLname(GuardianSurnameField.getText().toUpperCase());
+                    guard.setContact(GuardianContactField.getText());
+                    guard.setEmail(GuardianEmailField.getText());
+
+                    boolean editguardian = guardImpl.editGuardian(guard, guard.getGuardianID());
+
+                    if (edittenant && editguardian) {
+                        JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + "'s information has been successfully edited.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Not successful");
+                    }
                 }
+            } catch (AccountException e) {
+                e.promptFieldError();
             }
+
         }
 
 
@@ -873,36 +798,6 @@ public class AddTenant extends javax.swing.JFrame {
         preventDigit(evt);
     }//GEN-LAST:event_GuardianFirstnameFieldKeyTyped
 
-    private void ContactNumberField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ContactNumberField1KeyReleased
-        // TODO add your handling code here:
-
-        char c = evt.getKeyChar();
-        String input = "";
-        String trim1;
-        String trim2;
-        String re1 = "^[0-9]*$";
-        int last;
-        if (!ContactNumberField1.getText().isEmpty()) {
-            input = ContactNumberField1.getText();
-        }
-
-        if (input.matches(re1)) { // number
-            if (input.length() > 11) {
-                trim1 = input.substring(0, input.length() - 1);
-                input = trim1;
-            }// more than 11 numbers
-
-        } else {
-
-            trim1 = input.substring(0, input.indexOf(c));//first to index of character;
-            trim2 = input.substring(input.indexOf(c) + 1);
-            input = trim1 + trim2;
-        }
-
-        ContactNumberField1.setText(input);
-        
-    }//GEN-LAST:event_ContactNumberField1KeyReleased
-
     private void ContactNumberField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactNumberField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ContactNumberField1ActionPerformed
@@ -911,7 +806,8 @@ public class AddTenant extends javax.swing.JFrame {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         String input = "";
-        String trim1, trim2;
+        String trim1;
+        String trim2;
         String re1 = "^[0-9]*$";
         int last;
         if (!GuardianContactField.getText().isEmpty()) {
@@ -937,14 +833,13 @@ public class AddTenant extends javax.swing.JFrame {
     private void SurnameFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SurnameFieldKeyReleased
         // TODO add your handling code here:
         CheckAccount check = new CheckAccount();
-        
+
         String input = SurnameField.getText();
-        
+
         try {
             check.checkName(input, "Lastname");
             SurnameField.setBackground(Color.WHITE);
-        }
-        catch(AccountException e) {
+        } catch (AccountException e) {
             SurnameField.setBackground(Color.PINK);
         }
     }//GEN-LAST:event_SurnameFieldKeyReleased
@@ -952,14 +847,13 @@ public class AddTenant extends javax.swing.JFrame {
     private void FirstnameFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FirstnameFieldKeyReleased
         // TODO add your handling code here:
         CheckAccount check = new CheckAccount();
-        
+
         String input = FirstnameField.getText();
-        
+
         try {
             check.checkName(input, "Lastname");
             FirstnameField.setBackground(Color.WHITE);
-        }
-        catch(AccountException e) {
+        } catch (AccountException e) {
             FirstnameField.setBackground(Color.PINK);
         }
     }//GEN-LAST:event_FirstnameFieldKeyReleased
@@ -967,22 +861,21 @@ public class AddTenant extends javax.swing.JFrame {
     private void EmailAddressFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_EmailAddressFieldFocusLost
         // TODO add your handling code here:
         CheckAccount check = new CheckAccount();
-        
+
         String input = EmailAddressField.getText();
-        
+
         try {
             check.checkEmail(input, "Email");
             EmailAddressField.setBackground(Color.WHITE);
-        }
-        catch(AccountException e) {
+        } catch (AccountException e) {
             EmailAddressField.setBackground(Color.PINK);
         }
     }//GEN-LAST:event_EmailAddressFieldFocusLost
 
     private void SurnameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SurnameFieldFocusLost
         String input = SurnameField.getText();
-        
-        if(input.isEmpty()) {
+
+        if (input.isEmpty()) {
             SurnameField.setBackground(Color.PINK);
         }
     }//GEN-LAST:event_SurnameFieldFocusLost
@@ -990,8 +883,8 @@ public class AddTenant extends javax.swing.JFrame {
     private void FirstnameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_FirstnameFieldFocusLost
         // TODO add your handling code here:
         String input = FirstnameField.getText();
-        
-        if(input.isEmpty()) {
+
+        if (input.isEmpty()) {
             FirstnameField.setBackground(Color.PINK);
         }
     }//GEN-LAST:event_FirstnameFieldFocusLost
@@ -999,8 +892,8 @@ public class AddTenant extends javax.swing.JFrame {
     private void AddressFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_AddressFieldFocusLost
         // TODO add your handling code here:
         String input = AddressField.getText();
-        
-        if(input.isEmpty()) {
+
+        if (input.isEmpty()) {
             AddressField.setBackground(Color.PINK);
         }
     }//GEN-LAST:event_AddressFieldFocusLost
@@ -1016,8 +909,8 @@ public class AddTenant extends javax.swing.JFrame {
 
     private void SchoolFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SchoolFieldFocusLost
         String input = SchoolField.getText();
-        
-        if(input.isEmpty()) {
+
+        if (input.isEmpty()) {
             SchoolField.setBackground(Color.PINK);
         }
     }//GEN-LAST:event_SchoolFieldFocusLost
@@ -1025,8 +918,8 @@ public class AddTenant extends javax.swing.JFrame {
     private void DegreeFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DegreeFieldFocusLost
         // TODO add your handling code here:
         String input = DegreeField.getText();
-        
-        if(input.isEmpty()) {
+
+        if (input.isEmpty()) {
             DegreeField.setBackground(Color.PINK);
         }
     }//GEN-LAST:event_DegreeFieldFocusLost
@@ -1034,8 +927,8 @@ public class AddTenant extends javax.swing.JFrame {
     private void GuardianSurnameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_GuardianSurnameFieldFocusLost
         // TODO add your handling code here:
         String input = GuardianSurnameField.getText();
-        
-        if(input.isEmpty()) {
+
+        if (input.isEmpty()) {
             GuardianSurnameField.setBackground(Color.PINK);
         }
     }//GEN-LAST:event_GuardianSurnameFieldFocusLost
@@ -1043,14 +936,12 @@ public class AddTenant extends javax.swing.JFrame {
     private void ContactNumberField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContactNumberField1FocusLost
         // TODO add your handling code here:
         String input = ContactNumberField1.getText();
-        
-        if(input.isEmpty()) {
+
+        if (input.isEmpty()) {
             ContactNumberField1.setBackground(Color.PINK);
-        }
-        else if (input.length()!=11) {
+        } else if (input.length() != 11) {
             ContactNumberField1.setBackground(Color.PINK);
-        }
-        else {
+        } else {
             ContactNumberField1.setBackground(Color.WHITE);
         }
     }//GEN-LAST:event_ContactNumberField1FocusLost
@@ -1058,8 +949,8 @@ public class AddTenant extends javax.swing.JFrame {
     private void GuardianFirstnameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_GuardianFirstnameFieldFocusLost
         // TODO add your handling code here:
         String input = GuardianFirstnameField.getText();
-        
-        if(input.isEmpty()) {
+
+        if (input.isEmpty()) {
             GuardianFirstnameField.setBackground(Color.PINK);
         }
     }//GEN-LAST:event_GuardianFirstnameFieldFocusLost
@@ -1067,14 +958,12 @@ public class AddTenant extends javax.swing.JFrame {
     private void GuardianContactFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_GuardianContactFieldFocusLost
         // TODO add your handling code here:
         String input = GuardianContactField.getText();
-        
-        if(input.isEmpty()) {
+
+        if (input.isEmpty()) {
             GuardianContactField.setBackground(Color.PINK);
-        }
-        else if (input.length()!=11) {
+        } else if (input.length() != 11) {
             GuardianContactField.setBackground(Color.PINK);
-        }
-        else {
+        } else {
             GuardianContactField.setBackground(Color.WHITE);
         }
     }//GEN-LAST:event_GuardianContactFieldFocusLost
@@ -1082,14 +971,13 @@ public class AddTenant extends javax.swing.JFrame {
     private void GuardianEmailFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_GuardianEmailFieldFocusLost
         // TODO add your handling code here:
         CheckAccount check = new CheckAccount();
-        
+
         String input = EmailAddressField.getText();
-        
+
         try {
             check.checkEmail(input, "Email");
             EmailAddressField.setBackground(Color.WHITE);
-        }
-        catch(AccountException e) {
+        } catch (AccountException e) {
             EmailAddressField.setBackground(Color.PINK);
         }
     }//GEN-LAST:event_GuardianEmailFieldFocusLost
@@ -1112,14 +1000,13 @@ public class AddTenant extends javax.swing.JFrame {
     private void SchoolFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SchoolFieldKeyReleased
         // TODO add your handling code here:
         CheckAccount check = new CheckAccount();
-        
+
         String input = SchoolField.getText();
-        
+
         try {
             check.checkName(input, "Lastname");
             SchoolField.setBackground(Color.WHITE);
-        }
-        catch(AccountException e) {
+        } catch (AccountException e) {
             SchoolField.setBackground(Color.PINK);
         }
     }//GEN-LAST:event_SchoolFieldKeyReleased
@@ -1127,14 +1014,13 @@ public class AddTenant extends javax.swing.JFrame {
     private void DegreeFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DegreeFieldKeyReleased
         // TODO add your handling code here:
         CheckAccount check = new CheckAccount();
-        
+
         String input = DegreeField.getText();
-        
+
         try {
             check.checkName(input, "Lastname");
             DegreeField.setBackground(Color.WHITE);
-        }
-        catch(AccountException e) {
+        } catch (AccountException e) {
             DegreeField.setBackground(Color.PINK);
         }
     }//GEN-LAST:event_DegreeFieldKeyReleased
@@ -1142,14 +1028,13 @@ public class AddTenant extends javax.swing.JFrame {
     private void GuardianSurnameFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_GuardianSurnameFieldKeyReleased
         // TODO add your handling code here:
         CheckAccount check = new CheckAccount();
-        
+
         String input = GuardianSurnameField.getText();
-        
+
         try {
             check.checkName(input, "Lastname");
             GuardianSurnameField.setBackground(Color.WHITE);
-        }
-        catch(AccountException e) {
+        } catch (AccountException e) {
             GuardianSurnameField.setBackground(Color.PINK);
         }
     }//GEN-LAST:event_GuardianSurnameFieldKeyReleased
@@ -1157,17 +1042,44 @@ public class AddTenant extends javax.swing.JFrame {
     private void GuardianFirstnameFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_GuardianFirstnameFieldKeyReleased
         // TODO add your handling code here:
         CheckAccount check = new CheckAccount();
-        
+
         String input = GuardianFirstnameField.getText();
-        
+
         try {
             check.checkName(input, "Lastname");
             GuardianFirstnameField.setBackground(Color.WHITE);
-        }
-        catch(AccountException e) {
+        } catch (AccountException e) {
             GuardianFirstnameField.setBackground(Color.PINK);
         }
     }//GEN-LAST:event_GuardianFirstnameFieldKeyReleased
+
+    private void ContactNumberField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ContactNumberField1KeyReleased
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        String input = "";
+        String trim1;
+        String trim2;
+        String re1 = "^[0-9]*$";
+        int last;
+        if (!ContactNumberField1.getText().isEmpty()) {
+            input = ContactNumberField1.getText();
+        }
+
+        if (input.matches(re1)) { // number
+            if (input.length() > 11) {
+                trim1 = input.substring(0, input.length() - 1);
+                input = trim1;
+            }// more than 11 numbers
+
+        } else {
+
+            trim1 = input.substring(0, input.indexOf(c));//first to index of character;
+            trim2 = input.substring(input.indexOf(c) + 1);
+            input = trim1 + trim2;
+        }
+
+        ContactNumberField1.setText(input);
+    }//GEN-LAST:event_ContactNumberField1KeyReleased
 
     /**
      * @param args the command line arguments
