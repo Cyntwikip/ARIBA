@@ -129,17 +129,19 @@ public class Bills extends javax.swing.JFrame {
 
             for (int i = 0; i < rlist.size(); i++) {
                 // bbean = bdao.getBillsByRoomID(i);
-                billID = blist.get(i).getBillID();
+                billID = blist.get(rlist.size()-i-1).getBillID();
                 System.out.println(billID);
+                bbean = bdao.getBillsByRoomID(i+1);
+               
                 if (wlist.isEmpty() && elist.isEmpty() && blist.isEmpty()) {
                     Object[] obj = {rlist.get(i).getRoomID(), 0, "UNPAID"};
                     model.addRow(obj);
 
-                } else if (blist.get(rlist.size()-i-1).getPaidWater() == false || blist.get(rlist.size()-i-1).getpaidElectric() == false || blist.get(rlist.size()-i).getpaidRent() == false) {
+                } else if (bbean.getpaidElectric() == false || bbean.getpaidElectric() == false || bbean.getpaidRent() == false) {
                     ebean = edao.getElectricReadingByBillID(billID);
                     wbean = wdao.getWaterReadingsByBillID(billID);
 
-                    total = blist.get(rlist.size()-i-1).getPrice()+ ebean.getPrice() + wbean.getPrice();
+                    total = bbean.getPrice()+ ebean.getPrice() + wbean.getPrice();
                             Object[] obj = {rlist.get(i).getRoomID(), total, "UNPAID"};
                     model.addRow(obj);
                 } else {
