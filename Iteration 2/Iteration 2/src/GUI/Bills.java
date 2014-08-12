@@ -135,11 +135,11 @@ public class Bills extends javax.swing.JFrame {
                     Object[] obj = {rlist.get(i).getRoomID(), 0, "UNPAID"};
                     model.addRow(obj);
 
-                } else if (blist.get(i).getPaidWater() == false || blist.get(i).getpaidElectric() == false || blist.get(i).getpaidRent() == false) {
+                } else if (blist.get(rlist.size()-i-1).getPaidWater() == false || blist.get(rlist.size()-i-1).getpaidElectric() == false || blist.get(rlist.size()-i).getpaidRent() == false) {
                     ebean = edao.getElectricReadingByBillID(billID);
                     wbean = wdao.getWaterReadingsByBillID(billID);
 
-                    total = blist.get(i).getPrice()+ ebean.getPrice() + wbean.getPrice();
+                    total = blist.get(rlist.size()-i-1).getPrice()+ ebean.getPrice() + wbean.getPrice();
                             Object[] obj = {rlist.get(i).getRoomID(), total, "UNPAID"};
                     model.addRow(obj);
                 } else {
