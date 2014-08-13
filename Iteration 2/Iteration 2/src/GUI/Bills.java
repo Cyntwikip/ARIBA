@@ -133,7 +133,6 @@ public class Bills extends javax.swing.JFrame {
             for (int i = 0; i < rlist.size(); i++) {
                 // bbean = bdao.getBillsByRoomID(i);
                 billID = blist.get(rlist.size() - i - 1).getBillID();
-                System.out.println(billID);
                 bbean = bdao.getBillsByRoomID(i + 1);
 
                 if (wlist.isEmpty() && elist.isEmpty() && blist.isEmpty()) {
@@ -232,6 +231,11 @@ public class Bills extends javax.swing.JFrame {
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/paid.png"))); // NOI18N
         jButton3.setText("jButton3");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3);
         jButton3.setBounds(610, 310, 90, 40);
 
@@ -349,6 +353,13 @@ public class Bills extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow()+1;
+        
+        BillDAOImplementation billdao = new BillDAOImplementation();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     public java.sql.Date initializedate() {
 
