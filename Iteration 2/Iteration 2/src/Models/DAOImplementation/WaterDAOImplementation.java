@@ -81,7 +81,7 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
 
                 list.add(bean);
             }
-
+            connection.close();
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(WaterDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -124,6 +124,7 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -148,7 +149,8 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
             ps.setDate(4, water.getDateRead());
             ps.setInt(5, waterID);
             ps.executeUpdate();
-
+            
+            connection.close();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -170,6 +172,7 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
             ps.setFloat(2, waterID);
             ps.executeUpdate();
 
+            connection.close();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -214,7 +217,7 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
 
                 return bean;
             }
-
+            connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(ElectricReadingDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -254,6 +257,7 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);

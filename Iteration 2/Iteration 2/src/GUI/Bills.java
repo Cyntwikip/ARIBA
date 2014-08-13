@@ -147,10 +147,14 @@ public class Bills extends javax.swing.JFrame {
                     Object[] obj = {rlist.get(i).getRoomID(), total, "UNPAID"};
                     model.addRow(obj);
                 } else {
-                    waterprice = wlist.get(i).getPrice();
-                    electricprice = elist.get(i).getPrice();
-                    rentprice = blist.get(i).getPrice();
-                    total = waterprice + electricprice + rentprice;
+                    //waterprice = wlist.get(i).getPrice();
+                    //electricprice = elist.get(i).getPrice();
+                    //rentprice = blist.get(i).getPrice();
+                    //total = waterprice + electricprice + rentprice;
+                    ebean = edao.getElectricReadingByBillID(billID);
+                    wbean = wdao.getWaterReadingsByBillID(billID);
+
+                    total = bbean.getPrice() + ebean.getPrice() + wbean.getPrice();
                     Object[] obj = {rlist.get(i).getRoomID(), total, "PAID"};
                     model.addRow(obj);
                 }
@@ -359,6 +363,37 @@ public class Bills extends javax.swing.JFrame {
         int row = jTable1.getSelectedRow()+1;
         
         BillDAOImplementation billdao = new BillDAOImplementation();
+        BillBean bbean = new BillBean();
+        bbean = billdao.getBillsByRoomID(row);
+        
+        WaterDAOImplementation wdao = new WaterDAOImplementation();
+        WaterReadingBean wbean = wdao.getWaterReadingsByBillID(bbean.getBillID());
+        
+        ElectricReadingDAOImplementation edao = new ElectricReadingDAOImplementation();
+        ElectricReadingBean ebean = edao.getElectricReadingByBillID(bbean.getBillID());
+        
+        if(bbean.getPrice()==0 || wbean.getPrice()==0 || ebean.getPrice()==0) {
+            JOptionPane.showMessageDialog(null, "Check if Rent, Water and Electric Price was set");
+        }
+        else if (bbean.getPaidWater() && bbean.getpaidElectric() && bbean.getpaidRent()){
+            JOptionPane.showMessageDialog(null, "Paid already");
+        }
+        else {
+            bbean.setPaidElectric(true);
+            bbean.setPaidRent(true);
+            bbean.setPaidWater(true);
+            
+            boolean check;
+            if(billdao.editBill(bbean, bbean.getBillID())){
+                JOptionPane.showMessageDialog(null, "Successful");
+                roomtable();
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Not Successful");
+            }
+            
+        }
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     public java.sql.Date initializedate() {

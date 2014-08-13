@@ -81,7 +81,7 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
 
                 list.add(bean);
             }
-
+            connection.close();
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(ElectricReadingDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -107,6 +107,7 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
             ps.setInt(5, electricID);
             ps.executeUpdate();
 
+            connection.close();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -129,6 +130,7 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
             ps.setFloat(2, electricID);
             ps.executeUpdate();
 
+            connection.close();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -172,6 +174,7 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
 
                 list.add(bean);
             }
+            connection.close();
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -215,7 +218,7 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
 
                 return bean;
             }
-
+            connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(ElectricReadingDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -255,6 +258,7 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
 
                 list.add(bean);
             }
+            connection.close();
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);

@@ -59,6 +59,7 @@ public class RoomDAOImplementation implements RoomDAOInterface {
             ps.setInt(3, roomID);
             ps.executeUpdate();
 
+            connection.close();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -229,6 +230,7 @@ public class RoomDAOImplementation implements RoomDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -267,6 +269,7 @@ public class RoomDAOImplementation implements RoomDAOInterface {
                 //bean.setStatus(status);
 
             }
+            connection.close();
             return bean;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -296,6 +299,7 @@ public class RoomDAOImplementation implements RoomDAOInterface {
                 bean.setRoomID(roomID);
             }
 
+            connection.close();
             return bean;
 
         } catch (SQLException ex) {
@@ -333,6 +337,7 @@ public class RoomDAOImplementation implements RoomDAOInterface {
                 list.add(bean);
             }
 
+            connection.close();
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(RoomDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -357,6 +362,7 @@ public class RoomDAOImplementation implements RoomDAOInterface {
                 count = resultSet.getInt("count");
             }
 
+            connection.close();
             return count;
         } catch (SQLException ex) {
             Logger.getLogger(RoomDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
