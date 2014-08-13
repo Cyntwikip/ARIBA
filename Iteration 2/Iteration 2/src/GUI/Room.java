@@ -97,7 +97,7 @@ public class Room extends javax.swing.JFrame {
             }
         }
     }
-    
+
     public void updateRoomAssignments() {
         model1.getDataVector().removeAllElements();
         model1.fireTableDataChanged();
@@ -252,10 +252,9 @@ public class Room extends javax.swing.JFrame {
         //System.out.println(lname);
         int roomID = jTable2.getSelectedRow() + 1;
 
-        if(roomID == 0 && temp == null){
+        if (roomID == 0 && temp == null) {
             JOptionPane.showMessageDialog(null, "No tenant and room selected. Please choose from the list.");
-        }
-        else if (roomID == 0) {
+        } else if (roomID == 0) {
             JOptionPane.showMessageDialog(null, "Please select a room.");
         } else if (temp == null) {
             JOptionPane.showMessageDialog(null, "Please select a tenant.");
@@ -307,6 +306,7 @@ public class Room extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         MainMenu menu = new MainMenu();
+
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed

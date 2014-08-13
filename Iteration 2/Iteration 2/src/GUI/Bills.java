@@ -204,12 +204,22 @@ public class Bills extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
         getContentPane().add(jTextField1);
         jTextField1.setBounds(210, 210, 100, 30);
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
+            }
+        });
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField2KeyReleased(evt);
             }
         });
         getContentPane().add(jTextField2);
@@ -268,7 +278,7 @@ public class Bills extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("jLabel3");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(0, 0, 140, 20);
+        jLabel3.setBounds(-10, 0, 160, 20);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(110, 110, 140, 20);
@@ -395,6 +405,55 @@ public class Bills extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        // TODO add your handling code here:
+              char c = evt.getKeyChar();
+        String input = "";
+        String trim;
+        String re1 = "^(\\d*\\.?\\d*)$";
+        int last;
+        if (!jTextField1.getText().isEmpty()) {
+            input = jTextField1.getText();
+        }
+
+        if (input.matches(re1)) {
+
+        } else {
+            trim = input.substring(0, input.length() - 1);
+            input = trim;
+            System.out.println(trim);
+        }
+
+        jTextField1.setText(input);
+
+
+        
+    }//GEN-LAST:event_jTextField1KeyReleased
+
+    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+        // TODO add your handling code here:
+              char c = evt.getKeyChar();
+        String input = "";
+        String trim;
+        String re1 = "^(\\d*\\.?\\d*)$";
+        int last;
+        if (!jTextField2.getText().isEmpty()) {
+            input = jTextField2.getText();
+        }
+
+        if (input.matches(re1)) {
+
+        } else {
+            trim = input.substring(0, input.length() - 1);
+            input = trim;
+            System.out.println(trim);
+        }
+
+        jTextField2.setText(input);
+
+
+    }//GEN-LAST:event_jTextField2KeyReleased
 
     public java.sql.Date initializedate() {
 
