@@ -112,7 +112,7 @@ public class Bills extends javax.swing.JFrame {
         BillBean bbean = new BillBean();
 
         if (blist.isEmpty()) {
-            for (int i = 0; i <rlist.size(); i++) {
+            for (int i = 0; i < rlist.size(); i++) {
                 Object[] obj = {rlist.get(i).getRoomID(), "0", "UNPAID"};
                 model.addRow(obj);
             }
@@ -126,16 +126,28 @@ public class Bills extends javax.swing.JFrame {
             ArrayList<ElectricReadingBean> elist = edao.getAllElectricReadingforThisMonth(rlist.size()); //this month
             ElectricReadingBean ebean = new ElectricReadingBean();
 
+            ArrayList<BillBean> bbeanlistnotpaidelectric = new ArrayList<BillBean>();
+            ArrayList<BillBean> bbeanlistnotpaidwater = new ArrayList<BillBean>();
+            ArrayList<BillBean> bbeanlistnotpaidrent = new ArrayList<BillBean>();
+            ArrayList<ElectricReadingBean> ebeanlistnotpaid = new ArrayList<ElectricReadingBean>();
+            ArrayList<WaterReadingBean> wbeanlistnotpaid = new ArrayList<WaterReadingBean>();
+
+            bbeanlistnotpaidelectric = bdao.getAllNotPaidRoomsByElectric();
+            bbeanlistnotpaidwater = bdao.getAllNotPaidRoomsByWater();
+            bbeanlistnotpaidrent = bdao.getAllNotPaidRoomsByRent();
+
             float waterprice, electricprice;
             double rentprice, total = 0;
             int billID = 0;
+            float extrawater, extraelectric;
+            double extrarent, extratotal = 0;
 
             for (int i = 0; i < rlist.size(); i++) {
                 // bbean = bdao.getBillsByRoomID(i);
                 billID = blist.get(rlist.size() - i - 1).getBillID();
                 bbean = bdao.getBillsByRoomID(i + 1);
 
-                if (wlist.isEmpty() && elist.isEmpty() && blist.isEmpty()) {
+                if (wlist.isEmpty() && elist.isEmpty() && blist.isEmpty()) { // wala talagang bill
                     Object[] obj = {rlist.get(i).getRoomID(), 0, "UNPAID"};
                     model.addRow(obj);
 
@@ -147,10 +159,6 @@ public class Bills extends javax.swing.JFrame {
                     Object[] obj = {rlist.get(i).getRoomID(), total, "UNPAID"};
                     model.addRow(obj);
                 } else {
-                    //waterprice = wlist.get(i).getPrice();
-                    //electricprice = elist.get(i).getPrice();
-                    //rentprice = blist.get(i).getPrice();
-                    //total = waterprice + electricprice + rentprice;
                     ebean = edao.getElectricReadingByBillID(billID);
                     wbean = wdao.getWaterReadingsByBillID(billID);
 
@@ -380,10 +388,9 @@ public class Bills extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please input value for Electric meter.");
         } else if (jTextField2.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please input value for Water meter.");
-        } else if(blist.isEmpty()){
+        } else if (blist.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No bills generated.");
-        }
-        else {
+        } else {
             float currentkw = Float.parseFloat(jTextField1.getText());
             float currentcubicmeter = Float.parseFloat(jTextField2.getText());
 
@@ -415,45 +422,42 @@ public class Bills extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        int row = jTable1.getSelectedRow()+1;
-        
+        int row = jTable1.getSelectedRow() + 1;
+
         BillDAOImplementation billdao = new BillDAOImplementation();
         BillBean bbean = new BillBean();
         bbean = billdao.getBillsByRoomID(row);
-        
+
         WaterDAOImplementation wdao = new WaterDAOImplementation();
         WaterReadingBean wbean = wdao.getWaterReadingsByBillID(bbean.getBillID());
-        
+
         ElectricReadingDAOImplementation edao = new ElectricReadingDAOImplementation();
         ElectricReadingBean ebean = edao.getElectricReadingByBillID(bbean.getBillID());
-        
-        if(bbean.getPrice()==0 || wbean.getPrice()==0 || ebean.getPrice()==0) {
+
+        if (bbean.getPrice() == 0 || wbean.getPrice() == 0 || ebean.getPrice() == 0) {
             JOptionPane.showMessageDialog(null, "Check if Rent, Water and Electric Price was set");
-        }
-        else if (bbean.getPaidWater() && bbean.getpaidElectric() && bbean.getpaidRent()){
+        } else if (bbean.getPaidWater() && bbean.getpaidElectric() && bbean.getpaidRent()) {
             JOptionPane.showMessageDialog(null, "Paid already");
-        }
-        else {
+        } else {
             bbean.setPaidElectric(true);
             bbean.setPaidRent(true);
             bbean.setPaidWater(true);
-            
+
             boolean check;
-            if(billdao.editBill(bbean, bbean.getBillID())){
+            if (billdao.editBill(bbean, bbean.getBillID())) {
                 JOptionPane.showMessageDialog(null, "Successful");
                 roomtable();
-            }
-            else {
+            } else {
                 JOptionPane.showMessageDialog(null, "Not Successful");
             }
-            
+
         }
-        
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         // TODO add your handling code here:
-              char c = evt.getKeyChar();
+        char c = evt.getKeyChar();
         String input = "";
         String trim;
         String re1 = "^(\\d*\\.?\\d*)$";
@@ -473,12 +477,11 @@ public class Bills extends javax.swing.JFrame {
         jTextField1.setText(input);
 
 
-        
     }//GEN-LAST:event_jTextField1KeyReleased
 
     private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
         // TODO add your handling code here:
-              char c = evt.getKeyChar();
+        char c = evt.getKeyChar();
         String input = "";
         String trim;
         String re1 = "^(\\d*\\.?\\d*)$";
@@ -527,7 +530,6 @@ public class Bills extends javax.swing.JFrame {
         report.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
-
 
     public java.sql.Date initializedate() {
 

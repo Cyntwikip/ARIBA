@@ -256,71 +256,48 @@ public class Logging extends javax.swing.JFrame {
 
         AttendanceLogBean alistout = new AttendanceLogBean();
         AttendanceLogBean alistin = new AttendanceLogBean();
+        ArrayList<AttendanceLogBean> alist = new ArrayList<AttendanceLogBean>();
+        alist = logdao.getAllAtendanceLogsByTenantID(tenantid);
         alistout = logdao.getLatestLogoutByTenant(tenantid);
         alistin = logdao.getLatestLoginByTenant(tenantid);
 
         if (bean.getFname() == null) {
             JOptionPane.showMessageDialog(null, "No tenant ID " + tenantid);
             jTextField1.setText("");
-        } else {
+        } else if (alist.isEmpty()) {
             Calendar c = Calendar.getInstance();
             Timestamp time = new Timestamp(c.getTimeInMillis());
 
-            if (alistin == null) {
-                AttendanceLogBean logbean = new AttendanceLogBean();
-                logbean.setLog_tenantID(tenantid);
-                logbean.setTimeLogged(time);
-                logbean.setIsIn(true);
+            AttendanceLogBean logbean = new AttendanceLogBean();
+            logbean.setLog_tenantID(tenantid);
+            logbean.setTimeLogged(time);
+            logbean.setIsIn(true);
 
-                logdao.addAttendanceLogDAOInterface(logbean);
+            logdao.addAttendanceLogDAOInterface(logbean);
 
-                jTextField1.setText("");
+            jTextField1.setText("");
 
-                updateTable1();
+            updateTable1();
 
-            } else if (alistout != null && alistin.getTimeLogged().equals(time)) {
+        } else if (!alist.get(0).getIsIn()) {
+            Calendar c = Calendar.getInstance();
+            Timestamp time = new Timestamp(c.getTimeInMillis());
 
-                System.out.println("here po");
-                AttendanceLogBean logbean = new AttendanceLogBean();
-                logbean.setLog_tenantID(tenantid);
-                logbean.setTimeLogged(time);
-                logbean.setIsIn(true);
+            AttendanceLogBean logbean = new AttendanceLogBean();
+            logbean.setLog_tenantID(tenantid);
+            logbean.setTimeLogged(time);
+            logbean.setIsIn(true);
 
-                logdao.addAttendanceLogDAOInterface(logbean);
+            logdao.addAttendanceLogDAOInterface(logbean);
 
-                jTextField1.setText("");
+            jTextField1.setText("");
 
-                updateTable1();
+            updateTable1();
 
-            } else if (alistout == null) {
-                System.out.println("here po haha");
-                AttendanceLogBean logbean = new AttendanceLogBean();
-                logbean.setLog_tenantID(tenantid);
-                logbean.setTimeLogged(time);
-                logbean.setIsIn(true);
-
-                logdao.addAttendanceLogDAOInterface(logbean);
-
-                jTextField1.setText("");
-
-                updateTable1();
-            } else if (time.after(alistin.getTimeLogged())) {
-                System.out.println("here po haha");
-                AttendanceLogBean logbean = new AttendanceLogBean();
-                logbean.setLog_tenantID(tenantid);
-                logbean.setTimeLogged(time);
-                logbean.setIsIn(true);
-
-                logdao.addAttendanceLogDAOInterface(logbean);
-
-                jTextField1.setText("");
-
-                updateTable1();
-            } else {
-                JOptionPane.showMessageDialog(null, "You are not allowed to log in. Log out first before logging in again.");
-            }
-
+        } else {
+            JOptionPane.showMessageDialog(null, "You are not allowed to log in. Log out first before logging in again.");
         }
+
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -343,51 +320,41 @@ public class Logging extends javax.swing.JFrame {
         if (bean.getFname() == null) {
             JOptionPane.showMessageDialog(null, "No tenant ID " + tenantid);
             jTextField1.setText("");
-        } else {
-
+        } else if (alist.isEmpty()) {
             Calendar c = Calendar.getInstance();
             Timestamp time = new Timestamp(c.getTimeInMillis());
 
-            if (alistin == null) {
-                AttendanceLogBean logbean = new AttendanceLogBean();
-                logbean.setLog_tenantID(tenantid);
-                logbean.setTimeLogged(time);
-                logbean.setIsIn(false);
+            AttendanceLogBean logbean = new AttendanceLogBean();
+            logbean.setLog_tenantID(tenantid);
+            logbean.setTimeLogged(time);
+            logbean.setIsIn(false);
 
-                logdao.addAttendanceLogDAOInterface(logbean);
+            logdao.addAttendanceLogDAOInterface(logbean);
 
-                jTextField1.setText("");
+            jTextField1.setText("");
 
-                updateTable1();
+            updateTable1();
+        } else if (alist.get(0).getIsIn()) { // isIn = true
 
-            } else if (alistout == null) {
-                AttendanceLogBean logbean = new AttendanceLogBean();
-                logbean.setLog_tenantID(tenantid);
-                logbean.setTimeLogged(time);
-                logbean.setIsIn(false);
+            System.out.println("true!");
+            Calendar c = Calendar.getInstance();
+            Timestamp time = new Timestamp(c.getTimeInMillis());
 
-                logdao.addAttendanceLogDAOInterface(logbean);
+            AttendanceLogBean logbean = new AttendanceLogBean();
+            logbean.setLog_tenantID(tenantid);
+            logbean.setTimeLogged(time);
+            logbean.setIsIn(false);
 
-                jTextField1.setText("");
+            logdao.addAttendanceLogDAOInterface(logbean);
 
-                updateTable1();
-            } else if (alistout.getTimeLogged().before(alistin.getTimeLogged())) {
+            jTextField1.setText("");
 
-                AttendanceLogBean logbean = new AttendanceLogBean();
-                logbean.setLog_tenantID(tenantid);
-                logbean.setTimeLogged(time);
-                logbean.setIsIn(false);
-
-                logdao.addAttendanceLogDAOInterface(logbean);
-
-                jTextField1.setText("");
-
-                updateTable1();
-            } else {
-                JOptionPane.showMessageDialog(null, "You are not allowed to log out. Log in first before logging out."); // di balance yung log in
-            }
-
+            updateTable1();
+        } else {
+            JOptionPane.showMessageDialog(null, "You are not allowed to log out. Log in first before logging out."); // di balance yung log in
         }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
@@ -418,7 +385,7 @@ public class Logging extends javax.swing.JFrame {
         MainMenu tenant = new MainMenu();
         tenant.setVisible(true);
         this.dispose();
-        
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
