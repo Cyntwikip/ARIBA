@@ -133,7 +133,6 @@ public class Bills extends javax.swing.JFrame {
             for (int i = 0; i < rlist.size(); i++) {
                 // bbean = bdao.getBillsByRoomID(i);
                 billID = blist.get(rlist.size() - i - 1).getBillID();
-                System.out.println(billID);
                 bbean = bdao.getBillsByRoomID(i + 1);
 
                 if (wlist.isEmpty() && elist.isEmpty() && blist.isEmpty()) {
@@ -148,10 +147,14 @@ public class Bills extends javax.swing.JFrame {
                     Object[] obj = {rlist.get(i).getRoomID(), total, "UNPAID"};
                     model.addRow(obj);
                 } else {
-                    waterprice = wlist.get(i).getPrice();
-                    electricprice = elist.get(i).getPrice();
-                    rentprice = blist.get(i).getPrice();
-                    total = waterprice + electricprice + rentprice;
+                    //waterprice = wlist.get(i).getPrice();
+                    //electricprice = elist.get(i).getPrice();
+                    //rentprice = blist.get(i).getPrice();
+                    //total = waterprice + electricprice + rentprice;
+                    ebean = edao.getElectricReadingByBillID(billID);
+                    wbean = wdao.getWaterReadingsByBillID(billID);
+
+                    total = bbean.getPrice() + ebean.getPrice() + wbean.getPrice();
                     Object[] obj = {rlist.get(i).getRoomID(), total, "PAID"};
                     model.addRow(obj);
                 }
@@ -175,6 +178,10 @@ public class Bills extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
@@ -201,12 +208,22 @@ public class Bills extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
         getContentPane().add(jTextField1);
         jTextField1.setBounds(210, 210, 100, 30);
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
+            }
+        });
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField2KeyReleased(evt);
             }
         });
         getContentPane().add(jTextField2);
@@ -232,8 +249,54 @@ public class Bills extends javax.swing.JFrame {
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/paid.png"))); // NOI18N
         jButton3.setText("jButton3");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3);
         jButton3.setBounds(610, 310, 90, 40);
+
+        jButton4.setBorderPainted(false);
+        jButton4.setContentAreaFilled(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4);
+        jButton4.setBounds(40, 20, 100, 30);
+
+        jButton5.setToolTipText("");
+        jButton5.setBorderPainted(false);
+        jButton5.setContentAreaFilled(false);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5);
+        jButton5.setBounds(140, 20, 100, 30);
+
+        jButton6.setBorderPainted(false);
+        jButton6.setContentAreaFilled(false);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton6);
+        jButton6.setBounds(350, 20, 110, 30);
+
+        jButton7.setBorderPainted(false);
+        jButton7.setContentAreaFilled(false);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton7);
+        jButton7.setBounds(460, 20, 110, 30);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -260,7 +323,7 @@ public class Bills extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("jLabel3");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(0, 0, 140, 20);
+        jLabel3.setBounds(-10, 0, 160, 20);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(110, 110, 140, 20);
@@ -350,6 +413,122 @@ public class Bills extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow()+1;
+        
+        BillDAOImplementation billdao = new BillDAOImplementation();
+        BillBean bbean = new BillBean();
+        bbean = billdao.getBillsByRoomID(row);
+        
+        WaterDAOImplementation wdao = new WaterDAOImplementation();
+        WaterReadingBean wbean = wdao.getWaterReadingsByBillID(bbean.getBillID());
+        
+        ElectricReadingDAOImplementation edao = new ElectricReadingDAOImplementation();
+        ElectricReadingBean ebean = edao.getElectricReadingByBillID(bbean.getBillID());
+        
+        if(bbean.getPrice()==0 || wbean.getPrice()==0 || ebean.getPrice()==0) {
+            JOptionPane.showMessageDialog(null, "Check if Rent, Water and Electric Price was set");
+        }
+        else if (bbean.getPaidWater() && bbean.getpaidElectric() && bbean.getpaidRent()){
+            JOptionPane.showMessageDialog(null, "Paid already");
+        }
+        else {
+            bbean.setPaidElectric(true);
+            bbean.setPaidRent(true);
+            bbean.setPaidWater(true);
+            
+            boolean check;
+            if(billdao.editBill(bbean, bbean.getBillID())){
+                JOptionPane.showMessageDialog(null, "Successful");
+                roomtable();
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Not Successful");
+            }
+            
+        }
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        // TODO add your handling code here:
+              char c = evt.getKeyChar();
+        String input = "";
+        String trim;
+        String re1 = "^(\\d*\\.?\\d*)$";
+        int last;
+        if (!jTextField1.getText().isEmpty()) {
+            input = jTextField1.getText();
+        }
+
+        if (input.matches(re1)) {
+
+        } else {
+            trim = input.substring(0, input.length() - 1);
+            input = trim;
+            System.out.println(trim);
+        }
+
+        jTextField1.setText(input);
+
+
+        
+    }//GEN-LAST:event_jTextField1KeyReleased
+
+    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+        // TODO add your handling code here:
+              char c = evt.getKeyChar();
+        String input = "";
+        String trim;
+        String re1 = "^(\\d*\\.?\\d*)$";
+        int last;
+        if (!jTextField2.getText().isEmpty()) {
+            input = jTextField2.getText();
+        }
+
+        if (input.matches(re1)) {
+
+        } else {
+            trim = input.substring(0, input.length() - 1);
+            input = trim;
+            System.out.println(trim);
+        }
+
+        jTextField2.setText(input);
+
+
+    }//GEN-LAST:event_jTextField2KeyReleased
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        MainMenu menu = new MainMenu();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        Room room = new Room();
+        room.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        Logging log = new Logging();
+        log.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        Reports report = new Reports();
+        report.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+
     public java.sql.Date initializedate() {
 
         initdate();
@@ -408,6 +587,10 @@ public class Bills extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

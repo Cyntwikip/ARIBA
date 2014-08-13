@@ -84,6 +84,7 @@ public class BillDAOImplementation implements BillDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -98,18 +99,15 @@ public class BillDAOImplementation implements BillDAOInterface {
             Connector c = new Connector();
             Connection connection = c.getConnection();
 
-            String query = "update bill set bill_roomID = ?, "
-                    + "price = ?, paidRent = ?, paidWater= ?, paidElectric = ?"
-                    + "where billID = ?";
+            String query = "update bill set bill_roomID = ?, paidRent = ?, paidWater= ?, paidElectric = ? where billID = ?";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, bill.getBill_roomID());
-            ps.setDouble(2, bill.getPrice());
-            ps.setBoolean(3, bill.getpaidRent());
-            ps.setBoolean(4, bill.getPaidWater());
-            ps.setBoolean(5, bill.getpaidElectric());
-            ps.setInt(6, billID);
+            ps.setBoolean(2, bill.getpaidRent());
+            ps.setBoolean(3, bill.getPaidWater());
+            ps.setBoolean(4, bill.getpaidElectric());
+            ps.setInt(5, billID);
             ps.executeUpdate();
-
+            connection.close();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -154,6 +152,7 @@ public class BillDAOImplementation implements BillDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -198,6 +197,7 @@ public class BillDAOImplementation implements BillDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -242,6 +242,7 @@ public class BillDAOImplementation implements BillDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -286,6 +287,7 @@ public class BillDAOImplementation implements BillDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -330,6 +332,7 @@ public class BillDAOImplementation implements BillDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -375,6 +378,7 @@ public class BillDAOImplementation implements BillDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -420,6 +424,7 @@ public class BillDAOImplementation implements BillDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -462,6 +467,7 @@ public class BillDAOImplementation implements BillDAOInterface {
 
                 return bean;
             }
+            connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -505,14 +511,13 @@ public class BillDAOImplementation implements BillDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return null;
-
-
     }
 
 }

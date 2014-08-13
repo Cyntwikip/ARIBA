@@ -59,6 +59,7 @@ public class RoomDAOImplementation implements RoomDAOInterface {
             ps.setInt(3, roomID);
             ps.executeUpdate();
 
+            connection.close();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,112 +93,7 @@ public class RoomDAOImplementation implements RoomDAOInterface {
         return false;
 
     }
-
-    /*
-     @Override
-     public ArrayList<RoomBean> getAllCurrentKW() {
- 
-     try{
-     Connector c = new Connector();
-     Connection connection = c.getConnection();
-     String query = "select * from room";
-     PreparedStatement ps = connection.prepareStatement(query);
-            
-     ResultSet resultSet = ps.executeQuery();
-            
-     RoomBean bean = new RoomBean();
-     ArrayList<RoomBean> list = new ArrayList<RoomBean>();
-            
-     int roomID;
-     float currentKW, currentcubicmeter;
-     //String currStatus;
-            
-     while(resultSet.next()){
-     roomID = resultSet.getInt("roomID");
-     currentKW = resultSet.getFloat("currentKW");
-     currentcubicmeter = resultSet.getFloat("currentcubicmeter");
-     //currStatus = resultSet.getString("status");
-                
-     bean.setCurrentKW(currentKW);
-     bean.setCurrentcubicmeter(currentcubicmeter);
-     bean.setRoomID(roomID);
-     //bean.setStatus(currStatus);
-                
-     list.add(bean);
-     }
-     return list;
-     }   catch(SQLException ex){
-     Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
-     }
-     return null;
     
-     }
-    
-     @Override
-     public ArrayList<RoomBean> getCurrentKWbyRoom(int roomID) {  
-     try {
-     Connector c = new Connector();
-     Connection connection = c.getConnection();
-     String query = "select * from room";
-     PreparedStatement ps = connection.prepareStatement(query);
-     } catch (SQLException ex) {
-     Logger.getLogger(RoomDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
-     }
-     return null;
-        
-     }
-    
-     @Override
-     public ArrayList<RoomBean> getAllCubicMeter(int roomID) {
-     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-     }
-
-     @Override
-     public RoomBean getCubicMeter(int roomBean) {
- 
-     try{
-     Connector c = new Connector();
-     Connection connection = c.getConnection();
-     String query = "select roomID, currentcubicmeter from room where roomID=?";
-     PreparedStatement ps = connection.prepareStatement(query);
-     ps.setInt(1, roomBean);
-     ResultSet resultSet = ps.executeQuery();
-            
-     RoomBean bean = new RoomBean();
-            
-     int roomID;
-     float currentKW, currentcubicmeter;
-     String currStatus;
-            
-     while(resultSet.next()){
-     roomID = resultSet.getInt("roomID");
-     currentKW = resultSet.getFloat("currentKW");
-     currentcubicmeter = resultSet.getFloat("currentcubicmeter");
-     //currStatus = resultSet.getString("status");
-                
-     bean.setCurrentKW(currentKW);
-     bean.setCurrentcubicmeter(currentcubicmeter);
-     bean.setRoomID(roomID);
-     //bean.setStatus(currStatus);
-                
-     }
-     return bean;
-     }   catch(SQLException ex){
-     Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
-     }
-     return null;
-     }
-
-     @Override
-     public ArrayList<RoomBean> getAllUnoccupiedRooms() {
-     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-     }
-
-     @Override
-     public ArrayList<RoomBean> getAllOccupiedRooms() {
-     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-     }
-     */
     @Override
     public ArrayList<RoomBean> getAllRooms() {
         try {
@@ -229,6 +125,7 @@ public class RoomDAOImplementation implements RoomDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -267,6 +164,7 @@ public class RoomDAOImplementation implements RoomDAOInterface {
                 //bean.setStatus(status);
 
             }
+            connection.close();
             return bean;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -296,6 +194,7 @@ public class RoomDAOImplementation implements RoomDAOInterface {
                 bean.setRoomID(roomID);
             }
 
+            connection.close();
             return bean;
 
         } catch (SQLException ex) {
@@ -333,6 +232,7 @@ public class RoomDAOImplementation implements RoomDAOInterface {
                 list.add(bean);
             }
 
+            connection.close();
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(RoomDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -357,6 +257,7 @@ public class RoomDAOImplementation implements RoomDAOInterface {
                 count = resultSet.getInt("count");
             }
 
+            connection.close();
             return count;
         } catch (SQLException ex) {
             Logger.getLogger(RoomDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
