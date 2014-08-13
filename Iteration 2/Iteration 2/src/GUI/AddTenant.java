@@ -574,7 +574,7 @@ public class AddTenant extends javax.swing.JFrame {
         chooser.setAcceptAllFileFilterUsed(false);
 
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "JPG, GIF & PNG Images", "jpg", "gif", "png");
+                "JPG, GIF & PNG Images", "jpg", "gif", "png", "jpeg");
         chooser.setFileFilter(filter);
         int returnVal = chooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -587,6 +587,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
 
         }
+        
         Image img = icon.getImage();
         Image newimg = img.getScaledInstance(imgaddLabel.getWidth(), imgaddLabel.getHeight(), java.awt.Image.SCALE_SMOOTH);
         icon = new ImageIcon(newimg);
@@ -670,8 +671,12 @@ public class AddTenant extends javax.swing.JFrame {
                 tenant.setSchool(school.toUpperCase());
                 tenant.setExpectedyearofgrad(gradyear);
                 tenant.setStatus("CURRENT");
+                
+                if(tenant.getBlobimage() == null){
+                    System.out.println("Yes");
+                }
 
-                if (tenant.getBlobimage() == null) {
+                if (tenant.getImage().isEmpty()) {
                     File ff = new File("Woman.jpg");
                     ff = ff.getAbsoluteFile();
                     File fm = new File("Man.jpg");

@@ -499,7 +499,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(CurrentField);
-        CurrentField.setBounds(70, 360, 63, 23);
+        CurrentField.setBounds(70, 360, 79, 23);
 
         buttonGroup2.add(OldField);
         OldField.setText("Old");
@@ -509,7 +509,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(OldField);
-        OldField.setBounds(150, 360, 41, 23);
+        OldField.setBounds(150, 360, 54, 23);
 
         YearOfGraduationField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -517,7 +517,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(YearOfGraduationField);
-        YearOfGraduationField.setBounds(170, 190, 70, 20);
+        YearOfGraduationField.setBounds(170, 190, 70, 27);
 
         jLabel2.setText("adress");
         getContentPane().add(jLabel2);
@@ -540,7 +540,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         guardianfname.setText("fname");
         getContentPane().add(guardianfname);
-        guardianfname.setBounds(610, 300, 130, 14);
+        guardianfname.setBounds(610, 300, 130, 16);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tenanttab-peg-edited.png"))); // NOI18N
         getContentPane().add(jLabel1);
