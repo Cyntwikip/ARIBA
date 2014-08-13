@@ -92,7 +92,7 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from attendancelog where log_tenantID = ?";
+            String query = "select * from attendancelog where log_tenantID = ? order by logID desc";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, log_tenantID);
             ResultSet resultSet = ps.executeQuery();
