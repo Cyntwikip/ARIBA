@@ -252,6 +252,7 @@ public class MainMenu extends javax.swing.JFrame {
         guardiancontactno = new javax.swing.JLabel();
         roomassignment = new javax.swing.JLabel();
         status = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         NameField = new javax.swing.JTextField();
@@ -330,6 +331,19 @@ public class MainMenu extends javax.swing.JFrame {
         status.setText("stat");
         getContentPane().add(status);
         status.setBounds(590, 370, 70, 20);
+
+        jButton3.setToolTipText("");
+        jButton3.setBorder(null);
+        jButton3.setBorderPainted(false);
+        jButton3.setContentAreaFilled(false);
+        jButton3.setOpaque(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(140, 10, 110, 40);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/AddTenant.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -453,7 +467,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(CurrentField);
-        CurrentField.setBounds(70, 360, 79, 23);
+        CurrentField.setBounds(70, 360, 63, 23);
 
         buttonGroup2.add(OldField);
         OldField.setText("Old");
@@ -463,7 +477,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(OldField);
-        OldField.setBounds(150, 360, 54, 23);
+        OldField.setBounds(150, 360, 41, 23);
 
         YearOfGraduationField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -471,7 +485,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(YearOfGraduationField);
-        YearOfGraduationField.setBounds(170, 190, 70, 27);
+        YearOfGraduationField.setBounds(170, 190, 70, 20);
 
         jLabel2.setText("adress");
         getContentPane().add(jLabel2);
@@ -494,7 +508,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         guardianfname.setText("fname");
         getContentPane().add(guardianfname);
-        guardianfname.setBounds(610, 300, 130, 16);
+        guardianfname.setBounds(610, 300, 130, 14);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tenanttab-peg-edited.png"))); // NOI18N
         getContentPane().add(jLabel1);
@@ -593,6 +607,13 @@ public class MainMenu extends javax.swing.JFrame {
         getSelection();
     }//GEN-LAST:event_jTable1KeyReleased
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        Room room = new Room();
+        room.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -656,6 +677,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel imgLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
