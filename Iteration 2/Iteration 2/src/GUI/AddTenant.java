@@ -138,6 +138,8 @@ public class AddTenant extends javax.swing.JFrame {
             icon = new ImageIcon(img);
             imgaddLabel.setIcon(icon);
         }
+        
+        tenant.setBlobimage(tenant.getBlobimage());
 
         //get birthday month
         for (int i = 0; i < MonthField.getItemCount(); i++) {
@@ -669,7 +671,7 @@ public class AddTenant extends javax.swing.JFrame {
                 tenant.setExpectedyearofgrad(gradyear);
                 tenant.setStatus("CURRENT");
 
-                if (tenant.getImage().isEmpty()) {
+                if (tenant.getBlobimage() == null) {
                     File ff = new File("Woman.jpg");
                     ff = ff.getAbsoluteFile();
                     File fm = new File("Man.jpg");
@@ -733,22 +735,31 @@ public class AddTenant extends javax.swing.JFrame {
                         this.dispose();
 
                     } else {
+                        if(tenant != null){
+                            tenantImpl.deleteTenant(tenant);
+                        }
+                        
+                        if(guard != null){
+                            guardImpl.deleteGuardian(guard);
+                        }
+                        
+                        if(tg1){
+                            guardImpl.deleteAssignedTenantGuardian(tenant);
+                        }
                         JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correctly.");
                     }
 
                     // edit tenant    
                 } else {
                     boolean edittenant = tenantImpl.editTenant(tenant);
-
-                    guard.setFname(GuardianFirstnameField.getText().toUpperCase());
-                    guard.setLname(GuardianSurnameField.getText().toUpperCase());
-                    guard.setContact(GuardianContactField.getText());
-                    guard.setEmail(GuardianEmailField.getText());
-
+                    System.out.println(edittenant);
                     boolean editguardian = guardImpl.editGuardian(guard, guard.getGuardianID());
-
+                    System.out.println(editguardian);
                     if (edittenant && editguardian) {
                         JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + "'s information has been successfully edited.");
+                        this.dispose();
+                        MainMenu main = new MainMenu();
+                        main.setVisible(true);
                     } else {
                         JOptionPane.showMessageDialog(null, "Not successful");
                     }

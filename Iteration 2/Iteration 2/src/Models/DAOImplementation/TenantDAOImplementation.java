@@ -49,7 +49,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 } catch (IOException ex) {
                     Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }else{
+            } else {
                 ps.setBlob(3, tenant.getBlobimage());
             }
             ps.setString(4, tenant.getContact());
@@ -735,15 +735,20 @@ public class TenantDAOImplementation implements TenantDAOInterface {
             String query = "update tenant set image = ?, contact = ?, gender = ?, address = ?, degree = ?, school = ?, expectedyearofgrad = ?, status=?, fname = ?, lname = ?, email = ?, birthday = ? where tenantID = ?";
             PreparedStatement ps = connection.prepareStatement(query);
             FileInputStream fin = null;
-            try {
-                fin = new FileInputStream(tenant.getImage());
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                ps.setBinaryStream(1, fin, fin.available());
-            } catch (IOException ex) {
-                Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+
+            if (tenant.getImage() != null) {
+                try {
+                    fin = new FileInputStream(tenant.getImage());
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    ps.setBinaryStream(1, fin, fin.available());
+                } catch (IOException ex) {
+                    Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                ps.setBlob(1, tenant.getBlobimage());
             }
             ps.setString(2, tenant.getContact());
             ps.setString(3, tenant.getGender());
@@ -831,8 +836,8 @@ public class TenantDAOImplementation implements TenantDAOInterface {
 
     @Override
     public ArrayList<TenantBean> getAllTenantsWithoutRoom() {
-        
-               try {
+
+        try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
             String query = "select tenant.lname, tenant.fname, tenant.tenantID from tenant, tenantroom where tr_tenantID = tenantID order asc";
@@ -887,6 +892,23 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         }
 
         return null;
+    }
+
+    @Override
+    public boolean deleteTenant(TenantBean tenant) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "delete from Tenant where tenantID = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, tenant.getTenantID());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+
+        return true;
     }
 
 }
