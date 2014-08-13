@@ -26,5 +26,7 @@ public interface GuardianDAOInterface {
     public ArrayList<GuardianBean> getAllGuardians();
     public ArrayList<TenantBean> getTenantsRelatedToGuardian(int guardianID);
     public GuardianBean searchGuardianByName(String name);
+    public boolean deleteGuardian(GuardianBean guardian);
+    public boolean deleteAssignedTenantGuardian(TenantBean tenant);
     
 }

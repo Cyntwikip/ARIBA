@@ -433,4 +433,38 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
         return null;
     }
 
+    @Override
+    public boolean deleteGuardian(GuardianBean guardian) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "delete from Guardian where guardianID = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, guardian.getGuardianID());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(GuardianDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        
+        return true;
+    }
+
+    @Override
+    public boolean deleteAssignedTenantGuardian(TenantBean tenant) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "delete from TenantGuardian where tg_tenantID = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, tenant.getTenantID());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(GuardianDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
+        
+    }
+
 }

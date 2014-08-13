@@ -30,6 +30,7 @@ public interface TenantDAOInterface {
     public ArrayList<TenantBean> getTenantByRoomID(int tenant_roomID);
     public ArrayList<TenantBean> searchTenantName(String name);
     public ArrayList<TenantBean> getAllTenantsWithoutRoom();
+    public boolean deleteTenant(TenantBean tenant);
     
     
 }
