@@ -38,21 +38,7 @@ public class Logging extends javax.swing.JFrame {
         Calendar c = Calendar.getInstance();
 
         System.out.println(c.getTime());
-        
-        ArrayList<TenantBean> tbeanlist = new ArrayList<TenantBean>();
-        TenantDAOInterface tdao = new TenantDAOImplementation();
-        tbeanlist = tdao.getAllTenants();
-        
-        for(int i=0; i<tbeanlist.size(); i++){
-            String fname = tbeanlist.get(i).getFname();
-            String lname = tbeanlist.get(i).getLname();
-            String tenantID = Integer.toString(tbeanlist.get(i).getTenantID());
-            
-            jComboBox1.addItem(tenantID + ": "+ lname +", "+fname);
-            
-            
-        }
-        
+
     }
 
     public void updateTable() {
@@ -143,7 +129,6 @@ public class Logging extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -153,7 +138,6 @@ public class Logging extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -161,19 +145,6 @@ public class Logging extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(800, 450));
         setResizable(false);
         getContentPane().setLayout(null);
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField1KeyReleased(evt);
-            }
-        });
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(80, 250, 180, 40);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/imgoingout.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -250,9 +221,6 @@ public class Logging extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(90, 130, 190, 60);
 
-        getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(90, 190, 160, 20);
-
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/logging-peg-edited.png"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 800, 450);
@@ -260,14 +228,16 @@ public class Logging extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         // in
-        int tenantid = Integer.parseInt(jTextField1.getText());
+
+        int col = 0;
+        int row = jTable1.getSelectedRow();
+        Object tenant = jTable1.getModel().getValueAt(row, 0);
+        String tenantID = tenant.toString().substring(0, 1);
+        System.out.println(tenantID);
+        int tenantid = Integer.parseInt(tenantID);
 
         TenantDAOImplementation tdao = new TenantDAOImplementation();
         TenantBean bean = new TenantBean();
@@ -282,7 +252,7 @@ public class Logging extends javax.swing.JFrame {
 
         if (bean.getFname() == null) {
             JOptionPane.showMessageDialog(null, "No tenant ID " + tenantid);
-            jTextField1.setText("");
+
         } else if (alist.isEmpty()) {
             Calendar c = Calendar.getInstance();
             Timestamp time = new Timestamp(c.getTimeInMillis());
@@ -293,8 +263,6 @@ public class Logging extends javax.swing.JFrame {
             logbean.setIsIn(true);
 
             logdao.addAttendanceLogDAOInterface(logbean);
-
-            jTextField1.setText("");
 
             updateTable1();
 
@@ -309,8 +277,6 @@ public class Logging extends javax.swing.JFrame {
 
             logdao.addAttendanceLogDAOInterface(logbean);
 
-            jTextField1.setText("");
-
             updateTable1();
 
         } else {
@@ -323,8 +289,15 @@ public class Logging extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         // out
-        int tenantid = Integer.parseInt(jTextField1.getText());
 
+        int col = 0;
+        int row = jTable1.getSelectedRow();
+        Object tenant = jTable1.getModel().getValueAt(row, 0);
+        String tenantID = tenant.toString().substring(0, 1);
+        System.out.println(tenantID);
+        int tenantid = Integer.parseInt(tenantID);
+
+        System.out.println(tenantid);
         TenantDAOImplementation tdao = new TenantDAOImplementation();
         TenantBean bean = new TenantBean();
         bean = tdao.getTenantById(tenantid);
@@ -338,7 +311,7 @@ public class Logging extends javax.swing.JFrame {
 
         if (bean.getFname() == null) {
             JOptionPane.showMessageDialog(null, "No tenant ID " + tenantid);
-            jTextField1.setText("");
+            //      jTextField1.setText("");
         } else if (alist.isEmpty()) {
             Calendar c = Calendar.getInstance();
             Timestamp time = new Timestamp(c.getTimeInMillis());
@@ -350,8 +323,7 @@ public class Logging extends javax.swing.JFrame {
 
             logdao.addAttendanceLogDAOInterface(logbean);
 
-            jTextField1.setText("");
-
+            //      jTextField1.setText("");
             updateTable1();
         } else if (alist.get(0).getIsIn()) { // isIn = true
 
@@ -366,8 +338,7 @@ public class Logging extends javax.swing.JFrame {
 
             logdao.addAttendanceLogDAOInterface(logbean);
 
-            jTextField1.setText("");
-
+            //       jTextField1.setText("");
             updateTable1();
         } else {
             JOptionPane.showMessageDialog(null, "You are not allowed to log out. Log in first before logging out."); // di balance yung log in
@@ -375,29 +346,6 @@ public class Logging extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
-        // TODO add your handling code here:
-
-        char c = evt.getKeyChar();
-        String input = "";
-        String trim;
-        String re1 = "^(\\d*)$";
-        int last;
-        if (!jTextField1.getText().isEmpty()) {
-            input = jTextField1.getText();
-        }
-
-        if (input.matches(re1)) {
-
-        } else {
-            trim = input.substring(0, input.length() - 1);
-            input = trim;
-            System.out.println(trim);
-        }
-
-        jTextField1.setText(input);
-    }//GEN-LAST:event_jTextField1KeyReleased
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -475,11 +423,9 @@ public class Logging extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

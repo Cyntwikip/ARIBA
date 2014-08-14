@@ -107,9 +107,12 @@ public class AddTenant extends javax.swing.JFrame {
         AddressField.setText(tenant.getAddress());
         if (tenant.getGender().equalsIgnoreCase("Male")) {
             MaleField.doClick();
+
         } else {
             FemaleField.doClick();
         }
+        MaleField.setEnabled(false);
+        FemaleField.setEnabled(false);
         ContactNumberField1.setText(tenant.getContact());
         EmailAddressField.setText(tenant.getEmail());
         SchoolField.setText(tenant.getSchool());
@@ -138,7 +141,7 @@ public class AddTenant extends javax.swing.JFrame {
             icon = new ImageIcon(img);
             imgaddLabel.setIcon(icon);
         }
-        
+
         tenant.setBlobimage(tenant.getBlobimage());
 
         //get birthday month
@@ -587,7 +590,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
 
         }
-        
+
         Image img = icon.getImage();
         Image newimg = img.getScaledInstance(imgaddLabel.getWidth(), imgaddLabel.getHeight(), java.awt.Image.SCALE_SMOOTH);
         icon = new ImageIcon(newimg);
@@ -671,8 +674,8 @@ public class AddTenant extends javax.swing.JFrame {
                 tenant.setSchool(school.toUpperCase());
                 tenant.setExpectedyearofgrad(gradyear);
                 tenant.setStatus("CURRENT");
-                
-                if(tenant.getBlobimage() == null){
+
+                if (tenant.getBlobimage() == null) {
                     System.out.println("Yes");
                 }
 
@@ -740,15 +743,15 @@ public class AddTenant extends javax.swing.JFrame {
                         this.dispose();
 
                     } else {
-                        if(tenant != null){
+                        if (tenant != null) {
                             tenantImpl.deleteTenant(tenant);
                         }
-                        
-                        if(guard != null){
+
+                        if (guard != null) {
                             guardImpl.deleteGuardian(guard);
                         }
-                        
-                        if(tg1){
+
+                        if (tg1) {
                             guardImpl.deleteAssignedTenantGuardian(tenant);
                         }
                         JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correctly.");
