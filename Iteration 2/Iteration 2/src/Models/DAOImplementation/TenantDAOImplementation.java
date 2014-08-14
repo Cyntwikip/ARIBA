@@ -736,7 +736,9 @@ public class TenantDAOImplementation implements TenantDAOInterface {
             PreparedStatement ps = connection.prepareStatement(query);
             FileInputStream fin = null;
 
-            if (tenant.getImage() != null) {
+            if (tenant.getImage().isEmpty()) {
+                ps.setBlob(1, tenant.getBlobimage());
+            }else{
                 try {
                     fin = new FileInputStream(tenant.getImage());
                 } catch (FileNotFoundException ex) {
@@ -747,8 +749,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 } catch (IOException ex) {
                     Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }else{
-                ps.setBlob(1, tenant.getBlobimage());
+                
             }
             ps.setString(2, tenant.getContact());
             ps.setString(3, tenant.getGender());

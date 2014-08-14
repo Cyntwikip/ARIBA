@@ -137,6 +137,7 @@ public class AddTenant extends javax.swing.JFrame {
             img = img.getScaledInstance(imgaddLabel.getWidth(), imgaddLabel.getHeight(), Image.SCALE_SMOOTH);
             icon = new ImageIcon(img);
             imgaddLabel.setIcon(icon);
+            tenant.setImage("");
         }
         
         tenant.setBlobimage(tenant.getBlobimage());
@@ -675,8 +676,8 @@ public class AddTenant extends javax.swing.JFrame {
                 if(tenant.getBlobimage() == null){
                     System.out.println("Yes");
                 }
-
-                if (tenant.getImage().isEmpty()) {
+                System.out.println(tenant.getImage());
+                if (tenant.getImage() == null) {
                     File ff = new File("Woman.jpg");
                     ff = ff.getAbsoluteFile();
                     File fm = new File("Man.jpg");
