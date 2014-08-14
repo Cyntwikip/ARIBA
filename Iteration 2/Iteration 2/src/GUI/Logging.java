@@ -38,6 +38,21 @@ public class Logging extends javax.swing.JFrame {
         Calendar c = Calendar.getInstance();
 
         System.out.println(c.getTime());
+        
+        ArrayList<TenantBean> tbeanlist = new ArrayList<TenantBean>();
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+        tbeanlist = tdao.getAllTenants();
+        
+        for(int i=0; i<tbeanlist.size(); i++){
+            String fname = tbeanlist.get(i).getFname();
+            String lname = tbeanlist.get(i).getLname();
+            String tenantID = Integer.toString(tbeanlist.get(i).getTenantID());
+            
+            jComboBox1.addItem(tenantID + ": "+ lname +", "+fname);
+            
+            
+        }
+        
     }
 
     public void updateTable() {
@@ -138,6 +153,7 @@ public class Logging extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -233,6 +249,9 @@ public class Logging extends javax.swing.JFrame {
         jLabel2.setText("Current Date and Time HERE! ");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(90, 130, 190, 60);
+
+        getContentPane().add(jComboBox1);
+        jComboBox1.setBounds(90, 190, 160, 20);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/logging-peg-edited.png"))); // NOI18N
         getContentPane().add(jLabel1);
@@ -456,6 +475,7 @@ public class Logging extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

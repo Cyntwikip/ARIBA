@@ -3,9 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/Users/adrian/Documents/Term_7/INTROSE/MP/Iteration%202/Iteration%202/src/Models/DAOImplementation/TenantDAOImplementation.java</file>
             <file>file:/Users/adrian/Documents/Term_7/INTROSE/MP/Iteration%202/Iteration%202/src/GUI/MainMenu.java</file>
             <file>file:/Users/adrian/Documents/Term_7/INTROSE/MP/Iteration%202/Iteration%202/src/GUI/AddTenant.java</file>
+=======
+            <file>file:/D:/College/TERM%207/INTROSE/MP/ARIBA/Iteration%202/Iteration%202/src/GUI/Logging.java</file>
+            <file>file:/D:/College/TERM%207/INTROSE/MP/ARIBA/Iteration%202/Iteration%202/src/GUI/AddTenant.java</file>
+>>>>>>> 6da9f1bcfdcc3f79b46cc41c95dd71fb4b3d4f08
         </group>
     </open-files>
 </project-private>
