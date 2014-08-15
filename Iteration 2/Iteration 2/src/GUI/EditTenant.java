@@ -30,6 +30,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -53,13 +54,14 @@ public class EditTenant extends javax.swing.JPanel {
     public EditTenant(int id) {
         initComponents();
 
+        
         buttonGroup1.add(MaleField);
         buttonGroup1.add(FemaleField);
         
         tenant = tdao.getTenantById(id);
         int tenantID;
+        
         tenantID = tenant.getTenantID();
-        initComponents();
 
         int year = Calendar.getInstance().get(Calendar.YEAR);
 
@@ -159,214 +161,41 @@ public class EditTenant extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jTextField3 = new javax.swing.JTextField();
-        MaleField = new javax.swing.JRadioButton();
-        FemaleField = new javax.swing.JRadioButton();
-        ContactNumberField1 = new javax.swing.JTextField();
-        EmailAddressField = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        imgaddLabel = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        FirstnameField = new javax.swing.JTextField();
         SchoolField = new javax.swing.JTextField();
         DegreeField = new javax.swing.JTextField();
         YearOfGraduationField = new javax.swing.JComboBox();
+        MonthField = new javax.swing.JComboBox();
+        jTextField3 = new javax.swing.JTextField();
+        DayField = new javax.swing.JComboBox();
+        YearField = new javax.swing.JComboBox();
+        FemaleField = new javax.swing.JRadioButton();
+        MaleField = new javax.swing.JRadioButton();
+        ContactNumberField1 = new javax.swing.JTextField();
+        EmailAddressField = new javax.swing.JTextField();
         GuardianSurnameField = new javax.swing.JTextField();
         GuardianFirstnameField = new javax.swing.JTextField();
         GuardianContactField = new javax.swing.JTextField();
         GuardianEmailField = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        imgaddLabel = new javax.swing.JLabel();
-        MonthField = new javax.swing.JComboBox();
-        DayField = new javax.swing.JComboBox();
-        YearField = new javax.swing.JComboBox();
-        FirstnameField = new javax.swing.JTextField();
         SurnameField = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jLabel1 = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(1000, 680));
         setLayout(null);
 
-        jTextField3.setText("jTextField3");
-        add(jTextField3);
-        jTextField3.setBounds(430, 290, 170, 60);
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setOpaque(false);
+        jPanel1.setLayout(null);
 
-        MaleField.setText("Male");
-        MaleField.setActionCommand("Male");
-        MaleField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MaleFieldActionPerformed(evt);
-            }
-        });
-        add(MaleField);
-        MaleField.setBounds(420, 360, 70, 23);
-
-        FemaleField.setText("Female\n");
-        FemaleField.setActionCommand("Female");
-        FemaleField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FemaleFieldActionPerformed(evt);
-            }
-        });
-        add(FemaleField);
-        FemaleField.setBounds(500, 360, 90, 23);
-
-        ContactNumberField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ContactNumberField1ActionPerformed(evt);
-            }
-        });
-        ContactNumberField1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                ContactNumberField1FocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                ContactNumberField1FocusLost(evt);
-            }
-        });
-        ContactNumberField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                ContactNumberField1KeyReleased(evt);
-            }
-        });
-        add(ContactNumberField1);
-        ContactNumberField1.setBounds(470, 390, 130, 30);
-
-        EmailAddressField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                EmailAddressFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                EmailAddressFieldFocusLost(evt);
-            }
-        });
-        add(EmailAddressField);
-        EmailAddressField.setBounds(470, 420, 130, 30);
-
-        SchoolField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                SchoolFieldFocusLost(evt);
-            }
-        });
-        SchoolField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                SchoolFieldKeyTyped(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                SchoolFieldKeyReleased(evt);
-            }
-        });
-        add(SchoolField);
-        SchoolField.setBounds(650, 200, 190, 30);
-
-        DegreeField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                DegreeFieldFocusLost(evt);
-            }
-        });
-        DegreeField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                DegreeFieldKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                DegreeFieldKeyTyped(evt);
-            }
-        });
-        add(DegreeField);
-        DegreeField.setBounds(650, 230, 190, 30);
-
-        YearOfGraduationField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                YearOfGraduationFieldActionPerformed(evt);
-            }
-        });
-        add(YearOfGraduationField);
-        YearOfGraduationField.setBounds(720, 260, 120, 30);
-
-        GuardianSurnameField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                GuardianSurnameFieldFocusLost(evt);
-            }
-        });
-        GuardianSurnameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardianSurnameFieldActionPerformed(evt);
-            }
-        });
-        GuardianSurnameField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                GuardianSurnameFieldKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                GuardianSurnameFieldKeyTyped(evt);
-            }
-        });
-        add(GuardianSurnameField);
-        GuardianSurnameField.setBounds(670, 330, 170, 30);
-
-        GuardianFirstnameField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                GuardianFirstnameFieldFocusLost(evt);
-            }
-        });
-        GuardianFirstnameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardianFirstnameFieldActionPerformed(evt);
-            }
-        });
-        GuardianFirstnameField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                GuardianFirstnameFieldKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                GuardianFirstnameFieldKeyTyped(evt);
-            }
-        });
-        add(GuardianFirstnameField);
-        GuardianFirstnameField.setBounds(670, 360, 170, 30);
-
-        GuardianContactField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                GuardianContactFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                GuardianContactFieldFocusLost(evt);
-            }
-        });
-        GuardianContactField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                GuardianContactFieldKeyReleased(evt);
-            }
-        });
-        add(GuardianContactField);
-        GuardianContactField.setBounds(700, 390, 140, 30);
-
-        GuardianEmailField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                GuardianEmailFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                GuardianEmailFieldFocusLost(evt);
-            }
-        });
-        add(GuardianEmailField);
-        GuardianEmailField.setBounds(700, 420, 140, 30);
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/save.png"))); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        add(jButton3);
-        jButton3.setBounds(760, 460, 80, 40);
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/backbutton.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        add(jButton1);
-        jButton1.setBounds(660, 460, 80, 40);
+        imgaddLabel.setText("         Choose photo");
+        jPanel1.add(imgaddLabel);
+        imgaddLabel.setBounds(60, 40, 160, 160);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/choosephoto.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -374,38 +203,8 @@ public class EditTenant extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2);
-        jButton2.setBounds(170, 400, 140, 40);
-
-        imgaddLabel.setText("         Choose photo");
-        add(imgaddLabel);
-        imgaddLabel.setBounds(160, 230, 160, 160);
-
-        MonthField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }));
-        MonthField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MonthFieldActionPerformed(evt);
-            }
-        });
-        add(MonthField);
-        MonthField.setBounds(420, 260, 60, 20);
-
-        DayField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        DayField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DayFieldActionPerformed(evt);
-            }
-        });
-        add(DayField);
-        DayField.setBounds(480, 260, 50, 20);
-
-        YearField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                YearFieldActionPerformed(evt);
-            }
-        });
-        add(YearField);
-        YearField.setBounds(530, 260, 70, 20);
+        jPanel1.add(jButton2);
+        jButton2.setBounds(70, 210, 140, 40);
 
         FirstnameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -425,8 +224,219 @@ public class EditTenant extends javax.swing.JPanel {
                 FirstnameFieldKeyReleased(evt);
             }
         });
-        add(FirstnameField);
-        FirstnameField.setBounds(430, 230, 170, 30);
+        jPanel1.add(FirstnameField);
+        FirstnameField.setBounds(330, 40, 170, 30);
+
+        SchoolField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                SchoolFieldFocusLost(evt);
+            }
+        });
+        SchoolField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                SchoolFieldKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                SchoolFieldKeyReleased(evt);
+            }
+        });
+        jPanel1.add(SchoolField);
+        SchoolField.setBounds(550, 10, 190, 30);
+
+        DegreeField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                DegreeFieldFocusLost(evt);
+            }
+        });
+        DegreeField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                DegreeFieldKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                DegreeFieldKeyTyped(evt);
+            }
+        });
+        jPanel1.add(DegreeField);
+        DegreeField.setBounds(550, 40, 190, 30);
+
+        YearOfGraduationField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                YearOfGraduationFieldActionPerformed(evt);
+            }
+        });
+        jPanel1.add(YearOfGraduationField);
+        YearOfGraduationField.setBounds(620, 70, 120, 30);
+
+        MonthField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }));
+        MonthField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MonthFieldActionPerformed(evt);
+            }
+        });
+        jPanel1.add(MonthField);
+        MonthField.setBounds(330, 80, 60, 20);
+
+        jTextField3.setText("jTextField3");
+        jPanel1.add(jTextField3);
+        jTextField3.setBounds(320, 110, 180, 60);
+
+        DayField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        DayField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DayFieldActionPerformed(evt);
+            }
+        });
+        jPanel1.add(DayField);
+        DayField.setBounds(390, 80, 50, 20);
+
+        YearField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                YearFieldActionPerformed(evt);
+            }
+        });
+        jPanel1.add(YearField);
+        YearField.setBounds(440, 80, 60, 20);
+
+        FemaleField.setText("Female\n");
+        FemaleField.setActionCommand("Female");
+        FemaleField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FemaleFieldActionPerformed(evt);
+            }
+        });
+        jPanel1.add(FemaleField);
+        FemaleField.setBounds(400, 180, 90, 23);
+
+        MaleField.setText("Male");
+        MaleField.setActionCommand("Male");
+        MaleField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MaleFieldActionPerformed(evt);
+            }
+        });
+        jPanel1.add(MaleField);
+        MaleField.setBounds(330, 180, 70, 23);
+
+        ContactNumberField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ContactNumberField1ActionPerformed(evt);
+            }
+        });
+        ContactNumberField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                ContactNumberField1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                ContactNumberField1FocusLost(evt);
+            }
+        });
+        ContactNumberField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                ContactNumberField1KeyReleased(evt);
+            }
+        });
+        jPanel1.add(ContactNumberField1);
+        ContactNumberField1.setBounds(370, 200, 130, 30);
+
+        EmailAddressField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                EmailAddressFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                EmailAddressFieldFocusLost(evt);
+            }
+        });
+        jPanel1.add(EmailAddressField);
+        EmailAddressField.setBounds(360, 230, 140, 30);
+
+        GuardianSurnameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                GuardianSurnameFieldFocusLost(evt);
+            }
+        });
+        GuardianSurnameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardianSurnameFieldActionPerformed(evt);
+            }
+        });
+        GuardianSurnameField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                GuardianSurnameFieldKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                GuardianSurnameFieldKeyTyped(evt);
+            }
+        });
+        jPanel1.add(GuardianSurnameField);
+        GuardianSurnameField.setBounds(570, 140, 180, 30);
+
+        GuardianFirstnameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                GuardianFirstnameFieldFocusLost(evt);
+            }
+        });
+        GuardianFirstnameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardianFirstnameFieldActionPerformed(evt);
+            }
+        });
+        GuardianFirstnameField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                GuardianFirstnameFieldKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                GuardianFirstnameFieldKeyTyped(evt);
+            }
+        });
+        jPanel1.add(GuardianFirstnameField);
+        GuardianFirstnameField.setBounds(570, 170, 180, 30);
+
+        GuardianContactField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                GuardianContactFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                GuardianContactFieldFocusLost(evt);
+            }
+        });
+        GuardianContactField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                GuardianContactFieldKeyReleased(evt);
+            }
+        });
+        jPanel1.add(GuardianContactField);
+        GuardianContactField.setBounds(610, 200, 140, 30);
+
+        GuardianEmailField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                GuardianEmailFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                GuardianEmailFieldFocusLost(evt);
+            }
+        });
+        jPanel1.add(GuardianEmailField);
+        GuardianEmailField.setBounds(600, 230, 150, 30);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/save.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3);
+        jButton3.setBounds(650, 270, 80, 40);
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/backbutton.png"))); // NOI18N
+        jButton1.setOpaque(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(540, 270, 80, 40);
 
         SurnameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -446,13 +456,22 @@ public class EditTenant extends javax.swing.JPanel {
                 SurnameFieldKeyReleased(evt);
             }
         });
-        add(SurnameField);
-        SurnameField.setBounds(430, 200, 170, 30);
+        jPanel1.add(SurnameField);
+        SurnameField.setBounds(330, 10, 170, 30);
+
+        add(jPanel1);
+        jPanel1.setBounds(100, 190, 770, 330);
+
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(1000, 870));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(1000, 870));
+        jScrollPane1.setWheelScrollingEnabled(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addedit-peg-edited.png"))); // NOI18N
         jLabel1.setOpaque(true);
-        add(jLabel1);
-        jLabel1.setBounds(0, 0, 1000, 650);
+        jScrollPane1.setViewportView(jLabel1);
+
+        add(jScrollPane1);
+        jScrollPane1.setBounds(0, 0, 1002, 652);
     }// </editor-fold>//GEN-END:initComponents
 
     private void MaleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaleFieldActionPerformed
@@ -886,8 +905,9 @@ public class EditTenant extends javax.swing.JPanel {
                     if (edittenant && editguardian) {
                         JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + "'s information has been successfully edited.");
                         //         this.dispose();
-                        MainMenu main = new MainMenu();
-                        main.setVisible(true);
+
+                        
+                        
                     } else {
                         JOptionPane.showMessageDialog(null, "Not successful");
                     }
@@ -901,9 +921,10 @@ public class EditTenant extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        MainMenu menu = new MainMenu();
-        menu.setVisible(true);
-        //       this.dispose();
+
+        jPanel1.hide();
+        Tenant t = new Tenant();
+        jScrollPane1.setViewportView(t);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1067,6 +1088,8 @@ public class EditTenant extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 

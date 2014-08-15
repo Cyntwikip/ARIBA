@@ -43,6 +43,7 @@ public class NewJFrame extends javax.swing.JFrame {
         System.out.println("here");
         
         EditTenant et = new EditTenant(id);
+        setContentPane(et);
         jScrollPane1.setViewportView(et);
     }
 
@@ -62,15 +63,17 @@ public class NewJFrame extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1000, 680));
         getContentPane().setLayout(null);
 
+        jPanel2.setPreferredSize(new java.awt.Dimension(1790, 680));
         jPanel2.setLayout(null);
 
-        jScrollPane1.setMinimumSize(new java.awt.Dimension(1000, 680));
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(1000, 680));
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(1000, 720));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(1000, 720));
         jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(0, 0, 1830, 680);
+        jScrollPane1.setBounds(0, 0, 1830, 670);
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 0, 1790, 550);
+        jPanel2.setBounds(0, 0, 1790, 540);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
