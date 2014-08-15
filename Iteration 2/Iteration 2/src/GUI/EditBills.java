@@ -85,10 +85,13 @@ public class EditBills extends javax.swing.JFrame {
         ArrayList<BillBean> bbeanlist = new ArrayList<BillBean>();
         BillDAOInterface bdao = new BillDAOImplementation();
         bbeanlist = bdao.getAllBills();
+        ArrayList<WaterReadingBean> wbeanlist = new ArrayList<WaterReadingBean>();
+        WaterReadingDAOInterface wdao = new WaterDAOImplementation();
         if (ebeanlist.isEmpty()) {
             System.out.println("wala pa laman.");
-        } else {
-
+        } else { // meron na. get the latest nalang
+            jTextField1.setText(ebeanlist.get(ebeanlist.size()-1).get)
+                    // electricity consumption
                     
         }
 
@@ -459,8 +462,7 @@ public class EditBills extends javax.swing.JFrame {
 
         }
 
-        this.setVisible(
-                false);
+        this.setVisible(false);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
