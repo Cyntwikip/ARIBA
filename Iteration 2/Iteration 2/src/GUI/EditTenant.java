@@ -182,6 +182,7 @@ public class EditTenant extends javax.swing.JPanel {
         SurnameField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
+        setMinimumSize(new java.awt.Dimension(1000, 680));
         setLayout(null);
 
         jTextField3.setText("jTextField3");
@@ -449,6 +450,7 @@ public class EditTenant extends javax.swing.JPanel {
         SurnameField.setBounds(430, 200, 170, 30);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addedit-peg-edited.png"))); // NOI18N
+        jLabel1.setOpaque(true);
         add(jLabel1);
         jLabel1.setBounds(0, 0, 1000, 650);
     }// </editor-fold>//GEN-END:initComponents
