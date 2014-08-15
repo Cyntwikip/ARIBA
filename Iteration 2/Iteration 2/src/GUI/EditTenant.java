@@ -55,8 +55,8 @@ public class EditTenant extends javax.swing.JPanel {
 
         buttonGroup1.add(MaleField);
         buttonGroup1.add(FemaleField);
-
-        TenantBean tenant = tdao.getTenantById(id);
+        
+        tenant = tdao.getTenantById(id);
         int tenantID;
         tenantID = tenant.getTenantID();
         initComponents();
@@ -95,7 +95,6 @@ public class EditTenant extends javax.swing.JPanel {
         DegreeField.setText(tenant.getDegree());
         YearOfGraduationField.setSelectedItem(tenant.getExpectedyearofgrad());
 
-        GuardianBean guard = new GuardianBean();
         // guardian part
         guard = gdao.getGuardianByTenantID(id);
         int guardID;
@@ -755,7 +754,6 @@ public class EditTenant extends javax.swing.JPanel {
         String guardContact = GuardianContactField.getText();
         String guardEmail = GuardianEmailField.getText();
 
-        TenantBean tenant = new TenantBean();
         GuardianBean guard = new GuardianBean();
         boolean empty = false;
         if (FirstnameField.getText().isEmpty()

@@ -99,7 +99,7 @@ public class Tenant extends javax.swing.JPanel {
         lname.setText(bean.getLname());
         fname.setText(bean.getFname());
 //             birthday.setText(java.sql.Date.toString(bean.getBirthday()));
-        jLabel2.setText(bean.getAddress());
+//        jLabel2.setText(bean.getAddress());
         jLabel3.setText(bean.getGender());
         contactno.setText(bean.getContact());
         //    email.setText(bean.getEmail());
@@ -279,15 +279,13 @@ public class Tenant extends javax.swing.JPanel {
         add(jScrollPane1);
         jScrollPane1.setBounds(270, 80, 350, 520);
         add(imgLabel);
-        imgLabel.setBounds(700, 180, 50, 50);
+        imgLabel.setBounds(850, 100, 80, 80);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addnewtenant.png"))); // NOI18N
         add(jButton1);
         jButton1.setBounds(80, 430, 160, 40);
-
-        jLabel2.setText("jLabel2");
         add(jLabel2);
-        jLabel2.setBounds(850, 100, 80, 80);
+        jLabel2.setBounds(700, 120, 80, 80);
 
         jLabel3.setText("First Name:");
         add(jLabel3);
@@ -315,27 +313,27 @@ public class Tenant extends javax.swing.JPanel {
 
         fname.setText("jLabel9");
         add(fname);
-        fname.setBounds(780, 220, 34, 14);
+        fname.setBounds(780, 220, 130, 14);
 
         lname.setText("jLabel10");
         add(lname);
-        lname.setBounds(780, 260, 40, 14);
+        lname.setBounds(780, 260, 140, 14);
 
         jLabel11.setText("jLabel11");
         add(jLabel11);
-        jLabel11.setBounds(780, 300, 40, 14);
+        jLabel11.setBounds(780, 300, 130, 14);
 
         jLabel12.setText("jLabel12");
         add(jLabel12);
-        jLabel12.setBounds(810, 340, 40, 14);
+        jLabel12.setBounds(810, 340, 110, 14);
 
         roomassignment.setText("jLabel13");
         add(roomassignment);
-        roomassignment.setBounds(790, 380, 40, 14);
+        roomassignment.setBounds(790, 380, 120, 14);
 
         contactno.setText("jLabel14");
         add(contactno);
-        contactno.setBounds(810, 420, 40, 14);
+        contactno.setBounds(810, 420, 120, 14);
 
         jButton2.setText("View All Details");
         add(jButton2);
