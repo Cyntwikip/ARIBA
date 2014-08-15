@@ -267,7 +267,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(MonthField);
-        MonthField.setBounds(350, 160, 60, 27);
+        MonthField.setBounds(350, 160, 60, 20);
 
         DayField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         DayField.addActionListener(new java.awt.event.ActionListener() {
@@ -276,7 +276,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(DayField);
-        DayField.setBounds(410, 160, 50, 27);
+        DayField.setBounds(410, 160, 50, 20);
 
         YearField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -284,7 +284,7 @@ public class AddTenant extends javax.swing.JFrame {
             }
         });
         getContentPane().add(YearField);
-        YearField.setBounds(460, 160, 70, 27);
+        YearField.setBounds(460, 160, 70, 20);
 
         SchoolField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {

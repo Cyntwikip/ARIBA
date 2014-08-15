@@ -3,8 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package GUI;
+
+import ErrorHandling.AccountException;
+import ErrorHandling.CheckAccount;
+import Models.Beans.GuardianBean;
+import Models.Beans.RoomBean;
+import Models.Beans.TenantBean;
+import Models.DAOImplementation.GuardianDAOImplementation;
+import Models.DAOImplementation.RoomDAOImplementation;
+import Models.DAOImplementation.TenantDAOImplementation;
+import Models.DAOInterface.GuardianDAOInterface;
+import Models.DAOInterface.TenantDAOInterface;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,8 +34,109 @@ public class Tenant extends javax.swing.JPanel {
     /**
      * Creates new form Tenant
      */
+    private DefaultTableModel model;
+    private CheckAccount c = new CheckAccount();
+    private ArrayList<TenantBean> searchnamelist = new ArrayList<>();
+    private TenantDAOImplementation tenantImpl = new TenantDAOImplementation();
+
     public Tenant() {
         initComponents();
+        model = (DefaultTableModel) jTable1.getModel();
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+
+        for (int i = 2000; i <= year + 10; i++) {
+            YearOfGraduationField.removeItem(i);
+        }
+        for (int i = 2000; i <= year + 10; i++) {
+            YearOfGraduationField.addItem(i);
+        }
+        initTable();
+    }
+
+    public void initTable() {
+        ArrayList<TenantBean> tenantlist = new ArrayList<>();
+        tenantlist = tenantImpl.getAllTenants();
+        initSearch(tenantlist);
+    }
+
+    public void initSearch(ArrayList<TenantBean> list) {
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+        for (TenantBean tenant : list) {
+            Object[] obj = {tenant.getTenantID(), tenant.getLname(), tenant.getFname()};
+            model.addRow(obj);
+        }
+        if (!list.isEmpty()) {
+            jTable1.addRowSelectionInterval(0, 0);
+            getSelection();
+        }
+    }
+
+    public void getSelection() {
+        int row = jTable1.getSelectedRow();
+        int col = 0;
+
+        int tenantid = (Integer) jTable1.getModel().getValueAt(row, col);
+
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+        TenantBean bean = new TenantBean();
+        bean = tdao.getTenantById(tenantid);
+
+        byte[] content = null;
+        if (bean.getBlobimage() != null) {
+            try {
+                content = bean.getBlobimage().getBytes(1L, (int) bean.getBlobimage().length());
+            } catch (SQLException ex) {
+                Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            ImageIcon icon = new ImageIcon(content);
+            java.awt.Image img = icon.getImage();
+            java.awt.Image newimg = img.getScaledInstance(imgLabel.getWidth(), imgLabel.getHeight(), java.awt.Image.SCALE_SMOOTH);
+            icon = new ImageIcon(newimg);
+            imgLabel.setIcon(icon);
+        }
+        //       tenantID.setText(String.valueOf(bean.getTenantID()));
+        lname.setText(bean.getLname());
+        fname.setText(bean.getFname());
+//             birthday.setText(java.sql.Date.toString(bean.getBirthday()));
+//        jLabel2.setText(bean.getAddress());
+        jLabel3.setText(bean.getGender());
+        contactno.setText(bean.getContact());
+        //    email.setText(bean.getEmail());
+        //  school.setText(bean.getSchool());
+        //degree.setText(bean.getDegree());
+        //      yearofgraduation.setText(String.valueOf(bean.getExpectedyearofgrad()));
+        DateFormat date = new SimpleDateFormat("MMMM d, yyyy");
+        //    birthday.setText(date.format(bean.getBirthday()));
+
+        GuardianDAOInterface gdao = new GuardianDAOImplementation();
+        GuardianBean gbean = new GuardianBean();
+
+        gbean = gdao.getGuardianByTenantID(tenantid);
+
+        jLabel1.setText(gbean.getFname() + " " + gbean.getLname());
+//      guardiancontactno.setText(gbean.getContact());
+
+        GuardianBean guardianbean = new GuardianBean();
+
+        guardianbean = gdao.getGuardianByTenant(bean.getFname(), bean.getLname());
+//        guardianlname.setText(guardianbean.getLname());
+//        guardianfname.setText(guardianbean.getFname());
+//        guardiancontactno.setText(guardianbean.getContact());
+//        guardianEmail.setText(guardianbean.getEmail());
+
+        RoomBean roombean = new RoomBean();
+        RoomDAOImplementation roomdao = new RoomDAOImplementation();
+
+        roombean = roomdao.getTenantRoom(tenantid);
+        if (roombean.getRoomID() == 0) {
+            roomassignment.setText("none");
+        } else {
+            roomassignment.setText(String.valueOf(roombean.getRoomID()));
+        }
+
+//        status.setText(bean.getStatus());
+
     }
 
     /**
@@ -45,12 +165,12 @@ public class Tenant extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        fname = new javax.swing.JLabel();
+        lname = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        roomassignment = new javax.swing.JLabel();
+        contactno = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -69,7 +189,7 @@ public class Tenant extends javax.swing.JPanel {
             }
         });
         add(SchoolField);
-        SchoolField.setBounds(90, 240, 120, 25);
+        SchoolField.setBounds(90, 240, 120, 19);
 
         NameField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         NameField.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +217,7 @@ public class Tenant extends javax.swing.JPanel {
             }
         });
         add(DegreeField);
-        DegreeField.setBounds(90, 280, 120, 25);
+        DegreeField.setBounds(90, 280, 120, 19);
 
         YearOfGraduationField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,7 +225,7 @@ public class Tenant extends javax.swing.JPanel {
             }
         });
         add(YearOfGraduationField);
-        YearOfGraduationField.setBounds(90, 310, 90, 40);
+        YearOfGraduationField.setBounds(130, 310, 90, 40);
 
         MaleField.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         MaleField.setText("Male");
@@ -159,31 +279,29 @@ public class Tenant extends javax.swing.JPanel {
         add(jScrollPane1);
         jScrollPane1.setBounds(270, 80, 350, 520);
         add(imgLabel);
-        imgLabel.setBounds(700, 180, 50, 50);
+        imgLabel.setBounds(850, 100, 80, 80);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addnewtenant.png"))); // NOI18N
         add(jButton1);
         jButton1.setBounds(80, 430, 160, 40);
-
-        jLabel2.setText("jLabel2");
         add(jLabel2);
-        jLabel2.setBounds(850, 100, 80, 80);
+        jLabel2.setBounds(700, 120, 80, 80);
 
         jLabel3.setText("First Name:");
         add(jLabel3);
-        jLabel3.setBounds(690, 220, 80, 16);
+        jLabel3.setBounds(690, 220, 80, 14);
 
         jLabel4.setText("Last Name:");
         add(jLabel4);
-        jLabel4.setBounds(690, 260, 70, 16);
+        jLabel4.setBounds(690, 260, 54, 14);
 
         jLabel5.setText("In / Out:");
         add(jLabel5);
-        jLabel5.setBounds(690, 300, 54, 16);
+        jLabel5.setBounds(690, 300, 42, 14);
 
         jLabel6.setText("Time of Last Log:");
         add(jLabel6);
-        jLabel6.setBounds(690, 340, 109, 16);
+        jLabel6.setBounds(690, 340, 82, 14);
 
         jLabel7.setText("Room Number:");
         add(jLabel7);
@@ -191,35 +309,35 @@ public class Tenant extends javax.swing.JPanel {
 
         jLabel8.setText("Contact Number:");
         add(jLabel8);
-        jLabel8.setBounds(690, 420, 107, 16);
+        jLabel8.setBounds(690, 420, 82, 14);
 
-        jLabel9.setText("jLabel9");
-        add(jLabel9);
-        jLabel9.setBounds(780, 220, 45, 16);
+        fname.setText("jLabel9");
+        add(fname);
+        fname.setBounds(780, 220, 130, 14);
 
-        jLabel10.setText("jLabel10");
-        add(jLabel10);
-        jLabel10.setBounds(780, 260, 53, 16);
+        lname.setText("jLabel10");
+        add(lname);
+        lname.setBounds(780, 260, 140, 14);
 
         jLabel11.setText("jLabel11");
         add(jLabel11);
-        jLabel11.setBounds(780, 300, 53, 16);
+        jLabel11.setBounds(780, 300, 130, 14);
 
         jLabel12.setText("jLabel12");
         add(jLabel12);
-        jLabel12.setBounds(810, 340, 53, 16);
+        jLabel12.setBounds(810, 340, 110, 14);
 
-        jLabel13.setText("jLabel13");
-        add(jLabel13);
-        jLabel13.setBounds(790, 380, 53, 16);
+        roomassignment.setText("jLabel13");
+        add(roomassignment);
+        roomassignment.setBounds(790, 380, 120, 14);
 
-        jLabel14.setText("jLabel14");
-        add(jLabel14);
-        jLabel14.setBounds(810, 420, 53, 16);
+        contactno.setText("jLabel14");
+        add(contactno);
+        contactno.setBounds(810, 420, 120, 14);
 
         jButton2.setText("View All Details");
         add(jButton2);
-        jButton2.setBounds(710, 500, 180, 29);
+        jButton2.setBounds(710, 500, 180, 23);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/edit_information button.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -291,6 +409,77 @@ public class Tenant extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    public void searchName() {
+        String name = NameField.getText();
+
+        try {
+            c.checkName(name, "Name");
+            searchnamelist = tenantImpl.searchTenantName(name);
+            initSearch(searchnamelist);
+
+        } catch (AccountException ex) {
+            model.getDataVector().removeAllElements();
+            model.fireTableDataChanged();
+        }
+    }
+
+    public void searchSchool() {
+        String school = SchoolField.getText();
+
+        try {
+            c.checkName(school, "School");
+            searchnamelist = tenantImpl.getTenantBySchool(school);
+            initSearch(searchnamelist);
+
+        } catch (AccountException ex) {
+            model.getDataVector().removeAllElements();
+            model.fireTableDataChanged();
+        }
+    }
+
+    public void searchDegree() {
+        String degree = DegreeField.getText();
+
+        try {
+            c.checkName(degree, "Degree");
+            searchnamelist = tenantImpl.getTenantByDegree(degree);
+            initSearch(searchnamelist);
+
+        } catch (AccountException ex) {
+            model.getDataVector().removeAllElements();
+            model.fireTableDataChanged();
+        }
+    }
+
+    public void searchYear() {
+        int year = Integer.parseInt(YearOfGraduationField.getSelectedItem().toString());
+
+        searchnamelist = tenantImpl.getTenantByExpectedYearofGrad(year);
+        initSearch(searchnamelist);
+
+    }
+
+    public void searchMale() {
+        searchnamelist = tenantImpl.getMaleTenant();
+        initSearch(searchnamelist);
+
+    }
+
+    public void searchFemale() {
+        searchnamelist = tenantImpl.getFemaleTenant();
+        initSearch(searchnamelist);
+    }
+
+    public void searchCurrent() {
+//        searchnamelist = tenantImpl.getTenantByStatus(CurrentField.getText());
+        initSearch(searchnamelist);
+    }
+
+    public void searchOld() {
+ //       searchnamelist = tenantImpl.getTenantByStatus(OldField.getText());
+        initSearch(searchnamelist);
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField DegreeField;
@@ -299,16 +488,15 @@ public class Tenant extends javax.swing.JPanel {
     private javax.swing.JTextField NameField;
     private javax.swing.JTextField SchoolField;
     private javax.swing.JComboBox YearOfGraduationField;
+    private javax.swing.JLabel contactno;
+    private javax.swing.JLabel fname;
     private javax.swing.JLabel imgLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -316,8 +504,9 @@ public class Tenant extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lname;
+    private javax.swing.JLabel roomassignment;
     // End of variables declaration//GEN-END:variables
 }
