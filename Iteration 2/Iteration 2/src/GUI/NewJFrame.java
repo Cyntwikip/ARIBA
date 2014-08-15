@@ -32,8 +32,8 @@ public class NewJFrame extends javax.swing.JFrame {
        
         
         Tenant t = new Tenant();
-        
-        jScrollPane1.setViewportView(t);
+        Rooms r = new Rooms();
+        jScrollPane1.setViewportView(r);
         
         
     }
