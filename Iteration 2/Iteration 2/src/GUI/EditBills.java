@@ -90,7 +90,7 @@ public class EditBills extends javax.swing.JFrame {
         if (ebeanlist.isEmpty()) {
             System.out.println("wala pa laman.");
         } else { // meron na. get the latest nalang
-            jTextField1.setText(ebeanlist.get(ebeanlist.size()-1).get)
+           // jTextField1.setText(ebeanlist.get(ebeanlist.size()-1).get);
                     // electricity consumption
                     
         }
