@@ -27,7 +27,8 @@ public class NewJFrame extends javax.swing.JFrame {
 
         TenantPanel t = new TenantPanel();
         Rooms r = new Rooms();
-        jScrollPane1.setViewportView(t);
+        AddTenantPanel at = new AddTenantPanel();
+        jScrollPane1.setViewportView(r);
 
     }
 

@@ -41,9 +41,8 @@ public class AddTenantPanel extends javax.swing.JPanel {
     /**
      * Creates new form EditTenat
      */
-    
     public AddTenantPanel() {
-        
+        initComponents();
     }
 
     private TenantDAOInterface tdao = new TenantDAOImplementation();
@@ -54,17 +53,17 @@ public class AddTenantPanel extends javax.swing.JPanel {
     private TenantBean tenant = new TenantBean();
     private GuardianBean guard = new GuardianBean();
     private ImageIcon icon;
- 
+
     public void EditTenant(int id) {
         initComponents();
 
         buttonGroup1.add(MaleField);
         buttonGroup1.add(FemaleField);
-        
+
         tenant = tdao.getTenantById(id);
         int tenantID;
         tenantID = tenant.getTenantID();
-        
+
         initComponents();
 
         int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -211,28 +210,28 @@ public class AddTenantPanel extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(90, 210, 140, 40);
+        jButton2.setBounds(80, 210, 140, 40);
 
-        FirstnameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FirstnameFieldActionPerformed(evt);
-            }
-        });
         FirstnameField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 FirstnameFieldFocusLost(evt);
             }
         });
-        FirstnameField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                FirstnameFieldKeyTyped(evt);
+        FirstnameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FirstnameFieldActionPerformed(evt);
             }
+        });
+        FirstnameField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 FirstnameFieldKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                FirstnameFieldKeyTyped(evt);
+            }
         });
         jPanel1.add(FirstnameField);
-        FirstnameField.setBounds(340, 40, 170, 30);
+        FirstnameField.setBounds(330, 40, 170, 30);
 
         SchoolField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -248,7 +247,7 @@ public class AddTenantPanel extends javax.swing.JPanel {
             }
         });
         jPanel1.add(SchoolField);
-        SchoolField.setBounds(570, 10, 190, 30);
+        SchoolField.setBounds(560, 10, 190, 30);
 
         DegreeField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -264,7 +263,7 @@ public class AddTenantPanel extends javax.swing.JPanel {
             }
         });
         jPanel1.add(DegreeField);
-        DegreeField.setBounds(570, 40, 190, 30);
+        DegreeField.setBounds(560, 40, 190, 30);
 
         YearOfGraduationField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -285,7 +284,7 @@ public class AddTenantPanel extends javax.swing.JPanel {
 
         jTextField3.setText("jTextField3");
         jPanel1.add(jTextField3);
-        jTextField3.setBounds(330, 110, 180, 60);
+        jTextField3.setBounds(320, 110, 180, 60);
 
         DayField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         DayField.addActionListener(new java.awt.event.ActionListener() {
@@ -345,7 +344,7 @@ public class AddTenantPanel extends javax.swing.JPanel {
             }
         });
         jPanel1.add(ContactNumberField1);
-        ContactNumberField1.setBounds(380, 200, 130, 30);
+        ContactNumberField1.setBounds(370, 200, 130, 30);
 
         EmailAddressField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -356,7 +355,7 @@ public class AddTenantPanel extends javax.swing.JPanel {
             }
         });
         jPanel1.add(EmailAddressField);
-        EmailAddressField.setBounds(370, 230, 140, 30);
+        EmailAddressField.setBounds(360, 230, 140, 30);
 
         GuardianSurnameField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -466,12 +465,14 @@ public class AddTenantPanel extends javax.swing.JPanel {
             }
         });
         jPanel1.add(SurnameField);
-        SurnameField.setBounds(340, 10, 170, 30);
+        SurnameField.setBounds(330, 10, 170, 30);
 
         jPanel2.add(jPanel1);
-        jPanel1.setBounds(80, 190, 770, 330);
+        jPanel1.setBounds(100, 190, 770, 330);
 
-        jScrollPane1.setMinimumSize(new java.awt.Dimension(1000, 680));
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(1000, 650));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1000, 680));
         jScrollPane1.setWheelScrollingEnabled(false);
 
@@ -480,10 +481,10 @@ public class AddTenantPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jLabel1);
 
         jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(-10, 0, 1000, 652);
+        jScrollPane1.setBounds(0, 0, 1000, 650);
 
         add(jPanel2);
-        jPanel2.setBounds(10, 0, 1000, 650);
+        jPanel2.setBounds(0, 0, 1000, 650);
     }// </editor-fold>//GEN-END:initComponents
 
     private void MaleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaleFieldActionPerformed
@@ -889,9 +890,10 @@ public class AddTenantPanel extends javax.swing.JPanel {
                         contractdao.addContract(contractAcc);
 
                         JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + " has successfully added.");
-                //        MainMenu main = new MainMenu();
-                        //      main.setVisible(true);
-                        //       this.dispose();
+                        jPanel1.hide();
+
+                        TenantPanel t = new TenantPanel();
+                        jScrollPane1.setViewportView(t);
 
                     } else {
                         if (tenant != null) {
@@ -917,8 +919,10 @@ public class AddTenantPanel extends javax.swing.JPanel {
                     if (edittenant && editguardian) {
                         JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + "'s information has been successfully edited.");
                         //         this.dispose();
-                        MainMenu main = new MainMenu();
-                        main.setVisible(true);
+                        jPanel1.hide();
+
+                        TenantPanel t = new TenantPanel();
+                        jScrollPane1.setViewportView(t);
                     } else {
                         JOptionPane.showMessageDialog(null, "Not successful");
                     }
@@ -932,12 +936,12 @@ public class AddTenantPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jPanel2.hide();
+        //   jPanel2.hide();
         jPanel1.hide();
-        
+
         TenantPanel t = new TenantPanel();
         jScrollPane1.setViewportView(t);
-       
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
