@@ -3,16 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/D:/College/TERM%207/INTROSE/MP/ARIBA/Iteration%202/Iteration%202/src/GUI/Logging.java</file>
-            <file>file:/D:/College/TERM%207/INTROSE/MP/ARIBA/Iteration%202/Iteration%202/src/GUI/AddTenant.java</file>
-            <file>file:/D:/College/TERM%207/INTROSE/MP/ARIBA/Iteration%202/Iteration%202/src/GUI/EditBills.java</file>
-            <file>file:/D:/College/TERM%207/INTROSE/MP/ARIBA/Iteration%202/Iteration%202/src/GUI/Bills.java</file>
-=======
-            <file>file:/Users/jao/Desktop/School%20Files/Third%20Year/First%20Term/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/MainMenu.java</file>
-            <file>file:/Users/jao/Desktop/School%20Files/Third%20Year/First%20Term/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/AddTenant.java</file>
-            <file>file:/Users/jao/Desktop/School%20Files/Third%20Year/First%20Term/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/Bills.java</file>
->>>>>>> be487c377834e8f4ee2a6df2ca8e12b4f498666c
+            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/Tenant.java</file>
+            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/Rooms.java</file>
+            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/AddTenant.java</file>
+            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/Reports.java</file>
+            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/Bills.java</file>
+            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/MainMenu.java</file>
+            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/Logging.java</file>
+            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/EditTenant.java</file>
+            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/Room.java</file>
         </group>
     </open-files>
 </project-private>

@@ -148,7 +148,6 @@ public class Tenant extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         NameField = new javax.swing.JTextField();
         SchoolField = new javax.swing.JTextField();
@@ -174,12 +173,11 @@ public class Tenant extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jLabel1 = new javax.swing.JLabel();
 
         setLayout(null);
-        add(jLabel2);
-        jLabel2.setBounds(700, 120, 80, 80);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setOpaque(false);
@@ -255,7 +253,7 @@ public class Tenant extends javax.swing.JPanel {
         jPanel1.add(FemaleField);
         FemaleField.setBounds(90, 280, 80, 25);
         jPanel1.add(imgLabel);
-        imgLabel.setBounds(790, 10, 80, 80);
+        imgLabel.setBounds(790, 20, 80, 80);
 
         Fnamelabel.setText("First Name:");
         jPanel1.add(Fnamelabel);
@@ -306,6 +304,11 @@ public class Tenant extends javax.swing.JPanel {
         contactno.setBounds(750, 310, 120, 14);
 
         jButton2.setText("View All Details");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2);
         jButton2.setBounds(650, 380, 180, 23);
 
@@ -320,7 +323,7 @@ public class Tenant extends javax.swing.JPanel {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addnewtenant.png"))); // NOI18N
         jPanel1.add(jButton1);
-        jButton1.setBounds(20, 350, 160, 40);
+        jButton1.setBounds(20, 360, 160, 40);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -353,6 +356,8 @@ public class Tenant extends javax.swing.JPanel {
 
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(210, 0, 350, 520);
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(630, 30, 80, 80);
 
         add(jPanel1);
         jPanel1.setBounds(60, 80, 890, 550);
@@ -363,7 +368,7 @@ public class Tenant extends javax.swing.JPanel {
         jScrollPane2.setViewportView(jLabel1);
 
         add(jScrollPane2);
-        jScrollPane2.setBounds(0, 0, 990, 660);
+        jScrollPane2.setBounds(0, 0, 1010, 660);
     }// </editor-fold>//GEN-END:initComponents
 
     private void SchoolFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SchoolFieldActionPerformed
@@ -433,6 +438,10 @@ public class Tenant extends javax.swing.JPanel {
         jScrollPane2.setViewportView(et);
 
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public void searchName() {
         String name = NameField.getText();
