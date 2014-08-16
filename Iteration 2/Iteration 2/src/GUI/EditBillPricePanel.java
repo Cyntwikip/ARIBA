@@ -217,7 +217,49 @@ public class EditBillPricePanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-
+    public void changeAllBill() {
+        BillDAOInterface bdao = new BillDAOImplementation();
+        ElectricReadingDAOInterface edao = new ElectricReadingDAOImplementation();
+        WaterReadingDAOInterface wdao = new WaterDAOImplementation();
+        RoomDAOInterface rdao = new RoomDAOImplementation();
+        
+        ArrayList<RoomBean> rbeanlist = new ArrayList<RoomBean>();
+        rbeanlist = rdao.getAllRooms();
+        
+        ArrayList<BillBean> blist = bdao.getAllBills();
+        
+        BillBean bbean = new BillBean();
+        WaterReadingBean wbean = new WaterReadingBean();
+        ElectricReadingBean ebean = new ElectricReadingBean();
+        
+        float electricprice;
+        float waterprice;
+        
+        for(int i=0; i<rbeanlist.size(); i++) {
+            bbean = bdao.getBillsByRoomID(i);
+            wbean = wdao.getWaterReadingsByBillID(bbean.getBillID());
+            ebean = edao.getElectricReadingByBillID(bbean.getBillID());
+            
+            if(wbean.getCurrentcubicmeter()==0) {
+                
+            }
+            else {
+                waterprice = wbean.getCurrentcubicmeter() * wbean.getPricepercubicmeter();
+                wbean.setPrice(waterprice);
+                wdao.editWaterReading(wbean, wbean.getWater_billID());
+            }
+            
+            if(ebean.getCurrentKW()==0) {
+                
+            }
+            else {
+                electricprice = ebean.getCurrentKW() * ebean.getPriceperKW();
+                wbean.setPrice(electricprice);
+                edao.editElectricReading(ebean, ebean.getElectric_billID());
+            }
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
