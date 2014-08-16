@@ -57,6 +57,10 @@ public class BillsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel3 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
@@ -64,81 +68,17 @@ public class BillsPanel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jLabel1 = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(1000, 650));
         setLayout(null);
-
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-        add(jComboBox1);
-        jComboBox1.setBounds(300, 270, 100, 30);
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField1KeyReleased(evt);
-            }
-        });
-        add(jTextField1);
-        jTextField1.setBounds(290, 310, 100, 30);
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField2KeyReleased(evt);
-            }
-        });
-        add(jTextField2);
-        jTextField2.setBounds(290, 340, 100, 30);
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/computeforbills.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        add(jButton1);
-        jButton1.setBounds(210, 390, 190, 40);
-
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/editoverallbills.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        add(jButton2);
-        jButton2.setBounds(210, 440, 190, 40);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Room", "Bill Amount", "Status"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        add(jScrollPane1);
-        jScrollPane1.setBounds(470, 100, 340, 410);
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("jLabel3");
@@ -163,9 +103,135 @@ public class BillsPanel extends javax.swing.JPanel {
         add(jButton4);
         jButton4.setBounds(530, 550, 100, 40);
 
+        jPanel1.setLayout(null);
+
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox1);
+        jComboBox1.setBounds(300, 270, 100, 30);
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
+        jPanel1.add(jTextField1);
+        jTextField1.setBounds(300, 310, 100, 30);
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField2KeyReleased(evt);
+            }
+        });
+        jPanel1.add(jTextField2);
+        jTextField2.setBounds(300, 350, 100, 30);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/computeforbills.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(220, 400, 190, 40);
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/editoverallbills.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2);
+        jButton2.setBounds(220, 440, 190, 40);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Room", "Bill Amount", "Status"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(460, 100, 340, 410);
+        jScrollPane1.getAccessibleContext().setAccessibleParent(jScrollPane1);
+
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/paid.png"))); // NOI18N
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton5);
+        jButton5.setBounds(533, 560, 100, 47);
+
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/unpaid.png"))); // NOI18N
+        jPanel1.add(jButton6);
+        jButton6.setBounds(640, 560, 100, 50);
+
+        jButton7.setContentAreaFilled(false);
+        jButton7.setOpaque(false);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton7);
+        jButton7.setBounds(33, 23, 100, 30);
+
+        jButton8.setContentAreaFilled(false);
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton8);
+        jButton8.setBounds(140, 20, 100, 40);
+
+        jButton9.setContentAreaFilled(false);
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton9);
+        jButton9.setBounds(353, 23, 100, 30);
+
+        jButton10.setContentAreaFilled(false);
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton10);
+        jButton10.setBounds(460, 23, 100, 30);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/bills-tab-peg-edited.png"))); // NOI18N
-        add(jLabel1);
-        jLabel1.setBounds(0, 0, 1000, 650);
+        jScrollPane2.setViewportView(jLabel1);
+
+        jPanel1.add(jScrollPane2);
+        jScrollPane2.setBounds(0, 0, 1002, 652);
+
+        add(jPanel1);
+        jPanel1.setBounds(40, 20, 1000, 650);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -401,7 +467,7 @@ public class BillsPanel extends javax.swing.JPanel {
             ArrayList<ElectricReadingBean> ebeanlistnotpaid = new ArrayList<ElectricReadingBean>();
             ArrayList<WaterReadingBean> wbeanlistnotpaid = new ArrayList<WaterReadingBean>();
 
- //           bbeanlistnotpaidelectric = bdao.getAllNotPaidRoomsByElectric();
+            //           bbeanlistnotpaidelectric = bdao.getAllNotPaidRoomsByElectric();
             //         bbeanlistnotpaidwater = bdao.getAllNotPaidRoomsByWater();
             //       bbeanlistnotpaidrent = bdao.getAllNotPaidRoomsByRent();
             float waterprice, electricprice;
@@ -473,16 +539,109 @@ public class BillsPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+
+        jComboBox1.hide();
+        jTextField1.hide();
+        jTextField2.hide();
+        jButton1.hide();
+        jButton2.hide();
+        jButton5.hide();
+        jScrollPane1.hide();
+        jButton6.hide();
+        jButton7.hide();
+        jButton8.hide();
+        jButton9.hide();
+        jButton10.hide();
+
+        TenantPanel t = new TenantPanel();
+        jScrollPane2.setViewportView(t);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        jComboBox1.hide();
+        jTextField1.hide();
+        jTextField2.hide();
+        jButton1.hide();
+        jButton2.hide();
+        jButton5.hide();
+        jScrollPane1.hide();
+        jButton6.hide();
+        jButton7.hide();
+        jButton8.hide();
+        jButton9.hide();
+        jButton10.hide();
+
+        Rooms r = new Rooms();
+        jScrollPane2.setViewportView(r);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+
+        jComboBox1.hide();
+        jTextField1.hide();
+        jTextField2.hide();
+        jButton1.hide();
+        jButton2.hide();
+        jButton5.hide();
+        jScrollPane1.hide();
+        jButton6.hide();
+        jButton7.hide();
+        jButton8.hide();
+        jButton9.hide();
+        jButton10.hide();
+
+        AdminLoggingPanel al = new AdminLoggingPanel();
+        TenantLoggingPanel tl = new TenantLoggingPanel();
+
+        jScrollPane2.setViewportView(al);
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+
+        jComboBox1.hide();
+        jTextField1.hide();
+        jTextField2.hide();
+        jButton1.hide();
+        jButton2.hide();
+        jButton5.hide();
+        jScrollPane1.hide();
+        jButton6.hide();
+        jButton7.hide();
+        jButton8.hide();
+        jButton9.hide();
+        jButton10.hide();
+
+        ReportPanel rp = new ReportPanel();
+        jScrollPane2.setViewportView(rp);
+    }//GEN-LAST:event_jButton10ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;

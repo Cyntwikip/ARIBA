@@ -319,7 +319,7 @@ public class Rooms extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         
-                jButton1.hide();
+        jButton1.hide();
         jButton2.hide();
         jButton3.hide();
         jButton4.hide();
