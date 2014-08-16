@@ -6,6 +6,27 @@
 
 package GUI;
 
+
+import Models.Beans.BillBean;
+import Models.Beans.ContractBean;
+import Models.Beans.RoomBean;
+import Models.Beans.TenantBean;
+import Models.DAOImplementation.BillDAOImplementation;
+import Models.DAOImplementation.ContractDAOImplementation;
+import Models.DAOImplementation.RoomDAOImplementation;
+import Models.DAOImplementation.TenantDAOImplementation;
+import Models.DAOInterface.BillDAOInterface;
+import Models.DAOInterface.ContractDAOInterface;
+import Models.DAOInterface.RoomDAOInterface;
+import Models.DAOInterface.TenantDAOInterface;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+
 /**
  *
  * @author jao
@@ -15,6 +36,10 @@ public class ReportPanel extends javax.swing.JPanel {
     /**
      * Creates new form ReportPanel
      */
+    
+    
+       private DefaultTableModel model;
+       private TenantDAOImplementation tdao = new TenantDAOImplementation();
     public ReportPanel() {
         initComponents();
     }

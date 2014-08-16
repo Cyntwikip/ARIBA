@@ -41,9 +41,11 @@ public class AddTenantPanel extends javax.swing.JPanel {
     /**
      * Creates new form EditTenat
      */
-<<<<<<< HEAD:Iteration 2/Iteration 2/src/GUI/AddTenantPanel.java
+    
     public AddTenantPanel() {
-=======
+        
+    }
+
     private TenantDAOInterface tdao = new TenantDAOImplementation();
     private GuardianDAOInterface gdao = new GuardianDAOImplementation();
     private int tenantID;
@@ -53,7 +55,7 @@ public class AddTenantPanel extends javax.swing.JPanel {
     private GuardianBean guard = new GuardianBean();
     private ImageIcon icon;
  
-    public EditTenant(int id) {
+    public void EditTenant(int id) {
         initComponents();
 
         buttonGroup1.add(MaleField);
@@ -62,7 +64,7 @@ public class AddTenantPanel extends javax.swing.JPanel {
         tenant = tdao.getTenantById(id);
         int tenantID;
         tenantID = tenant.getTenantID();
->>>>>>> 6fd3118c8b4992d92e0d42e8875234c17eb9c3d1:Iteration 2/Iteration 2/src/GUI/EditTenant.java
+        
         initComponents();
 
         int year = Calendar.getInstance().get(Calendar.YEAR);

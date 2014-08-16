@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-<<<<<<< HEAD
+
 
 package GUI;
 
-=======
-package GUI;
+
+
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
->>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
+
 /**
  *
  * @author Giodee
@@ -23,16 +23,10 @@ public class NewJFrame extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-<<<<<<< HEAD
-    public NewJFrame() {
-        initComponents();
-        
-        Tenant t = new Tenant();
-        setContentPane(t);
-=======
-    
+
     private Tenant tenant;
-    private EditTenant edittenant;
+    private EditTenantPanel edittenant;
+
     public NewJFrame() {
         initComponents();
         
@@ -55,10 +49,10 @@ public class NewJFrame extends javax.swing.JFrame {
         initComponents();
         System.out.println("here");
         
-        EditTenant et = new EditTenant(id);
+        EditTenantPanel et = new EditTenantPanel(id);
         setContentPane(et);
         jScrollPane1.setViewportView(et);
->>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
+        
     }
 
     /**
@@ -70,7 +64,7 @@ public class NewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-<<<<<<< HEAD
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -83,7 +77,6 @@ public class NewJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
         );
-=======
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
 
@@ -102,7 +95,6 @@ public class NewJFrame extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2);
         jPanel2.setBounds(0, 0, 1790, 540);
->>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -138,19 +130,13 @@ public class NewJFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewJFrame().setVisible(true);
-<<<<<<< HEAD
-=======
-
->>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-<<<<<<< HEAD
-=======
+
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
->>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
     // End of variables declaration//GEN-END:variables
 }

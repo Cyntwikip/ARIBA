@@ -3,8 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package GUI;
+
+import Models.Beans.BillBean;
+import Models.Beans.ElectricReadingBean;
+import Models.Beans.RoomBean;
+import Models.Beans.WaterReadingBean;
+import Models.DAOImplementation.BillDAOImplementation;
+import Models.DAOImplementation.ElectricReadingDAOImplementation;
+import Models.DAOImplementation.RoomDAOImplementation;
+import Models.DAOImplementation.WaterDAOImplementation;
+import Models.DAOInterface.BillDAOInterface;
+import Models.DAOInterface.ElectricReadingDAOInterface;
+import Models.DAOInterface.RoomDAOInterface;
+import Models.DAOInterface.WaterReadingDAOInterface;
+import java.awt.event.KeyEvent;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,6 +36,12 @@ public class EditBillPricePanel extends javax.swing.JPanel {
     /**
      * Creates new form EditBillPricePanel
      */
+    private boolean dot = false;
+    private float priceperkw;
+    private float pricepercubicmeter;
+    private String year;
+    private String month;
+
     public EditBillPricePanel() {
         initComponents();
     }
@@ -91,10 +118,10 @@ public class EditBillPricePanel extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         if (jTextField1.getText().isEmpty()
-            || jTextField2.getText().isEmpty()
-            || jTextField3.getText().isEmpty()
-            || jTextField4.getText().isEmpty()
-            || jTextField5.getText().isEmpty()) {
+                || jTextField2.getText().isEmpty()
+                || jTextField3.getText().isEmpty()
+                || jTextField4.getText().isEmpty()
+                || jTextField5.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please input ALL necessary fields.");
         } else {
             String totalelectricityconsumption = jTextField1.getText();
@@ -135,7 +162,7 @@ public class EditBillPricePanel extends javax.swing.JPanel {
             ArrayList<BillBean> bbeanlist = bdao.getAllBills();
             wbean.setPricepercubicmeter(pricepercubicmeter);
             ebean.setPriceperKW(priceperkw);
-            java.sql.Date dateread = getDateRead();
+            java.sql.Date dateread = ebean.getDateRead();
             wbean.setDateRead(dateread);
             ebean.setDateRead(dateread);
             wbean.setCurrentcubicmeter(0);

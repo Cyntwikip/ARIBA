@@ -6,6 +6,18 @@
 
 package GUI;
 
+import Models.Beans.AttendanceLogBean;
+import Models.Beans.TenantBean;
+import Models.DAOImplementation.AttendanceLogDAOImplementation;
+import Models.DAOImplementation.TenantDAOImplementation;
+import Models.DAOInterface.AttendanceLogDAOInterface;
+import Models.DAOInterface.TenantDAOInterface;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Calendar;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author jao
@@ -15,8 +27,54 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
     /**
      * Creates new form LogginPanel
      */
+    private AttendanceLogDAOImplementation logdao = new AttendanceLogDAOImplementation();
+    private DefaultTableModel model;
+    private Object[] obj = {"", "", ""};
+    
     public TenantLoggingPanel() {
         initComponents();
+    }
+    
+       public void updateTable1() {
+
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+        AttendanceLogBean abean = new AttendanceLogBean();
+        AttendanceLogBean in = new AttendanceLogBean();
+        AttendanceLogBean out = new AttendanceLogBean();
+        ArrayList<AttendanceLogBean> alist = new ArrayList<AttendanceLogBean>();
+        ArrayList<TenantBean> tlist = new ArrayList<TenantBean>();
+
+        TenantBean tbean = new TenantBean();
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+
+        alist = logdao.getLogsToday();
+        tlist = tdao.getAllTenants();
+
+        for (int i = 0; i < tlist.size(); i++) {
+            tbean = tlist.get(i);
+
+            in = logdao.getLatestLoginByTenant(tbean.getTenantID());
+            out = logdao.getLatestLogoutByTenant(tbean.getTenantID());
+            String lname = tbean.getLname();
+            String fname = tbean.getFname();
+            String tenantid = Integer.toString(tbean.getTenantID());
+            if (in == null && out == null) {
+
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, "", ""};
+                model.addRow(obj);
+            } else if (out == null) {
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, in.getTimeLogged(), " "};
+                model.addRow(obj);
+            } else if (in == null) {
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, " ", out.getTimeLogged()};
+                model.addRow(obj);
+            } else {
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, in.getTimeLogged(), out.getTimeLogged()};
+                model.addRow(obj);
+            }
+
+        }
     }
 
     /**

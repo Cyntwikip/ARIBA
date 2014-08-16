@@ -23,10 +23,7 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-<<<<<<< HEAD
-=======
 import javax.swing.JScrollPane;
->>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -104,11 +101,8 @@ public class Tenant extends javax.swing.JPanel {
         fname.setText(bean.getFname());
 //             birthday.setText(java.sql.Date.toString(bean.getBirthday()));
 //        jLabel2.setText(bean.getAddress());
-<<<<<<< HEAD
-        jLabel3.setText(bean.getGender());
-=======
+//       jLabel3.setText(bean.getGender());
         Fnamelabel.setText(bean.getGender());
->>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
         contactno.setText(bean.getContact());
         //    email.setText(bean.getEmail());
         //  school.setText(bean.getSchool());
@@ -144,10 +138,6 @@ public class Tenant extends javax.swing.JPanel {
         }
 
 //        status.setText(bean.getStatus());
-<<<<<<< HEAD
-
-=======
->>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
     }
 
     /**
@@ -178,15 +168,12 @@ public class Tenant extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         roomassignment = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-<<<<<<< HEAD
         fname = new javax.swing.JLabel();
         lname = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         roomassignment = new javax.swing.JLabel();
-=======
->>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
-        contactno = new javax.swing.JLabel();
+       contactno = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -213,13 +200,11 @@ public class Tenant extends javax.swing.JPanel {
                 NameFieldKeyReleased(evt);
             }
         });
-<<<<<<< HEAD
+
         add(SchoolField);
         SchoolField.setBounds(90, 240, 120, 19);
-=======
         jPanel1.add(NameField);
         NameField.setBounds(30, 120, 150, 20);
->>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
 
         SchoolField.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         SchoolField.addActionListener(new java.awt.event.ActionListener() {
@@ -246,26 +231,21 @@ public class Tenant extends javax.swing.JPanel {
                 DegreeFieldKeyReleased(evt);
             }
         });
-<<<<<<< HEAD
         add(DegreeField);
         DegreeField.setBounds(90, 280, 120, 19);
-=======
+
         jPanel1.add(DegreeField);
         DegreeField.setBounds(30, 200, 150, 20);
->>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
 
         YearOfGraduationField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 YearOfGraduationFieldActionPerformed(evt);
             }
         });
-<<<<<<< HEAD
         add(YearOfGraduationField);
         YearOfGraduationField.setBounds(130, 310, 90, 40);
-=======
         jPanel1.add(YearOfGraduationField);
         YearOfGraduationField.setBounds(90, 240, 90, 30);
->>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
 
         MaleField.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         MaleField.setText("Male");
@@ -388,7 +368,6 @@ public class Tenant extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-<<<<<<< HEAD
         add(jScrollPane1);
         jScrollPane1.setBounds(270, 80, 350, 520);
         add(imgLabel);
@@ -400,9 +379,6 @@ public class Tenant extends javax.swing.JPanel {
         add(jLabel2);
         jLabel2.setBounds(700, 120, 80, 80);
 
-        jLabel3.setText("First Name:");
-        add(jLabel3);
-        jLabel3.setBounds(690, 220, 80, 14);
 
         jLabel4.setText("Last Name:");
         add(jLabel4);
@@ -460,7 +436,6 @@ public class Tenant extends javax.swing.JPanel {
         });
         add(jButton3);
         jButton3.setBounds(720, 530, 160, 40);
-=======
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(210, 0, 350, 520);
         jPanel1.add(jLabel2);
@@ -470,7 +445,6 @@ public class Tenant extends javax.swing.JPanel {
         jPanel1.setBounds(60, 80, 890, 550);
 
         jScrollPane2.setWheelScrollingEnabled(false);
->>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tenant-tab-peg-edited.png"))); // NOI18N
         jScrollPane2.setViewportView(jLabel1);
@@ -539,7 +513,7 @@ public class Tenant extends javax.swing.JPanel {
         int tenantID = (Integer) jTable1.getModel().getValueAt(row, 0);
 
         //  NewJFrame nj = new NewJFrame(0, tenantID);
-        EditTenant et = new EditTenant(tenantID);
+        EditTenantPanel et = new EditTenantPanel(tenantID);
 
         jPanel1.hide();
         
@@ -547,13 +521,12 @@ public class Tenant extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
-<<<<<<< HEAD
-=======
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
->>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
+    
     public void searchName() {
         String name = NameField.getText();
 
@@ -621,11 +594,8 @@ public class Tenant extends javax.swing.JPanel {
     }
 
     public void searchOld() {
-<<<<<<< HEAD
  //       searchnamelist = tenantImpl.getTenantByStatus(OldField.getText());
-=======
         //       searchnamelist = tenantImpl.getTenantByStatus(OldField.getText());
->>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
         initSearch(searchnamelist);
     }
 
@@ -653,10 +623,7 @@ public class Tenant extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-<<<<<<< HEAD
-=======
     private javax.swing.JPanel jPanel1;
->>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

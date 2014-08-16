@@ -33,9 +33,9 @@ public class Reports extends javax.swing.JFrame {
 
     /**
      * Creates new form Reports
-     */
-    private DefaultTableModel model;
-    private TenantDAOImplementation tdao = new TenantDAOImplementation();
+        */
+       private DefaultTableModel model;
+       private TenantDAOImplementation tdao = new TenantDAOImplementation();
 
     public Reports() {
         initComponents();

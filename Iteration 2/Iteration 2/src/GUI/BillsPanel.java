@@ -3,8 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package GUI;
+
+import Models.Beans.BillBean;
+import Models.Beans.ElectricReadingBean;
+import Models.Beans.RoomBean;
+import Models.Beans.WaterReadingBean;
+import Models.DAOImplementation.BillDAOImplementation;
+import Models.DAOImplementation.ElectricReadingDAOImplementation;
+import Models.DAOImplementation.RoomDAOImplementation;
+import Models.DAOImplementation.WaterDAOImplementation;
+import Models.DAOInterface.BillDAOInterface;
+import Models.DAOInterface.ElectricReadingDAOInterface;
+import Models.DAOInterface.RoomDAOInterface;
+import Models.DAOInterface.WaterReadingDAOInterface;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,6 +30,14 @@ public class BillsPanel extends javax.swing.JPanel {
     /**
      * Creates new form BillsPanel
      */
+    public RoomDAOInterface rdao = new RoomDAOImplementation();
+    public BillDAOInterface bdao = new BillDAOImplementation();
+    private float priceperkw;
+    private float pricepercubicmeter;
+    private String year;
+    private String month;
+    private DefaultTableModel model;
+
     public BillsPanel() {
         initComponents();
     }
@@ -293,6 +316,89 @@ public class BillsPanel extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    public void roomlist() {
+        jComboBox1.removeAllItems();
+
+        ArrayList<RoomBean> rbean = new ArrayList<RoomBean>();
+        rbean = rdao.getAllRooms();
+
+        for (int i = 0; i < rbean.size(); i++) {
+            jComboBox1.addItem(rbean.get(i).getRoomID());
+        }
+    }
+
+    public void roomtable() {
+        model = (DefaultTableModel) jTable1.getModel();
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+
+        RoomDAOImplementation rdao = new RoomDAOImplementation();
+        ArrayList<RoomBean> rlist = rdao.getAllRooms();
+
+        BillDAOImplementation bdao = new BillDAOImplementation();
+        ArrayList<BillBean> blist = bdao.getAllBills();
+        BillBean bbean = new BillBean();
+
+        if (blist.isEmpty()) {
+            for (int i = 0; i < rlist.size(); i++) {
+                Object[] obj = {rlist.get(i).getRoomID(), "0", "UNPAID"};
+                model.addRow(obj);
+            }
+        } else {
+
+            WaterDAOImplementation wdao = new WaterDAOImplementation();
+            ArrayList<WaterReadingBean> wlist = wdao.getWaterReadingforThisMonth(rlist.size()); //this month
+            WaterReadingBean wbean = new WaterReadingBean();
+
+            ElectricReadingDAOImplementation edao = new ElectricReadingDAOImplementation();
+            ArrayList<ElectricReadingBean> elist = edao.getAllElectricReadingforThisMonth(rlist.size()); //this month
+            ElectricReadingBean ebean = new ElectricReadingBean();
+
+            ArrayList<BillBean> bbeanlistnotpaidelectric = new ArrayList<BillBean>();
+            ArrayList<BillBean> bbeanlistnotpaidwater = new ArrayList<BillBean>();
+            ArrayList<BillBean> bbeanlistnotpaidrent = new ArrayList<BillBean>();
+            ArrayList<ElectricReadingBean> ebeanlistnotpaid = new ArrayList<ElectricReadingBean>();
+            ArrayList<WaterReadingBean> wbeanlistnotpaid = new ArrayList<WaterReadingBean>();
+
+            bbeanlistnotpaidelectric = bdao.getAllNotPaidRoomsByElectric();
+            bbeanlistnotpaidwater = bdao.getAllNotPaidRoomsByWater();
+            bbeanlistnotpaidrent = bdao.getAllNotPaidRoomsByRent();
+            float waterprice, electricprice;
+            double rentprice, total = 0;
+            int billID = 0;
+            float extrawater, extraelectric;
+            double extrarent, extratotal = 0;
+
+            for (int i = 0; i < rlist.size(); i++) {
+                // bbean = bdao.getBillsByRoomID(i);
+                //       billID = blist.get(rlist.size() - i - 1).getBillID();
+                bbean = bdao.getBillsByRoomID(i + 1);
+
+                if (wlist.isEmpty() && elist.isEmpty() && blist.isEmpty()) { // wala talagang bill
+                    Object[] obj = {rlist.get(i).getRoomID(), 0, "UNPAID"};
+                    model.addRow(obj);
+
+                } else if (bbean.getpaidElectric() == false || bbean.getpaidElectric() == false || bbean.getpaidRent() == false) {
+                    ebean = edao.getElectricReadingByBillID(billID);
+                    wbean = wdao.getWaterReadingsByBillID(billID);
+
+                    total = bbean.getPrice() + ebean.getPrice() + wbean.getPrice();
+                    Object[] obj = {rlist.get(i).getRoomID(), total, "UNPAID"};
+                    model.addRow(obj);
+                } else {
+                    ebean = edao.getElectricReadingByBillID(billID);
+                    wbean = wdao.getWaterReadingsByBillID(billID);
+
+                    total = bbean.getPrice() + ebean.getPrice() + wbean.getPrice();
+                    Object[] obj = {rlist.get(i).getRoomID(), total, "PAID"};
+                    model.addRow(obj);
+                }
+
+            }
+        }
+    }
+
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
