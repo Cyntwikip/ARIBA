@@ -95,19 +95,21 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
+        setMinimumSize(new java.awt.Dimension(1000, 650));
+        setPreferredSize(new java.awt.Dimension(1000, 650));
         setLayout(null);
 
         jLabel2.setText("Date Label");
         add(jLabel2);
-        jLabel2.setBounds(190, 210, 80, 16);
+        jLabel2.setBounds(190, 210, 80, 14);
 
         jLabel3.setText("Time Label");
         add(jLabel3);
-        jLabel3.setBounds(190, 250, 68, 16);
+        jLabel3.setBounds(190, 250, 50, 14);
 
         jTextField1.setText("jTextField1");
         add(jTextField1);
-        jTextField1.setBounds(140, 340, 170, 28);
+        jTextField1.setBounds(140, 340, 170, 20);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/imgoingout.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {

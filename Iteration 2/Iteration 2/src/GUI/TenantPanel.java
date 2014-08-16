@@ -54,14 +54,14 @@ public class TenantPanel extends javax.swing.JPanel {
         }
         initTable();
     }
-    
-        public void initTable() {
+
+    public void initTable() {
         ArrayList<TenantBean> tenantlist = new ArrayList<>();
         tenantlist = tenantImpl.getAllTenants();
         initSearch(tenantlist);
     }
-        
-            public void initSearch(ArrayList<TenantBean> list) {
+
+    public void initSearch(ArrayList<TenantBean> list) {
         model.getDataVector().removeAllElements();
         model.fireTableDataChanged();
         for (TenantBean tenant : list) {
@@ -73,8 +73,8 @@ public class TenantPanel extends javax.swing.JPanel {
             getSelection();
         }
     }
-            
-               public void getSelection() {
+
+    public void getSelection() {
         int row = jTable1.getSelectedRow();
         int col = 0;
 
@@ -141,7 +141,6 @@ public class TenantPanel extends javax.swing.JPanel {
 //        status.setText(bean.getStatus());
     }
 
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -180,6 +179,10 @@ public class TenantPanel extends javax.swing.JPanel {
         logstat = new javax.swing.JLabel();
         logtime = new javax.swing.JLabel();
         roomnumber = new javax.swing.JLabel();
+        changetoroom = new javax.swing.JButton();
+        changetobills = new javax.swing.JButton();
+        changetologs = new javax.swing.JButton();
+        changetoreports = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setOpaque(false);
@@ -191,9 +194,13 @@ public class TenantPanel extends javax.swing.JPanel {
         add(lname);
         lname.setBounds(720, 180, 110, 0);
 
+        jScrollPane2.setMinimumSize(new java.awt.Dimension(1000, 650));
         jScrollPane2.setOpaque(false);
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(1000, 680));
 
+        jPanel1.setMinimumSize(new java.awt.Dimension(1000, 650));
         jPanel1.setOpaque(false);
+        jPanel1.setPreferredSize(new java.awt.Dimension(1000, 650));
         jPanel1.setLayout(null);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addnewtenanttab.png"))); // NOI18N
@@ -203,7 +210,7 @@ public class TenantPanel extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(70, 440, 160, 30);
+        jButton1.setBounds(80, 440, 160, 30);
 
         MaleField.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         MaleField.setText("Male");
@@ -374,6 +381,43 @@ public class TenantPanel extends javax.swing.JPanel {
         jPanel1.add(roomnumber);
         roomnumber.setBounds(750, 330, 130, 14);
 
+        changetoroom.setContentAreaFilled(false);
+        changetoroom.setFocusPainted(false);
+        changetoroom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changetoroomActionPerformed(evt);
+            }
+        });
+        jPanel1.add(changetoroom);
+        changetoroom.setBounds(143, 23, 100, 30);
+
+        changetobills.setContentAreaFilled(false);
+        changetobills.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changetobillsActionPerformed(evt);
+            }
+        });
+        jPanel1.add(changetobills);
+        changetobills.setBounds(250, 23, 100, 30);
+
+        changetologs.setContentAreaFilled(false);
+        changetologs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changetologsActionPerformed(evt);
+            }
+        });
+        jPanel1.add(changetologs);
+        changetologs.setBounds(350, 20, 110, 30);
+
+        changetoreports.setContentAreaFilled(false);
+        changetoreports.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changetoreportsActionPerformed(evt);
+            }
+        });
+        jPanel1.add(changetoreports);
+        changetoreports.setBounds(463, 23, 100, 30);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tenant-tab-peg-edited.png"))); // NOI18N
         jPanel1.add(jLabel1);
         jLabel1.setBounds(0, 0, 1000, 650);
@@ -438,19 +482,59 @@ public class TenantPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        jPanel1.hide();
+        AddTenantPanel add = new AddTenantPanel();
+        jScrollPane2.setViewportView(add);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
+
         // edit tenant information
         int row = jTable1.getSelectedRow();
         int tenantID = (Integer) jTable1.getValueAt(row, 0);
         jPanel1.hide();
         EditTenantPanelFinal et = new EditTenantPanelFinal(tenantID);
         jScrollPane2.setViewportView(et);
-     //   NewJFrame nj = new NewJFrame(tenantID);
+        //   NewJFrame nj = new NewJFrame(tenantID);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void changetoroomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changetoroomActionPerformed
+        // TODO add your handling code here:
+        jPanel1.hide();
+
+        Rooms r = new Rooms();
+        jScrollPane2.setViewportView(r);
+    }//GEN-LAST:event_changetoroomActionPerformed
+
+    private void changetobillsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changetobillsActionPerformed
+        // TODO add your handling code here:
+        jPanel1.hide();
+
+        BillsPanel bp = new BillsPanel();
+        jScrollPane2.setViewportView(bp);
+    }//GEN-LAST:event_changetobillsActionPerformed
+
+    private void changetologsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changetologsActionPerformed
+        // TODO add your handling code here:
+        AdminLoggingPanel al = new AdminLoggingPanel();
+        TenantLoggingPanel tl = new TenantLoggingPanel();
+        jPanel1.hide();
+
+        jScrollPane2.setViewportView(al);
+        // jScrollPane2.setViewportView(tl);
+
+
+    }//GEN-LAST:event_changetologsActionPerformed
+
+    private void changetoreportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changetoreportsActionPerformed
+        // TODO add your handling code here:
+        jPanel1.hide();
+        ReportPanel rp = new ReportPanel();
+        jScrollPane2.setViewportView(rp);
+
+    }//GEN-LAST:event_changetoreportsActionPerformed
 
     public void searchName() {
         String name = NameField.getText();
@@ -531,6 +615,10 @@ public class TenantPanel extends javax.swing.JPanel {
     private javax.swing.JTextField NameField;
     private javax.swing.JTextField SchoolField;
     private javax.swing.JComboBox YearOfGraduationField;
+    private javax.swing.JButton changetobills;
+    private javax.swing.JButton changetologs;
+    private javax.swing.JButton changetoreports;
+    private javax.swing.JButton changetoroom;
     private javax.swing.JLabel contactno;
     private javax.swing.JLabel fname;
     private javax.swing.JLabel imgLabel;

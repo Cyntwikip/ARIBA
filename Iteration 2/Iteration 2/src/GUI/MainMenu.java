@@ -550,7 +550,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        AddTenant at = new AddTenant();
+        AddTenantPanel at = new AddTenantPanel();
         at.setVisible(true);
         this.dispose();
 
@@ -565,8 +565,8 @@ public class MainMenu extends javax.swing.JFrame {
         TenantBean tb = new TenantBean();
         tb = tdao.getTenantById(tenantID);
 
-        AddTenant at = new AddTenant(tenantID);
-        at.setVisible(true);
+      //  AddTenantPanel at = new AddTenantPanel(tenantID);
+        //at.setVisible(true);
         this.dispose();
 
 

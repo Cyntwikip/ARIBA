@@ -41,7 +41,7 @@ public class BillsPanel extends javax.swing.JPanel {
 
     public BillsPanel() {
         initComponents();
-        
+
         initdate();
 
         roomlist();
@@ -69,6 +69,7 @@ public class BillsPanel extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        setMinimumSize(new java.awt.Dimension(1000, 650));
         setLayout(null);
 
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -366,7 +367,7 @@ public class BillsPanel extends javax.swing.JPanel {
             jLabel3.setText("December " + year);
         }
     }
-    
+
     public void roomtable() {
         model = (DefaultTableModel) jTable1.getModel();
         model.getDataVector().removeAllElements();
@@ -400,9 +401,9 @@ public class BillsPanel extends javax.swing.JPanel {
             ArrayList<ElectricReadingBean> ebeanlistnotpaid = new ArrayList<ElectricReadingBean>();
             ArrayList<WaterReadingBean> wbeanlistnotpaid = new ArrayList<WaterReadingBean>();
 
-            bbeanlistnotpaidelectric = bdao.getAllNotPaidRoomsByElectric();
-            bbeanlistnotpaidwater = bdao.getAllNotPaidRoomsByWater();
-            bbeanlistnotpaidrent = bdao.getAllNotPaidRoomsByRent();
+ //           bbeanlistnotpaidelectric = bdao.getAllNotPaidRoomsByElectric();
+            //         bbeanlistnotpaidwater = bdao.getAllNotPaidRoomsByWater();
+            //       bbeanlistnotpaidrent = bdao.getAllNotPaidRoomsByRent();
             float waterprice, electricprice;
             double rentprice, total = 0;
             int billID = 0;
@@ -422,7 +423,7 @@ public class BillsPanel extends javax.swing.JPanel {
                     ebean = edao.getElectricReadingByBillID(billID);
                     wbean = wdao.getWaterReadingsByBillID(billID);
 
-                    total = bbean.getPrice() + ebean.getPrice() + wbean.getPrice();
+//                    total = bbean.getPrice() + ebean.getPrice() + wbean.getPrice();
                     Object[] obj = {rlist.get(i).getRoomID(), total, "UNPAID"};
                     model.addRow(obj);
                 } else {
@@ -442,11 +443,11 @@ public class BillsPanel extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         int row = jTable1.getSelectedRow() + 1;
-        
+
         BillDAOImplementation billdao = new BillDAOImplementation();
         BillBean bbean = new BillBean();
         bbean = billdao.getBillsByRoomID(row);
-        
+
         WaterDAOImplementation wdao = new WaterDAOImplementation();
         WaterReadingBean wbean = wdao.getWaterReadingsByBillID(bbean.getBillID());
 

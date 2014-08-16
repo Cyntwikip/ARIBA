@@ -32,6 +32,7 @@ public class AdminLoggingPanel extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
+        setMinimumSize(new java.awt.Dimension(1000, 650));
         setLayout(null);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(

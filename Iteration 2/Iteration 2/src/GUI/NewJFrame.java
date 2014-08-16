@@ -56,6 +56,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 680));
+        setPreferredSize(new java.awt.Dimension(1010, 650));
 
         jPanel1.setMinimumSize(new java.awt.Dimension(1000, 680));
         jPanel1.setOpaque(false);
@@ -64,7 +65,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jScrollPane1.setMinimumSize(new java.awt.Dimension(1000, 650));
         jScrollPane1.setOpaque(false);
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(1000, 680));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(1000, 650));
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(0, 0, 1000, 680);
 
@@ -72,7 +73,9 @@ public class NewJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 10, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
