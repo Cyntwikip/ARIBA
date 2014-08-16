@@ -371,7 +371,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(FemaleField);
-        FemaleField.setBounds(400, 230, 90, 23);
+        FemaleField.setBounds(410, 230, 90, 23);
 
         MaleField.setText("Male");
         MaleField.setActionCommand("Male");
@@ -381,7 +381,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(MaleField);
-        MaleField.setBounds(320, 230, 70, 23);
+        MaleField.setBounds(330, 230, 70, 23);
 
         jTextField3.setText("jTextField3");
         jPanel1.add(jTextField3);
@@ -394,7 +394,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(MonthField);
-        MonthField.setBounds(320, 130, 60, 20);
+        MonthField.setBounds(330, 140, 60, 20);
 
         DayField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         DayField.addActionListener(new java.awt.event.ActionListener() {
@@ -403,7 +403,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(DayField);
-        DayField.setBounds(380, 130, 50, 20);
+        DayField.setBounds(390, 140, 50, 20);
 
         YearField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -411,7 +411,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(YearField);
-        YearField.setBounds(430, 130, 70, 20);
+        YearField.setBounds(440, 140, 60, 20);
 
         FirstnameField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -469,7 +469,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
         imgaddLabel.setBounds(80, 110, 160, 160);
 
         add(jPanel1);
-        jPanel1.setBounds(100, 120, 790, 410);
+        jPanel1.setBounds(100, 130, 790, 410);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/edit-peg.png"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -851,7 +851,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         jPanel1.hide();
-        Tenant t = new Tenant();
+        TenantPanel t = new TenantPanel();
         jScrollPane1.setViewportView(t);
     }//GEN-LAST:event_jButton1ActionPerformed
 

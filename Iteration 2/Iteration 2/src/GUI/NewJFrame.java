@@ -24,34 +24,29 @@ public class NewJFrame extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
 
-    private Tenant tenant;
+    private TenantPanel tenant;
     private EditTenantPanelFinal edittenant;
 
     public NewJFrame() {
         initComponents();
-        
-        
-
-        setContentPane(jPanel1);
-        
-        
+        setContentPane(jPanel1);        
        jPanel1.add(jScrollPane1);
        
         
-        Tenant t = new Tenant();
+        TenantPanel t = new TenantPanel();
         Rooms r = new Rooms();
         jScrollPane1.setViewportView(t);
         
         
     }
     
-    public NewJFrame(int frame, int id){
+    public NewJFrame(int id){
         initComponents();
         System.out.println("here");
         
-//        EditTenantPanel et = new EditTenantPanel(id);
-  //      setContentPane(et);
-//        jScrollPane1.setViewportView(et);
+        EditTenantPanelFinal et = new EditTenantPanelFinal(id);
+        setContentPane(jPanel1);
+        jScrollPane1.setViewportView(et);
         
     }
 
