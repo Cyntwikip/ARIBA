@@ -24,10 +24,10 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="opaque" type="boolean" value="false"/>
+		</Property>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-<<<<<<< HEAD
           <AbsoluteConstraints x="90" y="240" width="120" height="-1"/>
         </Constraint>
       </Constraints>
@@ -111,16 +111,15 @@
         </Constraint>
       </Constraints>
     </Component>
+	</Container>
+
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
       <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="270" y="80" width="350" height="520"/>
-=======
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">	
           <AbsoluteConstraints x="60" y="80" width="890" height="550"/>
->>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
         </Constraint>
       </Constraints>
 
@@ -390,6 +389,7 @@
             </Constraint>
           </Constraints>
         </Component>
+        </Container>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -422,7 +422,6 @@
               </Events>
             </Component>
           </SubComponents>
-        </Container>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -430,9 +429,9 @@
             </Constraint>
           </Constraints>
         </Component>
-      </SubComponents>
-    </Container>
-<<<<<<< HEAD
+		</Container>
+    </SubComponents>
+	
     <Component class="javax.swing.JLabel" name="imgLabel">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -459,10 +458,8 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
-=======
+   
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
->>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
       <Properties>
         <Property name="wheelScrollingEnabled" type="boolean" value="false"/>
       </Properties>
@@ -471,7 +468,6 @@
           <AbsoluteConstraints x="0" y="0" width="1010" height="660"/>
         </Constraint>
       </Constraints>
-<<<<<<< HEAD
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -620,9 +616,7 @@
         </Constraint>
       </Constraints>
     </Component>
-=======
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+	      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
@@ -633,6 +627,6 @@
         </Component>
       </SubComponents>
     </Container>
->>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
+	
   </SubComponents>
 </Form>

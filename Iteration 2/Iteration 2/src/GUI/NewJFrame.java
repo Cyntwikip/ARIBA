@@ -25,22 +25,22 @@ public class NewJFrame extends javax.swing.JFrame {
      */
 
     private Tenant tenant;
-    private EditTenantPanel edittenant;
+    private EditTenantPanelFinal edittenant;
 
     public NewJFrame() {
         initComponents();
         
         
 
-        setContentPane(jPanel2);
+        setContentPane(jPanel1);
         
         
-        jPanel2.add(jScrollPane1);
+       jPanel1.add(jScrollPane1);
        
         
         Tenant t = new Tenant();
         Rooms r = new Rooms();
-        jScrollPane1.setViewportView(r);
+        jScrollPane1.setViewportView(t);
         
         
     }
@@ -49,9 +49,9 @@ public class NewJFrame extends javax.swing.JFrame {
         initComponents();
         System.out.println("here");
         
-        EditTenantPanel et = new EditTenantPanel(id);
-        setContentPane(et);
-        jScrollPane1.setViewportView(et);
+//        EditTenantPanel et = new EditTenantPanel(id);
+  //      setContentPane(et);
+//        jScrollPane1.setViewportView(et);
         
     }
 
@@ -64,37 +64,32 @@ public class NewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1000, 680));
+        setPreferredSize(new java.awt.Dimension(1000, 680));
+
+        jPanel1.setMinimumSize(new java.awt.Dimension(1000, 680));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1000, 680));
+        jPanel1.setLayout(null);
+
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(1000, 680));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(1000, 680));
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(0, 0, 1000, 680);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1000, 680));
-        getContentPane().setLayout(null);
-
-        jPanel2.setPreferredSize(new java.awt.Dimension(1790, 680));
-        jPanel2.setLayout(null);
-
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        jScrollPane1.setMinimumSize(new java.awt.Dimension(1000, 720));
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(1000, 720));
-        jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(0, 0, 1830, 670);
-
-        getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 0, 1790, 540);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -135,8 +130,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

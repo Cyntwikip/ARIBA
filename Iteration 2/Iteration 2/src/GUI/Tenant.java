@@ -513,7 +513,7 @@ public class Tenant extends javax.swing.JPanel {
         int tenantID = (Integer) jTable1.getModel().getValueAt(row, 0);
 
         //  NewJFrame nj = new NewJFrame(0, tenantID);
-        EditTenantPanel et = new EditTenantPanel(tenantID);
+        EditTenantPanelFinal et = new EditTenantPanelFinal(tenantID);
 
         jPanel1.hide();
         
