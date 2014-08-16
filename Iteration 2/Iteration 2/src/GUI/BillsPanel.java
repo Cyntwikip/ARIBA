@@ -17,6 +17,7 @@ import Models.DAOInterface.BillDAOInterface;
 import Models.DAOInterface.ElectricReadingDAOInterface;
 import Models.DAOInterface.RoomDAOInterface;
 import Models.DAOInterface.WaterReadingDAOInterface;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -40,6 +41,11 @@ public class BillsPanel extends javax.swing.JPanel {
 
     public BillsPanel() {
         initComponents();
+        
+        initdate();
+
+        roomlist();
+        roomtable();
     }
 
     /**
@@ -230,7 +236,7 @@ public class BillsPanel extends javax.swing.JPanel {
         WaterReadingDAOInterface wdao = new WaterDAOImplementation();
         int roomID = (Integer) jComboBox1.getSelectedItem();
 
-        System.out.println(roomID);
+        //System.out.println(roomID);
         bbean = bdao.getBillsByRoomID(roomID);
         float electricprice;
         float waterprice;
@@ -328,6 +334,39 @@ public class BillsPanel extends javax.swing.JPanel {
         }
     }
 
+    public void initdate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+        year = formatter.format(new java.util.Date());
+        SimpleDateFormat formatter1 = new SimpleDateFormat("MM");
+        month = formatter1.format(new java.util.Date());
+
+        if (month.equals("01")) {
+            jLabel3.setText("Jauary " + year);
+        } else if (month.equals("02")) {
+            jLabel3.setText("February " + year);
+        } else if (month.equals("03")) {
+            jLabel3.setText("March " + year);
+        } else if (month.equals("04")) {
+            jLabel3.setText("April " + year);
+        } else if (month.equals("05")) {
+            jLabel3.setText("May " + year);
+        } else if (month.equals("06")) {
+            jLabel3.setText("June " + year);
+        } else if (month.equals("07")) {
+            jLabel3.setText("July " + year);
+        } else if (month.equals("08")) {
+            jLabel3.setText("August " + year);
+        } else if (month.equals("09")) {
+            jLabel3.setText("September " + year);
+        } else if (month.equals("10")) {
+            jLabel3.setText("October " + year);
+        } else if (month.equals("11")) {
+            jLabel3.setText("November " + year);
+        } else {
+            jLabel3.setText("December " + year);
+        }
+    }
+    
     public void roomtable() {
         model = (DefaultTableModel) jTable1.getModel();
         model.getDataVector().removeAllElements();
@@ -402,6 +441,35 @@ public class BillsPanel extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        int row = jTable1.getSelectedRow() + 1;
+        
+        BillDAOImplementation billdao = new BillDAOImplementation();
+        BillBean bbean = new BillBean();
+        bbean = billdao.getBillsByRoomID(row);
+        
+        WaterDAOImplementation wdao = new WaterDAOImplementation();
+        WaterReadingBean wbean = wdao.getWaterReadingsByBillID(bbean.getBillID());
+
+        ElectricReadingDAOImplementation edao = new ElectricReadingDAOImplementation();
+        ElectricReadingBean ebean = edao.getElectricReadingByBillID(bbean.getBillID());
+
+        if (bbean.getPrice() == 0 || wbean.getPrice() == 0 || ebean.getPrice() == 0) {
+            JOptionPane.showMessageDialog(null, "Already set to unpaid");
+        } else if (bbean.getPaidWater() && bbean.getpaidElectric() && bbean.getpaidRent()) {
+            bbean.setPaidElectric(false);
+            bbean.setPaidRent(false);
+            bbean.setPaidWater(false);
+
+            boolean check;
+            if (billdao.editBill(bbean, bbean.getBillID())) {
+                JOptionPane.showMessageDialog(null, "Successful");
+                roomtable();
+            } else {
+                JOptionPane.showMessageDialog(null, "Not Successful");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Already set to unpaid");
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
 
