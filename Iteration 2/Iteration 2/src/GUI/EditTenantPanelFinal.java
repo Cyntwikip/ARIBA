@@ -466,7 +466,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
 
         imgaddLabel.setText("         Choose photo");
         jPanel1.add(imgaddLabel);
-        imgaddLabel.setBounds(80, 110, 160, 160);
+        imgaddLabel.setBounds(60, 100, 160, 160);
 
         add(jPanel1);
         jPanel1.setBounds(100, 130, 790, 410);

@@ -154,6 +154,7 @@ public class TenantPanel extends javax.swing.JPanel {
         roomassignment = new javax.swing.JLabel();
         fname = new javax.swing.JLabel();
         lname = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         MaleField = new javax.swing.JRadioButton();
@@ -181,6 +182,7 @@ public class TenantPanel extends javax.swing.JPanel {
         roomnumber = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
+        setOpaque(false);
         setLayout(null);
         add(roomassignment);
         roomassignment.setBounds(740, 330, 200, 0);
@@ -188,6 +190,8 @@ public class TenantPanel extends javax.swing.JPanel {
         fname.setBounds(720, 130, 100, 0);
         add(lname);
         lname.setBounds(720, 180, 110, 0);
+
+        jScrollPane2.setOpaque(false);
 
         jPanel1.setOpaque(false);
         jPanel1.setLayout(null);
@@ -299,7 +303,7 @@ public class TenantPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(270, 80, 350, 520);
+        jScrollPane1.setBounds(270, 70, 350, 520);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/viewcompletedetails.png"))); // NOI18N
         jPanel1.add(jButton3);
@@ -374,8 +378,10 @@ public class TenantPanel extends javax.swing.JPanel {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(0, 0, 1000, 650);
 
-        add(jPanel1);
-        jPanel1.setBounds(0, 0, 1000, 650);
+        jScrollPane2.setViewportView(jPanel1);
+
+        add(jScrollPane2);
+        jScrollPane2.setBounds(0, 0, 1030, 650);
     }// </editor-fold>//GEN-END:initComponents
 
     private void NameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameFieldActionPerformed
@@ -440,8 +446,10 @@ public class TenantPanel extends javax.swing.JPanel {
         // edit tenant information
         int row = jTable1.getSelectedRow();
         int tenantID = (Integer) jTable1.getValueAt(row, 0);
-        
-        NewJFrame nj = new NewJFrame(tenantID);
+        jPanel1.hide();
+        EditTenantPanelFinal et = new EditTenantPanelFinal(tenantID);
+        jScrollPane2.setViewportView(et);
+     //   NewJFrame nj = new NewJFrame(tenantID);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public void searchName() {
@@ -540,6 +548,7 @@ public class TenantPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lname;
     private javax.swing.JLabel logstat;

@@ -3,16 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 package GUI;
-
-
-
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
 
 /**
  *
@@ -23,31 +17,29 @@ public class NewJFrame extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-
     private TenantPanel tenant;
     private EditTenantPanelFinal edittenant;
 
     public NewJFrame() {
         initComponents();
-        setContentPane(jPanel1);        
-       jPanel1.add(jScrollPane1);
-       
-        
+        setContentPane(jPanel1);
+        jPanel1.add(jScrollPane1);
+
         TenantPanel t = new TenantPanel();
         Rooms r = new Rooms();
         jScrollPane1.setViewportView(t);
-        
-        
+
     }
-    
-    public NewJFrame(int id){
+
+    public NewJFrame(int id) {
         initComponents();
+
         System.out.println("here");
-        
+
         EditTenantPanelFinal et = new EditTenantPanelFinal(id);
         setContentPane(jPanel1);
         jScrollPane1.setViewportView(et);
-        
+
     }
 
     /**
@@ -64,13 +56,14 @@ public class NewJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 680));
-        setPreferredSize(new java.awt.Dimension(1000, 680));
 
         jPanel1.setMinimumSize(new java.awt.Dimension(1000, 680));
+        jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 680));
         jPanel1.setLayout(null);
 
-        jScrollPane1.setMinimumSize(new java.awt.Dimension(1000, 680));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(1000, 650));
+        jScrollPane1.setOpaque(false);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1000, 680));
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(0, 0, 1000, 680);
