@@ -23,6 +23,10 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+<<<<<<< HEAD
+=======
+import javax.swing.JScrollPane;
+>>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -100,7 +104,11 @@ public class Tenant extends javax.swing.JPanel {
         fname.setText(bean.getFname());
 //             birthday.setText(java.sql.Date.toString(bean.getBirthday()));
 //        jLabel2.setText(bean.getAddress());
+<<<<<<< HEAD
         jLabel3.setText(bean.getGender());
+=======
+        Fnamelabel.setText(bean.getGender());
+>>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
         contactno.setText(bean.getContact());
         //    email.setText(bean.getEmail());
         //  school.setText(bean.getSchool());
@@ -136,7 +144,10 @@ public class Tenant extends javax.swing.JPanel {
         }
 
 //        status.setText(bean.getStatus());
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
     }
 
     /**
@@ -148,48 +159,48 @@ public class Tenant extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        SchoolField = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
         NameField = new javax.swing.JTextField();
+        SchoolField = new javax.swing.JTextField();
         DegreeField = new javax.swing.JTextField();
         YearOfGraduationField = new javax.swing.JComboBox();
         MaleField = new javax.swing.JRadioButton();
         FemaleField = new javax.swing.JRadioButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         imgLabel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        Fnamelabel = new javax.swing.JLabel();
+        fname = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        lname = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        roomassignment = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+<<<<<<< HEAD
         fname = new javax.swing.JLabel();
         lname = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         roomassignment = new javax.swing.JLabel();
+=======
+>>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
         contactno = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jLabel1 = new javax.swing.JLabel();
 
         setLayout(null);
 
-        SchoolField.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        SchoolField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SchoolFieldActionPerformed(evt);
-            }
-        });
-        SchoolField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                SchoolFieldKeyReleased(evt);
-            }
-        });
-        add(SchoolField);
-        SchoolField.setBounds(90, 240, 120, 19);
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setOpaque(false);
+        jPanel1.setLayout(null);
 
         NameField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         NameField.addActionListener(new java.awt.event.ActionListener() {
@@ -202,8 +213,27 @@ public class Tenant extends javax.swing.JPanel {
                 NameFieldKeyReleased(evt);
             }
         });
-        add(NameField);
-        NameField.setBounds(90, 200, 120, 20);
+<<<<<<< HEAD
+        add(SchoolField);
+        SchoolField.setBounds(90, 240, 120, 19);
+=======
+        jPanel1.add(NameField);
+        NameField.setBounds(30, 120, 150, 20);
+>>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
+
+        SchoolField.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        SchoolField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SchoolFieldActionPerformed(evt);
+            }
+        });
+        SchoolField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                SchoolFieldKeyReleased(evt);
+            }
+        });
+        jPanel1.add(SchoolField);
+        SchoolField.setBounds(30, 160, 150, 20);
 
         DegreeField.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         DegreeField.addActionListener(new java.awt.event.ActionListener() {
@@ -216,16 +246,26 @@ public class Tenant extends javax.swing.JPanel {
                 DegreeFieldKeyReleased(evt);
             }
         });
+<<<<<<< HEAD
         add(DegreeField);
         DegreeField.setBounds(90, 280, 120, 19);
+=======
+        jPanel1.add(DegreeField);
+        DegreeField.setBounds(30, 200, 150, 20);
+>>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
 
         YearOfGraduationField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 YearOfGraduationFieldActionPerformed(evt);
             }
         });
+<<<<<<< HEAD
         add(YearOfGraduationField);
         YearOfGraduationField.setBounds(130, 310, 90, 40);
+=======
+        jPanel1.add(YearOfGraduationField);
+        YearOfGraduationField.setBounds(90, 240, 90, 30);
+>>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
 
         MaleField.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         MaleField.setText("Male");
@@ -234,8 +274,8 @@ public class Tenant extends javax.swing.JPanel {
                 MaleFieldActionPerformed(evt);
             }
         });
-        add(MaleField);
-        MaleField.setBounds(80, 350, 60, 30);
+        jPanel1.add(MaleField);
+        MaleField.setBounds(30, 280, 60, 25);
 
         FemaleField.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         FemaleField.setText("Female");
@@ -244,8 +284,80 @@ public class Tenant extends javax.swing.JPanel {
                 FemaleFieldActionPerformed(evt);
             }
         });
-        add(FemaleField);
-        FemaleField.setBounds(140, 350, 80, 30);
+        jPanel1.add(FemaleField);
+        FemaleField.setBounds(90, 280, 80, 25);
+        jPanel1.add(imgLabel);
+        imgLabel.setBounds(790, 20, 80, 80);
+
+        Fnamelabel.setText("First Name:");
+        jPanel1.add(Fnamelabel);
+        Fnamelabel.setBounds(630, 110, 80, 14);
+
+        fname.setText("jLabel9");
+        jPanel1.add(fname);
+        fname.setBounds(710, 110, 130, 14);
+
+        jLabel4.setText("Last Name:");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(630, 150, 80, 14);
+
+        lname.setText("jLabel10");
+        jPanel1.add(lname);
+        lname.setBounds(720, 150, 140, 14);
+
+        jLabel5.setText("In / Out:");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(630, 190, 42, 14);
+
+        jLabel11.setText("jLabel11");
+        jPanel1.add(jLabel11);
+        jLabel11.setBounds(720, 190, 130, 14);
+
+        jLabel6.setText("Time of Last Log:");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(630, 230, 82, 14);
+
+        jLabel12.setText("jLabel12");
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(740, 230, 110, 14);
+
+        jLabel7.setText("Room Number:");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(630, 270, 100, 20);
+
+        roomassignment.setText("jLabel13");
+        jPanel1.add(roomassignment);
+        roomassignment.setBounds(730, 280, 120, 14);
+
+        jLabel8.setText("Contact Number:");
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(630, 310, 82, 14);
+
+        contactno.setText("jLabel14");
+        jPanel1.add(contactno);
+        contactno.setBounds(750, 310, 120, 14);
+
+        jButton2.setText("View All Details");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2);
+        jButton2.setBounds(650, 380, 180, 23);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/edit_information button.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3);
+        jButton3.setBounds(660, 420, 160, 40);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addnewtenant.png"))); // NOI18N
+        jPanel1.add(jButton1);
+        jButton1.setBounds(20, 360, 160, 40);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -276,6 +388,7 @@ public class Tenant extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
+<<<<<<< HEAD
         add(jScrollPane1);
         jScrollPane1.setBounds(270, 80, 350, 520);
         add(imgLabel);
@@ -347,10 +460,23 @@ public class Tenant extends javax.swing.JPanel {
         });
         add(jButton3);
         jButton3.setBounds(720, 530, 160, 40);
+=======
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(210, 0, 350, 520);
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(630, 30, 80, 80);
+
+        add(jPanel1);
+        jPanel1.setBounds(60, 80, 890, 550);
+
+        jScrollPane2.setWheelScrollingEnabled(false);
+>>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tenant-tab-peg-edited.png"))); // NOI18N
-        add(jLabel1);
-        jLabel1.setBounds(0, 0, 1000, 650);
+        jScrollPane2.setViewportView(jLabel1);
+
+        add(jScrollPane2);
+        jScrollPane2.setBounds(0, 0, 1010, 660);
     }// </editor-fold>//GEN-END:initComponents
 
     private void SchoolFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SchoolFieldActionPerformed
@@ -407,8 +533,27 @@ public class Tenant extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+
+        //    setVisible(false);
+        int row = jTable1.getSelectedRow();
+        int tenantID = (Integer) jTable1.getModel().getValueAt(row, 0);
+
+        //  NewJFrame nj = new NewJFrame(0, tenantID);
+        EditTenant et = new EditTenant(tenantID);
+
+        jPanel1.hide();
+        
+        jScrollPane2.setViewportView(et);
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
+<<<<<<< HEAD
+=======
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+>>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
     public void searchName() {
         String name = NameField.getText();
 
@@ -476,7 +621,11 @@ public class Tenant extends javax.swing.JPanel {
     }
 
     public void searchOld() {
+<<<<<<< HEAD
  //       searchnamelist = tenantImpl.getTenantByStatus(OldField.getText());
+=======
+        //       searchnamelist = tenantImpl.getTenantByStatus(OldField.getText());
+>>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
         initSearch(searchnamelist);
     }
 
@@ -484,6 +633,7 @@ public class Tenant extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField DegreeField;
     private javax.swing.JRadioButton FemaleField;
+    private javax.swing.JLabel Fnamelabel;
     private javax.swing.JRadioButton MaleField;
     private javax.swing.JTextField NameField;
     private javax.swing.JTextField SchoolField;
@@ -498,13 +648,17 @@ public class Tenant extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+<<<<<<< HEAD
+=======
+    private javax.swing.JPanel jPanel1;
+>>>>>>> 1952505d310d12cd66b3d3499590ee4f7a055046
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lname;
     private javax.swing.JLabel roomassignment;
