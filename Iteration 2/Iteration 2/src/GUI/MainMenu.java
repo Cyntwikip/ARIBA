@@ -279,7 +279,6 @@ public class MainMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximizedBounds(new java.awt.Rectangle(0, 0, 1020, 560));
         setMinimumSize(new java.awt.Dimension(800, 450));
-        setResizable(false);
         getContentPane().setLayout(null);
 
         tenantID.setText("id");
@@ -551,7 +550,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        AddTenant at = new AddTenant();
+        AddTenantPanel at = new AddTenantPanel();
         at.setVisible(true);
         this.dispose();
 
@@ -566,8 +565,8 @@ public class MainMenu extends javax.swing.JFrame {
         TenantBean tb = new TenantBean();
         tb = tdao.getTenantById(tenantID);
 
-        AddTenant at = new AddTenant(tenantID);
-        at.setVisible(true);
+      //  AddTenantPanel at = new AddTenantPanel(tenantID);
+        //at.setVisible(true);
         this.dispose();
 
 

@@ -135,7 +135,6 @@ public class Bills extends javax.swing.JFrame {
             bbeanlistnotpaidelectric = bdao.getAllNotPaidRoomsByElectric();
             bbeanlistnotpaidwater = bdao.getAllNotPaidRoomsByWater();
             bbeanlistnotpaidrent = bdao.getAllNotPaidRoomsByRent();
-
             float waterprice, electricprice;
             double rentprice, total = 0;
             int billID = 0;
@@ -144,7 +143,7 @@ public class Bills extends javax.swing.JFrame {
 
             for (int i = 0; i < rlist.size(); i++) {
                 // bbean = bdao.getBillsByRoomID(i);
-                billID = blist.get(rlist.size() - i - 1).getBillID();
+                //       billID = blist.get(rlist.size() - i - 1).getBillID();
                 bbean = bdao.getBillsByRoomID(i + 1);
 
                 if (wlist.isEmpty() && elist.isEmpty() && blist.isEmpty()) { // wala talagang bill
