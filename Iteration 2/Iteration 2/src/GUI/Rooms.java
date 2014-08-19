@@ -196,7 +196,7 @@ public class Rooms extends javax.swing.JPanel {
         jPanel2.add(tenantlist);
         tenantlist.setBounds(630, 120, 200, 20);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/assignroom.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/assignroom.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -232,16 +232,18 @@ public class Rooms extends javax.swing.JPanel {
         jPanel2.add(jButton5);
         jButton5.setBounds(460, 23, 100, 30);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/rooms-tab-peg-edited.png"))); // NOI18N
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane3.setHorizontalScrollBar(null);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/rooms-tab-peg-edited.png"))); // NOI18N
         jScrollPane3.setViewportView(jLabel1);
 
         jPanel2.add(jScrollPane3);
         jScrollPane3.setBounds(0, 0, 1000, 650);
-        jScrollPane3.getAccessibleContext().setAccessibleParent(null);
 
         add(jPanel2);
         jPanel2.setBounds(0, 0, 1000, 640);
-        jPanel2.getAccessibleContext().setAccessibleParent(jScrollPane3);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

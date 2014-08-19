@@ -46,9 +46,9 @@ public class AdminLoggingPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(164, 140, 690, 460);
+        jScrollPane1.setBounds(260, 100, 690, 460);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/logging-tab-peg-clear.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/logging-tab-peg-clear.png"))); // NOI18N
         add(jLabel1);
         jLabel1.setBounds(0, 0, 1000, 650);
     }// </editor-fold>//GEN-END:initComponents

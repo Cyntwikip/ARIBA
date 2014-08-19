@@ -58,8 +58,6 @@ public class BillsPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox();
         jTextField1 = new javax.swing.JTextField();
@@ -76,6 +74,9 @@ public class BillsPanel extends javax.swing.JPanel {
         jButton10 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jLabel1 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(1000, 650));
         setLayout(null);
@@ -85,24 +86,7 @@ public class BillsPanel extends javax.swing.JPanel {
         add(jLabel3);
         jLabel3.setBounds(220, 170, 160, 20);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/unpaid.png"))); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        add(jButton3);
-        jButton3.setBounds(650, 550, 100, 40);
-
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/paid.png"))); // NOI18N
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        add(jButton4);
-        jButton4.setBounds(530, 550, 100, 40);
-
+        jPanel1.setOpaque(false);
         jPanel1.setLayout(null);
 
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -139,23 +123,23 @@ public class BillsPanel extends javax.swing.JPanel {
         jPanel1.add(jTextField2);
         jTextField2.setBounds(300, 350, 100, 30);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/computeforbills.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/computeforbills.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(220, 400, 190, 40);
+        jButton1.setBounds(210, 400, 190, 40);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/editoverallbills.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/editoverallbills.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(220, 440, 190, 40);
+        jButton2.setBounds(210, 440, 190, 40);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -171,24 +155,23 @@ public class BillsPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(460, 100, 340, 410);
+        jScrollPane1.setBounds(440, 80, 340, 410);
         jScrollPane1.getAccessibleContext().setAccessibleParent(jScrollPane1);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/paid.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/paid.png"))); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton5);
-        jButton5.setBounds(533, 560, 100, 47);
+        jButton5.setBounds(533, 529, 100, 40);
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/unpaid.png"))); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/unpaid.png"))); // NOI18N
         jPanel1.add(jButton6);
-        jButton6.setBounds(640, 560, 100, 50);
+        jButton6.setBounds(640, 530, 100, 50);
 
         jButton7.setContentAreaFilled(false);
-        jButton7.setOpaque(false);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -228,10 +211,32 @@ public class BillsPanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(jLabel1);
 
         jPanel1.add(jScrollPane2);
-        jScrollPane2.setBounds(0, 0, 1002, 652);
+        jScrollPane2.setBounds(0, 0, 2, 2);
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/paid.png"))); // NOI18N
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4);
+        jButton4.setBounds(430, 530, 100, 40);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/unpaid.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3);
+        jButton3.setBounds(750, 520, 100, 40);
 
         add(jPanel1);
-        jPanel1.setBounds(40, 20, 1000, 650);
+        jPanel1.setBounds(30, 20, 1000, 650);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/bills-tab-peg-edited.png"))); // NOI18N
+        add(jLabel2);
+        jLabel2.setBounds(0, 0, 1000, 650);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -638,6 +643,7 @@ public class BillsPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

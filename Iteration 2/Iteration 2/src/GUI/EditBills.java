@@ -205,7 +205,7 @@ public class EditBills extends javax.swing.JFrame {
         jPanel1.add(jTextField5);
         jTextField5.setBounds(120, 220, 100, 30);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/confirm.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/confirm.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -214,12 +214,12 @@ public class EditBills extends javax.swing.JFrame {
         jPanel1.add(jButton1);
         jButton1.setBounds(80, 250, 90, 50);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/billsedit-peg1.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/billsedit-peg1.png"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(250, 340));
         jLabel1.setMinimumSize(new java.awt.Dimension(250, 340));
         jLabel1.setPreferredSize(new java.awt.Dimension(250, 340));
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 230, 300);
+        jLabel1.setBounds(0, -10, 230, 310);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -230,9 +230,8 @@ public class EditBills extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();

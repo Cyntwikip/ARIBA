@@ -60,11 +60,15 @@ public class ReportPanel extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setLayout(null);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tenantscontract.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/tenantscontract.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -73,7 +77,7 @@ public class ReportPanel extends javax.swing.JPanel {
         add(jButton1);
         jButton1.setBounds(80, 120, 170, 40);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/unpaidtenants.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/unpaidtenants.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -82,7 +86,7 @@ public class ReportPanel extends javax.swing.JPanel {
         add(jButton2);
         jButton2.setBounds(80, 170, 170, 40);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/leavingtenants.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/leavingtenants.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -112,7 +116,28 @@ public class ReportPanel extends javax.swing.JPanel {
         add(jScrollPane1);
         jScrollPane1.setBounds(280, 90, 680, 500);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/5-reports-peg-edited.png"))); // NOI18N
+        jButton4.setText("Leaving By Contract");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        add(jButton4);
+        jButton4.setBounds(80, 320, 140, 23);
+
+        jButton5.setText("Leaving By Year Of Graduation");
+        add(jButton5);
+        jButton5.setBounds(60, 350, 200, 50);
+
+        jButton6.setText("Renew Contract");
+        add(jButton6);
+        jButton6.setBounds(80, 460, 170, 23);
+
+        jButton7.setText("End Contract");
+        add(jButton7);
+        jButton7.setBounds(70, 500, 170, 23);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/5-reports-peg-edited.png"))); // NOI18N
         add(jLabel1);
         jLabel1.setBounds(0, 0, 1000, 650);
     }// </editor-fold>//GEN-END:initComponents
@@ -243,11 +268,19 @@ public class ReportPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
