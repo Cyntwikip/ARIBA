@@ -71,11 +71,12 @@ public class MainMenuFinal extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(0, 50, 1000, 630);
 
-        jButton1.setLabel("tenant");
+        jButton1.setText("");
+        jButton1.setContentAreaFilled(false);
         jPanel1.add(jButton1);
         jButton1.setBounds(30, 20, 110, 30);
 
-        jButton2.setText("rooms");
+        jButton2.setContentAreaFilled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -84,7 +85,7 @@ public class MainMenuFinal extends javax.swing.JFrame {
         jPanel1.add(jButton2);
         jButton2.setBounds(140, 23, 100, 30);
 
-        jButton3.setText("bills");
+        jButton3.setContentAreaFilled(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -93,7 +94,7 @@ public class MainMenuFinal extends javax.swing.JFrame {
         jPanel1.add(jButton3);
         jButton3.setBounds(240, 23, 110, 30);
 
-        jButton4.setText("logging");
+        jButton4.setContentAreaFilled(false);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -102,7 +103,7 @@ public class MainMenuFinal extends javax.swing.JFrame {
         jPanel1.add(jButton4);
         jButton4.setBounds(350, 20, 110, 30);
 
-        jButton5.setText("reports");
+        jButton5.setContentAreaFilled(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
