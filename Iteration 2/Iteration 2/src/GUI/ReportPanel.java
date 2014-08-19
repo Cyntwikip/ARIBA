@@ -42,6 +42,8 @@ public class ReportPanel extends javax.swing.JPanel {
        private TenantDAOImplementation tdao = new TenantDAOImplementation();
     public ReportPanel() {
         initComponents();
+        
+        
     }
 
     /**

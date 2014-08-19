@@ -33,8 +33,8 @@ public class Reports extends javax.swing.JFrame {
 
     /**
      * Creates new form Reports
-        */
-       private DefaultTableModel model;
+     */
+    private DefaultTableModel model;
        private TenantDAOImplementation tdao = new TenantDAOImplementation();
 
     public Reports() {
@@ -168,7 +168,7 @@ public class Reports extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/reports-peg.png"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 800, 450);
+        jLabel1.setBounds(0, 0, 0, 0);
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/unpaidtenants.png"))); // NOI18N
         jButton8.addActionListener(new java.awt.event.ActionListener() {

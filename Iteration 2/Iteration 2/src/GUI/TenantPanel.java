@@ -232,7 +232,7 @@ public class TenantPanel extends javax.swing.JPanel {
             }
         });
         jPanel1.add(FemaleField);
-        FemaleField.setBounds(150, 350, 80, 30);
+        FemaleField.setBounds(160, 350, 80, 30);
 
         DegreeField.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         DegreeField.addActionListener(new java.awt.event.ActionListener() {
@@ -310,9 +310,14 @@ public class TenantPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(270, 70, 350, 520);
+        jScrollPane1.setBounds(340, 60, 350, 520);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/viewcompletedetails.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3);
         jButton3.setBounds(710, 460, 160, 40);
 
@@ -420,12 +425,12 @@ public class TenantPanel extends javax.swing.JPanel {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tenant-tab-peg-edited.png"))); // NOI18N
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 1000, 650);
+        jLabel1.setBounds(0, 0, 1000, 0);
 
         jScrollPane2.setViewportView(jPanel1);
 
         add(jScrollPane2);
-        jScrollPane2.setBounds(0, 0, 1030, 650);
+        jScrollPane2.setBounds(-10, 10, 1030, 620);
     }// </editor-fold>//GEN-END:initComponents
 
     private void NameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameFieldActionPerformed
@@ -535,6 +540,10 @@ public class TenantPanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(rp);
 
     }//GEN-LAST:event_changetoreportsActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     public void searchName() {
         String name = NameField.getText();
