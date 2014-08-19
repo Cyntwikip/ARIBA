@@ -510,9 +510,8 @@ public class TenantPanelFinal extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-     //   jPanel1.hide();
-        //  AddTenantPanel add = new AddTenantPanel();
-        // jScrollPane2.setViewportView(add);
+     
+        hide();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
