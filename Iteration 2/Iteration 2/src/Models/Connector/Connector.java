@@ -26,6 +26,7 @@ public class Connector {
         try {        
             Class.forName(driver);
             Connection c = DriverManager.getConnection(url, username, password);
+            
             return c;
         
         } catch (SQLException ex) {

@@ -22,16 +22,15 @@ public class NewJFrame extends javax.swing.JFrame {
 
     public NewJFrame() {
         initComponents();
-        setContentPane(jPanel1);
-        jPanel1.add(jScrollPane1);
+        
+        BillsPanelFinal b = new BillsPanelFinal();
 
-        TenantPanel t = new TenantPanel();
-        Rooms r = new Rooms();
-        AddTenantPanel at = new AddTenantPanel();
-        jScrollPane1.setViewportView(r);
+        setContentPane(jPanel1);
+        //     jPanel1.add(jScrollPane1);
+        jScrollPane1.setViewportView(b);
 
     }
-
+    /*
     public NewJFrame(int id) {
         initComponents();
 
@@ -42,7 +41,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(et);
 
     }
-
+    */
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

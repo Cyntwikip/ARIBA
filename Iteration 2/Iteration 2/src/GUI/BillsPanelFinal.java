@@ -76,7 +76,7 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("jLabel3");
         add(jLabel3);
-        jLabel3.setBounds(220, 170, 160, 20);
+        jLabel3.setBounds(220, 120, 160, 20);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -348,41 +348,42 @@ public class BillsPanelFinal extends javax.swing.JPanel {
             ArrayList<BillBean> bbeanlistnotpaidrent = new ArrayList<BillBean>();
             ArrayList<ElectricReadingBean> ebeanlistnotpaid = new ArrayList<ElectricReadingBean>();
             ArrayList<WaterReadingBean> wbeanlistnotpaid = new ArrayList<WaterReadingBean>();
-
-            //           bbeanlistnotpaidelectric = bdao.getAllNotPaidRoomsByElectric();
-            //         bbeanlistnotpaidwater = bdao.getAllNotPaidRoomsByWater();
-            //       bbeanlistnotpaidrent = bdao.getAllNotPaidRoomsByRent();
             float waterprice, electricprice;
             double rentprice, total = 0;
             int billID = 0;
-            float extrawater, extraelectric;
-            double extrarent, extratotal = 0;
 
-            for (int i = 0; i < rlist.size(); i++) {
-                // bbean = bdao.getBillsByRoomID(i);
-                //       billID = blist.get(rlist.size() - i - 1).getBillID();
+            for (int i = 0; i < rlist.size(); i++) { 
                 bbean = bdao.getBillsByRoomID(i + 1);
 
-                if (wlist.isEmpty() && elist.isEmpty() && blist.isEmpty()) { // wala talagang bill
+                billID = bbean.getBillID();
+                
+                ebean = edao.getElectricReadingByBillID(billID);
+                wbean = wdao.getWaterReadingsByBillID(billID);
+                
+                System.out.println(ebean.getPrice());
+                System.out.println(wbean.getPrice());
+                
+                if (bbean.getPrice()==0 && ebean.getPrice()==0 && wbean.getPrice()==0) { // wala talagang bill
                     Object[] obj = {rlist.get(i).getRoomID(), 0, "UNPAID"};
                     model.addRow(obj);
 
-                } else if (bbean.getpaidElectric() == false || bbean.getpaidElectric() == false || bbean.getpaidRent() == false) {
-                    ebean = edao.getElectricReadingByBillID(billID);
-                    wbean = wdao.getWaterReadingsByBillID(billID);
-
-//                    total = bbean.getPrice() + ebean.getPrice() + wbean.getPrice();
+                } else if (bbean.getpaidElectric() == false && bbean.getpaidElectric() == false && bbean.getpaidRent() == false) {
+                    electricprice = ebean.getPrice();
+                    waterprice = wbean.getPrice();
+                    
+                    total = bbean.getPrice() + electricprice + waterprice;
                     Object[] obj = {rlist.get(i).getRoomID(), total, "UNPAID"};
                     model.addRow(obj);
                 } else {
-                    ebean = edao.getElectricReadingByBillID(billID);
-                    wbean = wdao.getWaterReadingsByBillID(billID);
-
                     total = bbean.getPrice() + ebean.getPrice() + wbean.getPrice();
                     Object[] obj = {rlist.get(i).getRoomID(), total, "PAID"};
                     model.addRow(obj);
                 }
-
+                
+                bbean = new BillBean();
+                ebean = new ElectricReadingBean();
+                wbean = new WaterReadingBean();
+                total=0;
             }
         }
     }
