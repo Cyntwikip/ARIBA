@@ -71,7 +71,6 @@ public class MainMenuFinal extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(0, 50, 1000, 630);
 
-        jButton1.setText("");
         jButton1.setContentAreaFilled(false);
         jPanel1.add(jButton1);
         jButton1.setBounds(30, 20, 110, 30);

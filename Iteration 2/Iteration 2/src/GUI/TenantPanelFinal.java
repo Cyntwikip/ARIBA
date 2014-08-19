@@ -339,27 +339,27 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         jLabel2.setText("First Name:");
         add(jLabel2);
-        jLabel2.setBounds(660, 130, 90, 14);
+        jLabel2.setBounds(660, 180, 90, 14);
 
         jLabel8.setText("jLabel8");
         add(jLabel8);
-        jLabel8.setBounds(730, 130, 90, 14);
+        jLabel8.setBounds(760, 180, 140, 20);
 
         jLabel3.setText("Last Name:");
         add(jLabel3);
-        jLabel3.setBounds(660, 180, 80, 14);
+        jLabel3.setBounds(660, 220, 80, 14);
 
         jLabel9.setText("jLabel9");
         add(jLabel9);
-        jLabel9.setBounds(730, 180, 90, 14);
+        jLabel9.setBounds(760, 220, 150, 14);
 
         jLabel4.setText("In/Out:");
         add(jLabel4);
-        jLabel4.setBounds(660, 230, 70, 14);
+        jLabel4.setBounds(660, 260, 70, 14);
 
         logstat.setText("jLabel10");
         add(logstat);
-        logstat.setBounds(720, 230, 120, 14);
+        logstat.setBounds(760, 260, 120, 14);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -395,19 +395,19 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         jLabel5.setText("Last Log Time:");
         add(jLabel5);
-        jLabel5.setBounds(660, 280, 100, 14);
+        jLabel5.setBounds(660, 300, 100, 14);
 
         logtime.setText("jLabel10");
         add(logtime);
-        logtime.setBounds(760, 280, 140, 14);
+        logtime.setBounds(760, 300, 140, 14);
 
         jLabel6.setText("Room Number:");
         add(jLabel6);
-        jLabel6.setBounds(660, 330, 90, 14);
+        jLabel6.setBounds(660, 340, 90, 14);
 
         roomnumber.setText("jLabel10");
         add(roomnumber);
-        roomnumber.setBounds(750, 330, 130, 14);
+        roomnumber.setBounds(760, 340, 130, 14);
 
         jLabel7.setText("Contact Number:");
         add(jLabel7);
@@ -415,7 +415,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         contactno.setText("jLabel8");
         add(contactno);
-        contactno.setBounds(770, 380, 160, 14);
+        contactno.setBounds(760, 380, 160, 14);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/viewcompletedetails.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -424,7 +424,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
             }
         });
         add(jButton3);
-        jButton3.setBounds(690, 420, 160, 40);
+        jButton3.setBounds(720, 420, 170, 40);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/edit_information button.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -433,32 +433,32 @@ public class TenantPanelFinal extends javax.swing.JPanel {
             }
         });
         add(jButton2);
-        jButton2.setBounds(690, 480, 160, 40);
+        jButton2.setBounds(720, 470, 170, 40);
 
         jLabel10.setText("Name");
         add(jLabel10);
-        jLabel10.setBounds(60, 180, 50, 14);
+        jLabel10.setBounds(70, 180, 30, 14);
 
         jLabel11.setText("School");
         jLabel11.setPreferredSize(null);
         add(jLabel11);
-        jLabel11.setBounds(60, 210, 50, 14);
+        jLabel11.setBounds(70, 210, 40, 14);
 
         jLabel12.setText("Degree");
         add(jLabel12);
-        jLabel12.setBounds(60, 240, 50, 14);
+        jLabel12.setBounds(70, 240, 40, 14);
 
         jLabel13.setText("Year");
         add(jLabel13);
-        jLabel13.setBounds(60, 270, 50, 14);
+        jLabel13.setBounds(70, 270, 40, 14);
 
         jLabel14.setText("Gender");
         add(jLabel14);
-        jLabel14.setBounds(60, 300, 60, 14);
+        jLabel14.setBounds(70, 300, 50, 14);
 
-        imgLabel.setText("    Picture");
+        imgLabel.setText("Picture");
         add(imgLabel);
-        imgLabel.setBounds(850, 50, 80, 80);
+        imgLabel.setBounds(810, 50, 120, 110);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/tenant-tab-peg-crop.png"))); // NOI18N
         add(jLabel1);
