@@ -22,4 +22,5 @@ public interface ContractDAOInterface {
     public ArrayList <ContractBean> getAllContracts();
     public ArrayList<ContractBean> getAllContractsByTenantID(int contract_tenantID);
     public ArrayList<ContractBean> getAllContractsByDate(Date from, Date to);
+    
 }

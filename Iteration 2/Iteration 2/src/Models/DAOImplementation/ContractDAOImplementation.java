@@ -132,7 +132,7 @@ public class ContractDAOImplementation implements ContractDAOInterface {
             try{
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from contract where effectivadate and expirydate "
+            String query = "select * from contract where expirydate "
                     + "BETWEEN '" + from + "' and '" + to + "'" ;
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
