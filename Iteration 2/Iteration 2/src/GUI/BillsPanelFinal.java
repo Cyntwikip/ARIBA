@@ -66,6 +66,8 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 596));
@@ -145,6 +147,24 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         });
         add(jButton2);
         jButton2.setBounds(200, 390, 190, 40);
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/paid.png"))); // NOI18N
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        add(jButton4);
+        jButton4.setBounds(540, 510, 100, 40);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/unpaid.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        add(jButton3);
+        jButton3.setBounds(660, 510, 100, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/bills-tab-peg-edited-panel.png"))); // NOI18N
         jLabel1.setOpaque(true);
@@ -272,6 +292,73 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         nj.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow() + 1;
+
+        BillDAOImplementation billdao = new BillDAOImplementation();
+        BillBean bbean = new BillBean();
+        bbean = billdao.getBillsByRoomID(row);
+
+        WaterDAOImplementation wdao = new WaterDAOImplementation();
+        WaterReadingBean wbean = wdao.getWaterReadingsByBillID(bbean.getBillID());
+
+        ElectricReadingDAOImplementation edao = new ElectricReadingDAOImplementation();
+        ElectricReadingBean ebean = edao.getElectricReadingByBillID(bbean.getBillID());
+
+        if (bbean.getPrice() == 0 || wbean.getPrice() == 0 || ebean.getPrice() == 0) {
+            JOptionPane.showMessageDialog(null, "Check if Rent, Water and Electric Price was set");
+        } else if (bbean.getPaidWater() && bbean.getpaidElectric() && bbean.getpaidRent()) {
+            JOptionPane.showMessageDialog(null, "Paid already");
+        } else {
+            bbean.setPaidElectric(true);
+            bbean.setPaidRent(true);
+            bbean.setPaidWater(true);
+
+            boolean check;
+            if (billdao.editBill(bbean, bbean.getBillID())) {
+                JOptionPane.showMessageDialog(null, "Successful");
+                roomtable();
+            } else {
+                JOptionPane.showMessageDialog(null, "Not Successful");
+            }
+
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow() + 1;
+
+        BillDAOImplementation billdao = new BillDAOImplementation();
+        BillBean bbean = new BillBean();
+        bbean = billdao.getBillsByRoomID(row);
+
+        WaterDAOImplementation wdao = new WaterDAOImplementation();
+        WaterReadingBean wbean = wdao.getWaterReadingsByBillID(bbean.getBillID());
+
+        ElectricReadingDAOImplementation edao = new ElectricReadingDAOImplementation();
+        ElectricReadingBean ebean = edao.getElectricReadingByBillID(bbean.getBillID());
+
+        if (bbean.getPrice() == 0 || wbean.getPrice() == 0 || ebean.getPrice() == 0) {
+            JOptionPane.showMessageDialog(null, "Already set to unpaid");
+        } else if (bbean.getPaidWater() && bbean.getpaidElectric() && bbean.getpaidRent()) {
+            bbean.setPaidElectric(false);
+            bbean.setPaidRent(false);
+            bbean.setPaidWater(false);
+
+            boolean check;
+            if (billdao.editBill(bbean, bbean.getBillID())) {
+                JOptionPane.showMessageDialog(null, "Successful");
+                roomtable();
+            } else {
+                JOptionPane.showMessageDialog(null, "Not Successful");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Already set to unpaid");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     public void roomlist() {
         jComboBox1.removeAllItems();
 
@@ -392,6 +479,8 @@ public class BillsPanelFinal extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
