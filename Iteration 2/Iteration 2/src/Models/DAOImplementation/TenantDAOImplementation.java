@@ -940,4 +940,27 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         return true;
     }
 
+    @Override
+    public boolean setTenantToOld(int tenantID) {
+ 
+               try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+
+            String query = "update tenant set status ='NOT CURRENT' where tenantID = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, tenantID);
+            ps.executeUpdate();
+            connection.close();
+
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+  
+        
+    }
+
 }

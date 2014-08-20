@@ -25,4 +25,5 @@ public interface RoomDAOInterface {
     public RoomBean getTenantRoom(int tenantID);
     public int checkRoomCount(int roomID);
     public ArrayList<RoomBean> viewAvailbleRooms();
+    public boolean removeTenantToRoom(int tenantID, int roomID);
 }
