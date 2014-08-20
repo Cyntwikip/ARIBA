@@ -78,6 +78,7 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
                 list.add(bean);
 
             }
+            connection.close();
 
             return list;
         } catch (SQLException ex) {
@@ -118,6 +119,7 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
 
                 list.add(bean);
             }
+            connection.close();
 
             return list;
         } catch (SQLException ex) {
@@ -141,6 +143,7 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
             ps.setInt(4, attendance.getLogID());
 
             ps.executeUpdate();
+            connection.close();
 
             return true;
         } catch (SQLException ex) {
@@ -180,6 +183,8 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
                 list.add(bean);
 
             }
+            connection.close();
+
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(AttendanceLogDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -216,6 +221,8 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
                 list.add(bean);
 
             }
+            connection.close();
+
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(AttendanceLogDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -258,6 +265,8 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
                 list.add(bean);
 
             }
+            connection.close();
+
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(AttendanceLogDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -267,7 +276,7 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
 
     @Override
     public AttendanceLogBean getLatestLoginByTenant(int tenantID) {
-          try {
+        try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
             String query = "select * from attendancelog where isIn = true and log_tenantID = " + tenantID + "  and timeLogged >= CURDATE() order by logID desc";
@@ -275,7 +284,7 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
             ResultSet resultSet = ps.executeQuery();
             AttendanceLogBean bean = new AttendanceLogBean();
             ArrayList<AttendanceLogBean> list = new ArrayList<AttendanceLogBean>();
-    
+
             int logID, log_tenantID;
             boolean isIn;
             Timestamp timeLogged;
@@ -285,16 +294,17 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
                 isIn = resultSet.getBoolean("isIn");
                 timeLogged = resultSet.getTimestamp("timeLogged");
 
-     
                 bean.setLogID(logID);
                 bean.setLog_tenantID(log_tenantID);
                 bean.setIsIn(isIn);
                 bean.setTimeLogged(timeLogged);
 
+                connection.close();
+
                 return bean;
 
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(AttendanceLogDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -304,10 +314,10 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
 
     @Override
     public AttendanceLogBean getLatestLogoutByTenant(int tenantID) {
-         try {
+        try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from attendancelog where isIn = false and log_tenantID = "+ tenantID + " and timeLogged >= CURDATE() order by logID desc";
+            String query = "select * from attendancelog where isIn = false and log_tenantID = " + tenantID + " and timeLogged >= CURDATE() order by logID desc";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
             AttendanceLogBean bean = new AttendanceLogBean();
@@ -328,10 +338,12 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
                 bean.setIsIn(isIn);
                 bean.setTimeLogged(timeLogged);
 
+                connection.close();
+
                 return bean;
 
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(AttendanceLogDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }

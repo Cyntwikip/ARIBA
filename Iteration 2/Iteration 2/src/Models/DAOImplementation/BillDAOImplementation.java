@@ -464,10 +464,10 @@ public class BillDAOImplementation implements BillDAOInterface {
                 bean.setPaidElectric(paidElectric);
                 bean.setPaidRent(paidRent);
                 bean.setPaidWater(paidWater);
+         connection.close();
 
                 return bean;
             }
-            connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }

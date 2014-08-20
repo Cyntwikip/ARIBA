@@ -215,11 +215,11 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
                 bean.setPriceperKW(priceperKW);
                 bean.setPrice(price);
                 bean.setDateRead(dateRead);
+         connection.close();
 
                 return bean;
             }
-            connection.close();
-        } catch (SQLException ex) {
+         } catch (SQLException ex) {
             Logger.getLogger(ElectricReadingDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
