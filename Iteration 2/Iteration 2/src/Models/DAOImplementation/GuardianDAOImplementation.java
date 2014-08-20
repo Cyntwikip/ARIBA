@@ -81,6 +81,8 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 bean.setLname(lname);
                 bean.setEmail(email);
             }
+            connection.close();
+
             return bean;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -122,6 +124,8 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 bean.setEmail(email);
                 list.add(bean);
             }
+            connection.close();
+
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -146,6 +150,7 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
             ps.setString(4, guardian.getEmail());
             ps.setInt(5, guardianID);
             ps.executeUpdate();
+            connection.close();
 
             return true;
         } catch (SQLException ex) {
@@ -188,6 +193,8 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 bean.setLname(Lname);
                 bean.setEmail(email);
             }
+            connection.close();
+
             return bean;
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -244,6 +251,7 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                     bean.setEmail(email);
                 }
             }
+            connection.close();
 
             return bean;
 
@@ -328,6 +336,8 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 list.add(bean);
 
             }
+            connection.close();
+
             return list;
 
         } catch (SQLException ex) {
@@ -383,6 +393,7 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                     System.out.println("Guardian ID: " + bean.getGuardianID());
                 }
             }
+            connection.close();
 
             return bean;
 
@@ -414,7 +425,7 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 fname = resultSet.getString("fname");
                 lname = resultSet.getString("lname");
                 email = resultSet.getString("email");
-             
+
                 bean = new GuardianBean();
 
                 bean.setGuardianID(guardianID);
@@ -422,8 +433,10 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
                 bean.setFname(fname);
                 bean.setLname(lname);
                 bean.setEmail(email);
-           
-           }
+
+            }
+            connection.close();
+
             return bean;
 
         } catch (SQLException ex) {
@@ -442,11 +455,13 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, guardian.getGuardianID());
             ps.executeUpdate();
+            connection.close();
+
         } catch (SQLException ex) {
             Logger.getLogger(GuardianDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-        
+
         return true;
     }
 
@@ -459,12 +474,14 @@ public class GuardianDAOImplementation implements GuardianDAOInterface {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, tenant.getTenantID());
             ps.executeUpdate();
+            connection.close();
+
         } catch (SQLException ex) {
             Logger.getLogger(GuardianDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
         return true;
-        
+
     }
 
 }

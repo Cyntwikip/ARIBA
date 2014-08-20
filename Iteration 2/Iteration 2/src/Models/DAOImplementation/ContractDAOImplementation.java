@@ -78,6 +78,8 @@ public class ContractDAOImplementation implements ContractDAOInterface {
                 
                 list.add(bean);
              }
+                     connection.close();
+
             return list;
         }   catch(SQLException ex){
         Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
@@ -115,7 +117,8 @@ public class ContractDAOImplementation implements ContractDAOInterface {
                 contractlist.add(bean);
                 bean = new ContractBean();
             }
-            
+                     connection.close();
+
             return contractlist;
             
         } catch (SQLException ex) {
@@ -157,6 +160,8 @@ public class ContractDAOImplementation implements ContractDAOInterface {
                 
                 list.add(bean);
              }
+                     connection.close();
+
             return list;
         }   catch(SQLException ex){
         Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);

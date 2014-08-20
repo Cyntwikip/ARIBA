@@ -66,6 +66,8 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 596));
@@ -76,7 +78,7 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("jLabel3");
         add(jLabel3);
-        jLabel3.setBounds(220, 170, 160, 20);
+        jLabel3.setBounds(220, 120, 160, 20);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -145,6 +147,24 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         });
         add(jButton2);
         jButton2.setBounds(200, 390, 190, 40);
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/paid.png"))); // NOI18N
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        add(jButton4);
+        jButton4.setBounds(540, 510, 100, 40);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/unpaid.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        add(jButton3);
+        jButton3.setBounds(660, 510, 100, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/bills-tab-peg-edited-panel.png"))); // NOI18N
         jLabel1.setOpaque(true);
@@ -272,6 +292,73 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         nj.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow() + 1;
+
+        BillDAOImplementation billdao = new BillDAOImplementation();
+        BillBean bbean = new BillBean();
+        bbean = billdao.getBillsByRoomID(row);
+
+        WaterDAOImplementation wdao = new WaterDAOImplementation();
+        WaterReadingBean wbean = wdao.getWaterReadingsByBillID(bbean.getBillID());
+
+        ElectricReadingDAOImplementation edao = new ElectricReadingDAOImplementation();
+        ElectricReadingBean ebean = edao.getElectricReadingByBillID(bbean.getBillID());
+
+        if (bbean.getPrice() == 0 || wbean.getPrice() == 0 || ebean.getPrice() == 0) {
+            JOptionPane.showMessageDialog(null, "Check if Rent, Water and Electric Price was set");
+        } else if (bbean.getPaidWater() && bbean.getpaidElectric() && bbean.getpaidRent()) {
+            JOptionPane.showMessageDialog(null, "Paid already");
+        } else {
+            bbean.setPaidElectric(true);
+            bbean.setPaidRent(true);
+            bbean.setPaidWater(true);
+
+            boolean check;
+            if (billdao.editBill(bbean, bbean.getBillID())) {
+                JOptionPane.showMessageDialog(null, "Successful");
+                roomtable();
+            } else {
+                JOptionPane.showMessageDialog(null, "Not Successful");
+            }
+
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow() + 1;
+
+        BillDAOImplementation billdao = new BillDAOImplementation();
+        BillBean bbean = new BillBean();
+        bbean = billdao.getBillsByRoomID(row);
+
+        WaterDAOImplementation wdao = new WaterDAOImplementation();
+        WaterReadingBean wbean = wdao.getWaterReadingsByBillID(bbean.getBillID());
+
+        ElectricReadingDAOImplementation edao = new ElectricReadingDAOImplementation();
+        ElectricReadingBean ebean = edao.getElectricReadingByBillID(bbean.getBillID());
+
+        if (bbean.getPrice() == 0 || wbean.getPrice() == 0 || ebean.getPrice() == 0) {
+            JOptionPane.showMessageDialog(null, "Already set to unpaid");
+        } else if (bbean.getPaidWater() && bbean.getpaidElectric() && bbean.getpaidRent()) {
+            bbean.setPaidElectric(false);
+            bbean.setPaidRent(false);
+            bbean.setPaidWater(false);
+
+            boolean check;
+            if (billdao.editBill(bbean, bbean.getBillID())) {
+                JOptionPane.showMessageDialog(null, "Successful");
+                roomtable();
+            } else {
+                JOptionPane.showMessageDialog(null, "Not Successful");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Already set to unpaid");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     public void roomlist() {
         jComboBox1.removeAllItems();
 
@@ -348,41 +435,42 @@ public class BillsPanelFinal extends javax.swing.JPanel {
             ArrayList<BillBean> bbeanlistnotpaidrent = new ArrayList<BillBean>();
             ArrayList<ElectricReadingBean> ebeanlistnotpaid = new ArrayList<ElectricReadingBean>();
             ArrayList<WaterReadingBean> wbeanlistnotpaid = new ArrayList<WaterReadingBean>();
-
-            //           bbeanlistnotpaidelectric = bdao.getAllNotPaidRoomsByElectric();
-            //         bbeanlistnotpaidwater = bdao.getAllNotPaidRoomsByWater();
-            //       bbeanlistnotpaidrent = bdao.getAllNotPaidRoomsByRent();
             float waterprice, electricprice;
             double rentprice, total = 0;
             int billID = 0;
-            float extrawater, extraelectric;
-            double extrarent, extratotal = 0;
 
-            for (int i = 0; i < rlist.size(); i++) {
-                // bbean = bdao.getBillsByRoomID(i);
-                //       billID = blist.get(rlist.size() - i - 1).getBillID();
+            for (int i = 0; i < rlist.size(); i++) { 
                 bbean = bdao.getBillsByRoomID(i + 1);
 
-                if (wlist.isEmpty() && elist.isEmpty() && blist.isEmpty()) { // wala talagang bill
+                billID = bbean.getBillID();
+                
+                ebean = edao.getElectricReadingByBillID(billID);
+                wbean = wdao.getWaterReadingsByBillID(billID);
+                
+                System.out.println(ebean.getPrice());
+                System.out.println(wbean.getPrice());
+                
+                if (bbean.getPrice()==0 && ebean.getPrice()==0 && wbean.getPrice()==0) { // wala talagang bill
                     Object[] obj = {rlist.get(i).getRoomID(), 0, "UNPAID"};
                     model.addRow(obj);
 
-                } else if (bbean.getpaidElectric() == false || bbean.getpaidElectric() == false || bbean.getpaidRent() == false) {
-                    ebean = edao.getElectricReadingByBillID(billID);
-                    wbean = wdao.getWaterReadingsByBillID(billID);
-
-//                    total = bbean.getPrice() + ebean.getPrice() + wbean.getPrice();
+                } else if (bbean.getpaidElectric() == false && bbean.getpaidElectric() == false && bbean.getpaidRent() == false) {
+                    electricprice = ebean.getPrice();
+                    waterprice = wbean.getPrice();
+                    
+                    total = bbean.getPrice() + electricprice + waterprice;
                     Object[] obj = {rlist.get(i).getRoomID(), total, "UNPAID"};
                     model.addRow(obj);
                 } else {
-                    ebean = edao.getElectricReadingByBillID(billID);
-                    wbean = wdao.getWaterReadingsByBillID(billID);
-
                     total = bbean.getPrice() + ebean.getPrice() + wbean.getPrice();
                     Object[] obj = {rlist.get(i).getRoomID(), total, "PAID"};
                     model.addRow(obj);
                 }
-
+                
+                bbean = new BillBean();
+                ebean = new ElectricReadingBean();
+                wbean = new WaterReadingBean();
+                total=0;
             }
         }
     }
@@ -391,6 +479,8 @@ public class BillsPanelFinal extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

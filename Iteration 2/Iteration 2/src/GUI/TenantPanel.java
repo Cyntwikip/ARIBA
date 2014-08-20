@@ -184,6 +184,12 @@ public class TenantPanel extends javax.swing.JPanel {
         changetologs = new javax.swing.JButton();
         changetoreports = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setOpaque(false);
         setLayout(null);
@@ -203,14 +209,14 @@ public class TenantPanel extends javax.swing.JPanel {
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 650));
         jPanel1.setLayout(null);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addnewtenanttab.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/AddTenant.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(80, 440, 160, 30);
+        jButton1.setBounds(70, 410, 160, 30);
 
         MaleField.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         MaleField.setText("Male");
@@ -221,7 +227,7 @@ public class TenantPanel extends javax.swing.JPanel {
             }
         });
         jPanel1.add(MaleField);
-        MaleField.setBounds(90, 350, 60, 30);
+        MaleField.setBounds(120, 330, 60, 30);
 
         FemaleField.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         FemaleField.setText("Female");
@@ -232,7 +238,7 @@ public class TenantPanel extends javax.swing.JPanel {
             }
         });
         jPanel1.add(FemaleField);
-        FemaleField.setBounds(160, 350, 80, 30);
+        FemaleField.setBounds(170, 330, 80, 30);
 
         DegreeField.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         DegreeField.addActionListener(new java.awt.event.ActionListener() {
@@ -246,7 +252,7 @@ public class TenantPanel extends javax.swing.JPanel {
             }
         });
         jPanel1.add(DegreeField);
-        DegreeField.setBounds(90, 280, 120, 19);
+        DegreeField.setBounds(110, 280, 120, 19);
 
         imgLabel.setText("    Picture");
         jPanel1.add(imgLabel);
@@ -310,9 +316,9 @@ public class TenantPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(340, 60, 350, 520);
+        jScrollPane1.setBounds(270, 80, 350, 520);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/viewcompletedetails.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/viewcompletedetails.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -321,7 +327,7 @@ public class TenantPanel extends javax.swing.JPanel {
         jPanel1.add(jButton3);
         jButton3.setBounds(710, 460, 160, 40);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/edit_information button.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/edit_information button.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -342,7 +348,7 @@ public class TenantPanel extends javax.swing.JPanel {
             }
         });
         jPanel1.add(NameField);
-        NameField.setBounds(90, 200, 120, 20);
+        NameField.setBounds(110, 220, 120, 20);
 
         SchoolField.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         SchoolField.addActionListener(new java.awt.event.ActionListener() {
@@ -356,7 +362,7 @@ public class TenantPanel extends javax.swing.JPanel {
             }
         });
         jPanel1.add(SchoolField);
-        SchoolField.setBounds(100, 240, 120, 20);
+        SchoolField.setBounds(110, 250, 120, 20);
 
         YearOfGraduationField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -364,7 +370,7 @@ public class TenantPanel extends javax.swing.JPanel {
             }
         });
         jPanel1.add(YearOfGraduationField);
-        YearOfGraduationField.setBounds(100, 320, 70, 20);
+        YearOfGraduationField.setBounds(130, 310, 70, 20);
 
         jLabel8.setText("jLabel8");
         jPanel1.add(jLabel8);
@@ -427,10 +433,34 @@ public class TenantPanel extends javax.swing.JPanel {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(0, 0, 1000, 0);
 
+        jLabel11.setText("Name");
+        jPanel1.add(jLabel11);
+        jLabel11.setBounds(60, 220, 27, 14);
+
+        jLabel12.setText("School");
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(60, 250, 31, 14);
+
+        jLabel13.setText("Degree");
+        jPanel1.add(jLabel13);
+        jLabel13.setBounds(60, 280, 50, 14);
+
+        jLabel14.setText("Year");
+        jPanel1.add(jLabel14);
+        jLabel14.setBounds(60, 310, 60, 14);
+
+        jLabel15.setText("Gender");
+        jPanel1.add(jLabel15);
+        jLabel15.setBounds(60, 340, 60, 14);
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/tenant-tab-peg.png"))); // NOI18N
+        jPanel1.add(jLabel10);
+        jLabel10.setBounds(0, 0, 1000, 650);
+
         jScrollPane2.setViewportView(jPanel1);
 
         add(jScrollPane2);
-        jScrollPane2.setBounds(-10, 10, 1030, 620);
+        jScrollPane2.setBounds(0, 0, 1010, 660);
     }// </editor-fold>//GEN-END:initComponents
 
     private void NameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameFieldActionPerformed
@@ -635,6 +665,12 @@ public class TenantPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

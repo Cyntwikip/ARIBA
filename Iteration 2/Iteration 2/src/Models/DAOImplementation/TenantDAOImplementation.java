@@ -120,6 +120,8 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 bean.setEmail(email);
                 bean.setBirthday(birthday);
             }
+            connection.close();
+
             return bean;
 
         } catch (SQLException ex) {
@@ -179,6 +181,8 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 bean.setBirthday(birthday);
                 list.add(bean);
             }
+            connection.close();
+
             return list;
 
         } catch (SQLException ex) {
@@ -238,6 +242,8 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 bean.setEmail(email);
                 bean.setBirthday(birthday);
             }
+            connection.close();
+
             return bean;
 
         } catch (SQLException ex) {
@@ -299,6 +305,8 @@ public class TenantDAOImplementation implements TenantDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
+
             return list;
 
         } catch (SQLException ex) {
@@ -360,6 +368,8 @@ public class TenantDAOImplementation implements TenantDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
+
             return list;
 
         } catch (SQLException ex) {
@@ -418,6 +428,8 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 bean.setBirthday(birthday);
                 list.add(bean);
             }
+            connection.close();
+
             return list;
 
         } catch (SQLException ex) {
@@ -477,6 +489,8 @@ public class TenantDAOImplementation implements TenantDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
+
             return list;
 
         } catch (SQLException ex) {
@@ -536,6 +550,8 @@ public class TenantDAOImplementation implements TenantDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
+
             return list;
 
         } catch (SQLException ex) {
@@ -597,6 +613,8 @@ public class TenantDAOImplementation implements TenantDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
+
             return list;
 
         } catch (SQLException ex) {
@@ -658,6 +676,8 @@ public class TenantDAOImplementation implements TenantDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
+
             return list;
 
         } catch (SQLException ex) {
@@ -717,6 +737,8 @@ public class TenantDAOImplementation implements TenantDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
+
             return list;
 
         } catch (SQLException ex) {
@@ -749,7 +771,6 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 } catch (IOException ex) {
                     Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
             }
             ps.setString(2, tenant.getContact());
             ps.setString(3, tenant.getGender());
@@ -765,6 +786,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
             ps.setInt(13, tenant.getTenantID());
 
             ps.executeUpdate();
+            connection.close();
 
             return true;
         } catch (SQLException ex) {
@@ -825,6 +847,8 @@ public class TenantDAOImplementation implements TenantDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
+
             return list;
 
         } catch (SQLException ex) {
@@ -886,6 +910,8 @@ public class TenantDAOImplementation implements TenantDAOInterface {
 
                 list.add(bean);
             }
+            connection.close();
+
             return list;
 
         } catch (SQLException ex) {
@@ -904,6 +930,8 @@ public class TenantDAOImplementation implements TenantDAOInterface {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, tenant.getTenantID());
             ps.executeUpdate();
+            connection.close();
+
         } catch (SQLException ex) {
             Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
             return false;

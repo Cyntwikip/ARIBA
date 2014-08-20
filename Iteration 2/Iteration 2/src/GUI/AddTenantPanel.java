@@ -204,7 +204,7 @@ public class AddTenantPanel extends javax.swing.JPanel {
         jPanel1.add(imgaddLabel);
         imgaddLabel.setBounds(70, 40, 160, 160);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/choosephoto.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/choosephoto.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -427,7 +427,7 @@ public class AddTenantPanel extends javax.swing.JPanel {
         jPanel1.add(GuardianEmailField);
         GuardianEmailField.setBounds(600, 230, 150, 30);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/save.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/save.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -437,7 +437,7 @@ public class AddTenantPanel extends javax.swing.JPanel {
         jButton3.setBounds(650, 270, 80, 40);
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/backbutton.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/backbutton.png"))); // NOI18N
         jButton1.setOpaque(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -477,7 +477,7 @@ public class AddTenantPanel extends javax.swing.JPanel {
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1000, 680));
         jScrollPane1.setWheelScrollingEnabled(false);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addedit-peg-edited.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/addedit-peg-edited.png"))); // NOI18N
         jLabel1.setOpaque(true);
         jScrollPane1.setViewportView(jLabel1);
 

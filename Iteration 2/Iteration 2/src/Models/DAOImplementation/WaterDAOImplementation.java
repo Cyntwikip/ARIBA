@@ -214,10 +214,10 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
                 bean.setPricepercubicmeter(pricepercubicmeter);
                 bean.setPrice(price);
                 bean.setDateRead(dateRead);
+         connection.close();
 
                 return bean;
             }
-            connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(ElectricReadingDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }

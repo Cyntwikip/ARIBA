@@ -68,7 +68,7 @@
             <Component class="javax.swing.JButton" name="jButton2">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/GUI/choosephoto.png"/>
+                  <Image iconType="3" name="/GUI/Images/choosephoto.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -340,7 +340,7 @@
             <Component class="javax.swing.JButton" name="jButton3">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/GUI/save.png"/>
+                  <Image iconType="3" name="/GUI/Images/save.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -358,7 +358,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/GUI/backbutton.png"/>
+                  <Image iconType="3" name="/GUI/Images/backbutton.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -408,7 +408,7 @@
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/GUI/addedit-peg-edited.png"/>
+                  <Image iconType="3" name="/GUI/Images/addedit-peg-edited.png"/>
                 </Property>
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>

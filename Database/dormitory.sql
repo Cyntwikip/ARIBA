@@ -1,5 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `dormitory` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `dormitory`;
+SET GLOBAL max_connections = 200;
 -- MySQL dump 10.13  Distrib 5.6.13, for osx10.6 (i386)
 --
 -- Host: localhost    Database: dormitory
