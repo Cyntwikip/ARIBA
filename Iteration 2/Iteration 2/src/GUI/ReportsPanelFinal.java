@@ -306,6 +306,8 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
 
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
         ArrayList<TenantBean> tlist = new ArrayList<TenantBean>();
         ArrayList<ContractBean> clist = new ArrayList<ContractBean>();
         ContractDAOInterface cdao = new ContractDAOImplementation();
