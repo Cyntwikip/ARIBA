@@ -221,13 +221,14 @@ public class TenantPanelFinal extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         NameField = new javax.swing.JTextField();
         SchoolField = new javax.swing.JTextField();
         DegreeField = new javax.swing.JTextField();
         YearOfGraduationField = new javax.swing.JComboBox();
         MaleField = new javax.swing.JRadioButton();
         FemaleField = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -255,6 +256,20 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(1000, 596));
         setMinimumSize(new java.awt.Dimension(1000, 596));
         setLayout(null);
+
+        jPanel1.setBackground(new java.awt.Color(0, 51, 0));
+        jPanel1.setForeground(new java.awt.Color(0, 51, 0));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/AddTenant.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+
+        add(jPanel1);
+        jPanel1.setBounds(60, 330, 180, 70);
 
         NameField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         NameField.addActionListener(new java.awt.event.ActionListener() {
@@ -327,15 +342,6 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         });
         add(FemaleField);
         FemaleField.setBounds(170, 290, 80, 30);
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/AddTenant.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        add(jButton1);
-        jButton1.setBounds(70, 360, 160, 30);
 
         jLabel2.setText("First Name:");
         add(jLabel2);
@@ -569,6 +575,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel logstat;
