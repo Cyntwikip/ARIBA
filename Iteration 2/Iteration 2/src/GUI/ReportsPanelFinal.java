@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package GUI;
-
 
 import Models.Beans.BillBean;
 import Models.Beans.ContractBean;
@@ -20,12 +18,15 @@ import Models.DAOInterface.ContractDAOInterface;
 import Models.DAOInterface.RoomDAOInterface;
 import Models.DAOInterface.TenantDAOInterface;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+
 /**
  *
  * @author Giodee
@@ -35,13 +36,12 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
     /**
      * Creates new form ReportsPanelFinal
      */
-    
-           private DefaultTableModel model;
-                  private TenantDAOImplementation tdao = new TenantDAOImplementation();
+    private DefaultTableModel model;
+    private TenantDAOImplementation tdao = new TenantDAOImplementation();
 
     public ReportsPanelFinal() {
         initComponents();
-        
+
         model = (DefaultTableModel) jTable1.getModel();
     }
 
@@ -119,10 +119,20 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         jScrollPane1.setBounds(280, 40, 680, 500);
 
         jButton4.setText("leaving by year");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         add(jButton4);
         jButton4.setBounds(80, 290, 170, 23);
 
         jButton5.setText("leaving by contract");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         add(jButton5);
         jButton5.setBounds(80, 310, 170, 23);
 
@@ -264,6 +274,71 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
             model.addRow(obj);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+
+        JTableHeader th = jTable1.getTableHeader();
+        TableColumnModel tcm = th.getColumnModel();
+        TableColumn tc = tcm.getColumn(0);
+        tc.setHeaderValue("Tenant ID");
+        tc = tcm.getColumn(1);
+        tc.setHeaderValue("Lastname");
+        tc = tcm.getColumn(2);
+        tc.setHeaderValue("Firstname");
+        tc = tcm.getColumn(3);
+        tc.setHeaderValue("Degree");
+        th.repaint();
+
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+
+        ArrayList<TenantBean> tlist = tdao.getTenantByExpectedYearofGrad(year);
+
+        for (int i = 0; i < tlist.size(); i++) {
+            //System.out.println(tlist.get(i).getLname());
+            Object[] obj = {tlist.get(i).getTenantID(), tlist.get(i).getLname(), tlist.get(i).getFname(), tlist.get(i).getDegree()};
+            model.addRow(obj);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+
+        ArrayList<TenantBean> tlist = new ArrayList<TenantBean>();
+        ArrayList<ContractBean> clist = new ArrayList<ContractBean>();
+        ContractDAOInterface cdao = new ContractDAOImplementation();
+
+        java.util.Date utilDate = new java.util.Date();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+        System.out.println(sqlDate);
+
+        Calendar expirydate = Calendar.getInstance();
+        expirydate.add(Calendar.DAY_OF_YEAR, 92); // add 1 year
+        DateFormat df_contract = new SimpleDateFormat("MMMM d, yyyy");
+
+        //converting Calendar to sql Date
+        java.sql.Date sqlExpirydate = new java.sql.Date(expirydate.getTime().getTime());
+
+        System.out.println(sqlExpirydate);
+        clist = cdao.getAllContractsByDate(sqlDate, sqlExpirydate);
+
+        System.out.println(clist.size());
+
+        TenantBean tbean = new TenantBean();
+        for (int i = 0; i < clist.size(); i++) {
+            int tenantID = clist.get(i).getContract_tenantID();
+
+            tbean = tdao.getTenantById(tenantID);
+
+            Object[] obj = {tbean.getTenantID(), tbean.getLname(), tbean.getFname(), tbean.getDegree()};
+            model.addRow(obj);
+
+        }
+
+    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
