@@ -133,11 +133,6 @@ public class MainMenuFinal extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
 
-        // rooms
-        //       imageicon = new ImageIcon(getClass().getResource("rooms-tab-peg-crop.png")); 
-        //     jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("rooms-tab-peg-crop.png")));
-        // change to room
-        //jPanel1.remove(jPanel2);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/rooms-tab-peg-crop.png")));
         jPanel1.remove(jPanel2);
         jPanel2 = new RoomPanelFinal();

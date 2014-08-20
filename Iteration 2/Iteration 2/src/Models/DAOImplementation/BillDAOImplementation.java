@@ -99,13 +99,14 @@ public class BillDAOImplementation implements BillDAOInterface {
             Connector c = new Connector();
             Connection connection = c.getConnection();
 
-            String query = "update bill set bill_roomID = ?, paidRent = ?, paidWater= ?, paidElectric = ? where billID = ?";
+            String query = "update bill set bill_roomID = ?, paidRent = ?, paidWater= ?, paidElectric = ?, price = ? where billID = ?";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, bill.getBill_roomID());
             ps.setBoolean(2, bill.getpaidRent());
             ps.setBoolean(3, bill.getPaidWater());
             ps.setBoolean(4, bill.getpaidElectric());
-            ps.setInt(5, billID);
+            ps.setDouble(5, bill.getPrice());
+            ps.setInt(6, billID);
             ps.executeUpdate();
             connection.close();
             return true;
