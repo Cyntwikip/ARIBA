@@ -66,8 +66,6 @@ public class BillsPanel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
@@ -157,19 +155,6 @@ public class BillsPanel extends javax.swing.JPanel {
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(440, 80, 340, 410);
         jScrollPane1.getAccessibleContext().setAccessibleParent(jScrollPane1);
-
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/paid.png"))); // NOI18N
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton5);
-        jButton5.setBounds(533, 529, 100, 40);
-
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/unpaid.png"))); // NOI18N
-        jPanel1.add(jButton6);
-        jButton6.setBounds(640, 530, 100, 50);
 
         jButton7.setContentAreaFilled(false);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -544,10 +529,6 @@ public class BillsPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
-
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
 
@@ -556,9 +537,7 @@ public class BillsPanel extends javax.swing.JPanel {
         jTextField2.hide();
         jButton1.hide();
         jButton2.hide();
-        jButton5.hide();
         jScrollPane1.hide();
-        jButton6.hide();
         jButton7.hide();
         jButton8.hide();
         jButton9.hide();
@@ -575,9 +554,7 @@ public class BillsPanel extends javax.swing.JPanel {
         jTextField2.hide();
         jButton1.hide();
         jButton2.hide();
-        jButton5.hide();
         jScrollPane1.hide();
-        jButton6.hide();
         jButton7.hide();
         jButton8.hide();
         jButton9.hide();
@@ -595,9 +572,7 @@ public class BillsPanel extends javax.swing.JPanel {
         jTextField2.hide();
         jButton1.hide();
         jButton2.hide();
-        jButton5.hide();
         jScrollPane1.hide();
-        jButton6.hide();
         jButton7.hide();
         jButton8.hide();
         jButton9.hide();
@@ -617,9 +592,7 @@ public class BillsPanel extends javax.swing.JPanel {
         jTextField2.hide();
         jButton1.hide();
         jButton2.hide();
-        jButton5.hide();
         jScrollPane1.hide();
-        jButton6.hide();
         jButton7.hide();
         jButton8.hide();
         jButton9.hide();
@@ -636,8 +609,6 @@ public class BillsPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
