@@ -7,6 +7,8 @@ package GUI;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -28,16 +30,22 @@ public class MainMenuFinal extends javax.swing.JFrame {
     private TenantPanelFinal tenantpanelfinal;
     private ImageIcon imageicon;
     private RoomPanelFinal roompanelfinal;
+    private JPanel jPanel2;
 
     public MainMenuFinal() {
         initComponents();
 
-        tenantpanelfinal = new TenantPanelFinal();
-
-        setContentPane(jPanel1);
+        jPanel2 = new TenantPanelFinal();
+        setJpanel();
+        // setContentPane(jPanel1);
         //     jPanel1.add(jScrollPane1);
-        jScrollPane1.setViewportView(tenantpanelfinal);
 
+    }
+
+    public void setJpanel() {
+        jPanel2.setPreferredSize(new java.awt.Dimension(1000, 600));
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(0, 50, 1000, 600);
     }
 
     /**
@@ -50,7 +58,6 @@ public class MainMenuFinal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -67,12 +74,12 @@ public class MainMenuFinal extends javax.swing.JFrame {
         jPanel1.setOpaque(false);
         jPanel1.setLayout(null);
 
-        jScrollPane1.setBorder(null);
-        jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(0, 50, 1000, 630);
-
-        jButton1.setText("");
         jButton1.setContentAreaFilled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1);
         jButton1.setBounds(30, 20, 110, 30);
 
@@ -118,7 +125,7 @@ public class MainMenuFinal extends javax.swing.JFrame {
         jLabel1.setBounds(0, 0, 1010, 50);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 50, 1000, 630);
+        jPanel1.setBounds(0, 0, 1000, 630);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -127,42 +134,47 @@ public class MainMenuFinal extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         // rooms
- //       imageicon = new ImageIcon(getClass().getResource("rooms-tab-peg-crop.png")); 
-   //     jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("rooms-tab-peg-crop.png")));
-        
-     // change to room
-        roompanelfinal = new RoomPanelFinal();
-        jScrollPane1.setViewportView(roompanelfinal);
+        //       imageicon = new ImageIcon(getClass().getResource("rooms-tab-peg-crop.png")); 
+        //     jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("rooms-tab-peg-crop.png")));
+        // change to room
+        //jPanel1.remove(jPanel2);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/rooms-tab-peg-crop.png")));
+        jPanel1.remove(jPanel2);
+        jPanel2 = new RoomPanelFinal();
+        setJpanel();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        
-        // bill
-        
-        billspanelfinal = new BillsPanelFinal();
-        jScrollPane1.setViewportView(billspanelfinal);
-        
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/bills-tab-peg-edited-menu.png")));
+        jPanel1.remove(jPanel2);
+        jPanel2 = new BillsPanelFinal();
+        setJpanel();
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        
-        adminloggingpanelfinal = new AdminLoggingPanelFinal();
-        
-        jScrollPane1.setViewportView(adminloggingpanelfinal);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/logging-tab-peg-clear-menu.png")));
+        jPanel1.remove(jPanel2);
+        jPanel2 = new AdminLoggingPanelFinal();
+        setJpanel();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        
-        reportspanelfinal = new ReportsPanelFinal();
-        
-        jScrollPane1.setViewportView(reportspanelfinal);
-        
-        
+        //jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/tenant-tab-final.png")));
+        jPanel1.remove(jPanel2);
+        jPanel2 = new ReportsPanelFinal();
+        setJpanel();
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/tenant-tab-final.png")));
+        jPanel1.remove(jPanel2);
+        jPanel2 = new TenantPanelFinal();
+        setJpanel();
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,6 +219,5 @@ public class MainMenuFinal extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

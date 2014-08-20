@@ -181,7 +181,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(MonthField);
-        MonthField.setBounds(330, 80, 60, 20);
+        MonthField.setBounds(330, 80, 60, 27);
 
         jTextField3.setText("jTextField3");
         jPanel1.add(jTextField3);
@@ -194,7 +194,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(DayField);
-        DayField.setBounds(390, 80, 50, 20);
+        DayField.setBounds(390, 80, 50, 27);
 
         YearField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,11 +202,10 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(YearField);
-        YearField.setBounds(440, 80, 60, 20);
+        YearField.setBounds(440, 80, 60, 27);
 
         FemaleField.setText("Female\n");
         FemaleField.setActionCommand("Female");
-        FemaleField.setOpaque(false);
         FemaleField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FemaleFieldActionPerformed(evt);
@@ -217,7 +216,6 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
 
         MaleField.setText("Male");
         MaleField.setActionCommand("Male");
-        MaleField.setOpaque(false);
         MaleField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MaleFieldActionPerformed(evt);
@@ -338,7 +336,6 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/backbutton.png"))); // NOI18N
-        jButton1.setOpaque(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
