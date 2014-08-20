@@ -33,6 +33,7 @@ public class RoomPanelFinal extends javax.swing.JPanel {
     public RoomPanelFinal() {
         initComponents();
 
+  
         ArrayList<RoomBean> list = rdao.getAllRooms();
 
         model1 = (DefaultTableModel) jTable1.getModel();
@@ -57,11 +58,16 @@ public class RoomPanelFinal extends javax.swing.JPanel {
             } else {
             }
         }
+        if(tenantlist.getItemCount()==0){
+            jButton1.setEnabled(false);
+        }else{
+            jButton1.setEnabled(true);
+        }
         updateAvailableRooms();
 
     }
-    
-        public void updateAvailableRooms() {
+
+    public void updateAvailableRooms() {
         model2.getDataVector().removeAllElements();
         model2.fireTableDataChanged();
 
@@ -76,9 +82,10 @@ public class RoomPanelFinal extends javax.swing.JPanel {
                 model2.addRow(obj);
             }
         }
+        jTable2.requestFocus();
+        jTable2.changeSelection(0, 0, false, false);
     }
-        
-        
+
     public void updateTenants() {
         tenantlist.removeAllItems();
 
@@ -97,28 +104,35 @@ public class RoomPanelFinal extends javax.swing.JPanel {
             } else {
             }
         }
+        if(tenantlist.getItemCount()==0){
+            jButton1.setEnabled(false);
+        }else{
+            jButton1.setEnabled(true);
+        }
     }
 
     public void updateRoomAssignments() {
         model1.getDataVector().removeAllElements();
         model1.fireTableDataChanged();
 
-        int roomID = (Integer) tenantlist.getSelectedItem();
-
+       // String roomID1 = (String) tenantlist.getSelectedItem();
+        int roomID = jComboBox1.getSelectedIndex() + 1;
         System.out.println(roomID);
         ArrayList<TenantBean> tenantlistfinal = new ArrayList<TenantBean>();
         RoomDAOInterface rdao = new RoomDAOImplementation();
 
         tenantlistfinal = tdao.getTenantByRoomID(roomID);
-        String name;
+        String fname;
+        String lname;
 
         if (tenantlistfinal.isEmpty()) {
             model1.getDataVector().removeAllElements();
             model1.fireTableDataChanged();
         }
         for (int i = 0; i < tenantlistfinal.size(); i++) {
-            name = tenantlistfinal.get(i).getFname() + " " + tenantlistfinal.get(i).getLname();
-            Object[] obj = {name};
+            fname = tenantlistfinal.get(i).getFname();
+            lname = tenantlistfinal.get(i).getLname();
+            Object[] obj = {lname, fname};
             model1.addRow(obj);
         }
     }
@@ -146,6 +160,11 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1000, 596));
         setLayout(null);
 
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
         add(jComboBox1);
         jComboBox1.setBounds(250, 70, 200, 20);
 
@@ -165,7 +184,12 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         add(jScrollPane1);
         jScrollPane1.setBounds(150, 110, 320, 402);
 
-        tenantlist.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        tenantlist.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Tenant" }));
+        tenantlist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tenantlistActionPerformed(evt);
+            }
+        });
         add(tenantlist);
         tenantlist.setBounds(630, 70, 200, 20);
 
@@ -183,6 +207,9 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         jScrollPane2.setBounds(540, 110, 330, 370);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/assignroom.png"))); // NOI18N
+        jButton1.setBorderPainted(false);
+        jButton1.setEnabled(false);
+        jButton1.setOpaque(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -206,13 +233,19 @@ public class RoomPanelFinal extends javax.swing.JPanel {
 
         //System.out.println(fname);
         //System.out.println(lname);
-        int roomID = jTable2.getSelectedRow() + 1;
+        int selectedrow = jTable2.getSelectedRow();
+        int roomID =  (Integer) jTable2.getValueAt(selectedrow, 0);
+        System.out.println(roomID);
 
+        System.out.println("chosen room:"+roomID);
         if (roomID == 0 && temp == null) {
-            JOptionPane.showMessageDialog(null, "No tenant and room selected. Please choose from the list.");
+  //          jButton1.setEnabled(false);
+  //          JOptionPane.showMessageDialog(null, "No tenant and room selected. Please choose from the list.");
         } else if (roomID == 0) {
-            JOptionPane.showMessageDialog(null, "Please select a room.");
+   //         jButton1.setEnabled(false);
+   //         JOptionPane.showMessageDialog(null, "Please select a room.");
         } else if (temp == null) {
+   //         jButton1.setEnabled(false);
             JOptionPane.showMessageDialog(null, "Please select a tenant.");
 
         } else {
@@ -249,6 +282,27 @@ public class RoomPanelFinal extends javax.swing.JPanel {
             updateRoomAssignments();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tenantlistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tenantlistActionPerformed
+        // TODO add your handling code here:
+
+        int i = tenantlist.getSelectedIndex();
+        int roomID = jTable2.getSelectedRow() + 1;
+
+        System.out.println("selected" + roomID);
+
+        if (i == -1 && roomID == -1) {
+            jButton1.setEnabled(false);
+        } else {
+            jButton1.setEnabled(true);
+        }
+
+    }//GEN-LAST:event_tenantlistActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        updateRoomAssignments();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -37,7 +37,8 @@ public class MainMenuFinal extends javax.swing.JFrame {
         setContentPane(jPanel1);
         //     jPanel1.add(jScrollPane1);
         reportspanelfinal = new ReportsPanelFinal();
-        jScrollPane1.setViewportView(reportspanelfinal);
+        roompanelfinal = new RoomPanelFinal();
+        jScrollPane1.setViewportView(roompanelfinal);
         
 
     }

@@ -160,6 +160,11 @@ public class Rooms extends javax.swing.JPanel {
         jPanel2.add(jButton2);
         jButton2.setBounds(30, 23, 110, 30);
 
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jComboBox1);
         jComboBox1.setBounds(250, 120, 200, 20);
 
@@ -380,6 +385,10 @@ public class Rooms extends javax.swing.JPanel {
         ReportPanel rp = new ReportPanel();
         jScrollPane3.setViewportView(rp);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
