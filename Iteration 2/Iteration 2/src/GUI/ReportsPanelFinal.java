@@ -137,6 +137,11 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         jButton5.setBounds(80, 310, 170, 23);
 
         jButton6.setText("renew contract");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         add(jButton6);
         jButton6.setBounds(80, 370, 170, 23);
 
@@ -342,6 +347,97 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+
+        // renew contract
+        int row = jTable1.getSelectedRow();
+
+        String lname = (String) jTable1.getValueAt(row, 0);
+        String fname = (String) jTable1.getValueAt(row, 1);
+        System.out.println(lname);
+        System.out.println(fname);
+
+        TenantBean tbean = tdao.getTenantByName(fname, lname);
+        System.out.println(tbean.getTenantID());
+
+        ContractBean contractAcc = new ContractBean();
+        ArrayList<ContractBean> temp = new ArrayList<ContractBean>();
+        ContractDAOInterface contractdao = new ContractDAOImplementation();
+
+        temp = contractdao.getAllContractsByTenantID(tbean.getTenantID());
+
+        Calendar expirydate = Calendar.getInstance();
+
+        //   year month day
+        java.sql.Date sqlEffectivedate = temp.get(temp.size() - 1).getExpirydate();
+        DateFormat df_contract = new SimpleDateFormat("MMMM d, yyyy");
+        String text = df_contract.format(sqlEffectivedate);
+
+        int x = text.indexOf(' ');
+
+        System.out.println("index" + x);
+
+        String month = text.substring(0, x);
+        String day = text.substring(x + 1, x + 3);
+        String year = text.substring(text.length() - 4, text.length());
+        System.out.println(text);
+        System.out.println(month + " " + day + " " + year);
+        System.out.println("here");
+        System.out.println(month);
+        System.out.println(day);
+        System.out.println(year);
+
+        int year1 = Integer.valueOf(year);
+        int month1 = toMonth(month);
+        int day1 = Integer.valueOf(day);
+        year1++;
+        year1 = year1 - 1900;
+        month1 = month1-1;
+        java.sql.Date sqlExpirydate = new java.sql.Date(year1, month1, day1);
+
+        //converting Calendar to sql Date
+        contractAcc.setContract_tenantID(tbean.getTenantID());
+        contractAcc.setEffectivedate(sqlEffectivedate);
+        contractAcc.setExpirydate(sqlExpirydate);
+        if (contractdao.addContract(contractAcc)) {
+            System.out.println(expirydate);
+            // delete na rin sa room
+        } else {
+            System.out.println("no");
+        }
+
+
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    public int toMonth(String m) {
+        if (m.equals("January")) {
+            return 1;
+        } else if (m.equals("February")) {
+            return 2;
+        } else if (m.equals("March")) {
+            return 3;
+        } else if (m.equals("April")) {
+            return 4;
+        } else if (m.equals("May")) {
+            return 5;
+        } else if (m.equals("June")) {
+            return 6;
+        } else if (m.equals("July")) {
+            return 7;
+        } else if (m.equals("August")) {
+            return 8;
+        } else if (m.equals("September")) {
+            return 9;
+        } else if (m.equals("October")) {
+            return 10;
+        } else if (m.equals("November")) {
+            return 11;
+        } else if (m.equals("December")) {
+            return 12;
+        }
+        return 0;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

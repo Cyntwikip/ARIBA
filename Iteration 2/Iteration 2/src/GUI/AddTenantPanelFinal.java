@@ -884,9 +884,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + " has successfully added.");
                         jPanel1.hide();
 
-                        TenantPanel t = new TenantPanel();
-//                        jScrollPane1.setViewportView(t);
-
+    
                     } else {
                         if (tenant != null) {
                             //            tenantImpl.deleteTenant(tenant);
