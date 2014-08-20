@@ -181,9 +181,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(MonthField);
-        MonthField.setBounds(330, 80, 60, 27);
-
-        jTextField3.setText("jTextField3");
+        MonthField.setBounds(330, 80, 60, 20);
         jPanel1.add(jTextField3);
         jTextField3.setBounds(320, 110, 180, 60);
 
@@ -194,7 +192,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(DayField);
-        DayField.setBounds(390, 80, 50, 27);
+        DayField.setBounds(390, 80, 50, 20);
 
         YearField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,7 +200,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(YearField);
-        YearField.setBounds(440, 80, 60, 27);
+        YearField.setBounds(440, 80, 60, 20);
 
         FemaleField.setText("Female\n");
         FemaleField.setActionCommand("Female");

@@ -512,6 +512,8 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
      
         hide();
+        AddTenantPanelFinal addtenant = new AddTenantPanelFinal();
+        addtenant.show();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked

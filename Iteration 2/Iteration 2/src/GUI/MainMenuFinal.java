@@ -161,7 +161,7 @@ public class MainMenuFinal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        //jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/tenant-tab-final.png")));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/reports-tab-peg-crop.png")));
         jPanel1.remove(jPanel2);
         jPanel2 = new ReportsPanelFinal();
         setJpanel();
