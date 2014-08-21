@@ -29,51 +29,50 @@ public class RoomPanelFinal extends javax.swing.JPanel {
     private DefaultTableModel model2;
     private RoomDAOInterface rdao = new RoomDAOImplementation();
     private TenantDAOImplementation tdao = new TenantDAOImplementation();
-
+    
     public RoomPanelFinal() {
         initComponents();
-
-  
+        
         ArrayList<RoomBean> list = rdao.getAllRooms();
-
+        
         model1 = (DefaultTableModel) jTable1.getModel();
         model2 = (DefaultTableModel) jTable2.getModel();
-
+        
         for (RoomBean room : list) {
             jComboBox1.addItem(room.getRoomID());
         }
-
+        
         ArrayList<TenantBean> tlist = tdao.getAllTenants();
-
+        
         RoomDAOInterface rdao = new RoomDAOImplementation();
         RoomBean rbean = new RoomBean();
         tenantlist.removeAllItems();
-
+        
         for (int i = 0; i < tlist.size(); i++) {
             rbean = rdao.getTenantRoom(tlist.get(i).getTenantID());
             System.out.println(rbean.getRoomID());
             if (rbean.getRoomID() == 0) {
                 tenantlist.addItem(tlist.get(i).getLname() + ", " + tlist.get(i).getFname());
-
+                
             } else {
             }
         }
-        if(tenantlist.getItemCount()==0){
+        if (tenantlist.getItemCount() == 0) {
             jButton1.setEnabled(false);
-        }else{
+        } else {
             jButton1.setEnabled(true);
         }
         updateAvailableRooms();
-
+        
     }
-
+    
     public void updateAvailableRooms() {
         model2.getDataVector().removeAllElements();
         model2.fireTableDataChanged();
-
+        
         ArrayList<RoomBean> availablerooms = rdao.getAllRooms();
         int roomID, count;
-
+        
         for (int i = 0; i < availablerooms.size(); i++) {
             roomID = availablerooms.get(i).getRoomID();
             count = rdao.checkRoomCount(roomID);
@@ -85,46 +84,46 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         jTable2.requestFocus();
         jTable2.changeSelection(0, 0, false, false);
     }
-
+    
     public void updateTenants() {
         tenantlist.removeAllItems();
-
+        
         RoomDAOInterface rdao = new RoomDAOImplementation();
         RoomBean rbean = new RoomBean();
-
+        
         ArrayList<TenantBean> tlist = new ArrayList<TenantBean>();
         tlist = tdao.getAllTenants();
-
+        
         for (int i = 0; i < tlist.size(); i++) {
             rbean = rdao.getTenantRoom(tlist.get(i).getTenantID());
             System.out.println(rbean.getRoomID());
             if (rbean.getRoomID() == 0) {
                 tenantlist.addItem(tlist.get(i).getLname() + ", " + tlist.get(i).getFname());
-
+                
             } else {
             }
         }
-        if(tenantlist.getItemCount()==0){
+        if (tenantlist.getItemCount() == 0) {
             jButton1.setEnabled(false);
-        }else{
+        } else {
             jButton1.setEnabled(true);
         }
     }
-
+    
     public void updateRoomAssignments() {
         model1.getDataVector().removeAllElements();
         model1.fireTableDataChanged();
 
-       // String roomID1 = (String) tenantlist.getSelectedItem();
+        // String roomID1 = (String) tenantlist.getSelectedItem();
         int roomID = jComboBox1.getSelectedIndex() + 1;
         System.out.println(roomID);
         ArrayList<TenantBean> tenantlistfinal = new ArrayList<TenantBean>();
         RoomDAOInterface rdao = new RoomDAOImplementation();
-
+        
         tenantlistfinal = tdao.getTenantByRoomID(roomID);
         String fname;
         String lname;
-
+        
         if (tenantlistfinal.isEmpty()) {
             model1.getDataVector().removeAllElements();
             model1.fireTableDataChanged();
@@ -201,6 +200,14 @@ public class RoomPanelFinal extends javax.swing.JPanel {
                 "Room ID", "Population"
             }
         ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jTable2MouseEntered(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         add(jScrollPane2);
@@ -234,49 +241,49 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         //System.out.println(fname);
         //System.out.println(lname);
         int selectedrow = jTable2.getSelectedRow();
-        int roomID =  (Integer) jTable2.getValueAt(selectedrow, 0);
+        int roomID = (Integer) jTable2.getValueAt(selectedrow, 0);
         System.out.println(roomID);
-
-        System.out.println("chosen room:"+roomID);
+        
+        System.out.println("chosen room:" + roomID);
         if (roomID == 0 && temp == null) {
-  //          jButton1.setEnabled(false);
-  //          JOptionPane.showMessageDialog(null, "No tenant and room selected. Please choose from the list.");
+            //          jButton1.setEnabled(false);
+            //          JOptionPane.showMessageDialog(null, "No tenant and room selected. Please choose from the list.");
         } else if (roomID == 0) {
-   //         jButton1.setEnabled(false);
-   //         JOptionPane.showMessageDialog(null, "Please select a room.");
+            //         jButton1.setEnabled(false);
+            //         JOptionPane.showMessageDialog(null, "Please select a room.");
         } else if (temp == null) {
-   //         jButton1.setEnabled(false);
+            //         jButton1.setEnabled(false);
             JOptionPane.showMessageDialog(null, "Please select a tenant.");
-
+            
         } else {
             String tempString = temp.toString();
             int index = tempString.indexOf(",");
             String lname = tempString.substring(0, index);
             String fname = tempString.substring(index + 2);
-
+            
             RoomBean rbean = rdao.getRoomByRoomID(roomID);
 
             //System.out.println(roomID);
             TenantBean tbean = tdao.getTenantByName(fname, lname);
-
+            
             ContractDAOImplementation cdao = new ContractDAOImplementation();
             ArrayList<ContractBean> contractlist = new ArrayList<ContractBean>();
-
+            
             contractlist = cdao.getAllContractsByTenantID(tbean.getTenantID());
-
+            
             int contractindex = contractlist.size() - 1;
             ContractBean currentContract = new ContractBean();
-
+            
             if (contractindex >= 0) {
                 currentContract = contractlist.get(contractindex);
                 rdao.assignTenanttoRoom(tbean, rbean, currentContract);
-
+                
                 JOptionPane.showMessageDialog(null, "Successfully added tenant " + tbean.getFname() + " " + tbean.getLname()
                         + " to room " + rbean.getRoomID());
             } else {
                 JOptionPane.showMessageDialog(null, "Tenant doesn't have contract.");
             }
-
+            
             updateAvailableRooms();
             updateTenants();
             updateRoomAssignments();
@@ -288,9 +295,9 @@ public class RoomPanelFinal extends javax.swing.JPanel {
 
         int i = tenantlist.getSelectedIndex();
         int roomID = jTable2.getSelectedRow() + 1;
-
+        
         System.out.println("selected" + roomID);
-
+        
         if (i == -1 && roomID == -1) {
             jButton1.setEnabled(false);
         } else {
@@ -303,6 +310,113 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         // TODO add your handling code here:
         updateRoomAssignments();
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        // TODO add your handling code here:
+        // check the room
+        Object temp = tenantlist.getSelectedItem();
+
+        //System.out.println(fname);
+        //System.out.println(lname);
+        int selectedrow = jTable2.getSelectedRow();
+        int roomID = (Integer) jTable2.getValueAt(selectedrow, 0);
+        System.out.println(roomID);
+        
+        System.out.println("chosen room:" + roomID);
+        if (roomID == 0 && temp == null) {
+            //          jButton1.setEnabled(false);
+            //          JOptionPane.showMessageDialog(null, "No tenant and room selected. Please choose from the list.");
+        } else if (roomID == 0) {
+            //         jButton1.setEnabled(false);
+            //         JOptionPane.showMessageDialog(null, "Please select a room.");
+        } else if (temp == null) {
+            //         jButton1.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "Please select a tenant.");
+            
+        } else {
+            String tempString = temp.toString();
+            int index = tempString.indexOf(",");
+            String lname = tempString.substring(0, index);
+            String fname = tempString.substring(index + 2);
+            
+            RoomBean rbean = rdao.getRoomByRoomID(roomID);
+
+            //System.out.println(roomID);
+            TenantBean tbean = tdao.getTenantByName(fname, lname);
+            ArrayList<TenantBean> tlist = new ArrayList<TenantBean>();
+            tlist = tdao.getTenantByRoomID(rbean.getRoomID());
+            
+            String gender = tbean.getGender();
+            if (!tlist.isEmpty()) {
+                if (tlist.get(tlist.size() - 1).getGender().equals(gender)) {
+                    
+                    jButton1.setEnabled(true);
+                } else {
+                    jButton1.setEnabled(false);
+                }
+            } else {
+                
+                jButton1.setEnabled(true);
+                
+                updateRoomAssignments();
+                
+            }
+        }
+
+    }//GEN-LAST:event_jTable2MouseClicked
+
+    private void jTable2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseEntered
+        // TODO add your handling code here:
+        
+             Object temp = tenantlist.getSelectedItem();
+
+        //System.out.println(fname);
+        //System.out.println(lname);
+        int selectedrow = jTable2.getSelectedRow();
+        int roomID = (Integer) jTable2.getValueAt(selectedrow, 0);
+        System.out.println(roomID);
+        
+        System.out.println("chosen room:" + roomID);
+        if (roomID == 0 && temp == null) {
+            //          jButton1.setEnabled(false);
+            //          JOptionPane.showMessageDialog(null, "No tenant and room selected. Please choose from the list.");
+        } else if (roomID == 0) {
+            //         jButton1.setEnabled(false);
+            //         JOptionPane.showMessageDialog(null, "Please select a room.");
+        } else if (temp == null) {
+            //         jButton1.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "Please select a tenant.");
+            
+        } else {
+            String tempString = temp.toString();
+            int index = tempString.indexOf(",");
+            String lname = tempString.substring(0, index);
+            String fname = tempString.substring(index + 2);
+            
+            RoomBean rbean = rdao.getRoomByRoomID(roomID);
+
+            //System.out.println(roomID);
+            TenantBean tbean = tdao.getTenantByName(fname, lname);
+            ArrayList<TenantBean> tlist = new ArrayList<TenantBean>();
+            tlist = tdao.getTenantByRoomID(rbean.getRoomID());
+            
+            String gender = tbean.getGender();
+            if (!tlist.isEmpty()) {
+                if (tlist.get(tlist.size() - 1).getGender().equals(gender)) {
+                    
+                    jButton1.setEnabled(true);
+                } else {
+                    jButton1.setEnabled(false);
+                }
+            } else {
+                
+                jButton1.setEnabled(true);
+                
+                updateRoomAssignments();
+                
+            }
+        }
+    }//GEN-LAST:event_jTable2MouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
