@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package GUI;
 
 import Models.Beans.AttendanceLogBean;
@@ -12,6 +11,7 @@ import Models.DAOImplementation.AttendanceLogDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
 import Models.DAOInterface.AttendanceLogDAOInterface;
 import Models.DAOInterface.TenantDAOInterface;
+import java.awt.event.KeyEvent;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,12 +30,12 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
     private AttendanceLogDAOImplementation logdao = new AttendanceLogDAOImplementation();
     private DefaultTableModel model;
     private Object[] obj = {"", "", ""};
-    
+
     public TenantLoggingPanel() {
         initComponents();
     }
-    
-       public void updateTable1() {
+
+    public void updateTable1() {
 
         model.getDataVector().removeAllElements();
         model.fireTableDataChanged();
@@ -101,17 +101,26 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Date Label");
         add(jLabel2);
-        jLabel2.setBounds(190, 210, 80, 14);
+        jLabel2.setBounds(190, 210, 120, 14);
 
         jLabel3.setText("Time Label");
         add(jLabel3);
-        jLabel3.setBounds(190, 250, 50, 14);
+        jLabel3.setBounds(190, 250, 90, 14);
 
-        jTextField1.setText("jTextField1");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
         add(jTextField1);
-        jTextField1.setBounds(140, 340, 170, 20);
+        jTextField1.setBounds(140, 340, 170, 30);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/imgoingout.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/imgoingout.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -120,7 +129,7 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
         add(jButton1);
         jButton1.setBounds(130, 420, 190, 40);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/imcomingin.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/imcomingin.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -142,7 +151,7 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
         add(jScrollPane1);
         jScrollPane1.setBounds(400, 80, 540, 520);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/logging-tab-peg-edited.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/logging-tab-peg-edited.png"))); // NOI18N
         add(jLabel1);
         jLabel1.setBounds(0, 0, 1000, 650);
     }// </editor-fold>//GEN-END:initComponents
@@ -153,32 +162,35 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
 
         int col = 0;
         int row = jTable1.getSelectedRow();
-        Object tenant = jTable1.getModel().getValueAt(row, 0);
-        String tenantID = tenant.toString().substring(0, 1);
-        System.out.println(tenantID);
-        int tenantid = Integer.parseInt(tenantID);
 
-        System.out.println(tenantid);
-        TenantDAOImplementation tdao = new TenantDAOImplementation();
+        String lname = (String) jTable1.getValueAt(row, 0);
+        String fname = (String) jTable1.getValueAt(row, 1);
+        System.out.println(lname);
+        System.out.println(fname);
+
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+        TenantBean tbean = tdao.getTenantByName(fname, lname);
+
+        System.out.println(tbean.getTenantID());
         TenantBean bean = new TenantBean();
-        bean = tdao.getTenantById(tenantid);
+        bean = tdao.getTenantById(tbean.getTenantID());
 
         ArrayList<AttendanceLogBean> alist = new ArrayList<AttendanceLogBean>();
         AttendanceLogBean alistout = new AttendanceLogBean();
         AttendanceLogBean alistin = new AttendanceLogBean();
-        alist = logdao.getAllAtendanceLogsByTenantID(tenantid);
-        alistout = logdao.getLatestLogoutByTenant(tenantid);
-        alistin = logdao.getLatestLoginByTenant(tenantid);
+        alist = logdao.getAllAtendanceLogsByTenantID(tbean.getTenantID());
+        alistout = logdao.getLatestLogoutByTenant(tbean.getTenantID());
+        alistin = logdao.getLatestLoginByTenant(tbean.getTenantID());
 
         if (bean.getFname() == null) {
-            JOptionPane.showMessageDialog(null, "No tenant ID " + tenantid);
+            JOptionPane.showMessageDialog(null, "No tenant ID " + tbean.getTenantID());
             //      jTextField1.setText("");
         } else if (alist.isEmpty()) {
             Calendar c = Calendar.getInstance();
             Timestamp time = new Timestamp(c.getTimeInMillis());
 
             AttendanceLogBean logbean = new AttendanceLogBean();
-            logbean.setLog_tenantID(tenantid);
+            logbean.setLog_tenantID(tbean.getTenantID());
             logbean.setTimeLogged(time);
             logbean.setIsIn(false);
 
@@ -193,7 +205,7 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
             Timestamp time = new Timestamp(c.getTimeInMillis());
 
             AttendanceLogBean logbean = new AttendanceLogBean();
-            logbean.setLog_tenantID(tenantid);
+            logbean.setLog_tenantID(tbean.getTenantID());
             logbean.setTimeLogged(time);
             logbean.setIsIn(false);
 
@@ -213,15 +225,18 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
 
         int col = 0;
         int row = jTable1.getSelectedRow();
-        Object tenant = jTable1.getModel().getValueAt(row, 0);
-        String tenantID = tenant.toString().substring(0, 1);
-        System.out.println(tenantID);
-        int tenantid = Integer.parseInt(tenantID);
+
+        String lname = (String) jTable1.getValueAt(row, 0);
+        String fname = (String) jTable1.getValueAt(row, 1);
+        System.out.println(lname);
+        System.out.println(fname);
 
         TenantDAOImplementation tdao = new TenantDAOImplementation();
         TenantBean bean = new TenantBean();
-        bean = tdao.getTenantById(tenantid);
-
+        bean = tdao.getTenantByName(fname, lname);
+    
+        int tenantid = bean.getTenantID();
+        
         AttendanceLogBean alistout = new AttendanceLogBean();
         AttendanceLogBean alistin = new AttendanceLogBean();
         ArrayList<AttendanceLogBean> alist = new ArrayList<AttendanceLogBean>();
@@ -264,6 +279,47 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        // TODO add your handling code here:
+
+        char c = evt.getKeyChar();
+        String input = "";
+        String trim1;
+        String trim2;
+        String re1 = "^[0-9]*$";
+        int last;
+        if (!jTextField1.getText().isEmpty()) {
+            input = jTextField1.getText();
+        }
+
+        if (input.matches(re1)) { // number
+            if (input.length() > 11) {
+                trim1 = input.substring(0, input.length() - 1);
+                input = trim1;
+            }// more than 11 numbers
+
+        } else {
+
+            trim1 = input.substring(0, input.indexOf(c));//first to index of character;
+            trim2 = input.substring(input.indexOf(c) + 1);
+            input = trim1 + trim2;
+        }
+
+        jTextField1.setText(input);
+
+    }//GEN-LAST:event_jTextField1KeyReleased
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+    public void preventDigit(java.awt.event.KeyEvent evt) {
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            System.out.println("digit");
+            evt.setKeyCode(KeyEvent.VK_BACK_SPACE);
+            evt.consume();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
