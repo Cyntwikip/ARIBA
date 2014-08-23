@@ -27,5 +27,4 @@ public interface AttendanceLogDAOInterface {
     public ArrayList<AttendanceLogBean> getAllAtendanceLogsByTenantID(int log_tenantID);
     public ArrayList<AttendanceLogBean> checkLogin();
     public ArrayList<AttendanceLogBean> checkLogout();
-    public ArrayList<TenantBean> checkAllTenantByTime(Timestamp from, Timestamp to);
 }

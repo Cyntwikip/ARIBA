@@ -184,11 +184,6 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
     }
 
     @Override
-    public boolean computeElectricReading(ElectricReadingBean electric, int electricID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public ElectricReadingBean getElectricReadingByBillID(int billID) {
         try {
             Connector c = new Connector();

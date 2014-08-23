@@ -183,11 +183,6 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
     }
 
     @Override
-    public boolean computeWaterReading(WaterReadingBean water, int billID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public WaterReadingBean getWaterReadingsByBillID(int billID) {
         try {
             Connector c = new Connector();

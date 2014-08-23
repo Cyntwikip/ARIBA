@@ -335,7 +335,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(70, 360, 160, 30);
+        jButton1.setBounds(70, 340, 160, 50);
 
         jLabel2.setText("First Name:");
         add(jLabel2);
@@ -509,7 +509,8 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        //jPanel1.setVisible(false);
+        AddTenantPanelFinal addtenant = new AddTenantPanelFinal();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
