@@ -33,6 +33,46 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
 
     public TenantLoggingPanel() {
         initComponents();
+        model = (DefaultTableModel) jTable1.getModel();
+
+        updateTable();
+    }
+
+    public void updateTable() {
+        AttendanceLogBean abean = new AttendanceLogBean();
+        AttendanceLogBean in = new AttendanceLogBean();
+        AttendanceLogBean out = new AttendanceLogBean();
+        ArrayList<AttendanceLogBean> alist = new ArrayList<AttendanceLogBean>();
+        ArrayList<TenantBean> tlist = new ArrayList<TenantBean>();
+
+        TenantBean tbean = new TenantBean();
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+
+        tlist = tdao.getAllTenants();
+        System.out.println(tlist.size());
+        for (int i = 0; i < tlist.size(); i++) {
+            tbean = tlist.get(i);
+            System.out.println(tbean.getFname());
+            in = logdao.getLatestLoginByTenant(tbean.getTenantID());
+            out = logdao.getLatestLogoutByTenant(tbean.getTenantID());
+            String lname = tbean.getLname();
+            String fname = tbean.getFname();
+            String tenantid = Integer.toString(tbean.getTenantID());
+            if (in == null && out == null) {
+
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, "", ""};
+                model.addRow(obj);
+            } else if (out == null) {
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, in.getTimeLogged(), " "};
+                model.addRow(obj);
+            } else if (in == null) {
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, " ", out.getTimeLogged()};
+                model.addRow(obj);
+            } else {
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, in.getTimeLogged(), out.getTimeLogged()};
+                model.addRow(obj);
+            }
+        }
     }
 
     public void updateTable1() {
@@ -234,9 +274,9 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
         TenantDAOImplementation tdao = new TenantDAOImplementation();
         TenantBean bean = new TenantBean();
         bean = tdao.getTenantByName(fname, lname);
-    
+
         int tenantid = bean.getTenantID();
-        
+
         AttendanceLogBean alistout = new AttendanceLogBean();
         AttendanceLogBean alistin = new AttendanceLogBean();
         ArrayList<AttendanceLogBean> alist = new ArrayList<AttendanceLogBean>();
