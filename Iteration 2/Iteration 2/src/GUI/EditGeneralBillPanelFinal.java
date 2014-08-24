@@ -30,6 +30,7 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
 
@@ -41,6 +42,7 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
     private float pricepercubicmeter;
     private String year;
     private String month;
+    private JPanel jPanel2;
 
     public EditGeneralBillPanelFinal() {
         initComponents();
@@ -75,48 +77,53 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
 
         jTextField1.setText("jTextField1");
         add(jTextField1);
-        jTextField1.setBounds(300, 320, 80, 20);
+        jTextField1.setBounds(300, 280, 100, 30);
 
         jTextField2.setText("jTextField2");
         add(jTextField2);
-        jTextField2.setBounds(300, 350, 80, 20);
+        jTextField2.setBounds(300, 320, 100, 30);
 
         jTextField3.setText("jTextField3");
         add(jTextField3);
-        jTextField3.setBounds(540, 320, 70, 20);
+        jTextField3.setBounds(540, 280, 100, 30);
 
         jTextField4.setText("jTextField4");
         add(jTextField4);
-        jTextField4.setBounds(540, 350, 70, 20);
+        jTextField4.setBounds(540, 320, 100, 30);
 
         jTextField5.setText("jTextField5");
         add(jTextField5);
-        jTextField5.setBounds(730, 320, 70, 20);
+        jTextField5.setBounds(730, 280, 90, 40);
 
-        jButton2.setText("Cancel");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/backbutton.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
         add(jButton2);
-        jButton2.setBounds(640, 460, 97, 23);
+        jButton2.setBounds(650, 410, 80, 40);
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/save.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         add(jButton1);
-        jButton1.setBounds(750, 450, 80, 40);
+        jButton1.setBounds(750, 410, 80, 40);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/editgeneralbills-peg-edited.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/editgeneralbills-peg-edited-panel.png"))); // NOI18N
         add(jLabel1);
         jLabel1.setBounds(0, 0, 1000, 600);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
+        this.removeAll();
+        jPanel2 = new BillsPanelFinal();
+        setJpanel();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -208,6 +215,9 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
             }
 
             if (addbill) {
+                this.removeAll();
+                jPanel2 = new BillsPanelFinal();
+                setJpanel();
                 JOptionPane.showMessageDialog(null, "Succesfully added bills for all rooms!");
             } else {
                 JOptionPane.showMessageDialog(null, "Unsuccessful in adding bills.");
@@ -218,7 +228,12 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-
+    public void setJpanel() {
+        jPanel2.setPreferredSize(new java.awt.Dimension(1000, 600));
+        this.add(jPanel2);
+        jPanel2.setOpaque(true);
+        jPanel2.setBounds(0, 0, 1000, 600);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

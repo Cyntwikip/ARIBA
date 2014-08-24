@@ -24,6 +24,7 @@ import Models.DAOInterface.WaterReadingDAOInterface;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 public class BillsPanelFinal extends javax.swing.JPanel {
@@ -38,6 +39,7 @@ public class BillsPanelFinal extends javax.swing.JPanel {
     private String year;
     private String month;
     private DefaultTableModel model;
+    private JPanel jPanel2;
 
     public BillsPanelFinal() {
         initComponents();
@@ -288,8 +290,9 @@ public class BillsPanelFinal extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
 
-        EditBills nj = new EditBills();
-        nj.setVisible(true);
+        this.removeAll();
+        jPanel2 = new EditGeneralBillPanelFinal();
+        setJpanel();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -474,7 +477,12 @@ public class BillsPanelFinal extends javax.swing.JPanel {
             }
         }
     }
-
+    public void setJpanel() {
+        jPanel2.setPreferredSize(new java.awt.Dimension(1000, 600));
+        this.add(jPanel2);
+        jPanel2.setOpaque(true);
+        jPanel2.setBounds(0, 0, 1000, 600);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
