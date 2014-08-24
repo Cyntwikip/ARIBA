@@ -21,12 +21,10 @@ import Models.DAOInterface.BillDAOInterface;
 import Models.DAOInterface.ElectricReadingDAOInterface;
 import Models.DAOInterface.RoomDAOInterface;
 import Models.DAOInterface.WaterReadingDAOInterface;
-import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -43,9 +41,63 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
     private String year;
     private String month;
     private JPanel jPanel2;
+    ElectricReadingDAOInterface edao = new ElectricReadingDAOImplementation();
+    RoomDAOInterface rdao = new RoomDAOImplementation();
+    BillDAOInterface bdao = new BillDAOImplementation();
+    WaterReadingDAOInterface wdao = new WaterDAOImplementation();
 
     public EditGeneralBillPanelFinal() {
         initComponents();
+        
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+        year = formatter.format(new java.util.Date());
+        SimpleDateFormat formatter1 = new SimpleDateFormat("MM");
+        month = formatter1.format(new java.util.Date());
+
+        if (month.equals("01")) {
+            jLabel2.setText("January " + year);
+        } else if (month.equals("02")) {
+            jLabel2.setText("February " + year);
+        } else if (month.equals("03")) {
+            jLabel2.setText("March " + year);
+        } else if (month.equals("04")) {
+            jLabel2.setText("April " + year);
+        } else if (month.equals("05")) {
+            jLabel2.setText("May " + year);
+        } else if (month.equals("06")) {
+            jLabel2.setText("June " + year);
+        } else if (month.equals("07")) {
+            jLabel2.setText("July " + year);
+        } else if (month.equals("08")) {
+            jLabel2.setText("August " + year);
+        } else if (month.equals("09")) {
+            jLabel2.setText("September " + year);
+        } else if (month.equals("10")) {
+            jLabel2.setText("October " + year);
+        } else if (month.equals("11")) {
+            jLabel2.setText("November " + year);
+        } else {
+            jLabel2.setText("December " + year);
+        }
+    }
+    
+    public java.sql.Date getDateRead() {
+        String testDate = year + "-" + month;
+        DateFormat df = new SimpleDateFormat("yyyy-MM");
+        java.util.Date date;
+        try {
+            date = df.parse(testDate);
+
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            return sqlDate;
+
+        } catch (ParseException ex) {
+            Logger.getLogger(Bills.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
     }
 
     /**
@@ -158,71 +210,107 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
             boolean paidElectric = false;
             boolean addbill = false;
             BillBean bbean = new BillBean();
-            BillDAOInterface bdao = new BillDAOImplementation();
             // initialize billbean for each room
 
-            RoomDAOInterface rdao = new RoomDAOImplementation();
-            ArrayList<RoomBean> rbeanlist = new ArrayList<RoomBean>();
-            rbeanlist = rdao.getAllRooms();
-            RoomBean rbean = new RoomBean();
+            ArrayList<RoomBean> rbeanlist = rdao.getAllRooms();
 
             ElectricReadingBean ebean = new ElectricReadingBean();
             WaterReadingBean wbean = new WaterReadingBean();
-            ElectricReadingDAOInterface edao = new ElectricReadingDAOImplementation();
-            WaterReadingDAOInterface wdao = new WaterDAOImplementation();
 
-            ArrayList<BillBean> bbeanlist = bdao.getAllBills();
             wbean.setPricepercubicmeter(pricepercubicmeter);
             ebean.setPriceperKW(priceperkw);
-            java.sql.Date dateread = ebean.getDateRead();
+            java.sql.Date dateread = getDateRead();
             wbean.setDateRead(dateread);
             ebean.setDateRead(dateread);
-            wbean.setCurrentcubicmeter(0);
-            ebean.setCurrentKW(0);
-            wbean.setPrice(0);
-            ebean.setPrice(0);
-            for (int i = 0; i < rbeanlist.size(); i++) {
 
-                bbean = new BillBean();
+            ArrayList<WaterReadingBean> watertemp = wdao.getWaterReadingforThisMonth(rbeanlist.size());
 
-                bbean.setBill_roomID(rbeanlist.get(i).getRoomID());
-                bbean.setPrice(price);
-                bbean.setPaidElectric(paidElectric);
-                bbean.setPaidWater(paidWater);
-                bbean.setPaidRent(paidRent);
+            if (watertemp.isEmpty()) { //no existing bill for the month
 
-                if (bdao.addBill(bbean) == true) {
-                    addbill = true;
-                } else {
-                    addbill = false;
-                }
-                int billID = 0;
-                if (rbeanlist.size() <= bdao.getAllBills().size()) { // mas malaki yung billsize{
+                wbean.setCurrentcubicmeter(0);
+                ebean.setCurrentKW(0);
+                wbean.setPrice(0);
+                ebean.setPrice(0);
 
-                    billID = bdao.getAllBills().size() - (rbeanlist.size());
-                    if (billID == 0) {
-                        billID = 50;
+                for (int i = 0; i < rbeanlist.size(); i++) {
+
+                    bbean = new BillBean();
+
+                    bbean.setBill_roomID(rbeanlist.get(i).getRoomID());
+                    bbean.setPrice(price);
+                    bbean.setPaidElectric(paidElectric);
+                    bbean.setPaidWater(paidWater);
+                    bbean.setPaidRent(paidRent);
+
+                    if (bdao.addBill(bbean) == true) {
+                        addbill = true;
+                    } else {
+                        addbill = false;
                     }
-                } else { // start pa lang
-                    billID = i + 1;
+                    int billID = 0;
+                    if (rbeanlist.size() <= bdao.getAllBills().size()) { // mas malaki yung billsize{
+
+                        billID = bdao.getAllBills().size() - (rbeanlist.size());
+                        if (billID == 0) {
+                            billID = 50;
+                        }
+                    } else { // start pa lang
+                        billID = i + 1;
+                    }
+
+                    System.out.println(billID);
+                    wbean.setWater_billID(billID);
+                    ebean.setElectric_billID(billID);
+                    wdao.addWaterReadingToRoom(wbean, billID);
+                    edao.addElectricReadingToRoom(ebean, billID);
                 }
-
-                System.out.println(billID);
-                wbean.setWater_billID(billID);
-                ebean.setElectric_billID(billID);
-                wdao.addWaterReadingToRoom(wbean, billID);
-                edao.addElectricReadingToRoom(ebean, billID);
+                if (addbill) {
+                    JOptionPane.showMessageDialog(null, "Succesfully added bills for all rooms!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Unsuccessful in adding bills.");
+                }
             }
-
-            if (addbill) {
-                this.removeAll();
-                jPanel2 = new BillsPanelFinal();
-                setJpanel();
-                JOptionPane.showMessageDialog(null, "Succesfully added bills for all rooms!");
-            } else {
-                JOptionPane.showMessageDialog(null, "Unsuccessful in adding bills.");
+            else { //change existing bill
+                
+                WaterReadingBean watertemporary = new WaterReadingBean();
+                ElectricReadingBean electrictemporary = new ElectricReadingBean();
+                BillBean billtemporary = new BillBean();
+                
+                float waterprice, electricprice;
+                
+                for(int i=0; i<rbeanlist.size(); i++) {
+                    
+                    billtemporary = bdao.getBillsByRoomID(i+1);
+                    billtemporary.setPaidRent(false);
+                    billtemporary.setPaidWater(false);
+                    billtemporary.setPaidElectric(false);
+                    billtemporary.setPrice(price);
+                    
+                    bdao.editBill(billtemporary, billtemporary.getBillID());
+                    
+                    watertemporary = wdao.getWaterReadingsByBillID(billtemporary.getBillID());
+                    watertemporary.setPricepercubicmeter(pricepercubicmeter);
+                    watertemporary.setDateRead(dateread);
+                    waterprice = pricepercubicmeter * watertemporary.getCurrentcubicmeter();
+                    watertemporary.setPrice(waterprice);
+                    
+                    wdao.editWaterReading(watertemporary, watertemporary.getWater_billID());
+                    
+                    electrictemporary = edao.getElectricReadingByBillID(billtemporary.getBillID());
+                    electrictemporary.setPriceperKW(priceperkw);
+                    electrictemporary.setDateRead(dateread);
+                    electricprice = priceperkw * electrictemporary.getCurrentKW();
+                    electrictemporary.setPrice(electricprice);
+                    
+                    edao.editElectricReading(electrictemporary, electrictemporary.getElectric_billID());
+                    
+                    billtemporary = new BillBean();
+                    watertemporary = new WaterReadingBean();
+                    electrictemporary = new ElectricReadingBean();
+                                     
+                    
+                }
             }
-
         }
 
         this.setVisible(false);
