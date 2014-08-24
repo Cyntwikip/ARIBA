@@ -7,15 +7,19 @@ package GUI;
 
 import ErrorHandling.AccountException;
 import ErrorHandling.CheckAccount;
+import Models.Beans.AttendanceLogBean;
 import Models.Beans.GuardianBean;
 import Models.Beans.RoomBean;
 import Models.Beans.TenantBean;
+import Models.DAOImplementation.AttendanceLogDAOImplementation;
 import Models.DAOImplementation.GuardianDAOImplementation;
 import Models.DAOImplementation.RoomDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
+import Models.DAOInterface.AttendanceLogDAOInterface;
 import Models.DAOInterface.GuardianDAOInterface;
 import Models.DAOInterface.TenantDAOInterface;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -77,6 +81,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
     }
 
     public void getSelection() {
+
         int row = jTable1.getSelectedRow();
         int col = 0;
 
@@ -140,6 +145,61 @@ public class TenantPanelFinal extends javax.swing.JPanel {
             roomnumber.setText(String.valueOf(roombean.getRoomID()));
         }
 
+        AttendanceLogDAOInterface ldao = new AttendanceLogDAOImplementation();
+        AttendanceLogBean lbean = ldao.getLatestLoginByTenant(tenantID);
+        AttendanceLogBean lbean1 = ldao.getLatestLogoutByTenant(tenantID);
+
+        if (lbean == null && lbean1 == null) { // wala pa talaga
+            logstat.setText("No logs yet.");
+            logtime.setText("No logs yet.");
+
+        } else if (lbean == null & lbean1 != null) {
+            logstat.setText("OUT");
+
+            SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss.");
+            java.sql.Timestamp ts = lbean1.getTimeLogged();
+            int microFraction = ts.getNanos() / 1000;
+
+            StringBuilder sb = new StringBuilder(fmt.format(ts));
+
+            System.out.println(sb.toString());
+
+            logtime.setText(sb.toString());
+        } else if (lbean1 == null && lbean != null) {
+            logstat.setText("IN");
+
+            SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss.");
+            java.sql.Timestamp ts = lbean.getTimeLogged();
+            int microFraction = ts.getNanos() / 1000;
+
+            StringBuilder sb = new StringBuilder(fmt.format(ts));
+
+            System.out.println(sb.toString());
+
+            logtime.setText(sb.toString());
+        }else if (lbean.getLogID() > lbean1.getLogID()) { // login
+            logstat.setText("IN");
+
+            SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss.");
+            java.sql.Timestamp ts = lbean.getTimeLogged();
+            int microFraction = ts.getNanos() / 1000;
+
+            StringBuilder sb = new StringBuilder(fmt.format(ts));
+
+            System.out.println(sb.toString());
+
+            logtime.setText(sb.toString());
+        } else {
+            logstat.setText("OUT");
+
+            SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss.");
+            java.sql.Timestamp ts = lbean1.getTimeLogged();
+            int microFraction = ts.getNanos() / 1000;
+
+            StringBuilder sb = new StringBuilder(fmt.format(ts));
+
+            System.out.println(sb.toString());
+        }
 //        status.setText(bean.getStatus());
     }
 
