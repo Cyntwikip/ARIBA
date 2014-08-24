@@ -127,23 +127,43 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
         add(jLabel2);
         jLabel2.setBounds(200, 220, 160, 40);
 
-        jTextField1.setText("jTextField1");
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
         add(jTextField1);
         jTextField1.setBounds(300, 280, 100, 30);
 
-        jTextField2.setText("jTextField2");
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField2KeyReleased(evt);
+            }
+        });
         add(jTextField2);
         jTextField2.setBounds(300, 320, 100, 30);
 
-        jTextField3.setText("jTextField3");
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField3KeyReleased(evt);
+            }
+        });
         add(jTextField3);
         jTextField3.setBounds(540, 280, 100, 30);
 
-        jTextField4.setText("jTextField4");
+        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField4KeyReleased(evt);
+            }
+        });
         add(jTextField4);
         jTextField4.setBounds(540, 320, 100, 30);
 
-        jTextField5.setText("jTextField5");
+        jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField5KeyReleased(evt);
+            }
+        });
         add(jTextField5);
         jTextField5.setBounds(730, 280, 90, 40);
 
@@ -265,6 +285,9 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
                     edao.addElectricReadingToRoom(ebean, billID);
                 }
                 if (addbill) {
+                    this.removeAll();
+                    jPanel2 = new BillsPanelFinal();
+                    setJpanel();
                     JOptionPane.showMessageDialog(null, "Succesfully added bills for all rooms!");
                 } else {
                     JOptionPane.showMessageDialog(null, "Unsuccessful in adding bills.");
@@ -315,6 +338,119 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
 
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        // TODO add your handling code here:
+        
+                char c = evt.getKeyChar();
+        String input = "";
+        String trim;
+        String re1 = "^(\\d*\\.?\\d*)$";
+        int last;
+        if (!jTextField1.getText().isEmpty()) {
+            input = jTextField1.getText();
+        }
+
+        if (input.matches(re1)) {
+
+        } else {
+            trim = input.substring(0, input.length() - 1);
+            input = trim;
+            System.out.println(trim);
+        }
+
+        jTextField1.setText(input);
+    }//GEN-LAST:event_jTextField1KeyReleased
+
+    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+        // TODO add your handling code here:
+        
+                char c = evt.getKeyChar();
+        String input = "";
+        String trim;
+        String re1 = "^(\\d*\\.?\\d*)$";
+        int last;
+        if (!jTextField2.getText().isEmpty()) {
+            input = jTextField2.getText();
+        }
+
+        if (input.matches(re1)) {
+
+        } else {
+            trim = input.substring(0, input.length() - 1);
+            input = trim;
+            System.out.println(trim);
+        }
+
+        jTextField2.setText(input);
+    }//GEN-LAST:event_jTextField2KeyReleased
+
+    private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
+        // TODO add your handling code here:
+        
+                char c = evt.getKeyChar();
+        String input = "";
+        String trim;
+        String re1 = "^(\\d*\\.?\\d*)$";
+        int last;
+        if (!jTextField3.getText().isEmpty()) {
+            input = jTextField3.getText();
+        }
+
+        if (input.matches(re1)) {
+
+        } else {
+            trim = input.substring(0, input.length() - 1);
+            input = trim;
+            System.out.println(trim);
+        }
+
+        jTextField3.setText(input);
+    }//GEN-LAST:event_jTextField3KeyReleased
+
+    private void jTextField4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyReleased
+        // TODO add your handling code here:
+                char c = evt.getKeyChar();
+        String input = "";
+        String trim;
+        String re1 = "^(\\d*\\.?\\d*)$";
+        int last;
+        if (!jTextField4.getText().isEmpty()) {
+            input = jTextField4.getText();
+        }
+
+        if (input.matches(re1)) {
+
+        } else {
+            trim = input.substring(0, input.length() - 1);
+            input = trim;
+            System.out.println(trim);
+        }
+
+        jTextField4.setText(input);
+    }//GEN-LAST:event_jTextField4KeyReleased
+
+    private void jTextField5KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyReleased
+        // TODO add your handling code here:
+                char c = evt.getKeyChar();
+        String input = "";
+        String trim;
+        String re1 = "^(\\d*\\.?\\d*)$";
+        int last;
+        if (!jTextField5.getText().isEmpty()) {
+            input = jTextField5.getText();
+        }
+
+        if (input.matches(re1)) {
+
+        } else {
+            trim = input.substring(0, input.length() - 1);
+            input = trim;
+            System.out.println(trim);
+        }
+
+        jTextField5.setText(input);
+    }//GEN-LAST:event_jTextField5KeyReleased
 
     public void setJpanel() {
         jPanel2.setPreferredSize(new java.awt.Dimension(1000, 600));
