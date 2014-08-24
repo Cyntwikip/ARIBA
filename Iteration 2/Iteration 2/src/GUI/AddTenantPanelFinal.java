@@ -898,7 +898,9 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
                         contractdao.addContract(contractAcc);
 
                         JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + " has successfully added.");
-                        jPanel1.hide();
+                        this.removeAll();
+                        jPanel2 = new TenantPanelFinal();
+                        setJpanel();
 
                     } else {
                         if (tenant != null) {
@@ -938,7 +940,6 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //   jPanel2.hide();
 
         this.removeAll();
         jPanel2 = new TenantPanelFinal();

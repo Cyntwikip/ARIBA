@@ -50,6 +50,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
     private TenantBean tenant = new TenantBean();
     private GuardianBean guard = new GuardianBean();
     private ImageIcon icon;
+    private JPanel jPanel2;
 
     public EditTenantPanelFinal() {
         initComponents();
@@ -485,7 +486,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
         imgaddLabel.setBounds(60, 100, 160, 160);
 
         add(jPanel1);
-        jPanel1.setBounds(100, 100, 790, 410);
+        jPanel1.setBounds(100, 80, 790, 410);
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -827,10 +828,9 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
                         contractdao.addContract(contractAcc);
 
                         JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + " has successfully added.");
-                        //        MainMenu main = new MainMenu();
-                        //      main.setVisible(true);
-                        //       this.dispose();
-
+                        this.removeAll();
+                        jPanel2 = new TenantPanelFinal();
+                        setJpanel();
                     } else {
                         if (tenant != null) {
                             //            tenantImpl.deleteTenant(tenant);
@@ -869,9 +869,9 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        jPanel1.hide();
-        TenantPanel t = new TenantPanel();
-        jScrollPane1.setViewportView(t);
+        this.removeAll();
+        jPanel2 = new TenantPanelFinal();
+        setJpanel();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void EmailAddressFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_EmailAddressFieldFocusGained
@@ -1086,7 +1086,12 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
         icon = new ImageIcon(newimg);
         imgaddLabel.setIcon(icon);
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    public void setJpanel() {
+        jPanel2.setPreferredSize(new java.awt.Dimension(1000, 600));
+        this.add(jPanel2);
+        jPanel2.setOpaque(true);
+        jPanel2.setBounds(0, 0, 1000, 600);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ContactNumberField1;
