@@ -23,6 +23,7 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -38,6 +39,8 @@ public class TenantPanelFinal extends javax.swing.JPanel {
     private CheckAccount c = new CheckAccount();
     private ArrayList<TenantBean> searchnamelist = new ArrayList<>();
     private TenantDAOInterface tenantImpl = new TenantDAOImplementation();
+    private int tenantID;
+    private JPanel jPanel2;
 
     public TenantPanelFinal() {
         initComponents();
@@ -509,13 +512,22 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        AddTenantPanelFinal addtenant = new AddTenantPanelFinal();
-        
+        jPanel2 = new AddTenantPanelFinal();
+
+        setJpanel();
+//        mn.setJpanel(1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
+
+        int row = jTable1.getSelectedRow();
+
+        tenantID = (Integer) jTable1.getValueAt(row, 0);
+        System.out.println(tenantID);
+        setID(tenantID);
         getSelection();
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
@@ -527,11 +539,17 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         // edit tenant information
+        this.removeAll();
         int row = jTable1.getSelectedRow();
-        int tenantID = (Integer) jTable1.getValueAt(row, 0);
-//        jPanel1.hide();
-        EditTenantPanelFinal et = new EditTenantPanelFinal(tenantID);
-  //      jScrollPane2.setViewportView(et);
+
+        tenantID = (Integer) jTable1.getValueAt(row, 0);
+        System.out.println(tenantID);
+        setID(tenantID);
+
+        jPanel2 = new EditTenantPanelFinal(tenantID);
+
+        setJpanel();
+        //      jScrollPane2.setViewportView(et);
         //   NewJFrame nj = new NewJFrame(tenantID);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -539,7 +557,20 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    public void setJpanel() {
+        jPanel2.setPreferredSize(new java.awt.Dimension(1000, 600));
+        this.add(jPanel2);
+        jPanel2.setOpaque(true);
+        jPanel2.setBounds(0, 0, 1000, 600);
+    }
 
+    public void setID(int tenantID) {
+        this.tenantID = tenantID;
+    }
+
+    public int returnID() {
+        return this.tenantID;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField DegreeField;
     private javax.swing.JRadioButton FemaleField;

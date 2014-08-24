@@ -53,6 +53,22 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
 
     public EditTenantPanelFinal() {
         initComponents();
+
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+
+        for (int i = 0; i <= year - 1980; i++) { // remove all years
+            YearField.removeItem(1980 + i);
+        }
+        for (int i = 0; i <= year - 1980; i++) {
+            YearField.addItem(1980 + i);
+        }
+
+        for (int i = 2000; i <= year + 10; i++) {
+            YearOfGraduationField.removeItem(i);
+        }
+        for (int i = 2000; i <= year + 10; i++) {
+            YearOfGraduationField.addItem(i);
+        }
     }
 
     public EditTenantPanelFinal(int id) {
@@ -313,7 +329,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
         jPanel1.add(GuardianEmailField);
         GuardianEmailField.setBounds(600, 290, 140, 30);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/save.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/save.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -322,7 +338,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
         jPanel1.add(jButton3);
         jButton3.setBounds(660, 330, 80, 40);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/backbutton.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/backbutton.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -455,7 +471,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
         jPanel1.add(SurnameField);
         SurnameField.setBounds(330, 70, 170, 30);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/choosephoto.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/choosephoto.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -469,14 +485,17 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
         imgaddLabel.setBounds(60, 100, 160, 160);
 
         add(jPanel1);
-        jPanel1.setBounds(100, 130, 790, 410);
+        jPanel1.setBounds(100, 100, 790, 410);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/edit-peg.png"))); // NOI18N
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/edit-peg-crop-panel.png"))); // NOI18N
         jLabel1.setText("jLabel1");
         jScrollPane1.setViewportView(jLabel1);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(0, 0, 1000, 650);
+        jScrollPane1.setBounds(0, 0, 1000, 610);
     }// </editor-fold>//GEN-END:initComponents
 
     private void SchoolFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SchoolFieldFocusLost
