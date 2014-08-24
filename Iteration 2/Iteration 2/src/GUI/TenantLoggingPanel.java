@@ -33,9 +33,19 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
 
     public TenantLoggingPanel() {
         initComponents();
+        java.util.Date currentdate = new java.util.Date();
+        int month = currentdate.getMonth();
+        int day = currentdate.getDay();
+        int year = currentdate.getYear();
+
+        jLabel2.setText(month + " " + day + " " + year);
         model = (DefaultTableModel) jTable1.getModel();
 
         updateTable();
+
+        Calendar c = Calendar.getInstance();
+
+        System.out.println(c.getTime());
     }
 
     public void updateTable() {
@@ -200,16 +210,19 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         // out
 
-        int col = 0;
-        int row = jTable1.getSelectedRow();
+        /*  int col = 0;
+         int row = jTable1.getSelectedRow();
 
-        String lname = (String) jTable1.getValueAt(row, 0);
-        String fname = (String) jTable1.getValueAt(row, 1);
-        System.out.println(lname);
-        System.out.println(fname);
+         String lname = (String) jTable1.getValueAt(row, 0);
+         String fname = lname.substring(lname.indexOf(' '), lname.length()-1);
+         System.out.println(lname);
+         System.out.println(fname);
 
+         */
+        
+        int tenantID = Integer.valueOf(jTextField1.getText());
         TenantDAOInterface tdao = new TenantDAOImplementation();
-        TenantBean tbean = tdao.getTenantByName(fname, lname);
+        TenantBean tbean = tdao.getTenantById(tenantID);
 
         System.out.println(tbean.getTenantID());
         TenantBean bean = new TenantBean();
@@ -263,17 +276,13 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         // in
 
-        int col = 0;
-        int row = jTable1.getSelectedRow();
+        int tenantID = Integer.valueOf(jTextField1.getText());
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+        TenantBean tbean = tdao.getTenantById(tenantID);
 
-        String lname = (String) jTable1.getValueAt(row, 0);
-        String fname = (String) jTable1.getValueAt(row, 1);
-        System.out.println(lname);
-        System.out.println(fname);
-
-        TenantDAOImplementation tdao = new TenantDAOImplementation();
+        System.out.println(tbean.getTenantID());
         TenantBean bean = new TenantBean();
-        bean = tdao.getTenantByName(fname, lname);
+        bean = tdao.getTenantById(tbean.getTenantID());
 
         int tenantid = bean.getTenantID();
 
