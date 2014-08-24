@@ -49,6 +49,34 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
     public EditGeneralBillPanelFinal() {
         initComponents();
         
+        ArrayList<RoomBean> roomlist = rdao.getAllRooms();
+        
+        BillBean bill = bdao.getBillsByRoomID(1);
+        jTextField5.setText(String.valueOf(bill.getPrice()));;
+        
+        ArrayList<WaterReadingBean> waterlist = new ArrayList<WaterReadingBean>();
+        ArrayList<ElectricReadingBean> electriclist = new ArrayList<ElectricReadingBean>();
+        
+        float econsumption=0, ebill=0;
+        float wconsumption=0, wbill=0, wtotal=0;
+        
+        waterlist = wdao.getWaterReadingforThisMonth(roomlist.size());
+        electriclist = edao.getAllElectricReadingforThisMonth(roomlist.size());
+        
+        for(int i=0; i<roomlist.size(); i++) {
+            
+            wbill += waterlist.get(i).getPrice();
+            wconsumption += waterlist.get(i).getCurrentcubicmeter();
+            
+            ebill += electriclist.get(i).getPrice();
+            econsumption += electriclist.get(i).getCurrentKW();
+        }
+       
+        jTextField1.setText(String.valueOf(econsumption));
+        jTextField2.setText(String.valueOf(ebill));
+        jTextField3.setText(String.valueOf(wconsumption));
+        jTextField4.setText(String.valueOf(wbill));
+        
         
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
         year = formatter.format(new java.util.Date());
