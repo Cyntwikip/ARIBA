@@ -248,7 +248,6 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         ArrayList<BillBean> blist = new ArrayList<BillBean>();
         blist = bdao.getAllBills();
 
-        EditBills eb = new EditBills();
         if (jTextField1.getText().isEmpty() && jTextField2.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please input values for Electric Meter and Water Meter.");
         } else if (jTextField1.getText().isEmpty()) {

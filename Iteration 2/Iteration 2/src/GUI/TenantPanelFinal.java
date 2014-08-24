@@ -96,7 +96,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
             try {
                 content = bean.getBlobimage().getBytes(1L, (int) bean.getBlobimage().length());
             } catch (SQLException ex) {
-                Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(MainMenuFinal.class.getName()).log(Level.SEVERE, null, ex);
             }
             ImageIcon icon = new ImageIcon(content);
             java.awt.Image img = icon.getImage();

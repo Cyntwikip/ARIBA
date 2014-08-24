@@ -19,14 +19,10 @@ public class MainMenuFinal extends javax.swing.JFrame {
     /**
      * Creates new form MainMenuFinal
      */
-    private AddTenantPanel addtenantpanel;
     private AdminLoggingPanelFinal adminloggingpanelfinal;
     private BillsPanelFinal billspanelfinal;
-    private EditBillPricePanel editbillpricepanel;
     private EditTenantPanelFinal edittenantpanelfinal;
     private ReportsPanelFinal reportspanelfinal;
-    private Reports reports;
-    private TenantLoggingPanel tenantlogingpanel;
     private TenantPanelFinal tenantpanelfinal;
     private ImageIcon imageicon;
     private RoomPanelFinal roompanelfinal;

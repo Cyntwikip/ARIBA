@@ -121,7 +121,7 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
             return sqlDate;
 
         } catch (ParseException ex) {
-            Logger.getLogger(Bills.class
+            Logger.getLogger(BillsPanelFinal.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
         return null;

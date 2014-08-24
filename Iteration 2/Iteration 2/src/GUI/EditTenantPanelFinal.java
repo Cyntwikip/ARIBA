@@ -133,7 +133,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
             try {
                 content = tenant.getBlobimage().getBytes(1L, (int) tenant.getBlobimage().length());
             } catch (SQLException ex) {
-                Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(MainMenuFinal.class.getName()).log(Level.SEVERE, null, ex);
             }
             ImageIcon icon = new ImageIcon(content);
             Image img = icon.getImage();
@@ -707,7 +707,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
             birthdate.setTime(df.parse(sDate));
 
         } catch (ParseException ex) {
-            Logger.getLogger(AddTenantPanel.class
+            Logger.getLogger(AddTenantPanelFinal.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
         //converting Calendar to sql Date

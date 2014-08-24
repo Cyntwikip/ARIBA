@@ -778,7 +778,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         try {
             birthdate.setTime(df.parse(sDate));
         } catch (ParseException ex) {
-            Logger.getLogger(AddTenantPanel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddTenantPanelFinal.class.getName()).log(Level.SEVERE, null, ex);
         }
         //converting Calendar to sql Date
         java.sql.Date sqlBirthdate = new java.sql.Date(birthdate.getTime().getTime());
