@@ -48,41 +48,68 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
 
     public EditGeneralBillPanelFinal() {
         initComponents();
-        
-        ArrayList<RoomBean> roomlist = rdao.getAllRooms();
-        
-        BillBean bill = bdao.getBillsByRoomID(1);
-        jTextField5.setText(String.valueOf(bill.getPrice()));;
-        
-        ArrayList<WaterReadingBean> waterlist = new ArrayList<WaterReadingBean>();
-        ArrayList<ElectricReadingBean> electriclist = new ArrayList<ElectricReadingBean>();
-        
-        float econsumption=0, ebill=0;
-        float wconsumption=0, wbill=0, wtotal=0;
-        
-        waterlist = wdao.getWaterReadingforThisMonth(roomlist.size());
-        electriclist = edao.getAllElectricReadingforThisMonth(roomlist.size());
-        
-        for(int i=0; i<roomlist.size(); i++) {
-            
-            wbill += waterlist.get(i).getPrice();
-            wconsumption += waterlist.get(i).getCurrentcubicmeter();
-            
-            ebill += electriclist.get(i).getPrice();
-            econsumption += electriclist.get(i).getCurrentKW();
-        }
-       
-        jTextField1.setText(String.valueOf(econsumption));
-        jTextField2.setText(String.valueOf(ebill));
-        jTextField3.setText(String.valueOf(wconsumption));
-        jTextField4.setText(String.valueOf(wbill));
-        
-        
+
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
         year = formatter.format(new java.util.Date());
         SimpleDateFormat formatter1 = new SimpleDateFormat("MM");
         month = formatter1.format(new java.util.Date());
 
+        ArrayList<RoomBean> roomlist = rdao.getAllRooms();
+
+        ArrayList<WaterReadingBean> waterlist = new ArrayList<WaterReadingBean>();
+        ArrayList<ElectricReadingBean> electriclist = new ArrayList<ElectricReadingBean>();
+
+        waterlist = wdao.getWaterReadingforThisMonth(roomlist.size());
+        electriclist = edao.getAllElectricReadingforThisMonth(roomlist.size());
+
+        ArrayList<ElectricReadingBean> ebeanlist = edao.getAllElectricReadingforThisMonth(roomlist.size());
+        if (ebeanlist.isEmpty()) {
+            System.out.println("wala pa laman.");
+        } else { // may existing na
+
+            WaterReadingBean watertemporary = new WaterReadingBean();
+            ElectricReadingBean electrictemporary = new ElectricReadingBean();
+            BillBean billtemporary = new BillBean();
+
+            ArrayList<RoomBean> rbeanlist = new ArrayList<RoomBean>();
+            RoomDAOInterface rdao = new RoomDAOImplementation();
+            rbeanlist = rdao.getAllRooms();
+            float waterprice, electricprice;
+            boolean check = false;
+
+            for (int i = 0; i < rbeanlist.size(); i++) {
+
+                billtemporary = bdao.getBillsByRoomID(i + 1);
+                billtemporary.setPaidRent(false);
+                billtemporary.setPaidWater(false);
+                billtemporary.setPaidElectric(false);
+                billtemporary.setPrice(billtemporary.getPrice());
+                billtemporary.setRoomprice(billtemporary.getRoomprice());
+                billtemporary.setTotalelectricityconsumption(billtemporary.getTotalelectricityconsumption());
+                billtemporary.setTotalwaterconsumption(billtemporary.getTotalwaterconsumption());
+                System.out.println(billtemporary.getBillID());
+
+                watertemporary = wdao.getWaterReadingsByBillID(billtemporary.getBillID());
+                electrictemporary = edao.getElectricReadingByBillID(billtemporary.getBillID());
+
+                System.out.println(watertemporary.getPrice());
+                float temp1 = billtemporary.getTotalelectricityconsumption() * electrictemporary.getPriceperKW();
+                jTextField1.setText(String.valueOf(billtemporary.getTotalelectricityconsumption()));
+                jTextField2.setText(String.valueOf(temp1));
+
+                float temp2 = billtemporary.getTotalwaterconsumption() * watertemporary.getPricepercubicmeter();
+                jTextField3.setText(String.valueOf(billtemporary.getTotalwaterconsumption()));
+                jTextField4.setText(String.valueOf(temp2));
+
+                jTextField5.setText(String.valueOf(billtemporary.getRoomprice()));
+
+            }
+
+            initDate();
+        }
+    }
+
+    public void initDate() {
         if (month.equals("01")) {
             jLabel2.setText("January " + year);
         } else if (month.equals("02")) {
@@ -109,7 +136,7 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
             jLabel2.setText("December " + year);
         }
     }
-    
+
     public java.sql.Date getDateRead() {
         String testDate = year + "-" + month;
         DateFormat df = new SimpleDateFormat("yyyy-MM");
@@ -220,7 +247,7 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
+
         this.removeAll();
         jPanel2 = new BillsPanelFinal();
         setJpanel();
@@ -236,21 +263,19 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
                 || jTextField5.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please input ALL necessary fields.");
         } else {
-            String totalelectricityconsumption = jTextField1.getText();
-            String totalelectricitycost = jTextField2.getText();
+            float totalelectricityconsumption = Float.parseFloat(jTextField1.getText());
+            float totalelectricitycost = Float.parseFloat(jTextField2.getText());
 
-            String totalwaterconsumption = jTextField3.getText();
-            String totalwatercost = jTextField4.getText();
+            float totalwaterconsumption = Float.parseFloat(jTextField3.getText());
+            float totalwatercost = Float.parseFloat(jTextField4.getText());
 
-            String roomrent = jTextField5.getText();
+            float roomrent = Float.parseFloat(jTextField5.getText());
 
             //price ng room
-            double price = Double.parseDouble(roomrent);
-
-            priceperkw = Float.parseFloat(totalelectricitycost) / Float.parseFloat(totalelectricityconsumption);
+            priceperkw = totalelectricitycost / totalelectricityconsumption;
             System.out.println("Price per kw: " + priceperkw);
 
-            pricepercubicmeter = Float.parseFloat(totalwatercost) / Float.parseFloat(totalwaterconsumption);
+            pricepercubicmeter = totalwatercost / totalwaterconsumption;
             System.out.println(pricepercubicmeter);
 
             boolean paidRent = false;
@@ -285,10 +310,13 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
                     bbean = new BillBean();
 
                     bbean.setBill_roomID(rbeanlist.get(i).getRoomID());
-                    bbean.setPrice(price);
+                    bbean.setPrice(roomrent);
                     bbean.setPaidElectric(paidElectric);
                     bbean.setPaidWater(paidWater);
                     bbean.setPaidRent(paidRent);
+                    bbean.setRoomprice(roomrent);
+                    bbean.setTotalelectricityconsumption(totalelectricityconsumption);
+                    bbean.setTotalwaterconsumption(totalwaterconsumption);
 
                     if (bdao.addBill(bbean) == true) {
                         addbill = true;
@@ -309,57 +337,74 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
                     System.out.println(billID);
                     wbean.setWater_billID(billID);
                     ebean.setElectric_billID(billID);
-                    wdao.addWaterReadingToRoom(wbean, billID);
-                    edao.addElectricReadingToRoom(ebean, billID);
+                    wdao.addWaterReadingToRoom(wbean);
+                    edao.addElectricReadingToRoom(ebean);
                 }
                 if (addbill) {
+
+                    JOptionPane.showMessageDialog(null, "Succesfully added bills for all rooms!");
                     this.removeAll();
                     jPanel2 = new BillsPanelFinal();
                     setJpanel();
-                    JOptionPane.showMessageDialog(null, "Succesfully added bills for all rooms!");
                 } else {
                     JOptionPane.showMessageDialog(null, "Unsuccessful in adding bills.");
                 }
-            }
-            else { //change existing bill
-                
+            } else { //change existing bill
+
                 WaterReadingBean watertemporary = new WaterReadingBean();
                 ElectricReadingBean electrictemporary = new ElectricReadingBean();
                 BillBean billtemporary = new BillBean();
-                
+
                 float waterprice, electricprice;
-                
-                for(int i=0; i<rbeanlist.size(); i++) {
-                    
-                    billtemporary = bdao.getBillsByRoomID(i+1);
+
+                for (int i = 0; i < rbeanlist.size(); i++) {
+
+                    billtemporary = bdao.getBillsByRoomID(i + 1);
+
                     billtemporary.setPaidRent(false);
                     billtemporary.setPaidWater(false);
                     billtemporary.setPaidElectric(false);
-                    billtemporary.setPrice(price);
-                    
-                    bdao.editBill(billtemporary, billtemporary.getBillID());
-                    
+                    billtemporary.setTotalelectricityconsumption(totalelectricityconsumption);
+                    billtemporary.setTotalwaterconsumption(totalwaterconsumption);
+                    billtemporary.setRoomprice(roomrent);
+
                     watertemporary = wdao.getWaterReadingsByBillID(billtemporary.getBillID());
                     watertemporary.setPricepercubicmeter(pricepercubicmeter);
                     watertemporary.setDateRead(dateread);
                     waterprice = pricepercubicmeter * watertemporary.getCurrentcubicmeter();
                     watertemporary.setPrice(waterprice);
-                    
-                    wdao.editWaterReading(watertemporary, watertemporary.getWater_billID());
-                    
-                    electrictemporary = edao.getElectricReadingByBillID(billtemporary.getBillID());
-                    electrictemporary.setPriceperKW(priceperkw);
-                    electrictemporary.setDateRead(dateread);
-                    electricprice = priceperkw * electrictemporary.getCurrentKW();
-                    electrictemporary.setPrice(electricprice);
-                    
-                    edao.editElectricReading(electrictemporary, electrictemporary.getElectric_billID());
-                    
+                    boolean proceed = false;
+                    if (wdao.editWaterReading(watertemporary, watertemporary.getWater_billID())) {
+                        electrictemporary = edao.getElectricReadingByBillID(billtemporary.getBillID());
+                        electrictemporary.setPriceperKW(priceperkw);
+                        electrictemporary.setDateRead(dateread);
+                        electricprice = priceperkw * electrictemporary.getCurrentKW();
+                        electrictemporary.setPrice(electricprice);
+
+                        billtemporary.setPrice(watertemporary.getPrice() + electrictemporary.getPrice());
+
+                        if (edao.editElectricReading(electrictemporary, electrictemporary.getElectric_billID())) {
+                            if (bdao.editBill(billtemporary, billtemporary.getBillID())) {
+                                proceed = true;
+                            }
+
+                        } else {
+                            proceed = false;
+                        }
+                    }
+
+                    if (proceed) {
+                        JOptionPane.showMessageDialog(null, "Successfully edited bills.");
+                        this.removeAll();
+                        jPanel2 = new BillsPanelFinal();
+                        setJpanel();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Unsuccessful.");
+                    }
                     billtemporary = new BillBean();
                     watertemporary = new WaterReadingBean();
                     electrictemporary = new ElectricReadingBean();
-                                     
-                    
+
                 }
             }
         }
@@ -369,8 +414,8 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         // TODO add your handling code here:
-        
-                char c = evt.getKeyChar();
+
+        char c = evt.getKeyChar();
         String input = "";
         String trim;
         String re1 = "^(\\d*\\.?\\d*)$";
@@ -392,8 +437,8 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
 
     private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
         // TODO add your handling code here:
-        
-                char c = evt.getKeyChar();
+
+        char c = evt.getKeyChar();
         String input = "";
         String trim;
         String re1 = "^(\\d*\\.?\\d*)$";
@@ -415,8 +460,8 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
 
     private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
         // TODO add your handling code here:
-        
-                char c = evt.getKeyChar();
+
+        char c = evt.getKeyChar();
         String input = "";
         String trim;
         String re1 = "^(\\d*\\.?\\d*)$";
@@ -438,7 +483,7 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
 
     private void jTextField4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyReleased
         // TODO add your handling code here:
-                char c = evt.getKeyChar();
+        char c = evt.getKeyChar();
         String input = "";
         String trim;
         String re1 = "^(\\d*\\.?\\d*)$";
@@ -460,7 +505,7 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
 
     private void jTextField5KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyReleased
         // TODO add your handling code here:
-                char c = evt.getKeyChar();
+        char c = evt.getKeyChar();
         String input = "";
         String trim;
         String re1 = "^(\\d*\\.?\\d*)$";
