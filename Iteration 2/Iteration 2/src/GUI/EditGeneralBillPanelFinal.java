@@ -357,6 +357,7 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
 
                 float waterprice, electricprice;
 
+                boolean proceed = false;
                 for (int i = 0; i < rbeanlist.size(); i++) {
 
                     billtemporary = bdao.getBillsByRoomID(i + 1);
@@ -367,13 +368,14 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
                     billtemporary.setTotalelectricityconsumption(totalelectricityconsumption);
                     billtemporary.setTotalwaterconsumption(totalwaterconsumption);
                     billtemporary.setRoomprice(roomrent);
+                    billtemporary.setPrice(roomrent);
 
                     watertemporary = wdao.getWaterReadingsByBillID(billtemporary.getBillID());
                     watertemporary.setPricepercubicmeter(pricepercubicmeter);
                     watertemporary.setDateRead(dateread);
                     waterprice = pricepercubicmeter * watertemporary.getCurrentcubicmeter();
                     watertemporary.setPrice(waterprice);
-                    boolean proceed = false;
+
                     if (wdao.editWaterReading(watertemporary, watertemporary.getWater_billID())) {
                         electrictemporary = edao.getElectricReadingByBillID(billtemporary.getBillID());
                         electrictemporary.setPriceperKW(priceperkw);
@@ -381,35 +383,35 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
                         electricprice = priceperkw * electrictemporary.getCurrentKW();
                         electrictemporary.setPrice(electricprice);
 
-                        billtemporary.setPrice(watertemporary.getPrice() + electrictemporary.getPrice());
+                        billtemporary.setPrice(watertemporary.getPrice() + electrictemporary.getPrice() + roomrent);
 
                         if (edao.editElectricReading(electrictemporary, electrictemporary.getElectric_billID())) {
                             if (bdao.editBill(billtemporary, billtemporary.getBillID())) {
                                 proceed = true;
                             }
 
-                        } else {
-                            proceed = false;
+                        }else{
+                            proceed=false;
                         }
                     }
 
-                    if (proceed) {
-                        JOptionPane.showMessageDialog(null, "Successfully edited bills.");
-                        this.removeAll();
-                        jPanel2 = new BillsPanelFinal();
-                        setJpanel();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Unsuccessful.");
-                    }
                     billtemporary = new BillBean();
                     watertemporary = new WaterReadingBean();
                     electrictemporary = new ElectricReadingBean();
 
                 }
+
+                if (proceed) {
+                    JOptionPane.showMessageDialog(null, "Successfully edited bills.");
+                    this.removeAll();
+                    jPanel2 = new BillsPanelFinal();
+                    setJpanel();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Unsuccessful.");
+                }
             }
         }
 
-        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased

@@ -437,45 +437,54 @@ public class BillsPanelFinal extends javax.swing.JPanel {
             ArrayList<BillBean> bbeanlistnotpaidrent = new ArrayList<BillBean>();
             ArrayList<ElectricReadingBean> ebeanlistnotpaid = new ArrayList<ElectricReadingBean>();
             ArrayList<WaterReadingBean> wbeanlistnotpaid = new ArrayList<WaterReadingBean>();
-            float waterprice, electricprice;
+            float waterprice, electricprice, roomrent;
             double rentprice, total = 0;
             int billID = 0;
 
-            for (int i = 0; i < rlist.size(); i++) { 
+            for (int i = 0; i < rlist.size(); i++) {
                 bbean = bdao.getBillsByRoomID(i + 1);
 
                 billID = bbean.getBillID();
-                
+
                 ebean = edao.getElectricReadingByBillID(billID);
                 wbean = wdao.getWaterReadingsByBillID(billID);
-                
+
                 System.out.println(ebean.getPrice());
                 System.out.println(wbean.getPrice());
-                
-                if (bbean.getPrice()==0 && ebean.getPrice()==0 && wbean.getPrice()==0) { // wala talagang bill
-                    Object[] obj = {rlist.get(i).getRoomID(), 0, "UNPAID"};
+
+                if (bbean.getPrice() == 0 && ebean.getPrice() == 0 && wbean.getPrice() == 0) { // wala talagang bill
+                    System.out.println("wala talaga");
+                    Object[] obj = {rlist.get(i).getRoomID(), "0", "UNPAID"};
                     model.addRow(obj);
 
                 } else if (bbean.getpaidElectric() == false && bbean.getpaidElectric() == false && bbean.getpaidRent() == false) {
+                    System.out.println("wal2a talaga");
+              
                     electricprice = ebean.getPrice();
                     waterprice = wbean.getPrice();
-                    
-                    total = bbean.getPrice() + electricprice + waterprice;
+                    roomrent = bbean.getRoomprice();
+
+                    total =  electricprice + waterprice + roomrent;
                     Object[] obj = {rlist.get(i).getRoomID(), total, "UNPAID"};
                     model.addRow(obj);
                 } else {
-                    total = bbean.getPrice() + ebean.getPrice() + wbean.getPrice();
+                    electricprice = ebean.getPrice();
+                    waterprice = wbean.getPrice();
+                    roomrent = bbean.getRoomprice();
+
+                    total = bbean.getPrice() + electricprice + waterprice + roomrent;
                     Object[] obj = {rlist.get(i).getRoomID(), total, "PAID"};
                     model.addRow(obj);
                 }
-                
+
                 bbean = new BillBean();
                 ebean = new ElectricReadingBean();
                 wbean = new WaterReadingBean();
-                total=0;
+                total = 0;
             }
         }
     }
+
     public void setJpanel() {
         jPanel2.setPreferredSize(new java.awt.Dimension(1000, 600));
         this.add(jPanel2);
