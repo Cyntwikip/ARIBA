@@ -82,6 +82,12 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
         jLabel4.setText("(Tenant's Birthday: DDMM)");
         add(jLabel4);
         jLabel4.setBounds(310, 250, 160, 15);
+
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyReleased(evt);
+            }
+        });
         add(jPasswordField1);
         jPasswordField1.setBounds(480, 220, 290, 30);
 
@@ -149,7 +155,7 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
 
         if (!jTextField1.getText().isEmpty() && !jPasswordField1.getText().isEmpty()) {
             jButton1.setEnabled(true);
-            jButton2.setEnabled(true);
+            jButton3.setEnabled(true);
         }
     }//GEN-LAST:event_jTextField1KeyReleased
 
@@ -284,6 +290,15 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jPasswordField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyReleased
+        // TODO add your handling code here:
+
+        if (!jTextField1.getText().isEmpty() && !jPasswordField1.getText().isEmpty()) {
+            jButton1.setEnabled(true);
+            jButton3.setEnabled(true);
+        }
+    }//GEN-LAST:event_jPasswordField1KeyReleased
     public void setJpanel() {
         jPanel2.setPreferredSize(new java.awt.Dimension(1000, 600));
         this.add(jPanel2);
