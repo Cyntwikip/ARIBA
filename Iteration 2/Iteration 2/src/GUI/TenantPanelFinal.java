@@ -49,6 +49,8 @@ public class TenantPanelFinal extends javax.swing.JPanel {
     public TenantPanelFinal() {
         initComponents();
 
+        initBasicInfo();
+
         model = (DefaultTableModel) jTable1.getModel();
         int year = Calendar.getInstance().get(Calendar.YEAR);
 
@@ -59,6 +61,51 @@ public class TenantPanelFinal extends javax.swing.JPanel {
             YearOfGraduationField.addItem(i);
         }
         initTable();
+    }
+
+    public void initBasicInfo() {
+        birthdaylabel.hide();
+        birthday.hide();
+        genderlabel.hide();
+        gender.hide();
+        emaillabel.hide();
+        email.hide();
+        addresslabel.hide();
+        address.hide();
+        schooldegreelabel.hide();
+        schooldegree.hide();
+        yearofgradlabel.hide();
+        yearofgrad.hide();
+        statuslabel.hide();
+        status.hide();
+        gnamelabel.hide();
+        gnumlabel.hide();
+        gemaillabel.hide();
+        gname.hide();
+        gnum.hide();
+        gemail.hide();
+
+        fnamelabel.setLocation(20, 40);
+        fname.setLocation(110, 40);
+
+        lnamelabel.setLocation(20, 80);
+        lname.setLocation(120, 80);
+
+        inoutlabel.setLocation(20, 120);
+        inout.setLocation(120, 120);
+
+        logtimelabel.setLocation(20, 160);
+        logtime.setLocation(120, 160);
+
+        roomnumberlabel.setLocation(20, 200);
+        roomnumber.setLocation(120, 200);
+
+        contactnumberlabel.setLocation(20, 240);
+        contactno.setLocation(130, 240);
+
+        completebutton.setLocation(70, 280);
+        editbutton.setLocation(70, 330);
+
     }
 
     public void initTable() {
@@ -104,104 +151,100 @@ public class TenantPanelFinal extends javax.swing.JPanel {
             icon = new ImageIcon(newimg);
             imgLabel.setIcon(icon);
         }
-        //       tenantID.setText(String.valueOf(bean.getTenantID()));
-        jLabel9.setText(bean.getLname());
-        jLabel8.setText(bean.getFname());
-//             birthday.setText(java.sql.Date.toString(bean.getBirthday()));
-//        jLabel2.setText(bean.getAddress());
-//       jLabel3.setText(bean.getGender());
-//        Fnamelabel.setText(bean.getGender());
-        contactno.setText(bean.getContact());
-        //    email.setText(bean.getEmail());
-        //  school.setText(bean.getSchool());
-        //degree.setText(bean.getDegree());
-        //      yearofgraduation.setText(String.valueOf(bean.getExpectedyearofgrad()));
-        DateFormat date = new SimpleDateFormat("MMMM d, yyyy");
-        //    birthday.setText(date.format(bean.getBirthday()));
+        if (tenantid != 0) {
+            lname.setText(bean.getLname());
+            fname.setText(bean.getFname());
+            address.setText(bean.getAddress());
+            gender.setText(bean.getGender());
+            gender.setText(bean.getGender());
+            contactno.setText(bean.getContact());
+            email.setText(bean.getEmail());
+            schooldegree.setText(bean.getSchool() + "/" + bean.getDegree());
+            yearofgrad.setText(String.valueOf(bean.getExpectedyearofgrad()));
+            DateFormat date = new SimpleDateFormat("MMMM d, yyyy");
+            birthday.setText(date.format(bean.getBirthday()));
 
-        GuardianDAOInterface gdao = new GuardianDAOImplementation();
-        GuardianBean gbean = new GuardianBean();
+            GuardianDAOInterface gdao = new GuardianDAOImplementation();
+            GuardianBean gbean = new GuardianBean();
 
-        gbean = gdao.getGuardianByTenantID(tenantid);
+            gbean = gdao.getGuardianByTenantID(tenantid);
 
-        jLabel1.setText(gbean.getFname() + " " + gbean.getLname());
-//      guardiancontactno.setText(gbean.getContact());
+            gname.setText(gbean.getFname() + " " + gbean.getLname());
+            gnum.setText(gbean.getContact());
+            gemail.setText(gbean.getEmail());
 
-        GuardianBean guardianbean = new GuardianBean();
+            GuardianBean guardianbean = new GuardianBean();
 
-        guardianbean = gdao.getGuardianByTenant(bean.getFname(), bean.getLname());
-//        guardianlname.setText(guardianbean.getLname());
-//        guardianfname.setText(guardianbean.getFname());
-//        guardiancontactno.setText(guardianbean.getContact());
-//        guardianEmail.setText(guardianbean.getEmail());
+            RoomBean roombean = new RoomBean();
+            RoomDAOImplementation roomdao = new RoomDAOImplementation();
 
-        RoomBean roombean = new RoomBean();
-        RoomDAOImplementation roomdao = new RoomDAOImplementation();
+            roombean = roomdao.getTenantRoom(tenantid);
+            if (roombean.getRoomID() == 0) {
+                roomnumber.setText("none");
+            } else {
+                roomnumber.setText(String.valueOf(roombean.getRoomID()));
+            }
 
-        roombean = roomdao.getTenantRoom(tenantid);
-        if (roombean.getRoomID() == 0) {
-            roomnumber.setText("none");
-        } else {
-            roomnumber.setText(String.valueOf(roombean.getRoomID()));
+            AttendanceLogDAOInterface ldao = new AttendanceLogDAOImplementation();
+            AttendanceLogBean lbean = ldao.getLatestLoginByTenant(tenantID);
+            AttendanceLogBean lbean1 = ldao.getLatestLogoutByTenant(tenantID);
+
+            if (lbean == null && lbean1 == null) { // wala pa talaga
+                inout.setText("No logs yet.");
+                logtime.setText("No logs yet.");
+
+            } else if (lbean == null & lbean1 != null) {
+                inout.setText("OUT");
+
+                SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss.");
+                java.sql.Timestamp ts = lbean1.getTimeLogged();
+                int microFraction = ts.getNanos() / 1000;
+
+                StringBuilder sb = new StringBuilder(fmt.format(ts));
+
+                System.out.println(sb.toString());
+
+                logtime.setText(sb.toString());
+            } else if (lbean1 == null && lbean != null) {
+                inout.setText("IN");
+
+                SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss.");
+                java.sql.Timestamp ts = lbean.getTimeLogged();
+                int microFraction = ts.getNanos() / 1000;
+
+                StringBuilder sb = new StringBuilder(fmt.format(ts));
+
+                System.out.println(sb.toString());
+
+                logtime.setText(sb.toString());
+            } else if (lbean.getLogID() > lbean1.getLogID()) { // login
+                inout.setText("IN");
+
+                SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss.");
+                java.sql.Timestamp ts = lbean.getTimeLogged();
+                int microFraction = ts.getNanos() / 1000;
+
+                StringBuilder sb = new StringBuilder(fmt.format(ts));
+
+                System.out.println(sb.toString());
+
+                logtime.setText(sb.toString());
+            } else {
+                inout.setText("OUT");
+
+                SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss.");
+                java.sql.Timestamp ts = lbean1.getTimeLogged();
+                int microFraction = ts.getNanos() / 1000;
+
+                StringBuilder sb = new StringBuilder(fmt.format(ts));
+
+                System.out.println(sb.toString());
+            }
+        }else{
+            System.out.println("no tenant selected");
         }
-
-        AttendanceLogDAOInterface ldao = new AttendanceLogDAOImplementation();
-        AttendanceLogBean lbean = ldao.getLatestLoginByTenant(tenantID);
-        AttendanceLogBean lbean1 = ldao.getLatestLogoutByTenant(tenantID);
-
-        if (lbean == null && lbean1 == null) { // wala pa talaga
-            logstat.setText("No logs yet.");
-            logtime.setText("No logs yet.");
-
-        } else if (lbean == null & lbean1 != null) {
-            logstat.setText("OUT");
-
-            SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss.");
-            java.sql.Timestamp ts = lbean1.getTimeLogged();
-            int microFraction = ts.getNanos() / 1000;
-
-            StringBuilder sb = new StringBuilder(fmt.format(ts));
-
-            System.out.println(sb.toString());
-
-            logtime.setText(sb.toString());
-        } else if (lbean1 == null && lbean != null) {
-            logstat.setText("IN");
-
-            SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss.");
-            java.sql.Timestamp ts = lbean.getTimeLogged();
-            int microFraction = ts.getNanos() / 1000;
-
-            StringBuilder sb = new StringBuilder(fmt.format(ts));
-
-            System.out.println(sb.toString());
-
-            logtime.setText(sb.toString());
-        }else if (lbean.getLogID() > lbean1.getLogID()) { // login
-            logstat.setText("IN");
-
-            SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss.");
-            java.sql.Timestamp ts = lbean.getTimeLogged();
-            int microFraction = ts.getNanos() / 1000;
-
-            StringBuilder sb = new StringBuilder(fmt.format(ts));
-
-            System.out.println(sb.toString());
-
-            logtime.setText(sb.toString());
-        } else {
-            logstat.setText("OUT");
-
-            SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss.");
-            java.sql.Timestamp ts = lbean1.getTimeLogged();
-            int microFraction = ts.getNanos() / 1000;
-
-            StringBuilder sb = new StringBuilder(fmt.format(ts));
-
-            System.out.println(sb.toString());
-        }
-//        status.setText(bean.getStatus());
     }
+    
 
     public void searchName() {
         String name = NameField.getText();
@@ -291,28 +334,49 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         MaleField = new javax.swing.JRadioButton();
         FemaleField = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        logstat = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel5 = new javax.swing.JLabel();
-        logtime = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        roomnumber = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        contactno = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         imgLabel = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        fnamelabel = new javax.swing.JLabel();
+        fname = new javax.swing.JLabel();
+        lnamelabel = new javax.swing.JLabel();
+        lname = new javax.swing.JLabel();
+        inoutlabel = new javax.swing.JLabel();
+        inout = new javax.swing.JLabel();
+        logtimelabel = new javax.swing.JLabel();
+        logtime = new javax.swing.JLabel();
+        roomnumberlabel = new javax.swing.JLabel();
+        roomnumber = new javax.swing.JLabel();
+        contactnumberlabel = new javax.swing.JLabel();
+        contactno = new javax.swing.JLabel();
+        completebutton = new javax.swing.JButton();
+        editbutton = new javax.swing.JButton();
+        birthdaylabel = new javax.swing.JLabel();
+        birthday = new javax.swing.JLabel();
+        genderlabel = new javax.swing.JLabel();
+        gender = new javax.swing.JLabel();
+        emaillabel = new javax.swing.JLabel();
+        email = new javax.swing.JLabel();
+        addresslabel = new javax.swing.JLabel();
+        address = new javax.swing.JLabel();
+        schooldegreelabel = new javax.swing.JLabel();
+        schooldegree = new javax.swing.JLabel();
+        yearofgradlabel = new javax.swing.JLabel();
+        yearofgrad = new javax.swing.JLabel();
+        statuslabel = new javax.swing.JLabel();
+        status = new javax.swing.JLabel();
+        gnamelabel = new javax.swing.JLabel();
+        gnumlabel = new javax.swing.JLabel();
+        gemaillabel = new javax.swing.JLabel();
+        gname = new javax.swing.JLabel();
+        gnum = new javax.swing.JLabel();
+        gemail = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 596));
@@ -400,30 +464,6 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         add(jButton1);
         jButton1.setBounds(70, 340, 160, 50);
 
-        jLabel2.setText("First Name:");
-        add(jLabel2);
-        jLabel2.setBounds(660, 180, 90, 14);
-
-        jLabel8.setText("jLabel8");
-        add(jLabel8);
-        jLabel8.setBounds(760, 180, 140, 20);
-
-        jLabel3.setText("Last Name:");
-        add(jLabel3);
-        jLabel3.setBounds(660, 220, 80, 14);
-
-        jLabel9.setText("jLabel9");
-        add(jLabel9);
-        jLabel9.setBounds(760, 220, 150, 14);
-
-        jLabel4.setText("In/Out:");
-        add(jLabel4);
-        jLabel4.setBounds(660, 260, 70, 14);
-
-        logstat.setText("jLabel10");
-        add(logstat);
-        logstat.setBounds(760, 260, 120, 14);
-
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -456,48 +496,6 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         add(jScrollPane1);
         jScrollPane1.setBounds(270, 30, 350, 520);
 
-        jLabel5.setText("Last Log Time:");
-        add(jLabel5);
-        jLabel5.setBounds(660, 300, 100, 14);
-
-        logtime.setText("jLabel10");
-        add(logtime);
-        logtime.setBounds(760, 300, 140, 14);
-
-        jLabel6.setText("Room Number:");
-        add(jLabel6);
-        jLabel6.setBounds(660, 340, 90, 14);
-
-        roomnumber.setText("jLabel10");
-        add(roomnumber);
-        roomnumber.setBounds(760, 340, 130, 14);
-
-        jLabel7.setText("Contact Number:");
-        add(jLabel7);
-        jLabel7.setBounds(660, 380, 110, 14);
-
-        contactno.setText("jLabel8");
-        add(contactno);
-        contactno.setBounds(760, 380, 160, 14);
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/viewcompletedetails.png"))); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        add(jButton3);
-        jButton3.setBounds(720, 420, 170, 40);
-
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/edit_information button.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        add(jButton2);
-        jButton2.setBounds(720, 470, 170, 40);
-
         jLabel10.setText("Name");
         add(jLabel10);
         jLabel10.setBounds(70, 180, 40, 14);
@@ -522,6 +520,158 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         imgLabel.setText("Picture");
         add(imgLabel);
         imgLabel.setBounds(810, 50, 120, 110);
+
+        jPanel1.setOpaque(false);
+        jPanel1.setLayout(null);
+
+        fnamelabel.setText("First Name:");
+        jPanel1.add(fnamelabel);
+        fnamelabel.setBounds(20, 40, 90, 14);
+
+        fname.setText("jLabel8");
+        jPanel1.add(fname);
+        fname.setBounds(110, 40, 140, 20);
+
+        lnamelabel.setText("Last Name:");
+        jPanel1.add(lnamelabel);
+        lnamelabel.setBounds(20, 60, 80, 14);
+
+        lname.setText("jLabel9");
+        jPanel1.add(lname);
+        lname.setBounds(110, 60, 150, 14);
+
+        inoutlabel.setText("In/Out:");
+        jPanel1.add(inoutlabel);
+        inoutlabel.setBounds(20, 80, 70, 14);
+
+        inout.setText("jLabel10");
+        jPanel1.add(inout);
+        inout.setBounds(110, 80, 120, 14);
+
+        logtimelabel.setText("Last Log Time:");
+        jPanel1.add(logtimelabel);
+        logtimelabel.setBounds(20, 100, 100, 14);
+
+        logtime.setText("jLabel10");
+        jPanel1.add(logtime);
+        logtime.setBounds(110, 100, 140, 14);
+
+        roomnumberlabel.setText("Room Number:");
+        jPanel1.add(roomnumberlabel);
+        roomnumberlabel.setBounds(20, 120, 90, 14);
+
+        roomnumber.setText("jLabel10");
+        jPanel1.add(roomnumber);
+        roomnumber.setBounds(110, 120, 130, 14);
+
+        contactnumberlabel.setText("Contact Number:");
+        jPanel1.add(contactnumberlabel);
+        contactnumberlabel.setBounds(20, 140, 110, 14);
+
+        contactno.setText("jLabel8");
+        jPanel1.add(contactno);
+        contactno.setBounds(110, 140, 160, 14);
+
+        completebutton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/viewcompletedetails.png"))); // NOI18N
+        completebutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                completebuttonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(completebutton);
+        completebutton.setBounds(70, 360, 170, 40);
+
+        editbutton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/edit_information button.png"))); // NOI18N
+        editbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editbuttonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(editbutton);
+        editbutton.setBounds(70, 400, 170, 40);
+
+        birthdaylabel.setText("Birthday:");
+        jPanel1.add(birthdaylabel);
+        birthdaylabel.setBounds(20, 160, 80, 14);
+
+        birthday.setText("jLabel16");
+        jPanel1.add(birthday);
+        birthday.setBounds(110, 160, 70, 14);
+
+        genderlabel.setText("Gender:");
+        jPanel1.add(genderlabel);
+        genderlabel.setBounds(20, 180, 80, 14);
+
+        gender.setText("jLabel18");
+        jPanel1.add(gender);
+        gender.setBounds(110, 180, 70, 14);
+
+        emaillabel.setText("E-mail:");
+        jPanel1.add(emaillabel);
+        emaillabel.setBounds(20, 200, 32, 14);
+
+        email.setText("jLabel20");
+        jPanel1.add(email);
+        email.setBounds(110, 200, 60, 14);
+
+        addresslabel.setText("Address:");
+        jPanel1.add(addresslabel);
+        addresslabel.setBounds(20, 220, 80, 14);
+
+        address.setText("jLabel22");
+        jPanel1.add(address);
+        address.setBounds(110, 220, 80, 14);
+
+        schooldegreelabel.setText("School/Degree:");
+        jPanel1.add(schooldegreelabel);
+        schooldegreelabel.setBounds(20, 240, 90, 14);
+
+        schooldegree.setText("jLabel24");
+        jPanel1.add(schooldegree);
+        schooldegree.setBounds(110, 240, 80, 14);
+
+        yearofgradlabel.setText("Year of Graduation:");
+        jPanel1.add(yearofgradlabel);
+        yearofgradlabel.setBounds(20, 260, 110, 14);
+
+        yearofgrad.setText("jLabel26");
+        jPanel1.add(yearofgrad);
+        yearofgrad.setBounds(130, 260, 60, 14);
+
+        statuslabel.setText("Status:");
+        jPanel1.add(statuslabel);
+        statuslabel.setBounds(20, 280, 60, 14);
+
+        status.setText("jLabel28");
+        jPanel1.add(status);
+        status.setBounds(110, 280, 70, 14);
+
+        gnamelabel.setText("Guardian's Name:");
+        jPanel1.add(gnamelabel);
+        gnamelabel.setBounds(20, 300, 100, 14);
+
+        gnumlabel.setText("Guardian's Contact Number:");
+        jPanel1.add(gnumlabel);
+        gnumlabel.setBounds(20, 320, 160, 14);
+
+        gemaillabel.setText("Guardian's E-mail:");
+        jPanel1.add(gemaillabel);
+        gemaillabel.setBounds(20, 340, 110, 14);
+
+        gname.setText("jLabel32");
+        jPanel1.add(gname);
+        gname.setBounds(110, 300, 90, 14);
+
+        gnum.setText("jLabel33");
+        jPanel1.add(gnum);
+        gnum.setBounds(170, 320, 90, 14);
+
+        gemail.setText("jLabel34");
+        jPanel1.add(gemail);
+        gemail.setBounds(110, 340, 90, 14);
+
+        add(jPanel1);
+        jPanel1.setBounds(640, 100, 310, 450);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/tenant-tab-peg-crop.png"))); // NOI18N
         add(jLabel1);
@@ -596,7 +746,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         getSelection();
     }//GEN-LAST:event_jTable1KeyReleased
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void editbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editbuttonActionPerformed
         // TODO add your handling code here:
 
         // edit tenant information
@@ -612,11 +762,84 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         setJpanel();
         //      jScrollPane2.setViewportView(et);
         //   NewJFrame nj = new NewJFrame(tenantID);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_editbuttonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void completebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completebuttonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+
+        fnamelabel.setLocation(20, 40);
+        fname.setLocation(130, 40);
+
+        lnamelabel.setLocation(20, 60);
+        lname.setLocation(130, 60);
+
+        inoutlabel.setLocation(20, 80);
+        inout.setLocation(130, 80);
+
+        logtimelabel.setLocation(20, 100);
+        logtime.setLocation(130, 100);
+
+        roomnumberlabel.setLocation(20, 120);
+        roomnumber.setLocation(130, 120);
+
+        contactnumberlabel.setLocation(20, 140);
+        contactno.setLocation(130, 140);
+
+        birthdaylabel.show();
+        birthdaylabel.setLocation(20, 160);
+        birthday.show();
+        birthday.setLocation(130, 160);
+
+        genderlabel.show();
+        genderlabel.setLocation(20, 180);
+        gender.show();
+        gender.setLocation(130, 180);
+
+        emaillabel.show();
+        emaillabel.setLocation(20, 200);
+        email.show();
+        email.setLocation(130, 200);
+
+        addresslabel.show();
+        addresslabel.setLocation(20, 220);
+        address.show();
+        address.setLocation(130, 220);
+
+        schooldegreelabel.show();
+        schooldegreelabel.setLocation(20, 240);
+        schooldegree.show();
+        schooldegree.setLocation(130, 240);
+
+        yearofgradlabel.show();
+        yearofgradlabel.setLocation(20, 260);
+        yearofgrad.show();
+        yearofgrad.setLocation(150, 260);
+
+        statuslabel.show();
+        statuslabel.setLocation(20, 280);
+        status.show();
+        status.setLocation(130, 280);
+
+        gnamelabel.show();
+        gnamelabel.setLocation(20, 300);
+        gname.show();
+        gname.setLocation(130, 300);
+
+        gnumlabel.show();
+        gnumlabel.setLocation(20, 320);
+        gnum.show();
+        gnum.setLocation(190, 320);
+
+        gemaillabel.show();
+        gemaillabel.setLocation(20, 340);
+        gemail.show();
+        gemail.setLocation(130, 340);
+
+        completebutton.setLocation(70, 360);
+        editbutton.setLocation(70, 400);
+
+        getSelection();
+    }//GEN-LAST:event_completebuttonActionPerformed
 
     public void setJpanel() {
         jPanel2.setPreferredSize(new java.awt.Dimension(1000, 600));
@@ -639,29 +862,50 @@ public class TenantPanelFinal extends javax.swing.JPanel {
     private javax.swing.JTextField NameField;
     private javax.swing.JTextField SchoolField;
     private javax.swing.JComboBox YearOfGraduationField;
+    private javax.swing.JLabel address;
+    private javax.swing.JLabel addresslabel;
+    private javax.swing.JLabel birthday;
+    private javax.swing.JLabel birthdaylabel;
+    private javax.swing.JButton completebutton;
     private javax.swing.JLabel contactno;
+    private javax.swing.JLabel contactnumberlabel;
+    private javax.swing.JButton editbutton;
+    private javax.swing.JLabel email;
+    private javax.swing.JLabel emaillabel;
+    private javax.swing.JLabel fname;
+    private javax.swing.JLabel fnamelabel;
+    private javax.swing.JLabel gemail;
+    private javax.swing.JLabel gemaillabel;
+    private javax.swing.JLabel gender;
+    private javax.swing.JLabel genderlabel;
+    private javax.swing.JLabel gname;
+    private javax.swing.JLabel gnamelabel;
+    private javax.swing.JLabel gnum;
+    private javax.swing.JLabel gnumlabel;
     private javax.swing.JLabel imgLabel;
+    private javax.swing.JLabel inout;
+    private javax.swing.JLabel inoutlabel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JLabel logstat;
+    private javax.swing.JLabel lname;
+    private javax.swing.JLabel lnamelabel;
     private javax.swing.JLabel logtime;
+    private javax.swing.JLabel logtimelabel;
     private javax.swing.JLabel roomnumber;
+    private javax.swing.JLabel roomnumberlabel;
+    private javax.swing.JLabel schooldegree;
+    private javax.swing.JLabel schooldegreelabel;
+    private javax.swing.JLabel status;
+    private javax.swing.JLabel statuslabel;
+    private javax.swing.JLabel yearofgrad;
+    private javax.swing.JLabel yearofgradlabel;
     // End of variables declaration//GEN-END:variables
 }
