@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * @author User
  */
 public interface ElectricReadingDAOInterface {
-    public boolean addElectricReadingToRoom (ElectricReadingBean electric, int bill_roomID);
+    public boolean addElectricReadingToRoom (ElectricReadingBean electric);
     public boolean editElectricReading(ElectricReadingBean electric, int electricID);
     public boolean editElectricReadingByPrice(float price, int electricID);
     public ArrayList<ElectricReadingBean> getAllElectricReading();

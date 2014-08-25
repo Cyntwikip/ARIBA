@@ -15,10 +15,38 @@ public class BillBean {
     private int billID;
     private int bill_roomID;
     private double price;
+    private float totalelectricityconsumption;
+    private float totalwaterconsumption;
+    private float roomprice;
     private boolean paidRent;
     private boolean paidWater;
     private boolean paidElectric;
 
+    public float getRoomprice() {
+        return roomprice;
+    }
+
+    public void setRoomprice(float roomprice) {
+        this.roomprice = roomprice;
+    }
+    
+    public float getTotalelectricityconsumption() {
+        return totalelectricityconsumption;
+    }
+
+    public float getTotalwaterconsumption() {
+        return totalwaterconsumption;
+    }
+
+    public void setTotalelectricityconsumption(float totalelectricityconsumption) {
+        this.totalelectricityconsumption = totalelectricityconsumption;
+    }
+
+    public void setTotalwaterconsumption(float totalwaterconsumption) {
+        this.totalwaterconsumption = totalwaterconsumption;
+    }
+
+    
     public int getBillID() {
         return billID;
     }

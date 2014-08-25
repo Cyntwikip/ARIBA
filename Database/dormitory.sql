@@ -1,6 +1,8 @@
+
 CREATE DATABASE  IF NOT EXISTS `dormitory` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `dormitory`;
 SET GLOBAL max_connections = 200;
+SET SQL_SAFE_UPDATES=0;
 -- MySQL dump 10.13  Distrib 5.6.13, for osx10.6 (i386)
 --
 -- Host: localhost    Database: dormitory
@@ -59,6 +61,9 @@ CREATE TABLE `Bill` (
   `paidRent` tinyint(1) NOT NULL,
   `paidWater` tinyint(1) NOT NULL,
   `paidElectric` tinyint(1) NOT NULL,
+  `totalwaterconsumption`float  NOT NULL,
+	`totalelectricityconsumption` float NOT NULL,
+`roomprice` float NOT NULL,
   PRIMARY KEY (`billID`),
   KEY `roomID_idx` (`bill_roomID`),
   CONSTRAINT `bill_roomID` FOREIGN KEY (`bill_roomID`) REFERENCES `Room` (`roomID`) ON DELETE NO ACTION ON UPDATE NO ACTION
