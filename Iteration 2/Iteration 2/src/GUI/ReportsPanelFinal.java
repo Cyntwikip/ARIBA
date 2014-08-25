@@ -215,13 +215,13 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         JTableHeader th = jTable1.getTableHeader();
         TableColumnModel tcm = th.getColumnModel();
         TableColumn tc = tcm.getColumn(0);
-        tc.setHeaderValue("Tenant ID");
+        tc.setHeaderValue("Surname");
         tc = tcm.getColumn(1);
-        tc.setHeaderValue("Lastname");
+        tc.setHeaderValue("First name");
         tc = tcm.getColumn(2);
-        tc.setHeaderValue("Firstname");
-        tc = tcm.getColumn(3);
         tc.setHeaderValue("Degree");
+        tc = tcm.getColumn(3);
+        tc.setHeaderValue("Year");
         th.repaint();
         
         int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -230,7 +230,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         
         for (int i = 0; i < tlist.size(); i++) {
             //System.out.println(tlist.get(i).getLname());
-            Object[] obj = {tlist.get(i).getTenantID(), tlist.get(i).getLname(), tlist.get(i).getFname(), tlist.get(i).getDegree()};
+            Object[] obj = {tlist.get(i).getTenantID(), tlist.get(i).getLname(), tlist.get(i).getFname(), tlist.get(i).getDegree(), tlist.get(i).getExpectedyearofgrad()};
             model.addRow(obj);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
