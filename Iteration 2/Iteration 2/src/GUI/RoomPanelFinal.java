@@ -240,14 +240,14 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         add(jButton1);
         jButton1.setBounds(690, 480, 170, 50);
 
-        jButton2.setText("add room");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/addroom.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
         add(jButton2);
-        jButton2.setBounds(550, 500, 100, 23);
+        jButton2.setBounds(530, 490, 160, 41);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/rooms-tab-peg-edited-crop.png"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(1000, 596));
