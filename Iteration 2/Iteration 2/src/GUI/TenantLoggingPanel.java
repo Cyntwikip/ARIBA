@@ -156,6 +156,9 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
         if (!jTextField1.getText().isEmpty() && !jPasswordField1.getText().isEmpty()) {
             jButton1.setEnabled(true);
             jButton3.setEnabled(true);
+        }else{
+            jButton1.setEnabled(false);
+            jButton3.setEnabled(false);
         }
     }//GEN-LAST:event_jTextField1KeyReleased
 
@@ -297,6 +300,9 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
         if (!jTextField1.getText().isEmpty() && !jPasswordField1.getText().isEmpty()) {
             jButton1.setEnabled(true);
             jButton3.setEnabled(true);
+        }else{
+            jButton1.setEnabled(false);
+            jButton3.setEnabled(false);
         }
     }//GEN-LAST:event_jPasswordField1KeyReleased
     public void setJpanel() {
