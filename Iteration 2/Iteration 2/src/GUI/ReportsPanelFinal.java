@@ -167,9 +167,9 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         TableColumn tc = tcm.getColumn(0);
         tc.setHeaderValue("Tenant ID");
         tc = tcm.getColumn(1);
-        tc.setHeaderValue("Lastname");
+        tc.setHeaderValue("Last name");
         tc = tcm.getColumn(2);
-        tc.setHeaderValue("Firstname");
+        tc.setHeaderValue("First name");
         tc = tcm.getColumn(3);
         tc.setHeaderValue("Amount");
         th.repaint();
@@ -197,7 +197,6 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
 
             for (int j = 0; j < tbeanlist.size(); j++) {
                 tbean = tbeanlist.get(j);
-                deleteToRoom(tbean);
                 double amount = bbeanlist.get(i).getPrice();
                 String fname = tbean.getFname();
                 String lname = tbean.getLname();
@@ -417,7 +416,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         TableColumn tc = tcm.getColumn(0);
         tc.setHeaderValue("Surname");
         tc = tcm.getColumn(1);
-        tc.setHeaderValue("Firstname");
+        tc.setHeaderValue("First name");
         tc = tcm.getColumn(2);
         tc.setHeaderValue("Effective date");
         tc = tcm.getColumn(3);

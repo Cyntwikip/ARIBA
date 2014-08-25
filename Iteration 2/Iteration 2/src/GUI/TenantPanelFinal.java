@@ -604,7 +604,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         gender.setText("jLabel18");
         jPanel1.add(gender);
-        gender.setBounds(110, 180, 200, 14);
+        gender.setBounds(110, 180, 70, 14);
 
         emaillabel.setText("E-mail:");
         jPanel1.add(emaillabel);
@@ -612,7 +612,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         email.setText("jLabel20");
         jPanel1.add(email);
-        email.setBounds(110, 200, 200, 14);
+        email.setBounds(110, 200, 60, 14);
 
         addresslabel.setText("Address:");
         jPanel1.add(addresslabel);
@@ -620,7 +620,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         address.setText("jLabel22");
         jPanel1.add(address);
-        address.setBounds(110, 220, 200, 14);
+        address.setBounds(110, 220, 80, 14);
 
         schooldegreelabel.setText("School/Degree:");
         jPanel1.add(schooldegreelabel);
@@ -628,7 +628,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         schooldegree.setText("jLabel24");
         jPanel1.add(schooldegree);
-        schooldegree.setBounds(110, 240, 200, 14);
+        schooldegree.setBounds(110, 240, 80, 14);
 
         yearofgradlabel.setText("Year of Graduation:");
         jPanel1.add(yearofgradlabel);
@@ -636,7 +636,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         yearofgrad.setText("jLabel26");
         jPanel1.add(yearofgrad);
-        yearofgrad.setBounds(130, 260, 180, 14);
+        yearofgrad.setBounds(130, 260, 60, 14);
 
         statuslabel.setText("Status:");
         jPanel1.add(statuslabel);
@@ -644,7 +644,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         status.setText("jLabel28");
         jPanel1.add(status);
-        status.setBounds(110, 280, 200, 14);
+        status.setBounds(110, 280, 70, 14);
 
         gnamelabel.setText("Guardian's Name:");
         jPanel1.add(gnamelabel);
@@ -660,15 +660,15 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         gname.setText("jLabel32");
         jPanel1.add(gname);
-        gname.setBounds(110, 300, 200, 14);
+        gname.setBounds(110, 300, 90, 14);
 
         gnum.setText("jLabel33");
         jPanel1.add(gnum);
-        gnum.setBounds(170, 320, 140, 14);
+        gnum.setBounds(170, 320, 90, 14);
 
         gemail.setText("jLabel34");
         jPanel1.add(gemail);
-        gemail.setBounds(110, 340, 200, 14);
+        gemail.setBounds(110, 340, 90, 14);
 
         add(jPanel1);
         jPanel1.setBounds(640, 100, 310, 450);
