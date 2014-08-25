@@ -143,6 +143,59 @@ CREATE TABLE `room` (
 ) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+
+insert into room (roomID, currentKW, currentcubicmeter) values(1, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(2, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(3, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(4, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(5, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(6, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(7, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(8, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(9, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(10, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(11, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(12, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(13, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(14, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(15, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(16, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(17, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(18, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(19, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(20, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(21, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(22, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(23, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(24, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(25, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(26, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(27, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(28, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(29, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(30, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(31, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(32, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(33, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(34, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(35, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(36, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(37, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(38, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(39, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(40, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(41, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(42, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(43, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(44, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(45, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(46, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(47, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(48, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(49, 0,0);
+insert into room (roomID, currentKW, currentcubicmeter) values(50, 0,0);
+
+
 --
 -- Table structure for table `tenant`
 --

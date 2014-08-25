@@ -152,6 +152,7 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 596));
@@ -224,6 +225,15 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         });
         add(jButton1);
         jButton1.setBounds(690, 480, 170, 50);
+
+        jButton2.setText("add room");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        add(jButton2);
+        jButton2.setBounds(550, 500, 100, 23);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/rooms-tab-peg-edited-crop.png"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(1000, 596));
@@ -418,9 +428,22 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jTable2MouseEntered
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        RoomDAOInterface rdao = new RoomDAOImplementation();
+        RoomBean rbean = new RoomBean();
+        
+        rbean.setCurrentKW(0);
+        rbean.setCurrentcubicmeter(0);
+       
+        rdao.addRoom(rbean);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
