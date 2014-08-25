@@ -143,6 +143,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
         }
 
         tenant.setBlobimage(tenant.getBlobimage());
+        tenant.setImage("");
 
         //get birthday month
         for (int i = 0; i < MonthField.getItemCount(); i++) {
@@ -796,70 +797,20 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
                 guard.setContact(guardContact);
                 guard.setEmail(guardEmail);
 
-                // add tenant
-                if (flag) {
-                    boolean t1 = false, g1 = false, tg1;
-                    g1 = gdao.addGuardian(guard);
-                    t1 = tdao.addTenant(tenant);
-                    tenant = tdao.getTenantByName(fname, lname);
-                    guard = gdao.getGuardianByName(guardFname, guardLname);
-                    tg1 = gdao.assignTenantToGuardian(guard, tenant);
+                boolean edittenant = tdao.editTenant(tenant);
+                System.out.println(edittenant);
+                boolean editguardian = gdao.editGuardian(guard, guard.getGuardianID());
+                System.out.println(editguardian);
+                if (edittenant && editguardian) {
+                    JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + "'s information has been successfully edited.");
+                    this.removeAll();
+                    jPanel2 = new TenantPanelFinal();
+                    setJpanel();
 
-                    tenant = tdao.getTenantByName(fname, lname);
-                    guard = gdao.getGuardianByName(guardFname, guardLname);
-
-                    if (t1 && g1 && tg1) {
-                        ContractBean contractAcc = new ContractBean();
-                        ContractDAOInterface contractdao = new ContractDAOImplementation();
-
-                        Calendar effectivedate = Calendar.getInstance();
-                        Calendar expirydate = Calendar.getInstance();
-                        expirydate.add(Calendar.DAY_OF_YEAR, 365); // add 1 year
-                        DateFormat df_contract = new SimpleDateFormat("MMMM d, yyyy");
-
-                        //converting Calendar to sql Date
-                        java.sql.Date sqlEffectivedate = new java.sql.Date(effectivedate.getTime().getTime());
-                        java.sql.Date sqlExpirydate = new java.sql.Date(expirydate.getTime().getTime());
-
-                        contractAcc.setContract_tenantID(tenant.getTenantID());
-                        contractAcc.setEffectivedate(sqlEffectivedate);
-                        contractAcc.setExpirydate(sqlExpirydate);
-
-                        contractdao.addContract(contractAcc);
-
-                        JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + " has successfully added.");
-                        this.removeAll();
-                        jPanel2 = new TenantPanelFinal();
-                        setJpanel();
-                    } else {
-                        if (tenant != null) {
-                            //            tenantImpl.deleteTenant(tenant);
-                        }
-
-                        if (guard != null) {
-                            gdao.deleteGuardian(guard);
-                        }
-
-                        if (tg1) {
-                            gdao.deleteAssignedTenantGuardian(tenant);
-                        }
-                        JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correctly.");
-                    }
-
-                    // edit tenant
                 } else {
-                    boolean edittenant = tdao.editTenant(tenant);
-                    System.out.println(edittenant);
-                    boolean editguardian = gdao.editGuardian(guard, guard.getGuardianID());
-                    System.out.println(editguardian);
-                    if (edittenant && editguardian) {
-                        JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + "'s information has been successfully edited.");
-                        //         this.dispose();
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Not successful");
-                    }
+                    JOptionPane.showMessageDialog(null, "Not successful");
                 }
+
             } catch (AccountException e) {
                 e.promptFieldError();
             }

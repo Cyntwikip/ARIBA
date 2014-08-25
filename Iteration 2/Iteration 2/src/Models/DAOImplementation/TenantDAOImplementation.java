@@ -758,9 +758,9 @@ public class TenantDAOImplementation implements TenantDAOInterface {
             PreparedStatement ps = connection.prepareStatement(query);
             FileInputStream fin = null;
 
-                if (tenant.getImage().isEmpty()) {
+            if (tenant.getImage().isEmpty()) {
                 ps.setBlob(1, tenant.getBlobimage());
-            }else{
+            } else {
                 try {
                     fin = new FileInputStream(tenant.getImage());
                 } catch (FileNotFoundException ex) {
@@ -942,8 +942,8 @@ public class TenantDAOImplementation implements TenantDAOInterface {
 
     @Override
     public boolean setTenantToOld(int tenantID) {
- 
-               try {
+
+        try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
 
@@ -959,8 +959,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
         }
 
         return false;
-  
-        
+
     }
 
 }

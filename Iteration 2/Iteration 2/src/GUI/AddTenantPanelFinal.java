@@ -73,6 +73,9 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         for (int i = 2000; i <= year + 10; i++) {
             YearOfGraduationField.addItem(i);
         }
+        
+        tenant.setImage("");
+        flag = true;
     }
 
     /**
@@ -873,10 +876,9 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
                     tenant = tdao.getTenantByName(fname, lname);
                     guard = gdao.getGuardianByName(guardFname, guardLname);
                     tg1 = gdao.assignTenantToGuardian(guard, tenant);
-
-                    tenant = tdao.getTenantByName(fname, lname);
-                    guard = gdao.getGuardianByName(guardFname, guardLname);
-
+                    System.out.println(t1);
+                    System.out.println(g1);
+                    System.out.println(tg1);
                     if (t1 && g1 && tg1) {
                         ContractBean contractAcc = new ContractBean();
                         ContractDAOInterface contractdao = new ContractDAOImplementation();
@@ -903,7 +905,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
 
                     } else {
                         if (tenant != null) {
-                            //            tenantImpl.deleteTenant(tenant);
+                            tdao.deleteTenant(tenant);
                         }
 
                         if (guard != null) {
