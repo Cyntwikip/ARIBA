@@ -568,7 +568,7 @@ public class BillDAOImplementation implements BillDAOInterface {
                 paidElectric = resultSet.getBoolean("paidElectric");
                 totalwaterconsumption = resultSet.getFloat("totalwaterconsumption");
                 totalelectricityconsumption = resultSet.getFloat("totalelectricityconsumption");
-                roomprice = resultSet.getFloat("roomprce");
+                roomprice = resultSet.getFloat("roomprice");
 
                 bean = new BillBean();
 

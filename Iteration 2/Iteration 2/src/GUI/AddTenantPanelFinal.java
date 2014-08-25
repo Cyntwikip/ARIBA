@@ -118,7 +118,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         jPanel1.setOpaque(false);
         jPanel1.setLayout(null);
 
-        imgaddLabel.setText("         Choose photo");
+        imgaddLabel.setText("             Choose photo");
         jPanel1.add(imgaddLabel);
         imgaddLabel.setBounds(70, 40, 160, 160);
 
@@ -218,7 +218,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(YearField);
-        YearField.setBounds(440, 80, 60, 20);
+        YearField.setBounds(440, 80, 70, 20);
 
         FemaleField.setText("Female\n");
         FemaleField.setActionCommand("Female");
@@ -382,7 +382,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         SurnameField.setBounds(330, 10, 170, 30);
 
         add(jPanel1);
-        jPanel1.setBounds(80, 140, 770, 330);
+        jPanel1.setBounds(90, 130, 770, 330);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/addedit-peg-edited-panel.png"))); // NOI18N
         add(jLabel1);
@@ -834,26 +834,25 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
                 tenant.setExpectedyearofgrad(gradyear);
                 tenant.setStatus("CURRENT");
 
-                /*                if (tenant.getBlobimage() == null) {
-                 System.out.println("Yes");
-                 }
+                if (tenant.getBlobimage() == null) {
+                    System.out.println("Yes");
+                }
 
-                 if (tenant.getImage().isEmpty()) {
-                 File ff = new File("Woman.jpg");
-                 ff = ff.getAbsoluteFile();
-                 File fm = new File("Man.jpg");
-                 fm = fm.getAbsoluteFile();
+                if (tenant.getImage().isEmpty()) {
+                    File ff = new File("Woman.jpg");
+                    ff = ff.getAbsoluteFile();
+                    File fm = new File("Man.jpg");
+                    fm = fm.getAbsoluteFile();
 
-                 if (MaleField.isSelected()) {
-                 icon = new ImageIcon(fm.getAbsolutePath());
-                 tenant.setImage(fm.getAbsolutePath());
-                 } else {
-                 icon = new ImageIcon(ff.getAbsolutePath());
-                 tenant.setImage(ff.getAbsolutePath());
-                 }
-                 }
+                    if (MaleField.isSelected()) {
+                        icon = new ImageIcon(fm.getAbsolutePath());
+                        tenant.setImage(fm.getAbsolutePath());
+                    } else {
+                        icon = new ImageIcon(ff.getAbsolutePath());
+                        tenant.setImage(ff.getAbsolutePath());
+                    }
+                }
 
-                 */
                 //error checking guardian
                 c.checkName(guardFname, "Guardian Firstname");
                 c.checkName(guardLname, "Guardian Lastname");
@@ -917,21 +916,8 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correctly.");
                     }
 
-                    // edit tenant
-                } else {
-                    boolean edittenant = tdao.editTenant(tenant);
-                    System.out.println(edittenant);
-                    boolean editguardian = gdao.editGuardian(guard, guard.getGuardianID());
-                    System.out.println(editguardian);
-                    if (edittenant && editguardian) {
-                        JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + "'s information has been successfully edited.");
-                        //         this.dispose();
-                        jPanel1.hide();
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Not successful");
-                    }
-                }
+                    
+                } 
             } catch (AccountException e) {
                 e.promptFieldError();
             }

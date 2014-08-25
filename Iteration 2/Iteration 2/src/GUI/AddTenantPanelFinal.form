@@ -42,7 +42,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="80" y="140" width="770" height="330"/>
+          <AbsoluteConstraints x="90" y="130" width="770" height="330"/>
         </Constraint>
       </Constraints>
 
@@ -52,7 +52,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="imgaddLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="         Choose photo"/>
+            <Property name="text" type="java.lang.String" value="             Choose photo"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -220,7 +220,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="440" y="80" width="60" height="-1"/>
+              <AbsoluteConstraints x="440" y="80" width="70" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>

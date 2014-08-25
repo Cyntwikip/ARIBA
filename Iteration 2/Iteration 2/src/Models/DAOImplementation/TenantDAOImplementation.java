@@ -758,7 +758,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
             PreparedStatement ps = connection.prepareStatement(query);
             FileInputStream fin = null;
 
-            if (tenant.getImage().isEmpty()) {
+                if (tenant.getImage().isEmpty()) {
                 ps.setBlob(1, tenant.getBlobimage());
             }else{
                 try {
