@@ -130,6 +130,10 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 596));
@@ -154,6 +158,24 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         add(jButton1);
         jButton1.setBounds(830, 490, 80, 40);
 
+        jPanel1.setLayout(null);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Admin Name");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(10, 10, 140, 40);
+
+        jButton2.setText("Create new admin");
+        jPanel1.add(jButton2);
+        jButton2.setBounds(30, 393, 140, 40);
+
+        jButton3.setText("Edit account");
+        jPanel1.add(jButton3);
+        jButton3.setBounds(30, 340, 140, 40);
+
+        add(jPanel1);
+        jPanel1.setBounds(50, 20, 190, 450);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/logging-tab-peg-clear-panel.png"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(1000, 596));
         jLabel1.setMinimumSize(new java.awt.Dimension(1000, 596));
@@ -166,7 +188,11 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
