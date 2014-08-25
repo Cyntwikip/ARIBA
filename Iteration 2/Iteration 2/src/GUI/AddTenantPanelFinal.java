@@ -34,6 +34,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class AddTenantPanelFinal extends javax.swing.JPanel {
@@ -49,12 +50,29 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
     private TenantBean tenant = new TenantBean();
     private GuardianBean guard = new GuardianBean();
     private ImageIcon icon;
+    private JPanel jPanel2;
 
     public AddTenantPanelFinal() {
         initComponents();
 
         buttonGroup1.add(MaleField);
         buttonGroup1.add(FemaleField);
+
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+
+        for (int i = 0; i <= year - 1980; i++) { // remove all years
+            YearField.removeItem(1980 + i);
+        }
+        for (int i = 0; i <= year - 1980; i++) {
+            YearField.addItem(1980 + i);
+        }
+
+        for (int i = 2000; i <= year + 10; i++) {
+            YearOfGraduationField.removeItem(i);
+        }
+        for (int i = 2000; i <= year + 10; i++) {
+            YearOfGraduationField.addItem(i);
+        }
     }
 
     /**
@@ -100,7 +118,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         jPanel1.setOpaque(false);
         jPanel1.setLayout(null);
 
-        imgaddLabel.setText("         Choose photo");
+        imgaddLabel.setText("             Choose photo");
         jPanel1.add(imgaddLabel);
         imgaddLabel.setBounds(70, 40, 160, 160);
 
@@ -181,9 +199,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(MonthField);
-        MonthField.setBounds(330, 80, 60, 27);
-
-        jTextField3.setText("jTextField3");
+        MonthField.setBounds(330, 80, 60, 20);
         jPanel1.add(jTextField3);
         jTextField3.setBounds(320, 110, 180, 60);
 
@@ -194,7 +210,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(DayField);
-        DayField.setBounds(390, 80, 50, 27);
+        DayField.setBounds(390, 80, 50, 20);
 
         YearField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,7 +218,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(YearField);
-        YearField.setBounds(440, 80, 60, 27);
+        YearField.setBounds(440, 80, 70, 20);
 
         FemaleField.setText("Female\n");
         FemaleField.setActionCommand("Female");
@@ -366,9 +382,9 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         SurnameField.setBounds(330, 10, 170, 30);
 
         add(jPanel1);
-        jPanel1.setBounds(100, 170, 770, 330);
+        jPanel1.setBounds(90, 130, 770, 330);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/addedit-peg-edited.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/addedit-peg-edited-panel.png"))); // NOI18N
         add(jLabel1);
         jLabel1.setBounds(0, 0, 1000, 600);
     }// </editor-fold>//GEN-END:initComponents
@@ -762,7 +778,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         try {
             birthdate.setTime(df.parse(sDate));
         } catch (ParseException ex) {
-            Logger.getLogger(AddTenantPanel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddTenantPanelFinal.class.getName()).log(Level.SEVERE, null, ex);
         }
         //converting Calendar to sql Date
         java.sql.Date sqlBirthdate = new java.sql.Date(birthdate.getTime().getTime());
@@ -818,26 +834,25 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
                 tenant.setExpectedyearofgrad(gradyear);
                 tenant.setStatus("CURRENT");
 
-                /*                if (tenant.getBlobimage() == null) {
-                 System.out.println("Yes");
-                 }
+                if (tenant.getBlobimage() == null) {
+                    System.out.println("Yes");
+                }
 
-                 if (tenant.getImage().isEmpty()) {
-                 File ff = new File("Woman.jpg");
-                 ff = ff.getAbsoluteFile();
-                 File fm = new File("Man.jpg");
-                 fm = fm.getAbsoluteFile();
+                if (tenant.getImage().isEmpty()) {
+                    File ff = new File("Woman.jpg");
+                    ff = ff.getAbsoluteFile();
+                    File fm = new File("Man.jpg");
+                    fm = fm.getAbsoluteFile();
 
-                 if (MaleField.isSelected()) {
-                 icon = new ImageIcon(fm.getAbsolutePath());
-                 tenant.setImage(fm.getAbsolutePath());
-                 } else {
-                 icon = new ImageIcon(ff.getAbsolutePath());
-                 tenant.setImage(ff.getAbsolutePath());
-                 }
-                 }
+                    if (MaleField.isSelected()) {
+                        icon = new ImageIcon(fm.getAbsolutePath());
+                        tenant.setImage(fm.getAbsolutePath());
+                    } else {
+                        icon = new ImageIcon(ff.getAbsolutePath());
+                        tenant.setImage(ff.getAbsolutePath());
+                    }
+                }
 
-                 */
                 //error checking guardian
                 c.checkName(guardFname, "Guardian Firstname");
                 c.checkName(guardLname, "Guardian Lastname");
@@ -882,10 +897,9 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
                         contractdao.addContract(contractAcc);
 
                         JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + " has successfully added.");
-                        jPanel1.hide();
-
-                        TenantPanel t = new TenantPanel();
-//                        jScrollPane1.setViewportView(t);
+                        this.removeAll();
+                        jPanel2 = new TenantPanelFinal();
+                        setJpanel();
 
                     } else {
                         if (tenant != null) {
@@ -902,21 +916,8 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correctly.");
                     }
 
-                    // edit tenant
-                } else {
-                    boolean edittenant = tdao.editTenant(tenant);
-                    System.out.println(edittenant);
-                    boolean editguardian = gdao.editGuardian(guard, guard.getGuardianID());
-                    System.out.println(editguardian);
-                    if (edittenant && editguardian) {
-                        JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + "'s information has been successfully edited.");
-                        //         this.dispose();
-                        jPanel1.hide();
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Not successful");
-                    }
-                }
+                    
+                } 
             } catch (AccountException e) {
                 e.promptFieldError();
             }
@@ -925,9 +926,11 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //   jPanel2.hide();
-        jPanel1.hide();
 
+        this.removeAll();
+        jPanel2 = new TenantPanelFinal();
+
+        setJpanel();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void SurnameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SurnameFieldFocusLost
@@ -968,6 +971,13 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
             evt.setKeyCode(KeyEvent.VK_BACK_SPACE);
             evt.consume();
         }
+    }
+
+    public void setJpanel() {
+        jPanel2.setPreferredSize(new java.awt.Dimension(1000, 600));
+        this.add(jPanel2);
+        jPanel2.setOpaque(true);
+        jPanel2.setBounds(0, 0, 1000, 600);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ContactNumberField1;

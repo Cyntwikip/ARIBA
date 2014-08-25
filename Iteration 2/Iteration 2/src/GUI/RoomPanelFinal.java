@@ -5,14 +5,28 @@
  */
 package GUI;
 
+import Models.Beans.BillBean;
 import Models.Beans.ContractBean;
+import Models.Beans.ElectricReadingBean;
 import Models.Beans.RoomBean;
 import Models.Beans.TenantBean;
+import Models.Beans.WaterReadingBean;
+import Models.DAOImplementation.BillDAOImplementation;
 import Models.DAOImplementation.ContractDAOImplementation;
+import Models.DAOImplementation.ElectricReadingDAOImplementation;
 import Models.DAOImplementation.RoomDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
+import Models.DAOImplementation.WaterDAOImplementation;
+import Models.DAOInterface.BillDAOInterface;
+import Models.DAOInterface.ElectricReadingDAOInterface;
 import Models.DAOInterface.RoomDAOInterface;
+import Models.DAOInterface.WaterReadingDAOInterface;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -33,7 +47,6 @@ public class RoomPanelFinal extends javax.swing.JPanel {
     public RoomPanelFinal() {
         initComponents();
 
-  
         ArrayList<RoomBean> list = rdao.getAllRooms();
 
         model1 = (DefaultTableModel) jTable1.getModel();
@@ -58,9 +71,9 @@ public class RoomPanelFinal extends javax.swing.JPanel {
             } else {
             }
         }
-        if(tenantlist.getItemCount()==0){
+        if (tenantlist.getItemCount() == 0) {
             jButton1.setEnabled(false);
-        }else{
+        } else {
             jButton1.setEnabled(true);
         }
         updateAvailableRooms();
@@ -104,9 +117,9 @@ public class RoomPanelFinal extends javax.swing.JPanel {
             } else {
             }
         }
-        if(tenantlist.getItemCount()==0){
+        if (tenantlist.getItemCount() == 0) {
             jButton1.setEnabled(false);
-        }else{
+        } else {
             jButton1.setEnabled(true);
         }
     }
@@ -115,7 +128,7 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         model1.getDataVector().removeAllElements();
         model1.fireTableDataChanged();
 
-       // String roomID1 = (String) tenantlist.getSelectedItem();
+        // String roomID1 = (String) tenantlist.getSelectedItem();
         int roomID = jComboBox1.getSelectedIndex() + 1;
         System.out.println(roomID);
         ArrayList<TenantBean> tenantlistfinal = new ArrayList<TenantBean>();
@@ -153,6 +166,7 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 596));
@@ -201,6 +215,14 @@ public class RoomPanelFinal extends javax.swing.JPanel {
                 "Room ID", "Population"
             }
         ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jTable2MouseEntered(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         add(jScrollPane2);
@@ -216,7 +238,16 @@ public class RoomPanelFinal extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(710, 480, 150, 50);
+        jButton1.setBounds(690, 480, 170, 50);
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/addroom.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        add(jButton2);
+        jButton2.setBounds(530, 490, 160, 41);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/rooms-tab-peg-edited-crop.png"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(1000, 596));
@@ -234,18 +265,18 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         //System.out.println(fname);
         //System.out.println(lname);
         int selectedrow = jTable2.getSelectedRow();
-        int roomID =  (Integer) jTable2.getValueAt(selectedrow, 0);
+        int roomID = (Integer) jTable2.getValueAt(selectedrow, 0);
         System.out.println(roomID);
 
-        System.out.println("chosen room:"+roomID);
+        System.out.println("chosen room:" + roomID);
         if (roomID == 0 && temp == null) {
-  //          jButton1.setEnabled(false);
-  //          JOptionPane.showMessageDialog(null, "No tenant and room selected. Please choose from the list.");
+            //          jButton1.setEnabled(false);
+            //          JOptionPane.showMessageDialog(null, "No tenant and room selected. Please choose from the list.");
         } else if (roomID == 0) {
-   //         jButton1.setEnabled(false);
-   //         JOptionPane.showMessageDialog(null, "Please select a room.");
+            //         jButton1.setEnabled(false);
+            //         JOptionPane.showMessageDialog(null, "Please select a room.");
         } else if (temp == null) {
-   //         jButton1.setEnabled(false);
+            //         jButton1.setEnabled(false);
             JOptionPane.showMessageDialog(null, "Please select a tenant.");
 
         } else {
@@ -304,9 +335,183 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         updateRoomAssignments();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        // TODO add your handling code here:
+        // check the room
+        Object temp = tenantlist.getSelectedItem();
+
+        //System.out.println(fname);
+        //System.out.println(lname);
+        int selectedrow = jTable2.getSelectedRow();
+        int roomID = (Integer) jTable2.getValueAt(selectedrow, 0);
+        System.out.println(roomID);
+
+        System.out.println("chosen room:" + roomID);
+        if (roomID == 0 && temp == null) {
+            //          jButton1.setEnabled(false);
+            //          JOptionPane.showMessageDialog(null, "No tenant and room selected. Please choose from the list.");
+        } else if (roomID == 0) {
+            //         jButton1.setEnabled(false);
+            //         JOptionPane.showMessageDialog(null, "Please select a room.");
+        } else if (temp == null) {
+            //         jButton1.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "Please select a tenant.");
+
+        } else {
+            String tempString = temp.toString();
+            int index = tempString.indexOf(",");
+            String lname = tempString.substring(0, index);
+            String fname = tempString.substring(index + 2);
+
+            RoomBean rbean = rdao.getRoomByRoomID(roomID);
+
+            //System.out.println(roomID);
+            TenantBean tbean = tdao.getTenantByName(fname, lname);
+            ArrayList<TenantBean> tlist = new ArrayList<TenantBean>();
+            tlist = tdao.getTenantByRoomID(rbean.getRoomID());
+
+            String gender = tbean.getGender();
+            if (!tlist.isEmpty()) {
+                if (tlist.get(tlist.size() - 1).getGender().equals(gender)) {
+
+                    jButton1.setEnabled(true);
+                } else {
+                    jButton1.setEnabled(false);
+                }
+            } else {
+
+                jButton1.setEnabled(true);
+
+                updateRoomAssignments();
+
+            }
+        }
+
+    }//GEN-LAST:event_jTable2MouseClicked
+
+    private void jTable2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseEntered
+        // TODO add your handling code here:
+
+        Object temp = tenantlist.getSelectedItem();
+
+        int selectedrow = jTable2.getSelectedRow();
+        int roomID = (Integer) jTable2.getValueAt(selectedrow, 0);
+        System.out.println(roomID);
+
+        System.out.println("chosen room:" + roomID);
+        if (roomID == 0 && temp == null) {
+            //          jButton1.setEnabled(false);
+            //          JOptionPane.showMessageDialog(null, "No tenant and room selected. Please choose from the list.");
+        } else if (roomID == 0) {
+            //         jButton1.setEnabled(false);
+            //         JOptionPane.showMessageDialog(null, "Please select a room.");
+        } else if (temp == null) {
+            //         jButton1.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "Please select a tenant.");
+
+        } else {
+            String tempString = temp.toString();
+            int index = tempString.indexOf(",");
+            String lname = tempString.substring(0, index);
+            String fname = tempString.substring(index + 2);
+
+            RoomBean rbean = rdao.getRoomByRoomID(roomID);
+
+            //System.out.println(roomID);
+            TenantBean tbean = tdao.getTenantByName(fname, lname);
+            ArrayList<TenantBean> tlist = new ArrayList<TenantBean>();
+            tlist = tdao.getTenantByRoomID(rbean.getRoomID());
+
+            String gender = tbean.getGender();
+            if (!tlist.isEmpty()) {
+                if (tlist.get(tlist.size() - 1).getGender().equals(gender)) {
+
+                    jButton1.setEnabled(true);
+                } else {
+                    jButton1.setEnabled(false);
+                }
+            } else {
+
+                jButton1.setEnabled(true);
+
+                updateRoomAssignments();
+
+            }
+        }
+    }//GEN-LAST:event_jTable2MouseEntered
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        RoomDAOInterface rdao = new RoomDAOImplementation();
+        RoomBean rbean = new RoomBean();
+        ArrayList<RoomBean> rbeanlist = new ArrayList<RoomBean>();
+        rbean.setCurrentKW(0);
+        rbean.setCurrentcubicmeter(0);
+
+        rbeanlist = rdao.getAllRooms();
+
+        BillDAOInterface bdao = new BillDAOImplementation();
+        BillBean bbean = new BillBean();
+        ArrayList<ElectricReadingBean> ebeanlist = new ArrayList<ElectricReadingBean>();
+        ArrayList<WaterReadingBean> wbeanlist = new ArrayList<WaterReadingBean>();
+        ElectricReadingBean ebean = new ElectricReadingBean();
+        ElectricReadingBean ebeantemp = new ElectricReadingBean();
+        ElectricReadingDAOInterface edao = new ElectricReadingDAOImplementation();
+        WaterReadingBean wbean = new WaterReadingBean();
+        WaterReadingBean wbeantemp = new WaterReadingBean();
+        WaterReadingDAOInterface wdao = new WaterDAOImplementation();
+        BillBean temp = bdao.getBillsByRoomID(rbeanlist.size());
+
+        System.out.println(rbeanlist.size());
+        if (temp != null) {
+            rdao.addRoom(rbean);
+
+            bbean.setBill_roomID(rbeanlist.size() + 1);
+            bbean.setPaidElectric(false);
+            bbean.setPaidRent(false);
+            bbean.setPaidWater(false);
+            bbean.setRoomprice(temp.getRoomprice());
+            bbean.setTotalelectricityconsumption(rbeanlist.size() + 1);
+            bbean.setTotalwaterconsumption(rbeanlist.size() + 1);
+            bbean.setPrice(temp.getRoomprice());
+
+            bdao.addBill(bbean);
+            bbean = bdao.getBillsByRoomID(rbeanlist.size() + 1);
+
+            System.out.println("billID" + bbean.getBillID());
+            ebeantemp = edao.getElectricReadingByBillID(bbean.getBillID() - 1);
+
+            ebean.setCurrentKW(0);
+            ebean.setDateRead(ebeantemp.getDateRead());
+            ebean.setPrice(0);
+            ebean.setPriceperKW(0);
+            ebean.setElectric_billID(ebeantemp.getElectric_billID() + 1);
+            edao.addElectricReadingToRoom(ebean);
+
+            wbeantemp = wdao.getWaterReadingsByBillID(bbean.getBillID() - 1);
+
+            wbean.setCurrentcubicmeter(0);
+            wbean.setDateRead(wbeantemp.getDateRead());
+            wbean.setPrice(0);
+            wbean.setWater_billID(wbeantemp.getWater_billID() + 1);
+
+            wdao.addWaterReadingToRoom(wbean);
+//          wbean.setWater_billID(temp.getBillID()+1);
+
+        } else {
+            rdao.addRoom(rbean);
+
+            System.out.println("add");
+        }
+        updateAvailableRooms();
+
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

@@ -6,8 +6,10 @@
 package Models.DAOImplementation;
 
 import Models.Beans.ElectricReadingBean;
+import Models.Beans.WaterReadingBean;
 import Models.Connector.Connector;
 import Models.DAOInterface.ElectricReadingDAOInterface;
+import Models.DAOInterface.WaterReadingDAOInterface;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -24,14 +26,13 @@ import java.util.logging.Logger;
 public class ElectricReadingDAOImplementation implements ElectricReadingDAOInterface {
 
     @Override
-    public boolean addElectricReadingToRoom(ElectricReadingBean electric, int billID) {
-
+    public boolean addElectricReadingToRoom(ElectricReadingBean electric) {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "insert into electricreading (electric_billID, currentKW, priceperKW, price, dateRead) values ( ?, ?, ?, ?, ?)";
+            String query = "insert into electricreading (electric_billID, currentKW, priceperKW, price, dateRead) values (?, ?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, billID);
+            ps.setInt(1, electric.getElectric_billID());
             ps.setFloat(2, electric.getCurrentKW());
             ps.setFloat(3, electric.getPriceperKW());
             ps.setFloat(4, electric.getPrice());
@@ -42,52 +43,9 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
             return true;
 
         } catch (SQLException ex) {
-            Logger.getLogger(ElectricReadingDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WaterDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return false;
-    }
-
-    @Override
-    public ArrayList<ElectricReadingBean> getAllElectricReading() {
-        try {
-            Connector c = new Connector();
-            Connection connection = c.getConnection();
-            String query = "select * from electricreading";
-            PreparedStatement ps = connection.prepareStatement(query);
-            ResultSet resultSet = ps.executeQuery();
-
-            ElectricReadingBean bean = new ElectricReadingBean();
-            ArrayList<ElectricReadingBean> list = new ArrayList<ElectricReadingBean>();
-
-            int electricID;
-            float currentKW, priceperKW, price;
-            Date dateRead;
-
-            while (resultSet.next()) {
-                electricID = resultSet.getInt("electric_billID");
-                currentKW = resultSet.getFloat("currentKW");
-                priceperKW = resultSet.getFloat("priceperKW");
-                price = resultSet.getFloat("price");
-                dateRead = resultSet.getDate("dateRead");
-
-                bean = new ElectricReadingBean();
-
-                bean.setElectric_billID(electricID);
-                bean.setCurrentKW(currentKW);
-                bean.setPriceperKW(priceperKW);
-                bean.setPrice(price);
-                bean.setDateRead(dateRead);
-
-                list.add(bean);
-            }
-            connection.close();
-            return list;
-        } catch (SQLException ex) {
-            Logger.getLogger(ElectricReadingDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return null;
     }
 
     @Override
@@ -114,7 +72,6 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
         }
 
         return false;
-
     }
 
     @Override
@@ -124,7 +81,7 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
             Connection connection = c.getConnection();
 
             String query = "update electricreading set price = ? "
-                    + "where electricID = ?";
+                    + "where electric_billID = ?";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setFloat(1, price);
             ps.setFloat(2, electricID);
@@ -137,6 +94,47 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
         }
 
         return false;
+    }
+
+    @Override
+    public ArrayList<ElectricReadingBean> getAllElectricReading() {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from electricreading order by electric_billID desc";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+
+            ElectricReadingBean bean = new ElectricReadingBean();
+            ArrayList<ElectricReadingBean> list = new ArrayList<ElectricReadingBean>();
+
+            int electricID;
+            float currentKW, priceperKW, price;
+            Date dateRead;
+
+            while (resultSet.next()) {
+                electricID = resultSet.getInt("electric_billID");
+                currentKW = resultSet.getFloat("currentKW");
+                priceperKW = resultSet.getFloat("priceperKW");
+                price = resultSet.getFloat("price");
+                dateRead = resultSet.getDate("dateRead");
+
+                bean = new ElectricReadingBean();
+
+                bean.setCurrentKW(currentKW);
+                bean.setElectric_billID(electricID);
+                bean.setPriceperKW(priceperKW);
+                bean.setPrice(price);
+                bean.setDateRead(dateRead);
+
+                list.add(bean);
+            }
+            connection.close();
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(WaterDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
 
     }
 
@@ -153,12 +151,12 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
             ElectricReadingBean bean = new ElectricReadingBean();
             ArrayList<ElectricReadingBean> list = new ArrayList<ElectricReadingBean>();
 
-            int electric_billID;
+            int electricID;
             float currentKW, priceperKW, price;
             Date dateRead;
 
             while (resultSet.next()) {
-                electric_billID = resultSet.getInt("electric_billID");
+                electricID = resultSet.getInt("electric_billID");
                 currentKW = resultSet.getFloat("currentKW");
                 priceperKW = resultSet.getFloat("priceperKW");
                 price = resultSet.getFloat("price");
@@ -167,10 +165,10 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
                 bean = new ElectricReadingBean();
 
                 bean.setCurrentKW(currentKW);
-                bean.setDateRead(dateRead);
-                bean.setElectric_billID(electric_billID);
-                bean.setPrice(price);
+                bean.setElectric_billID(electricID);
                 bean.setPriceperKW(priceperKW);
+                bean.setPrice(price);
+                bean.setDateRead(dateRead);
 
                 list.add(bean);
             }
@@ -184,16 +182,11 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
     }
 
     @Override
-    public boolean computeElectricReading(ElectricReadingBean electric, int electricID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public ElectricReadingBean getElectricReadingByBillID(int billID) {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from electricreading where electric_billID = " + billID + " order by electric_billID desc";
+            String query = "select * from electricreading where electric_billID =" + billID + " order by electric_billID desc";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
 
@@ -210,16 +203,17 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
                 price = resultSet.getFloat("price");
                 dateRead = resultSet.getDate("dateRead");
 
-                bean.setElectric_billID(electricID);
                 bean.setCurrentKW(currentKW);
+                bean.setElectric_billID(electricID);
                 bean.setPriceperKW(priceperKW);
                 bean.setPrice(price);
                 bean.setDateRead(dateRead);
-         connection.close();
 
+                connection.close();
                 return bean;
             }
-         } catch (SQLException ex) {
+
+        } catch (SQLException ex) {
             Logger.getLogger(ElectricReadingDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
@@ -227,7 +221,7 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
 
     @Override
     public ArrayList<ElectricReadingBean> getAllElectricReadingforThisMonth(int roomCount) {
-         try {
+        try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
             String query = "select * from electricreading where dateRead >= (NOW() - INTERVAL 1 MONTH) order by electric_billID DESC limit " + roomCount;
@@ -265,5 +259,7 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
         }
 
         return null;
+
     }
+
 }

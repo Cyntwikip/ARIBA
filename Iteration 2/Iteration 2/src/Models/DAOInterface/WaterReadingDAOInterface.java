@@ -16,12 +16,11 @@ import java.util.ArrayList;
  */
 public interface WaterReadingDAOInterface {
     
-    public boolean addWaterReadingToRoom (WaterReadingBean water, int roomID);
+    public boolean addWaterReadingToRoom (WaterReadingBean water);
     public ArrayList<WaterReadingBean> getAllWaterBills();
     public ArrayList<WaterReadingBean> getAllWaterReadingsByDate(Date from, Date to);
     public boolean editWaterReading(WaterReadingBean water, int waterID);
     public boolean editWaterReadingByPrice(float price, int waterID);
-    public boolean computeWaterReading(WaterReadingBean water, int billID);
     public WaterReadingBean getWaterReadingsByBillID(int billID);
     public ArrayList<WaterReadingBean> getWaterReadingforThisMonth(int roomCount);
     

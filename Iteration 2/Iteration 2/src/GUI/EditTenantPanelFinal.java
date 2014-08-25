@@ -50,9 +50,26 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
     private TenantBean tenant = new TenantBean();
     private GuardianBean guard = new GuardianBean();
     private ImageIcon icon;
+    private JPanel jPanel2;
 
     public EditTenantPanelFinal() {
         initComponents();
+
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+
+        for (int i = 0; i <= year - 1980; i++) { // remove all years
+            YearField.removeItem(1980 + i);
+        }
+        for (int i = 0; i <= year - 1980; i++) {
+            YearField.addItem(1980 + i);
+        }
+
+        for (int i = 2000; i <= year + 10; i++) {
+            YearOfGraduationField.removeItem(i);
+        }
+        for (int i = 2000; i <= year + 10; i++) {
+            YearOfGraduationField.addItem(i);
+        }
     }
 
     public EditTenantPanelFinal(int id) {
@@ -116,7 +133,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
             try {
                 content = tenant.getBlobimage().getBytes(1L, (int) tenant.getBlobimage().length());
             } catch (SQLException ex) {
-                Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(MainMenuFinal.class.getName()).log(Level.SEVERE, null, ex);
             }
             ImageIcon icon = new ImageIcon(content);
             Image img = icon.getImage();
@@ -313,7 +330,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
         jPanel1.add(GuardianEmailField);
         GuardianEmailField.setBounds(600, 290, 140, 30);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/save.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/save.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -322,7 +339,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
         jPanel1.add(jButton3);
         jButton3.setBounds(660, 330, 80, 40);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/backbutton.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/backbutton.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -455,7 +472,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
         jPanel1.add(SurnameField);
         SurnameField.setBounds(330, 70, 170, 30);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/choosephoto.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/choosephoto.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -464,19 +481,22 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
         jPanel1.add(jButton2);
         jButton2.setBounds(70, 270, 140, 40);
 
-        imgaddLabel.setText("         Choose photo");
+        imgaddLabel.setText("             Choose photo");
         jPanel1.add(imgaddLabel);
         imgaddLabel.setBounds(60, 100, 160, 160);
 
         add(jPanel1);
-        jPanel1.setBounds(100, 130, 790, 410);
+        jPanel1.setBounds(100, 80, 790, 410);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/edit-peg.png"))); // NOI18N
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/edit-peg-crop-panel.png"))); // NOI18N
         jLabel1.setText("jLabel1");
         jScrollPane1.setViewportView(jLabel1);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(0, 0, 1000, 650);
+        jScrollPane1.setBounds(0, 0, 1000, 610);
     }// </editor-fold>//GEN-END:initComponents
 
     private void SchoolFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SchoolFieldFocusLost
@@ -687,7 +707,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
             birthdate.setTime(df.parse(sDate));
 
         } catch (ParseException ex) {
-            Logger.getLogger(AddTenantPanel.class
+            Logger.getLogger(AddTenantPanelFinal.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
         //converting Calendar to sql Date
@@ -808,10 +828,9 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
                         contractdao.addContract(contractAcc);
 
                         JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + " has successfully added.");
-                        //        MainMenu main = new MainMenu();
-                        //      main.setVisible(true);
-                        //       this.dispose();
-
+                        this.removeAll();
+                        jPanel2 = new TenantPanelFinal();
+                        setJpanel();
                     } else {
                         if (tenant != null) {
                             //            tenantImpl.deleteTenant(tenant);
@@ -850,9 +869,9 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        jPanel1.hide();
-        TenantPanel t = new TenantPanel();
-        jScrollPane1.setViewportView(t);
+        this.removeAll();
+        jPanel2 = new TenantPanelFinal();
+        setJpanel();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void EmailAddressFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_EmailAddressFieldFocusGained
@@ -1067,7 +1086,12 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
         icon = new ImageIcon(newimg);
         imgaddLabel.setIcon(icon);
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    public void setJpanel() {
+        jPanel2.setPreferredSize(new java.awt.Dimension(1000, 600));
+        this.add(jPanel2);
+        jPanel2.setOpaque(true);
+        jPanel2.setBounds(0, -10, 1000, 600);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ContactNumberField1;

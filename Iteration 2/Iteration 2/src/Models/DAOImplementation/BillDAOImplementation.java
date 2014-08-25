@@ -30,13 +30,17 @@ public class BillDAOImplementation implements BillDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "insert into bill (bill_roomID, price, paidRent, paidWater, paidElectric) value (?, ?, ?, ?, ?)";
+            String query = "insert into bill (bill_roomID, price, paidRent, paidWater, paidElectric, totalelectricityconsumption, totalwaterconsumption, roomprice) "
+                    + "value (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, bill.getBill_roomID());
             ps.setDouble(2, bill.getPrice());
             ps.setBoolean(3, bill.getpaidRent());
             ps.setBoolean(4, bill.getPaidWater());
             ps.setBoolean(5, bill.getpaidElectric());
+            ps.setFloat(6, bill.getTotalelectricityconsumption());
+            ps.setFloat(7, bill.getTotalwaterconsumption());
+            ps.setFloat(8, bill.getRoomprice());
 
             ps.executeUpdate();
             connection.close();
@@ -64,6 +68,7 @@ public class BillDAOImplementation implements BillDAOInterface {
             int billID, bill_roomID;
             double price;
             boolean paidRent, paidWater, paidElectric;
+            float roomprice, totalwaterconsumption, totalelectricityconsumption;
 
             while (resultSet.next()) {
                 billID = resultSet.getInt("billID");
@@ -72,6 +77,9 @@ public class BillDAOImplementation implements BillDAOInterface {
                 paidRent = resultSet.getBoolean("paidRent");
                 paidWater = resultSet.getBoolean("paidWater");
                 paidElectric = resultSet.getBoolean("paidElectric");
+                roomprice = resultSet.getFloat("roomprice");
+                totalwaterconsumption = resultSet.getFloat("totalwaterconsumption");
+                totalelectricityconsumption = resultSet.getFloat("totalelectricityconsumption");
 
                 bean = new BillBean();
 
@@ -81,6 +89,9 @@ public class BillDAOImplementation implements BillDAOInterface {
                 bean.setPaidElectric(paidElectric);
                 bean.setPaidRent(paidRent);
                 bean.setPaidWater(paidWater);
+                bean.setRoomprice(roomprice);
+                bean.setTotalelectricityconsumption(totalelectricityconsumption);
+                bean.setTotalwaterconsumption(totalwaterconsumption);
 
                 list.add(bean);
             }
@@ -99,13 +110,17 @@ public class BillDAOImplementation implements BillDAOInterface {
             Connector c = new Connector();
             Connection connection = c.getConnection();
 
-            String query = "update bill set bill_roomID = ?, paidRent = ?, paidWater= ?, paidElectric = ? where billID = ?";
+            String query = "update bill set bill_roomID = ?, paidRent = ?, paidWater= ?, paidElectric = ?, price = ?, totalelectricityconsumption = ?, totalwaterconsumption = ?, roomprice = ? where billID = ?";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, bill.getBill_roomID());
             ps.setBoolean(2, bill.getpaidRent());
             ps.setBoolean(3, bill.getPaidWater());
             ps.setBoolean(4, bill.getpaidElectric());
-            ps.setInt(5, billID);
+            ps.setDouble(5, bill.getPrice());
+            ps.setFloat(6, bill.getTotalelectricityconsumption());
+            ps.setFloat(7, bill.getTotalwaterconsumption());
+            ps.setFloat(8, bill.getRoomprice());
+            ps.setInt(9, billID);
             ps.executeUpdate();
             connection.close();
             return true;
@@ -132,6 +147,7 @@ public class BillDAOImplementation implements BillDAOInterface {
             int billID, bill_roomID;
             double price;
             boolean paidRent, paidWater, paidElectric;
+            float totalwaterconsumption, totalelectricityconsumption, roomprice;
 
             while (resultSet.next()) {
                 billID = resultSet.getInt("billID");
@@ -140,6 +156,9 @@ public class BillDAOImplementation implements BillDAOInterface {
                 paidRent = resultSet.getBoolean("paidRent");
                 paidWater = resultSet.getBoolean("paidWater");
                 paidElectric = resultSet.getBoolean("paidElectric");
+                totalwaterconsumption = resultSet.getFloat("totalwaterconsumption");
+                totalelectricityconsumption = resultSet.getFloat("totalelectricityconsumption");
+                roomprice = resultSet.getFloat("roomprce");
 
                 bean = new BillBean();
 
@@ -149,6 +168,9 @@ public class BillDAOImplementation implements BillDAOInterface {
                 bean.setPaidRent(paidRent);
                 bean.setPaidWater(paidWater);
                 bean.setPrice(price);
+                bean.setRoomprice(roomprice);
+                bean.setTotalelectricityconsumption(totalelectricityconsumption);
+                bean.setTotalwaterconsumption(totalwaterconsumption);
 
                 list.add(bean);
             }
@@ -177,6 +199,7 @@ public class BillDAOImplementation implements BillDAOInterface {
             int billID, bill_roomID;
             double price;
             boolean paidRent, paidWater, paidElectric;
+            float totalwaterconsumption, totalelectricityconsumption, roomprice;
 
             while (resultSet.next()) {
                 billID = resultSet.getInt("billID");
@@ -185,6 +208,9 @@ public class BillDAOImplementation implements BillDAOInterface {
                 paidRent = resultSet.getBoolean("paidRent");
                 paidWater = resultSet.getBoolean("paidWater");
                 paidElectric = resultSet.getBoolean("paidElectric");
+                totalwaterconsumption = resultSet.getFloat("totalwaterconsumption");
+                totalelectricityconsumption = resultSet.getFloat("totalelectricityconsumption");
+                roomprice = resultSet.getFloat("roomprce");
 
                 bean = new BillBean();
 
@@ -194,7 +220,9 @@ public class BillDAOImplementation implements BillDAOInterface {
                 bean.setPaidRent(paidRent);
                 bean.setPaidWater(paidWater);
                 bean.setPrice(price);
-
+                bean.setRoomprice(roomprice);
+                bean.setTotalelectricityconsumption(totalelectricityconsumption);
+                bean.setTotalwaterconsumption(totalwaterconsumption);
                 list.add(bean);
             }
             connection.close();
@@ -222,6 +250,7 @@ public class BillDAOImplementation implements BillDAOInterface {
             int billID, bill_roomID;
             double price;
             boolean paidRent, paidWater, paidElectric;
+            float totalelectricityconsumption, totalwaterconsumption, roomprice;
 
             while (resultSet.next()) {
                 billID = resultSet.getInt("billID");
@@ -230,6 +259,9 @@ public class BillDAOImplementation implements BillDAOInterface {
                 paidRent = resultSet.getBoolean("paidRent");
                 paidWater = resultSet.getBoolean("paidWater");
                 paidElectric = resultSet.getBoolean("paidElectric");
+                totalwaterconsumption = resultSet.getFloat("totalwaterconsumption");
+                totalelectricityconsumption = resultSet.getFloat("totalelectricityconsumption");
+                roomprice = resultSet.getFloat("roomprce");
 
                 bean = new BillBean();
 
@@ -239,7 +271,9 @@ public class BillDAOImplementation implements BillDAOInterface {
                 bean.setPaidRent(paidRent);
                 bean.setPaidWater(paidWater);
                 bean.setPrice(price);
-
+                bean.setRoomprice(roomprice);
+                bean.setTotalelectricityconsumption(totalelectricityconsumption);
+                bean.setTotalwaterconsumption(totalwaterconsumption);
                 list.add(bean);
             }
             connection.close();
@@ -267,6 +301,7 @@ public class BillDAOImplementation implements BillDAOInterface {
             int billID, bill_roomID;
             double price;
             boolean paidRent, paidWater, paidElectric;
+            float totalelectricityconsumption, totalwaterconsumption, roomprice;
 
             while (resultSet.next()) {
                 billID = resultSet.getInt("billID");
@@ -275,6 +310,9 @@ public class BillDAOImplementation implements BillDAOInterface {
                 paidRent = resultSet.getBoolean("paidRent");
                 paidWater = resultSet.getBoolean("paidWater");
                 paidElectric = resultSet.getBoolean("paidElectric");
+                totalwaterconsumption = resultSet.getFloat("totalwaterconsumption");
+                totalelectricityconsumption = resultSet.getFloat("totalelectricityconsumption");
+                roomprice = resultSet.getFloat("roomprce");
 
                 bean = new BillBean();
 
@@ -284,7 +322,9 @@ public class BillDAOImplementation implements BillDAOInterface {
                 bean.setPaidRent(paidRent);
                 bean.setPaidWater(paidWater);
                 bean.setPrice(price);
-
+                bean.setRoomprice(roomprice);
+                bean.setTotalelectricityconsumption(totalelectricityconsumption);
+                bean.setTotalwaterconsumption(totalwaterconsumption);
                 list.add(bean);
             }
             connection.close();
@@ -312,6 +352,7 @@ public class BillDAOImplementation implements BillDAOInterface {
             int billID, bill_roomID;
             double price;
             boolean paidRent, paidWater, paidElectric;
+            float totalwaterconsumption, totalelectricityconsumption, roomprice;
 
             while (resultSet.next()) {
                 billID = resultSet.getInt("billID");
@@ -320,6 +361,9 @@ public class BillDAOImplementation implements BillDAOInterface {
                 paidRent = resultSet.getBoolean("paidRent");
                 paidWater = resultSet.getBoolean("paidWater");
                 paidElectric = resultSet.getBoolean("paidElectric");
+                totalwaterconsumption = resultSet.getFloat("totalwaterconsumption");
+                totalelectricityconsumption = resultSet.getFloat("totalelectricityconsumption");
+                roomprice = resultSet.getFloat("roomprce");
 
                 bean = new BillBean();
 
@@ -329,7 +373,9 @@ public class BillDAOImplementation implements BillDAOInterface {
                 bean.setPaidRent(paidRent);
                 bean.setPaidWater(paidWater);
                 bean.setPrice(price);
-
+                bean.setRoomprice(roomprice);
+                bean.setTotalelectricityconsumption(totalelectricityconsumption);
+                bean.setTotalwaterconsumption(totalwaterconsumption);
                 list.add(bean);
             }
             connection.close();
@@ -358,6 +404,7 @@ public class BillDAOImplementation implements BillDAOInterface {
             int billID, bill_roomID;
             double price;
             boolean paidRent, paidWater, paidElectric;
+            float totalwaterconsumption, totalelectricityconsumption, roomprice;
 
             while (resultSet.next()) {
                 billID = resultSet.getInt("billID");
@@ -366,6 +413,9 @@ public class BillDAOImplementation implements BillDAOInterface {
                 paidRent = resultSet.getBoolean("paidRent");
                 paidWater = resultSet.getBoolean("paidWater");
                 paidElectric = resultSet.getBoolean("paidElectric");
+                totalwaterconsumption = resultSet.getFloat("totalwaterconsumption");
+                totalelectricityconsumption = resultSet.getFloat("totalelectricityconsumption");
+                roomprice = resultSet.getFloat("roomprce");
 
                 bean = new BillBean();
 
@@ -374,7 +424,9 @@ public class BillDAOImplementation implements BillDAOInterface {
                 bean.setPaidElectric(paidElectric);
                 bean.setPaidRent(paidRent);
                 bean.setPaidWater(paidWater);
-                bean.setPrice(price);
+                bean.setPrice(price);                bean.setRoomprice(roomprice);
+                bean.setTotalelectricityconsumption(totalelectricityconsumption);
+                bean.setTotalwaterconsumption(totalwaterconsumption);
 
                 list.add(bean);
             }
@@ -404,6 +456,7 @@ public class BillDAOImplementation implements BillDAOInterface {
             int billID, bill_roomID;
             double price;
             boolean paidRent, paidWater, paidElectric;
+            float totalwaterconsumption, totalelectricityconsumption, roomprice;
 
             while (resultSet.next()) {
                 billID = resultSet.getInt("billID");
@@ -412,6 +465,9 @@ public class BillDAOImplementation implements BillDAOInterface {
                 paidRent = resultSet.getBoolean("paidRent");
                 paidWater = resultSet.getBoolean("paidWater");
                 paidElectric = resultSet.getBoolean("paidElectric");
+                totalwaterconsumption = resultSet.getFloat("totalwaterconsumption");
+                totalelectricityconsumption = resultSet.getFloat("totalelectricityconsumption");
+                roomprice = resultSet.getFloat("roomprce");
 
                 bean = new BillBean();
 
@@ -421,6 +477,9 @@ public class BillDAOImplementation implements BillDAOInterface {
                 bean.setPaidRent(paidRent);
                 bean.setPaidWater(paidWater);
                 bean.setPrice(price);
+                bean.setRoomprice(roomprice);
+                bean.setTotalelectricityconsumption(totalelectricityconsumption);
+                bean.setTotalwaterconsumption(totalwaterconsumption);
 
                 list.add(bean);
             }
@@ -449,6 +508,7 @@ public class BillDAOImplementation implements BillDAOInterface {
             int billID, bill_roomID;
             double price;
             boolean paidRent, paidWater, paidElectric;
+            float totalelectricityconsumption, totalwaterconsumption, roomprice;
 
             while (resultSet.next()) {
                 billID = resultSet.getInt("billID");
@@ -457,6 +517,9 @@ public class BillDAOImplementation implements BillDAOInterface {
                 paidRent = resultSet.getBoolean("paidRent");
                 paidWater = resultSet.getBoolean("paidWater");
                 paidElectric = resultSet.getBoolean("paidElectric");
+                totalwaterconsumption = resultSet.getFloat("totalwaterconsumption");
+                totalelectricityconsumption = resultSet.getFloat("totalelectricityconsumption");
+                roomprice = resultSet.getFloat("roomprice");
 
                 bean.setBillID(billID);
                 bean.setBill_roomID(bill_roomID);
@@ -464,7 +527,10 @@ public class BillDAOImplementation implements BillDAOInterface {
                 bean.setPaidElectric(paidElectric);
                 bean.setPaidRent(paidRent);
                 bean.setPaidWater(paidWater);
-         connection.close();
+                bean.setRoomprice(roomprice);
+                bean.setTotalelectricityconsumption(totalelectricityconsumption);
+                bean.setTotalwaterconsumption(totalwaterconsumption);
+                connection.close();
 
                 return bean;
             }
@@ -491,6 +557,7 @@ public class BillDAOImplementation implements BillDAOInterface {
             int billID, bill_roomID;
             double price;
             boolean paidRent, paidWater, paidElectric;
+            float totalwaterconsumption, totalelectricityconsumption, roomprice;
 
             while (resultSet.next()) {
                 billID = resultSet.getInt("billID");
@@ -499,6 +566,9 @@ public class BillDAOImplementation implements BillDAOInterface {
                 paidRent = resultSet.getBoolean("paidRent");
                 paidWater = resultSet.getBoolean("paidWater");
                 paidElectric = resultSet.getBoolean("paidElectric");
+                totalwaterconsumption = resultSet.getFloat("totalwaterconsumption");
+                totalelectricityconsumption = resultSet.getFloat("totalelectricityconsumption");
+                roomprice = resultSet.getFloat("roomprice");
 
                 bean = new BillBean();
 

@@ -24,6 +24,7 @@ import Models.DAOInterface.WaterReadingDAOInterface;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 public class BillsPanelFinal extends javax.swing.JPanel {
@@ -38,6 +39,7 @@ public class BillsPanelFinal extends javax.swing.JPanel {
     private String year;
     private String month;
     private DefaultTableModel model;
+    private JPanel jPanel2;
 
     public BillsPanelFinal() {
         initComponents();
@@ -246,7 +248,6 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         ArrayList<BillBean> blist = new ArrayList<BillBean>();
         blist = bdao.getAllBills();
 
-        EditBills eb = new EditBills();
         if (jTextField1.getText().isEmpty() && jTextField2.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please input values for Electric Meter and Water Meter.");
         } else if (jTextField1.getText().isEmpty()) {
@@ -288,8 +289,9 @@ public class BillsPanelFinal extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
 
-        EditBills nj = new EditBills();
-        nj.setVisible(true);
+        this.removeAll();
+        jPanel2 = new EditGeneralBillPanelFinal();
+        setJpanel();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -435,46 +437,66 @@ public class BillsPanelFinal extends javax.swing.JPanel {
             ArrayList<BillBean> bbeanlistnotpaidrent = new ArrayList<BillBean>();
             ArrayList<ElectricReadingBean> ebeanlistnotpaid = new ArrayList<ElectricReadingBean>();
             ArrayList<WaterReadingBean> wbeanlistnotpaid = new ArrayList<WaterReadingBean>();
-            float waterprice, electricprice;
+            float waterprice, electricprice, roomrent;
             double rentprice, total = 0;
             int billID = 0;
 
-            for (int i = 0; i < rlist.size(); i++) { 
+            for (int i = 0; i < rlist.size(); i++) {
                 bbean = bdao.getBillsByRoomID(i + 1);
 
                 billID = bbean.getBillID();
-                
+
                 ebean = edao.getElectricReadingByBillID(billID);
                 wbean = wdao.getWaterReadingsByBillID(billID);
-                
-                System.out.println(ebean.getPrice());
-                System.out.println(wbean.getPrice());
-                
-                if (bbean.getPrice()==0 && ebean.getPrice()==0 && wbean.getPrice()==0) { // wala talagang bill
-                    Object[] obj = {rlist.get(i).getRoomID(), 0, "UNPAID"};
-                    model.addRow(obj);
 
-                } else if (bbean.getpaidElectric() == false && bbean.getpaidElectric() == false && bbean.getpaidRent() == false) {
-                    electricprice = ebean.getPrice();
-                    waterprice = wbean.getPrice();
-                    
-                    total = bbean.getPrice() + electricprice + waterprice;
-                    Object[] obj = {rlist.get(i).getRoomID(), total, "UNPAID"};
-                    model.addRow(obj);
+                if (ebean == null || wbean == null) {
+                    Object[] obj = {rlist.get(i).getRoomID(), "0", "UNPAID"};
                 } else {
-                    total = bbean.getPrice() + ebean.getPrice() + wbean.getPrice();
-                    Object[] obj = {rlist.get(i).getRoomID(), total, "PAID"};
-                    model.addRow(obj);
+                    if (bbean.getPrice() == 0 && ebean.getPrice() == 0 && wbean.getPrice() == 0) { // wala talagang bill
+                        System.out.println("wala talaga");
+                        System.out.println("rlist size" + rlist.size());
+
+                        Object[] obj = {rlist.get(i).getRoomID(), "0", "UNPAID"};
+                        model.addRow(obj);
+
+                    } else if (bbean.getpaidElectric() == false && bbean.getpaidElectric() == false && bbean.getpaidRent() == false) {
+                        System.out.println("wal2a talaga");
+                        System.out.println("rlist size" + i);
+
+                        electricprice = ebean.getPrice();
+                        waterprice = wbean.getPrice();
+                        roomrent = bbean.getRoomprice();
+
+                        total = electricprice + waterprice + roomrent;
+                        Object[] obj = {rlist.get(i).getRoomID(), total, "UNPAID"};
+                        model.addRow(obj);
+                    } else {
+                        electricprice = ebean.getPrice();
+                        waterprice = wbean.getPrice();
+                        roomrent = bbean.getRoomprice();
+
+                        total = bbean.getPrice() + electricprice + waterprice + roomrent;
+                        Object[] obj = {rlist.get(i).getRoomID(), total, "PAID"};
+                        model.addRow(obj);
+                    }
+
+                    bbean = new BillBean();
+                    ebean = new ElectricReadingBean();
+                    wbean = new WaterReadingBean();
+                    total = 0;
                 }
-                
-                bbean = new BillBean();
-                ebean = new ElectricReadingBean();
-                wbean = new WaterReadingBean();
-                total=0;
             }
         }
+        jTable1.requestFocus();
+        jTable1.changeSelection(0, 0, false, false);
     }
 
+    public void setJpanel() {
+        jPanel2.setPreferredSize(new java.awt.Dimension(1000, 600));
+        this.add(jPanel2);
+        jPanel2.setOpaque(true);
+        jPanel2.setBounds(0, -10, 1000, 600);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -93,7 +93,7 @@ public class RoomDAOImplementation implements RoomDAOInterface {
         return false;
 
     }
-    
+
     @Override
     public ArrayList<RoomBean> getAllRooms() {
         try {
@@ -250,7 +250,7 @@ public class RoomDAOImplementation implements RoomDAOInterface {
             ps.setInt(1, roomID);
             ResultSet resultSet = ps.executeQuery();
 
-            int count=0;
+            int count = 0;
             float currentKW, currentcubicmeter;
 
             while (resultSet.next()) {
@@ -263,7 +263,25 @@ public class RoomDAOImplementation implements RoomDAOInterface {
             Logger.getLogger(RoomDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
         return -1;
-    
+
+    }
+
+    @Override
+    public boolean removeTenantToRoom(int tenantID, int roomID) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "delete from tenantroom where tr_tenantID = " + tenantID + " and tr_roomID = " + roomID;
+            PreparedStatement ps = connection.prepareStatement(query);
+
+            ps.executeQuery();
+            connection.close();
+            return true;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
 }

@@ -19,18 +19,15 @@ public class MainMenuFinal extends javax.swing.JFrame {
     /**
      * Creates new form MainMenuFinal
      */
-    private AddTenantPanel addtenantpanel;
     private AdminLoggingPanelFinal adminloggingpanelfinal;
     private BillsPanelFinal billspanelfinal;
-    private EditBillPricePanel editbillpricepanel;
     private EditTenantPanelFinal edittenantpanelfinal;
     private ReportsPanelFinal reportspanelfinal;
-    private Reports reports;
-    private TenantLoggingPanel tenantlogingpanel;
     private TenantPanelFinal tenantpanelfinal;
     private ImageIcon imageicon;
     private RoomPanelFinal roompanelfinal;
     private JPanel jPanel2;
+    private JPanel jPanel3;
 
     public MainMenuFinal() {
         initComponents();
@@ -45,7 +42,8 @@ public class MainMenuFinal extends javax.swing.JFrame {
     public void setJpanel() {
         jPanel2.setPreferredSize(new java.awt.Dimension(1000, 600));
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 50, 1000, 600);
+        jPanel2.setOpaque(true);
+        jPanel2.setBounds(0, 45, 1000, 600);
     }
 
     /**
@@ -64,14 +62,17 @@ public class MainMenuFinal extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1000, 680));
-        setPreferredSize(new java.awt.Dimension(1000, 680));
+        setMinimumSize(new java.awt.Dimension(1010, 670));
+        setPreferredSize(new java.awt.Dimension(1010, 670));
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 255));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1010, 630));
         jPanel1.setOpaque(false);
+        jPanel1.setPreferredSize(new java.awt.Dimension(1010, 630));
         jPanel1.setLayout(null);
 
         jButton1.setContentAreaFilled(false);
@@ -124,6 +125,16 @@ public class MainMenuFinal extends javax.swing.JFrame {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(0, 0, 1010, 50);
 
+        jButton7.setContentAreaFilled(false);
+        jButton7.setEnabled(false);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton7);
+        jButton7.setBounds(630, 480, 90, 50);
+
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1000, 630);
 
@@ -133,11 +144,6 @@ public class MainMenuFinal extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
 
-        // rooms
-        //       imageicon = new ImageIcon(getClass().getResource("rooms-tab-peg-crop.png")); 
-        //     jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("rooms-tab-peg-crop.png")));
-        // change to room
-        //jPanel1.remove(jPanel2);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/rooms-tab-peg-crop.png")));
         jPanel1.remove(jPanel2);
         jPanel2 = new RoomPanelFinal();
@@ -161,9 +167,10 @@ public class MainMenuFinal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        //jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/tenant-tab-final.png")));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/5-reports-peg-edited-crop-menu.png")));
         jPanel1.remove(jPanel2);
         jPanel2 = new ReportsPanelFinal();
+
         setJpanel();
 
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -175,6 +182,15 @@ public class MainMenuFinal extends javax.swing.JFrame {
         setJpanel();
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+
+        System.out.println("here");
+        jPanel1.remove(jPanel2);
+        jPanel2 = new TenantPanelFinal();
+        setJpanel();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,6 +233,7 @@ public class MainMenuFinal extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
