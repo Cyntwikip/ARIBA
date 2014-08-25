@@ -3,8 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package GUI;
+
+import Models.Beans.AttendanceLogBean;
+import Models.Beans.TenantBean;
+import Models.DAOImplementation.AttendanceLogDAOImplementation;
+import Models.DAOImplementation.TenantDAOImplementation;
+import Models.DAOInterface.AttendanceLogDAOInterface;
+import Models.DAOInterface.TenantDAOInterface;
+import java.util.ArrayList;
+import java.util.Calendar;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,9 +24,98 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
     /**
      * Creates new form AdminLoggingPanelFinal
      */
-    
+    private AttendanceLogDAOInterface logdao = new AttendanceLogDAOImplementation();
+    private DefaultTableModel model;
+    private Object[] obj = {"", "", ""};
+
     public AdminLoggingPanelFinal() {
         initComponents();
+
+        model = (DefaultTableModel) jTable1.getModel();
+        updateTable();
+
+        Calendar c = Calendar.getInstance();
+
+        System.out.println(c.getTime());
+    }
+
+    public void updateTable() {
+        AttendanceLogBean abean = new AttendanceLogBean();
+        AttendanceLogBean in = new AttendanceLogBean();
+        AttendanceLogBean out = new AttendanceLogBean();
+        ArrayList<AttendanceLogBean> alist = new ArrayList<AttendanceLogBean>();
+        ArrayList<TenantBean> tlist = new ArrayList<TenantBean>();
+
+        TenantBean tbean = new TenantBean();
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+
+        tlist = tdao.getAllTenants();
+        System.out.println(tlist.size());
+        for (int i = 0; i < tlist.size(); i++) {
+            tbean = tlist.get(i);
+            System.out.println(tbean.getFname());
+            in = logdao.getLatestLoginByTenant(tbean.getTenantID());
+            out = logdao.getLatestLogoutByTenant(tbean.getTenantID());
+            String lname = tbean.getLname();
+            String fname = tbean.getFname();
+            String tenantid = Integer.toString(tbean.getTenantID());
+            if (in == null && out == null) {
+
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, "", ""};
+                model.addRow(obj);
+            } else if (out == null) {
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, in.getTimeLogged(), " "};
+                model.addRow(obj);
+            } else if (in == null) {
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, " ", out.getTimeLogged()};
+                model.addRow(obj);
+            } else {
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, in.getTimeLogged(), out.getTimeLogged()};
+                model.addRow(obj);
+            }
+        }
+    }
+
+    public void updateTable1() {
+
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+        AttendanceLogBean abean = new AttendanceLogBean();
+        AttendanceLogBean in = new AttendanceLogBean();
+        AttendanceLogBean out = new AttendanceLogBean();
+        ArrayList<AttendanceLogBean> alist = new ArrayList<AttendanceLogBean>();
+        ArrayList<TenantBean> tlist = new ArrayList<TenantBean>();
+
+        TenantBean tbean = new TenantBean();
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+
+        alist = logdao.getLogsToday();
+        tlist = tdao.getAllTenants();
+
+        for (int i = 0; i < tlist.size(); i++) {
+            tbean = tlist.get(i);
+
+            in = logdao.getLatestLoginByTenant(tbean.getTenantID());
+            out = logdao.getLatestLogoutByTenant(tbean.getTenantID());
+            String lname = tbean.getLname();
+            String fname = tbean.getFname();
+            String tenantid = Integer.toString(tbean.getTenantID());
+            if (in == null && out == null) {
+
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, "", ""};
+                model.addRow(obj);
+            } else if (out == null) {
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, in.getTimeLogged(), " "};
+                model.addRow(obj);
+            } else if (in == null) {
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, " ", out.getTimeLogged()};
+                model.addRow(obj);
+            } else {
+                Object[] obj = {tenantid + "-" + lname + ", " + fname, in.getTimeLogged(), out.getTimeLogged()};
+                model.addRow(obj);
+            }
+
+        }
     }
 
     /**
@@ -31,6 +129,7 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 596));
@@ -51,6 +150,10 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         add(jScrollPane1);
         jScrollPane1.setBounds(250, 20, 690, 460);
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/backbutton.png"))); // NOI18N
+        add(jButton1);
+        jButton1.setBounds(830, 490, 80, 40);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/logging-tab-peg-clear-panel.png"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(1000, 596));
         jLabel1.setMinimumSize(new java.awt.Dimension(1000, 596));
@@ -62,6 +165,7 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

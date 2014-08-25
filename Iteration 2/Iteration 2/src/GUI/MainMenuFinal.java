@@ -162,7 +162,7 @@ public class MainMenuFinal extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/logging-tab-peg-clear-menu.png")));
         jPanel1.remove(jPanel2);
-        jPanel2 = new AdminLoggingPanelFinal();
+        jPanel2 = new TenantLoggingPanel();
         setJpanel();
     }//GEN-LAST:event_jButton4ActionPerformed
 
