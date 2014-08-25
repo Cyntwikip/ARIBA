@@ -531,7 +531,7 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
         jPanel2.setPreferredSize(new java.awt.Dimension(1000, 600));
         this.add(jPanel2);
         jPanel2.setOpaque(true);
-        jPanel2.setBounds(0, 0, 1000, 600);
+        jPanel2.setBounds(0, -10, 1000, 600);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -500,7 +500,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         jLabel10.setText("Name");
         add(jLabel10);
-        jLabel10.setBounds(70, 180, 30, 14);
+        jLabel10.setBounds(70, 180, 40, 14);
 
         jLabel11.setText("School");
         jLabel11.setPreferredSize(null);
@@ -509,7 +509,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         jLabel12.setText("Degree");
         add(jLabel12);
-        jLabel12.setBounds(70, 240, 40, 14);
+        jLabel12.setBounds(70, 240, 50, 14);
 
         jLabel13.setText("Year");
         add(jLabel13);

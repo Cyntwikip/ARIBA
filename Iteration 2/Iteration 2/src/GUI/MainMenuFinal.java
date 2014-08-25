@@ -39,12 +39,11 @@ public class MainMenuFinal extends javax.swing.JFrame {
 
     }
 
-
     public void setJpanel() {
         jPanel2.setPreferredSize(new java.awt.Dimension(1000, 600));
         jPanel1.add(jPanel2);
         jPanel2.setOpaque(true);
-        jPanel2.setBounds(0, 50, 1000, 600);
+        jPanel2.setBounds(0, 40, 1000, 600);
     }
 
     /**
@@ -66,12 +65,14 @@ public class MainMenuFinal extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1000, 680));
-        setPreferredSize(new java.awt.Dimension(1000, 680));
+        setMinimumSize(new java.awt.Dimension(1010, 670));
+        setPreferredSize(new java.awt.Dimension(1010, 670));
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 255));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1010, 630));
         jPanel1.setOpaque(false);
+        jPanel1.setPreferredSize(new java.awt.Dimension(1010, 630));
         jPanel1.setLayout(null);
 
         jButton1.setContentAreaFilled(false);
@@ -166,9 +167,10 @@ public class MainMenuFinal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/reports-tab-peg-crop.png")));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/5-reports-peg-edited-crop-menu.png")));
         jPanel1.remove(jPanel2);
         jPanel2 = new ReportsPanelFinal();
+
         setJpanel();
 
     }//GEN-LAST:event_jButton5ActionPerformed

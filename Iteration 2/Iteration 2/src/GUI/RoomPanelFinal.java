@@ -223,7 +223,7 @@ public class RoomPanelFinal extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(710, 480, 150, 50);
+        jButton1.setBounds(690, 480, 170, 50);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/rooms-tab-peg-edited-crop.png"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(1000, 596));

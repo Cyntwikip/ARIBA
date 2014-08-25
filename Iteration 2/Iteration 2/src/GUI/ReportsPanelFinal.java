@@ -146,7 +146,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         add(jButton7);
         jButton7.setBounds(80, 410, 80, 35);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/5-reports-peg-edited-panel.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/5-reports-peg-edited-crop-panel.png"))); // NOI18N
         add(jLabel1);
         jLabel1.setBounds(0, 0, 1000, 600);
     }// </editor-fold>//GEN-END:initComponents
