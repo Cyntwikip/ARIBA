@@ -43,7 +43,7 @@ public class MainMenuFinal extends javax.swing.JFrame {
         jPanel2.setPreferredSize(new java.awt.Dimension(1000, 600));
         jPanel1.add(jPanel2);
         jPanel2.setOpaque(true);
-        jPanel2.setBounds(0, 40, 1000, 600);
+        jPanel2.setBounds(0, 45, 1000, 600);
     }
 
     /**

@@ -298,6 +298,8 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
 
             ArrayList<WaterReadingBean> watertemp = wdao.getWaterReadingforThisMonth(rbeanlist.size());
 
+            ArrayList<BillBean> bbeanlist = new ArrayList<BillBean>();
+
             if (watertemp.isEmpty()) { //no existing bill for the month
 
                 wbean.setCurrentcubicmeter(0);
@@ -323,18 +325,13 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
                     } else {
                         addbill = false;
                     }
-                    int billID = 0;
-                    if (rbeanlist.size() <= bdao.getAllBills().size()) { // mas malaki yung billsize{
-
-                        billID = bdao.getAllBills().size() - (rbeanlist.size());
+                    int billID = bdao.getAllBills().size();
+                        
                         if (billID == 0) {
-                            billID = 50;
+                            billID = i+1;
                         }
-                    } else { // start pa lang
-                        billID = i + 1;
-                    }
-
-                    System.out.println(billID);
+                 
+                    System.out.println("BILLid" + billID);
                     wbean.setWater_billID(billID);
                     ebean.setElectric_billID(billID);
                     wdao.addWaterReadingToRoom(wbean);
@@ -390,8 +387,8 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
                                 proceed = true;
                             }
 
-                        }else{
-                            proceed=false;
+                        } else {
+                            proceed = false;
                         }
                     }
 

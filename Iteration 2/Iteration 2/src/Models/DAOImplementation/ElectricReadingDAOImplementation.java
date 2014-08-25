@@ -101,7 +101,7 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from electricreading";
+            String query = "select * from electricreading order by electric_billID desc";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultSet = ps.executeQuery();
 
