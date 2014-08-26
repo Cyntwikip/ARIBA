@@ -182,6 +182,11 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
         add(jLabel2);
         jLabel2.setBounds(200, 220, 160, 40);
 
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField1KeyReleased(evt);
@@ -190,6 +195,11 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
         add(jTextField1);
         jTextField1.setBounds(300, 280, 100, 30);
 
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
         jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField2KeyReleased(evt);
@@ -523,6 +533,14 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
 
         jTextField5.setText(input);
     }//GEN-LAST:event_jTextField5KeyReleased
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     public void setJpanel() {
         jPanel2.setPreferredSize(new java.awt.Dimension(1000, 600));

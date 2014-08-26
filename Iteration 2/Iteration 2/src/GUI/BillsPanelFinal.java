@@ -48,7 +48,7 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         initdate();
 
         roomlist();
-        roomtable();
+        roomtable(); 
     }
 
     /**
@@ -70,6 +70,9 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 596));
@@ -167,6 +170,15 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         });
         add(jButton3);
         jButton3.setBounds(660, 510, 100, 40);
+
+        jScrollPane2.setViewportView(jList1);
+
+        add(jScrollPane2);
+        jScrollPane2.setBounds(830, 80, 120, 140);
+
+        jLabel5.setText("Surcharge:");
+        add(jLabel5);
+        jLabel5.setBounds(830, 60, 80, 16);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/bills-tab-peg-edited-panel.png"))); // NOI18N
         jLabel1.setOpaque(true);
@@ -506,7 +518,10 @@ public class BillsPanelFinal extends javax.swing.JPanel {
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;

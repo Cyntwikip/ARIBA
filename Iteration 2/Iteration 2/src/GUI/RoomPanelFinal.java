@@ -180,7 +180,7 @@ public class RoomPanelFinal extends javax.swing.JPanel {
             }
         });
         add(jComboBox1);
-        jComboBox1.setBounds(250, 70, 200, 20);
+        jComboBox1.setBounds(250, 70, 200, 27);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -205,7 +205,7 @@ public class RoomPanelFinal extends javax.swing.JPanel {
             }
         });
         add(tenantlist);
-        tenantlist.setBounds(630, 70, 200, 20);
+        tenantlist.setBounds(630, 70, 200, 27);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -231,7 +231,6 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/assignroom.png"))); // NOI18N
         jButton1.setBorderPainted(false);
         jButton1.setEnabled(false);
-        jButton1.setOpaque(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -247,7 +246,7 @@ public class RoomPanelFinal extends javax.swing.JPanel {
             }
         });
         add(jButton2);
-        jButton2.setBounds(530, 490, 160, 41);
+        jButton2.setBounds(530, 490, 160, 45);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/rooms-tab-peg-edited-crop.png"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(1000, 596));
