@@ -339,7 +339,7 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
                 }
                 if (addbill) {
 
-                    JOptionPane.showMessageDialog(null, "Succesfully added bills for all rooms!");
+                    //JOptionPane.showMessageDialog(null, "Succesfully added bills for all rooms!");
                     this.removeAll();
                     jPanel2 = new BillsPanelFinal();
                     setJpanel();
@@ -399,7 +399,7 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
                 }
 
                 if (proceed) {
-                    JOptionPane.showMessageDialog(null, "Successfully edited bills.");
+                    //JOptionPane.showMessageDialog(null, "Successfully edited bills.");
                     this.removeAll();
                     jPanel2 = new BillsPanelFinal();
                     setJpanel();
