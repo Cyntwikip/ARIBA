@@ -103,7 +103,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
 
         SurnameField.setText(tenant.getLname());
         FirstnameField.setText(tenant.getFname());
-        jTextField3.setText(tenant.getAddress());
+        AddressField.setText(tenant.getAddress());
         if (tenant.getGender().equalsIgnoreCase("Male")) {
             MaleField.doClick();
 
@@ -206,7 +206,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
         ContactNumberField1 = new javax.swing.JTextField();
         FemaleField = new javax.swing.JRadioButton();
         MaleField = new javax.swing.JRadioButton();
-        jTextField3 = new javax.swing.JTextField();
+        AddressField = new javax.swing.JTextField();
         MonthField = new javax.swing.JComboBox();
         DayField = new javax.swing.JComboBox();
         YearField = new javax.swing.JComboBox();
@@ -401,9 +401,9 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
         jPanel1.add(MaleField);
         MaleField.setBounds(330, 230, 70, 23);
 
-        jTextField3.setText("jTextField3");
-        jPanel1.add(jTextField3);
-        jTextField3.setBounds(330, 160, 170, 60);
+        AddressField.setText("jTextField3");
+        jPanel1.add(AddressField);
+        AddressField.setBounds(330, 160, 170, 60);
 
         MonthField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }));
         MonthField.addActionListener(new java.awt.event.ActionListener() {
@@ -699,7 +699,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
         String school = SchoolField.getText();
         String email = EmailAddressField.getText();
         String contact = ContactNumberField1.getText();
-        String address = jTextField3.getText();
+        String address = AddressField.getText();
         //converting string to Calendar
         String sDate = MonthField.getSelectedItem().toString() + " " + DayField.getSelectedItem().toString() + ", " + YearField.getSelectedItem().toString();
         Calendar birthdate = Calendar.getInstance();
@@ -732,7 +732,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
         if (FirstnameField.getText().isEmpty()
                 || SurnameField.getText().isEmpty()
                 || ContactNumberField1.getText().isEmpty()
-                || jTextField3.getText().isEmpty()
+                || AddressField.getText().isEmpty()
                 || DegreeField.getText().isEmpty()
                 || EmailAddressField.getText().isEmpty()
                 || SchoolField.getText().isEmpty()
@@ -742,7 +742,40 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
                 || guardEmail.isEmpty()
                 || guardContact.isEmpty()) {
             empty = true;
-            JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correctly.");
+            if(FirstnameField.getText().isEmpty()) {
+                FirstnameField.setBackground(Color.PINK);
+            }
+            if(SurnameField.getText().isEmpty()) {
+                SurnameField.setBackground(Color.PINK);
+            }
+            if(ContactNumberField1.getText().isEmpty()) {
+                ContactNumberField1.setBackground(Color.PINK);
+            }
+            if(AddressField.getText().isEmpty()) {
+                AddressField.setBackground(Color.PINK);
+            }
+            if(DegreeField.getText().isEmpty()) {
+                DegreeField.setBackground(Color.PINK);
+            }
+            if(EmailAddressField.getText().isEmpty()) {
+                EmailAddressField.setBackground(Color.PINK);
+            }
+            if(SchoolField.getText().isEmpty()) {
+                SchoolField.setBackground(Color.PINK);
+            }
+            if(GuardianFirstnameField.getText().isEmpty()) {
+                GuardianFirstnameField.setBackground(Color.PINK);
+            }
+            if(GuardianSurnameField.getText().isEmpty()) {
+                GuardianSurnameField.setBackground(Color.PINK);
+            }
+            if(GuardianContactField.getText().isEmpty()) {
+                GuardianContactField.setBackground(Color.PINK);
+            }
+            if(GuardianEmailField.getText().isEmpty()) {
+                GuardianEmailField.setBackground(Color.PINK);
+            }
+            //JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correctly.");
         } else {
             empty = false;
             try {
@@ -802,7 +835,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
                 boolean editguardian = gdao.editGuardian(guard, guard.getGuardianID());
                 System.out.println(editguardian);
                 if (edittenant && editguardian) {
-                    JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + "'s information has been successfully edited.");
+                    //JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + "'s information has been successfully edited.");
                     this.removeAll();
                     jPanel2 = new TenantPanelFinal();
                     setJpanel();
@@ -1045,6 +1078,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField AddressField;
     private javax.swing.JTextField ContactNumberField1;
     private javax.swing.JComboBox DayField;
     private javax.swing.JTextField DegreeField;
@@ -1069,6 +1103,5 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

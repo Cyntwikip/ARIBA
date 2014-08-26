@@ -517,7 +517,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         imgLabel.setText("Picture");
         add(imgLabel);
-        imgLabel.setBounds(810, 50, 120, 110);
+        imgLabel.setBounds(840, 40, 100, 90);
 
         jPanel1.setOpaque(false);
         jPanel1.setLayout(null);
@@ -528,7 +528,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         fname.setText("jLabel8");
         jPanel1.add(fname);
-        fname.setBounds(110, 40, 140, 20);
+        fname.setBounds(110, 40, 200, 20);
 
         lnamelabel.setText("Last Name:");
         jPanel1.add(lnamelabel);
@@ -536,7 +536,8 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         lname.setText("jLabel9");
         jPanel1.add(lname);
-        lname.setBounds(110, 60, 150, 16);
+
+        lname.setBounds(110, 60, 200, 14);
 
         inoutlabel.setText("In/Out:");
         jPanel1.add(inoutlabel);
@@ -544,7 +545,8 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         inout.setText("jLabel10");
         jPanel1.add(inout);
-        inout.setBounds(110, 80, 120, 16);
+
+        inout.setBounds(110, 74, 200, 20);
 
         logtimelabel.setText("Last Log Time:");
         jPanel1.add(logtimelabel);
@@ -552,7 +554,8 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         logtime.setText("jLabel10");
         jPanel1.add(logtime);
-        logtime.setBounds(120, 100, 140, 16);
+
+        logtime.setBounds(110, 100, 200, 14);
 
         roomnumberlabel.setText("Room Number:");
         jPanel1.add(roomnumberlabel);
@@ -560,7 +563,9 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         roomnumber.setText("jLabel10");
         jPanel1.add(roomnumber);
-        roomnumber.setBounds(130, 120, 130, 16);
+
+        roomnumber.setBounds(110, 120, 200, 14);
+
 
         contactnumberlabel.setText("Contact Number:");
         jPanel1.add(contactnumberlabel);
@@ -568,7 +573,8 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         contactno.setText("jLabel8");
         jPanel1.add(contactno);
-        contactno.setBounds(130, 140, 160, 16);
+
+        contactno.setBounds(110, 140, 200, 14);
 
         completebutton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/viewcompletedetails.png"))); // NOI18N
         completebutton.addActionListener(new java.awt.event.ActionListener() {
@@ -594,7 +600,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         birthday.setText("jLabel16");
         jPanel1.add(birthday);
-        birthday.setBounds(110, 160, 70, 16);
+        birthday.setBounds(110, 160, 200, 14);
 
         genderlabel.setText("Gender:");
         jPanel1.add(genderlabel);
@@ -602,15 +608,16 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         gender.setText("jLabel18");
         jPanel1.add(gender);
-        gender.setBounds(110, 180, 70, 16);
+
+        gender.setBounds(110, 180, 190, 14);
 
         emaillabel.setText("E-mail:");
         jPanel1.add(emaillabel);
-        emaillabel.setBounds(20, 200, 60, 16);
+        emaillabel.setBounds(20, 200, 70, 14);
 
         email.setText("jLabel20");
         jPanel1.add(email);
-        email.setBounds(110, 200, 60, 16);
+        email.setBounds(110, 200, 190, 14);
 
         addresslabel.setText("Address:");
         jPanel1.add(addresslabel);
@@ -618,7 +625,8 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         address.setText("jLabel22");
         jPanel1.add(address);
-        address.setBounds(110, 220, 80, 16);
+
+        address.setBounds(110, 220, 190, 14);
 
         schooldegreelabel.setText("School/Degree:");
         jPanel1.add(schooldegreelabel);
@@ -626,7 +634,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         schooldegree.setText("jLabel24");
         jPanel1.add(schooldegree);
-        schooldegree.setBounds(110, 240, 80, 16);
+        schooldegree.setBounds(110, 240, 190, 14);
 
         yearofgradlabel.setText("Year of Graduation:");
         jPanel1.add(yearofgradlabel);
@@ -634,7 +642,8 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         yearofgrad.setText("jLabel26");
         jPanel1.add(yearofgrad);
-        yearofgrad.setBounds(130, 260, 60, 16);
+
+        yearofgrad.setBounds(130, 260, 170, 14);
 
         statuslabel.setText("Status:");
         jPanel1.add(statuslabel);
@@ -642,7 +651,8 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         status.setText("jLabel28");
         jPanel1.add(status);
-        status.setBounds(110, 280, 70, 16);
+
+        status.setBounds(110, 280, 190, 14);
 
         gnamelabel.setText("Guardian's Name:");
         jPanel1.add(gnamelabel);
@@ -658,15 +668,15 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         gname.setText("jLabel32");
         jPanel1.add(gname);
-        gname.setBounds(110, 300, 90, 16);
+        gname.setBounds(110, 300, 190, 14);
 
         gnum.setText("jLabel33");
         jPanel1.add(gnum);
-        gnum.setBounds(200, 320, 90, 16);
+        gnum.setBounds(170, 320, 130, 14);
 
         gemail.setText("jLabel34");
         jPanel1.add(gemail);
-        gemail.setBounds(150, 340, 90, 16);
+        gemail.setBounds(110, 340, 190, 14);
 
         add(jPanel1);
         jPanel1.setBounds(640, 100, 310, 450);

@@ -96,7 +96,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         DegreeField = new javax.swing.JTextField();
         YearOfGraduationField = new javax.swing.JComboBox();
         MonthField = new javax.swing.JComboBox();
-        jTextField3 = new javax.swing.JTextField();
+        AddressField = new javax.swing.JTextField();
         DayField = new javax.swing.JComboBox();
         YearField = new javax.swing.JComboBox();
         FemaleField = new javax.swing.JRadioButton();
@@ -135,13 +135,11 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         jButton2.setBounds(80, 210, 140, 40);
 
         FirstnameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                FirstnameFieldFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 FirstnameFieldFocusLost(evt);
-            }
-        });
-        FirstnameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FirstnameFieldActionPerformed(evt);
             }
         });
         FirstnameField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -156,6 +154,9 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         FirstnameField.setBounds(330, 40, 170, 30);
 
         SchoolField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                SchoolFieldFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 SchoolFieldFocusLost(evt);
             }
@@ -172,6 +173,9 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         SchoolField.setBounds(560, 10, 190, 30);
 
         DegreeField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                DegreeFieldFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 DegreeFieldFocusLost(evt);
             }
@@ -203,8 +207,17 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         });
         jPanel1.add(MonthField);
         MonthField.setBounds(330, 80, 60, 20);
-        jPanel1.add(jTextField3);
-        jTextField3.setBounds(320, 110, 180, 60);
+
+        AddressField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                AddressFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                AddressFieldFocusLost(evt);
+            }
+        });
+        jPanel1.add(AddressField);
+        AddressField.setBounds(320, 110, 180, 60);
 
         DayField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         DayField.addActionListener(new java.awt.event.ActionListener() {
@@ -251,11 +264,6 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
                 ContactNumberField1FocusLost(evt);
             }
         });
-        ContactNumberField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ContactNumberField1ActionPerformed(evt);
-            }
-        });
         ContactNumberField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 ContactNumberField1KeyReleased(evt);
@@ -276,13 +284,11 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         EmailAddressField.setBounds(360, 230, 140, 30);
 
         GuardianSurnameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                GuardianSurnameFieldFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 GuardianSurnameFieldFocusLost(evt);
-            }
-        });
-        GuardianSurnameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardianSurnameFieldActionPerformed(evt);
             }
         });
         GuardianSurnameField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -297,13 +303,11 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         GuardianSurnameField.setBounds(570, 140, 180, 30);
 
         GuardianFirstnameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                GuardianFirstnameFieldFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 GuardianFirstnameFieldFocusLost(evt);
-            }
-        });
-        GuardianFirstnameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardianFirstnameFieldActionPerformed(evt);
             }
         });
         GuardianFirstnameField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -364,13 +368,11 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         jButton1.setBounds(540, 270, 80, 40);
 
         SurnameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                SurnameFieldFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 SurnameFieldFocusLost(evt);
-            }
-        });
-        SurnameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SurnameFieldActionPerformed(evt);
             }
         });
         SurnameField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -427,10 +429,6 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_FirstnameFieldFocusLost
 
-    private void FirstnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FirstnameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_FirstnameFieldActionPerformed
-
     private void FirstnameFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FirstnameFieldKeyReleased
         // TODO add your handling code here:
         CheckAccount check = new CheckAccount();
@@ -465,7 +463,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         String input = SchoolField.getText();
 
         try {
-            check.checkName(input, "Lastname");
+            check.checkName(input, "School");
             SchoolField.setBackground(Color.WHITE);
         } catch (AccountException e) {
             SchoolField.setBackground(Color.PINK);
@@ -583,10 +581,6 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_ContactNumberField1FocusLost
 
-    private void ContactNumberField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContactNumberField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ContactNumberField1ActionPerformed
-
     private void ContactNumberField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ContactNumberField1KeyReleased
         // TODO add your handling code here:
         char c = evt.getKeyChar();
@@ -642,10 +636,6 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_GuardianSurnameFieldFocusLost
 
-    private void GuardianSurnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardianSurnameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_GuardianSurnameFieldActionPerformed
-
     private void GuardianSurnameFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_GuardianSurnameFieldKeyReleased
         // TODO add your handling code here:
         CheckAccount check = new CheckAccount();
@@ -673,10 +663,6 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
             GuardianFirstnameField.setBackground(Color.PINK);
         }
     }//GEN-LAST:event_GuardianFirstnameFieldFocusLost
-
-    private void GuardianFirstnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardianFirstnameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_GuardianFirstnameFieldActionPerformed
 
     private void GuardianFirstnameFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_GuardianFirstnameFieldKeyReleased
         // TODO add your handling code here:
@@ -752,13 +738,13 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         // TODO add your handling code here:
         CheckAccount check = new CheckAccount();
 
-        String input = EmailAddressField.getText();
+        String input = GuardianEmailField.getText();
 
         try {
             check.checkEmail(input, "Email");
-            EmailAddressField.setBackground(Color.WHITE);
+            GuardianEmailField.setBackground(Color.WHITE);
         } catch (AccountException e) {
-            EmailAddressField.setBackground(Color.PINK);
+            GuardianEmailField.setBackground(Color.PINK);
         }
     }//GEN-LAST:event_GuardianEmailFieldFocusLost
 
@@ -773,7 +759,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         String school = SchoolField.getText();
         String email = EmailAddressField.getText();
         String contact = ContactNumberField1.getText();
-        String address = jTextField3.getText();
+        String address = AddressField.getText();
         //converting string to Calendar
         String sDate = MonthField.getSelectedItem().toString() + " " + DayField.getSelectedItem().toString() + ", " + YearField.getSelectedItem().toString();
         Calendar birthdate = Calendar.getInstance();
@@ -804,7 +790,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         if (FirstnameField.getText().isEmpty()
                 || SurnameField.getText().isEmpty()
                 || ContactNumberField1.getText().isEmpty()
-                || jTextField3.getText().isEmpty()
+                || AddressField.getText().isEmpty()
                 || DegreeField.getText().isEmpty()
                 || EmailAddressField.getText().isEmpty()
                 || SchoolField.getText().isEmpty()
@@ -814,7 +800,40 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
                 || guardEmail.isEmpty()
                 || guardContact.isEmpty()) {
             empty = true;
-            JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correctly.");
+            if(FirstnameField.getText().isEmpty()) {
+                FirstnameField.setBackground(Color.PINK);
+            }
+            if(SurnameField.getText().isEmpty()) {
+                SurnameField.setBackground(Color.PINK);
+            }
+            if(ContactNumberField1.getText().isEmpty()) {
+                ContactNumberField1.setBackground(Color.PINK);
+            }
+            if(AddressField.getText().isEmpty()) {
+                AddressField.setBackground(Color.PINK);
+            }
+            if(DegreeField.getText().isEmpty()) {
+                DegreeField.setBackground(Color.PINK);
+            }
+            if(EmailAddressField.getText().isEmpty()) {
+                EmailAddressField.setBackground(Color.PINK);
+            }
+            if(SchoolField.getText().isEmpty()) {
+                SchoolField.setBackground(Color.PINK);
+            }
+            if(GuardianFirstnameField.getText().isEmpty()) {
+                GuardianFirstnameField.setBackground(Color.PINK);
+            }
+            if(GuardianSurnameField.getText().isEmpty()) {
+                GuardianSurnameField.setBackground(Color.PINK);
+            }
+            if(GuardianContactField.getText().isEmpty()) {
+                GuardianContactField.setBackground(Color.PINK);
+            }
+            if(GuardianEmailField.getText().isEmpty()) {
+                GuardianEmailField.setBackground(Color.PINK);
+            }
+            //JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correctly.");
         } else {
             empty = false;
             try {
@@ -898,7 +917,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
 
                         contractdao.addContract(contractAcc);
 
-                        JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + " has successfully added.");
+                        //JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + " has successfully added.");
                         this.removeAll();
                         jPanel2 = new TenantPanelFinal();
                         setJpanel();
@@ -915,7 +934,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
                         if (tg1) {
                             gdao.deleteAssignedTenantGuardian(tenant);
                         }
-                        JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correctly.");
+                        //JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correctly.");
                     }
 
                     
@@ -943,10 +962,6 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_SurnameFieldFocusLost
 
-    private void SurnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SurnameFieldActionPerformed
-
-    }//GEN-LAST:event_SurnameFieldActionPerformed
-
     private void SurnameFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SurnameFieldKeyReleased
         // TODO add your handling code here:
         CheckAccount check = new CheckAccount();
@@ -966,6 +981,50 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         preventDigit(evt);
     }//GEN-LAST:event_SurnameFieldKeyTyped
 
+    private void SurnameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SurnameFieldFocusGained
+        // TODO add your handling code here:
+        SurnameField.setBackground(Color.WHITE);
+    }//GEN-LAST:event_SurnameFieldFocusGained
+
+    private void FirstnameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_FirstnameFieldFocusGained
+        // TODO add your handling code here:
+        FirstnameField.setBackground(Color.WHITE);
+    }//GEN-LAST:event_FirstnameFieldFocusGained
+
+    private void AddressFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_AddressFieldFocusGained
+        // TODO add your handling code here:
+        AddressField.setBackground(Color.WHITE);
+    }//GEN-LAST:event_AddressFieldFocusGained
+
+    private void AddressFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_AddressFieldFocusLost
+        // TODO add your handling code here:
+        String input = AddressField.getText();
+
+        if (input.isEmpty()) {
+            AddressField.setBackground(Color.PINK);
+        }
+    }//GEN-LAST:event_AddressFieldFocusLost
+
+    private void SchoolFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SchoolFieldFocusGained
+        // TODO add your handling code here:
+        SchoolField.setBackground(Color.WHITE);
+    }//GEN-LAST:event_SchoolFieldFocusGained
+
+    private void DegreeFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DegreeFieldFocusGained
+        // TODO add your handling code here:
+        DegreeField.setBackground(Color.WHITE);
+    }//GEN-LAST:event_DegreeFieldFocusGained
+
+    private void GuardianSurnameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_GuardianSurnameFieldFocusGained
+        // TODO add your handling code here:
+        GuardianSurnameField.setBackground(Color.WHITE);
+    }//GEN-LAST:event_GuardianSurnameFieldFocusGained
+
+    private void GuardianFirstnameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_GuardianFirstnameFieldFocusGained
+        // TODO add your handling code here:
+        GuardianFirstnameField.setBackground(Color.WHITE);
+    }//GEN-LAST:event_GuardianFirstnameFieldFocusGained
+
     public void preventDigit(java.awt.event.KeyEvent evt) {
         char c = evt.getKeyChar();
         if (Character.isDigit(c)) {
@@ -982,6 +1041,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         jPanel2.setBounds(0, 0, 1000, 600);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField AddressField;
     private javax.swing.JTextField ContactNumberField1;
     private javax.swing.JComboBox DayField;
     private javax.swing.JTextField DegreeField;
@@ -1005,6 +1065,5 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }
