@@ -358,7 +358,7 @@ public class RoomPanelFinal extends javax.swing.JPanel {
             //         JOptionPane.showMessageDialog(null, "Please select a room.");
         } else if (temp == null) {
             //         jButton1.setEnabled(false);
-            JOptionPane.showMessageDialog(null, "Please select a tenant.");
+            //JOptionPane.showMessageDialog(null, "Please select a tenant.");
 
         } else {
             String tempString = temp.toString();
@@ -410,7 +410,7 @@ public class RoomPanelFinal extends javax.swing.JPanel {
             //         JOptionPane.showMessageDialog(null, "Please select a room.");
         } else if (temp == null) {
             //         jButton1.setEnabled(false);
-            JOptionPane.showMessageDialog(null, "Please select a tenant.");
+            //JOptionPane.showMessageDialog(null, "Please select a tenant.");
 
         } else {
             String tempString = temp.toString();
