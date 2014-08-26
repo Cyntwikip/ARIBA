@@ -800,7 +800,40 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
                 || guardEmail.isEmpty()
                 || guardContact.isEmpty()) {
             empty = true;
-            JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correctly.");
+            if(FirstnameField.getText().isEmpty()) {
+                FirstnameField.setBackground(Color.PINK);
+            }
+            if(SurnameField.getText().isEmpty()) {
+                SurnameField.setBackground(Color.PINK);
+            }
+            if(ContactNumberField1.getText().isEmpty()) {
+                ContactNumberField1.setBackground(Color.PINK);
+            }
+            if(AddressField.getText().isEmpty()) {
+                AddressField.setBackground(Color.PINK);
+            }
+            if(DegreeField.getText().isEmpty()) {
+                DegreeField.setBackground(Color.PINK);
+            }
+            if(EmailAddressField.getText().isEmpty()) {
+                EmailAddressField.setBackground(Color.PINK);
+            }
+            if(SchoolField.getText().isEmpty()) {
+                SchoolField.setBackground(Color.PINK);
+            }
+            if(GuardianFirstnameField.getText().isEmpty()) {
+                GuardianFirstnameField.setBackground(Color.PINK);
+            }
+            if(GuardianSurnameField.getText().isEmpty()) {
+                GuardianSurnameField.setBackground(Color.PINK);
+            }
+            if(GuardianContactField.getText().isEmpty()) {
+                GuardianContactField.setBackground(Color.PINK);
+            }
+            if(GuardianEmailField.getText().isEmpty()) {
+                GuardianEmailField.setBackground(Color.PINK);
+            }
+            //JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correctly.");
         } else {
             empty = false;
             try {
@@ -884,7 +917,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
 
                         contractdao.addContract(contractAcc);
 
-                        JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + " has successfully added.");
+                        //JOptionPane.showMessageDialog(null, "Tenant " + tenant.getFname() + " " + tenant.getLname() + " has successfully added.");
                         this.removeAll();
                         jPanel2 = new TenantPanelFinal();
                         setJpanel();
@@ -901,7 +934,7 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
                         if (tg1) {
                             gdao.deleteAssignedTenantGuardian(tenant);
                         }
-                        JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correctly.");
+                        //JOptionPane.showMessageDialog(null, "Error: Make sure to input all necessary information correctly.");
                     }
 
                     

@@ -519,7 +519,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         imgLabel.setText("Picture");
         add(imgLabel);
-        imgLabel.setBounds(810, 50, 120, 110);
+        imgLabel.setBounds(840, 40, 100, 90);
 
         jPanel1.setOpaque(false);
         jPanel1.setLayout(null);
@@ -608,7 +608,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         emaillabel.setText("E-mail:");
         jPanel1.add(emaillabel);
-        emaillabel.setBounds(20, 200, 32, 14);
+        emaillabel.setBounds(20, 200, 70, 14);
 
         email.setText("jLabel20");
         jPanel1.add(email);

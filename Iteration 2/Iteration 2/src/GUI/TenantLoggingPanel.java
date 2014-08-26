@@ -228,6 +228,8 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Invalid password for tenant.");
         }
 
+        jTextField1.setText("");
+        jPasswordField1.setText("");
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -244,6 +246,9 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
         SimpleDateFormat df = new SimpleDateFormat("ddMM");
 
         String birthday = df.format(bean.getBirthday());
+        
+        System.out.println(birthday);
+        
         if (jPasswordField1.getText().equals(birthday)) {
 
             ArrayList<AttendanceLogBean> alist = new ArrayList<AttendanceLogBean>();
@@ -290,8 +295,10 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "Invalid password for tenant. Please try again.");
         }
-
-
+        
+        jTextField1.setText("");
+        jPasswordField1.setText("");
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jPasswordField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyReleased
