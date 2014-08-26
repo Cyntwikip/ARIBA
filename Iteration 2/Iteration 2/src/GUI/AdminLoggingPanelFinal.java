@@ -13,6 +13,7 @@ import Models.DAOInterface.AttendanceLogDAOInterface;
 import Models.DAOInterface.TenantDAOInterface;
 import java.util.ArrayList;
 import java.util.Calendar;
+import javafx.scene.paint.Color;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,6 +38,8 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         Calendar c = Calendar.getInstance();
 
         System.out.println(c.getTime());
+        
+        jButton3.setBackground(java.awt.Color.GREEN);
     }
 
     public void updateTable() {
@@ -169,7 +172,16 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         jPanel1.add(jButton2);
         jButton2.setBounds(30, 393, 140, 40);
 
+        jButton3.setBackground(new java.awt.Color(0, 51, 0));
+        jButton3.setForeground(new java.awt.Color(0, 51, 0));
         jButton3.setText("Edit account");
+        jButton3.setBorder(null);
+        jButton3.setName(""); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3);
         jButton3.setBounds(30, 340, 140, 40);
 
@@ -184,6 +196,10 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         add(jLabel1);
         jLabel1.setBounds(0, 0, 1010, 600);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

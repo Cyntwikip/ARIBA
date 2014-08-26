@@ -71,7 +71,7 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
             }
         });
         add(jTextField1);
-        jTextField1.setBounds(480, 120, 290, 60);
+        jTextField1.setBounds(480, 140, 290, 40);
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
         jLabel2.setText("Password:");
@@ -89,7 +89,7 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
             }
         });
         add(jPasswordField1);
-        jPasswordField1.setBounds(480, 220, 290, 30);
+        jPasswordField1.setBounds(480, 210, 290, 40);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/imcomingin.png"))); // NOI18N
         jButton2.setEnabled(false);
