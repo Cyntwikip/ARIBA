@@ -153,13 +153,38 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
 
         jTextField1.setText(input);
 
-        if (!jTextField1.getText().isEmpty() && !jPasswordField1.getText().isEmpty()) {
-            jButton1.setEnabled(true);
-            jButton3.setEnabled(true);
-        }else{
-            jButton1.setEnabled(false);
+        if (jTextField1.getText().isEmpty()) {
+            jButton2.setEnabled(false);
             jButton3.setEnabled(false);
+        } else {
+            last = Integer.parseInt(jTextField1.getText());
+            AttendanceLogBean login = logdao.getLatestLoginByTenant(last);
+            AttendanceLogBean logout = logdao.getLatestLogoutByTenant(last);
+
+            if (login == null && logout == null) {
+                jButton2.setEnabled(false);
+                jButton3.setEnabled(false);
+            }
+            if (login == null) {
+                jButton2.setEnabled(true);
+                jButton3.setEnabled(false);
+            } else if (logout == null) {
+                jButton2.setEnabled(false);
+                jButton3.setEnabled(true);
+            } else if (login.getLogID() > logout.getLogID()) {
+                jButton2.setEnabled(false);
+                jButton3.setEnabled(true);
+            } else if (login.getLogID() < logout.getLogID()) {
+                jButton2.setEnabled(true);
+                jButton3.setEnabled(false);
+
+            } else {
+                jButton2.setEnabled(false);
+                jButton3.setEnabled(false);
+            }
         }
+
+
     }//GEN-LAST:event_jTextField1KeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -192,10 +217,7 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
             alistout = logdao.getLatestLogoutByTenant(tenantID);
             alistin = logdao.getLatestLoginByTenant(tenantID);
 
-            if (bean.getFname() == null) {
-                JOptionPane.showMessageDialog(null, "No tenant ID " + tenantID);
-
-            } else if (alist.isEmpty()) {
+            if (alist.isEmpty()) {
                 Calendar c = Calendar.getInstance();
                 Timestamp time = new Timestamp(c.getTimeInMillis());
 
@@ -206,9 +228,13 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
 
                 if (logdao.addAttendanceLogDAOInterface(logbean)) {
                     JOptionPane.showMessageDialog(null, "You are now in.");
+                    jTextField1.setText("");
+                    jPasswordField1.setText("");
+                    jButton2.setEnabled(false);
+                    jButton3.setEnabled(false);
                 }
-
-            } else if (!alist.get(0).getIsIn()) {
+            } 
+            else if (!alist.get(0).getIsIn()) {
                 Calendar c = Calendar.getInstance();
                 Timestamp time = new Timestamp(c.getTimeInMillis());
 
@@ -219,17 +245,20 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
 
                 if (logdao.addAttendanceLogDAOInterface(logbean)) {
                     JOptionPane.showMessageDialog(null, "You are now in.");
+                    jTextField1.setText("");
+                    jPasswordField1.setText("");
+                    jButton2.setEnabled(false);
+                    jButton3.setEnabled(false);
                 }
 
-            } else {
-                JOptionPane.showMessageDialog(null, "You are not allowed to log in. Log out first before logging in again.");
             }
+            /*else {
+             JOptionPane.showMessageDialog(null, "You are not allowed to log in. Log out first before logging in again.");
+             }*/
         } else {
             JOptionPane.showMessageDialog(null, "Invalid password for tenant.");
         }
 
-        jTextField1.setText("");
-        jPasswordField1.setText("");
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -246,9 +275,9 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
         SimpleDateFormat df = new SimpleDateFormat("ddMM");
 
         String birthday = df.format(bean.getBirthday());
-        
+
         System.out.println(birthday);
-        
+
         if (jPasswordField1.getText().equals(birthday)) {
 
             ArrayList<AttendanceLogBean> alist = new ArrayList<AttendanceLogBean>();
@@ -258,10 +287,7 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
             alistout = logdao.getLatestLogoutByTenant(tenantid);
             alistin = logdao.getLatestLoginByTenant(tenantid);
 
-            if (bean.getFname() == null) {
-                JOptionPane.showMessageDialog(null, "No tenant ID " + tenantid);
-                //      jTextField1.setText("");
-            } else if (alist.isEmpty()) {
+            if (alist.isEmpty()) {
                 Calendar c = Calendar.getInstance();
                 Timestamp time = new Timestamp(c.getTimeInMillis());
 
@@ -272,6 +298,10 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
 
                 if (logdao.addAttendanceLogDAOInterface(logbean)) {
                     JOptionPane.showMessageDialog(null, "You are now out.");
+                    jTextField1.setText("");
+                    jPasswordField1.setText("");
+                    jButton2.setEnabled(false);
+                    jButton3.setEnabled(false);
                 }
 
             } else if (alist.get(0).getIsIn()) { // isIn = true
@@ -287,30 +317,29 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
 
                 if (logdao.addAttendanceLogDAOInterface(logbean)) {
                     JOptionPane.showMessageDialog(null, "You are now out.");
+                    jTextField1.setText("");
+                    jPasswordField1.setText("");
+                    jButton2.setEnabled(false);
+                    jButton3.setEnabled(false);
                 }
-
-            } else {
-                JOptionPane.showMessageDialog(null, "You are not allowed to log out. Log in first before logging out."); // di balance yung log in
             }
         } else {
             JOptionPane.showMessageDialog(null, "Invalid password for tenant. Please try again.");
         }
-        
-        jTextField1.setText("");
-        jPasswordField1.setText("");
-        
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jPasswordField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyReleased
         // TODO add your handling code here:
-
-        if (!jTextField1.getText().isEmpty() && !jPasswordField1.getText().isEmpty()) {
-            jButton1.setEnabled(true);
-            jButton3.setEnabled(true);
-        }else{
-            jButton1.setEnabled(false);
-            jButton3.setEnabled(false);
-        }
+        /*
+         if (!jTextField1.getText().isEmpty() && !jPasswordField1.getText().isEmpty()) {
+         jButton2.setEnabled(true);
+         jButton3.setEnabled(true);
+         }else{
+         jButton2.setEnabled(false);
+         jButton3.setEnabled(false);
+         }
+         */
     }//GEN-LAST:event_jPasswordField1KeyReleased
     public void setJpanel() {
         jPanel2.setPreferredSize(new java.awt.Dimension(1000, 600));
