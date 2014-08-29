@@ -111,14 +111,15 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
         add(jButton3);
         jButton3.setBounds(540, 330, 170, 40);
 
-        jButton1.setText("View As Admin");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/viewadmin.png"))); // NOI18N
+        jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         add(jButton1);
-        jButton1.setBounds(800, 483, 110, 30);
+        jButton1.setBounds(740, 473, 190, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/logging-tab-peg-clear-panel.png"))); // NOI18N
         add(jLabel1);
@@ -296,7 +297,8 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
                 logbean.setTimeLogged(time);
                 logbean.setIsIn(false);
 
-                if (logdao.addAttendanceLogDAOInterface(logbean)) {
+                if (logdao.addAttendanceLogDAOInterface(logbean)) 
+                {
                     JOptionPane.showMessageDialog(null, "You are now out.");
                     jTextField1.setText("");
                     jPasswordField1.setText("");
