@@ -308,8 +308,8 @@ public class RoomPanelFinal extends javax.swing.JPanel {
                 currentContract = contractlist.get(contractindex);
                 rdao.assignTenanttoRoom(tbean, rbean, currentContract);
 
-                JOptionPane.showMessageDialog(null, "Successfully added tenant " + tbean.getFname() + " " + tbean.getLname()
-                        + " to room " + rbean.getRoomID());
+                //JOptionPane.showMessageDialog(null, "Successfully added tenant " + tbean.getFname() + " " + tbean.getLname()
+                //        + " to room " + rbean.getRoomID());
             } else {
                 JOptionPane.showMessageDialog(null, "Tenant doesn't have contract.");
             }

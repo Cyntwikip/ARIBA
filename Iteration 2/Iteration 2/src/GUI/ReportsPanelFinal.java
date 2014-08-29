@@ -74,22 +74,24 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         setLayout(null);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/tenantscontract.png"))); // NOI18N
+        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         add(jButton1);
-        jButton1.setBounds(80, 70, 170, 40);
+        jButton1.setBounds(80, 60, 170, 40);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/unpaidtenants.png"))); // NOI18N
+        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
         add(jButton2);
-        jButton2.setBounds(80, 120, 170, 40);
+        jButton2.setBounds(80, 100, 170, 40);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -113,13 +115,15 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         jScrollPane1.setBounds(280, 40, 680, 500);
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/viewgrad.png"))); // NOI18N
+        jButton4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton4.setMinimumSize(new java.awt.Dimension(221, 47));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
         add(jButton4);
-        jButton4.setBounds(80, 283, 140, 30);
+        jButton4.setBounds(80, 140, 170, 40);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/viewcontractdate.png"))); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +132,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
             }
         });
         add(jButton5);
-        jButton5.setBounds(80, 310, 140, 30);
+        jButton5.setBounds(80, 180, 170, 40);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/renew.png"))); // NOI18N
         jButton6.setEnabled(false);
@@ -138,7 +142,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
             }
         });
         add(jButton6);
-        jButton6.setBounds(80, 370, 80, 35);
+        jButton6.setBounds(100, 330, 110, 50);
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/end.png"))); // NOI18N
         jButton7.setEnabled(false);
@@ -148,7 +152,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
             }
         });
         add(jButton7);
-        jButton7.setBounds(80, 410, 80, 35);
+        jButton7.setBounds(100, 390, 110, 50);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/5-reports-peg-edited-crop-panel.png"))); // NOI18N
         add(jLabel1);
@@ -212,8 +216,6 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         // TODO add your handling code here:
         model.getDataVector().removeAllElements();
         model.fireTableDataChanged();
-        jButton6.setEnabled(true);
-        jButton7.setEnabled(true);
 
         JTableHeader th = jTable1.getTableHeader();
         TableColumnModel tcm = th.getColumnModel();
@@ -229,14 +231,18 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
 
         int year = Calendar.getInstance().get(Calendar.YEAR);
 
-        ArrayList<TenantBean> tlist = tdao.getTenantByExpectedYearofGrad(year);
-
+        //ArrayList<TenantBean> tlist = tdao.getTenantByExpectedYearofGrad(year);
+        ArrayList<TenantBean> tlist = tdao.getAllTenants();
+        
         for (int i = 0; i < tlist.size(); i++) {
-            deleteToRoom(tlist.get(i));
+            //deleteToRoom(tlist.get(i));
 
-            Object[] obj = {tlist.get(i).getTenantID(), tlist.get(i).getLname(), tlist.get(i).getFname(), tlist.get(i).getDegree(), tlist.get(i).getExpectedyearofgrad()};
+            Object[] obj = {tlist.get(i).getLname(), tlist.get(i).getFname(), tlist.get(i).getDegree(), tlist.get(i).getExpectedyearofgrad()};
             model.addRow(obj);
         }
+        
+        jButton6.setEnabled(true);
+        jButton7.setEnabled(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
