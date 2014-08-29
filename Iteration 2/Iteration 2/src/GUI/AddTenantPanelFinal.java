@@ -349,6 +349,12 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         GuardianEmailField.setBounds(600, 230, 150, 30);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/save.png"))); // NOI18N
+        jButton3.setEnabled(false);
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton3MouseEntered(evt);
+            }
+        });
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -1024,6 +1030,25 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         // TODO add your handling code here:
         GuardianFirstnameField.setBackground(Color.WHITE);
     }//GEN-LAST:event_GuardianFirstnameFieldFocusGained
+
+    private void jButton3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseEntered
+        // TODO add your handling code here:
+        if(!SurnameField.getText().isEmpty() &&
+                !FirstnameField.getText().isEmpty() &&
+                !imgaddLabel.getText().isEmpty() &&
+                !SchoolField.getText().isEmpty() &&
+                !DegreeField.getText().isEmpty() &&
+                !AddressField.getText().isEmpty() &&
+                !GuardianSurnameField.getText().isEmpty() &&
+                !GuardianFirstnameField.getText().isEmpty() &&
+                !GuardianContactField.getText().isEmpty() &&
+                !GuardianEmailField.getText().isEmpty() &&
+                !ContactNumberField1.getText().isEmpty() &&
+                !EmailAddressField.getText().isEmpty()){
+            jButton3.setEnabled(true);
+        }
+        
+    }//GEN-LAST:event_jButton3MouseEntered
 
     public void preventDigit(java.awt.event.KeyEvent evt) {
         char c = evt.getKeyChar();

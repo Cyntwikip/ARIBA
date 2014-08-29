@@ -856,6 +856,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
         this.removeAll();
         jPanel2 = new TenantPanelFinal();
         setJpanel();
+        System.out.println("hi");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void EmailAddressFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_EmailAddressFieldFocusGained
