@@ -148,7 +148,7 @@ public class EditTenantPanelFinal extends javax.swing.JPanel {
         //get birthday month
         for (int i = 0; i < MonthField.getItemCount(); i++) {
             if (MonthField.getItemAt(i).equals(new SimpleDateFormat("MMM").format(tenant.getBirthday()))) {
-                MonthField.setSelectedIndex(id);
+                MonthField.setSelectedIndex(i);
                 break;
             }
         }

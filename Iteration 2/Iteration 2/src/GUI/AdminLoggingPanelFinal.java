@@ -131,7 +131,7 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -156,9 +156,9 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         add(jScrollPane1);
         jScrollPane1.setBounds(250, 20, 690, 460);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/backbutton.png"))); // NOI18N
-        add(jButton1);
-        jButton1.setBounds(830, 490, 80, 40);
+        jButton4.setText("Logout");
+        add(jButton4);
+        jButton4.setBounds(830, 510, 100, 30);
 
         jPanel1.setLayout(null);
 
@@ -168,6 +168,11 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         jLabel2.setBounds(10, 10, 140, 40);
 
         jButton2.setText("Create new admin");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2);
         jButton2.setBounds(30, 393, 140, 40);
 
@@ -188,8 +193,6 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         jPanel1.setBounds(50, 20, 190, 450);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/logging-tab-peg-clear-panel.png"))); // NOI18N
-        jLabel1.setMaximumSize(new java.awt.Dimension(1000, 596));
-        jLabel1.setMinimumSize(new java.awt.Dimension(1000, 596));
         jLabel1.setOpaque(true);
         jLabel1.setPreferredSize(new java.awt.Dimension(1000, 596));
         add(jLabel1);
@@ -200,11 +203,15 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
