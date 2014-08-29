@@ -131,7 +131,7 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -156,9 +156,9 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         add(jScrollPane1);
         jScrollPane1.setBounds(250, 20, 690, 460);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/backbutton.png"))); // NOI18N
-        add(jButton1);
-        jButton1.setBounds(830, 490, 80, 40);
+        jButton4.setText("Logout");
+        add(jButton4);
+        jButton4.setBounds(830, 510, 100, 30);
 
         jPanel1.setLayout(null);
 
@@ -211,9 +211,9 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

@@ -7,16 +7,21 @@ package GUI;
 
 import Models.Beans.AttendanceLogBean;
 import Models.Beans.TenantBean;
+import Models.DAOImplementation.AdminDAOImplementation;
 import Models.DAOImplementation.AttendanceLogDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
 import Models.DAOInterface.AttendanceLogDAOInterface;
+import java.awt.Color;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -190,10 +195,37 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-        
-        this.removeAll();
-        jPanel2 = new AdminLoggingPanelFinal();
-        setJpanel();
+        JLabel jUserName = new JLabel("Username");
+        JTextField userName = new JTextField();
+        JLabel jPassword = new JLabel("Password");
+        JTextField password = new JPasswordField();
+        Object[] ob = {jUserName, userName, jPassword, password};
+        int result = JOptionPane.showConfirmDialog(null, ob, "Admin Login", JOptionPane.OK_CANCEL_OPTION);
+
+        if (result == JOptionPane.OK_OPTION) {
+            if (userName == null || password == null) {
+
+            } else {
+                AdminDAOImplementation admindao = new AdminDAOImplementation();
+                boolean check = admindao.verifyAdmin(userName.getText(), password.getText());
+                if (check) {
+                    this.removeAll();
+                    jPanel2 = new AdminLoggingPanelFinal();
+                    setJpanel();
+                }
+                else {
+                    /*
+                    JLabel incorrect = new JLabel("The username or password you entered is incorrect.");
+                    incorrect.setForeground(Color.RED);
+                    Object[] obj = {jUserName, userName, jPassword, password, incorrect};
+                    result = JOptionPane.showConfirmDialog(null, obj, "Admin Login", JOptionPane.OK_CANCEL_OPTION);
+                    */
+                }
+
+            }
+
+        }
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -234,8 +266,7 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
                     jButton2.setEnabled(false);
                     jButton3.setEnabled(false);
                 }
-            } 
-            else if (!alist.get(0).getIsIn()) {
+            } else if (!alist.get(0).getIsIn()) {
                 Calendar c = Calendar.getInstance();
                 Timestamp time = new Timestamp(c.getTimeInMillis());
 
