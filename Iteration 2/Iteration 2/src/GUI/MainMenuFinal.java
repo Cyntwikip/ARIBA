@@ -70,7 +70,8 @@ public class MainMenuFinal extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 255));
-        jPanel1.setMinimumSize(new java.awt.Dimension(1010, 630));
+        jPanel1.setMaximumSize(new java.awt.Dimension(1000, 32767));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1000, 630));
         jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(1010, 630));
         jPanel1.setLayout(null);

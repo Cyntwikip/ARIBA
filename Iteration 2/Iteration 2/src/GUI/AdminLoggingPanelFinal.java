@@ -193,8 +193,6 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         jPanel1.setBounds(50, 20, 190, 450);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/logging-tab-peg-clear-panel.png"))); // NOI18N
-        jLabel1.setMaximumSize(new java.awt.Dimension(1000, 596));
-        jLabel1.setMinimumSize(new java.awt.Dimension(1000, 596));
         jLabel1.setOpaque(true);
         jLabel1.setPreferredSize(new java.awt.Dimension(1000, 596));
         add(jLabel1);
