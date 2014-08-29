@@ -21,6 +21,8 @@ public class BillBean {
     private boolean paidRent;
     private boolean paidWater;
     private boolean paidElectric;
+    private float surcharge;
+    private java.sql.Date date;
 
     public float getRoomprice() {
         return roomprice;
@@ -93,6 +95,34 @@ public class BillBean {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    /**
+     * @return the surcharge
+     */
+    public float getSurcharge() {
+        return surcharge;
+    }
+
+    /**
+     * @param surcharge the surcharge to set
+     */
+    public void setSurcharge(float surcharge) {
+        this.surcharge = surcharge;
+    }
+
+    /**
+     * @return the date
+     */
+    public java.sql.Date getDate() {
+        return date;
+    }
+
+    /**
+     * @param date the date to set
+     */
+    public void setDate(java.sql.Date date) {
+        this.date = date;
     }
     
     
