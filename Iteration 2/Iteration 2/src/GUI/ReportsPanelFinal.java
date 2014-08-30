@@ -81,7 +81,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(80, 60, 170, 40);
+        jButton1.setBounds(80, 100, 170, 40);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/unpaidtenants.png"))); // NOI18N
         jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -91,7 +91,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
             }
         });
         add(jButton2);
-        jButton2.setBounds(80, 100, 170, 40);
+        jButton2.setBounds(80, 60, 170, 40);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -405,7 +405,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Terminated " + tbean.getFname() + " " + tbean.getLname() + "'s contract. Effective on " + cbeanlist.get(cbeanlist.size() - 1).getExpirydate());
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Terminated " + tbean.getFname() + " " + tbean.getLname() + "'s contract. Effective on " + cbeanlist.get(cbeanlist.size() - 1).getExpirydate());
+            //.showMessageDialog(null, "Terminated " + tbean.getFname() + " " + tbean.getLname() + "'s contract. Effective on " + cbeanlist.get(cbeanlist.size() - 1).getExpirydate());
 
         }
 
