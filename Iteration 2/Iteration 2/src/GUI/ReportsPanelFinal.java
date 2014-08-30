@@ -262,7 +262,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         System.out.println(sqlDate);
 
         Calendar expirydate = Calendar.getInstance();
-        expirydate.add(Calendar.DAY_OF_YEAR, 92); // add 1 year
+        expirydate.add(Calendar.DAY_OF_YEAR, 92); // add 3 months
         DateFormat df_contract = new SimpleDateFormat("MMMM d, yyyy");
 
         //converting Calendar to sql Date

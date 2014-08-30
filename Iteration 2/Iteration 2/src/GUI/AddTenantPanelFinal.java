@@ -381,6 +381,11 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
                 SurnameFieldFocusLost(evt);
             }
         });
+        SurnameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SurnameFieldActionPerformed(evt);
+            }
+        });
         SurnameField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 SurnameFieldKeyReleased(evt);
@@ -1049,6 +1054,10 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_jButton3MouseEntered
+
+    private void SurnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SurnameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SurnameFieldActionPerformed
 
     public void preventDigit(java.awt.event.KeyEvent evt) {
         char c = evt.getKeyChar();

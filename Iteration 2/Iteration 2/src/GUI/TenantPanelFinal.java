@@ -61,6 +61,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
             YearOfGraduationField.addItem(i);
         }
         initTable();
+        
     }
 
     public void initBasicInfo() {
@@ -91,6 +92,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         lnamelabel.setLocation(20, 80);
         lname.setLocation(120, 80);
 
+       
         inoutlabel.setLocation(20, 120);
         inout.setLocation(120, 120);
 
@@ -132,6 +134,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         int row = jTable1.getSelectedRow();
         int col = 0;
 
+        
         int tenantid = (Integer) jTable1.getModel().getValueAt(row, col);
 
         TenantDAOInterface tdao = new TenantDAOImplementation();
@@ -186,17 +189,20 @@ public class TenantPanelFinal extends javax.swing.JPanel {
             }
 
             AttendanceLogDAOInterface ldao = new AttendanceLogDAOImplementation();
-            AttendanceLogBean lbean = ldao.getLatestLoginByTenant(tenantID);
-            AttendanceLogBean lbean1 = ldao.getLatestLogoutByTenant(tenantID);
+            AttendanceLogBean lbean = ldao.getLatestLoginByTenant(tenantid);
+            AttendanceLogBean lbean1 = ldao.getLatestLogoutByTenant(tenantid);
 
             if (lbean == null && lbean1 == null) { // wala pa talaga
+                System.out.println("First");
                 inout.setText("No logs yet.");
                 logtime.setText("No logs yet.");
 
             } else if (lbean == null & lbean1 != null) {
                 inout.setText("OUT");
+                    System.out.println("Second");
+            
 
-                SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss.");
+                SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss");
                 java.sql.Timestamp ts = lbean1.getTimeLogged();
                 int microFraction = ts.getNanos() / 1000;
 
@@ -207,8 +213,10 @@ public class TenantPanelFinal extends javax.swing.JPanel {
                 logtime.setText(sb.toString());
             } else if (lbean1 == null && lbean != null) {
                 inout.setText("IN");
+                    System.out.println("Third");
+            
 
-                SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss.");
+                SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss");
                 java.sql.Timestamp ts = lbean.getTimeLogged();
                 int microFraction = ts.getNanos() / 1000;
 
@@ -219,8 +227,10 @@ public class TenantPanelFinal extends javax.swing.JPanel {
                 logtime.setText(sb.toString());
             } else if (lbean.getLogID() > lbean1.getLogID()) { // login
                 inout.setText("IN");
+                    System.out.println("fourth");
+            
 
-                SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss.");
+                SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss");
                 java.sql.Timestamp ts = lbean.getTimeLogged();
                 int microFraction = ts.getNanos() / 1000;
 
@@ -232,7 +242,9 @@ public class TenantPanelFinal extends javax.swing.JPanel {
             } else {
                 inout.setText("OUT");
 
-                SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss.");
+                    System.out.println("fifth");
+            
+                SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss");
                 java.sql.Timestamp ts = lbean1.getTimeLogged();
                 int microFraction = ts.getNanos() / 1000;
 
@@ -726,7 +738,6 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         jPanel2 = new AddTenantPanelFinal();
 
         setJpanel();
-//        mn.setJpanel(1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
