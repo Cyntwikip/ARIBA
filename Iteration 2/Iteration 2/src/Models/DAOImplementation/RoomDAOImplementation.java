@@ -29,11 +29,10 @@ public class RoomDAOImplementation implements RoomDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "insert into room (currentKW, currentcubicmeter) values(?, ?)";
+            String query = "insert into room (status) values(?)";
             PreparedStatement ps = connection.prepareStatement(query);
             //ps.setString(1, room.getStatus());
-            ps.setFloat(1, room.getCurrentKW());
-            ps.setFloat(2, room.getCurrentcubicmeter());
+            ps.setString(1, room.getStatus());
             ps.executeUpdate();
             connection.close();
 
@@ -44,30 +43,6 @@ public class RoomDAOImplementation implements RoomDAOInterface {
         return false;
     }
 
-    @Override
-    public boolean editRoom(RoomBean room, int roomID) {
-
-        try {
-            Connector c = new Connector();
-            Connection connection = c.getConnection();
-
-            String query = "update room set currentKW = ?, currentcubicmeter = ? where roomID = ?";
-            PreparedStatement ps = connection.prepareStatement(query);
-            //ps.setString(1, room.getStatus());
-            ps.setFloat(1, room.getCurrentKW());
-            ps.setFloat(2, room.getCurrentcubicmeter());
-            ps.setInt(3, roomID);
-            ps.executeUpdate();
-
-            connection.close();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return false;
-
-    }
 
     @Override
     public boolean assignTenanttoRoom(TenantBean tenant, RoomBean room, ContractBean contract) {
@@ -75,13 +50,12 @@ public class RoomDAOImplementation implements RoomDAOInterface {
             Connector c = new Connector();
             Connection connection = c.getConnection();
 
-            String query = "insert into tenantroom (tr_tenantID, tr_roomID, startDate, endDate) values (?, ?, ?, ?)";
+            String query = "insert into tenantroom (tr_tenantID, tr_roomID, startDate) values (?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
 
             ps.setInt(1, tenant.getTenantID());
             ps.setInt(2, room.getRoomID());
             ps.setDate(3, contract.getEffectivedate());
-            ps.setDate(4, contract.getExpirydate());
             ps.executeUpdate();
             connection.close();
 
@@ -107,19 +81,17 @@ public class RoomDAOImplementation implements RoomDAOInterface {
             ArrayList<RoomBean> list = new ArrayList<RoomBean>();
 
             int roomID;
-            float currentKW, currentcubicmeter;
+            String roomstatus;
             //String status;
 
             while (resultSet.next()) {
                 roomID = resultSet.getInt("roomID");
-                currentKW = resultSet.getFloat("currentKW");
-                currentcubicmeter = resultSet.getFloat("currentcubicmeter");
+                roomstatus = resultSet.getString("status");
                 //status = resultSet.getString("status");
 
                 bean = new RoomBean();
 
-                bean.setCurrentKW(currentKW);
-                bean.setCurrentcubicmeter(currentcubicmeter);
+                bean.setStatus(roomstatus);
                 bean.setRoomID(roomID);
                 //bean.setStatus(status);
 
@@ -149,17 +121,15 @@ public class RoomDAOImplementation implements RoomDAOInterface {
             ArrayList<RoomBean> list = new ArrayList<RoomBean>();
 
             int currroomID;
-            float currentKW, currentcubicmeter;
+            String curroomstatus;
             //String status;
 
             while (resultSet.next()) {
                 currroomID = resultSet.getInt("roomID");
-                currentKW = resultSet.getFloat("currentKW");
-                currentcubicmeter = resultSet.getFloat("currentcubicmeter");
+                curroomstatus = resultSet.getString("status");
                 //status = resultSet.getString("status");
 
-                bean.setCurrentKW(currentKW);
-                bean.setCurrentcubicmeter(currentcubicmeter);
+                bean.setStatus(curroomstatus);
                 bean.setRoomID(roomID);
                 //bean.setStatus(status);
 
@@ -281,6 +251,50 @@ public class RoomDAOImplementation implements RoomDAOInterface {
         } catch (SQLException ex) {
             Logger.getLogger(RoomDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return false;
+    }
+
+    @Override
+    public boolean setUnoccupied(RoomBean room) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+
+            String query = "update room set status = ? where roomID = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            
+            ps.setString(1, "Unoccupied");
+            ps.setInt(2, room.getRoomID());
+            ps.executeUpdate();
+            connection.close();
+
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean setOccupied(RoomBean room) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+
+            String query = "update room set status = ? where roomID = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            
+            ps.setString(1, "Occupied");
+            ps.setInt(2, room.getRoomID());
+            ps.executeUpdate();
+            connection.close();
+
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return false;
     }
 

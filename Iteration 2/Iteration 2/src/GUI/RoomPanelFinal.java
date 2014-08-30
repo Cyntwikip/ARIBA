@@ -292,6 +292,7 @@ public class RoomPanelFinal extends javax.swing.JPanel {
             String fname = tempString.substring(index + 2);
 
             RoomBean rbean = rdao.getRoomByRoomID(roomID);
+            
 
             //System.out.println(roomID);
             TenantBean tbean = tdao.getTenantByName(fname, lname);
@@ -451,8 +452,7 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         RoomDAOInterface rdao = new RoomDAOImplementation();
         RoomBean rbean = new RoomBean();
         ArrayList<RoomBean> rbeanlist = new ArrayList<RoomBean>();
-        rbean.setCurrentKW(0);
-        rbean.setCurrentcubicmeter(0);
+        rbean.setStatus("Unoccupied");
 
         rbeanlist = rdao.getAllRooms();
 

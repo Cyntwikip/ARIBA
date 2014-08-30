@@ -71,40 +71,6 @@ LOCK TABLES `attendancelog` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `bill`
---
-
-DROP TABLE IF EXISTS `bill`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bill` (
-  `billID` int(11) NOT NULL AUTO_INCREMENT,
-  `bill_roomID` int(11) NOT NULL,
-  `price` double NOT NULL,
-  `paidRent` tinyint(1) NOT NULL,
-  `paidWater` tinyint(1) NOT NULL,
-  `paidElectric` tinyint(1) NOT NULL,
-  `totalwaterconsumption` float NOT NULL,
-  `totalelectricityconsumption` float NOT NULL,
-  `roomprice` float NOT NULL,
-  `surcharge` float DEFAULT NULL,
-  `date` datetime NOT NULL,
-  PRIMARY KEY (`billID`),
-  KEY `roomID_idx` (`bill_roomID`),
-  CONSTRAINT `bill_roomID` FOREIGN KEY (`bill_roomID`) REFERENCES `room` (`roomID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bill`
---
-
-LOCK TABLES `bill` WRITE;
-/*!40000 ALTER TABLE `bill` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bill` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `contract`
 --
 
@@ -132,6 +98,32 @@ LOCK TABLES `contract` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `dormbill`
+--
+
+DROP TABLE IF EXISTS `dormbill`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `dormbill` (
+  `dbill_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `waterconsumption` float NOT NULL,
+  `electricityconsumption` float NOT NULL,
+  `totalwaterprice` float NOT NULL,
+  `totalelectricityprice` float NOT NULL,
+  PRIMARY KEY (`dbill_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `dormbill`
+--
+
+LOCK TABLES `dormbill` WRITE;
+/*!40000 ALTER TABLE `dormbill` DISABLE KEYS */;
+/*!40000 ALTER TABLE `dormbill` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `electricreading`
 --
 
@@ -140,12 +132,14 @@ DROP TABLE IF EXISTS `electricreading`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `electricreading` (
   `electric_billID` int(11) NOT NULL AUTO_INCREMENT,
+  `electric_roomID` int(11) NOT NULL,
   `currentKW` float NOT NULL,
-  `priceperKW` float NOT NULL,
-  `price` float NOT NULL,
-  `dateRead` date DEFAULT NULL,
-  KEY `billID_idx` (`electric_billID`),
-  CONSTRAINT `electricID` FOREIGN KEY (`electric_billID`) REFERENCES `bill` (`billID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  `dateRead` date NOT NULL,
+  `datePaid` datetime DEFAULT NULL,
+  `status` varchar(15) NOT NULL DEFAULT 'Unpaid',
+  PRIMARY KEY (`electric_billID`),
+  KEY `roomID_idx` (`electric_roomID`),
+  CONSTRAINT `roomID` FOREIGN KEY (`electric_roomID`) REFERENCES `room` (`roomID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -193,8 +187,7 @@ DROP TABLE IF EXISTS `room`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `room` (
   `roomID` int(11) NOT NULL AUTO_INCREMENT,
-  `currentKW` float NOT NULL,
-  `currentcubicmeter` float NOT NULL,
+  `status` varchar(15) NOT NULL DEFAULT 'Unoccupied',
   PRIMARY KEY (`roomID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -205,8 +198,38 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES (1,0,0),(2,0,0),(3,0,0),(4,0,0),(5,0,0),(6,0,0),(7,0,0),(8,0,0),(9,0,0),(10,0,0),(11,0,0),(12,0,0),(13,0,0),(14,0,0),(15,0,0),(16,0,0),(17,0,0),(18,0,0),(19,0,0),(20,0,0),(21,0,0),(22,0,0),(23,0,0),(24,0,0),(25,0,0),(26,0,0),(27,0,0),(28,0,0),(29,0,0),(30,0,0),(31,0,0),(32,0,0),(33,0,0),(34,0,0),(35,0,0),(36,0,0),(37,0,0),(38,0,0),(39,0,0),(40,0,0),(41,0,0),(42,0,0),(43,0,0),(44,0,0),(45,0,0),(46,0,0),(47,0,0),(48,0,0),(49,0,0),(50,0,0);
+INSERT INTO `room` VALUES (1,'Unoccupied'),(2,'Unoccupied'),(3,'Unoccupied'),(4,'Unoccupied'),(5,'Unoccupied'),(6,'Unoccupied'),(7,'Unoccupied'),(8,'Unoccupied'),(9,'Unoccupied'),(10,'Unoccupied'),(11,'Unoccupied'),(12,'Unoccupied'),(13,'Unoccupied'),(14,'Unoccupied'),(15,'Unoccupied'),(16,'Unoccupied'),(17,'Unoccupied'),(18,'Unoccupied'),(19,'Unoccupied'),(20,'Unoccupied'),(21,'Unoccupied'),(22,'Unoccupied'),(23,'Unoccupied'),(24,'Unoccupied'),(25,'Unoccupied'),(26,'Unoccupied'),(27,'Unoccupied'),(28,'Unoccupied'),(29,'Unoccupied'),(30,'Unoccupied'),(31,'Unoccupied'),(32,'Unoccupied'),(33,'Unoccupied'),(34,'Unoccupied'),(35,'Unoccupied'),(36,'Unoccupied'),(37,'Unoccupied'),(38,'Unoccupied'),(39,'Unoccupied'),(40,'Unoccupied'),(41,'Unoccupied'),(42,'Unoccupied'),(43,'Unoccupied'),(44,'Unoccupied'),(45,'Unoccupied'),(46,'Unoccupied'),(47,'Unoccupied'),(48,'Unoccupied'),(49,'Unoccupied'),(50,'Unoccupied');
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `roombill`
+--
+
+DROP TABLE IF EXISTS `roombill`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `roombill` (
+  `billID` int(11) NOT NULL AUTO_INCREMENT,
+  `bill_roomID` int(11) NOT NULL,
+  `roomprice` float NOT NULL,
+  `surcharge` float DEFAULT NULL,
+  `dateRead` datetime NOT NULL,
+  `datePaid` datetime DEFAULT NULL,
+  `status` varchar(15) NOT NULL DEFAULT 'Unpaid',
+  PRIMARY KEY (`billID`),
+  KEY `roomID_idx` (`bill_roomID`),
+  CONSTRAINT `bill_roomID` FOREIGN KEY (`bill_roomID`) REFERENCES `room` (`roomID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `roombill`
+--
+
+LOCK TABLES `roombill` WRITE;
+/*!40000 ALTER TABLE `roombill` DISABLE KEYS */;
+/*!40000 ALTER TABLE `roombill` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -305,13 +328,16 @@ DROP TABLE IF EXISTS `waterreading`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `waterreading` (
-  `water_billID` int(11) NOT NULL,
+  `water_billID` int(11) NOT NULL AUTO_INCREMENT,
+  `water_roomID` int(11) NOT NULL,
   `currentcubicpermeter` float NOT NULL,
-  `pricepercubicmeter` float NOT NULL,
-  `price` float NOT NULL,
-  `dateRead` date DEFAULT NULL,
-  KEY `billID_idx` (`water_billID`),
-  CONSTRAINT `waterID` FOREIGN KEY (`water_billID`) REFERENCES `bill` (`billID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  `dateRead` date NOT NULL,
+  `datePaid` datetime DEFAULT NULL,
+  `status` varchar(15) NOT NULL DEFAULT 'Unpaid',
+  PRIMARY KEY (`water_billID`),
+  KEY `roomID_idx` (`water_roomID`),
+  KEY `water_roomID_idx` (`water_roomID`),
+  CONSTRAINT `water_roomID` FOREIGN KEY (`water_roomID`) REFERENCES `room` (`roomID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -333,4 +359,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-30  1:15:24
+-- Dump completed on 2014-08-30  3:34:59

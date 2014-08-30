@@ -18,7 +18,6 @@ import java.util.ArrayList;
 public interface RoomDAOInterface {
     
     public boolean addRoom(RoomBean room);
-    public boolean editRoom(RoomBean room, int roomID);
     public boolean assignTenanttoRoom(TenantBean tenant, RoomBean room, ContractBean contract);
     public ArrayList<RoomBean> getAllRooms();
     public RoomBean getRoomByRoomID(int roomID);
@@ -26,4 +25,7 @@ public interface RoomDAOInterface {
     public int checkRoomCount(int roomID);
     public ArrayList<RoomBean> viewAvailbleRooms();
     public boolean removeTenantToRoom(int tenantID, int roomID);
+    public boolean setUnoccupied(RoomBean room);
+    public boolean setOccupied(RoomBean room);
+    
 }

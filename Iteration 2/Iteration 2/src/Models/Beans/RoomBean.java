@@ -13,30 +13,35 @@ package Models.Beans;
 public class RoomBean {
     
     private int roomID;
-    private float currentKW;
-    private float currentcubicmeter;
+    private String status;
 
-    public float getCurrentKW() {
-        return currentKW;
-    }
-
-    public float getCurrentcubicmeter() {
-        return currentcubicmeter;
-    }
-
+    /**
+     * @return the roomID
+     */
     public int getRoomID() {
         return roomID;
     }
 
-    public void setCurrentKW(float currentKW) {
-        this.currentKW = currentKW;
-    }
-
-    public void setCurrentcubicmeter(float currentcubicmeter) {
-        this.currentcubicmeter = currentcubicmeter;
-    }
-
+    /**
+     * @param roomID the roomID to set
+     */
     public void setRoomID(int roomID) {
         this.roomID = roomID;
     }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+   
 }
