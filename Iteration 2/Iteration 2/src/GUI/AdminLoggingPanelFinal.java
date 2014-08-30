@@ -250,7 +250,7 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
                 
                 if(check) {
                     //successful
-                    jLabel2.setText("Hi! "+firstName.getText()+" "+lastName.getText());
+                    jLabel2.setText("Hi! "+bean.getFname()+" "+bean.getLname());
         
                 }
                 else {
