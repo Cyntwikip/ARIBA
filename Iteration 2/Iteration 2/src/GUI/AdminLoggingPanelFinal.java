@@ -216,18 +216,48 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        AdminDAOImplementation admindao = new AdminDAOImplementation();
+        AdminBean bean = new AdminBean();
+        AdminBean beanDB = admindao.getAdminByID(adminBean.getAdminID());
+        boolean check;
         
         JLabel jUserName = new JLabel("Username:");
-        JTextField userName = new JTextField();
+        JTextField userName = new JTextField(beanDB.getUsername());
      
         JLabel jFirstName = new JLabel("First name: ");
-        JTextField firstName = new JTextField();
+        JTextField firstName = new JTextField(beanDB.getFname());
         
         JLabel jLastName = new JLabel("Last name: ");
-        JTextField lastName = new JTextField();
+        JTextField lastName = new JTextField(beanDB.getLname());
         
         JLabel jPassword = new JLabel("Password");
-        JTextField password = new JPasswordField();
+        JTextField password = new JPasswordField(beanDB.getPassword());
+        
+        Object[] ob = {jUserName, userName, jFirstName, firstName, jLastName, lastName, jPassword, password};
+        int result = JOptionPane.showConfirmDialog(null, ob, "Admin Login", JOptionPane.OK_CANCEL_OPTION);
+        
+        if(result == JOptionPane.OK_OPTION) {
+            if(userName == null || password == null) {
+                
+            }
+            else {
+                bean.setFname(firstName.getText());
+                bean.setLname(lastName.getText());
+                bean.setPassword(password.getText());
+                bean.setUsername(userName.getText());
+                bean.setAdminID(adminBean.getAdminID());
+                check = admindao.editAdmin(bean, adminBean.getAdminID());
+                
+                if(check) {
+                    //successful
+                    jLabel2.setText("Hi! "+firstName.getText()+" "+lastName.getText());
+        
+                }
+                else {
+                    //unsuccessful
+                }
+            }
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -259,7 +289,7 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
             } else {
                 AdminDAOImplementation admindao = new AdminDAOImplementation();
                 
-                bean.setFname(userName.getText());
+                bean.setFname(firstName.getText());
                 bean.setLname(lastName.getText());
                 bean.setPassword(password.getText());
                 bean.setUsername(userName.getText());
