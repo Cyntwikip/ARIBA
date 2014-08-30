@@ -205,7 +205,9 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
 
         if (result == JOptionPane.OK_OPTION) {
             if (userName == null || password == null) {
-
+                this.removeAll();
+                jPanel2 = new AdminLoggingPanelFinal();
+                setJpanel();
             } else {
                 AdminDAOImplementation admindao = new AdminDAOImplementation();
                 boolean check = admindao.verifyAdmin(userName.getText(), password.getText());
@@ -213,14 +215,16 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
                     this.removeAll();
                     jPanel2 = new AdminLoggingPanelFinal();
                     setJpanel();
-                }
-                else {
+                } else {
+                    this.removeAll();
+                    jPanel2 = new AdminLoggingPanelFinal();
+                    setJpanel();
                     /*
-                    JLabel incorrect = new JLabel("The username or password you entered is incorrect.");
-                    incorrect.setForeground(Color.RED);
-                    Object[] obj = {jUserName, userName, jPassword, password, incorrect};
-                    result = JOptionPane.showConfirmDialog(null, obj, "Admin Login", JOptionPane.OK_CANCEL_OPTION);
-                    */
+                     JLabel incorrect = new JLabel("The username or password you entered is incorrect.");
+                     incorrect.setForeground(Color.RED);
+                     Object[] obj = {jUserName, userName, jPassword, password, incorrect};
+                     result = JOptionPane.showConfirmDialog(null, obj, "Admin Login", JOptionPane.OK_CANCEL_OPTION);
+                     */
                 }
 
             }
@@ -329,8 +333,7 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
                 logbean.setTimeLogged(time);
                 logbean.setIsIn(false);
 
-                if (logdao.addAttendanceLogDAOInterface(logbean)) 
-                {
+                if (logdao.addAttendanceLogDAOInterface(logbean)) {
                     JOptionPane.showMessageDialog(null, "You are now out.");
                     jTextField1.setText("");
                     jPasswordField1.setText("");

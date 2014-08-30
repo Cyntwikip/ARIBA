@@ -5,14 +5,20 @@
  */
 package GUI;
 
+import Models.Beans.AdminBean;
 import Models.Beans.AttendanceLogBean;
 import Models.Beans.TenantBean;
+import Models.DAOImplementation.AdminDAOImplementation;
 import Models.DAOImplementation.AttendanceLogDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
 import Models.DAOInterface.AttendanceLogDAOInterface;
 import Models.DAOInterface.TenantDAOInterface;
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,7 +43,7 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         Calendar c = Calendar.getInstance();
 
         System.out.println(c.getTime());
-        
+
         jButton3.setBackground(java.awt.Color.GREEN);
     }
 
@@ -136,6 +142,7 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 596));
@@ -194,6 +201,10 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         jPanel1.add(jButton3);
         jButton3.setBounds(30, 340, 140, 40);
 
+        jLabel3.setText("<admin name here>");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(40, 70, 130, 40);
+
         add(jPanel1);
         jPanel1.setBounds(50, 20, 190, 450);
 
@@ -210,6 +221,52 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        // create new admin
+
+        JLabel jUserName = new JLabel("Username:");
+        JTextField userName = new JTextField();
+     
+        JLabel jFirstName = new JLabel("First name: ");
+        JTextField firstName = new JTextField();
+        
+        JLabel jLastName = new JLabel("Last name: ");
+        JTextField lastName = new JTextField();
+        
+        JLabel jPassword = new JLabel("Password");
+        JTextField password = new JPasswordField();
+        
+        Object[] ob = {jUserName, userName, jFirstName, firstName, jLastName, lastName, jPassword, password};
+        int result = JOptionPane.showConfirmDialog(null, ob, "Admin Login", JOptionPane.OK_CANCEL_OPTION);
+
+        AdminBean bean = new AdminBean();
+        
+        if (result == JOptionPane.OK_OPTION) {
+            if (userName == null || password == null ) {
+               // 
+                System.out.println("Here");
+            
+            } else {
+                AdminDAOImplementation admindao = new AdminDAOImplementation();
+                
+                bean.setFname(userName.getText());
+                bean.setLname(lastName.getText());
+                bean.setPassword(password.getText());
+                bean.setUsername(userName.getText());
+                if (admindao.addAdmin(bean)) {
+                    System.out.println("successful");
+                } else {
+                    System.out.println("not successful.");
+                    /*
+                     JLabel incorrect = new JLabel("The username or password you entered is incorrect.");
+                     incorrect.setForeground(Color.RED);
+                     Object[] obj = {jUserName, userName, jPassword, password, incorrect};
+                     result = JOptionPane.showConfirmDialog(null, obj, "Admin Login", JOptionPane.OK_CANCEL_OPTION);
+                     */
+                }
+
+            }
+        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -232,6 +289,7 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
