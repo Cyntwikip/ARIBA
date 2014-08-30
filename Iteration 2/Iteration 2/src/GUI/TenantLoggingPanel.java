@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Models.Beans.AdminBean;
 import Models.Beans.AttendanceLogBean;
 import Models.Beans.TenantBean;
 import Models.DAOImplementation.AdminDAOImplementation;
@@ -203,21 +204,25 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
         Object[] ob = {jUserName, userName, jPassword, password};
         int result = JOptionPane.showConfirmDialog(null, ob, "Admin Login", JOptionPane.OK_CANCEL_OPTION);
 
+        AdminDAOImplementation admindao = new AdminDAOImplementation();
+        AdminBean bean = new AdminBean();
+        
         if (result == JOptionPane.OK_OPTION) {
+            bean = admindao.getAdmin(userName.getText());
             if (userName == null || password == null) {
                 this.removeAll();
-                jPanel2 = new AdminLoggingPanelFinal();
+                jPanel2 = new AdminLoggingPanelFinal(bean);
                 setJpanel();
             } else {
-                AdminDAOImplementation admindao = new AdminDAOImplementation();
+                
                 boolean check = admindao.verifyAdmin(userName.getText(), password.getText());
                 if (check) {
                     this.removeAll();
-                    jPanel2 = new AdminLoggingPanelFinal();
+                    jPanel2 = new AdminLoggingPanelFinal(bean);
                     setJpanel();
                 } else {
                     this.removeAll();
-                    jPanel2 = new AdminLoggingPanelFinal();
+                    jPanel2 = new AdminLoggingPanelFinal(bean);
                     setJpanel();
                     /*
                      JLabel incorrect = new JLabel("The username or password you entered is incorrect.");

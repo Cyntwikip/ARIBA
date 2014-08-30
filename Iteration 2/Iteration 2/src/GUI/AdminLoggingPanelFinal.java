@@ -33,10 +33,14 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
     private AttendanceLogDAOInterface logdao = new AttendanceLogDAOImplementation();
     private DefaultTableModel model;
     private Object[] obj = {"", "", ""};
+    private AdminBean adminBean;
 
-    public AdminLoggingPanelFinal() {
+    public AdminLoggingPanelFinal(AdminBean bean) {
         initComponents();
-
+        
+        adminBean = bean;
+        jLabel2.setText("Hi! "+adminBean.getFname()+" "+adminBean.getLname());
+        
         model = (DefaultTableModel) jTable1.getModel();
         updateTable();
 
@@ -142,7 +146,6 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 596));
@@ -201,10 +204,6 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         jPanel1.add(jButton3);
         jButton3.setBounds(30, 340, 140, 40);
 
-        jLabel3.setText("<admin name here>");
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(40, 70, 130, 40);
-
         add(jPanel1);
         jPanel1.setBounds(50, 20, 190, 450);
 
@@ -217,6 +216,18 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        
+        JLabel jUserName = new JLabel("Username:");
+        JTextField userName = new JTextField();
+     
+        JLabel jFirstName = new JLabel("First name: ");
+        JTextField firstName = new JTextField();
+        
+        JLabel jLastName = new JLabel("Last name: ");
+        JTextField lastName = new JTextField();
+        
+        JLabel jPassword = new JLabel("Password");
+        JTextField password = new JPasswordField();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -289,7 +300,6 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
