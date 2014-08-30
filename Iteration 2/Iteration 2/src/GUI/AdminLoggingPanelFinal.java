@@ -157,6 +157,11 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         jScrollPane1.setBounds(250, 20, 690, 460);
 
         jButton4.setText("Logout");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         add(jButton4);
         jButton4.setBounds(830, 510, 100, 30);
 
@@ -196,7 +201,7 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         jLabel1.setOpaque(true);
         jLabel1.setPreferredSize(new java.awt.Dimension(1000, 596));
         add(jLabel1);
-        jLabel1.setBounds(0, 0, 1010, 600);
+        jLabel1.setBounds(0, 0, 1000, 590);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -207,6 +212,19 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        this.removeAll();
+        jPanel1 = new TenantLoggingPanel();
+        setJpanel();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    public void setJpanel() {
+        jPanel1.setPreferredSize(new java.awt.Dimension(1000, 600));
+        this.add(jPanel1);
+        jPanel1.setOpaque(true);
+        jPanel1.setBounds(0, 10, 1000, 600);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
