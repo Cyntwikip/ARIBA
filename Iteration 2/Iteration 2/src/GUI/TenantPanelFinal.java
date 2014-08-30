@@ -407,7 +407,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
             }
         });
         add(NameField);
-        NameField.setBounds(110, 180, 120, 20);
+        NameField.setBounds(110, 170, 120, 30);
 
         SchoolField.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         SchoolField.addActionListener(new java.awt.event.ActionListener() {
@@ -421,7 +421,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
             }
         });
         add(SchoolField);
-        SchoolField.setBounds(110, 210, 120, 20);
+        SchoolField.setBounds(110, 200, 120, 30);
 
         DegreeField.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         DegreeField.addActionListener(new java.awt.event.ActionListener() {
@@ -435,7 +435,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
             }
         });
         add(DegreeField);
-        DegreeField.setBounds(110, 240, 120, 19);
+        DegreeField.setBounds(110, 229, 120, 30);
 
         YearOfGraduationField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -443,7 +443,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
             }
         });
         add(YearOfGraduationField);
-        YearOfGraduationField.setBounds(110, 270, 70, 20);
+        YearOfGraduationField.setBounds(110, 260, 70, 30);
 
         MaleField.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         MaleField.setText("Male");
@@ -465,7 +465,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
             }
         });
         add(FemaleField);
-        FemaleField.setBounds(170, 290, 80, 30);
+        FemaleField.setBounds(160, 290, 80, 30);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/AddTenant.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
