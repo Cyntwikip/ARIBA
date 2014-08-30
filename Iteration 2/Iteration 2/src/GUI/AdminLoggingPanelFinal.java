@@ -13,6 +13,7 @@ import Models.DAOImplementation.AttendanceLogDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
 import Models.DAOInterface.AttendanceLogDAOInterface;
 import Models.DAOInterface.TenantDAOInterface;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.JLabel;
@@ -37,97 +38,39 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
 
     public AdminLoggingPanelFinal(AdminBean bean) {
         initComponents();
-        
-        adminBean = bean;
-        jLabel2.setText("Hi! "+adminBean.getFname()+" "+adminBean.getLname());
-        
-        model = (DefaultTableModel) jTable1.getModel();
-        updateTable();
+
+        //      adminBean = bean;
+//        jLabel2.setText("Hi! " + adminBean.getFname() + " " + adminBean.getLname());
+        model = (DefaultTableModel) jTable2.getModel();
 
         Calendar c = Calendar.getInstance();
 
         System.out.println(c.getTime());
 
         jButton3.setBackground(java.awt.Color.GREEN);
-    }
 
-    public void updateTable() {
-        AttendanceLogBean abean = new AttendanceLogBean();
-        AttendanceLogBean in = new AttendanceLogBean();
-        AttendanceLogBean out = new AttendanceLogBean();
-        ArrayList<AttendanceLogBean> alist = new ArrayList<AttendanceLogBean>();
-        ArrayList<TenantBean> tlist = new ArrayList<TenantBean>();
+        buttonGroup1.add(jRadioButton1);
+        buttonGroup1.add(jRadioButton2);
+        buttonGroup1.add(jRadioButton3);
 
-        TenantBean tbean = new TenantBean();
+        ArrayList<TenantBean> tb = new ArrayList<TenantBean>();
         TenantDAOInterface tdao = new TenantDAOImplementation();
+        tb = tdao.getAllTenants();
+        String fname, lname;
+        int id;
 
-        tlist = tdao.getAllTenants();
-        System.out.println(tlist.size());
-        for (int i = 0; i < tlist.size(); i++) {
-            tbean = tlist.get(i);
-            System.out.println(tbean.getFname());
-            in = logdao.getLatestLoginByTenant(tbean.getTenantID());
-            out = logdao.getLatestLogoutByTenant(tbean.getTenantID());
-            String lname = tbean.getLname();
-            String fname = tbean.getFname();
-            String tenantid = Integer.toString(tbean.getTenantID());
-            if (in == null && out == null) {
+        jComboBox1.addItem("Choose one");
 
-                Object[] obj = {tenantid + "-" + lname + ", " + fname, "", ""};
-                model.addRow(obj);
-            } else if (out == null) {
-                Object[] obj = {tenantid + "-" + lname + ", " + fname, in.getTimeLogged(), " "};
-                model.addRow(obj);
-            } else if (in == null) {
-                Object[] obj = {tenantid + "-" + lname + ", " + fname, " ", out.getTimeLogged()};
-                model.addRow(obj);
-            } else {
-                Object[] obj = {tenantid + "-" + lname + ", " + fname, in.getTimeLogged(), out.getTimeLogged()};
-                model.addRow(obj);
-            }
-        }
-    }
+        for (int i = 0; i < tb.size(); i++) {
+            id = tb.get(i).getTenantID();
+            fname = tb.get(i).getFname();
+            lname = tb.get(i).getLname();
 
-    public void updateTable1() {
-
-        model.getDataVector().removeAllElements();
-        model.fireTableDataChanged();
-        AttendanceLogBean abean = new AttendanceLogBean();
-        AttendanceLogBean in = new AttendanceLogBean();
-        AttendanceLogBean out = new AttendanceLogBean();
-        ArrayList<AttendanceLogBean> alist = new ArrayList<AttendanceLogBean>();
-        ArrayList<TenantBean> tlist = new ArrayList<TenantBean>();
-
-        TenantBean tbean = new TenantBean();
-        TenantDAOInterface tdao = new TenantDAOImplementation();
-
-        alist = logdao.getLogsToday();
-        tlist = tdao.getAllTenants();
-
-        for (int i = 0; i < tlist.size(); i++) {
-            tbean = tlist.get(i);
-
-            in = logdao.getLatestLoginByTenant(tbean.getTenantID());
-            out = logdao.getLatestLogoutByTenant(tbean.getTenantID());
-            String lname = tbean.getLname();
-            String fname = tbean.getFname();
-            String tenantid = Integer.toString(tbean.getTenantID());
-            if (in == null && out == null) {
-
-                Object[] obj = {tenantid + "-" + lname + ", " + fname, "", ""};
-                model.addRow(obj);
-            } else if (out == null) {
-                Object[] obj = {tenantid + "-" + lname + ", " + fname, in.getTimeLogged(), " "};
-                model.addRow(obj);
-            } else if (in == null) {
-                Object[] obj = {tenantid + "-" + lname + ", " + fname, " ", out.getTimeLogged()};
-                model.addRow(obj);
-            } else {
-                Object[] obj = {tenantid + "-" + lname + ", " + fname, in.getTimeLogged(), out.getTimeLogged()};
-                model.addRow(obj);
-            }
+            String id1 = String.valueOf(id);
+            jComboBox1.addItem(id1 + ": " + lname + ", " + fname);
 
         }
+
     }
 
     /**
@@ -139,32 +82,25 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jButton4 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jComboBox1 = new javax.swing.JComboBox();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 596));
         setMinimumSize(new java.awt.Dimension(1000, 596));
         setPreferredSize(new java.awt.Dimension(1000, 596));
         setLayout(null);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Name", "Time - IN", "Time - OUT"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        add(jScrollPane1);
-        jScrollPane1.setBounds(250, 20, 690, 460);
 
         jButton4.setText("Logout");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -173,7 +109,7 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
             }
         });
         add(jButton4);
-        jButton4.setBounds(830, 510, 100, 30);
+        jButton4.setBounds(710, 500, 100, 30);
 
         jPanel1.setLayout(null);
 
@@ -204,8 +140,63 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         jPanel1.add(jButton3);
         jButton3.setBounds(30, 340, 140, 40);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setText("Search by:");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(20, 70, 110, 15);
+
+        jRadioButton1.setText("Log in");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jRadioButton1);
+        jRadioButton1.setBounds(20, 90, 80, 23);
+
+        jRadioButton2.setText("Log out");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jRadioButton2);
+        jRadioButton2.setBounds(20, 120, 90, 23);
+
+        jRadioButton3.setText("Name");
+        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jRadioButton3);
+        jRadioButton3.setBounds(20, 150, 80, 23);
+
+        jComboBox1.setMaximumRowCount(500);
+        jComboBox1.setEnabled(false);
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox1);
+        jComboBox1.setBounds(20, 180, 160, 20);
+
         add(jPanel1);
         jPanel1.setBounds(50, 20, 190, 450);
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", ""
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        add(jScrollPane2);
+        jScrollPane2.setBounds(400, 20, 490, 450);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/logging-tab-peg-clear-panel.png"))); // NOI18N
         jLabel1.setOpaque(true);
@@ -220,40 +211,38 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         AdminBean bean = new AdminBean();
         AdminBean beanDB = admindao.getAdminByID(adminBean.getAdminID());
         boolean check;
-        
+
         JLabel jUserName = new JLabel("Username:");
         JTextField userName = new JTextField(beanDB.getUsername());
-     
+
         JLabel jFirstName = new JLabel("First name: ");
         JTextField firstName = new JTextField(beanDB.getFname());
-        
+
         JLabel jLastName = new JLabel("Last name: ");
         JTextField lastName = new JTextField(beanDB.getLname());
-        
+
         JLabel jPassword = new JLabel("Password");
         JTextField password = new JPasswordField(beanDB.getPassword());
-        
+
         Object[] ob = {jUserName, userName, jFirstName, firstName, jLastName, lastName, jPassword, password};
         int result = JOptionPane.showConfirmDialog(null, ob, "Admin Login", JOptionPane.OK_CANCEL_OPTION);
-        
-        if(result == JOptionPane.OK_OPTION) {
-            if(userName == null || password == null) {
-                
-            }
-            else {
+
+        if (result == JOptionPane.OK_OPTION) {
+            if (userName == null || password == null) {
+
+            } else {
                 bean.setFname(firstName.getText());
                 bean.setLname(lastName.getText());
                 bean.setPassword(password.getText());
                 bean.setUsername(userName.getText());
                 bean.setAdminID(adminBean.getAdminID());
                 check = admindao.editAdmin(bean, adminBean.getAdminID());
-                
-                if(check) {
+
+                if (check) {
                     //successful
-                    jLabel2.setText("Hi! "+bean.getFname()+" "+bean.getLname());
-        
-                }
-                else {
+                    jLabel2.setText("Hi! " + bean.getFname() + " " + bean.getLname());
+
+                } else {
                     //unsuccessful
                 }
             }
@@ -266,29 +255,29 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
 
         JLabel jUserName = new JLabel("Username:");
         JTextField userName = new JTextField();
-     
+
         JLabel jFirstName = new JLabel("First name: ");
         JTextField firstName = new JTextField();
-        
+
         JLabel jLastName = new JLabel("Last name: ");
         JTextField lastName = new JTextField();
-        
+
         JLabel jPassword = new JLabel("Password");
         JTextField password = new JPasswordField();
-        
+
         Object[] ob = {jUserName, userName, jFirstName, firstName, jLastName, lastName, jPassword, password};
         int result = JOptionPane.showConfirmDialog(null, ob, "Admin Login", JOptionPane.OK_CANCEL_OPTION);
 
         AdminBean bean = new AdminBean();
-        
+
         if (result == JOptionPane.OK_OPTION) {
-            if (userName == null || password == null ) {
-               // 
+            if (userName == null || password == null) {
+                // 
                 System.out.println("Here");
-            
+
             } else {
                 AdminDAOImplementation admindao = new AdminDAOImplementation();
-                
+
                 bean.setFname(firstName.getText());
                 bean.setLname(lastName.getText());
                 bean.setPassword(password.getText());
@@ -317,6 +306,39 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         setJpanel();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+        // TODO add your handling code here:
+
+        jComboBox1.setEnabled(true);
+    }//GEN-LAST:event_jRadioButton3ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+        jComboBox1.setEnabled(false);
+
+        searchLogin();
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+        jComboBox1.setEnabled(false);
+
+        searchLogout();
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+
+        int selected = jComboBox1.getSelectedIndex();
+        System.out.println(selected);
+
+        TenantBean tb = new TenantBean();
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+        tb = tdao.getTenantById(selected);
+
+        setTable(selected);
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
     public void setJpanel() {
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 600));
         this.add(jPanel1);
@@ -324,14 +346,109 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         jPanel1.setBounds(0, 10, 1000, 600);
     }
 
+    public void searchLogin() {
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+
+        AttendanceLogDAOInterface ldao = new AttendanceLogDAOImplementation();
+        ArrayList<AttendanceLogBean> abean = new ArrayList<AttendanceLogBean>();
+        TenantBean tb = new TenantBean();
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+        abean = ldao.getLogsToday();
+        SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss");
+
+        for (int i = 0; i < abean.size(); i++) {
+
+            if (abean.get(i).getIsIn()) {
+                tb = tdao.getTenantById(abean.get(i).getLog_tenantID());
+
+                java.sql.Timestamp ts = abean.get(i).getTimeLogged();
+                int microFraction = ts.getNanos() / 1000;
+
+                StringBuilder sb = new StringBuilder(fmt.format(ts));
+
+                System.out.println(sb.toString());
+                Object[] obj = {tb.getLname() + ", " + tb.getFname(), sb};
+                model.addRow(obj);
+            }
+
+        }
+
+    }
+
+    public void searchLogout() {
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+
+        AttendanceLogDAOInterface ldao = new AttendanceLogDAOImplementation();
+        ArrayList<AttendanceLogBean> abean = new ArrayList<AttendanceLogBean>();
+        TenantBean tb = new TenantBean();
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+        abean = ldao.getLogsToday();
+        SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss");
+
+        for (int i = 0; i < abean.size(); i++) {
+
+            if (!abean.get(i).getIsIn()) {
+                tb = tdao.getTenantById(abean.get(i).getLog_tenantID());
+
+                java.sql.Timestamp ts = abean.get(i).getTimeLogged();
+                int microFraction = ts.getNanos() / 1000;
+
+                StringBuilder sb = new StringBuilder(fmt.format(ts));
+
+                System.out.println(sb.toString());
+                Object[] obj = {tb.getLname() + ", " + tb.getFname(), sb};
+                model.addRow(obj);
+            }
+
+        }
+
+    }
+
+    public void setTable(int id) {
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+
+        AttendanceLogDAOInterface ldao = new AttendanceLogDAOImplementation();
+        ArrayList<AttendanceLogBean> abean = new ArrayList<AttendanceLogBean>();
+        TenantBean tb = new TenantBean();
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+        abean = ldao.getAllAtendanceLogsTodayByTenantID(id);
+        SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss");
+
+        for (int i = 0; i < abean.size(); i++) {
+
+                tb = tdao.getTenantById(abean.get(i).getLog_tenantID());
+
+                java.sql.Timestamp ts = abean.get(i).getTimeLogged();
+                int microFraction = ts.getNanos() / 1000;
+
+                StringBuilder sb = new StringBuilder(fmt.format(ts));
+
+                System.out.println(sb.toString());
+                Object[] obj = {tb.getLname() + ", " + tb.getFname(), sb};
+                model.addRow(obj);
+           
+
+        }
+
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }

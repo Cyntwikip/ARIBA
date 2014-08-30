@@ -25,6 +25,7 @@ public interface AttendanceLogDAOInterface {
     public ArrayList<AttendanceLogBean> getLogsToday();
     public ArrayList<AttendanceLogBean> getAllLogs(); //needed ba to haha
     public ArrayList<AttendanceLogBean> getAllAtendanceLogsByTenantID(int log_tenantID);
+    public ArrayList<AttendanceLogBean> getAllAtendanceLogsTodayByTenantID(int tenantID);
     public ArrayList<AttendanceLogBean> checkLogin();
     public ArrayList<AttendanceLogBean> checkLogout();
 }
