@@ -85,7 +85,8 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         model2.fireTableDataChanged();
 
         ArrayList<RoomBean> availablerooms = rdao.getAllRooms();
-        int roomID, count;
+        int roomID, count=0;
+        
 
         for (int i = 0; i < availablerooms.size(); i++) {
             roomID = availablerooms.get(i).getRoomID();
@@ -95,6 +96,18 @@ public class RoomPanelFinal extends javax.swing.JPanel {
                 model2.addRow(obj);
             }
         }
+        
+        for(int j=0; j<availablerooms.size(); j++) {
+            roomID = availablerooms.get(j).getRoomID();
+            count = rdao.checkRoomCount(roomID);
+            if(count>0) {
+                rdao.setOccupied(availablerooms.get(j));
+            }
+            else {
+                rdao.setUnoccupied(availablerooms.get(j));
+            }
+        }
+        
         jTable2.requestFocus();
         jTable2.changeSelection(0, 0, false, false);
     }
