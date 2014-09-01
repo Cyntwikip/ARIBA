@@ -41,7 +41,7 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         initComponents();
 
         adminBean = bean;
-//        jLabel2.setText("Hi! " + adminBean.getFname() + " " + adminBean.getLname());
+        jLabel2.setText("Hi! " + adminBean.getFname() + " " + adminBean.getLname());
         model = (DefaultTableModel) jTable2.getModel();
 
         Calendar c = Calendar.getInstance();

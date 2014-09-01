@@ -165,6 +165,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
             yearofgrad.setText(String.valueOf(bean.getExpectedyearofgrad()));
             DateFormat date = new SimpleDateFormat("MMMM d, yyyy");
             birthday.setText(date.format(bean.getBirthday()));
+            status.setText(bean.getStatus());
 
             GuardianDAOInterface gdao = new GuardianDAOImplementation();
             GuardianBean gbean = new GuardianBean();
