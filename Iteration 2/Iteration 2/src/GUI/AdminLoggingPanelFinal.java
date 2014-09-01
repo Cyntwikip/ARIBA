@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -196,7 +197,7 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         jScrollPane2.setViewportView(jTable2);
 
         add(jScrollPane2);
-        jScrollPane2.setBounds(400, 20, 490, 450);
+        jScrollPane2.setBounds(440, 40, 490, 450);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/logging-tab-peg-clear-panel.png"))); // NOI18N
         jLabel1.setOpaque(true);
@@ -309,11 +310,31 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
         // TODO add your handling code here:
 
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+
+        if (jTable2.getColumnCount() == 3) {
+
+        } else {
+
+            TableColumn c = new TableColumn();
+            c.setHeaderValue("Log out Time");
+            jTable2.getColumnModel().addColumn(c);
+        }
         jComboBox1.setEnabled(true);
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
+
+        System.out.println(jTable2.getColumnCount());
+        if (jTable2.getColumnCount() == 3) {
+            TableColumn tcol = jTable2.getColumnModel().getColumn(jTable2.getColumnCount() - 1);
+            jTable2.removeColumn(tcol);
+
+            model.getDataVector().removeAllElements();
+            model.fireTableDataChanged();
+        }
         jComboBox1.setEnabled(false);
 
         searchLogin();
@@ -321,6 +342,14 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
+
+        if (jTable2.getColumnCount() == 3) {
+            TableColumn tcol = jTable2.getColumnModel().getColumn(jTable2.getColumnCount() - 1);
+            jTable2.removeColumn(tcol);
+
+            model.getDataVector().removeAllElements();
+            model.fireTableDataChanged();
+        }
         jComboBox1.setEnabled(false);
 
         searchLogout();
@@ -332,11 +361,23 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         int selected = jComboBox1.getSelectedIndex();
         System.out.println(selected);
 
-        TenantBean tb = new TenantBean();
-        TenantDAOInterface tdao = new TenantDAOImplementation();
-        tb = tdao.getTenantById(selected);
+        String id1 = (String) jComboBox1.getSelectedItem();
 
-        setTable(selected);
+        if (!id1.equals("Choose one")) {
+            String id = id1.substring(0, id1.indexOf(":"));
+
+            int idfin = Integer.valueOf(id);
+            System.out.println("ID" + id);
+            TenantBean tb = new TenantBean();
+            TenantDAOInterface tdao = new TenantDAOImplementation();
+            tb = tdao.getTenantById(idfin);
+
+            setTable(idfin);
+        } else {
+            model.getDataVector().removeAllElements();
+            model.fireTableDataChanged();
+
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     public void setJpanel() {
@@ -411,30 +452,58 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         model.fireTableDataChanged();
 
         AttendanceLogDAOInterface ldao = new AttendanceLogDAOImplementation();
+        ArrayList<AttendanceLogBean> abeanin = new ArrayList<AttendanceLogBean>();
+        ArrayList<AttendanceLogBean> abeanout = new ArrayList<AttendanceLogBean>();
         ArrayList<AttendanceLogBean> abean = new ArrayList<AttendanceLogBean>();
+        AttendanceLogBean temp = new AttendanceLogBean();
         TenantBean tb = new TenantBean();
         TenantDAOInterface tdao = new TenantDAOImplementation();
+        abeanin = ldao.getAllLogInByTenant(id);
+        abeanout = ldao.getAllLogOutByTenant(id);
         abean = ldao.getAllAtendanceLogsTodayByTenantID(id);
         SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss");
 
-        for (int i = 0; i < abean.size(); i++) {
+        int size = 0;
+        if (abeanin.size() > abeanout.size()) {
+            size = abeanin.size();
+        } else {
+            size = abeanout.size();
+        }
+        System.out.println("table column" + jTable2.getColumnCount());
+        for (int i = 0; i < size; i++) {
 
-                tb = tdao.getTenantById(abean.get(i).getLog_tenantID());
+            tb = tdao.getTenantById(abean.get(i).getLog_tenantID());
 
-                java.sql.Timestamp ts = abean.get(i).getTimeLogged();
-                int microFraction = ts.getNanos() / 1000;
+            java.sql.Timestamp ts = abeanin.get(i).getTimeLogged();
+            int microFraction = ts.getNanos() / 1000;
+            StringBuilder sb = new StringBuilder(fmt.format(ts)); //log in
 
-                StringBuilder sb = new StringBuilder(fmt.format(ts));
+            if (abeanin.get(i) == null && abeanout.get(i) != null) {
+                Object[] tenant = {tb.getLname() + ", " + tb.getFname(), sb, ""};
+                model.addRow(tenant);
 
-                System.out.println(sb.toString());
-                Object[] obj = {tb.getLname() + ", " + tb.getFname(), sb};
-                model.addRow(obj);
-           
+            } else if (abeanin.get(i) != null && abeanout.get(i) == null) {
+
+                java.sql.Timestamp ts1 = abeanout.get(i).getTimeLogged();
+                int microFraction1 = ts1.getNanos() / 1000;
+                StringBuilder sb1 = new StringBuilder(fmt.format(ts1)); //log out
+
+                Object[] tenant = {tb.getLname() + ", " + tb.getFname(), "", sb1};
+                model.addRow(tenant);
+
+            } else {
+
+                java.sql.Timestamp ts1 = abeanout.get(i).getTimeLogged();
+                int microFraction1 = ts1.getNanos() / 1000;
+                StringBuilder sb1 = new StringBuilder(fmt.format(ts1)); //log out
+
+                Object[] tenant = {tb.getLname() + ", " + tb.getFname(), sb, sb1};
+                model.addRow(tenant);
+
+            }
 
         }
-
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton2;

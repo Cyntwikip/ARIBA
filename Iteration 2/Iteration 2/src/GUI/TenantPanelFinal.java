@@ -854,20 +854,20 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         gemaillabel.setLocation(20, 340);
         gemail.show();
         gemail.setLocation(130, 340);
-
+      
         editbutton.setLocation(70, 400);
-        backbutton.show();
         backbutton.setEnabled(true);
+        backbutton.show();
         completebutton.hide();
         getSelection();
     }//GEN-LAST:event_completebuttonActionPerformed
 
     private void backbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbuttonActionPerformed
         // TODO add your handling code here:
-        
+
         completebutton.show();
         backbutton.hide();
-        backbutton.setEnabled(false);
+        backbutton.setEnabled(true);
         initBasicInfo();
     }//GEN-LAST:event_backbuttonActionPerformed
 
