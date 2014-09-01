@@ -51,8 +51,6 @@ public class MainMenuFinal extends javax.swing.JFrame {
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                 DateFormat date_format = new SimpleDateFormat("MMMM d, yyyy");
 
-                System.out.println(sdf.format(cal.getTime()));
-
                 jLabel2.setText(date_format.format(cal.getTime()) + " - " + sdf.format(cal.getTime()));
 
             }
