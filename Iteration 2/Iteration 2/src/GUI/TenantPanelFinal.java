@@ -49,6 +49,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
     public TenantPanelFinal() {
         initComponents();
 
+        backbutton.hide();
         initBasicInfo();
 
         model = (DefaultTableModel) jTable1.getModel();
@@ -61,7 +62,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
             YearOfGraduationField.addItem(i);
         }
         initTable();
-        
+
     }
 
     public void initBasicInfo() {
@@ -92,7 +93,6 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         lnamelabel.setLocation(20, 80);
         lname.setLocation(120, 80);
 
-       
         inoutlabel.setLocation(20, 120);
         inout.setLocation(120, 120);
 
@@ -134,7 +134,6 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         int row = jTable1.getSelectedRow();
         int col = 0;
 
-        
         int tenantid = (Integer) jTable1.getModel().getValueAt(row, col);
 
         TenantDAOInterface tdao = new TenantDAOImplementation();
@@ -199,8 +198,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
             } else if (lbean == null & lbean1 != null) {
                 inout.setText("OUT");
-                    System.out.println("Second");
-            
+                System.out.println("Second");
 
                 SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss");
                 java.sql.Timestamp ts = lbean1.getTimeLogged();
@@ -213,8 +211,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
                 logtime.setText(sb.toString());
             } else if (lbean1 == null && lbean != null) {
                 inout.setText("IN");
-                    System.out.println("Third");
-            
+                System.out.println("Third");
 
                 SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss");
                 java.sql.Timestamp ts = lbean.getTimeLogged();
@@ -227,8 +224,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
                 logtime.setText(sb.toString());
             } else if (lbean.getLogID() > lbean1.getLogID()) { // login
                 inout.setText("IN");
-                    System.out.println("fourth");
-            
+                System.out.println("fourth");
 
                 SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss");
                 java.sql.Timestamp ts = lbean.getTimeLogged();
@@ -242,8 +238,8 @@ public class TenantPanelFinal extends javax.swing.JPanel {
             } else {
                 inout.setText("OUT");
 
-                    System.out.println("fifth");
-            
+                System.out.println("fifth");
+
                 SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss");
                 java.sql.Timestamp ts = lbean1.getTimeLogged();
                 int microFraction = ts.getNanos() / 1000;
@@ -252,11 +248,10 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
                 System.out.println(sb.toString());
             }
-        }else{
+        } else {
             System.out.println("no tenant selected");
         }
     }
-    
 
     public void searchName() {
         String name = NameField.getText();
@@ -389,6 +384,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         gname = new javax.swing.JLabel();
         gnum = new javax.swing.JLabel();
         gemail = new javax.swing.JLabel();
+        backbutton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 596));
@@ -585,15 +581,17 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         contactno.setBounds(110, 140, 200, 14);
 
         completebutton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/viewcompletedetails.png"))); // NOI18N
+        completebutton.setContentAreaFilled(false);
         completebutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 completebuttonActionPerformed(evt);
             }
         });
         jPanel1.add(completebutton);
-        completebutton.setBounds(70, 360, 170, 40);
+        completebutton.setBounds(80, 330, 170, 40);
 
         editbutton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/edit_information button.png"))); // NOI18N
+        editbutton.setContentAreaFilled(false);
         editbutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editbuttonActionPerformed(evt);
@@ -681,6 +679,17 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         gemail.setText("jLabel34");
         jPanel1.add(gemail);
         gemail.setBounds(110, 340, 190, 14);
+
+        backbutton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/backbutton.png"))); // NOI18N
+        backbutton.setContentAreaFilled(false);
+        backbutton.setEnabled(false);
+        backbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backbuttonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(backbutton);
+        backbutton.setBounds(100, 360, 115, 40);
 
         add(jPanel1);
         jPanel1.setBounds(640, 100, 310, 450);
@@ -846,11 +855,21 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         gemail.show();
         gemail.setLocation(130, 340);
 
-        completebutton.setLocation(70, 360);
         editbutton.setLocation(70, 400);
-
+        backbutton.show();
+        backbutton.setEnabled(true);
+        completebutton.hide();
         getSelection();
     }//GEN-LAST:event_completebuttonActionPerformed
+
+    private void backbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbuttonActionPerformed
+        // TODO add your handling code here:
+        
+        completebutton.show();
+        backbutton.hide();
+        backbutton.setEnabled(false);
+        initBasicInfo();
+    }//GEN-LAST:event_backbuttonActionPerformed
 
     public void setJpanel() {
         jPanel2.setPreferredSize(new java.awt.Dimension(1000, 600));
@@ -875,6 +894,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
     private javax.swing.JComboBox YearOfGraduationField;
     private javax.swing.JLabel address;
     private javax.swing.JLabel addresslabel;
+    private javax.swing.JButton backbutton;
     private javax.swing.JLabel birthday;
     private javax.swing.JLabel birthdaylabel;
     private javax.swing.JButton completebutton;
