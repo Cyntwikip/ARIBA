@@ -5,11 +5,15 @@
  */
 package GUI;
 
+import Models.Beans.RoomBillBean;
+import Models.DAOImplementation.RoomBillDAOImplementation;
+import Models.DAOInterface.RoomBillDAOInterface;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -35,6 +39,10 @@ public class MainMenuFinal extends javax.swing.JFrame {
     private JPanel jPanel2;
     private JPanel jPanel3;
     private int cnt = 0;
+    private boolean checksurcharge = false;
+    private RoomBillBean roombill = new RoomBillBean();
+    private ArrayList<RoomBillBean> roombilllist = new ArrayList<RoomBillBean>();
+    private RoomBillDAOInterface roombillbeandao = new RoomBillDAOImplementation();
 
     public MainMenuFinal() {
         initComponents();
@@ -50,8 +58,24 @@ public class MainMenuFinal extends javax.swing.JFrame {
                 cal.getTime();
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                 DateFormat date_format = new SimpleDateFormat("MMMM d, yyyy");
+                DateFormat day_format = new SimpleDateFormat("d");
 
                 jLabel2.setText(date_format.format(cal.getTime()) + " - " + sdf.format(cal.getTime()));
+
+                // add surcharge
+                // get all not paid
+                roombilllist = roombillbeandao.getAllNotPaidRooms();
+                System.out.println(day_format.format(cal.getTime()));
+                
+
+                if (day_format.format(cal.getTime()).equals("15") && !checksurcharge) {
+                    for (int i = 0; i < roombilllist.size(); i++) {
+                        roombillbeandao.addSurcharge(roombilllist.get(i));
+                    }
+                    checksurcharge = true;
+                }else{
+                    checksurcharge = false;
+                }
 
             }
 
@@ -156,14 +180,17 @@ public class MainMenuFinal extends javax.swing.JFrame {
         jPanel1.add(jButton7);
         jButton7.setBounds(630, 480, 90, 50);
 
+        jPanel4.setBackground(new java.awt.Color(204, 204, 204));
         jPanel4.setLayout(null);
 
+        jLabel2.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("jLabel2");
         jPanel4.add(jLabel2);
-        jLabel2.setBounds(10, 4, 270, 20);
+        jLabel2.setBounds(10, 0, 270, 30);
 
         jPanel1.add(jPanel4);
-        jPanel4.setBounds(580, 10, 280, 30);
+        jPanel4.setBounds(570, 20, 280, 30);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/tenant-tab-final.png"))); // NOI18N
         jLabel1.setOpaque(true);

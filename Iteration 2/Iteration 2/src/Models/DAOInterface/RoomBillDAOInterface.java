@@ -24,5 +24,6 @@ public interface RoomBillDAOInterface {
     public ArrayList<RoomBillBean> getAllBills();
     public ArrayList<RoomBillBean> getAllPaidRooms();
     public ArrayList<RoomBillBean> getAllNotPaidRooms();
+    public boolean addSurcharge (RoomBillBean roombill);
     
 }

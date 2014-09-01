@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Models.Beans;
 
 import java.sql.Date;
@@ -13,10 +12,9 @@ import java.sql.Date;
  * @author User
  */
 public class WaterReadingBean {
+
     private int water_billID;
-    private int water_roomID;
     private float currentcubicpermeter;
-    private Date dateRead;
     private Date datePaid;
     private String status;
 
@@ -35,20 +33,6 @@ public class WaterReadingBean {
     }
 
     /**
-     * @return the water_roomID
-     */
-    public int getWater_roomID() {
-        return water_roomID;
-    }
-
-    /**
-     * @param water_roomID the water_roomID to set
-     */
-    public void setWater_roomID(int water_roomID) {
-        this.water_roomID = water_roomID;
-    }
-
-    /**
      * @return the currentcubicpermeter
      */
     public float getCurrentcubicpermeter() {
@@ -61,21 +45,6 @@ public class WaterReadingBean {
     public void setCurrentcubicpermeter(float currentcubicpermeter) {
         this.currentcubicpermeter = currentcubicpermeter;
     }
-
-    /**
-     * @return the dateRead
-     */
-    public Date getDateRead() {
-        return dateRead;
-    }
-
-    /**
-     * @param dateRead the dateRead to set
-     */
-    public void setDateRead(Date dateRead) {
-        this.dateRead = dateRead;
-    }
-
     /**
      * @return the datePaid
      */
@@ -103,7 +72,5 @@ public class WaterReadingBean {
     public void setStatus(String status) {
         this.status = status;
     }
-    
-    
-    
+
 }
