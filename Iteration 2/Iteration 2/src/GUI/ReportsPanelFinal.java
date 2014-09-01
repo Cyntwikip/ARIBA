@@ -116,6 +116,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/viewgrad.png"))); // NOI18N
         jButton4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton4.setContentAreaFilled(false);
         jButton4.setMinimumSize(new java.awt.Dimension(221, 47));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,6 +127,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         jButton4.setBounds(80, 140, 170, 40);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/viewcontractdate.png"))); // NOI18N
+        jButton5.setContentAreaFilled(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -135,6 +137,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         jButton5.setBounds(80, 180, 170, 40);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/renew.png"))); // NOI18N
+        jButton6.setContentAreaFilled(false);
         jButton6.setEnabled(false);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,6 +148,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         jButton6.setBounds(100, 330, 110, 50);
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/end.png"))); // NOI18N
+        jButton7.setContentAreaFilled(false);
         jButton7.setEnabled(false);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,8 +235,8 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
 
         int year = Calendar.getInstance().get(Calendar.YEAR);
 
-        //ArrayList<TenantBean> tlist = tdao.getTenantByExpectedYearofGrad(year);
-        ArrayList<TenantBean> tlist = tdao.getAllTenants();
+        ArrayList<TenantBean> tlist = tdao.getTenantByExpectedYearofGrad(year);
+    //    ArrayList<TenantBean> tlist = tdao.getAllTenants();
         
         for (int i = 0; i < tlist.size(); i++) {
             //deleteToRoom(tlist.get(i));
