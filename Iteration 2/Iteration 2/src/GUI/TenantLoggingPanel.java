@@ -206,24 +206,21 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
 
         AdminDAOImplementation admindao = new AdminDAOImplementation();
         AdminBean bean = new AdminBean();
-        
+
         if (result == JOptionPane.OK_OPTION) {
             bean = admindao.getAdmin(userName.getText());
             if (userName == null || password == null) {
-                this.removeAll();
-                jPanel2 = new AdminLoggingPanelFinal(bean);
-                setJpanel();
+
+                JOptionPane.showMessageDialog(null, "Invalid admin.");
             } else {
-                
+
                 boolean check = admindao.verifyAdmin(userName.getText(), password.getText());
                 if (check) {
                     this.removeAll();
                     jPanel2 = new AdminLoggingPanelFinal(bean);
                     setJpanel();
                 } else {
-                    this.removeAll();
-                    jPanel2 = new AdminLoggingPanelFinal(bean);
-                    setJpanel();
+                    JOptionPane.showMessageDialog(null, "Invalid admin.");
                     /*
                      JLabel incorrect = new JLabel("The username or password you entered is incorrect.");
                      incorrect.setForeground(Color.RED);
@@ -233,6 +230,9 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
                 }
 
             }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid admin.");
 
         }
 
