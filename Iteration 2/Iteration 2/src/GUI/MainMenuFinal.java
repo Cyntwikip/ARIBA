@@ -6,9 +6,15 @@
 package GUI;
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 /**
  *
@@ -28,14 +34,33 @@ public class MainMenuFinal extends javax.swing.JFrame {
     private RoomPanelFinal roompanelfinal;
     private JPanel jPanel2;
     private JPanel jPanel3;
+    private int cnt = 0;
 
     public MainMenuFinal() {
         initComponents();
 
         jPanel2 = new TenantPanelFinal();
         setJpanel();
-        // setContentPane(jPanel1);
-        //     jPanel1.add(jScrollPane1);
+
+        ActionListener actListner = new ActionListener() {
+
+            public void actionPerformed(ActionEvent event) {
+
+                Calendar cal = Calendar.getInstance();
+                cal.getTime();
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                DateFormat date_format = new SimpleDateFormat("MMMM d, yyyy");
+
+                System.out.println(sdf.format(cal.getTime()));
+
+                jLabel2.setText(date_format.format(cal.getTime()) + " - " + sdf.format(cal.getTime()));
+
+            }
+
+        };
+        Timer timer = new Timer(1000, actListner);
+
+        timer.start();
 
     }
 
@@ -61,8 +86,10 @@ public class MainMenuFinal extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1010, 670));
@@ -121,11 +148,6 @@ public class MainMenuFinal extends javax.swing.JFrame {
         jPanel1.add(jButton5);
         jButton5.setBounds(460, 20, 110, 30);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/tenant-tab-final.png"))); // NOI18N
-        jLabel1.setOpaque(true);
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 1010, 50);
-
         jButton7.setContentAreaFilled(false);
         jButton7.setEnabled(false);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -135,6 +157,20 @@ public class MainMenuFinal extends javax.swing.JFrame {
         });
         jPanel1.add(jButton7);
         jButton7.setBounds(630, 480, 90, 50);
+
+        jPanel4.setLayout(null);
+
+        jLabel2.setText("jLabel2");
+        jPanel4.add(jLabel2);
+        jLabel2.setBounds(10, 4, 270, 20);
+
+        jPanel1.add(jPanel4);
+        jPanel4.setBounds(580, 10, 280, 30);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/tenant-tab-final.png"))); // NOI18N
+        jLabel1.setOpaque(true);
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(0, 0, 1010, 50);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1000, 630);
@@ -207,16 +243,21 @@ public class MainMenuFinal extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainMenuFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainMenuFinal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainMenuFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainMenuFinal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainMenuFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainMenuFinal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainMenuFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainMenuFinal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -236,6 +277,8 @@ public class MainMenuFinal extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 }

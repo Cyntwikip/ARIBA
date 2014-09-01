@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -50,12 +51,15 @@ public class RoomDAOImplementation implements RoomDAOInterface {
             Connector c = new Connector();
             Connection connection = c.getConnection();
 
+            Calendar startdate = Calendar.getInstance();
+            java.sql.Date startDate = new java.sql.Date(startdate.getTime().getTime());
+            
             String query = "insert into tenantroom (tr_tenantID, tr_roomID, startDate) values (?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
 
             ps.setInt(1, tenant.getTenantID());
             ps.setInt(2, room.getRoomID());
-            ps.setDate(3, contract.getEffectivedate());
+            ps.setDate(3, startDate);
             ps.executeUpdate();
             connection.close();
 
@@ -252,9 +256,15 @@ public class RoomDAOImplementation implements RoomDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "delete from tenantroom where tr_tenantID = " + tenantID + " and tr_roomID = " + roomID;
+            String query = "update tenantroom set endDate = ? where tr_tenantID = ? and tr_roomID = ? and endDate=null";
             PreparedStatement ps = connection.prepareStatement(query);
 
+            Calendar enddate = Calendar.getInstance();
+            java.sql.Date endDate = new java.sql.Date(enddate.getTime().getTime());
+            
+            ps.setDate(1, endDate);
+            ps.setInt(2, tenantID);
+            ps.setInt(3, roomID);
             ps.executeQuery();
             connection.close();
             return true;

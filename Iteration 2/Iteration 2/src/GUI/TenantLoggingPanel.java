@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Models.Beans.AdminBean;
 import Models.Beans.AttendanceLogBean;
 import Models.Beans.TenantBean;
 import Models.DAOImplementation.AdminDAOImplementation;
@@ -203,27 +204,35 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
         Object[] ob = {jUserName, userName, jPassword, password};
         int result = JOptionPane.showConfirmDialog(null, ob, "Admin Login", JOptionPane.OK_CANCEL_OPTION);
 
+        AdminDAOImplementation admindao = new AdminDAOImplementation();
+        AdminBean bean = new AdminBean();
+
         if (result == JOptionPane.OK_OPTION) {
+            bean = admindao.getAdmin(userName.getText());
             if (userName == null || password == null) {
 
+                JOptionPane.showMessageDialog(null, "Invalid admin.");
             } else {
-                AdminDAOImplementation admindao = new AdminDAOImplementation();
+
                 boolean check = admindao.verifyAdmin(userName.getText(), password.getText());
                 if (check) {
                     this.removeAll();
-                    jPanel2 = new AdminLoggingPanelFinal();
+                    jPanel2 = new AdminLoggingPanelFinal(bean);
                     setJpanel();
-                }
-                else {
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid admin.");
                     /*
-                    JLabel incorrect = new JLabel("The username or password you entered is incorrect.");
-                    incorrect.setForeground(Color.RED);
-                    Object[] obj = {jUserName, userName, jPassword, password, incorrect};
-                    result = JOptionPane.showConfirmDialog(null, obj, "Admin Login", JOptionPane.OK_CANCEL_OPTION);
-                    */
+                     JLabel incorrect = new JLabel("The username or password you entered is incorrect.");
+                     incorrect.setForeground(Color.RED);
+                     Object[] obj = {jUserName, userName, jPassword, password, incorrect};
+                     result = JOptionPane.showConfirmDialog(null, obj, "Admin Login", JOptionPane.OK_CANCEL_OPTION);
+                     */
                 }
 
             }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid admin.");
 
         }
 
@@ -329,8 +338,7 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
                 logbean.setTimeLogged(time);
                 logbean.setIsIn(false);
 
-                if (logdao.addAttendanceLogDAOInterface(logbean)) 
-                {
+                if (logdao.addAttendanceLogDAOInterface(logbean)) {
                     JOptionPane.showMessageDialog(null, "You are now out.");
                     jTextField1.setText("");
                     jPasswordField1.setText("");
@@ -379,7 +387,7 @@ public class TenantLoggingPanel extends javax.swing.JPanel {
         jPanel2.setPreferredSize(new java.awt.Dimension(1000, 600));
         this.add(jPanel2);
         jPanel2.setOpaque(true);
-        jPanel2.setBounds(0, 45, 1000, 600);
+        jPanel2.setBounds(0, 10, 1000, 600);
     }
 
 

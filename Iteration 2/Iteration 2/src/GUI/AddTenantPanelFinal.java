@@ -121,9 +121,9 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         jPanel1.setOpaque(false);
         jPanel1.setLayout(null);
 
-        imgaddLabel.setText("             Choose photo");
+        imgaddLabel.setText("                Choose photo");
         jPanel1.add(imgaddLabel);
-        imgaddLabel.setBounds(70, 40, 160, 160);
+        imgaddLabel.setBounds(60, 40, 170, 170);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/choosephoto.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -379,6 +379,11 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 SurnameFieldFocusLost(evt);
+            }
+        });
+        SurnameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SurnameFieldActionPerformed(evt);
             }
         });
         SurnameField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1049,6 +1054,10 @@ public class AddTenantPanelFinal extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_jButton3MouseEntered
+
+    private void SurnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SurnameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SurnameFieldActionPerformed
 
     public void preventDigit(java.awt.event.KeyEvent evt) {
         char c = evt.getKeyChar();

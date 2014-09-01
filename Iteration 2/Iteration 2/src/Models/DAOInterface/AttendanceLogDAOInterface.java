@@ -22,9 +22,12 @@ public interface AttendanceLogDAOInterface {
     public boolean editAttendanceLog(AttendanceLogBean attendance);
     public AttendanceLogBean getLatestLoginByTenant(int tenantID);
     public AttendanceLogBean getLatestLogoutByTenant(int tenantID);
+    public ArrayList<AttendanceLogBean> getAllLogInByTenant(int tenantID);
+    public ArrayList<AttendanceLogBean> getAllLogOutByTenant(int tenantID);
     public ArrayList<AttendanceLogBean> getLogsToday();
     public ArrayList<AttendanceLogBean> getAllLogs(); //needed ba to haha
     public ArrayList<AttendanceLogBean> getAllAtendanceLogsByTenantID(int log_tenantID);
+    public ArrayList<AttendanceLogBean> getAllAtendanceLogsTodayByTenantID(int tenantID);
     public ArrayList<AttendanceLogBean> checkLogin();
     public ArrayList<AttendanceLogBean> checkLogout();
 }

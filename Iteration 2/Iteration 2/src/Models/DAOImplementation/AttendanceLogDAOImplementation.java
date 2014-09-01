@@ -87,6 +87,49 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
         return null;
 
     }
+    
+      @Override
+    public ArrayList<AttendanceLogBean> getAllAtendanceLogsTodayByTenantID(int tenantID) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from attendancelog where log_tenantID = ? and timeLogged >= CURDATE()";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, tenantID);
+            ResultSet resultSet = ps.executeQuery();
+
+            AttendanceLogBean bean = new AttendanceLogBean();
+            ArrayList<AttendanceLogBean> list = new ArrayList<AttendanceLogBean>();
+
+            int logID, log_tenantID;
+            boolean isIn;
+            Timestamp timeLogged;
+
+            while (resultSet.next()) {
+                logID = resultSet.getInt("logID");
+                log_tenantID = resultSet.getInt("log_tenantID");
+                isIn = resultSet.getBoolean("isIn");
+                timeLogged = resultSet.getTimestamp("timeLogged");
+
+                bean = new AttendanceLogBean();
+
+                bean.setLogID(logID);
+                bean.setLog_tenantID(log_tenantID);
+                bean.setIsIn(isIn);
+                bean.setTimeLogged(timeLogged);
+
+                list.add(bean);
+
+            }
+            connection.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(AttendanceLogDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
 
     @Override
     public ArrayList<AttendanceLogBean> getAllAtendanceLogsByTenantID(int log_tenantID) {
@@ -344,6 +387,92 @@ public class AttendanceLogDAOImplementation implements AttendanceLogDAOInterface
         }
         return null;
 
+    }
+
+    @Override
+    public ArrayList<AttendanceLogBean> getAllLogInByTenant(int tenantID) {
+     
+          try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from attendancelog where log_tenantID =  " + tenantID + " and isIn = 1 and timeLogged >= CURDATE()";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+
+            AttendanceLogBean bean = new AttendanceLogBean();
+            ArrayList<AttendanceLogBean> list = new ArrayList<AttendanceLogBean>();
+
+            int logID, log_tenantID;
+            boolean isIn;
+            Timestamp timeLogged;
+
+            while (resultSet.next()) {
+                logID = resultSet.getInt("logID");
+                log_tenantID = resultSet.getInt("log_tenantID");
+                isIn = resultSet.getBoolean("isIn");
+                timeLogged = resultSet.getTimestamp("timeLogged");
+
+                bean = new AttendanceLogBean();
+
+                bean.setLogID(logID);
+                bean.setLog_tenantID(log_tenantID);
+                bean.setIsIn(isIn);
+                bean.setTimeLogged(timeLogged);
+
+                list.add(bean);
+
+            }
+            connection.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(AttendanceLogDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
+
+    @Override
+    public ArrayList<AttendanceLogBean> getAllLogOutByTenant(int tenantID) {
+     
+     
+          try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from attendancelog where log_tenantID =  " + tenantID + " and isIn = 0 and timeLogged >= CURDATE()";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet resultSet = ps.executeQuery();
+
+            AttendanceLogBean bean = new AttendanceLogBean();
+            ArrayList<AttendanceLogBean> list = new ArrayList<AttendanceLogBean>();
+
+            int logID, log_tenantID;
+            boolean isIn;
+            Timestamp timeLogged;
+
+            while (resultSet.next()) {
+                logID = resultSet.getInt("logID");
+                log_tenantID = resultSet.getInt("log_tenantID");
+                isIn = resultSet.getBoolean("isIn");
+                timeLogged = resultSet.getTimestamp("timeLogged");
+
+                bean = new AttendanceLogBean();
+
+                bean.setLogID(logID);
+                bean.setLog_tenantID(log_tenantID);
+                bean.setIsIn(isIn);
+                bean.setTimeLogged(timeLogged);
+
+                list.add(bean);
+
+            }
+            connection.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(AttendanceLogDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
 }

@@ -15,7 +15,8 @@ import Models.Beans.AdminBean;
 public interface AdminDAOInterface {
     public boolean addAdmin(AdminBean bean);
     public boolean verifyAdmin(String username, String password);
-    public boolean editAdmin(AdminBean bean, String password);
+    public boolean editAdmin(AdminBean bean, int adminID);
     public AdminBean getAdmin(String username);
+    public AdminBean getAdminByID(int adminID);
     public boolean deleteAdmin(String username, String password);
 }
