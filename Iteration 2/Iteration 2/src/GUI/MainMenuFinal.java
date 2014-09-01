@@ -47,13 +47,14 @@ public class MainMenuFinal extends javax.swing.JFrame {
 
             public void actionPerformed(ActionEvent event) {
 
-         
                 Calendar cal = Calendar.getInstance();
                 cal.getTime();
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                DateFormat date_format = new SimpleDateFormat("MMMM d, yyyy");
+
                 System.out.println(sdf.format(cal.getTime()));
 
-                jLabel2.setText(sdf.format(cal.getTime()));
+                jLabel2.setText(date_format.format(cal.getTime()) + " - " + sdf.format(cal.getTime()));
 
             }
 
@@ -162,10 +163,10 @@ public class MainMenuFinal extends javax.swing.JFrame {
 
         jLabel2.setText("jLabel2");
         jPanel4.add(jLabel2);
-        jLabel2.setBounds(10, 4, 60, 20);
+        jLabel2.setBounds(10, 4, 270, 20);
 
         jPanel1.add(jPanel4);
-        jPanel4.setBounds(580, 10, 80, 30);
+        jPanel4.setBounds(580, 10, 280, 30);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/tenant-tab-final.png"))); // NOI18N
         jLabel1.setOpaque(true);
