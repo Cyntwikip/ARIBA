@@ -169,5 +169,39 @@ public class ContractDAOImplementation implements ContractDAOInterface {
         
         return null; 
     }
+
+    @Override
+    public ContractBean getLatestContractByTenantID(int contract_tenantID) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from contract where contract_tenantID = ? order by effectivedate DESC";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, contract_tenantID);
+            ResultSet resultSet = ps.executeQuery();
+            
+            ContractBean bean = new ContractBean();
+            
+            int contractID;
+            Date effectivedate, expirydate;
+            
+            while(resultSet.next()) {
+                contractID = resultSet.getInt("contractID");
+                effectivedate = resultSet.getDate("effectivedate");
+                expirydate = resultSet.getDate("expirydate");
+                
+                bean.setContractID(contractID);
+                bean.setContract_tenantID(contract_tenantID);
+                bean.setEffectivedate(effectivedate);
+                bean.setExpirydate(expirydate);
+                
+                return bean;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ContractDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
 }

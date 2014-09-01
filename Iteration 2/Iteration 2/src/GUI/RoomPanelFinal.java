@@ -21,12 +21,7 @@ import Models.DAOInterface.BillDAOInterface;
 import Models.DAOInterface.ElectricReadingDAOInterface;
 import Models.DAOInterface.RoomDAOInterface;
 import Models.DAOInterface.WaterReadingDAOInterface;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 

@@ -4,9 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/Models/DAOInterface/TenantDAOInterface.java</file>
-            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/AdminLoggingPanelFinal.java</file>
-            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/Models/DAOInterface/RoomDAOInterface.java</file>
-            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/Models/DAOInterface/WaterReadingDAOInterface.java</file>
+            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/ReportsPanelFinal.java</file>
+            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/Models/DAOImplementation/RoomDAOImplementation.java</file>
+            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/RoomPanelFinal.java</file>
         </group>
     </open-files>
 </project-private>
