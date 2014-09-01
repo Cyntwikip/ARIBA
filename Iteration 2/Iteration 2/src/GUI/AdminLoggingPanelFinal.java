@@ -40,7 +40,7 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
     public AdminLoggingPanelFinal(AdminBean bean) {
         initComponents();
 
-        //      adminBean = bean;
+        adminBean = bean;
 //        jLabel2.setText("Hi! " + adminBean.getFname() + " " + adminBean.getLname());
         model = (DefaultTableModel) jTable2.getModel();
 

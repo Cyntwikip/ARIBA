@@ -129,24 +129,14 @@ public class TenantBean {
     public void setTenantID(int tenantID) {
         this.tenantID = tenantID;
     }
-
-    /**
-     * @param image the image to set
-     */
     public void setImage(String image) {
         this.image = image;
     }
 
-    /**
-     * @return the blobimage
-     */
     public Blob getBlobimage() {
         return blobimage;
     }
 
-    /**
-     * @param blobimage the blobimage to set
-     */
     public void setBlobimage(Blob blobimage) {
         this.blobimage = blobimage;
     }
