@@ -86,17 +86,20 @@ public class RoomDAOImplementation implements RoomDAOInterface {
 
             int roomID;
             String roomstatus;
+            double roomprice;
             //String status;
 
             while (resultSet.next()) {
                 roomID = resultSet.getInt("roomID");
                 roomstatus = resultSet.getString("status");
+                roomprice = resultSet.getDouble("roomprice");
                 //status = resultSet.getString("status");
 
                 bean = new RoomBean();
 
                 bean.setStatus(roomstatus);
                 bean.setRoomID(roomID);
+                bean.setRoomprice(roomprice);
                 //bean.setStatus(status);
 
                 list.add(bean);
@@ -126,15 +129,18 @@ public class RoomDAOImplementation implements RoomDAOInterface {
 
             int currroomID;
             String curroomstatus;
+            double roomprice;
             //String status;
 
             while (resultSet.next()) {
                 currroomID = resultSet.getInt("roomID");
                 curroomstatus = resultSet.getString("status");
+                roomprice = resultSet.getDouble("roomprice");
                 //status = resultSet.getString("status");
 
                 bean.setStatus(curroomstatus);
                 bean.setRoomID(roomID);
+                bean.setRoomprice(roomprice);
                 //bean.setStatus(status);
 
             }
@@ -190,16 +196,21 @@ public class RoomDAOImplementation implements RoomDAOInterface {
             RoomBean bean = new RoomBean();
 
             int roomID;
-            float currentKW, currentcubicmeter;
+            String status;
+            double roomprice;
 
             while (resultSet.next()) {
                 roomID = resultSet.getInt("tr_roomID");
+                status = resultSet.getString("status");
+                roomprice = resultSet.getDouble("roomprice");
                 //currentKW = resultSet.getFloat("currentKW");
                 //currentcubicmeter = resultSet.getFloat("currentcubicmeter");
 
                 bean = new RoomBean();
 
                 bean.setRoomID(roomID);
+                bean.setStatus(status);
+                bean.setRoomprice(roomprice);
                 //bean.setCurrentKW(currentKW);
                 //bean.setCurrentcubicmeter(currentcubicmeter);
 
@@ -297,6 +308,67 @@ public class RoomDAOImplementation implements RoomDAOInterface {
             
             ps.setString(1, "Occupied");
             ps.setInt(2, room.getRoomID());
+            ps.executeUpdate();
+            connection.close();
+
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+
+    @Override
+    public ArrayList<RoomBean> getRoomByStatus(String status) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from room where status = ?";
+            PreparedStatement ps = connection.prepareStatement(query);           
+            ps.setString(1, status);
+            ResultSet resultSet = ps.executeQuery();
+            
+            RoomBean room = new RoomBean();
+            ArrayList<RoomBean> list = new ArrayList<>();
+            
+            int roomID;
+            String beanstatus;
+            double roomprice;
+            
+            while(resultSet.next()){
+                roomID = resultSet.getInt("roomID");
+                beanstatus = resultSet.getString("status");
+                roomprice = resultSet.getDouble("roomprice");
+                
+                room.setRoomID(roomID);
+                room.setStatus(beanstatus);
+                room.setRoomprice(roomprice);
+                
+                list.add(room);
+                      
+            }
+            connection.close();
+            return list;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
+    @Override
+    public boolean setPrice(int roomID, double price) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+
+            String query = "update room set roomprice = ? where roomID = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            
+            ps.setDouble(1, price);
+            ps.setInt(2, roomID);
             ps.executeUpdate();
             connection.close();
 

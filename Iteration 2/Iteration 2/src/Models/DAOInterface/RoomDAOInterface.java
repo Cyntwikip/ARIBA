@@ -27,5 +27,7 @@ public interface RoomDAOInterface {
     public boolean removeTenantToRoom(int tenantID, int roomID);
     public boolean setUnoccupied(RoomBean room);
     public boolean setOccupied(RoomBean room);
+    public ArrayList<RoomBean> getRoomByStatus(String status);
+    public boolean setPrice(int roomID, double price);
     
 }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Models.Beans;
 
 import java.sql.Date;
@@ -13,53 +12,68 @@ import java.sql.Date;
  * @author User
  */
 public class ElectricReadingBean {
-    
+
     private int electric_billID;
     private float currentKW;
-    private float priceperKW;
-    private float price;
-    private Date dateRead;
+    private Date datePaid;
+    private String status;
 
-    public float getCurrentKW() {
-        return currentKW;
-    }
-
-    public Date getDateRead() {
-        return dateRead;
-    }
-
+    /**
+     * @return the electric_billID
+     */
     public int getElectric_billID() {
         return electric_billID;
     }
 
-    public float getPrice() {
-        return price;
-    }
-
-    public float getPriceperKW() {
-        return priceperKW;
-    }
-
-    public void setCurrentKW(float currentKW) {
-        this.currentKW = currentKW;
-    }
-
-    public void setDateRead(Date dateRead) {
-        this.dateRead = dateRead;
-    }
-
+    /**
+     * @param electric_billID the electric_billID to set
+     */
     public void setElectric_billID(int electric_billID) {
         this.electric_billID = electric_billID;
     }
 
-    public void setPrice(float price) {
-        this.price = price;
+    /**
+     * @return the currentKW
+     */
+    public float getCurrentKW() {
+        return currentKW;
     }
 
-    public void setPriceperKW(float priceperKW) {
-        this.priceperKW = priceperKW;
+    /**
+     * @param currentKW the currentKW to set
+     */
+    public void setCurrentKW(float currentKW) {
+        this.currentKW = currentKW;
     }
+
+    /**
+     * @return the datePaid
+     */
+    public Date getDatePaid() {
+        return datePaid;
+    }
+
+    /**
+     * @param datePaid the datePaid to set
+     */
+    public void setDatePaid(Date datePaid) {
+        this.datePaid = datePaid;
+    }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     
-    
-    
+
 }

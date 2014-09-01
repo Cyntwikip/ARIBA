@@ -525,8 +525,6 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         jLabel14.setText("Gender");
         add(jLabel14);
         jLabel14.setBounds(70, 300, 50, 14);
-
-        imgLabel.setText("Picture");
         add(imgLabel);
         imgLabel.setBounds(840, 40, 100, 90);
 
@@ -536,50 +534,38 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         fnamelabel.setText("First Name:");
         jPanel1.add(fnamelabel);
         fnamelabel.setBounds(20, 40, 90, 14);
-
-        fname.setText("jLabel8");
         jPanel1.add(fname);
         fname.setBounds(110, 40, 200, 20);
 
         lnamelabel.setText("Last Name:");
         jPanel1.add(lnamelabel);
         lnamelabel.setBounds(20, 60, 80, 14);
-
-        lname.setText("jLabel9");
         jPanel1.add(lname);
-        lname.setBounds(110, 60, 200, 14);
+        lname.setBounds(110, 60, 200, 0);
 
         inoutlabel.setText("In/Out:");
         jPanel1.add(inoutlabel);
         inoutlabel.setBounds(20, 80, 70, 14);
-
-        inout.setText("jLabel10");
         jPanel1.add(inout);
         inout.setBounds(110, 74, 200, 20);
 
         logtimelabel.setText("Last Log Time:");
         jPanel1.add(logtimelabel);
         logtimelabel.setBounds(20, 100, 100, 14);
-
-        logtime.setText("jLabel10");
         jPanel1.add(logtime);
-        logtime.setBounds(110, 100, 200, 14);
+        logtime.setBounds(110, 100, 200, 0);
 
         roomnumberlabel.setText("Room Number:");
         jPanel1.add(roomnumberlabel);
         roomnumberlabel.setBounds(20, 120, 100, 14);
-
-        roomnumber.setText("jLabel10");
         jPanel1.add(roomnumber);
-        roomnumber.setBounds(110, 120, 200, 14);
+        roomnumber.setBounds(110, 120, 200, 0);
 
         contactnumberlabel.setText("Contact Number:");
         jPanel1.add(contactnumberlabel);
         contactnumberlabel.setBounds(20, 140, 110, 14);
-
-        contactno.setText("jLabel8");
         jPanel1.add(contactno);
-        contactno.setBounds(110, 140, 200, 14);
+        contactno.setBounds(110, 140, 200, 0);
 
         completebutton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/viewcompletedetails.png"))); // NOI18N
         completebutton.setContentAreaFilled(false);
@@ -589,7 +575,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(completebutton);
-        completebutton.setBounds(80, 330, 170, 40);
+        completebutton.setBounds(80, 360, 170, 40);
 
         editbutton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/edit_information button.png"))); // NOI18N
         editbutton.setContentAreaFilled(false);
@@ -604,58 +590,44 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         birthdaylabel.setText("Birthday:");
         jPanel1.add(birthdaylabel);
         birthdaylabel.setBounds(20, 160, 80, 14);
-
-        birthday.setText("jLabel16");
         jPanel1.add(birthday);
-        birthday.setBounds(110, 160, 200, 14);
+        birthday.setBounds(110, 160, 200, 0);
 
         genderlabel.setText("Gender:");
         jPanel1.add(genderlabel);
         genderlabel.setBounds(20, 180, 80, 14);
-
-        gender.setText("jLabel18");
         jPanel1.add(gender);
-        gender.setBounds(110, 180, 190, 14);
+        gender.setBounds(110, 180, 190, 0);
 
         emaillabel.setText("E-mail:");
         jPanel1.add(emaillabel);
         emaillabel.setBounds(20, 200, 70, 14);
-
-        email.setText("jLabel20");
         jPanel1.add(email);
-        email.setBounds(110, 200, 190, 14);
+        email.setBounds(110, 200, 190, 0);
 
         addresslabel.setText("Address:");
         jPanel1.add(addresslabel);
         addresslabel.setBounds(20, 220, 80, 14);
-
-        address.setText("jLabel22");
         jPanel1.add(address);
-        address.setBounds(110, 220, 190, 14);
+        address.setBounds(110, 220, 190, 0);
 
         schooldegreelabel.setText("School/Degree:");
         jPanel1.add(schooldegreelabel);
         schooldegreelabel.setBounds(20, 240, 90, 14);
-
-        schooldegree.setText("jLabel24");
         jPanel1.add(schooldegree);
-        schooldegree.setBounds(110, 240, 190, 14);
+        schooldegree.setBounds(110, 240, 190, 0);
 
         yearofgradlabel.setText("Year of Graduation:");
         jPanel1.add(yearofgradlabel);
         yearofgradlabel.setBounds(20, 260, 110, 14);
-
-        yearofgrad.setText("jLabel26");
         jPanel1.add(yearofgrad);
-        yearofgrad.setBounds(130, 260, 170, 14);
+        yearofgrad.setBounds(130, 260, 170, 0);
 
         statuslabel.setText("Status:");
         jPanel1.add(statuslabel);
         statuslabel.setBounds(20, 280, 60, 14);
-
-        status.setText("jLabel28");
         jPanel1.add(status);
-        status.setBounds(110, 280, 190, 14);
+        status.setBounds(110, 280, 190, 0);
 
         gnamelabel.setText("Guardian's Name:");
         jPanel1.add(gnamelabel);
@@ -668,18 +640,12 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         gemaillabel.setText("Guardian's E-mail:");
         jPanel1.add(gemaillabel);
         gemaillabel.setBounds(20, 340, 120, 14);
-
-        gname.setText("jLabel32");
         jPanel1.add(gname);
-        gname.setBounds(110, 300, 190, 14);
-
-        gnum.setText("jLabel33");
+        gname.setBounds(110, 300, 190, 0);
         jPanel1.add(gnum);
-        gnum.setBounds(170, 320, 130, 14);
-
-        gemail.setText("jLabel34");
+        gnum.setBounds(170, 320, 130, 0);
         jPanel1.add(gemail);
-        gemail.setBounds(110, 340, 190, 14);
+        gemail.setBounds(110, 340, 190, 0);
 
         backbutton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/backbutton.png"))); // NOI18N
         backbutton.setContentAreaFilled(false);
