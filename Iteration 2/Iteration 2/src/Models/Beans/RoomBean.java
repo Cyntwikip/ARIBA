@@ -14,6 +14,7 @@ public class RoomBean {
     
     private int roomID;
     private String status;
+    private double roomprice;
 
     /**
      * @return the roomID
@@ -41,6 +42,20 @@ public class RoomBean {
      */
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    /**
+     * @return the roomprice
+     */
+    public double getRoomprice() {
+        return roomprice;
+    }
+
+    /**
+     * @param roomprice the roomprice to set
+     */
+    public void setRoomprice(double roomprice) {
+        this.roomprice = roomprice;
     }
 
    

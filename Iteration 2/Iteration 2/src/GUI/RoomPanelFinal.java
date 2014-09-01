@@ -5,19 +5,19 @@
  */
 package GUI;
 
-import Models.Beans.BillBean;
+import Models.Beans.RoomBillBean;
 import Models.Beans.ContractBean;
 import Models.Beans.ElectricReadingBean;
 import Models.Beans.RoomBean;
 import Models.Beans.TenantBean;
 import Models.Beans.WaterReadingBean;
-import Models.DAOImplementation.BillDAOImplementation;
+import Models.DAOImplementation.RoomBillDAOImplementation;
 import Models.DAOImplementation.ContractDAOImplementation;
 import Models.DAOImplementation.ElectricReadingDAOImplementation;
 import Models.DAOImplementation.RoomDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
 import Models.DAOImplementation.WaterDAOImplementation;
-import Models.DAOInterface.BillDAOInterface;
+import Models.DAOInterface.RoomBillDAOInterface;
 import Models.DAOInterface.ElectricReadingDAOInterface;
 import Models.DAOInterface.RoomDAOInterface;
 import Models.DAOInterface.WaterReadingDAOInterface;
@@ -469,8 +469,8 @@ public class RoomPanelFinal extends javax.swing.JPanel {
 
         rbeanlist = rdao.getAllRooms();
 
-        BillDAOInterface bdao = new BillDAOImplementation();
-        BillBean bbean = new BillBean();
+        RoomBillDAOInterface bdao = new RoomBillDAOImplementation();
+        RoomBillBean bbean = new RoomBillBean();
         ArrayList<ElectricReadingBean> ebeanlist = new ArrayList<ElectricReadingBean>();
         ArrayList<WaterReadingBean> wbeanlist = new ArrayList<WaterReadingBean>();
         ElectricReadingBean ebean = new ElectricReadingBean();
@@ -479,12 +479,12 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         WaterReadingBean wbean = new WaterReadingBean();
         WaterReadingBean wbeantemp = new WaterReadingBean();
         WaterReadingDAOInterface wdao = new WaterDAOImplementation();
-        BillBean temp = bdao.getBillsByRoomID(rbeanlist.size());
+//        RoomBillBean temp = bdao.getBillsByRoomID(rbeanlist.size());
 
         System.out.println(rbeanlist.size());
-        if (temp != null) {
+       /* if (temp != null) {
             rdao.addRoom(rbean);
-
+            
             bbean.setBill_roomID(rbeanlist.size() + 1);
             bbean.setPaidElectric(false);
             bbean.setPaidRent(false);
@@ -516,12 +516,14 @@ public class RoomPanelFinal extends javax.swing.JPanel {
 
             wdao.addWaterReadingToRoom(wbean);
 //          wbean.setWater_billID(temp.getBillID()+1);
+                    
 
         } else {
             rdao.addRoom(rbean);
 
             System.out.println("add");
-        }
+        }*/
+        rdao.addRoom(rbean);
         updateAvailableRooms();
 
 

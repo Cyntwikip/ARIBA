@@ -5,15 +5,15 @@
  */
 package GUI;
 
-import Models.Beans.BillBean;
+import Models.Beans.RoomBillBean;
 import Models.Beans.ContractBean;
 import Models.Beans.RoomBean;
 import Models.Beans.TenantBean;
-import Models.DAOImplementation.BillDAOImplementation;
+import Models.DAOImplementation.RoomBillDAOImplementation;
 import Models.DAOImplementation.ContractDAOImplementation;
 import Models.DAOImplementation.RoomDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
-import Models.DAOInterface.BillDAOInterface;
+import Models.DAOInterface.RoomBillDAOInterface;
 import Models.DAOInterface.ContractDAOInterface;
 import Models.DAOInterface.RoomDAOInterface;
 import Models.DAOInterface.TenantDAOInterface;
@@ -177,9 +177,9 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         tc = tcm.getColumn(3);
         tc.setHeaderValue("Amount");
         th.repaint();
-        ArrayList<BillBean> bbeanlist = new ArrayList<BillBean>();
-        BillBean bbean = new BillBean();
-        BillDAOInterface bdao = new BillDAOImplementation();
+        ArrayList<RoomBillBean> bbeanlist = new ArrayList<RoomBillBean>();
+        RoomBillBean bbean = new RoomBillBean();
+        RoomBillDAOInterface bdao = new RoomBillDAOImplementation();
 
         ArrayList<RoomBean> rbeanlist = new ArrayList<RoomBean>();
         RoomBean rbean = new RoomBean();

@@ -31,7 +31,7 @@ CREATE TABLE `admin` (
   `username` varchar(45) NOT NULL,
   `password` varchar(20) NOT NULL,
   PRIMARY KEY (`adminID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,8 +108,9 @@ CREATE TABLE `dormbill` (
   `dbill_ID` int(11) NOT NULL AUTO_INCREMENT,
   `waterconsumption` float NOT NULL,
   `electricityconsumption` float NOT NULL,
-  `totalwaterprice` float NOT NULL,
-  `totalelectricityprice` float NOT NULL,
+  `totalwaterprice` double NOT NULL,
+  `totalelectricityprice` double NOT NULL,
+  `dateRead` datetime NOT NULL,
   PRIMARY KEY (`dbill_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -132,14 +133,10 @@ DROP TABLE IF EXISTS `electricreading`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `electricreading` (
   `electric_billID` int(11) NOT NULL AUTO_INCREMENT,
-  `electric_roomID` int(11) NOT NULL,
   `currentKW` float NOT NULL,
-  `dateRead` date NOT NULL,
   `datePaid` datetime DEFAULT NULL,
   `status` varchar(15) NOT NULL DEFAULT 'Unpaid',
-  PRIMARY KEY (`electric_billID`),
-  KEY `roomID_idx` (`electric_roomID`),
-  CONSTRAINT `roomID` FOREIGN KEY (`electric_roomID`) REFERENCES `room` (`roomID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`electric_billID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -188,6 +185,7 @@ DROP TABLE IF EXISTS `room`;
 CREATE TABLE `room` (
   `roomID` int(11) NOT NULL AUTO_INCREMENT,
   `status` varchar(15) NOT NULL DEFAULT 'Unoccupied',
+  `roomprice` double DEFAULT '0',
   PRIMARY KEY (`roomID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -198,7 +196,7 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES (1,'Unoccupied'),(2,'Unoccupied'),(3,'Unoccupied'),(4,'Unoccupied'),(5,'Unoccupied'),(6,'Unoccupied'),(7,'Unoccupied'),(8,'Unoccupied'),(9,'Unoccupied'),(10,'Unoccupied'),(11,'Unoccupied'),(12,'Unoccupied'),(13,'Unoccupied'),(14,'Unoccupied'),(15,'Unoccupied'),(16,'Unoccupied'),(17,'Unoccupied'),(18,'Unoccupied'),(19,'Unoccupied'),(20,'Unoccupied'),(21,'Unoccupied'),(22,'Unoccupied'),(23,'Unoccupied'),(24,'Unoccupied'),(25,'Unoccupied'),(26,'Unoccupied'),(27,'Unoccupied'),(28,'Unoccupied'),(29,'Unoccupied'),(30,'Unoccupied'),(31,'Unoccupied'),(32,'Unoccupied'),(33,'Unoccupied'),(34,'Unoccupied'),(35,'Unoccupied'),(36,'Unoccupied'),(37,'Unoccupied'),(38,'Unoccupied'),(39,'Unoccupied'),(40,'Unoccupied'),(41,'Unoccupied'),(42,'Unoccupied'),(43,'Unoccupied'),(44,'Unoccupied'),(45,'Unoccupied'),(46,'Unoccupied'),(47,'Unoccupied'),(48,'Unoccupied'),(49,'Unoccupied'),(50,'Unoccupied');
+INSERT INTO `room` VALUES (1,'Unoccupied',0),(2,'Unoccupied',0),(3,'Unoccupied',0),(4,'Unoccupied',0),(5,'Unoccupied',0),(6,'Unoccupied',0),(7,'Unoccupied',0),(8,'Unoccupied',0),(9,'Unoccupied',0),(10,'Unoccupied',0),(11,'Unoccupied',0),(12,'Unoccupied',0),(13,'Unoccupied',0),(14,'Unoccupied',0),(15,'Unoccupied',0),(16,'Unoccupied',0),(17,'Unoccupied',0),(18,'Unoccupied',0),(19,'Unoccupied',0),(20,'Unoccupied',0),(21,'Unoccupied',0),(22,'Unoccupied',0),(23,'Unoccupied',0),(24,'Unoccupied',0),(25,'Unoccupied',0),(26,'Unoccupied',0),(27,'Unoccupied',0),(28,'Unoccupied',0),(29,'Unoccupied',0),(30,'Unoccupied',0),(31,'Unoccupied',0),(32,'Unoccupied',0),(33,'Unoccupied',0),(34,'Unoccupied',0),(35,'Unoccupied',0),(36,'Unoccupied',0),(37,'Unoccupied',0),(38,'Unoccupied',0),(39,'Unoccupied',0),(40,'Unoccupied',0),(41,'Unoccupied',0),(42,'Unoccupied',0),(43,'Unoccupied',0),(44,'Unoccupied',0),(45,'Unoccupied',0),(46,'Unoccupied',0),(47,'Unoccupied',0),(48,'Unoccupied',0),(49,'Unoccupied',0),(50,'Unoccupied',0);
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,16 +208,21 @@ DROP TABLE IF EXISTS `roombill`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `roombill` (
-  `billID` int(11) NOT NULL AUTO_INCREMENT,
-  `bill_roomID` int(11) NOT NULL,
-  `roomprice` float NOT NULL,
-  `surcharge` float DEFAULT NULL,
-  `dateRead` datetime NOT NULL,
+  `roomID` int(11) NOT NULL,
+  `waterreadingID` int(11) NOT NULL,
+  `electricreadingID` int(11) NOT NULL,
+  `dbillID` int(11) NOT NULL,
+  `surcharge` double DEFAULT NULL,
   `datePaid` datetime DEFAULT NULL,
   `status` varchar(15) NOT NULL DEFAULT 'Unpaid',
-  PRIMARY KEY (`billID`),
-  KEY `roomID_idx` (`bill_roomID`),
-  CONSTRAINT `bill_roomID` FOREIGN KEY (`bill_roomID`) REFERENCES `room` (`roomID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `roomID_idx` (`roomID`),
+  KEY `dbillID_idx` (`dbillID`),
+  KEY `waterID_idx` (`waterreadingID`),
+  KEY `electricID_idx` (`electricreadingID`),
+  CONSTRAINT `dbillID` FOREIGN KEY (`dbillID`) REFERENCES `dormbill` (`dbill_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `electricID` FOREIGN KEY (`electricreadingID`) REFERENCES `electricreading` (`electric_billID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `roomID` FOREIGN KEY (`roomID`) REFERENCES `room` (`roomID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `waterID` FOREIGN KEY (`waterreadingID`) REFERENCES `waterreading` (`water_billID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -278,8 +281,8 @@ CREATE TABLE `tenantguardian` (
   `tg_guardianID` int(11) NOT NULL,
   KEY `tenantID_idx` (`tg_tenantID`),
   KEY `guardianID_idx` (`tg_guardianID`),
-  CONSTRAINT `tg_tenantID` FOREIGN KEY (`tg_tenantID`) REFERENCES `tenant` (`tenantID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `tg_guardianID` FOREIGN KEY (`tg_guardianID`) REFERENCES `guardian` (`guardianID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `tg_guardianID` FOREIGN KEY (`tg_guardianID`) REFERENCES `guardian` (`guardianID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `tg_tenantID` FOREIGN KEY (`tg_tenantID`) REFERENCES `tenant` (`tenantID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -306,8 +309,8 @@ CREATE TABLE `tenantroom` (
   `endDate` date DEFAULT NULL,
   KEY `tr_tenantID_idx` (`tr_tenantID`),
   KEY `tr_roomID_idx` (`tr_roomID`),
-  CONSTRAINT `tr_tenantID` FOREIGN KEY (`tr_tenantID`) REFERENCES `tenant` (`tenantID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `tr_roomID` FOREIGN KEY (`tr_roomID`) REFERENCES `room` (`roomID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `tr_roomID` FOREIGN KEY (`tr_roomID`) REFERENCES `room` (`roomID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `tr_tenantID` FOREIGN KEY (`tr_tenantID`) REFERENCES `tenant` (`tenantID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -329,15 +332,10 @@ DROP TABLE IF EXISTS `waterreading`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `waterreading` (
   `water_billID` int(11) NOT NULL AUTO_INCREMENT,
-  `water_roomID` int(11) NOT NULL,
   `currentcubicpermeter` float NOT NULL,
-  `dateRead` date NOT NULL,
   `datePaid` datetime DEFAULT NULL,
   `status` varchar(15) NOT NULL DEFAULT 'Unpaid',
-  PRIMARY KEY (`water_billID`),
-  KEY `roomID_idx` (`water_roomID`),
-  KEY `water_roomID_idx` (`water_roomID`),
-  CONSTRAINT `water_roomID` FOREIGN KEY (`water_roomID`) REFERENCES `room` (`roomID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`water_billID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -359,4 +357,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-30  3:34:59
+-- Dump completed on 2014-09-02  0:17:04
