@@ -313,14 +313,6 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         model.getDataVector().removeAllElements();
         model.fireTableDataChanged();
 
-        if (jTable2.getColumnCount() == 3) {
-
-        } else {
-
-            TableColumn c = new TableColumn();
-            c.setHeaderValue("Log out Time");
-            jTable2.getColumnModel().addColumn(c);
-        }
         jComboBox1.setEnabled(true);
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
@@ -463,46 +455,29 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         abean = ldao.getAllAtendanceLogsTodayByTenantID(id);
         SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss");
 
-        int size = 0;
-        if (abeanin.size() > abeanout.size()) {
-            size = abeanin.size();
-        } else {
-            size = abeanout.size();
-        }
-        System.out.println("table column" + jTable2.getColumnCount());
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < abeanin.size(); i++) {
 
-            tb = tdao.getTenantById(abean.get(i).getLog_tenantID());
-
+            tb = tdao.getTenantById(id);
             java.sql.Timestamp ts = abeanin.get(i).getTimeLogged();
             int microFraction = ts.getNanos() / 1000;
             StringBuilder sb = new StringBuilder(fmt.format(ts)); //log in
 
-            if (abeanin.get(i) == null && abeanout.get(i) != null) {
-                Object[] tenant = {tb.getLname() + ", " + tb.getFname(), sb, ""};
-                model.addRow(tenant);
-
-            } else if (abeanin.get(i) != null && abeanout.get(i) == null) {
-
-                java.sql.Timestamp ts1 = abeanout.get(i).getTimeLogged();
-                int microFraction1 = ts1.getNanos() / 1000;
-                StringBuilder sb1 = new StringBuilder(fmt.format(ts1)); //log out
-
-                Object[] tenant = {tb.getLname() + ", " + tb.getFname(), "", sb1};
-                model.addRow(tenant);
-
+            if (i == abeanin.size() - 1) {
+                Object[] add = {tb.getLname() + ", " + tb.getFname(), sb + " ---- " };
+                model.addRow(add);
+                model.fireTableDataChanged();
             } else {
-
                 java.sql.Timestamp ts1 = abeanout.get(i).getTimeLogged();
                 int microFraction1 = ts1.getNanos() / 1000;
-                StringBuilder sb1 = new StringBuilder(fmt.format(ts1)); //log out
+                StringBuilder sb1 = new StringBuilder(fmt.format(ts1)); //log in
 
-                Object[] tenant = {tb.getLname() + ", " + tb.getFname(), sb, sb1};
-                model.addRow(tenant);
-
+                Object[] add = {tb.getLname() + ", " + tb.getFname(), sb + " ---- " + sb1};
+                model.addRow(add);
+                model.fireTableDataChanged();
             }
 
         }
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
