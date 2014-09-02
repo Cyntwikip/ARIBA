@@ -21,12 +21,7 @@ import Models.DAOInterface.RoomBillDAOInterface;
 import Models.DAOInterface.ElectricReadingDAOInterface;
 import Models.DAOInterface.RoomDAOInterface;
 import Models.DAOInterface.WaterReadingDAOInterface;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -193,7 +188,6 @@ public class RoomPanelFinal extends javax.swing.JPanel {
             }
         });
         add(jComboBox1);
-
         jComboBox1.setBounds(240, 60, 200, 30);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -219,7 +213,6 @@ public class RoomPanelFinal extends javax.swing.JPanel {
             }
         });
         add(tenantlist);
-
         tenantlist.setBounds(630, 60, 200, 30);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -249,7 +242,6 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
         jButton1.setEnabled(false);
-
         jButton1.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -260,13 +252,14 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         jButton1.setBounds(740, 480, 120, 50);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/addroom.png"))); // NOI18N
+        jButton2.setContentAreaFilled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
         add(jButton2);
-        jButton2.setBounds(530, 490, 100, 41);
+        jButton2.setBounds(530, 490, 120, 41);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/rooms-tab-peg-panel.png"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(1000, 596));

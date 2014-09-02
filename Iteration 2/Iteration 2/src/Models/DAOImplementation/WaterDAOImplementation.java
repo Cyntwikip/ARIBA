@@ -29,7 +29,8 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "insert into waterreading (currentcubicpermeter, datePaid, status) values (?, ?, ?)";
+
+            String query = "insert into waterreading (currentcubicpermeter, datePaid, status) values ( ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setFloat(1, water.getCurrentcubicpermeter());
             ps.setDate(2, water.getDatePaid());
@@ -138,7 +139,7 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
             Connection connection = c.getConnection();
 
             String query = "update waterreading set currentcubicpermeter =?, "
-                    + "datePaid = ?, status = ?"
+                    + " datePaid = ?, status = ?"
                     + "where water_billID = ?";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setFloat(1, water.getCurrentcubicpermeter());
@@ -165,7 +166,7 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, wbillID);
             ResultSet resultSet = ps.executeQuery();
-            
+
             WaterReadingBean bean = new WaterReadingBean();
 
             int water_billID;
@@ -183,7 +184,7 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
                 bean.setCurrentcubicpermeter(currentcubicpermeter);
                 bean.setDatePaid(datePaid);
                 bean.setStatus(status);
-                
+
                 return bean;
             }
         } catch (SQLException ex) {

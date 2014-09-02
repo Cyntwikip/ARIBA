@@ -355,6 +355,19 @@ public class BillsPanelFinal extends javax.swing.JPanel {
             ecost = electric * priceperkw;
             wcost = water * pricepercubicmeter;
             
+            ElectricReadingBean ebean = new ElectricReadingBean();
+            WaterReadingBean wbean = new WaterReadingBean();
+            RoomBillBean rbillbean = new RoomBillBean();
+            
+            int roomID = (Integer) jComboBox1.getSelectedIndex()+1;
+            System.out.println(roomID);
+            
+            rbillbean.setRoomID(roomID);
+            rbillbean.setStatus("Not paid");
+            rbillbean.setSurcharge(0);
+            
+            ebean.setCurrentKW(electric);
+            wbean.setCurrentcubicpermeter(water);
             
             
             

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Models.Beans;
 
 import java.sql.Date;
@@ -13,6 +12,7 @@ import java.sql.Date;
  * @author User
  */
 public class WaterReadingBean {
+
     private int water_billID;
     private float currentcubicpermeter;
     private Date datePaid;
@@ -74,7 +74,4 @@ public class WaterReadingBean {
         this.status = status;
     }
 
-    
-    
-    
 }

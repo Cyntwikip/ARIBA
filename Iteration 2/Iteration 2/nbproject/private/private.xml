@@ -3,16 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/Users/adrian/Documents/Term_7/INTROSE/MP/Iteration%202/Iteration%202/src/Models/DAOImplementation/DormBillDAOImplementation.java</file>
-            <file>file:/Users/adrian/Documents/Term_7/INTROSE/MP/Iteration%202/Iteration%202/src/Models/DAOInterface/DormBillDAOInterface.java</file>
-            <file>file:/Users/adrian/Documents/Term_7/INTROSE/MP/Iteration%202/Iteration%202/src/Models/DAOImplementation/ElectricReadingDAOImplementation.java</file>
-=======
-            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/Models/DAOInterface/TenantDAOInterface.java</file>
-            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/AdminLoggingPanelFinal.java</file>
-            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/Models/DAOInterface/RoomDAOInterface.java</file>
-            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/Models/DAOInterface/WaterReadingDAOInterface.java</file>
->>>>>>> 4a482fd56314ed2fc39f67dafe672f934436e251
+            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/ReportsPanelFinal.java</file>
+            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/Models/DAOImplementation/RoomDAOImplementation.java</file>
+            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/GUI/RoomPanelFinal.java</file>
+            <file>file:/C:/Users/Danica/Documents/GitHub/INTROSE/ARIBA/Iteration%202/Iteration%202/src/Models/DAOImplementation/ContractDAOImplementation.java</file>
         </group>
     </open-files>
 </project-private>

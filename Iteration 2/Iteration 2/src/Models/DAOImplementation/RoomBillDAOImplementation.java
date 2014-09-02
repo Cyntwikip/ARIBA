@@ -259,5 +259,30 @@ public class RoomBillDAOImplementation implements RoomBillDAOInterface {
         return null;
     }
 
-  
+    @Override
+    public boolean addSurcharge(RoomBillBean roombill) {
+       try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+
+            String query = "update roombill set roomID = ?, waterreadingID = ?, electricreadingID = ?, dbillID = ?, surcharge = ?, datePaid = ?, status = ?"
+                    + "where roomID = ? ";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, roombill.getRoomID());
+            ps.setInt(2, roombill.getWaterreadingID());
+            ps.setInt(3, roombill.getElectricreadingID());
+            ps.setInt(4, roombill.getDbillID());
+            ps.setDouble(5, roombill.getSurcharge());
+            ps.setDate(6, roombill.getDatePaid());
+            ps.setString(7, roombill.getStatus());
+            ps.setInt(8, roombill.getRoomID());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+
 }
