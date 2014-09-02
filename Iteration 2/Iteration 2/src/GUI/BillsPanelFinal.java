@@ -434,15 +434,43 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         ebean.setElectric_billID(electricid);
         ebean.setStatus("Paid");
 
+        //paid
+        
+        RoomBillBean rbill = new RoomBillBean();
+
+        
+        System.out.println("electricid"+electricid);
+        System.out.println("waterid"+waterid);
+        
+        ebean = edao.getElectricReadingsByElectricBillID(electricid);
+        wbean = wdao.getWaterReadingsByWaterBillID(waterid);
+        
+        ebean.setCurrentKW(ebean.getCurrentKW());
+        ebean.setDatePaid(date);
+        ebean.setDateRead(ebean.getDateRead());
+        ebean.setElectric_billID(electricid);
+        ebean.setStatus("Paid");
+        
         wbean.setCurrentcubicpermeter(wbean.getCurrentcubicpermeter());
         wbean.setDatePaid(date);
         wbean.setDateRead(wbean.getDateRead());
         wbean.setStatus("Paid");
         wbean.setWater_billID(waterid);
-
-        if (edao.editElectricReading(ebean) && wdao.editWaterReading(wbean)) {
+        
+        rbill = rblist.get(rblist.size()-1);
+        rbill.setDatePaid(date);
+        rbill.setDbillID(rbill.getDbillID());
+        rbill.setElectricreadingID(electricid);
+        rbill.setRoomID(roomID);
+        rbill.setStatus("Paid");
+        rbill.setSurcharge(0);
+        rbill.setWaterreadingID(waterid);
+        rbill.setDateRead(rbill.getDateRead());
+        
+        
+        if(edao.editElectricReading(ebean) && wdao.editWaterReading(wbean) && rbdao.editRoomBill(rbill)){
             System.out.println("edit successful");
-        } else {
+        }else{
             System.out.println("edit not successful");
         }
 
@@ -459,6 +487,7 @@ public class BillsPanelFinal extends javax.swing.JPanel {
 
         RoomBillDAOInterface rbdao = new RoomBillDAOImplementation();
         ArrayList<RoomBillBean> rblist = new ArrayList<RoomBillBean>();
+        RoomBillBean rbill = new RoomBillBean();
 
         int row = jTable1.getSelectedRow();
         int roomID = (Integer) jTable1.getValueAt(row, 0);
@@ -486,8 +515,19 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         wbean.setDateRead(wbean.getDateRead());
         wbean.setStatus("Unpaid");
         wbean.setWater_billID(waterid);
-
-        if (edao.editElectricReading(ebean) && wdao.editWaterReading(wbean)) {
+        
+        rbill = rblist.get(rblist.size()-1);
+        rbill.setDatePaid(date);
+        rbill.setDbillID(rbill.getDbillID());
+        rbill.setElectricreadingID(electricid);
+        rbill.setRoomID(roomID);
+        rbill.setStatus("unpaid");
+        rbill.setSurcharge(0);
+        rbill.setWaterreadingID(waterid);
+        rbill.setDateRead(rbill.getDateRead());
+        
+        
+        if(edao.editElectricReading(ebean) && wdao.editWaterReading(wbean) && rbdao.editRoomBill(rbill)){
             System.out.println("EDIT!!");
         } else {
             System.out.println("fail");

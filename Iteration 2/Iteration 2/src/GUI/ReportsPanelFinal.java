@@ -241,7 +241,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
 
         int roomID;
         for (int i = 0; i < bbeanlist.size(); i++) {
-//            roomID = bbeanlist.get(i).getBill_roomID(); // current room ID
+            //roomID = bbeanlist.get(i).getBill_roomID(); // current room ID
 
             //        tbeanlist = tdao.getTenantByRoomID(roomID);
             for (int j = 0; j < tbeanlist.size(); j++) {
@@ -405,8 +405,8 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         System.out.println("month1" + month1);
         System.out.println("day1" + day1);
 
-        java.sql.Date sqlExpirydate = new java.sql.Date(year2 - 1900, month1-1, day1);
-        java.sql.Date sqlEffectivedate1 = new java.sql.Date(year1 - 1900, month1-1, day1);
+        java.sql.Date sqlExpirydate = new java.sql.Date(year2 - 1900, month1 - 1, day1);
+        java.sql.Date sqlEffectivedate1 = new java.sql.Date(year1 - 1900, month1 - 1, day1);
 
         //converting Calendar to sql Date
         contractAcc.setContract_tenantID(tbean.getTenantID());
@@ -495,10 +495,10 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
 
         ContractDAOInterface cdao = new ContractDAOImplementation();
         ArrayList<ContractBean> clist = new ArrayList<ContractBean>();
+        ArrayList<ContractBean> clist2 = new ArrayList<ContractBean>();
         clist = cdao.getAllContracts();
 
         TenantDAOInterface tdao = new TenantDAOImplementation();
-        ArrayList<TenantBean> tlist = new ArrayList<TenantBean>();
 
         TenantBean temp = new TenantBean();
         int tenantID;
@@ -506,10 +506,12 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         Date effectivedate, expirydate;
         for (int i = 0; i < clist.size(); i++) {
             tenantID = clist.get(i).getContract_tenantID();
+            clist2 = cdao.getAllContractsByTenantID(tenantID);
 
             if (tenantID == 0) {
                 // wala tenant
             } else {
+
                 temp = tdao.getTenantById(tenantID);
                 fname = temp.getFname();
                 lname = temp.getLname();
