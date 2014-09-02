@@ -51,18 +51,16 @@ public class RoomPanelFinal extends javax.swing.JPanel {
             jComboBox1.addItem(room.getRoomID());
         }
 
-        ArrayList<TenantBean> tlist = tdao.getAllTenants();
-
+        //lists of tenants that can be assigned to room
+        ArrayList<TenantBean> tlist = tdao.getTenantByStatus("CURRENT");
         RoomDAOInterface rdao = new RoomDAOImplementation();
         RoomBean rbean = new RoomBean();
         tenantlist.removeAllItems();
 
         for (int i = 0; i < tlist.size(); i++) {
             rbean = rdao.getTenantRoom(tlist.get(i).getTenantID());
-            System.out.println(rbean.getRoomID());
-            if (rbean.getRoomID() == 0) {
+            if (rbean == null) {
                 tenantlist.addItem(tlist.get(i).getLname() + ", " + tlist.get(i).getFname());
-
             } else {
             }
         }
@@ -72,7 +70,6 @@ public class RoomPanelFinal extends javax.swing.JPanel {
             jButton1.setEnabled(true);
         }
         updateAvailableRooms();
-
     }
 
     public void updateAvailableRooms() {
@@ -81,7 +78,6 @@ public class RoomPanelFinal extends javax.swing.JPanel {
 
         ArrayList<RoomBean> availablerooms = rdao.getAllRooms();
         int roomID, count=0;
-        
 
         for (int i = 0; i < availablerooms.size(); i++) {
             roomID = availablerooms.get(i).getRoomID();
@@ -136,7 +132,6 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         model1.getDataVector().removeAllElements();
         model1.fireTableDataChanged();
 
-        // String roomID1 = (String) tenantlist.getSelectedItem();
         int roomID = jComboBox1.getSelectedIndex() + 1;
         System.out.println(roomID);
         ArrayList<TenantBean> tenantlistfinal = new ArrayList<TenantBean>();
@@ -472,50 +467,6 @@ public class RoomPanelFinal extends javax.swing.JPanel {
         WaterReadingBean wbean = new WaterReadingBean();
         WaterReadingBean wbeantemp = new WaterReadingBean();
         WaterReadingDAOInterface wdao = new WaterDAOImplementation();
-//        RoomBillBean temp = bdao.getBillsByRoomID(rbeanlist.size());
-
-        System.out.println(rbeanlist.size());
-       /* if (temp != null) {
-            rdao.addRoom(rbean);
-            
-            bbean.setBill_roomID(rbeanlist.size() + 1);
-            bbean.setPaidElectric(false);
-            bbean.setPaidRent(false);
-            bbean.setPaidWater(false);
-            bbean.setRoomprice(temp.getRoomprice());
-            bbean.setTotalelectricityconsumption(rbeanlist.size() + 1);
-            bbean.setTotalwaterconsumption(rbeanlist.size() + 1);
-            bbean.setPrice(temp.getRoomprice());
-
-            bdao.addBill(bbean);
-            bbean = bdao.getBillsByRoomID(rbeanlist.size() + 1);
-
-            System.out.println("billID" + bbean.getBillID());
-            ebeantemp = edao.getElectricReadingByBillID(bbean.getBillID() - 1);
-
-            ebean.setCurrentKW(0);
-            ebean.setDateRead(ebeantemp.getDateRead());
-            ebean.setPrice(0);
-            ebean.setPriceperKW(0);
-            ebean.setElectric_billID(ebeantemp.getElectric_billID() + 1);
-            edao.addElectricReadingToRoom(ebean);
-
-            wbeantemp = wdao.getWaterReadingsByBillID(bbean.getBillID() - 1);
-
-            wbean.setCurrentcubicmeter(0);
-            wbean.setDateRead(wbeantemp.getDateRead());
-            wbean.setPrice(0);
-            wbean.setWater_billID(wbeantemp.getWater_billID() + 1);
-
-            wdao.addWaterReadingToRoom(wbean);
-//          wbean.setWater_billID(temp.getBillID()+1);
-                    
-
-        } else {
-            rdao.addRoom(rbean);
-
-            System.out.println("add");
-        }*/
         rdao.addRoom(rbean);
         updateAvailableRooms();
 
