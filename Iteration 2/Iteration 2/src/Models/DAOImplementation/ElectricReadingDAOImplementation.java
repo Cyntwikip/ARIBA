@@ -240,5 +240,48 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
         }
         return null;
     }
+
+    @Override
+    public ElectricReadingBean getElectricReadingByRoomID(int roomid, int dbillid) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select electric_billID, currentKW, electricreading.dateRead, electricreading.datePaid, electricreading.status from electricreading, roombill, room, dormbill where roombill.roomID = ? and roombill.roomID = room.roomID and electric_billID = electricreadingID and dbill_ID = ? and dbill_ID = dbillID";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, roomid);
+            ps.setInt(2, dbillid);
+            ResultSet resultSet = ps.executeQuery();
+            
+            int electric_billID;
+            float currentKW;
+            Date dateRead, datePaid;
+            String status;
+            
+            ElectricReadingBean ebean = new ElectricReadingBean();
+            
+            while(resultSet.next()){   
+                electric_billID = resultSet.getInt(1);
+                currentKW= resultSet.getFloat(2);
+                dateRead = resultSet.getDate(3);
+                datePaid = resultSet.getDate(4);
+                status = resultSet.getString(5);
+                
+                ebean.setElectric_billID(electric_billID);
+                ebean.setCurrentKW(currentKW);
+                ebean.setDateRead(dateRead);
+                ebean.setDatePaid(datePaid);
+                ebean.setStatus(status);
+                
+                
+            }
+            connection.close();
+
+            return ebean;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ElectricReadingDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
 }

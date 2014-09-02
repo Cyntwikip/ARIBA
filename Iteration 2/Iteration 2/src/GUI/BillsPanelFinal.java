@@ -372,11 +372,12 @@ public class BillsPanelFinal extends javax.swing.JPanel {
             waterbean = wdao.getWaterReadingByMonth(date);
             electricbean = edao.getElectricReadingByMonth(date);
 
-            //create room bill
+            //creat room bill
             int row = jTable1.getSelectedRow();
             int col = 0;
 
-            int roomID = (int) jComboBox1.getSelectedItem();
+            int roomID = (int) jTable1.getModel().getValueAt(row, col);
+
 
             RoomBillBean room = new RoomBillBean();
             room.setRoomID(roomID);
@@ -384,15 +385,12 @@ public class BillsPanelFinal extends javax.swing.JPanel {
             room.setWaterreadingID(waterbean.getWater_billID());
             room.setElectricreadingID(electricbean.getElectric_billID());
             room.setSurcharge(0);
+            room.setDateRead(date);
             room.setDatePaid(null);
             room.setStatus("Unpaid");
-            room.setDateRead(date);
 
-            if (rbdao.addRoomBill(room)) {
-                System.out.println("hi");
-            } else {
-                System.out.println("bye");
-            }
+            rbdao.addRoomBill(room);
+
 
         }
 
@@ -409,52 +407,9 @@ public class BillsPanelFinal extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
-        //paid
-        
-        
-        ElectricReadingDAOInterface edao = new ElectricReadingDAOImplementation();
-        ElectricReadingBean ebean = new ElectricReadingBean();
-
-        WaterReadingDAOInterface wdao = new WaterDAOImplementation();
-        WaterReadingBean wbean = new WaterReadingBean();
-
-        RoomBillDAOInterface rbdao = new RoomBillDAOImplementation();
-        ArrayList<RoomBillBean> rblist = new ArrayList<RoomBillBean>();
-
-        int row = jTable1.getSelectedRow();
-        int roomID =  (Integer)jTable1.getValueAt(row, 0);
-        System.out.println(roomID);
-        rblist = rbdao.getRoomBillsByRoomID(roomID);
-
-        System.out.println(rblist.get(rblist.size() - 1).getRoomID());
-        int electricid = rblist.get(rblist.size()-1).getElectricreadingID();
-        int waterid = rblist.get(rblist.size()-1).getWaterreadingID();
-        
-        System.out.println("electricid"+electricid);
-        System.out.println("waterid"+waterid);
-        
-        ebean = edao.getElectricReadingsByElectricBillID(electricid);
-        wbean = wdao.getWaterReadingsByWaterBillID(waterid);
-        
-        ebean.setCurrentKW(ebean.getCurrentKW());
-        ebean.setDatePaid(date);
-        ebean.setDateRead(ebean.getDateRead());
-        ebean.setElectric_billID(electricid);
-        ebean.setStatus("Paid");
-        
-        wbean.setCurrentcubicpermeter(wbean.getCurrentcubicpermeter());
-        wbean.setDatePaid(date);
-        wbean.setDateRead(wbean.getDateRead());
-        wbean.setStatus("Paid");
-        wbean.setWater_billID(waterid);
-        
-        if(edao.editElectricReading(ebean) && wdao.editWaterReading(wbean)){
-            System.out.println("edit successful");
-        }else{
-            System.out.println("edit not successful");
-        }
 
     }//GEN-LAST:event_jButton4ActionPerformed
+
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
        
@@ -526,11 +481,46 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         double surcharge, total;
         String status;
 
+        //ArrayList<RoomBillBean> rblist = new ArrayList<>();
+        // rblist = rbdao.getAllRoomBillByMonthandYear(date);
+        WaterReadingBean wbean = new WaterReadingBean();
+        ElectricReadingBean ebean = new ElectricReadingBean();
+        RoomBillBean rbean = new RoomBillBean();
+        WaterDAOImplementation wdao = new WaterDAOImplementation();
+        
+        dorm = dbdao.getDormBillByMonthandYear(new java.sql.Date(new java.util.Date().getTime()));
+       // System.out.println("room:" + dorm.getDbill_ID());
+        /* if (rblist.isEmpty() || rblist == null) {
+         //empty roombill
+         for (RoomBean bean : occupied) {
+         room = bean.getRoomID();
+         Object[] obj = {room, 0, 0, 0, 0, "none"};
+         model.addRow(obj);
+         }
+
+         } else {*/
         for (RoomBean bean : occupied) {
             room = bean.getRoomID();
-            Object[] obj = {room, 0, 0, 0, 0, "none"};
+            wbean = wdao.getWaterReadingByID(bean.getRoomID(), dorm.getDbill_ID());
+            ebean = edao.getElectricReadingByRoomID(bean.getRoomID(), dorm.getDbill_ID());
+            rbean = rbdao.getRoomBillByDbill(bean.getRoomID(), dorm.getDbill_ID());
+            water = wbean.getCurrentcubicpermeter();
+            
+            double e = dorm.getElectprice()/dorm.getElectconsumption();
+            double w = dorm.getWaterprice()/dorm.getWaterconsumption();
+            double r = dorm.getRoomprice();
+            
+            electricity = (float) ebean.getCurrentKW();
+            water = (float) wbean.getCurrentcubicpermeter();
+            surcharge = rbean.getSurcharge();
+            status = rbean.getStatus();           
+            total = electricity * e + water * w + surcharge + r;
+
+            Object[] obj = {bean.getRoomID(), electricity, water, surcharge, total, status};
             model.addRow(obj);
         }
+
+        //}
         model.fireTableDataChanged();
         jTable1.requestFocus();
         jTable1.changeSelection(0, 0, false, false);

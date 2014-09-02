@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Models.Beans;
 
 /**
@@ -11,10 +10,9 @@ package Models.Beans;
  * @author User
  */
 public class RoomBean {
-    
+
     private int roomID;
     private String status;
-    private double roomprice;
 
     /**
      * @return the roomID
@@ -44,19 +42,4 @@ public class RoomBean {
         this.status = status;
     }
 
-    /**
-     * @return the roomprice
-     */
-    public double getRoomprice() {
-        return roomprice;
-    }
-
-    /**
-     * @param roomprice the roomprice to set
-     */
-    public void setRoomprice(double roomprice) {
-        this.roomprice = roomprice;
-    }
-
-   
 }

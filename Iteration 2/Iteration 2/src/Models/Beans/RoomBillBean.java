@@ -15,8 +15,7 @@ public class RoomBillBean {
 
     private int roomID, waterreadingID, electricreadingID, dbillID;
     private double surcharge;
-    private java.sql.Date datePaid;
-    private java.sql.Date dateRead;
+    private java.sql.Date datePaid, dateRead;
     private String status;
 
     /**
@@ -117,11 +116,18 @@ public class RoomBillBean {
         this.status = status;
     }
 
-    public Date getDateRead() {
+
+    /**
+     * @return the dateRead
+     */
+    public java.sql.Date getDateRead() {
         return dateRead;
     }
 
-    public void setDateRead(Date dateRead) {
+    /**
+     * @param dateRead the dateRead to set
+     */
+    public void setDateRead(java.sql.Date dateRead) {
         this.dateRead = dateRead;
     }
 
