@@ -21,6 +21,8 @@ public interface WaterReadingDAOInterface {
     public boolean editWaterReading(WaterReadingBean water);
     public WaterReadingBean getWaterReadingsByWaterBillID(int wbillID);
     public WaterReadingBean getWaterReadingByMonth(java.sql.Date date);
+    public WaterReadingBean getWaterReadingByID(int roomid, int dbillid);
+
     
     
 }

@@ -243,6 +243,7 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
             dorm.setElectconsumption(totalelectricityconsumption);
             dorm.setWaterprice(totalwatercost);
             dorm.setElectprice(totalelectricitycost);
+            dorm.setRoomprice(roomrent);
             dorm.setDateRead(dateRead);
             dorm.setRoomprice(roomrent);
             ddao.addDormBill(dorm);
@@ -252,7 +253,6 @@ public class EditGeneralBillPanelFinal extends javax.swing.JPanel {
 
             //change roomprice for each occupied rooms
             RoomBillBean rbean = new RoomBillBean();
-            
             this.removeAll();
             jPanel2 = new BillsPanelFinal();
             setJpanel();

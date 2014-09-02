@@ -59,7 +59,7 @@ public class RoomPanelFinal extends javax.swing.JPanel {
 
         for (int i = 0; i < tlist.size(); i++) {
             rbean = rdao.getTenantRoom(tlist.get(i).getTenantID());
-            if (rbean == null) {
+            if (rbean.getRoomID()==0) {
                 tenantlist.addItem(tlist.get(i).getLname() + ", " + tlist.get(i).getFname());
             } else {
             }

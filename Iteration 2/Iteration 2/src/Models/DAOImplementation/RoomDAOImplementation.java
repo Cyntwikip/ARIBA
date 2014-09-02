@@ -91,7 +91,6 @@ public class RoomDAOImplementation implements RoomDAOInterface {
             while (resultSet.next()) {
                 roomID = resultSet.getInt("roomID");
                 roomstatus = resultSet.getString("status");
-                //roomprice = resultSet.getDouble("roomprice");
                 //status = resultSet.getString("status");
 
                 bean = new RoomBean();
@@ -99,7 +98,6 @@ public class RoomDAOImplementation implements RoomDAOInterface {
                 bean.setStatus(roomstatus);
                 bean.setRoomID(roomID);
 
-                //bean.setRoomprice(roomprice);
                 //bean.setStatus(status);
 
                 list.add(bean);
@@ -329,9 +327,11 @@ public class RoomDAOImplementation implements RoomDAOInterface {
             String beanstatus;
             
             while(resultSet.next()){
+                
                 roomID = resultSet.getInt("roomID");
                 beanstatus = resultSet.getString("status");
                 
+                room = new RoomBean();
                 room.setRoomID(roomID);
                 room.setStatus(beanstatus);
                 

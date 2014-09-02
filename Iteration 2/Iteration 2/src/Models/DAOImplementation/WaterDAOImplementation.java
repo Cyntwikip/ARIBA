@@ -209,28 +209,68 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
             ps.setDate(1, date);
             ps.setDate(2, date);
             ResultSet resultSet = ps.executeQuery();
-            
             int water_billID;
             float currentcubicpermeter;
             Date dateRead, datePaid;
             String status;
-            
             WaterReadingBean wbean = new WaterReadingBean();
-            
-            while(resultSet.next()){   
+
+            while (resultSet.next()) {
+
                 water_billID = resultSet.getInt("water_billID");
                 currentcubicpermeter = resultSet.getFloat("currentcubicpermeter");
                 dateRead = resultSet.getDate("dateRead");
                 datePaid = resultSet.getDate("datePaid");
                 status = resultSet.getString("status");
-                
+
                 wbean.setWater_billID(water_billID);
                 wbean.setCurrentcubicpermeter(currentcubicpermeter);
                 wbean.setDateRead(dateRead);
                 wbean.setDatePaid(datePaid);
                 wbean.setStatus(status);
-                
-                
+
+            }
+            connection.close();
+
+            return wbean;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ElectricReadingDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public WaterReadingBean getWaterReadingByID(int roomid, int dbillid) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select water_billID, currentcubicpermeter, waterreading.dateRead, waterreading.datePaid, waterreading.status from waterreading, roombill, room, dormbill where roombill.roomID = ? and roombill.roomID = room.roomID and water_billID = waterreadingID and dbill_ID = ? and dbill_ID = dbillID";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, roomid);
+            ps.setInt(2, dbillid);
+            ResultSet resultSet = ps.executeQuery();
+
+            int water_billID;
+            float currentcubicpermeter;
+            Date dateRead, datePaid;
+            String status;
+
+            WaterReadingBean wbean = new WaterReadingBean();
+
+            //System.out.println("hi");
+            while (resultSet.next()) {
+                water_billID = resultSet.getInt(1);
+                currentcubicpermeter = resultSet.getFloat(2);
+                dateRead = resultSet.getDate(3);
+                datePaid = resultSet.getDate(4);
+                status = resultSet.getString(5);
+
+                wbean.setWater_billID(water_billID);
+                wbean.setCurrentcubicpermeter(currentcubicpermeter);
+                wbean.setDateRead(dateRead);
+                wbean.setDatePaid(datePaid);
+                wbean.setStatus(status);
             }
             connection.close();
 

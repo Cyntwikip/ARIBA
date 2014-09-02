@@ -343,13 +343,13 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         FemaleField = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        fnamelabel = new javax.swing.JLabel();
         fname = new javax.swing.JLabel();
+        lnamelabel = new javax.swing.JLabel();
         lname = new javax.swing.JLabel();
         inout1 = new javax.swing.JLabel();
         logtime = new javax.swing.JLabel();
         roomnumber = new javax.swing.JLabel();
-        lnamelabel = new javax.swing.JLabel();
-        fnamelabel = new javax.swing.JLabel();
         inoutlabel = new javax.swing.JLabel();
         logtimelabel = new javax.swing.JLabel();
         logtime1 = new javax.swing.JLabel();
@@ -480,24 +480,24 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         jPanel1.setOpaque(false);
         jPanel1.setLayout(null);
-        jPanel1.add(fname);
-        fname.setBounds(90, 30, 200, 20);
-        jPanel1.add(lname);
-        lname.setBounds(110, 60, 200, 0);
-        jPanel1.add(inout1);
-        inout1.setBounds(110, 74, 200, 20);
-        jPanel1.add(logtime);
-        logtime.setBounds(110, 100, 200, 0);
-        jPanel1.add(roomnumber);
-        roomnumber.setBounds(110, 120, 200, 0);
-
-        lnamelabel.setText("Last Name:");
-        jPanel1.add(lnamelabel);
-        lnamelabel.setBounds(20, 60, 80, 14);
 
         fnamelabel.setText("First Name:");
         jPanel1.add(fnamelabel);
         fnamelabel.setBounds(20, 40, 90, 14);
+        jPanel1.add(fname);
+        fname.setBounds(90, 30, 200, 20);
+
+        lnamelabel.setText("Last Name:");
+        jPanel1.add(lnamelabel);
+        lnamelabel.setBounds(20, 60, 80, 14);
+        jPanel1.add(lname);
+        lname.setBounds(100, 60, 200, 20);
+        jPanel1.add(inout1);
+        inout1.setBounds(110, 74, 200, 20);
+        jPanel1.add(logtime);
+        logtime.setBounds(110, 100, 200, 20);
+        jPanel1.add(roomnumber);
+        roomnumber.setBounds(110, 120, 200, 20);
 
         inoutlabel.setText("In/Out:");
         jPanel1.add(inoutlabel);
