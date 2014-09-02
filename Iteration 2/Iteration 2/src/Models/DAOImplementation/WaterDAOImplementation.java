@@ -199,4 +199,47 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
         return null;
     }
 
+    @Override
+    public WaterReadingBean getWaterReadingByMonth(Date date) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from waterreading where month(?) = month(dateRead)and year(?) = year(dateRead)";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setDate(1, date);
+            ps.setDate(2, date);
+            ResultSet resultSet = ps.executeQuery();
+            
+            int water_billID;
+            float currentcubicpermeter;
+            Date dateRead, datePaid;
+            String status;
+            
+            WaterReadingBean wbean = new WaterReadingBean();
+            
+            while(resultSet.next()){   
+                water_billID = resultSet.getInt("water_billID");
+                currentcubicpermeter = resultSet.getFloat("currentcubicpermeter");
+                dateRead = resultSet.getDate("dateRead");
+                datePaid = resultSet.getDate("datePaid");
+                status = resultSet.getString("status");
+                
+                wbean.setWater_billID(water_billID);
+                wbean.setCurrentcubicpermeter(currentcubicpermeter);
+                wbean.setDateRead(dateRead);
+                wbean.setDatePaid(datePaid);
+                wbean.setStatus(status);
+                
+                
+            }
+            connection.close();
+
+            return wbean;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ElectricReadingDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
 }

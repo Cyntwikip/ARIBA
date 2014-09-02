@@ -65,7 +65,7 @@ public class MainMenuFinal extends javax.swing.JFrame {
                 // add surcharge
                 // get all not paid
                 roombilllist = roombillbeandao.getAllNotPaidRooms();
-                System.out.println(day_format.format(cal.getTime()));
+            //    System.out.println(day_format.format(cal.getTime()));
                 
 
                 if (day_format.format(cal.getTime()).equals("15") && !checksurcharge) {

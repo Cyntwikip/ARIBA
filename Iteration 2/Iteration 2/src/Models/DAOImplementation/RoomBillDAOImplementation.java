@@ -30,8 +30,8 @@ public class RoomBillDAOImplementation implements RoomBillDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "insert into roombill (roomID, waterreadingID, electricreadingID, dbillID, surcharge, datePaid, status)"
-                    + "value (?, ?, ?, ?, ?, ?, ?)";
+            String query = "insert into roombill (roomID, waterreadingID, electricreadingID, dbillID, surcharge, datePaid, status, dateRead)"
+                    + "value (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, roombill.getRoomID());
             ps.setInt(2, roombill.getWaterreadingID());
@@ -40,6 +40,7 @@ public class RoomBillDAOImplementation implements RoomBillDAOInterface {
             ps.setDouble(5, roombill.getSurcharge());
             ps.setDate(6, roombill.getDatePaid());
             ps.setString(7, roombill.getStatus());
+            ps.setDate(8, roombill.getDateRead());
 
             ps.executeUpdate();
             connection.close();
@@ -172,7 +173,7 @@ public class RoomBillDAOImplementation implements RoomBillDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "select * from roombill where roombill_roomID = ? order by roombillID DESC";
+            String query = "select * from roombill where roomID = ? order by roomID DESC";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, room);
             ResultSet resultSet = ps.executeQuery();

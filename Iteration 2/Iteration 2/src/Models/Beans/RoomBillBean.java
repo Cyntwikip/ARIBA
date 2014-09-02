@@ -3,18 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Models.Beans;
+
+import java.sql.Date;
 
 /**
  *
  * @author User
  */
 public class RoomBillBean {
-    
+
     private int roomID, waterreadingID, electricreadingID, dbillID;
     private double surcharge;
     private java.sql.Date datePaid;
+    private java.sql.Date dateRead;
     private String status;
 
     /**
@@ -115,7 +117,12 @@ public class RoomBillBean {
         this.status = status;
     }
 
-    
-    
-    
+    public Date getDateRead() {
+        return dateRead;
+    }
+
+    public void setDateRead(Date dateRead) {
+        this.dateRead = dateRead;
+    }
+
 }

@@ -29,13 +29,14 @@ public class DormBillDAOImplementation implements DormBillDAOInterface{
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "insert into dormbill (waterconsumption, electricityconsumption, totalwaterprice, totalelectricityprice, dateRead) values (?, ?, ?, ?, ?)";
+            String query = "insert into dormbill (waterconsumption, electricityconsumption, totalwaterprice, totalelectricityprice, roomprice, dateRead) values (?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setFloat(1, dorm.getWaterconsumption());
             ps.setFloat(2, dorm.getElectconsumption());
             ps.setDouble(3, dorm.getWaterprice());
             ps.setDouble(4, dorm.getElectprice());
-            ps.setDate(5, dorm.getDateRead());
+            ps.setDouble(5, dorm.getRoomprice());
+            ps.setDate(6, dorm.getDateRead());
             ps.executeUpdate();
             connection.close();
 
@@ -54,14 +55,15 @@ public class DormBillDAOImplementation implements DormBillDAOInterface{
             Connector c = new Connector();
             Connection connection = c.getConnection();
             String query = "update dormbill set waterconsumption = ?, electricityconsumption = ?,"
-                    +"totalwaterprice = ?, totalelectricityprice = ?, dateRead = ? where dbill_ID = ?";
+                    +"totalwaterprice = ?, totalelectricityprice = ?, roomprice = ?, dateRead = ? where dbill_ID = ?";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setFloat(1, dorm.getWaterconsumption());
             ps.setFloat(2, dorm.getElectconsumption());
             ps.setDouble(3, dorm.getWaterprice());
             ps.setDouble(4, dorm.getElectprice());
-            ps.setDate(5, dorm.getDateRead());
-            ps.setInt(6, dorm.getDbill_ID());
+            ps.setDouble(5, dorm.getRoomprice());
+            ps.setDate(6, dorm.getDateRead());
+            ps.setInt(7, dorm.getDbill_ID());
             ps.executeUpdate();
             connection.close();
 
@@ -87,7 +89,7 @@ public class DormBillDAOImplementation implements DormBillDAOInterface{
             
             int dbill_ID;
             float waterconsumption, electconsumption;
-            double waterprice, electprice;
+            double waterprice, electprice, roomprice;
             java.sql.Date dateRead;
             
             while(resultSet.next()){                
@@ -96,6 +98,7 @@ public class DormBillDAOImplementation implements DormBillDAOInterface{
                 electconsumption = resultSet.getFloat("electconsumption");
                 waterprice = resultSet.getDouble("totalwaterprice");
                 electprice = resultSet.getDouble("totalelectricityprice");
+                roomprice = resultSet.getDouble("roomprice");
                 dateRead = resultSet.getDate("dateRead");
                 
                 dorm.setDbill_ID(dbill_ID);
@@ -103,6 +106,7 @@ public class DormBillDAOImplementation implements DormBillDAOInterface{
                 dorm.setElectconsumption(electconsumption);
                 dorm.setWaterprice(waterprice);
                 dorm.setElectprice(electprice);
+                dorm.setRoomprice(roomprice);
                 dorm.setDateRead(dateRead);
                 
                 list.add(dorm);
@@ -132,7 +136,7 @@ public class DormBillDAOImplementation implements DormBillDAOInterface{
             
             int dbill_ID;
             float waterconsumption, electconsumption;
-            double waterprice, electprice;
+            double waterprice, electprice, roomprice;
             java.sql.Date dateRead;
             
             while(resultSet.next()){                
@@ -141,6 +145,7 @@ public class DormBillDAOImplementation implements DormBillDAOInterface{
                 electconsumption = resultSet.getFloat("electconsumption");
                 waterprice = resultSet.getDouble("totalwaterprice");
                 electprice = resultSet.getDouble("totalelectricityprice");
+                roomprice = resultSet.getDouble("roomprice");
                 dateRead = resultSet.getDate("dateRead");
                 
                 dorm.setDbill_ID(dbill_ID);
@@ -148,6 +153,7 @@ public class DormBillDAOImplementation implements DormBillDAOInterface{
                 dorm.setElectconsumption(electconsumption);
                 dorm.setWaterprice(waterprice);
                 dorm.setElectprice(electprice);
+                dorm.setRoomprice(roomprice);
                 dorm.setDateRead(dateRead);
                 
             }
@@ -176,7 +182,7 @@ public class DormBillDAOImplementation implements DormBillDAOInterface{
             
             int dbill_ID;
             float waterconsumption, electconsumption;
-            double waterprice, electprice;
+            double waterprice, electprice, roomprice;
             java.sql.Date dateRead;
             
             while(resultSet.next()){                
@@ -185,6 +191,7 @@ public class DormBillDAOImplementation implements DormBillDAOInterface{
                 electconsumption = resultSet.getFloat("electricityconsumption");
                 waterprice = resultSet.getDouble("totalwaterprice");
                 electprice = resultSet.getDouble("totalelectricityprice");
+                roomprice = resultSet.getDouble("roomprice");
                 dateRead = resultSet.getDate("dateRead");
                 
                 dorm.setDbill_ID(dbill_ID);
@@ -192,6 +199,7 @@ public class DormBillDAOImplementation implements DormBillDAOInterface{
                 dorm.setElectconsumption(electconsumption);
                 dorm.setWaterprice(waterprice);
                 dorm.setElectprice(electprice);
+                dorm.setRoomprice(roomprice);
                 dorm.setDateRead(dateRead);
                 
             }
@@ -204,7 +212,5 @@ public class DormBillDAOImplementation implements DormBillDAOInterface{
         }
         return null;
     }
-
-  
     
 }
