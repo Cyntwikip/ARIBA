@@ -775,7 +775,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         fname.setLocation(130, 40);
 
         lnamelabel.setLocation(20, 60);
-        lname1.setLocation(130, 60);
+        lname.setLocation(130, 60);
 
         inoutlabel.setLocation(20, 80);
         inout1.setLocation(130, 80);

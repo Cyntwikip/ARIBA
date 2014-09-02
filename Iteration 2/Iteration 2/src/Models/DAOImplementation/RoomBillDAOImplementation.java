@@ -108,7 +108,7 @@ public class RoomBillDAOImplementation implements RoomBillDAOInterface {
             Connector c = new Connector();
             Connection connection = c.getConnection();
 
-            String query = "update roombill set roomID = ?, waterreadingID = ?, electricreadingID = ?, dbillID = ?, surcharge = ?, dateRead = ?, datePaid = ?, status = ?";
+            String query = "update roombill set roomID = ?, waterreadingID = ?, electricreadingID = ?, dbillID = ?, surcharge = ?, dateRead = ?, datePaid = ?, status = ? where dbillID = ? and roomID = ?";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, roombill.getRoomID());
             ps.setInt(2, roombill.getWaterreadingID());
@@ -118,6 +118,8 @@ public class RoomBillDAOImplementation implements RoomBillDAOInterface {
             ps.setDate(6, roombill.getDateRead());
             ps.setDate(7, roombill.getDatePaid());
             ps.setString(8, roombill.getStatus());
+            ps.setInt(9, roombill.getDbillID());
+            ps.setInt(10, roombill.getRoomID());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {

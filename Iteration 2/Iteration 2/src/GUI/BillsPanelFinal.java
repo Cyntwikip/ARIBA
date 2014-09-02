@@ -29,6 +29,8 @@ import java.sql.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import java.lang.Math;
+import java.text.DecimalFormat;
 
 public class BillsPanelFinal extends javax.swing.JPanel {
 
@@ -72,10 +74,12 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         priceperkw = dorm.getElectprice() / dorm.getElectconsumption();
         pricepercubicmeter = dorm.getWaterprice() / dorm.getWaterconsumption();
         rent = dorm.getRoomprice();
-
-        kwlabel.setText(Double.toString(priceperkw));
-        cubicmeterlabel.setText(Double.toString(priceperkw));
-        rentlabel.setText(Double.toString(rent));
+        
+        DecimalFormat df = new DecimalFormat("####0.00");
+        
+        kwlabel.setText(df.format(priceperkw));
+        cubicmeterlabel.setText(df.format(pricepercubicmeter));
+        rentlabel.setText(df.format(rent));
 
     }
 
@@ -124,8 +128,8 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox();
         electricmeterlabel = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox();
         watermeterlabel = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -137,6 +141,7 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         kwlabel = new javax.swing.JLabel();
         cubicmeterlabel = new javax.swing.JLabel();
         rentlabel = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -173,15 +178,7 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(450, 50, 390, 410);
-
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-        add(jComboBox1);
-        jComboBox1.setBounds(300, 220, 100, 30);
+        jScrollPane1.setBounds(450, 50, 410, 410);
 
         electricmeterlabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,6 +192,14 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         });
         add(electricmeterlabel);
         electricmeterlabel.setBounds(300, 260, 100, 30);
+
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        add(jComboBox1);
+        jComboBox1.setBounds(300, 220, 100, 30);
 
         watermeterlabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,36 +253,38 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Price per KW:");
         add(jLabel2);
-        jLabel2.setBounds(840, 50, 130, 15);
+        jLabel2.setBounds(860, 50, 130, 15);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Price per cubicmeter:");
         add(jLabel4);
-        jLabel4.setBounds(840, 100, 120, 15);
+        jLabel4.setBounds(860, 90, 120, 15);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Rent:");
         add(jLabel6);
-        jLabel6.setBounds(840, 150, 120, 15);
+        jLabel6.setBounds(860, 130, 120, 15);
 
         kwlabel.setForeground(new java.awt.Color(250, 0, 0));
         kwlabel.setText("jLabel7");
         add(kwlabel);
-        kwlabel.setBounds(870, 70, 45, 16);
+        kwlabel.setBounds(880, 70, 90, 16);
 
         cubicmeterlabel.setForeground(new java.awt.Color(250, 0, 0));
         cubicmeterlabel.setText("jLabel8");
         add(cubicmeterlabel);
-        cubicmeterlabel.setBounds(870, 120, 45, 16);
+        cubicmeterlabel.setBounds(880, 110, 100, 16);
 
         rentlabel.setForeground(new java.awt.Color(250, 0, 0));
         rentlabel.setText("jLabel9");
         add(rentlabel);
-        rentlabel.setBounds(870, 170, 45, 16);
+        rentlabel.setBounds(880, 150, 100, 16);
+        add(jPanel3);
+        jPanel3.setBounds(180, 210, 230, 40);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         add(jPanel1);
-        jPanel1.setBounds(150, 470, 230, 30);
+        jPanel1.setBounds(190, 150, 230, 30);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/bills-tab-peg-edited-panel.png"))); // NOI18N
         jLabel1.setOpaque(true);
@@ -390,6 +397,8 @@ public class BillsPanelFinal extends javax.swing.JPanel {
 
             rbdao.addRoomBill(room);
 
+           roomtable();
+
         }
 
 
@@ -404,134 +413,57 @@ public class BillsPanelFinal extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        ElectricReadingDAOInterface edao = new ElectricReadingDAOImplementation();
-        ElectricReadingBean ebean = new ElectricReadingBean();
-
-        WaterReadingDAOInterface wdao = new WaterDAOImplementation();
-        WaterReadingBean wbean = new WaterReadingBean();
-
-        RoomBillDAOInterface rbdao = new RoomBillDAOImplementation();
-        ArrayList<RoomBillBean> rblist = new ArrayList<RoomBillBean>();
-
+     
+        
         int row = jTable1.getSelectedRow();
         int roomID = (Integer) jTable1.getValueAt(row, 0);
-        System.out.println(roomID);
-        rblist = rbdao.getRoomBillsByRoomID(roomID);
-
-        System.out.println(rblist.get(rblist.size() - 1).getRoomID());
-        int electricid = rblist.get(rblist.size() - 1).getElectricreadingID();
-        int waterid = rblist.get(rblist.size() - 1).getWaterreadingID();
-
-        System.out.println("electricid" + electricid);
-        System.out.println("waterid" + waterid);
-
-        ebean = edao.getElectricReadingsByElectricBillID(electricid);
-        wbean = wdao.getWaterReadingsByWaterBillID(waterid);
-
-        ebean.setCurrentKW(ebean.getCurrentKW());
-        ebean.setDatePaid(date);
-        ebean.setDateRead(ebean.getDateRead());
-        ebean.setElectric_billID(electricid);
-        ebean.setStatus("Paid");
-
-        //paid
         
-        RoomBillBean rbill = new RoomBillBean();
-
+        dorm = dbdao.getDormBillByMonthandYear(new java.sql.Date(new java.util.Date().getTime()));
         
-        System.out.println("electricid"+electricid);
-        System.out.println("waterid"+waterid);
+        WaterReadingBean wbean = new WaterReadingBean();
+        ElectricReadingBean ebean = new ElectricReadingBean();
+        RoomBillBean rbean = new RoomBillBean();
         
-        ebean = edao.getElectricReadingsByElectricBillID(electricid);
-        wbean = wdao.getWaterReadingsByWaterBillID(waterid);
+        wbean = wdao.getWaterReadingByID(roomID, dorm.getDbill_ID());
+        ebean = edao.getElectricReadingByRoomID(roomID, dorm.getDbill_ID());
+        rbean = rbdao.getRoomBillByDbill(roomID, dorm.getDbill_ID());
         
-        ebean.setCurrentKW(ebean.getCurrentKW());
-        ebean.setDatePaid(date);
-        ebean.setDateRead(ebean.getDateRead());
-        ebean.setElectric_billID(electricid);
-        ebean.setStatus("Paid");
-        
-        wbean.setCurrentcubicpermeter(wbean.getCurrentcubicpermeter());
-        wbean.setDatePaid(date);
-        wbean.setDateRead(wbean.getDateRead());
         wbean.setStatus("Paid");
-        wbean.setWater_billID(waterid);
+        ebean.setStatus("Paid");
+        rbean.setStatus("Paid");
         
-        rbill = rblist.get(rblist.size()-1);
-        rbill.setDatePaid(date);
-        rbill.setDbillID(rbill.getDbillID());
-        rbill.setElectricreadingID(electricid);
-        rbill.setRoomID(roomID);
-        rbill.setStatus("Paid");
-        rbill.setSurcharge(0);
-        rbill.setWaterreadingID(waterid);
-        rbill.setDateRead(rbill.getDateRead());
+        wdao.editWaterReading(wbean);
+        edao.editElectricReading(ebean);
+        rbdao.editRoomBill(rbean);
         
-        
-        if(edao.editElectricReading(ebean) && wdao.editWaterReading(wbean) && rbdao.editRoomBill(rbill)){
-            System.out.println("edit successful");
-        }else{
-            System.out.println("edit not successful");
-        }
+        roomtable();
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
-        ElectricReadingDAOInterface edao = new ElectricReadingDAOImplementation();
-        ElectricReadingBean ebean = new ElectricReadingBean();
-
-        WaterReadingDAOInterface wdao = new WaterDAOImplementation();
-        WaterReadingBean wbean = new WaterReadingBean();
-
-        RoomBillDAOInterface rbdao = new RoomBillDAOImplementation();
-        ArrayList<RoomBillBean> rblist = new ArrayList<RoomBillBean>();
-        RoomBillBean rbill = new RoomBillBean();
-
         int row = jTable1.getSelectedRow();
         int roomID = (Integer) jTable1.getValueAt(row, 0);
-        System.out.println(roomID);
-        rblist = rbdao.getRoomBillsByRoomID(roomID);
-
-        System.out.println(rblist.get(rblist.size() - 1).getRoomID());
-        int electricid = rblist.get(rblist.size() - 1).getElectricreadingID();
-        int waterid = rblist.get(rblist.size() - 1).getWaterreadingID();
-
-        System.out.println("electricid" + electricid);
-        System.out.println("waterid" + waterid);
-
-        ebean = edao.getElectricReadingsByElectricBillID(electricid);
-        wbean = wdao.getWaterReadingsByWaterBillID(waterid);
-
-        ebean.setCurrentKW(ebean.getCurrentKW());
-        ebean.setDatePaid(null);
-        ebean.setDateRead(ebean.getDateRead());
-        ebean.setElectric_billID(electricid);
-        ebean.setStatus("Unpaid");
-
-        wbean.setCurrentcubicpermeter(wbean.getCurrentcubicpermeter());
-        wbean.setDatePaid(null);
-        wbean.setDateRead(wbean.getDateRead());
+        
+        dorm = dbdao.getDormBillByMonthandYear(new java.sql.Date(new java.util.Date().getTime()));
+        
+        WaterReadingBean wbean = new WaterReadingBean();
+        ElectricReadingBean ebean = new ElectricReadingBean();
+        RoomBillBean rbean = new RoomBillBean();
+        
+        wbean = wdao.getWaterReadingByID(roomID, dorm.getDbill_ID());
+        ebean = edao.getElectricReadingByRoomID(roomID, dorm.getDbill_ID());
+        rbean = rbdao.getRoomBillByDbill(roomID, dorm.getDbill_ID());
+        
         wbean.setStatus("Unpaid");
-        wbean.setWater_billID(waterid);
+        ebean.setStatus("Unpaid");
+        rbean.setStatus("Unpaid");
         
-        rbill = rblist.get(rblist.size()-1);
-        rbill.setDatePaid(date);
-        rbill.setDbillID(rbill.getDbillID());
-        rbill.setElectricreadingID(electricid);
-        rbill.setRoomID(roomID);
-        rbill.setStatus("unpaid");
-        rbill.setSurcharge(0);
-        rbill.setWaterreadingID(waterid);
-        rbill.setDateRead(rbill.getDateRead());
+        wdao.editWaterReading(wbean);
+        edao.editElectricReading(ebean);
+        rbdao.editRoomBill(rbean);
         
-        
-        if(edao.editElectricReading(ebean) && wdao.editWaterReading(wbean) && rbdao.editRoomBill(rbill)){
-            System.out.println("EDIT!!");
-        } else {
-            System.out.println("fail");
-        }
+        roomtable();
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -553,6 +485,8 @@ public class BillsPanelFinal extends javax.swing.JPanel {
 
         ArrayList<RoomBean> occupied = new ArrayList<>();
         occupied = rdao.getRoomByStatus("Occupied");
+        
+        DecimalFormat df = new DecimalFormat("####0.00");
 
         int room;
         float electricity, water;
@@ -583,7 +517,7 @@ public class BillsPanelFinal extends javax.swing.JPanel {
             status = rbean.getStatus();
             total = electricity * e + water * w + surcharge + r;
 
-            Object[] obj = {bean.getRoomID(), electricity, water, surcharge, total, status};
+            Object[] obj = {bean.getRoomID(), electricity, water, surcharge, df.format(total), status};
             model.addRow(obj);
         }
 
@@ -614,6 +548,7 @@ public class BillsPanelFinal extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel kwlabel;
