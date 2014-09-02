@@ -15,6 +15,7 @@ public class WaterReadingBean {
 
     private int water_billID;
     private float currentcubicpermeter;
+    private Date dateRead;
     private Date datePaid;
     private String status;
 
@@ -45,6 +46,7 @@ public class WaterReadingBean {
     public void setCurrentcubicpermeter(float currentcubicpermeter) {
         this.currentcubicpermeter = currentcubicpermeter;
     }
+
     /**
      * @return the datePaid
      */
@@ -71,6 +73,20 @@ public class WaterReadingBean {
      */
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    /**
+     * @return the dateRead
+     */
+    public Date getDateRead() {
+        return dateRead;
+    }
+
+    /**
+     * @param dateRead the dateRead to set
+     */
+    public void setDateRead(Date dateRead) {
+        this.dateRead = dateRead;
     }
 
 }

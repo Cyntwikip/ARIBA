@@ -92,14 +92,14 @@ public class RoomDAOImplementation implements RoomDAOInterface {
             while (resultSet.next()) {
                 roomID = resultSet.getInt("roomID");
                 roomstatus = resultSet.getString("status");
-                roomprice = resultSet.getDouble("roomprice");
+                //roomprice = resultSet.getDouble("roomprice");
                 //status = resultSet.getString("status");
 
                 bean = new RoomBean();
 
                 bean.setStatus(roomstatus);
                 bean.setRoomID(roomID);
-                bean.setRoomprice(roomprice);
+                //bean.setRoomprice(roomprice);
                 //bean.setStatus(status);
 
                 list.add(bean);

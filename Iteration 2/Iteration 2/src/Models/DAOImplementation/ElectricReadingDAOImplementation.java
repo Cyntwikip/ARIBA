@@ -29,11 +29,12 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "insert into electricreading (currentKW, datePaid, status) values (?, ?, ?,)";
+            String query = "insert into electricreading (currentKW, dateRead, datePaid, status) values (?, ?, ?,?)";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setFloat(1, electric.getCurrentKW());
-            ps.setDate(2, electric.getDatePaid());
-            ps.setString(3, electric.getStatus());
+            ps.setDate(2, electric.getDateRead());
+            ps.setDate(3, electric.getDatePaid());
+            ps.setString(4, electric.getStatus());
             ps.executeUpdate();
             connection.close();
 
@@ -60,12 +61,13 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
 
             int electric_billID;
             float currentKW;
-            Date datePaid;
+            Date dateRead, datePaid;
             String status;
 
             while (resultSet.next()) {
                 electric_billID = resultSet.getInt("electric_billID");
                 currentKW = resultSet.getFloat("currentKW");
+                dateRead = resultSet.getDate("dateRead");
                 datePaid = resultSet.getDate("datePaid");
                 status = resultSet.getString("status");
 
@@ -73,6 +75,7 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
 
                 bean.setElectric_billID(electric_billID);
                 bean.setCurrentKW(currentKW);
+                bean.setDateRead(dateRead);
                 bean.setDatePaid(datePaid);
                 bean.setStatus(status);
 
@@ -138,13 +141,14 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
             Connection connection = c.getConnection();
 
             String query = "update electricreading set currentKW =?, "
-                    + "datePaid = ?, status = ?"
+                    + "dateRead = ?, datePaid = ?, status = ?"
                     + "where electric_billID = ?";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setFloat(1, electric.getCurrentKW());
-            ps.setDate(2, electric.getDatePaid());
-            ps.setString(3, electric.getStatus());
-            ps.setInt(4, electric.getElectric_billID());
+            ps.setDate(2, electric.getDateRead());
+            ps.setDate(3, electric.getDatePaid());
+            ps.setString(4, electric.getStatus());
+            ps.setInt(5, electric.getElectric_billID());
             ps.executeUpdate();
 
             connection.close();
@@ -170,17 +174,19 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
 
             int electric_billID;
             float currentKW;
-            Date datePaid;
+            Date dateRead, datePaid;
             String status;
 
             while (resultSet.next()) {
                 electric_billID = resultSet.getInt("electric_billID");
                 currentKW = resultSet.getFloat("currentKW");
+                dateRead = resultSet.getDate("dateRead");
                 datePaid = resultSet.getDate("datePaid");
                 status = resultSet.getString("status");
 
                 bean.setElectric_billID(electric_billID);
                 bean.setCurrentKW(currentKW);
+                bean.setDateRead(dateRead);
                 bean.setDatePaid(datePaid);
                 bean.setStatus(status);
                 

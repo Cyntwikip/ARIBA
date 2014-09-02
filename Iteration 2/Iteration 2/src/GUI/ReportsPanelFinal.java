@@ -273,7 +273,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
 
         int year = Calendar.getInstance().get(Calendar.YEAR);
 
-        ArrayList<TenantBean> tlist = tdao.getTenantByStatus("CURRENT");
+        ArrayList<TenantBean> tlist = tdao.getAllTenants();
         
         ContractDAOImplementation cdao = new ContractDAOImplementation();
         RoomDAOImplementation rdao = new RoomDAOImplementation();

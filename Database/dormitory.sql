@@ -1,8 +1,8 @@
 CREATE DATABASE  IF NOT EXISTS `dormitory` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `dormitory`;
--- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.6.13, for osx10.6 (i386)
 --
--- Host: 127.0.0.1    Database: dormitory
+-- Host: localhost    Database: dormitory
 -- ------------------------------------------------------
 -- Server version	5.6.14
 
@@ -31,7 +31,7 @@ CREATE TABLE `admin` (
   `username` varchar(45) NOT NULL,
   `password` varchar(20) NOT NULL,
   PRIMARY KEY (`adminID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,6 +135,7 @@ DROP TABLE IF EXISTS `electricreading`;
 CREATE TABLE `electricreading` (
   `electric_billID` int(11) NOT NULL AUTO_INCREMENT,
   `currentKW` float NOT NULL,
+  `dateRead` datetime NOT NULL,
   `datePaid` datetime DEFAULT NULL,
   `status` varchar(15) NOT NULL DEFAULT 'Unpaid',
   PRIMARY KEY (`electric_billID`)
@@ -334,6 +335,7 @@ DROP TABLE IF EXISTS `waterreading`;
 CREATE TABLE `waterreading` (
   `water_billID` int(11) NOT NULL AUTO_INCREMENT,
   `currentcubicpermeter` float NOT NULL,
+  `dateRead` datetime NOT NULL,
   `datePaid` datetime DEFAULT NULL,
   `status` varchar(15) NOT NULL DEFAULT 'Unpaid',
   PRIMARY KEY (`water_billID`)
@@ -358,8 +360,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-<<<<<<< HEAD
--- Dump completed on 2014-09-02  0:17:04
-=======
--- Dump completed on 2014-09-01 18:37:49
->>>>>>> 4a482fd56314ed2fc39f67dafe672f934436e251
+-- Dump completed on 2014-09-02 10:08:22
