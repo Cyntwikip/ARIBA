@@ -9,7 +9,10 @@
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1010, 670]"/>
     </Property>
+<<<<<<< HEAD
     <Property name="resizable" type="boolean" value="false"/>
+=======
+>>>>>>> 2048c127480410ae4cbc365ebc6916380a981e5e
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>

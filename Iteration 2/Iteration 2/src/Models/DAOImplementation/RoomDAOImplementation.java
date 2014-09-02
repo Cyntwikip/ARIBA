@@ -250,15 +250,14 @@ public class RoomDAOImplementation implements RoomDAOInterface {
         try {
             Connector c = new Connector();
             Connection connection = c.getConnection();
-            String query = "update tenantroom set endDate = ? where tr_tenantID = ? and tr_roomID = ?";
+            String query = "delete from tenantroom where tr_tenantID = ? and tr_roomID = ?";
             PreparedStatement ps = connection.prepareStatement(query);
 
-            Calendar enddate = Calendar.getInstance();
-            java.sql.Date endDate = new java.sql.Date(enddate.getTime().getTime());
+            //Calendar enddate = Calendar.getInstance();
+            //java.sql.Date endDate = new java.sql.Date(enddate.getTime().getTime());
             
-            ps.setDate(1, endDate);
-            ps.setInt(2, tenantID);
-            ps.setInt(3, roomID);
+            ps.setInt(1, tenantID);
+            ps.setInt(2, roomID);
             ps.executeUpdate();
             connection.close();
             return true;
