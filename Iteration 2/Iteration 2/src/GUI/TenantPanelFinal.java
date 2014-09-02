@@ -483,11 +483,11 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         jPanel1.add(fname);
         fname.setBounds(90, 30, 200, 20);
         jPanel1.add(lname);
-        lname.setBounds(110, 60, 200, 0);
+        lname.setBounds(100, 60, 200, 20);
         jPanel1.add(inout1);
         inout1.setBounds(110, 74, 200, 20);
         jPanel1.add(logtime);
-        logtime.setBounds(110, 100, 200, 0);
+        logtime.setBounds(110, 100, 200, 20);
         jPanel1.add(roomnumber);
         roomnumber.setBounds(110, 120, 200, 0);
 
