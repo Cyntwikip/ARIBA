@@ -347,7 +347,10 @@ public class BillsPanelFinal extends javax.swing.JPanel {
             WaterDAOImplementation wdao = new WaterDAOImplementation();
             ElectricReadingDAOImplementation edao = new ElectricReadingDAOImplementation();
             
-            //waterbean.set
+            electricbean.setCurrentKW(electric);
+            electricbean.setStatus("Unpaid");
+            waterbean.setCurrentcubicpermeter(water);
+            waterbean.setStatus("Unpaid");
             
             
             

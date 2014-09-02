@@ -15,6 +15,7 @@ public class ElectricReadingBean {
 
     private int electric_billID;
     private float currentKW;
+    private Date dateRead;
     private Date datePaid;
     private String status;
 
@@ -72,6 +73,20 @@ public class ElectricReadingBean {
      */
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    /**
+     * @return the dateRead
+     */
+    public Date getDateRead() {
+        return dateRead;
+    }
+
+    /**
+     * @param dateRead the dateRead to set
+     */
+    public void setDateRead(Date dateRead) {
+        this.dateRead = dateRead;
     }
 
     
