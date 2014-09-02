@@ -86,20 +86,17 @@ public class RoomDAOImplementation implements RoomDAOInterface {
 
             int roomID;
             String roomstatus;
-            double roomprice;
             //String status;
 
             while (resultSet.next()) {
                 roomID = resultSet.getInt("roomID");
                 roomstatus = resultSet.getString("status");
-                roomprice = resultSet.getDouble("roomprice");
                 //status = resultSet.getString("status");
 
                 bean = new RoomBean();
 
                 bean.setStatus(roomstatus);
                 bean.setRoomID(roomID);
-                bean.setRoomprice(roomprice);
                 //bean.setStatus(status);
 
                 list.add(bean);
@@ -129,18 +126,15 @@ public class RoomDAOImplementation implements RoomDAOInterface {
 
             int currroomID;
             String curroomstatus;
-            double roomprice;
             //String status;
 
             while (resultSet.next()) {
                 currroomID = resultSet.getInt("roomID");
                 curroomstatus = resultSet.getString("status");
-                roomprice = resultSet.getDouble("roomprice");
                 //status = resultSet.getString("status");
 
                 bean.setStatus(curroomstatus);
                 bean.setRoomID(roomID);
-                bean.setRoomprice(roomprice);
                 //bean.setStatus(status);
 
             }
@@ -197,12 +191,10 @@ public class RoomDAOImplementation implements RoomDAOInterface {
 
             int roomID;
             String status;
-            double roomprice;
 
             while (resultSet.next()) {
                 roomID = resultSet.getInt("tr_roomID");
                 status = resultSet.getString("status");
-                roomprice = resultSet.getDouble("roomprice");
                 //currentKW = resultSet.getFloat("currentKW");
                 //currentcubicmeter = resultSet.getFloat("currentcubicmeter");
 
@@ -210,7 +202,6 @@ public class RoomDAOImplementation implements RoomDAOInterface {
 
                 bean.setRoomID(roomID);
                 bean.setStatus(status);
-                bean.setRoomprice(roomprice);
                 //bean.setCurrentKW(currentKW);
                 //bean.setCurrentcubicmeter(currentcubicmeter);
 
@@ -334,16 +325,13 @@ public class RoomDAOImplementation implements RoomDAOInterface {
             
             int roomID;
             String beanstatus;
-            double roomprice;
             
             while(resultSet.next()){
                 roomID = resultSet.getInt("roomID");
                 beanstatus = resultSet.getString("status");
-                roomprice = resultSet.getDouble("roomprice");
                 
                 room.setRoomID(roomID);
                 room.setStatus(beanstatus);
-                room.setRoomprice(roomprice);
                 
                 list.add(room);
                       
@@ -357,27 +345,6 @@ public class RoomDAOImplementation implements RoomDAOInterface {
 
         return null;
     }
-
-    @Override
-    public boolean setPrice(int roomID, double price) {
-        try {
-            Connector c = new Connector();
-            Connection connection = c.getConnection();
-
-            String query = "update room set roomprice = ? where roomID = ?";
-            PreparedStatement ps = connection.prepareStatement(query);
-            
-            ps.setDouble(1, price);
-            ps.setInt(2, roomID);
-            ps.executeUpdate();
-            connection.close();
-
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(TenantDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return false;
-    }
+    
 
 }

@@ -16,6 +16,7 @@ public class DormBillBean {
     private float electconsumption;
     private double waterprice;
     private double electprice;
+    private double roomprice;
     private java.sql.Date dateRead;
 
     /**
@@ -100,6 +101,20 @@ public class DormBillBean {
      */
     public void setDbill_ID(int dbill_ID) {
         this.dbill_ID = dbill_ID;
+    }
+
+    /**
+     * @return the roomprice
+     */
+    public double getRoomprice() {
+        return roomprice;
+    }
+
+    /**
+     * @param roomprice the roomprice to set
+     */
+    public void setRoomprice(double roomprice) {
+        this.roomprice = roomprice;
     }
     
 }
