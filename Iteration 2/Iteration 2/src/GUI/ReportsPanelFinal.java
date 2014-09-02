@@ -181,7 +181,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
         jLabel3.setText("View Leaving Tenants By:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(10, 200, 240, 40);
+        jLabel3.setBounds(10, 200, 210, 40);
 
         jLabel4.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         jLabel4.setText("View...");
@@ -201,7 +201,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         jButton3.setBounds(10, 290, 210, 30);
 
         add(jPanel1);
-        jPanel1.setBounds(50, 70, 220, 470);
+        jPanel1.setBounds(50, 40, 220, 500);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/5-reports-peg-edited-crop-panel.png"))); // NOI18N
         add(jLabel1);

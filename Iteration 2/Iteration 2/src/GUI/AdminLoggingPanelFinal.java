@@ -197,7 +197,7 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Name", ""
+                "Name", "Time"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
