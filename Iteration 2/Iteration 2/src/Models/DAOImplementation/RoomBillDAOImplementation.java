@@ -280,10 +280,12 @@ public class RoomBillDAOImplementation implements RoomBillDAOInterface {
             Connection connection = c.getConnection();
 
             String query = "update roombill set surcharge = ?"
-                    + "where roomID = ? ";
+                    + "where roomID = ? and dbillID = ? and status = ?";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setDouble(1, roombill.getSurcharge());
             ps.setInt(2, roombill.getRoomID());
+            ps.setInt(3, roombill.getDbillID());
+            ps.setString(4, "Unpaid");
 
             return true;
         } catch (SQLException ex) {

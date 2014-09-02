@@ -42,7 +42,7 @@ public class MainMenuFinal extends javax.swing.JFrame {
     private boolean checksurcharge = false;
     private RoomBillBean roombill = new RoomBillBean();
     private ArrayList<RoomBillBean> roombilllist = new ArrayList<RoomBillBean>();
-    private RoomBillDAOInterface roombillbeandao = new RoomBillDAOImplementation();
+    private RoomBillDAOImplementation roombillbeandao = new RoomBillDAOImplementation();
 
     public MainMenuFinal() {
         initComponents();

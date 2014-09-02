@@ -129,7 +129,6 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         electricmeterlabel = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
         watermeterlabel = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -192,14 +191,6 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         });
         add(electricmeterlabel);
         electricmeterlabel.setBounds(300, 260, 100, 30);
-
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-        add(jComboBox1);
-        jComboBox1.setBounds(300, 220, 100, 30);
 
         watermeterlabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -279,6 +270,8 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         rentlabel.setText("jLabel9");
         add(rentlabel);
         rentlabel.setBounds(880, 150, 100, 16);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         add(jPanel3);
         jPanel3.setBounds(180, 210, 230, 40);
 
@@ -291,10 +284,6 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         add(jLabel1);
         jLabel1.setBounds(0, 0, 1000, 600);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void electricmeterlabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_electricmeterlabelActionPerformed
         // TODO add your handling code here:
@@ -405,11 +394,18 @@ public class BillsPanelFinal extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-
+        // TODO add your handling code here:        
+        dorm = dbdao.getDormBillByMonthandYear(new java.sql.Date(new java.util.Date().getTime()));
+        
+        if(dorm == null ){
+            JOptionPane.showMessageDialog(null, "Current month bills already exist");
+        }else{
+            
         this.removeAll();
         jPanel2 = new EditGeneralBillPanelFinal();
         setJpanel();
+        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -468,14 +464,10 @@ public class BillsPanelFinal extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     public void roomlist() {
-        jComboBox1.removeAllItems();
 
         ArrayList<RoomBean> rbean = new ArrayList<RoomBean>();
         rbean = rdao.getRoomByStatus("Occupied");
 
-        for (int i = 0; i < rbean.size(); i++) {
-            jComboBox1.addItem(rbean.get(i).getRoomID());
-        }
     }
 
     public void roomtable() {
@@ -541,7 +533,6 @@ public class BillsPanelFinal extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
