@@ -481,7 +481,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
         jPanel1.setOpaque(false);
         jPanel1.setLayout(null);
         jPanel1.add(fname);
-        fname.setBounds(110, 40, 200, 20);
+        fname.setBounds(90, 30, 200, 20);
         jPanel1.add(lname);
         lname.setBounds(110, 60, 200, 0);
         jPanel1.add(inout1);
@@ -614,7 +614,7 @@ public class TenantPanelFinal extends javax.swing.JPanel {
 
         lname1.setText(" ");
         jPanel1.add(lname1);
-        lname1.setBounds(90, 60, 200, 14);
+        lname1.setBounds(90, 54, 200, 20);
 
         jLabel2.setText(" ");
         jPanel1.add(jLabel2);
