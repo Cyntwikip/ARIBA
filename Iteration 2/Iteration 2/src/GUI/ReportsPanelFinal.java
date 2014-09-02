@@ -130,9 +130,10 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         jPanel1.add(jButton1);
         jButton1.setBounds(10, 130, 170, 40);
 
-        jButton4.setText("Expired Contract");
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/Originals/Expired Contract.png"))); // NOI18N
         jButton4.setToolTipText("");
         jButton4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton4.setBorderPainted(false);
         jButton4.setContentAreaFilled(false);
         jButton4.setMinimumSize(new java.awt.Dimension(221, 47));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -141,9 +142,9 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jButton4);
-        jButton4.setBounds(30, 240, 130, 30);
+        jButton4.setBounds(10, 240, 200, 40);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/viewcontractdate.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/Originals/View by Contract Date.png"))); // NOI18N
         jButton5.setContentAreaFilled(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,7 +152,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jButton5);
-        jButton5.setBounds(10, 320, 170, 40);
+        jButton5.setBounds(30, 330, 170, 40);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/renew.png"))); // NOI18N
         jButton6.setContentAreaFilled(false);
@@ -162,7 +163,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jButton6);
-        jButton6.setBounds(0, 370, 110, 30);
+        jButton6.setBounds(20, 420, 90, 30);
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/end.png"))); // NOI18N
         jButton7.setContentAreaFilled(false);
@@ -173,7 +174,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jButton7);
-        jButton7.setBounds(100, 360, 80, 50);
+        jButton7.setBounds(120, 410, 90, 50);
         jPanel1.add(jLabel2);
         jLabel2.setBounds(20, 20, 0, 0);
 
@@ -187,18 +188,20 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         jPanel1.add(jLabel4);
         jLabel4.setBounds(20, 44, 100, 30);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/viewgrad.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/Originals/View by Expected Year of Grad.png"))); // NOI18N
         jButton3.setBorder(null);
+        jButton3.setBorderPainted(false);
+        jButton3.setContentAreaFilled(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(30, 280, 140, 30);
+        jButton3.setBounds(10, 290, 210, 30);
 
         add(jPanel1);
-        jPanel1.setBounds(70, 40, 190, 470);
+        jPanel1.setBounds(50, 70, 220, 470);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/5-reports-peg-edited-crop-panel.png"))); // NOI18N
         add(jLabel1);
