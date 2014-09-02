@@ -130,8 +130,10 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
 
         jButton3.setBackground(new java.awt.Color(0, 51, 0));
         jButton3.setForeground(new java.awt.Color(0, 51, 0));
-        jButton3.setText("Edit account");
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/Originals/edit.jpg"))); // NOI18N
         jButton3.setBorder(null);
+        jButton3.setBorderPainted(false);
+        jButton3.setContentAreaFilled(false);
         jButton3.setName(""); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,7 +141,7 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(30, 340, 140, 40);
+        jButton3.setBounds(50, 340, 90, 40);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Search by:");
