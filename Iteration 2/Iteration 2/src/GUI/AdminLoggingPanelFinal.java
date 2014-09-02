@@ -103,14 +103,16 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1000, 596));
         setLayout(null);
 
-        jButton4.setText("Logout");
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/Originals/logout.png"))); // NOI18N
+        jButton4.setBorderPainted(false);
+        jButton4.setContentAreaFilled(false);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
         add(jButton4);
-        jButton4.setBounds(710, 500, 100, 30);
+        jButton4.setBounds(730, 500, 200, 45);
 
         jPanel1.setLayout(null);
 
@@ -119,14 +121,16 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
         jPanel1.add(jLabel2);
         jLabel2.setBounds(10, 10, 140, 40);
 
-        jButton2.setText("Create new admin");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/Originals/createnew.png"))); // NOI18N
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(30, 393, 140, 40);
+        jButton2.setBounds(0, 380, 190, 40);
 
         jButton3.setBackground(new java.awt.Color(0, 51, 0));
         jButton3.setForeground(new java.awt.Color(0, 51, 0));
@@ -141,7 +145,7 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(50, 340, 90, 40);
+        jButton3.setBounds(20, 320, 140, 40);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Search by:");
@@ -193,7 +197,7 @@ public class AdminLoggingPanelFinal extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Name", ""
+                "Name", "Time"
             }
         ));
         jScrollPane2.setViewportView(jTable2);

@@ -137,6 +137,7 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         kwlabel = new javax.swing.JLabel();
         cubicmeterlabel = new javax.swing.JLabel();
         rentlabel = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 596));
@@ -144,10 +145,11 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1000, 596));
         setLayout(null);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("jLabel3");
         add(jLabel3);
-        jLabel3.setBounds(220, 120, 160, 20);
+        jLabel3.setBounds(200, 120, 220, 30);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -243,32 +245,39 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         add(jButton3);
         jButton3.setBounds(660, 510, 100, 40);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Price per KW:");
         add(jLabel2);
-        jLabel2.setBounds(840, 50, 90, 16);
+        jLabel2.setBounds(840, 50, 130, 15);
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Price per cubicmeter:");
         add(jLabel4);
-        jLabel4.setBounds(840, 100, 132, 16);
+        jLabel4.setBounds(840, 100, 120, 15);
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Rent:");
         add(jLabel6);
-        jLabel6.setBounds(840, 150, 32, 16);
+        jLabel6.setBounds(840, 150, 120, 15);
 
         kwlabel.setForeground(new java.awt.Color(250, 0, 0));
         kwlabel.setText("jLabel7");
         add(kwlabel);
-        kwlabel.setBounds(870, 70, 45, 16);
+        kwlabel.setBounds(870, 70, 34, 14);
 
         cubicmeterlabel.setForeground(new java.awt.Color(250, 0, 0));
         cubicmeterlabel.setText("jLabel8");
         add(cubicmeterlabel);
-        cubicmeterlabel.setBounds(870, 120, 45, 16);
+        cubicmeterlabel.setBounds(870, 120, 34, 14);
 
         rentlabel.setForeground(new java.awt.Color(250, 0, 0));
         rentlabel.setText("jLabel9");
         add(rentlabel);
-        rentlabel.setBounds(870, 170, 45, 16);
+        rentlabel.setBounds(870, 170, 34, 14);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        add(jPanel1);
+        jPanel1.setBounds(190, 150, 230, 30);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/bills-tab-peg-edited-panel.png"))); // NOI18N
         jLabel1.setOpaque(true);
@@ -369,6 +378,7 @@ public class BillsPanelFinal extends javax.swing.JPanel {
 
             int roomID = (int) jTable1.getModel().getValueAt(row, col);
 
+
             RoomBillBean room = new RoomBillBean();
             room.setRoomID(roomID);
             room.setDbillID(dorm.getDbill_ID());
@@ -380,6 +390,7 @@ public class BillsPanelFinal extends javax.swing.JPanel {
             room.setStatus("Unpaid");
 
             rbdao.addRoomBill(room);
+
 
         }
 
@@ -396,17 +407,61 @@ public class BillsPanelFinal extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       
+        ElectricReadingDAOInterface edao = new ElectricReadingDAOImplementation();
+        ElectricReadingBean ebean = new ElectricReadingBean();
+
+        WaterReadingDAOInterface wdao = new WaterDAOImplementation();
+        WaterReadingBean wbean = new WaterReadingBean();
+
+        RoomBillDAOInterface rbdao = new RoomBillDAOImplementation();
+        ArrayList<RoomBillBean> rblist = new ArrayList<RoomBillBean>();
+
+        int row = jTable1.getSelectedRow();
+        int roomID =  (Integer)jTable1.getValueAt(row, 0);
+        System.out.println(roomID);
+        rblist = rbdao.getRoomBillsByRoomID(roomID);
+
+        System.out.println(rblist.get(rblist.size() - 1).getRoomID());
+        int electricid = rblist.get(rblist.size()-1).getElectricreadingID();
+        int waterid = rblist.get(rblist.size()-1).getWaterreadingID();
+        
+        System.out.println("electricid"+electricid);
+        System.out.println("waterid"+waterid);
+        
+        ebean = edao.getElectricReadingsByElectricBillID(electricid);
+        wbean = wdao.getWaterReadingsByWaterBillID(waterid);
+        
+        ebean.setCurrentKW(ebean.getCurrentKW());
+        ebean.setDatePaid(null);
+        ebean.setDateRead(ebean.getDateRead());
+        ebean.setElectric_billID(electricid);
+        ebean.setStatus("Unpaid");
+        
+        wbean.setCurrentcubicpermeter(wbean.getCurrentcubicpermeter());
+        wbean.setDatePaid(null);
+        wbean.setDateRead(wbean.getDateRead());
+        wbean.setStatus("Unpaid");
+        wbean.setWater_billID(waterid);
+        
+        if(edao.editElectricReading(ebean) && wdao.editWaterReading(wbean)){
+            System.out.println("EDIT!!");
+        }else{
+            System.out.println("fail");
+        }
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     public void roomlist() {
         jComboBox1.removeAllItems();
 
         ArrayList<RoomBean> rbean = new ArrayList<RoomBean>();
-        rbean = rdao.getAllRooms();
+        rbean = rdao.getRoomByStatus("Occupied");
 
         for (int i = 0; i < rbean.size(); i++) {
             jComboBox1.addItem(rbean.get(i).getRoomID());
@@ -491,6 +546,7 @@ public class BillsPanelFinal extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel kwlabel;

@@ -209,15 +209,14 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
             ps.setDate(1, date);
             ps.setDate(2, date);
             ResultSet resultSet = ps.executeQuery();
-
             int water_billID;
             float currentcubicpermeter;
             Date dateRead, datePaid;
             String status;
-
             WaterReadingBean wbean = new WaterReadingBean();
 
             while (resultSet.next()) {
+
                 water_billID = resultSet.getInt("water_billID");
                 currentcubicpermeter = resultSet.getFloat("currentcubicpermeter");
                 dateRead = resultSet.getDate("dateRead");
@@ -272,7 +271,6 @@ public class WaterDAOImplementation implements WaterReadingDAOInterface {
                 wbean.setDateRead(dateRead);
                 wbean.setDatePaid(datePaid);
                 wbean.setStatus(status);
-                System.out.println("hi");
             }
             connection.close();
 

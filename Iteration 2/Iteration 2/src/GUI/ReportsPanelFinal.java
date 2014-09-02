@@ -52,7 +52,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
 
     public ReportsPanelFinal() {
         initComponents();
-        startTime();
+        //startTime();
 
         model = (DefaultTableModel) jTable1.getModel();
     }
@@ -130,9 +130,10 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         jPanel1.add(jButton1);
         jButton1.setBounds(10, 130, 170, 40);
 
-        jButton4.setText("Expired Contract");
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/Originals/Expired Contract.png"))); // NOI18N
         jButton4.setToolTipText("");
         jButton4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton4.setBorderPainted(false);
         jButton4.setContentAreaFilled(false);
         jButton4.setMinimumSize(new java.awt.Dimension(221, 47));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -141,9 +142,9 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jButton4);
-        jButton4.setBounds(30, 240, 130, 30);
+        jButton4.setBounds(10, 240, 200, 40);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/viewcontractdate.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/Originals/View by Contract Date.png"))); // NOI18N
         jButton5.setContentAreaFilled(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,7 +152,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jButton5);
-        jButton5.setBounds(10, 320, 170, 40);
+        jButton5.setBounds(30, 330, 170, 40);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/renew.png"))); // NOI18N
         jButton6.setContentAreaFilled(false);
@@ -162,7 +163,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jButton6);
-        jButton6.setBounds(0, 370, 110, 30);
+        jButton6.setBounds(20, 420, 90, 30);
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/end.png"))); // NOI18N
         jButton7.setContentAreaFilled(false);
@@ -173,32 +174,34 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jButton7);
-        jButton7.setBounds(100, 360, 80, 50);
+        jButton7.setBounds(120, 410, 90, 50);
         jPanel1.add(jLabel2);
         jLabel2.setBounds(20, 20, 0, 0);
 
         jLabel3.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
         jLabel3.setText("View Leaving Tenants By:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(10, 200, 240, 40);
+        jLabel3.setBounds(10, 200, 210, 40);
 
         jLabel4.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         jLabel4.setText("View...");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(20, 44, 100, 30);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/viewgrad.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/Originals/View by Expected Year of Grad.png"))); // NOI18N
         jButton3.setBorder(null);
+        jButton3.setBorderPainted(false);
+        jButton3.setContentAreaFilled(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(30, 280, 140, 30);
+        jButton3.setBounds(10, 290, 210, 30);
 
         add(jPanel1);
-        jPanel1.setBounds(70, 40, 190, 470);
+        jPanel1.setBounds(50, 40, 220, 500);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Images/5-reports-peg-edited-crop-panel.png"))); // NOI18N
         add(jLabel1);
@@ -235,9 +238,6 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         ArrayList<TenantBean> tbeanlist = new ArrayList<TenantBean>();
         TenantBean tbean = new TenantBean();
         TenantDAOInterface tdao = new TenantDAOImplementation();
-
-        //     bbeanlist = bdao.getAllNotPaidAll(rbeanlist.size());
-        System.out.println(bbeanlist.size());
 
         int roomID;
         for (int i = 0; i < bbeanlist.size(); i++) {
@@ -276,23 +276,27 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
 
         int year = Calendar.getInstance().get(Calendar.YEAR);
 
-        ArrayList<TenantBean> tlist = tdao.getTenantByStatus("CURRENT");
+        ArrayList<TenantBean> tlist = tdao.getAllTenants();
 
         ContractDAOImplementation cdao = new ContractDAOImplementation();
         RoomDAOImplementation rdao = new RoomDAOImplementation();
         TenantDAOImplementation tdao = new TenantDAOImplementation();
         ContractBean tenantcontract = new ContractBean();
+        TenantBean editedtenant = new TenantBean();
         RoomBean tenantroom = new RoomBean();
 
         Calendar date = Calendar.getInstance();
         java.util.Date utilDate = date.getTime();
 
         String fname, lname, degree;
+        boolean remove = false;
         int yearofgrad;
 
         for (int i = 0; i < tlist.size(); i++) {
+            System.out.println(tlist.get(i).getFname());
             tenantcontract = cdao.getLatestContractByTenantID(tlist.get(i).getTenantID());
-            if (tenantcontract.getExpirydate().after(utilDate)) { //expired
+            System.out.println(tenantcontract.getExpirydate());
+            if (tenantcontract.getExpirydate().before(utilDate)) { //expired
                 fname = tlist.get(i).getLname();
                 lname = tlist.get(i).getFname();
                 degree = tlist.get(i).getDegree();
@@ -302,8 +306,11 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
                 model.addRow(obj);
 
                 tenantroom = rdao.getTenantRoom(tlist.get(i).getTenantID());
-                rdao.removeTenantToRoom(tlist.get(i).getTenantID(), tenantroom.getRoomID());
-                tdao.editTenant(tlist.get(i));
+                remove = rdao.removeTenantToRoom(tlist.get(i).getTenantID(), tenantroom.getRoomID());
+                if (remove) {
+                    tdao.setTenantToOld(tlist.get(i).getTenantID());
+                    System.out.println("remove tenant to room");
+                }
 
                 tenantcontract = new ContractBean();
                 tenantroom = new RoomBean();
@@ -375,50 +382,42 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         ContractDAOInterface contractdao = new ContractDAOImplementation();
 
         temp = contractdao.getAllContractsByTenantID(tbean.getTenantID());
-
         Calendar expirydate = Calendar.getInstance();
 
         //   year month day
         java.sql.Date sqlEffectivedate = temp.get(temp.size() - 1).getExpirydate();
-        DateFormat df_contract = new SimpleDateFormat("MMMM d, yyyy");
-        String text = df_contract.format(sqlEffectivedate);
+        DateFormat df_contractyear = new SimpleDateFormat("yyyy");
+        DateFormat df_contractday = new SimpleDateFormat("d");
+        DateFormat df_contractmonth = new SimpleDateFormat("MM");
 
-        int x = text.indexOf(' ');
+        int year = Integer.valueOf(df_contractyear.format(sqlEffectivedate));
+        String month = df_contractmonth.format(sqlEffectivedate);
+        String day = df_contractday.format(sqlEffectivedate);
 
-        System.out.println("index" + x);
+        System.out.println(year + "-" + month + "-" + day);
 
-        String month = text.substring(0, x);
-        String day = text.substring(x + 1, x + 3);
-        String year = text.substring(text.length() - 4, text.length());
-        System.out.println(text);
-        System.out.println(month + " " + day + " " + year);
-        System.out.println("here");
-        System.out.println(month);
-        System.out.println(day);
-        System.out.println(year);
-
-        int year1 = Integer.valueOf(year);
-        int month1 = toMonth(month);
+        int year1 = year;
+        int year2 = year1 + 1;
+        int month1 = Integer.valueOf(month);
         int day1 = Integer.valueOf(day);
-        year1++;
-        year1 = year1 - 1900;
-        month1 = month1 - 1;
-        java.sql.Date sqlExpirydate = new java.sql.Date(year1, month1, day1);
+
+        System.out.println("year1" + year1);
+        System.out.println("month1" + month1);
+        System.out.println("day1" + day1);
+
+        java.sql.Date sqlExpirydate = new java.sql.Date(year2 - 1900, month1-1, day1);
+        java.sql.Date sqlEffectivedate1 = new java.sql.Date(year1 - 1900, month1-1, day1);
 
         //converting Calendar to sql Date
         contractAcc.setContract_tenantID(tbean.getTenantID());
-        contractAcc.setEffectivedate(sqlEffectivedate);
+        contractAcc.setEffectivedate(sqlEffectivedate1);
         contractAcc.setExpirydate(sqlExpirydate);
 
         if (contractdao.addContract(contractAcc)) {
             System.out.println(expirydate);
-
-            // delete na rin sa room
         } else {
             System.out.println("no");
-
         }
-
 
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -430,11 +429,8 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
 
         String lname = (String) jTable1.getValueAt(row, 0);
         String fname = (String) jTable1.getValueAt(row, 1);
-        System.out.println(lname);
-        System.out.println(fname);
 
         TenantBean tbean = tdao.getTenantByName(fname, lname);
-        System.out.println(tbean.getTenantID());
 
         RoomDAOInterface rdao = new RoomDAOImplementation();
         RoomBean rbean = rdao.getTenantRoom(tbean.getTenantID());
@@ -443,10 +439,10 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         tbean.setStatus("not current");
         boolean setold = tdao.setTenantToOld(tbean.getTenantID());
         if (setold) {
-            System.out.println("End");
+            //System.out.println("End");
             deleteToRoom(tbean);
         } else {
-            System.out.println("nope nope");
+            //System.out.println("nope nope");
         }
 
 
@@ -492,9 +488,9 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         tc = tcm.getColumn(1);
         tc.setHeaderValue("First name");
         tc = tcm.getColumn(2);
-        tc.setHeaderValue("Effective date");
+        tc.setHeaderValue("Date of Effectivity");
         tc = tcm.getColumn(3);
-        tc.setHeaderValue("Expiry date");
+        tc.setHeaderValue("Date of Expiry");
         th.repaint();
 
         ContractDAOInterface cdao = new ContractDAOImplementation();
@@ -528,6 +524,57 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        jButton6.setEnabled(true);
+        jButton7.setEnabled(true);
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+        JTableHeader th = jTable1.getTableHeader();
+        TableColumnModel tcm = th.getColumnModel();
+        TableColumn tc = tcm.getColumn(0);
+        tc.setHeaderValue("Surname");
+        tc = tcm.getColumn(1);
+        tc.setHeaderValue("First name");
+        tc = tcm.getColumn(2);
+        tc.setHeaderValue("Date of Effectivity");
+        tc = tcm.getColumn(3);
+        tc.setHeaderValue("Date of Expiry");
+        th.repaint();
+
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+
+        ContractDAOInterface cdao = new ContractDAOImplementation();
+        ArrayList<ContractBean> clist = new ArrayList<ContractBean>();
+        clist = cdao.getAllContracts();
+
+        TenantDAOInterface tdao = new TenantDAOImplementation();
+        ArrayList<TenantBean> tlist = new ArrayList<TenantBean>();
+
+        tlist = tdao.getTenantByExpectedYearofGrad(year);
+
+        TenantBean temp = new TenantBean();
+        ContractBean ctemp = new ContractBean();
+        int tenantID;
+        String fname, lname;
+        Date effectivedate, expirydate;
+
+        for (int i = 0; i < tlist.size(); i++) {
+            tenantID = tlist.get(i).getTenantID();
+
+            if (tenantID == 0) {
+                // wala tenant
+            } else {
+                temp = tdao.getTenantById(tenantID);
+                fname = temp.getFname();
+                lname = temp.getLname();
+                ctemp = cdao.getLatestContractByTenantID(tenantID);
+                effectivedate = ctemp.getEffectivedate();
+                expirydate = ctemp.getExpirydate();
+
+                Object[] obj = {lname, fname, effectivedate, expirydate};
+                model.addRow(obj);
+            }
+        }
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     public int toMonth(String m) {
@@ -559,60 +606,62 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         return 0;
     }
 
-    public void startTime() {
+    /*
+     public void startTime() {
 
-        ActionListener actListner = new ActionListener() {
+     ActionListener actListner = new ActionListener() {
 
-            public void actionPerformed(ActionEvent event) {
+     public void actionPerformed(ActionEvent event) {
 
-                Calendar cal = Calendar.getInstance();
-                cal.getTime();
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-                DateFormat date_format = new SimpleDateFormat("MMMM d, yyyy");
+     Calendar cal = Calendar.getInstance();
+     cal.getTime();
+     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+     DateFormat date_format = new SimpleDateFormat("MMMM d, yyyy");
 
-                System.out.println(sdf.format(cal.getTime()));
+     System.out.println(sdf.format(cal.getTime()));
 
-                // check if ireremove na contract
+     // check if ireremove na contract
           
-                Calendar date = Calendar.getInstance();
-                java.util.Date utilDate = date.getTime();
+     Calendar date = Calendar.getInstance();
+     java.util.Date utilDate = date.getTime();
 
-                String fname, lname, degree;
-                int yearofgrad;
-                TenantDAOInterface tdao = new TenantDAOImplementation();
-                ArrayList<TenantBean> tlist = tdao.getAllTenants();
-                RoomDAOInterface rdao = new RoomDAOImplementation();
-                RoomBean troom = new RoomBean();
+     String fname, lname, degree;
+     int yearofgrad;
+     TenantDAOInterface tdao = new TenantDAOImplementation();
+     ArrayList<TenantBean> tlist = tdao.getAllTenants();
+     RoomDAOInterface rdao = new RoomDAOImplementation();
+     RoomBean troom = new RoomBean();
                 
-                for (int i = 0; i < tlist.size(); i++) {
-                    cbean = cdao.getLatestContractByTenantID(tlist.get(i).getTenantID());
-                    if (cbean.getExpirydate().after(utilDate)) { //expired
-                        fname = tlist.get(i).getLname();
-                        lname = tlist.get(i).getFname();
-                        degree = tlist.get(i).getDegree();
-                        tlist.get(i).setStatus("NOT CURRENT");
-                        yearofgrad = tlist.get(i).getExpectedyearofgrad();
-                        Object[] obj = {lname, fname, degree, yearofgrad};
-                        model.addRow(obj);
+     for (int i = 0; i < tlist.size(); i++) {
+     cbean = cdao.getLatestContractByTenantID(tlist.get(i).getTenantID());
+     if (cbean.getExpirydate().after(utilDate)) { //expired
+     fname = tlist.get(i).getLname();
+     lname = tlist.get(i).getFname();
+     degree = tlist.get(i).getDegree();
+     tlist.get(i).setStatus("NOT CURRENT");
+     yearofgrad = tlist.get(i).getExpectedyearofgrad();
+     Object[] obj = {lname, fname, degree, yearofgrad};
+     model.addRow(obj);
 
-                        troom = rdao.getTenantRoom(tlist.get(i).getTenantID());
-                        rdao.removeTenantToRoom(tlist.get(i).getTenantID(), troom.getRoomID());
-                        tdao.editTenant(tlist.get(i));
+     troom = rdao.getTenantRoom(tlist.get(i).getTenantID());
+     rdao.removeTenantToRoom(tlist.get(i).getTenantID(), troom.getRoomID());
+     tdao.editTenant(tlist.get(i));
 
-                        cbean = new ContractBean();
-                        troom = new RoomBean();
-                    }else{
-                        System.out.println("contractid"+cbean.getContractID());
-                    }
-                }
+     cbean = new ContractBean();
+     troom = new RoomBean();
+     }else{
+     System.out.println("contractid"+cbean.getContractID());
+     }
+     }
 
-            }
+     }
 
-        };
-        timer = new Timer(1000, actListner);
+     };
+     timer = new Timer(1000, actListner);
 
-        timer.start();
-    }
+     timer.start();
+     }
+     */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
