@@ -327,9 +327,11 @@ public class RoomDAOImplementation implements RoomDAOInterface {
             String beanstatus;
             
             while(resultSet.next()){
+                
                 roomID = resultSet.getInt("roomID");
                 beanstatus = resultSet.getString("status");
                 
+                room = new RoomBean();
                 room.setRoomID(roomID);
                 room.setStatus(beanstatus);
                 

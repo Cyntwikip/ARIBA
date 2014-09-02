@@ -215,6 +215,7 @@ CREATE TABLE `roombill` (
   `electricreadingID` int(11) NOT NULL,
   `dbillID` int(11) NOT NULL,
   `surcharge` double DEFAULT NULL,
+  `dateRead` datetime NOT NULL,
   `datePaid` datetime DEFAULT NULL,
   `status` varchar(15) NOT NULL DEFAULT 'Unpaid',
   KEY `roomID_idx` (`roomID`),
@@ -360,4 +361,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-09-02 11:15:45
+-- Dump completed on 2014-09-02 14:08:02

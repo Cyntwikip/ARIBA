@@ -21,6 +21,7 @@ public interface ElectricReadingDAOInterface {
     public boolean editElectricReading(ElectricReadingBean water);
     public ElectricReadingBean getElectricReadingsByElectricBillID(int ebillID);
     public ElectricReadingBean getElectricReadingByMonth(java.sql.Date date);
+    public ElectricReadingBean getElectricReadingByRoomID(int roomid, int dbillid);
 
 
 }

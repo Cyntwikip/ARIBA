@@ -9,7 +9,6 @@ package GUI;
  *
  * @author Giodee
  */
-
 import Models.Beans.DormBillBean;
 import Models.Beans.RoomBillBean;
 import Models.Beans.ElectricReadingBean;
@@ -61,28 +60,26 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         roomtable();
         prices();
     }
-    
-    public void prices(){
+
+    public void prices() {
         //get dormbill for the month
         date = new java.sql.Date(new java.util.Date().getTime());
-        
-        
+
         //set view units and prices for water and electricity
-        dorm = dbdao.getDormBillByMonthandYear(date); 
-        System.out.println("dbillID: "+dorm.getDbill_ID());
-        
+        dorm = dbdao.getDormBillByMonthandYear(date);
+        System.out.println("dbillID: " + dorm.getDbill_ID());
+
         priceperkw = dorm.getElectprice() / dorm.getElectconsumption();
         pricepercubicmeter = dorm.getWaterprice() / dorm.getWaterconsumption();
         rent = dorm.getRoomprice();
-        
+
         kwlabel.setText(Double.toString(priceperkw));
         cubicmeterlabel.setText(Double.toString(priceperkw));
         rentlabel.setText(Double.toString(rent));
-        
-        
+
     }
-    
-      public void initdate() {
+
+    public void initdate() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
         year = formatter.format(new java.util.Date());
         SimpleDateFormat formatter1 = new SimpleDateFormat("MM");
@@ -337,55 +334,56 @@ public class BillsPanelFinal extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(electricmeterlabel.getText().isEmpty() || watermeterlabel.getText().isEmpty()){
+        if (electricmeterlabel.getText().isEmpty() || watermeterlabel.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please input ALL necessary fields.");
-        }else{
+        } else {
             float electric, water;
-            double ecost,wcost;
+            double ecost, wcost;
             date = new java.sql.Date(new java.util.Date().getTime());
             electric = Float.parseFloat(electricmeterlabel.getText());
             water = Float.parseFloat(watermeterlabel.getText());
-            
+
             //create water and electricity reading
             WaterReadingBean waterbean = new WaterReadingBean();
             ElectricReadingBean electricbean = new ElectricReadingBean();
             WaterDAOImplementation wdao = new WaterDAOImplementation();
             ElectricReadingDAOImplementation edao = new ElectricReadingDAOImplementation();
-            
+
             electricbean.setCurrentKW(electric);
             electricbean.setDateRead(date);
             electricbean.setStatus("Unpaid");
             waterbean.setCurrentcubicpermeter(water);
             waterbean.setDateRead(date);
             waterbean.setStatus("Unpaid");
-            
+
             wdao.addWaterReadingToRoom(waterbean);
             edao.addElectricReadingToRoom(electricbean);
-            
+
             //get water and electric  reading by month and year
             waterbean = wdao.getWaterReadingByMonth(date);
             electricbean = edao.getElectricReadingByMonth(date);
-            
+
             //creat room bill
             int row = jTable1.getSelectedRow();
             int col = 0;
-            
+
             int roomID = (int) jTable1.getModel().getValueAt(row, col);
-            
+
             RoomBillBean room = new RoomBillBean();
             room.setRoomID(roomID);
             room.setDbillID(dorm.getDbill_ID());
             room.setWaterreadingID(waterbean.getWater_billID());
             room.setElectricreadingID(electricbean.getElectric_billID());
             room.setSurcharge(0);
+            room.setDateRead(date);
             room.setDatePaid(null);
             room.setStatus("Unpaid");
-            
-            rbdao.addRoomBill(room);       
-            
+
+            rbdao.addRoomBill(room);
+
         }
 
-       
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -397,11 +395,11 @@ public class BillsPanelFinal extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     public void roomlist() {
@@ -415,26 +413,59 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         }
     }
 
-  
-
     public void roomtable() {
         model = (DefaultTableModel) jTable1.getModel();
         model.getDataVector().removeAllElements();
         model.fireTableDataChanged();
-        
+
         ArrayList<RoomBean> occupied = new ArrayList<>();
         occupied = rdao.getRoomByStatus("Occupied");
-        
+
         int room;
         float electricity, water;
         double surcharge, total;
         String status;
+
+        //ArrayList<RoomBillBean> rblist = new ArrayList<>();
+        // rblist = rbdao.getAllRoomBillByMonthandYear(date);
+        WaterReadingBean wbean = new WaterReadingBean();
+        ElectricReadingBean ebean = new ElectricReadingBean();
+        RoomBillBean rbean = new RoomBillBean();
+        WaterDAOImplementation wdao = new WaterDAOImplementation();
         
-        for(RoomBean bean: occupied){
+        dorm = dbdao.getDormBillByMonthandYear(new java.sql.Date(new java.util.Date().getTime()));
+       // System.out.println("room:" + dorm.getDbill_ID());
+        /* if (rblist.isEmpty() || rblist == null) {
+         //empty roombill
+         for (RoomBean bean : occupied) {
+         room = bean.getRoomID();
+         Object[] obj = {room, 0, 0, 0, 0, "none"};
+         model.addRow(obj);
+         }
+
+         } else {*/
+        for (RoomBean bean : occupied) {
             room = bean.getRoomID();
-            Object[] obj = {room, 0, 0, 0, 0, "none"};
+            wbean = wdao.getWaterReadingByID(bean.getRoomID(), dorm.getDbill_ID());
+            ebean = edao.getElectricReadingByRoomID(bean.getRoomID(), dorm.getDbill_ID());
+            rbean = rbdao.getRoomBillByDbill(bean.getRoomID(), dorm.getDbill_ID());
+            water = wbean.getCurrentcubicpermeter();
+            
+            double e = dorm.getElectprice()/dorm.getElectconsumption();
+            double w = dorm.getWaterprice()/dorm.getWaterconsumption();
+            double r = dorm.getRoomprice();
+            
+            electricity = (float) ebean.getCurrentKW();
+            water = (float) wbean.getCurrentcubicpermeter();
+            surcharge = rbean.getSurcharge();
+            status = rbean.getStatus();           
+            total = electricity * e + water * w + surcharge + r;
+
+            Object[] obj = {bean.getRoomID(), electricity, water, surcharge, total, status};
             model.addRow(obj);
         }
+
+        //}
         model.fireTableDataChanged();
         jTable1.requestFocus();
         jTable1.changeSelection(0, 0, false, false);
