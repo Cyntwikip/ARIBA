@@ -607,7 +607,7 @@ public class TenantDAOImplementation implements TenantDAOInterface {
                 bean.setAddress(address);
                 bean.setSchool(school);
                 bean.setStatus(status);
-//                bean.setImage(image);
+                bean.setBlobimage(image);
                 bean.setEmail(email);
                 bean.setBirthday(birthday);
 
