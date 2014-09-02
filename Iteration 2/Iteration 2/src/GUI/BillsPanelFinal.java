@@ -341,6 +341,17 @@ public class BillsPanelFinal extends javax.swing.JPanel {
             electric = Float.parseFloat(electricmeterlabel.getText());
             water = Float.parseFloat(watermeterlabel.getText());
             
+            //create water and electricity reading
+            WaterReadingBean waterbean = new WaterReadingBean();
+            ElectricReadingBean electricbean = new ElectricReadingBean();
+            WaterDAOImplementation wdao = new WaterDAOImplementation();
+            ElectricReadingDAOImplementation edao = new ElectricReadingDAOImplementation();
+            
+            //waterbean.set
+            
+            
+            
+            
             ecost = electric * priceperkw;
             wcost = water * pricepercubicmeter;
             
