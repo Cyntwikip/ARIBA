@@ -20,6 +20,7 @@ public interface ElectricReadingDAOInterface {
     //public ArrayList<ElectricReadingBean> getAllElectricReadingsByDate(Date from, Date to);
     public boolean editElectricReading(ElectricReadingBean water);
     public ElectricReadingBean getElectricReadingsByElectricBillID(int ebillID);
+    public ElectricReadingBean getElectricReadingByMonth(java.sql.Date date);
 
 
 }

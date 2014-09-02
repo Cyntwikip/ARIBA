@@ -197,4 +197,48 @@ public class ElectricReadingDAOImplementation implements ElectricReadingDAOInter
         }
         return null;
     }
+
+    @Override
+    public ElectricReadingBean getElectricReadingByMonth(Date date) {
+        try {
+            Connector c = new Connector();
+            Connection connection = c.getConnection();
+            String query = "select * from electricreading where month(?) = month(dateRead)and year(?) = year(dateRead)";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setDate(1, date);
+            ps.setDate(2, date);
+            ResultSet resultSet = ps.executeQuery();
+            
+            int electric_billID;
+            float currentKW;
+            Date dateRead, datePaid;
+            String status;
+            
+            ElectricReadingBean ebean = new ElectricReadingBean();
+            
+            while(resultSet.next()){   
+                electric_billID = resultSet.getInt("electric_billID");
+                currentKW= resultSet.getFloat("currentKW");
+                dateRead = resultSet.getDate("dateRead");
+                datePaid = resultSet.getDate("datePaid");
+                status = resultSet.getString("status");
+                
+                ebean.setElectric_billID(electric_billID);
+                ebean.setCurrentKW(currentKW);
+                ebean.setDateRead(dateRead);
+                ebean.setDatePaid(datePaid);
+                ebean.setStatus(status);
+                
+                
+            }
+            connection.close();
+
+            return ebean;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ElectricReadingDAOImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
 }
