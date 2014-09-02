@@ -309,10 +309,6 @@
         <Component class="javax.swing.JLabel" name="logtime">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-<<<<<<< HEAD
-
-=======
->>>>>>> 4a482fd56314ed2fc39f67dafe672f934436e251
               <AbsoluteConstraints x="110" y="100" width="200" height="-1"/>
             </Constraint>
           </Constraints>
@@ -330,10 +326,6 @@
         <Component class="javax.swing.JLabel" name="roomnumber">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-<<<<<<< HEAD
-
-=======
->>>>>>> 4a482fd56314ed2fc39f67dafe672f934436e251
               <AbsoluteConstraints x="110" y="120" width="200" height="-1"/>
             </Constraint>
           </Constraints>
@@ -351,10 +343,6 @@
         <Component class="javax.swing.JLabel" name="contactno">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-<<<<<<< HEAD
-
-=======
->>>>>>> 4a482fd56314ed2fc39f67dafe672f934436e251
               <AbsoluteConstraints x="110" y="140" width="200" height="-1"/>
             </Constraint>
           </Constraints>
@@ -431,10 +419,6 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-<<<<<<< HEAD
-
-=======
->>>>>>> 4a482fd56314ed2fc39f67dafe672f934436e251
               <AbsoluteConstraints x="20" y="200" width="70" height="-1"/>
             </Constraint>
           </Constraints>
@@ -554,10 +538,6 @@
         <Component class="javax.swing.JLabel" name="gnum">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-<<<<<<< HEAD
-
-=======
->>>>>>> 4a482fd56314ed2fc39f67dafe672f934436e251
               <AbsoluteConstraints x="170" y="320" width="130" height="-1"/>
             </Constraint>
           </Constraints>
@@ -565,10 +545,7 @@
         <Component class="javax.swing.JLabel" name="gemail">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-<<<<<<< HEAD
 
-              <AbsoluteConstraints x="110" y="340" width="190" height="-1"/>
-=======
               <AbsoluteConstraints x="110" y="340" width="190" height="-1"/>
             </Constraint>
           </Constraints>
@@ -587,7 +564,6 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="100" y="360" width="-1" height="40"/>
->>>>>>> 4a482fd56314ed2fc39f67dafe672f934436e251
             </Constraint>
           </Constraints>
         </Component>
