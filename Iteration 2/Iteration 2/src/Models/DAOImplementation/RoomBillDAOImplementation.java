@@ -253,7 +253,9 @@ public class RoomBillDAOImplementation implements RoomBillDAOInterface {
                 dateRead = resultSet.getDate("dateRead");
                 datePaid = resultSet.getDate("datePaid");
                 status = resultSet.getString("status");
-
+                
+                rb = new RoomBillBean();
+                
                 rb.setRoomID(roomID);
                 rb.setWaterreadingID(waterID);
                 rb.setElectricreadingID(electricID);

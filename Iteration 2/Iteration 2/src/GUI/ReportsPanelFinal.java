@@ -7,12 +7,18 @@ package GUI;
 
 import Models.Beans.RoomBillBean;
 import Models.Beans.ContractBean;
+import Models.Beans.DormBillBean;
+import Models.Beans.ElectricReadingBean;
 import Models.Beans.RoomBean;
 import Models.Beans.TenantBean;
+import Models.Beans.WaterReadingBean;
 import Models.DAOImplementation.RoomBillDAOImplementation;
 import Models.DAOImplementation.ContractDAOImplementation;
+import Models.DAOImplementation.DormBillDAOImplementation;
+import Models.DAOImplementation.ElectricReadingDAOImplementation;
 import Models.DAOImplementation.RoomDAOImplementation;
 import Models.DAOImplementation.TenantDAOImplementation;
+import Models.DAOImplementation.WaterDAOImplementation;
 import Models.DAOInterface.RoomBillDAOInterface;
 import Models.DAOInterface.ContractDAOInterface;
 import Models.DAOInterface.RoomDAOInterface;
@@ -210,6 +216,7 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        model = (DefaultTableModel) jTable1.getModel();
         model.getDataVector().removeAllElements();
         model.fireTableDataChanged();
 
@@ -218,47 +225,77 @@ public class ReportsPanelFinal extends javax.swing.JPanel {
         JTableHeader th = jTable1.getTableHeader();
         TableColumnModel tcm = th.getColumnModel();
         TableColumn tc = tcm.getColumn(0);
-        tc.setHeaderValue("Tenant ID");
+        tc.setHeaderValue("Surname");
         tc = tcm.getColumn(1);
-        tc.setHeaderValue("Last name");
+        tc.setHeaderValue("Firstname");
         tc = tcm.getColumn(2);
-        tc.setHeaderValue("First name");
+        tc.setHeaderValue("Room No.");
         tc = tcm.getColumn(3);
         tc.setHeaderValue("Amount");
         th.repaint();
+        
         ArrayList<RoomBillBean> bbeanlist = new ArrayList<RoomBillBean>();
-        RoomBillBean bbean = new RoomBillBean();
-        RoomBillDAOInterface bdao = new RoomBillDAOImplementation();
+        RoomBillBean rbean = new RoomBillBean();
+        RoomBillDAOImplementation bdao = new RoomBillDAOImplementation();
+        TenantBean tenant = new TenantBean();
+        ArrayList<TenantBean> tlist = new ArrayList<>();
+        TenantDAOImplementation tdao = new TenantDAOImplementation();
+        
+        int room;
+        float electricity, water;
+        double surcharge, total;
+        String status;
 
-        ArrayList<RoomBean> rbeanlist = new ArrayList<RoomBean>();
-        RoomBean rbean = new RoomBean();
-        RoomDAOInterface rdao = new RoomDAOImplementation();
-        rbeanlist = rdao.getAllRooms();
+        WaterReadingBean wbean = new WaterReadingBean();
+        ElectricReadingBean ebean = new ElectricReadingBean();
+        WaterDAOImplementation wdao = new WaterDAOImplementation();
+        ElectricReadingDAOImplementation edao = new ElectricReadingDAOImplementation();
+        
+        DormBillDAOImplementation dbdao = new DormBillDAOImplementation();
+        DormBillBean dorm = new DormBillBean();
+        
+        dorm = dbdao.getDormBillByMonthandYear(new java.sql.Date(new java.util.Date().getTime()));
+        
+        bbeanlist = bdao.getAllNotPaidRooms();
+        
+        for(RoomBillBean bean: bbeanlist){
+            room = bean.getRoomID();
+            wbean = wdao.getWaterReadingByID(bean.getRoomID(), dorm.getDbill_ID());
+            ebean = edao.getElectricReadingByRoomID(bean.getRoomID(), dorm.getDbill_ID());
+            rbean = bdao.getRoomBillByDbill(bean.getRoomID(), dorm.getDbill_ID());
+            water = wbean.getCurrentcubicpermeter();
 
-        ArrayList<TenantBean> tbeanlist = new ArrayList<TenantBean>();
-        TenantBean tbean = new TenantBean();
-        TenantDAOInterface tdao = new TenantDAOImplementation();
+            double e = dorm.getElectprice() / dorm.getElectconsumption();
+            double w = dorm.getWaterprice() / dorm.getWaterconsumption();
+            double r = dorm.getRoomprice();
 
-        int roomID;
-        for (int i = 0; i < bbeanlist.size(); i++) {
-            //roomID = bbeanlist.get(i).getBill_roomID(); // current room ID
-
-            //        tbeanlist = tdao.getTenantByRoomID(roomID);
-            for (int j = 0; j < tbeanlist.size(); j++) {
-                tbean = tbeanlist.get(j);
-                //              double amount = bbeanlist.get(i).getPrice();
-                String fname = tbean.getFname();
-                String lname = tbean.getLname();
-
-                //            Object[] obj = {roomID, lname, fname, amount};
-                //          model.addRow(obj);
+            electricity = (float) ebean.getCurrentKW();
+            water = (float) wbean.getCurrentcubicpermeter();
+            surcharge = rbean.getSurcharge();
+            status = rbean.getStatus();
+            total = electricity * e + water * w + surcharge + r;
+            
+           // tlist = tdao.getTenantByRoomID(bean.getRoomID());
+            System.out.println(bean.getRoomID());
+            tlist = tdao.getTenantByRoomID(bean.getRoomID());
+            for(TenantBean ten: tlist){
+                Object[] obj = {ten.getLname(), ten.getFname(), bean.getRoomID(),total};
+                model.addRow(obj);
+                model.fireTableDataChanged();
+                
             }
-
+            
         }
+        
+        model.fireTableDataChanged();
+
+
+     
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        model = (DefaultTableModel) jTable1.getModel();
         model.getDataVector().removeAllElements();
         model.fireTableDataChanged();
 

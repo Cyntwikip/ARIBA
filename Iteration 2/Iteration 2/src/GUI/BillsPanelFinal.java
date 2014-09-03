@@ -74,9 +74,9 @@ public class BillsPanelFinal extends javax.swing.JPanel {
         priceperkw = dorm.getElectprice() / dorm.getElectconsumption();
         pricepercubicmeter = dorm.getWaterprice() / dorm.getWaterconsumption();
         rent = dorm.getRoomprice();
-        
+
         DecimalFormat df = new DecimalFormat("####0.00");
-        
+
         kwlabel.setText(df.format(priceperkw));
         cubicmeterlabel.setText(df.format(pricepercubicmeter));
         rentlabel.setText(df.format(rent));
@@ -385,8 +385,11 @@ public class BillsPanelFinal extends javax.swing.JPanel {
             room.setStatus("Unpaid");
 
             rbdao.addRoomBill(room);
+            
+            electricmeterlabel.setText("");
+            watermeterlabel.setText("");
 
-           roomtable();
+            roomtable();
 
         }
 
@@ -396,42 +399,41 @@ public class BillsPanelFinal extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:        
         dorm = dbdao.getDormBillByMonthandYear(new java.sql.Date(new java.util.Date().getTime()));
-        
-        if(dorm == null ){
+
+        if (dorm != null) {
             JOptionPane.showMessageDialog(null, "Current month bills already exist");
-        }else{
-            
-        this.removeAll();
-        jPanel2 = new EditGeneralBillPanelFinal();
-        setJpanel();
+        } else {
+
+            this.removeAll();
+            jPanel2 = new EditGeneralBillPanelFinal();
+            setJpanel();
         }
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-     
-        
+
         int row = jTable1.getSelectedRow();
         int roomID = (Integer) jTable1.getValueAt(row, 0);
-        
+
         dorm = dbdao.getDormBillByMonthandYear(new java.sql.Date(new java.util.Date().getTime()));
-        
+
         WaterReadingBean wbean = new WaterReadingBean();
         ElectricReadingBean ebean = new ElectricReadingBean();
         RoomBillBean rbean = new RoomBillBean();
-        
+
         wbean = wdao.getWaterReadingByID(roomID, dorm.getDbill_ID());
         ebean = edao.getElectricReadingByRoomID(roomID, dorm.getDbill_ID());
         rbean = rbdao.getRoomBillByDbill(roomID, dorm.getDbill_ID());
-        
+
         wbean.setStatus("Paid");
         ebean.setStatus("Paid");
         rbean.setStatus("Paid");
-        
+
         wdao.editWaterReading(wbean);
         edao.editElectricReading(ebean);
         rbdao.editRoomBill(rbean);
-        
+
         roomtable();
 
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -440,25 +442,25 @@ public class BillsPanelFinal extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int row = jTable1.getSelectedRow();
         int roomID = (Integer) jTable1.getValueAt(row, 0);
-        
+
         dorm = dbdao.getDormBillByMonthandYear(new java.sql.Date(new java.util.Date().getTime()));
-        
+
         WaterReadingBean wbean = new WaterReadingBean();
         ElectricReadingBean ebean = new ElectricReadingBean();
         RoomBillBean rbean = new RoomBillBean();
-        
+
         wbean = wdao.getWaterReadingByID(roomID, dorm.getDbill_ID());
         ebean = edao.getElectricReadingByRoomID(roomID, dorm.getDbill_ID());
         rbean = rbdao.getRoomBillByDbill(roomID, dorm.getDbill_ID());
-        
+
         wbean.setStatus("Unpaid");
         ebean.setStatus("Unpaid");
         rbean.setStatus("Unpaid");
-        
+
         wdao.editWaterReading(wbean);
         edao.editElectricReading(ebean);
         rbdao.editRoomBill(rbean);
-        
+
         roomtable();
 
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -477,7 +479,7 @@ public class BillsPanelFinal extends javax.swing.JPanel {
 
         ArrayList<RoomBean> occupied = new ArrayList<>();
         occupied = rdao.getRoomByStatus("Occupied");
-        
+
         DecimalFormat df = new DecimalFormat("####0.00");
 
         int room;
